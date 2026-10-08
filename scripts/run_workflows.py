@@ -140,6 +140,30 @@ def ensure_release_assets(sources, sources_root: Path, keys):
                               "-- the release asset changed under the same tag")
 
 
+def ensure_ogcapi_processes(sources, sources_root: Path, force: bool = False):
+    """Live OGC API - Processes processDescriptions (sources.yaml `kind: ogcapi-process`), fetched
+    once and cached under sources_root as <id>.json -- generate.py only ever reads the cache, it
+    never hits the network itself, the same invariant as the CWL clones. Unlike a CWL source there
+    is no commit or checksum to pin against: the live service can change its processDescription at
+    any time without us knowing, which is a real, open limitation of this source kind (not papered
+    over), not something to fetch-and-forget silently -- pass --force to refresh the cache and see
+    what, if anything, changed."""
+    for key, src in sources.items():
+        if src.get("kind") != "ogcapi-process":
+            continue
+        d = sources_root / src["clone"]
+        d.mkdir(parents=True, exist_ok=True)
+        for pid in src["items"]:
+            dest = d / f"{pid}.json"
+            if dest.is_file() and not force:
+                continue
+            url = f"{src['repo']}/{pid}"
+            print(f"== fetching {url} -> {dest}")
+            req = urllib.request.Request(url, headers={"Accept": "application/json"})
+            with urllib.request.urlopen(req) as r:
+                dest.write_bytes(r.read())
+
+
 def build_w1_images(w1_root: Path):
     """docs/DEVIATIONS.md U-03 (+ U-04 on arm64). docker compose does not order builds by
     depends_on, so `base` is built alone first."""
@@ -282,6 +306,7 @@ def main():
             sys.exit(f"source(s) {unknown_kind} have neither `commit` nor `release` in scripts/sources.yaml")
         ensure_clones(sources, a.sources_root, cloned)
         ensure_release_assets(sources, a.sources_root, released)
+        ensure_ogcapi_processes(sources, a.sources_root, force=a.force)
     if a.build_images:
         build_w1_images(a.sources_root / sources["w1"]["clone"])
 

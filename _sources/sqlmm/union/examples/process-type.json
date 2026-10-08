@@ -1,0 +1,23 @@
+{
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/union",
+  "type": "ProcessType",
+  "prefLabel": "Compute union.",
+  "definition": "This service shall return a bag of geometry values representing a Point set union of geometry InputEntity1 with geometry InputEntity2.",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+  ],
+  "profile": "ospd.process-profiles.sqlmm.union",
+  "processDescription": {
+    "id": "Union",
+    "version": "2.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Union"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/union",
+  "openeoEquivalence": {
+    "level": "none",
+    "rationale": "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."
+  }
+}

@@ -14,7 +14,7 @@
     "qualifiedAssociation": [
       {
         "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-        "hadPlan": "https://ospd.example.org/ogc-api/processes/calculate_indices"
+        "hadPlan": "https://ospd.example.org/ogc-api/processes/calculate_indices/package"
       }
     ],
     "endedAtTime": "2026-09-24T10:59:40Z"
@@ -89,5 +89,14 @@
     "id": "urn:example:image:ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc2",
     "provType": "prov:SoftwareAgent",
     "name": "container image ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc2"
+  },
+  {
+    "id": "https://ospd.example.org/ogc-api/processes/calculate_indices/package",
+    "provType": "prov:Plan"
+  },
+  {
+    "id": "arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/calculate_indices",
+    "provType": "prov:Plan",
+    "specializationOf": "https://ospd.example.org/ogc-api/processes/calculate_indices/package"
   }
 ]

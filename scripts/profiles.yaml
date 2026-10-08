@@ -1030,3 +1030,265 @@ processes:
     stac_catalog: [stac_catalog]
     results:
       stac_catalog: {href: catalog.json, type: application/json, stac: true}
+
+# ---------------------------------------------------------------- SQL/MM spatial operations
+# (ZOO-Project, Geonovum testbed: https://host1.tb.geonovum.geolabs.fr/ogc-api/processes).
+# Profiled directly from their own live processDescription (sources.yaml `kind: ogcapi-process`),
+# no CWL involved -- see generate.py's `load_ogcapi_process()`/`generate_ogcapi_profiles()`.
+# Static processDescription only, deliberately: no execute/results/provenance (no CWLProv-style
+# run record exists for a live deployed service the way there is for the CWL workflows). Each
+# entry links to its own Implementation Profile in the separate bblocks-generic-profiles register
+# via `implementsProfile` (process-type schema field), built locally and imported through
+# bblocks-config-local.yml. That register models four tiers (OGC 14-065 WPS 2.0.2 §7.5): one
+# Process Concept ("Vector Geometry Processing"), 3 Generic Profiles shared by I/O shape
+# (binary-spatial-predicate / binary-spatial-operation / geometry-buffer -- §7.5.2: "a signature
+# for a process", but several operations may share one when their shape is identical), and one
+# Implementation Profile per operation (§7.5.3: standard data formats -- WKT/GeoJSON/GML -- still
+# not one deployment's own choice), each `refinesGenericProfile` to its Generic Profile. These
+# `ogcapi_processes` entries are Implementation (instance level): one concrete deployed process,
+# narrowing the Implementation Profile's standard formats to whichever one it actually supports
+# (Geonovum's own processes only accept GML 3.1.0 Polygon).
+ogcapi_processes:
+  - key: intersects
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: Intersects.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/intersects
+    bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
+
+  - key: disjoint
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: Disjoint.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/disjoint
+    bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
+
+  - key: contains
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: Contains.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/contains
+    bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
+
+  - key: within
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: Within.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/within
+    bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
+
+  - key: touches
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: Touches.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches
+    bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
+
+  - key: crosses
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: Crosses.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/crosses
+    bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
+
+  - key: equals
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: Equals.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/equals
+    bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
+
+  - key: intersection
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: Intersection.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/intersection
+    bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."}
+
+  - key: union
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: Union.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/union
+    bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."}
+
+  - key: difference
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: Difference.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/difference
+    bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."}
+
+  - key: symdifference
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: SymDifference.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference
+    bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."}
+
+  - key: buffer
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: Buffer.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer
+    bindings: {inputs: {InputPolygon: geometry, BufferDistance: distance}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process for this SQL/MM operation in the published bblocks-openeo register."}
+
+  - key: centroid
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: Centroid.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/centroid
+    bindings: {inputs: {InputPolygon: geometry}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process computes the centroid of a vector geometry in the published bblocks-openeo register."}
+
+  - key: convex-hull
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: ConvexHull.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull
+    bindings: {inputs: {InputPolygon: geometry}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process computes the convex hull of a vector geometry in the published bblocks-openeo register."}
+
+  - key: is-simple
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: IsSimple.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/is-simple
+    bindings: {inputs: {InputPolygon: geometry}, outputs: {Result: result}}
+    openeo: {level: none, rationale: "No openEO process tests a vector geometry for self-intersection/self-tangency in the published bblocks-openeo register."}
+
+  - key: area
+    workflow: sqlmm
+    source: {repo: sqlmm_geonovum, file: GetArea.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area
+    bindings: {inputs: {InputPolygon: geometry}, outputs: {Area: result}}
+    openeo: {level: none, rationale: "No openEO process computes the area of a vector geometry in the published bblocks-openeo register."}
+
+# ---------------------------------------------------------------- Raster/coverage operations
+# (ZOO-Project, Geonovum testbed, same host as SQL/MM above). Same pattern (sources.yaml
+# `kind: ogcapi-process`, no CWL), Implementation Profile grounded in GDAL/OTB instead of SQL/MM
+# (`generic-profiles.implementation-profile.*` under the raster-coverage-processing Concept).
+  - key: reprojection
+    workflow: raster
+    source: {repo: raster_geonovum, file: Gdal_Warp.json}
+    phases: [pre-processing]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection
+    bindings: {inputs: {InputDSN: raster, t_srs: targetCRS}, outputs: {Result: raster}}
+    openeo:
+      level: closeMatch
+      closeMatch: [ogc.openeo.processes.cubes.resample_spatial]
+      rationale: >-
+        Gdal_Warp exposes both `s_srs`/`t_srs` (CRS reprojection) and `r`/`te` (resampling method,
+        target extent): a closer match to resample_spatial than W1's own `reproject-image` use of
+        the same underlying tool (which only changes pixel size, `-t_srs` unused) -- here both the
+        `projection` and `resolution`/`method` parameters of resample_spatial are exercised.
+        Not exactMatch: GCP-based warping (`tps`, `rpc`, `geoloc`) and `order` (polynomial order)
+        have no openEO equivalent.
+
+  - key: band-math
+    workflow: raster
+    source: {repo: raster_geonovum, file: OTB.BandMath.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math
+    bindings: {inputs: {il: rasters, exp: expression}, outputs: {out: raster}}
+    openeo:
+      level: closeMatch
+      closeMatch: [ogc.openeo.processes.cubes.reduce_dimension]
+      relatedMatch: [ogc.openeo.processes.math.divide, ogc.openeo.processes.math.power, ogc.openeo.processes.math.multiply, ogc.openeo.processes.math.subtract]
+      rationale: >-
+        Generic band math (muParser expression over an input image list `il`, output forced
+        monoband): the same closeMatch reasoning as W1's `algae-bloom.calculate-band` (also
+        gdal_calc.py-style band math) -- reduce_dimension over the `bands` dimension with a
+        callback built from math processes. The expression is free text here (muParser syntax),
+        a process graph in openEO.
+
+  - key: radiometric-index
+    workflow: raster
+    source: {repo: raster_geonovum, file: OTB.RadiometricIndices.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index
+    bindings: {inputs: {in: rasters}, outputs: {out: raster}}
+    unbound: {index: "no input of the live service selects the index: OTB RadiometricIndices' `list` parameter is not exposed"}
+    openeo:
+      level: closeMatch
+      closeMatch: [ogc.openeo.processes.cubes.ndvi]
+      rationale: >-
+        OTB.RadiometricIndices computes a *selectable set* of named indices (NDVI, NDWI, and many
+        others via `channels` / `list`) from user-mapped spectral channels (`channels.red`,
+        `channels.nir`, ...), only one of which (NDVI) has a dedicated openEO process (`ndvi`,
+        which also expects band-role mapping via `nir`/`red` parameters). closeMatch, not
+        exactMatch: openEO has no equivalent for the other indices this application can compute.
+
+  - key: extract-roi
+    workflow: raster
+    source: {repo: raster_geonovum, file: OTB.ExtractROI.json}
+    phases: [pre-processing]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop
+    bindings: {inputs: {in: raster}, outputs: {out: raster}}
+    unbound: {areaOfInterest: "four plain numbers on the live service (mode.extent.ulx/uly/lrx/lry, with mode=extent), not one bounding box"}
+    openeo:
+      level: closeMatch
+      closeMatch: [ogc.openeo.processes.cubes.filter_bbox]
+      rationale: >-
+        OTB.ExtractROI's "extent" mode (`mode.extent.ulx/uly/lrx/lry`, two corner points) matches
+        filter_bbox's role (spatially limit a data cube to a bounding box). Not exactMatch: three
+        other modes have no openEO equivalent -- pixel-offset/size ("standard": `startx`/`starty`/
+        `sizex`/`sizey`), circular ("radius": `mode.radius.r`/`cx`/`cy`), and reference-geometry
+        ("fit": `mode.fit.im`/`vect`) extraction.
+
+  - key: format-conversion
+    workflow: raster
+    source: {repo: raster_geonovum, file: Gdal_Translate.json}
+    phases: [export-aggregation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion
+    bindings: {inputs: {InputDSN: raster, Format: targetFormat}, outputs: {Result: raster}}
+    openeo:
+      level: closeMatch
+      closeMatch: [ogc.openeo.processes.cubes.save_result]
+      rationale: >-
+        Gdal_Translate re-encodes a raster into another format (`Format`) without changing its
+        content -- the same role save_result's `format` parameter plays when terminating an openEO
+        process graph. Not exactMatch: save_result is a cube-terminal process (no further chaining
+        downstream), while Gdal_Translate is an ordinary mid-pipeline step; `GCP` (ground control
+        point) handling has no openEO equivalent either.
+
+  - key: band-math-multiband
+    workflow: raster
+    source: {repo: raster_geonovum, file: OTB.BandMathX.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math-multiband
+    bindings: {inputs: {il: rasters, exp: expression}, outputs: {out: raster}}
+    openeo: {level: none, rationale: "No openEO process combines several image bands via an arbitrary muParserX-style vector expression with multi-band output in the published bblocks-openeo register (array_apply is closest but applies a unary process per band, not a joint expression)."}
+
+  - key: extent
+    workflow: raster
+    source: {repo: raster_geonovum, file: OTB.ImageEnvelope.json}
+    phases: [export-aggregation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent
+    bindings: {inputs: {in: raster}, outputs: {out: result}}
+    openeo: {level: none, rationale: "No openEO process computes the bounding envelope of a raster/data cube in the published bblocks-openeo register (filter_bbox takes a bbox as input to filter by, it does not compute one as output)."}
+
+# ---------------------------------------------------------------- Vector operations (SAGA GIS)
+# (ZOO-Project, Geonovum testbed, same host as SQL/MM/raster above). Same pattern (sources.yaml
+# `kind: ogcapi-process`, no CWL); unlike the sqlmm.* profiles, this one is SAGA-bound, not
+# SQL/MM-bound -- this testbed has no SQL/MM ST_Envelope process of its own.
+  - key: geometry-extent
+    workflow: vector
+    source: {repo: vector_geonovum, file: SAGA.shapes_tools.19.json}
+    phases: [export-aggregation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent
+    bindings: {inputs: {SHAPES: geometry}, outputs: {EXTENTS: result}}
+    openeo: {level: none, rationale: "No openEO process computes the bounding envelope of a vector geometry/feature collection in the published bblocks-openeo register."}

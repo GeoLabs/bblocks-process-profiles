@@ -3,7 +3,7 @@
     "id": "urn:example:run:water-bodies:water-bodies",
     "type": "WorkflowRun",
     "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies",
-    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/water-bodies",
+    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/water-bodies/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
     "status": "successful",
     "jobID": "water-bodies-water-bodies-0001",

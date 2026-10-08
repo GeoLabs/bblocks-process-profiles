@@ -36,6 +36,7 @@ BBLOCK_IRI = "https://www.opengis.net/def/bblocks/"
 PREFIX = "ospd.process-profiles."
 TODAY = "2026-09-22"
 PART1_CORE = "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+GENERIC_PROFILES_BASE = "https://geolabs.github.io/bblocks-generic-profiles/def/"
 
 PHASE_LABELS = {
     "filter-configuration": "Filter configuration",
@@ -108,7 +109,8 @@ PROFILE_CONTEXT = {
         "mutable": "proc:mutable",
         "jobControlOptions": "proc:jobControlOptions",
         "outputTransmission": "proc:outputTransmission",
-        "metadata": "proc:metadata",
+        "metadata": {"@id": "proc:metadata", "@context": {
+            "href": {"@id": "proc:href", "@type": "@id"}}},
         "role": {"@id": "proc:role", "@type": "@id"},
         "inputs": {"@id": "proc:inputs", "@context": {"@vocab": BASE + "input/"}},
         "outputs": {"@id": "proc:outputs", "@context": {"@vocab": BASE + "output/"}},
@@ -119,9 +121,16 @@ PROFILE_CONTEXT = {
             "type": "dct:type", "title": "rdfs:label"}},
         "response": "proc:response",
 
-        # ogcapppkg (Part 2) / results / execution bundle
-        "executionUnit": "proc:executionUnit",
-        "processDescription": "pp:processDescription",
+        # ogcapppkg (Part 2) / results / execution bundle. `executionUnit` is a link: scoped like
+        # `links`, or its media type lands on the root `type` (@type) and becomes a class.
+        "executionUnit": {"@id": "proc:executionUnit", "@context": {
+            "href": {"@id": "oa:hasTarget", "@type": "@id"},
+            "rel": {"@id": "http://www.iana.org/assignments/relation", "@type": "@id",
+                    "@context": {"@base": "http://www.iana.org/assignments/relation/"}},
+            "type": "dct:format"}},
+        "processDescription": {"@id": "pp:processDescription", "@context": {
+            "href": {"@id": "rdfs:seeAlso", "@type": "@id"},
+            "license": {"@id": "dct:license", "@type": "@id"}}},
         "result": "pp:result",
         "engine": "pp:engine",
         "run": "pp:run",
@@ -140,6 +149,7 @@ PROFILE_CONTEXT = {
         "qualifiedAssociation": {"@id": "prov:qualifiedAssociation"},
         "agent": {"@id": "prov:agent", "@type": "@id"},
         "hadPlan": {"@id": "prov:hadPlan", "@type": "@id"},
+        "specializationOf": {"@id": "prov:specializationOf", "@type": "@id"},
         "startedAtTime": {"@id": "prov:startedAtTime", "@type": "xsd:dateTime"},
         "endedAtTime": {"@id": "prov:endedAtTime", "@type": "xsd:dateTime"},
         "value": "rdf:value",
@@ -161,11 +171,15 @@ PROFILE_CONTEXT = {
         "status": "pp:status",
         "phase": {"@id": "skos:broader", "@type": "@id"},
         "profile": "pp:profile",
-        "source": "pp:source",
-        "cwl": {"@id": "pp:cwl", "@type": "@id"},
+        # The plan (prov:Plan) is the Application Package at /processes/{id}/package, kept apart
+        # from the type itself; the same IRI is each run's `hadPlan`.
+        "plan": {"@id": "pp:plan", "@context": {
+            "license": {"@id": "dct:license", "@type": "@id"}}},
+        "Plan": "prov:Plan",
         "cwlClass": "pp:cwlClass",
         "cwlId": "pp:cwlId",
         "provenanceClass": {"@id": "pp:provenanceClass", "@type": "@id"},
+        "implementsProfile": {"@id": "pp:implementsProfile", "@type": "@id"},
         "cctDependencies": "pp:cctDependency",
         "candidateCctDependencies": "pp:candidateCctDependency",
         "hasStep": {"@id": "pp:hasStep", "@type": "@id"},
@@ -324,8 +338,8 @@ def load_bag(path: Path):
 
         for aid, a in d.get("activity", {}).items():
             a = _lst(a)[0]
-            rec = {"id": aid, "iteration": iteration, "bundle": bundle_name, "plan": None, "image": None,
-                   "start": None, "end": None, "inputs": {}, "outputs": {}}
+            rec = {"id": aid, "iteration": iteration, "bundle": bundle_name, "plan": None, "planIri": None,
+                   "image": None, "start": None, "end": None, "inputs": {}, "outputs": {}}
             for vv in d.get("wasStartedBy", {}).values():
                 for v in _lst(vv):
                     if v.get("prov:activity") == aid:
@@ -339,7 +353,12 @@ def load_bag(path: Path):
                     if v.get("prov:activity") != aid:
                         continue
                     if v.get("prov:plan"):
-                        rec["plan"] = _qn(v["prov:plan"]).split(":", 1)[-1]
+                        pfx, sep, local = _qn(v["prov:plan"]).partition(":")
+                        if not sep:
+                            pfx, local = "", pfx
+                        rec["plan"] = local
+                        if pfx in d.get("prefix", {}):
+                            rec["planIri"] = d["prefix"][pfx] + local
                     img = agents.get(v.get("prov:agent"), {}).get("cwlprov:image")
                     if img:
                         rec["image"] = img
@@ -531,6 +550,18 @@ def pd_url(pd):
     return f"https://ospd.example.org/ogc-api/processes/{pd['id']}"
 
 
+def plan_url(pd):
+    """The prov:Plan of a CWL-sourced process: its OGC Application Package, as served by OGC API -
+    Processes - Part 2 (DRU) at /processes/{processID}/package (req. /deploy-replace-undeploy/
+    package-get-op). The same IRI is the type-level `plan` and every run's `hadPlan`."""
+    return pd_url(pd) + "/package"
+
+
+def execution_unit(url):
+    return {"href": url.replace("/blob/", "/raw/", 1), "type": "application/cwl+yaml",
+            "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"}
+
+
 def media(v, d):
     return d["media"].get(v, v)
 
@@ -623,7 +654,7 @@ def provenance_chain(proc, pd, exe, res, info, image, d):
         "startedAtTime": info["start"],
         "used": used,
         "wasAssociatedWith": [eng["id"]] + ([f"urn:example:image:{image}"] if image else []),
-        "qualifiedAssociation": [{"agent": eng["id"], "hadPlan": pd_url(pd)}],
+        "qualifiedAssociation": [{"agent": eng["id"], "hadPlan": plan_url(pd)}],
     }
     if info["end"]:
         activity["endedAtTime"] = info["end"]
@@ -631,7 +662,14 @@ def provenance_chain(proc, pd, exe, res, info, image, d):
     if image:
         agents.append({"id": f"urn:example:image:{image}", "provType": "prov:SoftwareAgent",
                        "name": f"container image {image}"})
-    return [activity] + ents + agents, run_id
+    # The plan the run followed, as this view names it (the Application Package), and as the
+    # engine's own CWLProv graph names it (the run-local copy in the research object, an arcp: IRI
+    # that changes with every run): the latter is a specialization of the former.
+    plans = [{"id": plan_url(pd), "provType": "prov:Plan"}]
+    if info["activity"].get("planIri"):
+        plans.append({"id": info["activity"]["planIri"], "provType": "prov:Plan",
+                      "specializationOf": plan_url(pd)})
+    return [activity] + ents + agents + plans, run_id
 
 
 def process_run(proc, pd, run_id, info, parent_run):
@@ -640,7 +678,7 @@ def process_run(proc, pd, run_id, info, parent_run):
         "id": run_id,
         "type": "ProcessRun",
         "activityType": ptype_iri(proc),
-        "describedByProcess": pd_url(pd),
+        "describedByProcess": plan_url(pd),
         "usedInput": [{"id": f"urn:example:entity:{proc['key']}:in:{n}"} for n in proc["execute"]["inputs"]],
         "startedAtTime": info["start"],
         "wasEnactedBy": info["engine"]["id"],
@@ -668,7 +706,7 @@ def execution_bundle(proc, pd, run_id, info, job_id, d):
     if not outputs:
         return None
     run = {"id": run_id, "type": "WorkflowRun", "activityType": ptype_iri(proc),
-           "describedByWorkflow": pd_url(pd), "wasEnactedBy": eng["id"], "status": "successful",
+           "describedByWorkflow": plan_url(pd), "wasEnactedBy": eng["id"], "status": "successful",
            "jobID": job_id, "startedAtTime": info["start"], "endedAtTime": info["end"]}
     if proc.get("steps"):
         run["hadSubProcessRun"] = [{"id": f"urn:example:run:{proc['workflow']}:{s}"} for s in proc["steps"]]
@@ -688,12 +726,18 @@ def process_type_entry(proc, pd, cwl_el, src, url, by_key):
         "status": "submitted",
         "phase": [PHASE_BASE + p for p in proc["phases"]],
         "profile": bb_id(proc),
-        "processDescription": {"id": pd["id"], "version": pd["version"]},
-        "source": {"cwl": url, "cwlClass": cwl_el["class"], "cwlId": cwl_el.get("id", pd["id"]),
-                   "license": src["license"]},
+        "processDescription": {"id": pd["id"], "version": pd["version"], "href": pd_url(pd)},
+        "plan": {
+            "id": plan_url(pd),
+            "type": "Plan",
+            "executionUnit": execution_unit(url),
+            "cwlClass": cwl_el["class"],
+            "cwlId": cwl_el.get("id", pd["id"]),
+            "license": src["license"],
+            "cctDependencies": proc.get("cct", []),
+            "candidateCctDependencies": proc.get("cct_candidates", []),
+        },
         "provenanceClass": "http://purl.org/wf4ever/wfprov#" + ("WorkflowRun" if cwl_el["class"] == "Workflow" else "ProcessRun"),
-        "cctDependencies": proc.get("cct", []),
-        "candidateCctDependencies": proc.get("cct_candidates", []),
     }
     if proc.get("steps"):
         entry["hasStep"] = [ptype_iri(by_key[s]) for s in proc["steps"]]
@@ -831,7 +875,7 @@ def description_md(proc, pd, cwl_el, url, src, corrections, has_exec, info, by_k
     if proc.get("analysis"):
         parts += ["", "## Analysis", "", proc["analysis"].strip()]
     parts += ["", "## processDescription derivation", "",
-              "Derived with the `eoap.cct.cwl-to-ogcprocess` jq transform (bblocks-eoap-cct "
+              "Derived with the `eoap.cct.cwl-to-ogcprocess` jq transform (bblocks-eoap-cct " 
               f"`{eoap_commit[:7]}`, inline variant)."]
     if corrections:
         parts += ["", "**Manually corrected** (the raw transform output is kept as a separate example):", ""]
@@ -841,7 +885,11 @@ def description_md(proc, pd, cwl_el, url, src, corrections, has_exec, info, by_k
     parts += ["", "## Provenance view", "",
               "Expressed against the generic provenance profile (`ogc.bbr.provenance.provenance`, a W3C PROV "
               "chain): one `prov:Activity` whose `activityType` is the process-type IRI, `qualifiedAssociation."
-              "hadPlan` pointing to the processDescription, input and output `prov:Entity` objects (literal "
+              "hadPlan` pointing to the process's Application Package (`/processes/{id}/package`, OGC API - "
+              "Processes - Part 2), the same plan as the process-type entry's own `plan` -- the plan as "
+              "the engine's own CWLProv graph names it (its run-local `arcp:` copy in the research object) is "
+              "given as a `prov:specializationOf` that Application Package --, input and output "
+              "`prov:Entity` objects (literal "
               "parameters carry `value`, files carry `links`) and the engine / container image as "
               "`prov:SoftwareAgent`."]
     if cwl_el["class"] == "Workflow":
@@ -965,6 +1013,275 @@ def examples_yaml(proc, cwl_el, url, corrected, has_exec):
             for e in ex]
 
 
+# ------------------------------------------------------------------ live OGC API - Processes
+# profiles (sources.yaml `kind: ogcapi-process`): no CWL, no jq transform, no run record -- the
+# cached processDescription IS the target shape already. Static processDescription only, by
+# design (docs/OPEN-QUESTIONS.md Q-SQLMM): no execute/results/provenance examples, since there is
+# no CWLProv-style run record for a live deployed service the way there is for the CWL workflows.
+
+def load_ogcapi_process(proc, sources, roots):
+    """Reads a cached live processDescription (never downloaded here, see
+    run_workflows.py ensure_ogcapi_processes()) and normalises it: keeps the clean `schema` per
+    input/output, drops ZOO-Project-internal fields (`extended-schema`, `raw_schema1`) that are
+    not part of OGC API - Processes Part 1 and would not uplift to anything meaningful."""
+    src = sources[proc["source"]["repo"]]
+    path = roots[proc["source"]["repo"]] / src["base_path"] / proc["source"]["file"]
+    raw = json.loads(path.read_text())
+    url = src["repo"] + "/" + raw["id"]
+
+    def clean_io(items):
+        out = {}
+        for k, v in items.items():
+            e = {"title": (v.get("title") or "").strip(), "description": (v.get("description") or "").strip()}
+            if "schema" in v:
+                e["schema"] = v["schema"]
+            out[k] = e
+        return out
+
+    pd = {
+        "id": raw["id"],
+        "title": raw.get("title", raw["id"]),
+        "description": raw.get("description", ""),
+        "version": raw.get("version", "1.0.0"),
+        "jobControlOptions": raw.get("jobControlOptions", []),
+        "outputTransmission": raw.get("outputTransmission", []),
+        "inputs": clean_io(raw.get("inputs", {})),
+        "outputs": clean_io(raw.get("outputs", {})),
+    }
+    if "mutable" in raw:
+        pd["mutable"] = raw["mutable"]
+    return raw, pd, url
+
+
+def ogcapi_process_type_entry(proc, pd, src, url, by_key):
+    oe = proc["openeo"]
+    # A natively implemented process (`mutable: false`) has no Application Package -- Part 2's
+    # /package is only served for dynamically deployed ones (req. package-get-op C) -- so no plan.
+    entry = {
+        "id": ptype_iri(proc),
+        "type": "ProcessType",
+        "prefLabel": (proc.get("label") or pd.get("title") or pd["id"]).strip(),
+        "definition": " ".join((proc.get("definition") or pd.get("description") or "").split()),
+        "inScheme": PTYPE_SCHEME,
+        "status": "submitted",
+        "phase": [PHASE_BASE + p for p in proc["phases"]],
+        "profile": bb_id(proc),
+        "processDescription": {"id": pd["id"], "version": pd["version"], "href": url},
+        "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+    }
+    if src.get("license"):
+        entry["processDescription"]["license"] = src["license"]
+    if proc.get("implementsProfile"):
+        entry["implementsProfile"] = proc["implementsProfile"]
+    for rel in ("exactMatch", "closeMatch", "relatedMatch"):
+        if oe.get(rel):
+            entry[rel] = [BBLOCK_IRI + t for t in oe[rel]]
+    entry["openeoEquivalence"] = {"level": oe["level"], "rationale": " ".join(oe["rationale"].split())}
+    return entry
+
+
+PROFILE_ROLE = "http://www.opengis.net/spec/wps/2.0/def/process-profile/"  # OGC 14-065r1 Table 22
+# Table 22 only names profile levels; these say the target is one input/output of an
+# Implementation Profile. Defined by bblocks-generic-profiles, not by OGC: nothing is minted
+# under opengis.net.
+IO_ROLE = GENERIC_PROFILES_BASE + "role/implementation-"
+
+
+def _contains_all(values):
+    return {"allOf": [{"contains": {"const": v}} for v in values]}
+
+
+def _contains_refs(refs):
+    return {"allOf": [{"contains": {"type": "object", "required": ["role", "href"], "properties": {
+        "role": {"const": m["role"]}, "href": {"const": m["href"]}}}} for m in refs]}
+
+
+def inherited_process_description(proc, pd, gp_root):
+    """The live processDescription with what OGC 14-065r1 Table 21 says the Implementation
+    (instance level) inherits from its Implementation Profile: keywords Extended (E), and, per
+    footnote a, the list of metadata references to superior profiles extended with a Table 22
+    `implementation` reference -- at process level and on every input/output bound to one of the
+    Implementation Profile's (`bindings` in profiles.yaml). Returns the document and the JSON
+    Schema checking exactly that inheritance."""
+    ip_iri = proc["implementsProfile"]
+    ip_key = ip_iri.rstrip("/").rsplit("/", 1)[-1]
+    load = lambda tier, k: json.loads((gp_root / "_sources" / tier / k / "examples" / f"{k}.json").read_text())
+    ip = load("implementation-profile", ip_key)
+    # Profile-level references (Table 22 roles) live on the process only: the Implementation
+    # Profile's own list (concept, generic), extended with `implementation` (footnote a).
+    refs = list(ip["metadata"]) + [
+        {"title": f"Implementation Profile: {ip['prefLabel']}", "role": PROFILE_ROLE + "implementation", "href": ip_iri}]
+
+    bindings, unbound = proc.get("bindings", {}), proc.get("unbound", {})
+    doc = {k: v for k, v in pd.items() if k not in ("inputs", "outputs")}
+    doc["keywords"] = list(ip["keywords"])
+    doc["metadata"] = refs
+    rules = {"keywords": _contains_all(ip["keywords"]), "metadata": _contains_refs(refs)}
+    for side in ("inputs", "outputs"):
+        bound = bindings.get(side, {})
+        for live, name in bound.items():
+            if live not in pd[side] or name not in ip[side]:
+                sys.exit(f"{proc['key']}: binding {side} {live} -> {name}: unknown on the live process or on {ip_key}")
+        missing = set(ip[side]) - set(bound.values()) - set(unbound)
+        if missing:
+            sys.exit(f"{proc['key']}: {ip_key} {side} {sorted(missing)} neither bound nor `unbound` in profiles.yaml")
+        out, side_rules = {}, {}
+        for live, e in pd[side].items():
+            name = bound.get(live)
+            if not name:
+                out[live] = e
+                continue
+            ipe = ip[side][name]
+            # Input/output level: the Implementation Profile input/output's own references (to
+            # its Generic Profile input/output) extended with one to that input/output itself.
+            meta = list(ipe["metadata"]) + [
+                {"title": f"Implementation Profile: {ip['prefLabel']} -- {side[:-1]} `{name}`",
+                 "role": IO_ROLE + side[:-1], "href": f"{ip_iri}/{side}/{name}"}]
+            out[live] = {"title": e["title"], "description": e["description"],
+                         "keywords": list(ipe["keywords"]), "metadata": meta,
+                         **{k: v for k, v in e.items() if k not in ("title", "description")}}
+            side_rules[live] = {"required": ["keywords", "metadata"], "properties": {
+                "keywords": _contains_all(ipe["keywords"]), "metadata": _contains_refs(meta)}}
+        doc[side] = out
+        rules[side] = {"type": "object", "required": sorted(side_rules), "properties": side_rules}
+    schema = {"description": (f"`{pd['id']}` as the Implementation (instance level) of `{ip_iri}`: "
+                              "Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) "
+                              "inherited from its Implementation Profile."),
+              "type": "object", "required": ["keywords", "metadata"], "properties": rules}
+    return doc, schema
+
+
+def ogcapi_profile_schema(pd, inherited=None):
+    pins = {
+        "type": "object",
+        "required": ["id", "inputs", "outputs"],
+        "properties": {
+            "id": {"const": pd["id"]},
+            "inputs": {"type": "object", "required": list(pd["inputs"].keys())},
+            "outputs": {"type": "object", "required": list(pd["outputs"].keys())},
+        },
+    }
+    base = [{"$ref": "bblocks://ogc.api.processes.v1.schemas.process"},
+            {"$ref": "bblocks://ogc.api.processes.v2.schemas.staticIndicator"}, pins]
+    defs = {"processTypeEntry": {"$ref": f"bblocks://{PREFIX}process-type"}}
+    if inherited:
+        # deep copies: a shared object would be dumped as a YAML anchor/alias
+        defs["inheritedProcessDescription"] = {"allOf": copy.deepcopy(base) + [inherited]}
+    return {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "description": (f"Profile of the live OGC API - Processes processDescription of `{pd['id']}`. "
+                        "Pins the process id and the input/output names. No execute/results/"
+                        "provenance $defs or examples: static processDescription only (no CWLProv-"
+                        "style run record exists for a live deployed service)."),
+        "allOf": base,
+        "$defs": defs,
+    }
+
+
+def generic_profiles_identifier(iri):
+    # isProfileOf expects a bblocks:// URI or a bare register-local identifier (bblocks-docs
+    # "Building Block relationships") -- never a plain https:// IRI, which the postprocessor
+    # treats as an already-bare identifier and prefixes as-is, producing a malformed
+    # "bblocks://https://..." value. `implementsProfile` on process-type is a data property and
+    # correctly holds the full IRI; this converts it to the identifier form for isProfileOf.
+    if not iri.startswith(GENERIC_PROFILES_BASE):
+        return iri
+    return "generic-profiles." + iri[len(GENERIC_PROFILES_BASE):].replace("/", ".")
+
+
+def ogcapi_bblock_json(proc, pd, src):
+    depends = ["ogc.api.processes.v1.schemas.process", "ogc.api.processes.v2.schemas.staticIndicator",
+               f"{PREFIX}process-type"]
+    family = src.get("family", "OGC API - Processes")
+    group = src.get("group", src.get("title", "OGC API - Processes"))
+    entry = {
+        "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+        "name": f"Process profile: {pd['id']}",
+        "abstract": (f"Process profile of the live OGC API - Processes process `{pd['id']}` "
+                     "(ZOO-Project, Geonovum testbed), with a process-type entry linking to its "
+                     "Implementation Profile. Static processDescription only, no execute/results/provenance."),
+        "status": "under-development",
+        "dateTimeAddition": f"{TODAY}T00:00:00Z",
+        "dateOfLastChange": TODAY,
+        "version": "0.1",
+        "itemClass": "schema",
+        "register": "process-profiles",
+        "dependsOn": depends,
+        "seeAlso": ["ogc.api.processes.part1.requirements.core"],
+        "conformanceClasses": [PART1_CORE],
+        "scope": "dev",
+        "tags": ["OSPD", "process profile", "OGC API - Processes", family, proc["workflow"]],
+        "sourceSchema": "schema.yaml",
+        "maturity": "development",
+        "group": group,
+    }
+    # Implementation (instance level) is a profile of its Implementation Profile (bblocks-docs
+    # "Building Block relationships": isProfileOf, not dependsOn -- there is no bblocks:// $ref
+    # for it anywhere in this schema, only a plain IRI on the process-type entry's own
+    # `implementsProfile` data property; isProfileOf is the metadata-level declaration of the
+    # same relationship, read by the register/viewer independently of that data field. Extension
+    # points (bblocks-docs "Extension points") do not apply here: that mechanism substitutes a
+    # nested schema $ref throughout an inheritance chain, and this processDescription schema
+    # never references generic-profiles.implementation-profile.* in the first place.
+    if proc.get("implementsProfile"):
+        entry["isProfileOf"] = generic_profiles_identifier(proc["implementsProfile"])
+    return entry
+
+
+def ogcapi_examples_yaml(proc, url):
+    unbound = "".join(f" `{k}` is not bound: {v}." for k, v in proc.get("unbound", {}).items())
+    ex = [
+        {"title": "Source (referenced)",
+         "content": f"The processDescription is fetched from the live service, not copied: <{url}>."},
+        {"title": "processDescription",
+         "content": "Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fields dropped).",
+         "snippets": [{"language": "json", "ref": "examples/processDescription.json"}]},
+        {"title": "processDescription with its inheritance (Implementation, instance level)",
+         "content": ("The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation "
+                     f"(instance level) of `{proc['implementsProfile']}`: the Implementation Profile's keywords "
+                     "(E) on the process and on each bound input/output, and, per footnote a, its list of "
+                     "metadata references to superior profiles extended with a Table 22 `implementation` "
+                     "reference to the Implementation Profile -- on the process only. Each bound input/output "
+                     "keeps its Implementation Profile counterpart's reference to the Generic Profile input/output "
+                     "(`generic-input`/`-output`) and adds one to that counterpart itself "
+                     "(`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`, `implementation-input`/"
+                     "`-output`): roles defined by bblocks-generic-profiles, since Table 22 only names whole "
+                     "profiles. Which live "
+                     "input/output is which Implementation Profile one is `bindings` in scripts/profiles.yaml; "
+                     "inputs/outputs bound to none are the live service's own additions (footnote b)."
+                     + unbound + " Not what the live service serves today (docs/OPEN-QUESTIONS.md "
+                     "Q-TABLE21-INSTANCE)."),
+         "snippets": [{"language": "json", "ref": "examples/processDescription.inherited.json",
+                       "schema-ref": "#/$defs/inheritedProcessDescription"}]},
+        {"title": "process-type entry",
+         "content": f"Candidate entry `{ptype_iri(proc)}` (`{PREFIX}process-type`), status `submitted`, linking to its Implementation Profile.",
+         "snippets": [{"language": "json", "ref": "examples/process-type.json", "schema-ref": "#/$defs/processTypeEntry"}]},
+    ]
+    return [e if not e.get("snippets")
+            else {"title": e["title"], "base-uri": PROCESS_BASE, **{k: v for k, v in e.items() if k != "title"}}
+            for e in ex]
+
+
+def generate_ogcapi_profiles(sources, roots, by_key, ogcapi_procs, gp_root):
+    for proc in ogcapi_procs:
+        src = sources[proc["source"]["repo"]]
+        raw, pd, url = load_ogcapi_process(proc, sources, roots)
+        out = ROOT / "_sources" / proc["workflow"] / proc["key"]
+        exd = out / "examples"
+        for f in exd.glob("*.json"):
+            f.unlink()
+        dump_json(exd / "processDescription.json", pd)
+        inherited, inherited_schema = inherited_process_description(proc, pd, gp_root)
+        dump_json(exd / "processDescription.inherited.json", inherited)
+        entry = ogcapi_process_type_entry(proc, pd, src, url, by_key)
+        dump_json(exd / "process-type.json", entry)
+        dump_json(out / "context.jsonld", PROFILE_CONTEXT)
+        dump_yaml(out / "schema.yaml", ogcapi_profile_schema(pd, inherited_schema))
+        dump_yaml(out / "examples.yaml", ogcapi_examples_yaml(proc, url))
+        dump_json(out / "bblock.json", ogcapi_bblock_json(proc, pd, src))
+        print(f"{bb_id(proc):60s} {'OGCAPIProcess':16s} (static processDescription only)")
+
+
 # ------------------------------------------------------------------ main
 
 def main():
@@ -978,20 +1295,30 @@ def main():
     ap.add_argument("--runs-root", type=Path,
                     help="directory holding the CWLProv research objects named in scripts/sources.yaml `runs:` "
                          "(default: --sources-root)")
+    ap.add_argument("--generic-profiles", type=Path, default=ROOT.parent / "bblocks-generic-profiles",
+                    help="checkout of bblocks-generic-profiles, read for the Implementation Profiles the live "
+                         "processes inherit from (default: the sibling directory, as in .volumes)")
     a = ap.parse_args()
+    if not (a.generic_profiles / "_sources" / "implementation-profile").is_dir():
+        sys.exit(f"{a.generic_profiles}: not a bblocks-generic-profiles checkout (use --generic-profiles)")
 
     sources = yaml.safe_load((SCRIPTS / "sources.yaml").read_text())
     cfg = yaml.safe_load((SCRIPTS / "profiles.yaml").read_text())
     d, procs = cfg["defaults"], cfg["processes"]
-    by_key = {p["key"]: p for p in procs}
-    if len(by_key) != len(procs):
-        dupes = sorted({p["key"] for p in procs if [q["key"] for q in procs].count(p["key"]) > 1})
+    ogcapi_procs = cfg.get("ogcapi_processes", [])
+    all_procs = procs + ogcapi_procs
+    by_key = {p["key"]: p for p in all_procs}
+    if len(by_key) != len(all_procs):
+        dupes = sorted({p["key"] for p in all_procs if [q["key"] for q in all_procs].count(p["key"]) > 1})
         sys.exit(f"scripts/profiles.yaml: duplicate key(s) {dupes} -- `key` must be unique across "
                  "the whole file (steps/parents references and by_key lookups are not workflow-scoped)")
     roots = {"w1": a.w1 or a.sources_root / sources["w1"]["clone"],
              "w2": a.w2 or a.sources_root / sources["w2"]["clone"],
              "w3": a.w3 or a.sources_root / sources["w3"]["clone"],
-             "kindgrove_steps": a.kindgrove_steps or a.sources_root / sources["kindgrove_steps"]["clone"]}
+             "kindgrove_steps": a.kindgrove_steps or a.sources_root / sources["kindgrove_steps"]["clone"],
+             "sqlmm_geonovum": a.sources_root / sources["sqlmm_geonovum"]["clone"],
+             "raster_geonovum": a.sources_root / sources["raster_geonovum"]["clone"],
+             "vector_geonovum": a.sources_root / sources["vector_geonovum"]["clone"]}
     eoap = a.eoap_cct or a.sources_root / sources["eoap_cct"]["clone"]
     jq_path = eoap / sources["eoap_cct"]["transform"]
     # real run records: local research objects, never downloaded (like the CWL clones)
@@ -1041,10 +1368,9 @@ def main():
         dump_json(exd / "processDescription.json", pd)
         if corrected:
             dump_json(exd / "processDescription.raw.json", raw)
-        exec_unit_type = "application/cwl+yaml"
         dump_json(exd / "ogcapppkg.json", {
             "processDescription": {"process": {"id": pd["id"], "version": pd["version"]}},
-            "executionUnit": {"href": url.replace("/blob/", "/raw/", 1), "type": exec_unit_type, "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"},
+            "executionUnit": execution_unit(url),
         })
         dump_json(exd / "execute.json", exe)
         dump_json(exd / "results.json", res)
@@ -1074,6 +1400,8 @@ def main():
                         "execution": has_exec, "cct": proc.get("cct", []),
                         "inputs": len(pd["inputs"]), "outputs": len(pd["outputs"])})
         print(f"{bb_id(proc):60s} {cwl_el['class']:16s} corrections={len(corrections)} exec={has_exec}")
+
+    generate_ogcapi_profiles(sources, roots, by_key, ogcapi_procs, a.generic_profiles)
 
     # shared process-type example: reproject-image entry
     pt = ROOT / "_sources" / "process-type"

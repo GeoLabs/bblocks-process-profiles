@@ -26,6 +26,61 @@ eoap_cct:
   commit: 291a741c3f2b61da7607f1dbb7a777134374227d
   clone: bblocks-eoap-cct
   transform: _sources/cwl-to-ogcprocess/transforms/cwl-to-ogcprocess.jq
+sqlmm_geonovum:
+  title: SQL/MM spatial operations (ZOO-Project, Geonovum testbed)
+  repo: https://host1.tb.geonovum.geolabs.fr/ogc-api/processes
+  clone: sqlmm-geonovum
+  base_path: .
+  kind: ogcapi-process   # a live OGC API - Processes processDescription, fetched and cached as-is
+                         # -- no CWL, no jq transform (the source is already in the target shape)
+  license: null   # no license declared by this testbed instance; do not assume one
+  family: SQL/MM
+  group: SQL/MM (Geonovum testbed)
+  items:   # process ids to fetch, cached as <id>.json under --sources-root/sqlmm-geonovum/
+    - Intersects
+    - Disjoint
+    - Contains
+    - Within
+    - Touches
+    - Crosses
+    - Equals
+    - Intersection
+    - Union
+    - Difference
+    - SymDifference
+    - Buffer
+    - Centroid
+    - GetArea
+    - IsSimple
+    - ConvexHull
+raster_geonovum:
+  title: Raster/coverage operations (ZOO-Project, Geonovum testbed, GDAL/OTB)
+  repo: https://host1.tb.geonovum.geolabs.fr/ogc-api/processes
+  clone: raster-geonovum
+  base_path: .
+  kind: ogcapi-process
+  license: null   # no license declared by this testbed instance; do not assume one
+  family: GDAL/OTB
+  group: Raster/Coverage (Geonovum testbed)
+  items:   # process ids to fetch, cached as <id>.json under --sources-root/raster-geonovum/
+    - Gdal_Warp
+    - OTB.BandMath
+    - OTB.BandMathX
+    - OTB.RadiometricIndices
+    - OTB.ExtractROI
+    - Gdal_Translate
+    - OTB.ImageEnvelope
+vector_geonovum:
+  title: Vector operations (ZOO-Project, Geonovum testbed, SAGA GIS)
+  repo: https://host1.tb.geonovum.geolabs.fr/ogc-api/processes
+  clone: vector-geonovum
+  base_path: .
+  kind: ogcapi-process
+  license: null   # no license declared by this testbed instance; do not assume one
+  family: SAGA
+  group: Vector (Geonovum testbed)
+  items:   # process ids to fetch, cached as <id>.json under --sources-root/vector-geonovum/
+    - SAGA.shapes_tools.19
 w3:
   title: W3 Water Bodies (OGC EO Application Package Hands-On, GeoLabs split)
   repo: https://github.com/GeoLabs/ogc-eo-application-package-hands-on

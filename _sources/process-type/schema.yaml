@@ -4,6 +4,14 @@ description: |
   activities recorded in provenance: a provenance Activity of this type carries the entry `id` as
   its `activityType`. The entry is modelled as a SKOS concept; openEO equivalences use the SKOS
   mapping properties.
+
+  The entry describes the *type* of activity only. What an activity of this type executes -- its
+  plan, a `prov:Plan` -- is kept apart in `plan`: the OGC Application Package served by OGC API -
+  Processes - Part 2 (Deploy, Replace, Undeploy) at `/processes/{processID}/package`, whose
+  execution unit is the pinned CWL. A run of this type records the same IRI as its
+  `qualifiedAssociation.hadPlan`. A process implemented natively by its server (`mutable: false`)
+  has no Application Package (Part 2 serves `/package` only for dynamically deployed processes)
+  and so no `plan`; `processDescription` is then the only link to what is executed.
 type: object
 required:
   - id
@@ -14,7 +22,7 @@ required:
   - status
   - phase
   - profile
-  - source
+  - processDescription
   - provenanceClass
   - openeoEquivalence
 properties:
@@ -53,21 +61,53 @@ properties:
     description: Identifier of the process-profile Building Block.
     type: string
   processDescription:
+    description: >-
+      The OGC API - Processes processDescription this type is profiled from, at `href` (the
+      `/processes/{processID}` resource). For a CWL-sourced process it is the description the
+      Application Package would deploy, under the illustrative host `ospd.example.org`; for a live
+      process (e.g. a ZOO-Project deployment, `ospd.process-profiles.sqlmm.*`) the real one.
     type: object
-    required: [id, version]
+    required: [id, version, href]
     properties:
       id:
         type: string
       version:
         type: string
-  source:
-    type: object
-    required: [cwl, cwlClass, cwlId]
-    properties:
-      cwl:
-        description: Pinned URL of the CWL document.
+      href:
         type: string
         format: uri
+      license:
+        description: Of a live process; omitted, not null, when it declares none -- do not assume one.
+        type: string
+        format: uri
+  plan:
+    description: >-
+      The plan (`prov:Plan`) an activity of this type executes: the OGC Application Package at
+      `/processes/{processID}/package` (OGC API - Processes - Part 2, requirement
+      /req/deploy-replace-undeploy/package-get-op), whose `executionUnit` is the pinned CWL.
+      Present only for a CWL-sourced process.
+    type: object
+    required: [id, type, executionUnit, cwlClass, cwlId]
+    properties:
+      id:
+        type: string
+        format: uri
+        pattern: '/processes/[^/]+/package$'
+      type:
+        const: Plan
+      executionUnit:
+        description: Same link as the Application Package's own `executionUnit` (examples/ogcapppkg.json).
+        type: object
+        required: [href, type]
+        properties:
+          href:
+            description: Pinned URL of the CWL document.
+            type: string
+            format: uri
+          type:
+            type: string
+          rel:
+            type: string
       cwlClass:
         enum: [CommandLineTool, Workflow, ExpressionTool]
       cwlId:
@@ -75,24 +115,35 @@ properties:
       license:
         type: string
         format: uri
+      cctDependencies:
+        description: EOAP CWL custom types used by the CWL.
+        type: array
+        items:
+          type: string
+          pattern: '^eoap\.cct\.'
+      candidateCctDependencies:
+        description: EOAP CWL custom types that could replace plain CWL types (not used by the CWL).
+        type: array
+        items:
+          type: string
+          pattern: '^eoap\.cct\.'
   provenanceClass:
     description: Class of the run records produced by executing this process.
     type: string
     enum:
       - http://purl.org/wf4ever/wfprov#ProcessRun
       - http://purl.org/wf4ever/wfprov#WorkflowRun
-  cctDependencies:
-    description: EOAP CWL custom types used by the CWL source.
-    type: array
-    items:
-      type: string
-      pattern: '^eoap\.cct\.'
-  candidateCctDependencies:
-    description: EOAP CWL custom types that could replace plain CWL types (not used by the source).
-    type: array
-    items:
-      type: string
-      pattern: '^eoap\.cct\.'
+  implementsProfile:
+    description: >-
+      IRI of the nearest applicable profile this process specialises, in the generic-profiles
+      register -- normally an Implementation Profile (generic-profiles.implementation-profile.*,
+      OGC 14-065 WPS 2.0.2 §7.5.3: standard data formats, still not one specific deployment's own
+      choice), or a Generic Profile directly when no Implementation Profile exists yet. Optional:
+      most processes have no standardised abstract counterpart at all. `processDescription` and
+      `plan` (this entry's own concrete binding) are what further specialise it to one real,
+      deployed process -- Implementation (instance level) in the same standard's terms.
+    type: string
+    format: uri
   hasStep:
     description: Process types of the steps of a Workflow.
     type: array

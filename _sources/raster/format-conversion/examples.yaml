@@ -1,0 +1,33 @@
+- title: Source (referenced)
+  content: 'The processDescription is fetched from the live service, not copied: <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate>.'
+- title: processDescription
+  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  content: Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fields dropped).
+  snippets:
+  - language: json
+    ref: examples/processDescription.json
+- title: processDescription with its inheritance (Implementation, instance level)
+  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  content: 'The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance
+    level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion`:
+    the Implementation Profile''s keywords (E) on the process and on each bound input/output, and, per
+    footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation`
+    reference to the Implementation Profile -- on the process only. Each bound input/output keeps its
+    Implementation Profile counterpart''s reference to the Generic Profile input/output (`generic-input`/`-output`)
+    and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`,
+    `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only
+    names whole profiles. Which live input/output is which Implementation Profile one is `bindings` in
+    scripts/profiles.yaml; inputs/outputs bound to none are the live service''s own additions (footnote
+    b). Not what the live service serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).'
+  snippets:
+  - language: json
+    ref: examples/processDescription.inherited.json
+    schema-ref: '#/$defs/inheritedProcessDescription'
+- title: process-type entry
+  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  content: Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion`
+    (`ospd.process-profiles.process-type`), status `submitted`, linking to its Implementation Profile.
+  snippets:
+  - language: json
+    ref: examples/process-type.json
+    schema-ref: '#/$defs/processTypeEntry'

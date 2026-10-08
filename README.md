@@ -64,7 +64,7 @@ Shared: `ospd.process-profiles.process-type` — schema of a candidate process-t
 - [docs/OPENEO-EQUIVALENCES.md](docs/OPENEO-EQUIVALENCES.md) — equivalence decisions and criteria
 - [docs/WORKFLOW-COMPARISON.md](docs/WORKFLOW-COMPARISON.md) — structural parallels and differences across W1/W2/W3
 - [docs/OPEN-QUESTIONS.md](docs/OPEN-QUESTIONS.md)
-- [docs/VALIDATION.md](docs/VALIDATION.md) — validation status (Docker build passing, 28/28)
+- [docs/VALIDATION.md](docs/VALIDATION.md) — validation status (Docker build passing, 52/52)
 
 ## Regenerating
 

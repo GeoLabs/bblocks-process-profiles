@@ -1,0 +1,174 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+description: 'Profile of the live OGC API - Processes processDescription of `Centroid`. Pins the process
+  id and the input/output names. No execute/results/provenance $defs or examples: static processDescription
+  only (no CWLProv-style run record exists for a live deployed service).'
+allOf:
+- $ref: bblocks://ogc.api.processes.v1.schemas.process
+- $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+- type: object
+  required:
+  - id
+  - inputs
+  - outputs
+  properties:
+    id:
+      const: Centroid
+    inputs:
+      type: object
+      required:
+      - InputPolygon
+    outputs:
+      type: object
+      required:
+      - Result
+$defs:
+  processTypeEntry:
+    $ref: bblocks://ospd.process-profiles.process-type
+  inheritedProcessDescription:
+    allOf:
+    - $ref: bblocks://ogc.api.processes.v1.schemas.process
+    - $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+    - type: object
+      required:
+      - id
+      - inputs
+      - outputs
+      properties:
+        id:
+          const: Centroid
+        inputs:
+          type: object
+          required:
+          - InputPolygon
+        outputs:
+          type: object
+          required:
+          - Result
+    - description: '`Centroid` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/centroid`:
+        Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) inherited from its Implementation
+        Profile.'
+      type: object
+      required:
+      - keywords
+      - metadata
+      properties:
+        keywords:
+          allOf:
+          - contains:
+              const: vector
+          - contains:
+              const: geometry
+          - contains:
+              const: derived geometry
+          - contains:
+              const: Centroid
+          - contains:
+              const: ST_Centroid
+        metadata:
+          allOf:
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/centroid
+        inputs:
+          type: object
+          required:
+          - InputPolygon
+          properties:
+            InputPolygon:
+              required:
+              - keywords
+              - metadata
+              properties:
+                keywords:
+                  allOf:
+                  - contains:
+                      const: geometry
+                  - contains:
+                      const: GML
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/inputs/geometry
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/centroid/inputs/geometry
+        outputs:
+          type: object
+          required:
+          - Result
+          properties:
+            Result:
+              required:
+              - keywords
+              - metadata
+              properties:
+                keywords:
+                  allOf:
+                  - contains:
+                      const: geometry
+                  - contains:
+                      const: GML
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/outputs/result
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/centroid/outputs/result

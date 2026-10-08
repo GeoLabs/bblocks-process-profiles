@@ -1,5 +1,44 @@
 # Validation status
 
+## Authoritative validation: passing (2026-10-06)
+
+`./build.sh` (Docker, `ghcr.io/opengeospatial/bblocks-postprocess:latest`): **52/52 building
+blocks, 0 errors**, no empty RDF graph. Supersedes the 2026-09-24 28/28 below, not a correction
+of it: the `sqlmm`/`raster`/`vector` workflow groups (SQL/MM, GDAL/OTB and SAGA operations on
+the Geonovum testbed, `ospd.process-profiles.{sqlmm,raster,vector}.*`) were added over several
+sessions starting 2026-10-01 but never run through a full Docker build until now -- this is
+their first validation, not a revalidation.
+
+It surfaced one real, pre-existing bug, unrelated to any one session's additions: three
+`profiles.yaml` entries (`raster.extent`, `raster.format-conversion`, `vector.geometry-extent`)
+used `phases: [post-processing]`, a value `_sources/process-type/schema.yaml`'s `phase` enum
+has never accepted (it only has `filter-configuration`/`selection-filtering`/`data-retrieval`/
+`pre-processing`/`scientific-computation`/`export-aggregation`) -- a silent latent failure since
+whichever commit first added it, only visible once the register was actually built end-to-end.
+Fixed to `export-aggregation`, the enum value matching what all three operations are (a
+terminal/summarising step: re-encoding a raster's final format, or reducing a geometry/raster to
+its bounding envelope), not a judgement call specific to this addition.
+
+Also added in this validation: four more vector operations from OGC 99-049 (Centroid, ConvexHull,
+IsSimple, GetArea -> `ospd.process-profiles.sqlmm.{centroid,convex-hull,is-simple,area}`), on the
+`bblocks-generic-profiles` side merging the former dedicated `geometry-extent` Generic Profile
+into a new shared `unary-geometry-operation` (alongside `centroid`/`convex-hull`) and adding
+`unary-spatial-predicate` (`is-simple`) and `geometry-measure` (`area`) -- see that register's own
+`docs/ARCHITECTURE.md`. `bblocks-generic-profiles` itself validates separately at **41/41
+building blocks, 0 errors**.
+
+Environment note for whoever runs `scripts/generate.py` locally rather than only through
+`./build.sh`: the W3C PROV-JSONLD examples (`w3c_prov_example()`) need `prov`'s own `jsonld`
+serializer, which PyPI's released `prov` (2.2.0 at time of writing) does not ship -- it exists
+only on the project's unreleased `main` branch, which itself requires Python >= 3.10. On a system
+Python 3.9 (as `/usr/bin/python3` is on this machine), `pip install prov` resolves to 2.2.0 (no
+`jsonld` serializer, `generate.py` exits) and `pip install git+https://github.com/trungdong/prov`
+silently builds an empty `UNKNOWN-0.0.0` wheel instead of failing loudly (old pip's PEP 621
+handling, not a `generate.py` bug) -- `./build.sh` itself is unaffected, since the Docker image
+bundles its own working Python. Run `scripts/generate.py` with any Python >= 3.10 that has a
+`prov` built from that branch (Homebrew's `python3.14`, if installed, already had one on this
+machine).
+
 ## Authoritative validation: passing (2026-09-24)
 
 `./build.sh` (Docker, `ghcr.io/opengeospatial/bblocks-postprocess:latest`) run on a machine with
@@ -68,7 +107,7 @@ Fix, in `scripts/generate.py`: a shared `PROFILE_CONTEXT` written to every profi
 the same build and rejected: splitting each profile into one building block per payload
 (26/102 — the OGC API - Processes bblocks have no annotations to inherit) and inlining
 `@context` in the example files (75/102 with 13 new JSON Schema failures, `propertyNames: enum`
-rejects `@context`; array-rooted `provenance.json` cannot carry one).
+rejects `@context`; array-rooted `provenance.json` cannot carry one). See `CLAUDE.md`.
 
 A data bug surfaced by the fix: `scripts/profiles.yaml` had an unquoted flow-mapping value
 `note: partial, no colour-ramp rendering`, parsed as a stray key that became an invalid IRI once a

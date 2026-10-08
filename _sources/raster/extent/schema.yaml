@@ -1,0 +1,184 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+description: 'Profile of the live OGC API - Processes processDescription of `OTB.ImageEnvelope`. Pins
+  the process id and the input/output names. No execute/results/provenance $defs or examples: static processDescription
+  only (no CWLProv-style run record exists for a live deployed service).'
+allOf:
+- $ref: bblocks://ogc.api.processes.v1.schemas.process
+- $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+- type: object
+  required:
+  - id
+  - inputs
+  - outputs
+  properties:
+    id:
+      const: OTB.ImageEnvelope
+    inputs:
+      type: object
+      required:
+      - in
+      - sr
+      - elev
+      - elev.geoid
+      - elev.default
+      - proj
+    outputs:
+      type: object
+      required:
+      - out
+$defs:
+  processTypeEntry:
+    $ref: bblocks://ospd.process-profiles.process-type
+  inheritedProcessDescription:
+    allOf:
+    - $ref: bblocks://ogc.api.processes.v1.schemas.process
+    - $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+    - type: object
+      required:
+      - id
+      - inputs
+      - outputs
+      properties:
+        id:
+          const: OTB.ImageEnvelope
+        inputs:
+          type: object
+          required:
+          - in
+          - sr
+          - elev
+          - elev.geoid
+          - elev.default
+          - proj
+        outputs:
+          type: object
+          required:
+          - out
+    - description: '`OTB.ImageEnvelope` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent`:
+        Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) inherited from its Implementation
+        Profile.'
+      type: object
+      required:
+      - keywords
+      - metadata
+      properties:
+        keywords:
+          allOf:
+          - contains:
+              const: raster
+          - contains:
+              const: coverage
+          - contains:
+              const: extent
+          - contains:
+              const: OTB
+          - contains:
+              const: ImageEnvelope
+        metadata:
+          allOf:
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent
+        inputs:
+          type: object
+          required:
+          - in
+          properties:
+            in:
+              required:
+              - keywords
+              - metadata
+              properties:
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                  - contains:
+                      const: GeoTIFF
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent/inputs/raster
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent/inputs/raster
+        outputs:
+          type: object
+          required:
+          - out
+          properties:
+            out:
+              required:
+              - keywords
+              - metadata
+              properties:
+                keywords:
+                  allOf:
+                  - contains:
+                      const: geometry
+                  - contains:
+                      const: GML
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent/outputs/result
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent/outputs/result

@@ -70,6 +70,10 @@ imports:
   # W3C PROV serialisations (experimental, under-development): the cwltool CWLProv bundles as
   # W3C PROV-JSONLD examples (`ogc.ogc-utils.prov.w3c-prov-jsonld`), see docs/OPEN-QUESTIONS.md Q-W3C
   - https://ogcincubator.github.io/bblocks-prov-jsonld-alt/build/register.json
+  # Generic Process Profiles (Concept / Generic Profile, GeoLabs): not yet published, built locally
+  # in ../bblocks-generic-profiles and mapped by bblocks-config-local.yaml / .volumes -- see that
+  # register's own README before publishing this one
+  - https://geolabs.github.io/bblocks-generic-profiles/build/register.json
 
 schema-oas30-downcompile: False
 

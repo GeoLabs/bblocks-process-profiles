@@ -1,0 +1,188 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+description: 'Profile of the live OGC API - Processes processDescription of `OTB.RadiometricIndices`.
+  Pins the process id and the input/output names. No execute/results/provenance $defs or examples: static
+  processDescription only (no CWLProv-style run record exists for a live deployed service).'
+allOf:
+- $ref: bblocks://ogc.api.processes.v1.schemas.process
+- $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+- type: object
+  required:
+  - id
+  - inputs
+  - outputs
+  properties:
+    id:
+      const: OTB.RadiometricIndices
+    inputs:
+      type: object
+      required:
+      - in
+      - out
+      - channels
+      - channels.green
+      - channels.red
+      - channels.nir
+      - channels.mir
+      - ram
+    outputs:
+      type: object
+      required:
+      - out
+$defs:
+  processTypeEntry:
+    $ref: bblocks://ospd.process-profiles.process-type
+  inheritedProcessDescription:
+    allOf:
+    - $ref: bblocks://ogc.api.processes.v1.schemas.process
+    - $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+    - type: object
+      required:
+      - id
+      - inputs
+      - outputs
+      properties:
+        id:
+          const: OTB.RadiometricIndices
+        inputs:
+          type: object
+          required:
+          - in
+          - out
+          - channels
+          - channels.green
+          - channels.red
+          - channels.nir
+          - channels.mir
+          - ram
+        outputs:
+          type: object
+          required:
+          - out
+    - description: '`OTB.RadiometricIndices` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index`:
+        Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) inherited from its Implementation
+        Profile.'
+      type: object
+      required:
+      - keywords
+      - metadata
+      properties:
+        keywords:
+          allOf:
+          - contains:
+              const: raster
+          - contains:
+              const: coverage
+          - contains:
+              const: radiometric index
+          - contains:
+              const: OTB
+          - contains:
+              const: RadiometricIndices
+        metadata:
+          allOf:
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index
+        inputs:
+          type: object
+          required:
+          - in
+          properties:
+            in:
+              required:
+              - keywords
+              - metadata
+              properties:
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                  - contains:
+                      const: GeoTIFF
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index/inputs/rasters
+        outputs:
+          type: object
+          required:
+          - out
+          properties:
+            out:
+              required:
+              - keywords
+              - metadata
+              properties:
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                  - contains:
+                      const: GeoTIFF
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/outputs/raster
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index/outputs/raster

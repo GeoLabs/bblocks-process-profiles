@@ -14,7 +14,7 @@
     "qualifiedAssociation": [
       {
         "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-        "hadPlan": "https://ospd.example.org/ogc-api/processes/parse_aoi"
+        "hadPlan": "https://ospd.example.org/ogc-api/processes/parse_aoi/package"
       }
     ],
     "endedAtTime": "2026-09-24T10:57:48Z"
@@ -74,5 +74,14 @@
     "id": "urn:example:image:alpine:3.22.2",
     "provType": "prov:SoftwareAgent",
     "name": "container image alpine:3.22.2"
+  },
+  {
+    "id": "https://ospd.example.org/ogc-api/processes/parse_aoi/package",
+    "provType": "prov:Plan"
+  },
+  {
+    "id": "arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/parse_aoi",
+    "provType": "prov:Plan",
+    "specializationOf": "https://ospd.example.org/ogc-api/processes/parse_aoi/package"
   }
 ]

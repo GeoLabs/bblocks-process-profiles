@@ -2,7 +2,7 @@
   "id": "urn:example:run:kindgrove-steps:estimate-biomass",
   "type": "ProcessRun",
   "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/estimate-biomass",
-  "describedByProcess": "https://ospd.example.org/ogc-api/processes/estimate_biomass",
+  "describedByProcess": "https://ospd.example.org/ogc-api/processes/estimate_biomass/package",
   "usedInput": [
     {
       "id": "urn:example:entity:estimate-biomass:in:ndvi_file"

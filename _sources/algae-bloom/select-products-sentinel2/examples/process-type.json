@@ -11,20 +11,27 @@
   "profile": "ospd.process-profiles.algae-bloom.select-products-sentinel2",
   "processDescription": {
     "id": "select-products-sentinel2",
-    "version": "1.1.0"
+    "version": "1.1.0",
+    "href": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2"
   },
-  "source": {
-    "cwl": "https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/select-products-sentinel2.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/select-products-sentinel2.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "select-products-sentinel2",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.geojson",
+      "eoap.cct.string-format"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.geojson",
-    "eoap.cct.string-format"
-  ],
   "closeMatch": [
     "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection"
   ],

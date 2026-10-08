@@ -1,0 +1,26 @@
+{
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi",
+  "type": "ProcessType",
+  "prefLabel": "Extract a ROI defined by the user.",
+  "definition": "This application extracts a Region Of Interest with user parameters. There are four mode of extraction. The standard mode allows the user to enter one point (upper left corner of the region to extract) and a size. The extent mode needs two points (upper left corner and lower right) and the radius mode need the center of the region and the radius: it will extract the rectangle containing the circle defined and limited by the image dimension. The fit mode needs a reference image or vector and the dimension of the extracted region will be the same as the extent of the reference. Different units are available such as pixel, image physical space or longitude and latitude.",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+  ],
+  "profile": "ospd.process-profiles.raster.extract-roi",
+  "processDescription": {
+    "id": "OTB.ExtractROI",
+    "version": "1.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ExtractROI"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop",
+  "closeMatch": [
+    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.filter_bbox"
+  ],
+  "openeoEquivalence": {
+    "level": "closeMatch",
+    "rationale": "OTB.ExtractROI's \"extent\" mode (`mode.extent.ulx/uly/lrx/lry`, two corner points) matches filter_bbox's role (spatially limit a data cube to a bounding box). Not exactMatch: three other modes have no openEO equivalent -- pixel-offset/size (\"standard\": `startx`/`starty`/ `sizex`/`sizey`), circular (\"radius\": `mode.radius.r`/`cx`/`cy`), and reference-geometry (\"fit\": `mode.fit.im`/`vect`) extraction."
+  }
+}
