@@ -13,6 +13,14 @@
     "reference"
   ],
   "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Within/execution"
+    }
+  ],
   "keywords": [
     "vector",
     "geometry",
@@ -129,6 +137,9 @@
           "title": "Implementation Profile: Within -- output `result`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/within/outputs/result"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {

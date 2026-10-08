@@ -139,6 +139,10 @@ $defs:
                           const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
                         href:
                           const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/inputs/targetFormat
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
             InputDSN:
               required:
               - keywords

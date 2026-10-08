@@ -1204,6 +1204,19 @@ ogcapi_processes:
     phases: [scientific-computation]
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math
     bindings: {inputs: {il: rasters, exp: expression}, outputs: {out: raster}}
+    tool:
+      name: OTB BandMath
+      doc: https://www.orfeo-toolbox.org/CookBook/Applications/app_BandMath.html
+      documented: Orfeo ToolBox 10.0.0 CookBook (the deployed OTB version is not exposed by the service)
+      license: "OTB CookBook, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)"
+      summary: Outputs a monoband image which is the result of a mathematical operation on several multi-band images.
+      excerpt: >-
+        This application performs a mathematical operation on several multi-band images and outputs the
+        result into a monoband image. The given expression is computed at each pixel position. Evaluation
+        of the mathematical formula is done by the muParser library.
+      notes:
+        - "`il` is served with `maxOccurs: 1024`, ZOO-Project's encoding of an unbounded list."
+        - "`out` is an input on the live service (the output pixel type, OTB's `-out` type argument) as well as the output image."
     openeo:
       level: closeMatch
       closeMatch: [ogc.openeo.processes.cubes.reduce_dimension]
@@ -1222,6 +1235,18 @@ ogcapi_processes:
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index
     bindings: {inputs: {in: rasters}, outputs: {out: raster}}
     unbound: {index: "no input of the live service selects the index: OTB RadiometricIndices' `list` parameter is not exposed"}
+    tool:
+      name: OTB RadiometricIndices
+      doc: https://www.orfeo-toolbox.org/CookBook/Applications/app_RadiometricIndices.html
+      documented: Orfeo ToolBox 10.0.0 CookBook (the deployed OTB version is not exposed by the service)
+      license: "OTB CookBook, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)"
+      summary: Compute radiometric indices.
+      excerpt: >-
+        This application computes radiometric indices using the relevant channels of the input image.
+        The output is a multi band image into which each channel is one of the selected indices.
+      notes:
+        - "The CookBook's `-list` parameter (the indices to compute, default `ndvi`) is not exposed by the live service, hence the Implementation Profile's `index` stays unbound."
+        - "The live `channels` input is titled \"Blue channel index\": the CookBook's `-channels.blue`."
     openeo:
       level: closeMatch
       closeMatch: [ogc.openeo.processes.cubes.ndvi]
@@ -1239,6 +1264,17 @@ ogcapi_processes:
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop
     bindings: {inputs: {in: raster}, outputs: {out: raster}}
     unbound: {areaOfInterest: "four plain numbers on the live service (mode.extent.ulx/uly/lrx/lry, with mode=extent), not one bounding box"}
+    tool:
+      name: OTB ExtractROI
+      doc: https://www.orfeo-toolbox.org/CookBook/Applications/app_ExtractROI.html
+      documented: Orfeo ToolBox 10.0.0 CookBook (the deployed OTB version is not exposed by the service)
+      license: "OTB CookBook, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)"
+      summary: Extract a ROI defined by the user.
+      excerpt: >-
+        This application extracts a Region Of Interest with user parameters. There are four mode of
+        extraction. [...] The extent mode needs two points (upper left corner and lower right) [...]
+      notes:
+        - "The extent mode takes the area as four numbers (`mode.extent.ulx`, `uly`, `lrx`, `lry`), not one bounding box, hence the Implementation Profile's `areaOfInterest` stays unbound."
     openeo:
       level: closeMatch
       closeMatch: [ogc.openeo.processes.cubes.filter_bbox]
@@ -1271,6 +1307,18 @@ ogcapi_processes:
     phases: [scientific-computation]
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math-multiband
     bindings: {inputs: {il: rasters, exp: expression}, outputs: {out: raster}}
+    tool:
+      name: OTB BandMathX
+      doc: https://www.orfeo-toolbox.org/CookBook/Applications/app_BandMathX.html
+      documented: Orfeo ToolBox 10.0.0 CookBook (the deployed OTB version is not exposed by the service)
+      license: "OTB CookBook, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)"
+      summary: This application performs mathematical operations on several multiband images.
+      excerpt: >-
+        This application performs a mathematical operation on several multi-band images and outputs the
+        result into an image (multi- or mono-band, as opposed to the BandMath OTB-application). The
+        mathematical formula is done by the muParserX library.
+      notes:
+        - "`il` is served with `maxOccurs: 1024`, ZOO-Project's encoding of an unbounded list."
     openeo: {level: none, rationale: "No openEO process combines several image bands via an arbitrary muParserX-style vector expression with multi-band output in the published bblocks-openeo register (array_apply is closest but applies a unary process per band, not a joint expression)."}
 
   - key: extent
@@ -1279,6 +1327,16 @@ ogcapi_processes:
     phases: [export-aggregation]
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent
     bindings: {inputs: {in: raster}, outputs: {out: result}}
+    tool:
+      name: OTB ImageEnvelope
+      doc: https://www.orfeo-toolbox.org/CookBook/Applications/app_ImageEnvelope.html
+      documented: Orfeo ToolBox 10.0.0 CookBook (the deployed OTB version is not exposed by the service)
+      license: "OTB CookBook, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)"
+      summary: Extracts an image envelope.
+      excerpt: >-
+        Build a vector data containing the image envelope polygon. [...] This filter supports
+        user-specified output projection. If no projection is defined, the standard WGS84 projection
+        will be used.
     openeo: {level: none, rationale: "No openEO process computes the bounding envelope of a raster/data cube in the published bblocks-openeo register (filter_bbox takes a bbox as input to filter by, it does not compute one as output)."}
 
 # ---------------------------------------------------------------- Vector operations (SAGA GIS)
@@ -1291,4 +1349,15 @@ ogcapi_processes:
     phases: [export-aggregation]
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent
     bindings: {inputs: {SHAPES: geometry}, outputs: {EXTENTS: result}}
+    tool:
+      name: SAGA shapes_tools 19 (Get Shapes Extents)
+      doc: https://saga-gis.sourceforge.io/saga_tool_doc/9.4.0/shapes_tools_19.html
+      documented: SAGA 9.4.0 tool library documentation (the deployed SAGA version is not exposed by the service)
+      description: >-
+        Tool 19 of SAGA's Shapes - Tools library (author O. Conrad, 2008; command line
+        `saga_cmd shapes_tools 19`). It builds the extent (bounding rectangle) of the input shapes as
+        polygons -- one for all shapes, one per shape (the default), or one per part of each shape, as
+        chosen by its `OUTPUT` option. The documentation page itself only gives the title.
+      notes:
+        - "The live `OUTPUT` input is that option (`all shapes`, `each shape`, `each shape's part`); it is a live-only input, not part of the Implementation Profile."
     openeo: {level: none, rationale: "No openEO process computes the bounding envelope of a vector geometry/feature collection in the published bblocks-openeo register."}

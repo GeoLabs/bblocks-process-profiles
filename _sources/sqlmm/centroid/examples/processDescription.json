@@ -31,7 +31,12 @@
             "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     }
   },
   "outputs": {
@@ -50,8 +55,26 @@
             "type": "object"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     }
   },
-  "mutable": false
+  "mutable": false,
+  "metadata": [
+    {
+      "title": "Demo"
+    }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Centroid/execution"
+    }
+  ]
 }

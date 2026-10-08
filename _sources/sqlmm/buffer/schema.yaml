@@ -170,6 +170,10 @@ $defs:
                           const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
                         href:
                           const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/inputs/distance
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
         outputs:
           type: object
           required:

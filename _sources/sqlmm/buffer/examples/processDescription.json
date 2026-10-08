@@ -28,11 +28,17 @@
             "type": "object"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     },
     "BufferDistance": {
       "title": "Buffer Distance",
       "description": "Distance to be used to calculate buffer.",
+      "minOccurs": 0,
       "schema": {
         "type": "number",
         "default": 10,
@@ -57,8 +63,26 @@
             "type": "object"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     }
   },
-  "mutable": false
+  "mutable": false,
+  "metadata": [
+    {
+      "title": "Demo"
+    }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Buffer/execution"
+    }
+  ]
 }

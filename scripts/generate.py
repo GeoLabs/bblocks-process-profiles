@@ -108,6 +108,8 @@ PROFILE_CONTEXT = {
         "version": "pp:version",
         "mutable": "proc:mutable",
         "jobControlOptions": "proc:jobControlOptions",
+        "minOccurs": "proc:minOccurs",
+        "maxOccurs": "proc:maxOccurs",
         "outputTransmission": "proc:outputTransmission",
         "metadata": {"@id": "proc:metadata", "@context": {
             "href": {"@id": "proc:href", "@type": "@id"}}},
@@ -1019,22 +1021,30 @@ def examples_yaml(proc, cwl_el, url, corrected, has_exec):
 # design (docs/OPEN-QUESTIONS.md Q-SQLMM): no execute/results/provenance examples, since there is
 # no CWLProv-style run record for a live deployed service the way there is for the CWL workflows.
 
+# Fields ZOO-Project adds to an input/output description that OGC API - Processes Part 1 does not
+# define; the only ones removed from a live processDescription.
+ZOO_INTERNAL_IO = ("extended-schema", "raw_schema1")
+
+
 def load_ogcapi_process(proc, sources, roots):
     """Reads a cached live processDescription (never downloaded here, see
-    run_workflows.py ensure_ogcapi_processes()) and normalises it: keeps the clean `schema` per
-    input/output, drops ZOO-Project-internal fields (`extended-schema`, `raw_schema1`) that are
-    not part of OGC API - Processes Part 1 and would not uplift to anything meaningful."""
+    run_workflows.py ensure_ogcapi_processes()) and normalises it: drops only the
+    ZOO-Project-internal input/output fields (ZOO_INTERNAL_IO) that are not part of OGC API -
+    Processes Part 1 and would not uplift to anything meaningful, and trims titles and
+    descriptions. Everything else -- minOccurs/maxOccurs, metadata, keywords, links -- is kept as
+    the live service serves it (until 2026-10-08 a whitelist dropped those too)."""
     src = sources[proc["source"]["repo"]]
     path = roots[proc["source"]["repo"]] / src["base_path"] / proc["source"]["file"]
     raw = json.loads(path.read_text())
     url = src["repo"] + "/" + raw["id"]
 
     def clean_io(items):
+        # Drop only what is ZOO-Project-internal; everything else (minOccurs/maxOccurs, metadata,
+        # keywords, ...) is the live description and is kept as served.
         out = {}
         for k, v in items.items():
             e = {"title": (v.get("title") or "").strip(), "description": (v.get("description") or "").strip()}
-            if "schema" in v:
-                e["schema"] = v["schema"]
+            e.update({kk: vv for kk, vv in v.items() if kk not in ZOO_INTERNAL_IO and kk not in e})
             out[k] = e
         return out
 
@@ -1048,8 +1058,7 @@ def load_ogcapi_process(proc, sources, roots):
         "inputs": clean_io(raw.get("inputs", {})),
         "outputs": clean_io(raw.get("outputs", {})),
     }
-    if "mutable" in raw:
-        pd["mutable"] = raw["mutable"]
+    pd.update({k: v for k, v in raw.items() if k not in pd and k not in ("inputs", "outputs")})
     return raw, pd, url
 
 
@@ -1087,6 +1096,10 @@ PROFILE_ROLE = "http://www.opengis.net/spec/wps/2.0/def/process-profile/"  # OGC
 IO_ROLE = GENERIC_PROFILES_BASE + "role/implementation-"
 
 
+def _merge(first, then):
+    return list(first) + [v for v in then if v not in first]
+
+
 def _contains_all(values):
     return {"allOf": [{"contains": {"const": v}} for v in values]}
 
@@ -1107,6 +1120,7 @@ def inherited_process_description(proc, pd, gp_root):
     ip_key = ip_iri.rstrip("/").rsplit("/", 1)[-1]
     load = lambda tier, k: json.loads((gp_root / "_sources" / tier / k / "examples" / f"{k}.json").read_text())
     ip = load("implementation-profile", ip_key)
+    gp = load("generic-profile", ip["refinesGenericProfile"].rstrip("/").rsplit("/", 1)[-1])
     # Profile-level references (Table 22 roles) live on the process only: the Implementation
     # Profile's own list (concept, generic), extended with `implementation` (footnote a).
     refs = list(ip["metadata"]) + [
@@ -1114,8 +1128,9 @@ def inherited_process_description(proc, pd, gp_root):
 
     bindings, unbound = proc.get("bindings", {}), proc.get("unbound", {})
     doc = {k: v for k, v in pd.items() if k not in ("inputs", "outputs")}
-    doc["keywords"] = list(ip["keywords"])
-    doc["metadata"] = refs
+    # Extend (E), never replace: the inherited values first, then whatever the live service has.
+    doc["keywords"] = _merge(ip["keywords"], pd.get("keywords", []))
+    doc["metadata"] = refs + list(pd.get("metadata", []))
     rules = {"keywords": _contains_all(ip["keywords"]), "metadata": _contains_refs(refs)}
     for side in ("inputs", "outputs"):
         bound = bindings.get(side, {})
@@ -1138,10 +1153,18 @@ def inherited_process_description(proc, pd, gp_root):
                 {"title": f"Implementation Profile: {ip['prefLabel']} -- {side[:-1]} `{name}`",
                  "role": IO_ROLE + side[:-1], "href": f"{ip_iri}/{side}/{name}"}]
             out[live] = {"title": e["title"], "description": e["description"],
-                         "keywords": list(ipe["keywords"]), "metadata": meta,
-                         **{k: v for k, v in e.items() if k not in ("title", "description")}}
+                         "keywords": _merge(ipe["keywords"], e.get("keywords", [])),
+                         "metadata": meta + list(e.get("metadata", [])),
+                         **{k: v for k, v in e.items() if k not in ("title", "description", "keywords", "metadata")}}
             side_rules[live] = {"required": ["keywords", "metadata"], "properties": {
                 "keywords": _contains_all(ipe["keywords"]), "metadata": _contains_refs(meta)}}
+            if side == "inputs" and "minOccurs" in e:
+                # Only where the live input declares a cardinality. It may restrict the inherited
+                # minimum, down to 0 (optional input), never above it -- the rule
+                # bblocks-generic-profiles applies to its own Implementation Profiles.
+                # maxOccurs: Table 21 footnote d, it may extend.
+                floor = ipe.get("minOccurs", gp["inputs"][name].get("minOccurs", 1))
+                side_rules[live]["properties"]["minOccurs"] = {"type": "integer", "minimum": 0, "maximum": floor}
         doc[side] = out
         rules[side] = {"type": "object", "required": sorted(side_rules), "properties": side_rules}
     schema = {"description": (f"`{pd['id']}` as the Implementation (instance level) of `{ip_iri}`: "
@@ -1262,6 +1285,51 @@ def ogcapi_examples_yaml(proc, url):
             for e in ex]
 
 
+def ogcapi_description_md(proc, pd, url, gp_root):
+    """description.md of a live process profile: what the process is (and, for a wrapped tool such
+    as OTB or SAGA, the tool's own documentation, from `tool` in profiles.yaml), what it implements,
+    and how its inputs/outputs bind to that Implementation Profile."""
+    ip_iri = proc["implementsProfile"]
+    ip_key = ip_iri.rstrip("/").rsplit("/", 1)[-1]
+    ip = json.loads((gp_root / "_sources" / "implementation-profile" / ip_key / "examples" / f"{ip_key}.json").read_text())
+    parts = [f"Process profile of the live OGC API - Processes process `{pd['id']}` "
+             f"(ZOO-Project, Geonovum testbed): <{url}>.", "",
+             f"> {' '.join((pd.get('description') or pd.get('title') or '').split())}", "",
+             "(the process's own description, as served)"]
+    tool = proc.get("tool")
+    if tool:
+        parts += ["", "## The tool behind it", "",
+                  f"[{tool['name']}]({tool['doc']}) -- {tool['documented']}.", ""]
+        if tool.get("summary"):
+            parts += [f"> **{tool['summary']}**", ">", f"> {' '.join(tool['excerpt'].split())}", "",
+                      f"Quoted from the {tool['license']}."]
+        if tool.get("description"):
+            parts += [" ".join(tool["description"].split())]
+        if tool.get("notes"):
+            parts += ["", "On this deployment:", ""] + [f"- {n}" for n in tool["notes"]]
+    b, unbound = proc.get("bindings", {}), proc.get("unbound", {})
+    parts += ["", "## Implementation Profile", "",
+              f"Implements [`{ip['prefLabel']}`]({ip_iri}) "
+              f"(`{generic_profiles_identifier(ip_iri)}`, bblocks-generic-profiles). Live inputs/outputs and "
+              "the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):", "",
+              "| Live | Implementation Profile |", "|---|---|"]
+    for side in ("inputs", "outputs"):
+        rev = {v: k for k, v in b.get(side, {}).items()}
+        for name in ip[side]:
+            live = rev.get(name)
+            parts.append(f"| {f'`{live}`' if live else '--'} | {side[:-1]} `{name}`"
+                         + (f" (unbound: {unbound[name]})" if not live and name in unbound else "") + " |")
+        extra = [k for k in pd[side] if k not in b.get(side, {})]
+        if extra:
+            parts.append(f"| {', '.join(f'`{k}`' for k in extra)} | -- (live-only {side}, Table 21 footnote b) |")
+    parts += ["", "## Examples", "",
+              "- `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.",
+              "- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at "
+              "the Implementation (instance level): keywords and metadata references to its profiles.",
+              "- `process-type.json`: its candidate process-type entry."]
+    return "\n".join(parts) + "\n"
+
+
 def generate_ogcapi_profiles(sources, roots, by_key, ogcapi_procs, gp_root):
     for proc in ogcapi_procs:
         src = sources[proc["source"]["repo"]]
@@ -1279,6 +1347,7 @@ def generate_ogcapi_profiles(sources, roots, by_key, ogcapi_procs, gp_root):
         dump_yaml(out / "schema.yaml", ogcapi_profile_schema(pd, inherited_schema))
         dump_yaml(out / "examples.yaml", ogcapi_examples_yaml(proc, url))
         dump_json(out / "bblock.json", ogcapi_bblock_json(proc, pd, src))
+        (out / "description.md").write_text(ogcapi_description_md(proc, pd, url, gp_root))
         print(f"{bb_id(proc):60s} {'OGCAPIProcess':16s} (static processDescription only)")
 
 
