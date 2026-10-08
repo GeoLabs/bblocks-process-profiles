@@ -14,6 +14,14 @@
     "reference"
   ],
   "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ExtractROI/execution"
+    }
+  ],
   "keywords": [
     "raster",
     "coverage",
@@ -294,6 +302,7 @@
     "elev": {
       "title": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
       "description": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -302,6 +311,7 @@
     "elev.geoid": {
       "title": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
       "description": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
+      "minOccurs": 0,
       "schema": {
         "oneOf": [
           {
@@ -324,6 +334,7 @@
     "ram": {
       "title": "Available memory for processing (in MB).",
       "description": "Available memory for processing (in MB).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 256,

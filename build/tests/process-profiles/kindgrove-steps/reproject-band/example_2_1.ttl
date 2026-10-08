@@ -1,8 +1,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://schema.org/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://w3id.org/ogc/api/schema/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns4: <http://schema.org/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -15,67 +15,67 @@
         "reprojection" ;
     dcterms:title "reproject_band" ;
     pp:version "0.1.0" ;
-    proc:inputs [ ns2:band_file [ dcterms:description "" ;
+    proc:inputs [ ns3:band_file [ dcterms:description "" ;
                     dcterms:title "band_file" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
-                            ns3:contentMediaType "application/octet-stream" ] ] ;
-            ns2:east [ dcterms:description "" ;
+                            ns1:contentMediaType "application/octet-stream" ] ] ;
+            ns3:east [ dcterms:description "" ;
                     dcterms:title "east" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns2:epsg [ dcterms:description "" ;
+            ns3:epsg [ dcterms:description "" ;
                     dcterms:title "epsg" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "4326"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns2:north [ dcterms:description "" ;
+            ns3:north [ dcterms:description "" ;
                     dcterms:title "north" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns2:resolution [ dcterms:description "" ;
+            ns3:resolution [ dcterms:description "" ;
                     dcterms:title "resolution" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "0.0001"^^rdf:JSON ;
                             proc:type "number" ] ] ;
-            ns2:south [ dcterms:description "" ;
+            ns3:south [ dcterms:description "" ;
                     dcterms:title "south" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns2:west [ dcterms:description "" ;
+            ns3:west [ dcterms:description "" ;
                     dcterms:title "west" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "0.1.0" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value "reproject_band" ;
+    proc:metadata [ rdf:value "reproject_band" ;
             proc:role schema:name ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
+        [ rdf:value "0.1.0" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value [ a ns4:Person ;
+                    ns4:affiliation "GeoLabs" ;
+                    ns4:name "Gérald Fenoy" ] ;
+            proc:role schema:contributor ],
         [ rdf:value "Reproject a raster onto a regular grid covering a bounding box" ;
             proc:role schema:description ],
-        [ rdf:value [ a ns1:Person ;
-                    ns1:affiliation "GeoLabs" ;
-                    ns1:name "Gérald Fenoy" ] ;
-            proc:role schema:contributor ],
-        [ rdf:value [ a ns1:Person ;
-                    ns1:name "Cameron Sajedi" ] ;
-            proc:role schema:author ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ] ;
+            proc:role schema:license ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value [ a ns4:Person ;
+                    ns4:name "Cameron Sajedi" ] ;
+            proc:role schema:author ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns4:reprojected_file [ dcterms:description "" ;
+    proc:outputs [ ns2:reprojected_file [ dcterms:description "" ;
                     dcterms:title "reprojected_file" ;
                     proc:schema [ proc:type "string" ;
-                            ns3:contentMediaType "application/octet-stream" ] ] ] .
+                            ns1:contentMediaType "application/octet-stream" ] ] ] .
 

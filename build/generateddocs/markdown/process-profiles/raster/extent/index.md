@@ -7,6 +7,40 @@ Process profile of the live OGC API - Processes process `OTB.ImageEnvelope` (ZOO
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
+## Description
+
+Process profile of the live OGC API - Processes process `OTB.ImageEnvelope` (ZOO-Project, Geonovum testbed): <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ImageEnvelope>.
+
+> Build a vector data containing the image envelope polygon. Useful for some projection, you can set the polygon with more points with the sr parameter. This filter supports user-specified output projection. If no projection is defined, the standard WGS84 projection will be used.
+
+(the process's own description, as served)
+
+## The tool behind it
+
+[OTB ImageEnvelope](https://www.orfeo-toolbox.org/CookBook/Applications/app_ImageEnvelope.html) -- Orfeo ToolBox 10.0.0 CookBook (the deployed OTB version is not exposed by the service).
+
+> **Extracts an image envelope.**
+>
+> Build a vector data containing the image envelope polygon. [...] This filter supports user-specified output projection. If no projection is defined, the standard WGS84 projection will be used.
+
+Quoted from the OTB CookBook, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+
+## Implementation Profile
+
+Implements [`Raster extent`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent) (`generic-profiles.implementation-profile.raster-extent`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+
+| Live | Implementation Profile |
+|---|---|
+| `in` | input `raster` |
+| `sr`, `elev`, `elev.geoid`, `elev.default`, `proj` | -- (live-only inputs, Table 21 footnote b) |
+| `out` | output `result` |
+
+## Examples
+
+- `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `process-type.json`: its candidate process-type entry.
+
 ## Examples
 
 ### Source (referenced)
@@ -57,6 +91,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "sr": {
       "title": "Sampling rate for image edges (in pixel).",
       "description": "Sampling rate for image edges (in pixel).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 0,
@@ -66,6 +101,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "elev": {
       "title": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
       "description": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -74,6 +110,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "elev.geoid": {
       "title": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
       "description": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
+      "minOccurs": 0,
       "schema": {
         "oneOf": [
           {
@@ -96,6 +133,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "proj": {
       "title": "Projection to be used to compute the envelope (default is WGS84)",
       "description": "Projection to be used to compute the envelope (default is WGS84)",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -130,7 +168,15 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       }
     }
   },
-  "mutable": false
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ImageEnvelope/execution"
+    }
+  ]
 }
 
 ```
@@ -179,6 +225,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "sr": {
       "title": "Sampling rate for image edges (in pixel).",
       "description": "Sampling rate for image edges (in pixel).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 0,
@@ -188,6 +235,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "elev": {
       "title": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
       "description": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -196,6 +244,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "elev.geoid": {
       "title": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
       "description": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
+      "minOccurs": 0,
       "schema": {
         "oneOf": [
           {
@@ -218,6 +267,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "proj": {
       "title": "Projection to be used to compute the envelope (default is WGS84)",
       "description": "Projection to be used to compute the envelope (default is WGS84)",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -252,55 +302,74 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       }
     }
   },
-  "mutable": false
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ImageEnvelope/execution"
+    }
+  ]
 }
 ```
 
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
 @prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.ImageEnvelope> dcterms:description "Build a vector data containing the image envelope polygon. Useful for some projection, you can set the polygon with more points with the sr parameter. This filter supports user-specified output projection. If no projection is defined, the standard WGS84 projection will be used." ;
     dcterms:title "Extracts an image envelope." ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ImageEnvelope/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns2:elev [ dcterms:description "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory." ;
+    proc:inputs [ ns1:elev [ dcterms:description "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory." ;
                     dcterms:title "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory." ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:elev.default [ dcterms:description "This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value." ;
+            ns1:elev.default [ dcterms:description "This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value." ;
                     dcterms:title "This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value." ;
                     proc:schema [ proc:default "0"^^rdf:JSON ;
                             proc:type "number" ;
-                            ns1:format "float" ] ] ;
-            ns2:elev.geoid [ dcterms:description "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd)." ;
+                            ns2:format "float" ] ] ;
+            ns1:elev.geoid [ dcterms:description "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd)." ;
                     dcterms:title "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd)." ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/octet-stream" ] ] ] ;
-            ns2:in [ dcterms:description "Input image filename." ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/octet-stream" ] ] ] ;
+            ns1:in [ dcterms:description "Input image filename." ;
                     dcterms:title "Input image filename." ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns2:proj [ dcterms:description "Projection to be used to compute the envelope (default is WGS84)" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/jpeg" ] ] ] ;
+            ns1:proj [ dcterms:description "Projection to be used to compute the envelope (default is WGS84)" ;
                     dcterms:title "Projection to be used to compute the envelope (default is WGS84)" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:sr [ dcterms:description "Sampling rate for image edges (in pixel)." ;
+            ns1:sr [ dcterms:description "Sampling rate for image edges (in pixel)." ;
                     dcterms:title "Sampling rate for image edges (in pixel)." ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "0"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "integer" ] ] ] ;
@@ -312,16 +381,16 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
         "value" ;
     proc:outputs [ ns3:out [ dcterms:description "Vector data file containing the envelope." ;
                     dcterms:title "Vector data file containing the envelope." ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/xml" ],
-                                [ proc:type "object" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/zip" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/zip" ],
+                                    ns2:contentEncoding "utf-8" ;
+                                    ns2:contentMediaType "text/xml" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ] ] ] ] .
+                                    ns2:contentEncoding "utf-8" ;
+                                    ns2:contentMediaType "application/vnd.google-earth.kml+xml" ],
+                                [ proc:type "object" ] ] ] ] .
 
 
 ```
@@ -346,6 +415,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ImageEnvelope/execution"
+    }
+  ],
   "keywords": [
     "raster",
     "coverage",
@@ -413,6 +490,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "sr": {
       "title": "Sampling rate for image edges (in pixel).",
       "description": "Sampling rate for image edges (in pixel).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 0,
@@ -422,6 +500,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "elev": {
       "title": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
       "description": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -430,6 +509,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "elev.geoid": {
       "title": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
       "description": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
+      "minOccurs": 0,
       "schema": {
         "oneOf": [
           {
@@ -452,6 +532,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "proj": {
       "title": "Projection to be used to compute the envelope (default is WGS84)",
       "description": "Projection to be used to compute the envelope (default is WGS84)",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -524,6 +605,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ImageEnvelope/execution"
+    }
+  ],
   "keywords": [
     "raster",
     "coverage",
@@ -591,6 +680,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "sr": {
       "title": "Sampling rate for image edges (in pixel).",
       "description": "Sampling rate for image edges (in pixel).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 0,
@@ -600,6 +690,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "elev": {
       "title": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
       "description": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -608,6 +699,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "elev.geoid": {
       "title": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
       "description": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
+      "minOccurs": 0,
       "schema": {
         "oneOf": [
           {
@@ -630,6 +722,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "proj": {
       "title": "Projection to be used to compute the envelope (default is WGS84)",
       "description": "Projection to be used to compute the envelope (default is WGS84)",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -686,12 +779,15 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.ImageEnvelope> dcterms:description "Build a vector data containing the image envelope polygon. Useful for some projection, you can set the polygon with more points with the sr parameter. This filter supports user-specified output projection. If no projection is defined, the standard WGS84 projection will be used." ;
@@ -701,84 +797,92 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         "extent",
         "raster" ;
     dcterms:title "Extracts an image envelope." ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ImageEnvelope/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns1:elev [ dcterms:description "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory." ;
+    proc:inputs [ ns2:elev [ dcterms:description "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory." ;
                     dcterms:title "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory." ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns1:elev.default [ dcterms:description "This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value." ;
+            ns2:elev.default [ dcterms:description "This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value." ;
                     dcterms:title "This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value." ;
                     proc:schema [ proc:default "0"^^rdf:JSON ;
                             proc:type "number" ;
-                            ns2:format "float" ] ] ;
-            ns1:elev.geoid [ dcterms:description "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd)." ;
+                            ns1:format "float" ] ] ;
+            ns2:elev.geoid [ dcterms:description "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd)." ;
                     dcterms:title "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd)." ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/octet-stream" ] ] ] ;
-            ns1:in [ dcterms:description "Input image filename." ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/octet-stream" ] ] ] ;
+            ns2:in [ dcterms:description "Input image filename." ;
                     dcterms:title "Input image filename." ;
                     proc:keywords "GeoTIFF",
                         "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster extent -- input `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent/inputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster extent -- input `raster`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster extent -- input `raster`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent/inputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/tiff" ],
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster extent -- input `raster`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent/inputs/raster> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/png" ],
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/jpeg" ] ] ] ;
-            ns1:proj [ dcterms:description "Projection to be used to compute the envelope (default is WGS84)" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+            ns2:proj [ dcterms:description "Projection to be used to compute the envelope (default is WGS84)" ;
                     dcterms:title "Projection to be used to compute the envelope (default is WGS84)" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns1:sr [ dcterms:description "Sampling rate for image edges (in pixel)." ;
+            ns2:sr [ dcterms:description "Sampling rate for image edges (in pixel)." ;
                     dcterms:title "Sampling rate for image edges (in pixel)." ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "0"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "integer" ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+    proc:metadata [ dcterms:title "Generic Profile: Raster extent" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Implementation Profile: Raster extent" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ dcterms:title "Generic Profile: Raster extent" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:out [ dcterms:description "Vector data file containing the envelope." ;
+    proc:outputs [ ns4:out [ dcterms:description "Vector data file containing the envelope." ;
                     dcterms:title "Vector data file containing the envelope." ;
                     proc:keywords "GML",
                         "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster extent -- output `result`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Raster extent -- output `result`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster extent -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/zip" ],
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Raster extent -- output `result`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent/outputs/result> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/zip" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "utf-8" ;
+                                    ns1:contentMediaType "text/xml" ],
                                 [ proc:type "object" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "utf-8" ;
-                                    ns2:contentMediaType "text/xml" ],
-                                [ proc:type "string" ;
-                                    ns2:contentEncoding "utf-8" ;
-                                    ns2:contentMediaType "application/vnd.google-earth.kml+xml" ] ] ] ] .
+                                    ns1:contentEncoding "utf-8" ;
+                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ] ] ] ] .
 
 
 ```
@@ -1090,6 +1194,8 @@ x-jsonld-extra-terms:
   version: https://geolabs.github.io/bblocks-process-profiles/def/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
+  minOccurs: https://w3id.org/ogc/api/processes/minOccurs
+  maxOccurs: https://w3id.org/ogc/api/processes/maxOccurs
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
   metadata:
     x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
@@ -1317,6 +1423,8 @@ Links to the schema:
     "version": "pp:version",
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
+    "minOccurs": "proc:minOccurs",
+    "maxOccurs": "proc:maxOccurs",
     "outputTransmission": "proc:outputTransmission",
     "metadata": {
       "@id": "proc:metadata",
@@ -1539,8 +1647,6 @@ Links to the schema:
       "@id": "proc:enum",
       "@container": "@set"
     },
-    "minOccurs": "proc:minOccurs",
-    "maxOccurs": "proc:maxOccurs",
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",

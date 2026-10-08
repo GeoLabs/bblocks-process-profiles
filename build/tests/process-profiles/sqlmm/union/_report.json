@@ -2,7 +2,7 @@
   "title": "Validation report for ospd.process-profiles.sqlmm.union - Process profile: Union",
   "bblockName": "Process profile: Union",
   "bblockId": "ospd.process-profiles.sqlmm.union",
-  "generated": "2026-10-08T09:16:19.018270+00:00",
+  "generated": "2026-10-08T14:44:51.796462+00:00",
   "result": true,
   "items": [
     {
@@ -40,7 +40,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_2_1.ttl",
-              "size": 50,
+              "size": 63,
               "isError": false,
               "message": "Output Turtle example_2_1.ttl created"
             }
@@ -95,7 +95,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_3_1.ttl",
-              "size": 98,
+              "size": 111,
               "isError": false,
               "message": "Output Turtle example_3_1.ttl created"
             }

@@ -7,6 +7,31 @@ Process profile of the live OGC API - Processes process `Gdal_Warp` (ZOO-Project
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
+## Description
+
+Process profile of the live OGC API - Processes process `Gdal_Warp` (ZOO-Project, Geonovum testbed): <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp>.
+
+> The gdalwarp utility is an image mosaicing, reprojection and warping utility. The program can reproject to any supported projection, and can also apply GCPs stored with the image if the image is "raw" with control information.
+
+(the process's own description, as served)
+
+## Implementation Profile
+
+Implements [`Raster reprojection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection) (`generic-profiles.implementation-profile.raster-reprojection`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+
+| Live | Implementation Profile |
+|---|---|
+| `InputDSN` | input `raster` |
+| `t_srs` | input `targetCRS` |
+| `Format`, `OutputDSN`, `s_srs`, `tps`, `geoloc`, `rpc`, `r`, `order`, `te` | -- (live-only inputs, Table 21 footnote b) |
+| `Result` | output `raster` |
+
+## Examples
+
+- `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `process-type.json`: its candidate process-type entry.
+
 ## Examples
 
 ### Source (referenced)
@@ -34,6 +59,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "Format": {
       "title": "Format of the output data",
       "description": "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform).",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "GTiff",
@@ -57,6 +83,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "s_srs": {
       "title": "The source Spatial reference Set",
       "description": "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -65,6 +92,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "t_srs": {
       "title": "The target Spatial reference Set",
       "description": "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -73,6 +101,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "tps": {
       "title": "Thin Plate Spline",
       "description": "Force use of thin plate spline transformer based on available GCPs",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -81,6 +110,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "geoloc": {
       "title": "Geolocation",
       "description": "Force use of Geolocation Arrays",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -89,6 +119,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "rpc": {
       "title": "RPCs",
       "description": "Force use of RPCs",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -97,6 +128,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "r": {
       "title": "Resampling method to use",
       "description": "Available methods are: near (nearest neighbour resampling - default, fastest algorithm, worst interpolation quality), bilinear, cubic, cubicspline, lanczos (Lanczos windowed sinc resampling)",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -105,6 +137,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "order": {
       "title": "The order of polynomial used for warping (1 to 3)",
       "description": "The default is to select a polynomial order based on the number of GCPs.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "1",
@@ -114,6 +147,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "te": {
       "title": "xmin,ymin,xmax,ymax",
       "description": "set georeferenced extents of output file to be created (in target SRS).",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -129,7 +163,15 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       }
     }
   },
-  "mutable": false
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp/execution"
+    }
+  ]
 }
 
 ```
@@ -155,6 +197,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "Format": {
       "title": "Format of the output data",
       "description": "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform).",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "GTiff",
@@ -178,6 +221,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "s_srs": {
       "title": "The source Spatial reference Set",
       "description": "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -186,6 +230,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "t_srs": {
       "title": "The target Spatial reference Set",
       "description": "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -194,6 +239,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "tps": {
       "title": "Thin Plate Spline",
       "description": "Force use of thin plate spline transformer based on available GCPs",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -202,6 +248,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "geoloc": {
       "title": "Geolocation",
       "description": "Force use of Geolocation Arrays",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -210,6 +257,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "rpc": {
       "title": "RPCs",
       "description": "Force use of RPCs",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -218,6 +266,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "r": {
       "title": "Resampling method to use",
       "description": "Available methods are: near (nearest neighbour resampling - default, fastest algorithm, worst interpolation quality), bilinear, cubic, cubicspline, lanczos (Lanczos windowed sinc resampling)",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -226,6 +275,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "order": {
       "title": "The order of polynomial used for warping (1 to 3)",
       "description": "The default is to select a polynomial order based on the number of GCPs.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "1",
@@ -235,6 +285,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "te": {
       "title": "xmin,ymin,xmax,ymax",
       "description": "set georeferenced extents of output file to be created (in target SRS).",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -250,65 +301,89 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       }
     }
   },
-  "mutable": false
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp/execution"
+    }
+  ]
 }
 ```
 
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/Gdal_Warp> dcterms:description "The gdalwarp utility is an image mosaicing, reprojection and warping utility. The program can reproject to any supported projection, and can also apply GCPs stored with the image if the image is \"raw\" with control information." ;
     dcterms:title "GDAL Warp Tool" ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns1:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
+    proc:inputs [ ns2:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
                     dcterms:title "Format of the output data" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"GTiff\""^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns1:InputDSN [ dcterms:description "The input data source name to use as source for convertion." ;
+            ns2:InputDSN [ dcterms:description "The input data source name to use as source for convertion." ;
                     dcterms:title "The input data source name" ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns1:OutputDSN [ dcterms:description "The output data source name to use as source for convertion." ;
+            ns2:OutputDSN [ dcterms:description "The output data source name to use as source for convertion." ;
                     dcterms:title "The output data source name" ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns1:geoloc [ dcterms:description "Force use of Geolocation Arrays" ;
+            ns2:geoloc [ dcterms:description "Force use of Geolocation Arrays" ;
                     dcterms:title "Geolocation" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "boolean" ] ] ;
-            ns1:order [ dcterms:description "The default is to select a polynomial order based on the number of GCPs." ;
+            ns2:order [ dcterms:description "The default is to select a polynomial order based on the number of GCPs." ;
                     dcterms:title "The order of polynomial used for warping (1 to 3)" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"1\""^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns1:r [ dcterms:description "Available methods are: near (nearest neighbour resampling - default, fastest algorithm, worst interpolation quality), bilinear, cubic, cubicspline, lanczos (Lanczos windowed sinc resampling)" ;
+            ns2:r [ dcterms:description "Available methods are: near (nearest neighbour resampling - default, fastest algorithm, worst interpolation quality), bilinear, cubic, cubicspline, lanczos (Lanczos windowed sinc resampling)" ;
                     dcterms:title "Resampling method to use" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "boolean" ] ] ;
-            ns1:rpc [ dcterms:description "Force use of RPCs" ;
+            ns2:rpc [ dcterms:description "Force use of RPCs" ;
                     dcterms:title "RPCs" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "boolean" ] ] ;
-            ns1:s_srs [ dcterms:description "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text." ;
+            ns2:s_srs [ dcterms:description "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text." ;
                     dcterms:title "The source Spatial reference Set" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns1:t_srs [ dcterms:description "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text." ;
+            ns2:t_srs [ dcterms:description "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text." ;
                     dcterms:title "The target Spatial reference Set" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns1:te [ dcterms:description "set georeferenced extents of output file to be created (in target SRS)." ;
+            ns2:te [ dcterms:description "set georeferenced extents of output file to be created (in target SRS)." ;
                     dcterms:title "xmin,ymin,xmax,ymax" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns1:tps [ dcterms:description "Force use of thin plate spline transformer based on available GCPs" ;
+            ns2:tps [ dcterms:description "Force use of thin plate spline transformer based on available GCPs" ;
                     dcterms:title "Thin Plate Spline" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "boolean" ] ] ] ;
     proc:jobControlOptions "async-execute",
@@ -317,7 +392,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:Result [ dcterms:description "The file name resulting of the convertion" ;
+    proc:outputs [ ns1:Result [ dcterms:description "The file name resulting of the convertion" ;
                     dcterms:title "The resulting converted file" ;
                     proc:schema [ proc:type "string" ] ] ] .
 
@@ -344,6 +419,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp/execution"
+    }
+  ],
   "keywords": [
     "raster",
     "coverage",
@@ -372,6 +455,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "Format": {
       "title": "Format of the output data",
       "description": "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform).",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "GTiff",
@@ -411,6 +495,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "s_srs": {
       "title": "The source Spatial reference Set",
       "description": "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -434,6 +519,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/targetCRS"
         }
       ],
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -442,6 +528,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "tps": {
       "title": "Thin Plate Spline",
       "description": "Force use of thin plate spline transformer based on available GCPs",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -450,6 +537,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "geoloc": {
       "title": "Geolocation",
       "description": "Force use of Geolocation Arrays",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -458,6 +546,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "rpc": {
       "title": "RPCs",
       "description": "Force use of RPCs",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -466,6 +555,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "r": {
       "title": "Resampling method to use",
       "description": "Available methods are: near (nearest neighbour resampling - default, fastest algorithm, worst interpolation quality), bilinear, cubic, cubicspline, lanczos (Lanczos windowed sinc resampling)",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -474,6 +564,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "order": {
       "title": "The order of polynomial used for warping (1 to 3)",
       "description": "The default is to select a polynomial order based on the number of GCPs.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "1",
@@ -483,6 +574,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "te": {
       "title": "xmin,ymin,xmax,ymax",
       "description": "set georeferenced extents of output file to be created (in target SRS).",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -536,6 +628,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp/execution"
+    }
+  ],
   "keywords": [
     "raster",
     "coverage",
@@ -564,6 +664,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "Format": {
       "title": "Format of the output data",
       "description": "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform).",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "GTiff",
@@ -603,6 +704,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "s_srs": {
       "title": "The source Spatial reference Set",
       "description": "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -626,6 +728,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/targetCRS"
         }
       ],
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -634,6 +737,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "tps": {
       "title": "Thin Plate Spline",
       "description": "Force use of thin plate spline transformer based on available GCPs",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -642,6 +746,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "geoloc": {
       "title": "Geolocation",
       "description": "Force use of Geolocation Arrays",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -650,6 +755,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "rpc": {
       "title": "RPCs",
       "description": "Force use of RPCs",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -658,6 +764,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "r": {
       "title": "Resampling method to use",
       "description": "Available methods are: near (nearest neighbour resampling - default, fastest algorithm, worst interpolation quality), bilinear, cubic, cubicspline, lanczos (Lanczos windowed sinc resampling)",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -666,6 +773,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "order": {
       "title": "The order of polynomial used for warping (1 to 3)",
       "description": "The default is to select a polynomial order based on the number of GCPs.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "1",
@@ -675,6 +783,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "te": {
       "title": "xmin,ymin,xmax,ymax",
       "description": "set georeferenced extents of output file to be created (in target SRS).",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -714,9 +823,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/Gdal_Warp> dcterms:description "The gdalwarp utility is an image mosaicing, reprojection and warping utility. The program can reproject to any supported projection, and can also apply GCPs stored with the image if the image is \"raw\" with control information." ;
@@ -726,9 +838,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         "raster",
         "reprojection" ;
     dcterms:title "GDAL Warp Tool" ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns1:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
                     dcterms:title "Format of the output data" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"GTiff\""^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
@@ -736,35 +853,40 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:title "The input data source name" ;
                     proc:keywords "GeoTIFF",
                         "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster reprojection -- input `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster reprojection -- input `raster`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection -- input `raster`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster reprojection -- input `raster`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
                     proc:schema [ proc:type "string" ] ] ;
             ns1:OutputDSN [ dcterms:description "The output data source name to use as source for convertion." ;
                     dcterms:title "The output data source name" ;
                     proc:schema [ proc:type "string" ] ] ;
             ns1:geoloc [ dcterms:description "Force use of Geolocation Arrays" ;
                     dcterms:title "Geolocation" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "boolean" ] ] ;
             ns1:order [ dcterms:description "The default is to select a polynomial order based on the number of GCPs." ;
                     dcterms:title "The order of polynomial used for warping (1 to 3)" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"1\""^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
             ns1:r [ dcterms:description "Available methods are: near (nearest neighbour resampling - default, fastest algorithm, worst interpolation quality), bilinear, cubic, cubicspline, lanczos (Lanczos windowed sinc resampling)" ;
                     dcterms:title "Resampling method to use" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "boolean" ] ] ;
             ns1:rpc [ dcterms:description "Force use of RPCs" ;
                     dcterms:title "RPCs" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "boolean" ] ] ;
             ns1:s_srs [ dcterms:description "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text." ;
                     dcterms:title "The source Spatial reference Set" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
             ns1:t_srs [ dcterms:description "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text." ;
@@ -776,25 +898,28 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                         [ dcterms:title "Generic Profile: Raster reprojection -- input `targetCRS`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/targetCRS> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
             ns1:te [ dcterms:description "set georeferenced extents of output file to be created (in target SRS)." ;
                     dcterms:title "xmin,ymin,xmax,ymax" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
             ns1:tps [ dcterms:description "Force use of thin plate spline transformer based on available GCPs" ;
                     dcterms:title "Thin Plate Spline" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "boolean" ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Generic Profile: Raster reprojection" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Implementation Profile: Raster reprojection" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
@@ -1116,6 +1241,11 @@ $defs:
                         href:
                           const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/targetCRS
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+                  x-jsonld-id: https://w3id.org/ogc/api/processes/minOccurs
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
           x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
         outputs:
@@ -1173,6 +1303,8 @@ x-jsonld-extra-terms:
   version: https://geolabs.github.io/bblocks-process-profiles/def/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
+  minOccurs: https://w3id.org/ogc/api/processes/minOccurs
+  maxOccurs: https://w3id.org/ogc/api/processes/maxOccurs
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
   metadata:
     x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
@@ -1400,6 +1532,8 @@ Links to the schema:
     "version": "pp:version",
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
+    "minOccurs": "proc:minOccurs",
+    "maxOccurs": "proc:maxOccurs",
     "outputTransmission": "proc:outputTransmission",
     "metadata": {
       "@id": "proc:metadata",
@@ -1622,8 +1756,6 @@ Links to the schema:
       "@id": "proc:enum",
       "@container": "@set"
     },
-    "minOccurs": "proc:minOccurs",
-    "maxOccurs": "proc:maxOccurs",
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",

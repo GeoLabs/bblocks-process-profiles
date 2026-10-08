@@ -39,9 +39,9 @@
     rdf:value [ a pp:geotiff ;
             pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/nir_4326.tif" ],
         [ a pp:geotiff ;
-            pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/red_4326.tif" ],
+            pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/green_4326.tif" ],
         [ a pp:geotiff ;
-            pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/green_4326.tif" ] .
+            pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/red_4326.tif" ] .
 
 <urn:example:image:ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc2> a prov:SoftwareAgent ;
     pp:name "container image ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc2" .

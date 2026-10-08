@@ -2,7 +2,7 @@
   "title": "Validation report for ospd.process-profiles.sqlmm.area - Process profile: GetArea",
   "bblockName": "Process profile: GetArea",
   "bblockId": "ospd.process-profiles.sqlmm.area",
-  "generated": "2026-10-08T09:16:04.693364+00:00",
+  "generated": "2026-10-08T14:44:25.170177+00:00",
   "result": true,
   "items": [
     {
@@ -40,7 +40,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_2_1.ttl",
-              "size": 31,
+              "size": 42,
               "isError": false,
               "message": "Output Turtle example_2_1.ttl created"
             }
@@ -95,7 +95,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_3_1.ttl",
-              "size": 67,
+              "size": 78,
               "isError": false,
               "message": "Output Turtle example_3_1.ttl created"
             }

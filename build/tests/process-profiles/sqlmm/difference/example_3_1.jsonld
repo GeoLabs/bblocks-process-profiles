@@ -14,14 +14,6 @@
     "reference"
   ],
   "mutable": false,
-  "keywords": [
-    "vector",
-    "geometry",
-    "spatial analysis",
-    "set operation",
-    "Difference",
-    "ST_Difference"
-  ],
   "metadata": [
     {
       "title": "Process Concept: Vector Geometry Processing",
@@ -37,7 +29,26 @@
       "title": "Implementation Profile: Difference",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
       "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/difference"
+    },
+    {
+      "title": "Demo"
     }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Difference/execution"
+    }
+  ],
+  "keywords": [
+    "vector",
+    "geometry",
+    "spatial analysis",
+    "set operation",
+    "Difference",
+    "ST_Difference"
   ],
   "inputs": {
     "InputEntity1": {
@@ -57,6 +68,9 @@
           "title": "Implementation Profile: Difference -- input `geometry1`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/difference/inputs/geometry1"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -93,6 +107,9 @@
           "title": "Implementation Profile: Difference -- input `geometry2`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/difference/inputs/geometry2"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -131,6 +148,9 @@
           "title": "Implementation Profile: Difference -- output `result`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/difference/outputs/result"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {

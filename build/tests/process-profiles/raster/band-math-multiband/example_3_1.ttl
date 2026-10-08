@@ -2,9 +2,12 @@
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.BandMathX> dcterms:description "This application performs a mathematical operation on several multi-band images and outputs the result into an image (multi- or mono-band, as opposed to the BandMath OTB-application). The mathematical formula is done by the muParserX library.The list of features and the syntax of muParserX is available at [1].As opposed to muParser (and thus the BandMath OTB-application [2]), muParserX supports vector expressions which allows outputting multi-band images.Hereafter is a brief reference of the muParserX syntaxFundamentals------------The formula can be written using:* numerical values ( 2.3, -5, 3.1e4, ...)* variables containing pixel values (please, note the indexing of inputs from 1 to N). Examples for the first input image:  * ``im1`` a pixel from 1st input, made of n components (n bands)  * ``im1b2`` the 2nd component of a pixel from 1st input (band index is 1-based)  * ``im1b2N3x4`` a 3x4 pixels Neighbourhood of a pixel the 2nd component of a pixel from the 1st input  * ``im1PhyX`` horizontal (X-axis) spacing of the 1st input.  * ``im1PhyY`` vertical (Y-axis) spacing of the 1st input input.  * ``im1b2Mean`` mean of the 2nd component of the 1st input (global statistics)  * ``im1b2Mini`` minimum of the 2nd component of the 1st input (global statistics)  * ``im1b2Maxi`` maximum of the 2nd component of the 1st input (global statistics)  * ``im1b2Sum`` sum of the 2nd component of the 1st input (global statistics)  * ``im1b2Var`` variance of the 2nd component of the 1st input (global statistics)  * ``idxX`` and ``idxY`` are the indices of the current pixel (generic variables)* binary operators:  * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division  * ``^`` raise x to the power of y  * ``" ;
@@ -15,6 +18,10 @@
         "multi-band",
         "raster" ;
     dcterms:title "This application performs mathematical operations on several multiband images." ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMathX/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns2:exp [ dcterms:description "Mathematical expression to apply." ;
                     dcterms:title "Mathematical expression to apply." ;
@@ -30,29 +37,31 @@
                     dcterms:title "Image list to perform computation on." ;
                     proc:keywords "GeoTIFF",
                         "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math (multi-band output) -- input `rasters`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math-multiband/inputs/rasters> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                    proc:maxOccurs 1024 ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ] ] ] ;
-            ns2:incontext [ dcterms:description "A txt file containing user's constants and expressions." ;
-                    dcterms:title "A txt file containing user's constants and expressions." ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math (multi-band output) -- input `rasters`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math-multiband/inputs/rasters> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+            ns2:incontext [ dcterms:description "A txt file containing user's constants and expressions." ;
+                    dcterms:title "A txt file containing user's constants and expressions." ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ] ] ] ;
@@ -68,6 +77,7 @@
                             proc:type "string" ] ] ;
             ns2:ram [ dcterms:description "Available memory for processing (in MB)." ;
                     dcterms:title "Available memory for processing (in MB)." ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "256"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "integer" ] ] ] ;
@@ -90,27 +100,27 @@
                     dcterms:title "Output image." ;
                     proc:keywords "GeoTIFF",
                         "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math (multi-band output) -- output `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math-multiband/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- output `raster`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- output `raster`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Raster band math (multi-band output) -- output `raster`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math-multiband/outputs/raster> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ;
+                                    ns1:contentMediaType "image/jpeg" ] ] ] ;
             ns3:outcontext [ dcterms:description "A txt file where to save user's constants and expressions." ;
                     dcterms:title "A txt file where to save user's constants and expressions." ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/plain" ],
+                                    ns1:contentMediaType "text/xml" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/xml" ] ] ] ] .
+                                    ns1:contentMediaType "text/plain" ] ] ] ] .
 

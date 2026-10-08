@@ -1,5 +1,5 @@
 Validation report for ospd.process-profiles.sqlmm.equals - Process profile: Equals
-Generated 2026-10-08T09:16:13.079084+00:00
+Generated 2026-10-08T14:44:39.604640+00:00
 === Files ===
 Using examples/processDescription.inherited.json from examples
 JSON-LD context is present - uplifting

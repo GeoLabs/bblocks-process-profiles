@@ -7,6 +7,46 @@ Process profile of the live OGC API - Processes process `OTB.BandMath` (ZOO-Proj
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
+## Description
+
+Process profile of the live OGC API - Processes process `OTB.BandMath` (ZOO-Project, Geonovum testbed): <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMath>.
+
+> This application performs a mathematical operation on several multi-band images and outputs the result into a monoband image. The given expression is computed at each pixel position. Evaluation of the mathematical formula is done by the muParser library.The formula can be written using:* numerical values ( 2.3, -5, 3.1e4, ...)* variables containing pixel values (e.g. ``im2b3`` is the pixel value in 2nd image, 3rd band)* binary operators: * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division * ``^`` raise x to the power of y * ``
+
+(the process's own description, as served)
+
+## The tool behind it
+
+[OTB BandMath](https://www.orfeo-toolbox.org/CookBook/Applications/app_BandMath.html) -- Orfeo ToolBox 10.0.0 CookBook (the deployed OTB version is not exposed by the service).
+
+> **Outputs a monoband image which is the result of a mathematical operation on several multi-band images.**
+>
+> This application performs a mathematical operation on several multi-band images and outputs the result into a monoband image. The given expression is computed at each pixel position. Evaluation of the mathematical formula is done by the muParser library.
+
+Quoted from the OTB CookBook, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+
+On this deployment:
+
+- `il` is served with `maxOccurs: 1024`, ZOO-Project's encoding of an unbounded list.
+- `out` is an input on the live service (the output pixel type, OTB's `-out` type argument) as well as the output image.
+
+## Implementation Profile
+
+Implements [`Raster band math`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math) (`generic-profiles.implementation-profile.raster-band-math`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+
+| Live | Implementation Profile |
+|---|---|
+| `il` | input `rasters` |
+| `exp` | input `expression` |
+| `out`, `ram` | -- (live-only inputs, Table 21 footnote b) |
+| `out` | output `raster` |
+
+## Examples
+
+- `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `process-type.json`: its candidate process-type entry.
+
 ## Examples
 
 ### Source (referenced)
@@ -34,6 +74,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "il": {
       "title": "Image list of operands to the mathematical expression.",
       "description": "Image list of operands to the mathematical expression.",
+      "maxOccurs": 1024,
       "schema": {
         "oneOf": [
           {
@@ -81,6 +122,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "ram": {
       "title": "Available memory for processing (in MB).",
       "description": "Available memory for processing (in MB).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 256,
@@ -113,7 +155,15 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       }
     }
   },
-  "mutable": false
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMath/execution"
+    }
+  ]
 }
 
 ```
@@ -139,6 +189,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "il": {
       "title": "Image list of operands to the mathematical expression.",
       "description": "Image list of operands to the mathematical expression.",
+      "maxOccurs": 1024,
       "schema": {
         "oneOf": [
           {
@@ -186,6 +237,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "ram": {
       "title": "Available memory for processing (in MB).",
       "description": "Available memory for processing (in MB).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 256,
@@ -218,7 +270,15 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       }
     }
   },
-  "mutable": false
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMath/execution"
+    }
+  ]
 }
 ```
 
@@ -227,29 +287,37 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.BandMath> dcterms:description "This application performs a mathematical operation on several multi-band images and outputs the result into a monoband image. The given expression is computed at each pixel position. Evaluation of the mathematical formula is done by the muParser library.The formula can be written using:* numerical values ( 2.3, -5, 3.1e4, ...)* variables containing pixel values (e.g. ``im2b3`` is the pixel value in 2nd image, 3rd band)* binary operators:  * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division  * ``^`` raise x to the power of y  * ``" ;
     dcterms:title "Outputs a monoband image which is the result of a mathematical operation on several multi-band images." ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMath/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns2:exp [ dcterms:description "The muParser mathematical expression to apply on input images." ;
                     dcterms:title "The muParser mathematical expression to apply on input images." ;
                     proc:schema [ proc:type "string" ] ] ;
             ns2:il [ dcterms:description "Image list of operands to the mathematical expression." ;
                     dcterms:title "Image list of operands to the mathematical expression." ;
+                    proc:maxOccurs 1024 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ] ] ] ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
             ns2:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
                     dcterms:title "Output image which is the result of the mathematical expressions on input image list operands." ;
                     proc:schema [ proc:default "\"float\""^^rdf:JSON ;
@@ -262,6 +330,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                             proc:type "string" ] ] ;
             ns2:ram [ dcterms:description "Available memory for processing (in MB)." ;
                     dcterms:title "Available memory for processing (in MB)." ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "256"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "integer" ] ] ] ;
@@ -271,17 +340,17 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
+    proc:outputs [ ns4:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
                     dcterms:title "Output image which is the result of the mathematical expressions on input image list operands." ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ] .
+                                    ns1:contentMediaType "image/jpeg" ] ] ] ] .
 
 
 ```
@@ -306,6 +375,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMath/execution"
+    }
+  ],
   "keywords": [
     "raster",
     "coverage",
@@ -350,6 +427,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
         }
       ],
+      "maxOccurs": 1024,
       "schema": {
         "oneOf": [
           {
@@ -412,6 +490,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "ram": {
       "title": "Available memory for processing (in MB).",
       "description": "Available memory for processing (in MB).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 256,
@@ -482,6 +561,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMath/execution"
+    }
+  ],
   "keywords": [
     "raster",
     "coverage",
@@ -526,6 +613,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
         }
       ],
+      "maxOccurs": 1024,
       "schema": {
         "oneOf": [
           {
@@ -588,6 +676,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "ram": {
       "title": "Available memory for processing (in MB).",
       "description": "Available memory for processing (in MB).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 256,
@@ -643,11 +732,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.BandMath> dcterms:description "This application performs a mathematical operation on several multi-band images and outputs the result into a monoband image. The given expression is computed at each pixel position. Evaluation of the mathematical formula is done by the muParser library.The formula can be written using:* numerical values ( 2.3, -5, 3.1e4, ...)* variables containing pixel values (e.g. ``im2b3`` is the pixel value in 2nd image, 3rd band)* binary operators:  * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division  * ``^`` raise x to the power of y  * ``" ;
@@ -657,21 +749,26 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         "coverage",
         "raster" ;
     dcterms:title "Outputs a monoband image which is the result of a mathematical operation on several multi-band images." ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMath/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns2:exp [ dcterms:description "The muParser mathematical expression to apply on input images." ;
+    proc:inputs [ ns3:exp [ dcterms:description "The muParser mathematical expression to apply on input images." ;
                     dcterms:title "The muParser mathematical expression to apply on input images." ;
                     proc:keywords "expression" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `expression`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/expression> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Raster band math -- input `expression`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `expression`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/expression> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Raster band math -- input `expression`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/expression> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns2:il [ dcterms:description "Image list of operands to the mathematical expression." ;
+            ns3:il [ dcterms:description "Image list of operands to the mathematical expression." ;
                     dcterms:title "Image list of operands to the mathematical expression." ;
                     proc:keywords "GeoTIFF",
                         "raster" ;
+                    proc:maxOccurs 1024 ;
                     proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
@@ -680,14 +777,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ;
-            ns2:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
+                                    ns1:contentMediaType "image/jpeg" ] ] ] ;
+            ns3:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
                     dcterms:title "Output image which is the result of the mathematical expressions on input image list operands." ;
                     proc:schema [ proc:default "\"float\""^^rdf:JSON ;
                             proc:enum "double",
@@ -697,27 +794,28 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 "uint16",
                                 "uint8" ;
                             proc:type "string" ] ] ;
-            ns2:ram [ dcterms:description "Available memory for processing (in MB)." ;
+            ns3:ram [ dcterms:description "Available memory for processing (in MB)." ;
                     dcterms:title "Available memory for processing (in MB)." ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "256"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "integer" ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Implementation Profile: Raster band math" ;
+    proc:metadata [ dcterms:title "Generic Profile: Raster band math" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Implementation Profile: Raster band math" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ dcterms:title "Process Concept: Raster Coverage Processing" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Generic Profile: Raster band math" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
+    proc:outputs [ ns2:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
                     dcterms:title "Output image which is the result of the mathematical expressions on input image list operands." ;
                     proc:keywords "GeoTIFF",
                         "raster" ;
@@ -732,10 +830,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                     ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ] .
+                                    ns1:contentMediaType "image/png" ] ] ] ] .
 
 
 ```
@@ -1099,6 +1197,8 @@ x-jsonld-extra-terms:
   version: https://geolabs.github.io/bblocks-process-profiles/def/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
+  minOccurs: https://w3id.org/ogc/api/processes/minOccurs
+  maxOccurs: https://w3id.org/ogc/api/processes/maxOccurs
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
   metadata:
     x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
@@ -1326,6 +1426,8 @@ Links to the schema:
     "version": "pp:version",
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
+    "minOccurs": "proc:minOccurs",
+    "maxOccurs": "proc:maxOccurs",
     "outputTransmission": "proc:outputTransmission",
     "metadata": {
       "@id": "proc:metadata",
@@ -1548,8 +1650,6 @@ Links to the schema:
       "@id": "proc:enum",
       "@container": "@set"
     },
-    "minOccurs": "proc:minOccurs",
-    "maxOccurs": "proc:maxOccurs",
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",

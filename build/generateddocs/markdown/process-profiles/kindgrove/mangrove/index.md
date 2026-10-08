@@ -496,23 +496,23 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "Process converted from CWL" ;
-            proc:role schema:description ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
+    proc:metadata [ rdf:value "0.0.1" ;
+            proc:role schema:softwareVersion ],
         [ rdf:value "https://github.com/starling-foundries/KindGrove?tab=MIT-1-ov-file#readme" ;
             proc:role schema:license ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value [ a ns3:Person ;
+                    ns3:name "Cameron Sajedi" ] ;
+            proc:role schema:author ],
+        [ rdf:value "Process converted from CWL" ;
+            proc:role schema:description ],
         [ rdf:value "mangrove_cli" ;
             proc:role schema:name ],
-        [ rdf:value "0.0.1" ;
-            proc:role schema:softwareVersion ],
         [ rdf:value [ a ns3:Person ;
                     ns3:identifier "https://orcid.org/0000-0002-9617-8641" ;
                     ns3:name "Gérald Fenoy" ] ;
-            proc:role schema:contributor ],
-        [ rdf:value [ a ns3:Person ;
-                    ns3:name "Cameron Sajedi" ] ;
-            proc:role schema:author ] ;
+            proc:role schema:contributor ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
@@ -899,8 +899,8 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix ns3: <http://schema.org/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -915,76 +915,76 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
         "mangrove" ;
     dcterms:title "mangrove_cli" ;
     pp:version "0.0.1" ;
-    proc:inputs [ ns1:cloud_cover_max [ dcterms:description "" ;
+    proc:inputs [ ns2:cloud_cover_max [ dcterms:description "" ;
                     dcterms:title "cloud_cover_max" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns1:days_back [ dcterms:description "" ;
+            ns2:days_back [ dcterms:description "" ;
                     dcterms:title "days_back" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "integer" ] ] ;
-            ns1:east [ dcterms:description "" ;
+            ns2:east [ dcterms:description "" ;
                     dcterms:title "east" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns1:north [ dcterms:description "" ;
+            ns2:north [ dcterms:description "" ;
                     dcterms:title "north" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns1:output_dir [ dcterms:description "" ;
+            ns2:output_dir [ dcterms:description "" ;
                     dcterms:title "output_dir" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns1:south [ dcterms:description "" ;
+            ns2:south [ dcterms:description "" ;
                     dcterms:title "south" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns1:west [ dcterms:description "" ;
+            ns2:west [ dcterms:description "" ;
                     dcterms:title "west" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "https://github.com/starling-foundries/KindGrove?tab=MIT-1-ov-file#readme" ;
-            proc:role schema:license ],
-        [ rdf:value "mangrove_cli" ;
-            proc:role schema:name ],
-        [ rdf:value [ a ns3:Person ;
-                    ns3:name "Cameron Sajedi" ] ;
-            proc:role schema:author ],
-        [ rdf:value "Process converted from CWL" ;
-            proc:role schema:description ],
-        [ rdf:value [ a ns3:Person ;
+    proc:metadata [ rdf:value [ a ns3:Person ;
                     ns3:identifier "https://orcid.org/0000-0002-9617-8641" ;
                     ns3:name "Gérald Fenoy" ] ;
             proc:role schema:contributor ],
+        [ rdf:value [ a ns3:Person ;
+                    ns3:name "Cameron Sajedi" ] ;
+            proc:role schema:author ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove?tab=MIT-1-ov-file#readme" ;
+            proc:role schema:license ],
         [ rdf:value "0.0.1" ;
             proc:role schema:softwareVersion ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ] ;
+        [ rdf:value "Process converted from CWL" ;
+            proc:role schema:description ],
+        [ rdf:value "mangrove_cli" ;
+            proc:role schema:name ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ pp:result [ dcterms:description "" ;
                     dcterms:title "result" ;
                     proc:schema [ proc:type "object" ;
-                            ns2:format "stac-collection" ;
-                            ns2:properties [ dcterms:description [ proc:type "string" ] ;
+                            ns1:format "stac-collection" ;
+                            ns1:properties [ dcterms:description [ proc:type "string" ] ;
                                     dcterms:title [ proc:type "string" ] ;
                                     rdfs:seeAlso [ dcterms:type "array" ] ;
                                     proc:type [ proc:enum "Collection" ;
                                             proc:type "string" ] ;
-                                    ns2:assets [ proc:type "object" ] ;
-                                    ns2:extent [ proc:type "object" ] ;
-                                    ns2:license [ proc:type "string" ] ;
-                                    ns2:stac_version [ proc:type "string" ] ] ;
-                            ns2:required "description",
+                                    ns1:assets [ proc:type "object" ] ;
+                                    ns1:extent [ proc:type "object" ] ;
+                                    ns1:license [ proc:type "string" ] ;
+                                    ns1:stac_version [ proc:type "string" ] ] ;
+                            ns1:required "description",
                                 "extent",
                                 "id",
                                 "license",
@@ -3463,6 +3463,10 @@ id:32497dfb-a6ea-4996-a29e-3700668da867 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T10:01:12.463948"^^xsd:dateTime ;
             prov:hadActivity id:ec5cc9e1-3e83-4551-a759-4745c5b5040b ] ;
     prov:qualifiedUsage [ a prov:Usage ;
+            prov:atTime "2026-09-23T10:01:12.503865"^^xsd:dateTime ;
+            prov:entity data:e71003c6b7dd4093ce139ac0c51a6ba38d54a439 ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/output_dir> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T10:01:12.503886"^^xsd:dateTime ;
             prov:entity id:a98d2a32-f817-4ba9-9a35-66d4b22bc9de ;
             prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/south> ],
@@ -3470,14 +3474,6 @@ id:32497dfb-a6ea-4996-a29e-3700668da867 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T10:01:12.503410"^^xsd:dateTime ;
             prov:entity id:cf0be29b-e4d9-4fd3-bd1b-2ed80a4095a9 ;
             prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/days_back> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:12.503903"^^xsd:dateTime ;
-            prov:entity id:d061c0fb-cd9b-4026-acea-7aa18b482246 ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/west> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:12.503865"^^xsd:dateTime ;
-            prov:entity data:e71003c6b7dd4093ce139ac0c51a6ba38d54a439 ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/output_dir> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T10:01:12.503452"^^xsd:dateTime ;
             prov:entity id:930cbb58-e736-4bd6-97e8-f8d6fdb3ecca ;
@@ -3489,7 +3485,11 @@ id:32497dfb-a6ea-4996-a29e-3700668da867 a wfprov:ProcessRun,
         [ a prov:Usage ;
             prov:atTime "2026-09-23T10:01:12.503436"^^xsd:dateTime ;
             prov:entity id:43bb865a-d8cd-4787-8345-a30f5433a956 ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/east> ] .
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/east> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T10:01:12.503903"^^xsd:dateTime ;
+            prov:entity id:d061c0fb-cd9b-4026-acea-7aa18b482246 ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/west> ] .
 
 id:371c06f9-5e4f-482d-a56d-17457d592305 a prov:Entity ;
     prov:value 1.59e+01 .
@@ -3528,9 +3528,9 @@ id:570b17a1-1129-4b02-b2bc-a4675847cf5d a ro:Folder,
             prov:atTime "2026-09-23T10:03:16.994705"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/result> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:3efd1082-30b0-4081-aac3-595258d0235a ],
+            provext:member id:204e8020-f340-4534-bcb6-378a06cfce69 ],
         [ a provext:Membership ;
-            provext:member id:204e8020-f340-4534-bcb6-378a06cfce69 ] ;
+            provext:member id:3efd1082-30b0-4081-aac3-595258d0235a ] ;
     cwlprov:basename "outputs" .
 
 id:5aa7a676-73f7-4cd5-bcc3-8c24e71dd6e0 a prov:Entity ;
@@ -3605,13 +3605,13 @@ id:ef051260-da6b-471f-b7ec-77a3f03338f9 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
+            provext:member id:371c06f9-5e4f-482d-a56d-17457d592305 ],
+        [ a provext:Membership ;
             provext:member id:5aa7a676-73f7-4cd5-bcc3-8c24e71dd6e0 ],
         [ a provext:Membership ;
             provext:member id:05148d8f-b41a-430e-ab3c-e47863420580 ],
         [ a provext:Membership ;
-            provext:member id:3d6a2dea-df15-41de-943f-5c75ffc145fd ],
-        [ a provext:Membership ;
-            provext:member id:371c06f9-5e4f-482d-a56d-17457d592305 ] .
+            provext:member id:3d6a2dea-df15-41de-943f-5c75ffc145fd ] .
 
 data:09b42388eb37be1a4b972127a78f691ec6eb3795 a wfprov:Artifact,
         prov:Entity ;
@@ -3630,11 +3630,11 @@ id:3efd1082-30b0-4081-aac3-595258d0235a a ro:Folder,
     provext:qualifiedMembership [ a provext:Membership ;
             provext:member id:1ec302cf-1d77-48c8-9550-86945f3a70ef ],
         [ a provext:Membership ;
-            provext:member id:311c03b4-81b7-421a-8cd4-b744019dc39b ],
+            provext:member id:1a78bcc2-8056-4262-8f95-eff699d2deeb ],
         [ a provext:Membership ;
             provext:member id:30f546f9-0831-4994-946d-88f0365ffd8a ],
         [ a provext:Membership ;
-            provext:member id:1a78bcc2-8056-4262-8f95-eff699d2deeb ] ;
+            provext:member id:311c03b4-81b7-421a-8cd4-b744019dc39b ] ;
     cwlprov:basename "mangrove-analysis-20260923-080315" .
 
 id:3ad94428-01ae-451b-a3f4-af56b73e6981 a wfprov:WorkflowEngine,
@@ -3677,13 +3677,13 @@ id:ec5cc9e1-3e83-4551-a759-4745c5b5040b a wfprov:WorkflowRun,
             prov:atTime "2026-09-23T10:01:10.962463"^^xsd:dateTime ;
             prov:hadActivity id:3ad94428-01ae-451b-a3f4-af56b73e6981 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:11.351432"^^xsd:dateTime ;
-            prov:entity id:d41afe53-37b5-4d07-a4d3-8f135d5ee9bd ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/cloud_cover_max> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T10:01:11.351399"^^xsd:dateTime ;
             prov:entity id:74500aa8-7eb8-4831-a5d7-b57b0d559a7f ;
             prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/aoi> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T10:01:11.351432"^^xsd:dateTime ;
+            prov:entity id:d41afe53-37b5-4d07-a4d3-8f135d5ee9bd ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/cloud_cover_max> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T10:01:11.351454"^^xsd:dateTime ;
             prov:entity id:ab971800-6389-44da-a7db-d85c11161552 ;
@@ -3841,6 +3841,8 @@ x-jsonld-extra-terms:
   version: https://geolabs.github.io/bblocks-process-profiles/def/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
+  minOccurs: https://w3id.org/ogc/api/processes/minOccurs
+  maxOccurs: https://w3id.org/ogc/api/processes/maxOccurs
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
   metadata:
     x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
@@ -4068,6 +4070,8 @@ Links to the schema:
     "version": "pp:version",
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
+    "minOccurs": "proc:minOccurs",
+    "maxOccurs": "proc:maxOccurs",
     "outputTransmission": "proc:outputTransmission",
     "metadata": {
       "@id": "proc:metadata",
@@ -4290,8 +4294,6 @@ Links to the schema:
       "@id": "proc:enum",
       "@container": "@set"
     },
-    "minOccurs": "proc:minOccurs",
-    "maxOccurs": "proc:maxOccurs",
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",

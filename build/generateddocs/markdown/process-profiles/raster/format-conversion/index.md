@@ -7,6 +7,31 @@ Process profile of the live OGC API - Processes process `Gdal_Translate` (ZOO-Pr
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
+## Description
+
+Process profile of the live OGC API - Processes process `Gdal_Translate` (ZOO-Project, Geonovum testbed): <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate>.
+
+> http://www.gdal.org/gdal_translate.html
+
+(the process's own description, as served)
+
+## Implementation Profile
+
+Implements [`Raster format conversion`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion) (`generic-profiles.implementation-profile.raster-format-conversion`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+
+| Live | Implementation Profile |
+|---|---|
+| `InputDSN` | input `raster` |
+| `Format` | input `targetFormat` |
+| `GCP`, `OutputDSN` | -- (live-only inputs, Table 21 footnote b) |
+| `Result` | output `raster` |
+
+## Examples
+
+- `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `process-type.json`: its candidate process-type entry.
+
 ## Examples
 
 ### Source (referenced)
@@ -34,6 +59,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "Format": {
       "title": "Format of the output data",
       "description": "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform).",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "GTiff",
@@ -43,6 +69,8 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "GCP": {
       "title": "Ground Point Control",
       "description": "Ground Point Control in the form : pixel,line,eating,northing(,elev).",
+      "minOccurs": 0,
+      "maxOccurs": "unbounded",
       "schema": {
         "type": "string",
         "nullable": true
@@ -72,7 +100,20 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       }
     }
   },
-  "mutable": false
+  "mutable": false,
+  "metadata": [
+    {
+      "title": "My Demo"
+    }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate/execution"
+    }
+  ]
 }
 
 ```
@@ -98,6 +139,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "Format": {
       "title": "Format of the output data",
       "description": "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform).",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "GTiff",
@@ -107,6 +149,8 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "GCP": {
       "title": "Ground Point Control",
       "description": "Ground Point Control in the form : pixel,line,eating,northing(,elev).",
+      "minOccurs": 0,
+      "maxOccurs": "unbounded",
       "schema": {
         "type": "string",
         "nullable": true
@@ -136,7 +180,20 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       }
     }
   },
-  "mutable": false
+  "mutable": false,
+  "metadata": [
+    {
+      "title": "My Demo"
+    }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate/execution"
+    }
+  ]
 }
 ```
 
@@ -145,21 +202,31 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/Gdal_Translate> dcterms:description "http://www.gdal.org/gdal_translate.html" ;
     dcterms:title "Convert raster data from one format to another. " ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns1:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
                     dcterms:title "Format of the output data" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"GTiff\""^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
             ns1:GCP [ dcterms:description "Ground Point Control in the form : pixel,line,eating,northing(,elev)." ;
                     dcterms:title "Ground Point Control" ;
+                    proc:maxOccurs "unbounded" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
             ns1:InputDSN [ dcterms:description "The input data source name to use as source for convertion." ;
@@ -171,6 +238,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
+    proc:metadata [ dcterms:title "My Demo" ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
@@ -201,13 +269,6 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
-  "keywords": [
-    "raster",
-    "coverage",
-    "format conversion",
-    "GDAL",
-    "gdal_translate"
-  ],
   "metadata": [
     {
       "title": "Process Concept: Raster Coverage Processing",
@@ -223,7 +284,25 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Implementation Profile: Raster format conversion",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
       "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion"
+    },
+    {
+      "title": "My Demo"
     }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate/execution"
+    }
+  ],
+  "keywords": [
+    "raster",
+    "coverage",
+    "format conversion",
+    "GDAL",
+    "gdal_translate"
   ],
   "inputs": {
     "Format": {
@@ -244,6 +323,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/inputs/targetFormat"
         }
       ],
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "GTiff",
@@ -253,6 +333,8 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "GCP": {
       "title": "Ground Point Control",
       "description": "Ground Point Control in the form : pixel,line,eating,northing(,elev).",
+      "minOccurs": 0,
+      "maxOccurs": "unbounded",
       "schema": {
         "type": "string",
         "nullable": true
@@ -336,13 +418,6 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
-  "keywords": [
-    "raster",
-    "coverage",
-    "format conversion",
-    "GDAL",
-    "gdal_translate"
-  ],
   "metadata": [
     {
       "title": "Process Concept: Raster Coverage Processing",
@@ -358,7 +433,25 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Implementation Profile: Raster format conversion",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
       "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion"
+    },
+    {
+      "title": "My Demo"
     }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate/execution"
+    }
+  ],
+  "keywords": [
+    "raster",
+    "coverage",
+    "format conversion",
+    "GDAL",
+    "gdal_translate"
   ],
   "inputs": {
     "Format": {
@@ -379,6 +472,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/inputs/targetFormat"
         }
       ],
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "GTiff",
@@ -388,6 +482,8 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "GCP": {
       "title": "Ground Point Control",
       "description": "Ground Point Control in the form : pixel,line,eating,northing(,elev).",
+      "minOccurs": 0,
+      "maxOccurs": "unbounded",
       "schema": {
         "type": "string",
         "nullable": true
@@ -455,11 +551,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/Gdal_Translate> dcterms:description "http://www.gdal.org/gdal_translate.html" ;
@@ -469,8 +568,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         "gdal_translate",
         "raster" ;
     dcterms:title "Convert raster data from one format to another. " ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns1:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
+    proc:inputs [ ns2:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
                     dcterms:title "Format of the output data" ;
                     proc:keywords "format" ;
                     proc:metadata [ dcterms:title "Generic Profile: Raster format conversion -- input `targetFormat`" ;
@@ -479,14 +582,17 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                         [ dcterms:title "Implementation Profile: Raster format conversion -- input `targetFormat`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/inputs/targetFormat> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"GTiff\""^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns1:GCP [ dcterms:description "Ground Point Control in the form : pixel,line,eating,northing(,elev)." ;
+            ns2:GCP [ dcterms:description "Ground Point Control in the form : pixel,line,eating,northing(,elev)." ;
                     dcterms:title "Ground Point Control" ;
+                    proc:maxOccurs "unbounded" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns1:InputDSN [ dcterms:description "The input data source name to use as source for convertion." ;
+            ns2:InputDSN [ dcterms:description "The input data source name to use as source for convertion." ;
                     dcterms:title "The input data source name" ;
                     proc:keywords "GeoTIFF",
                         "raster" ;
@@ -497,7 +603,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-format-conversion/inputs/raster> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns1:OutputDSN [ dcterms:description "The output data source name to use as source for convertion." ;
+            ns2:OutputDSN [ dcterms:description "The output data source name to use as source for convertion." ;
                     dcterms:title "The output data source name" ;
                     proc:schema [ proc:type "string" ] ] ] ;
     proc:jobControlOptions "async-execute",
@@ -511,20 +617,21 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ dcterms:title "Generic Profile: Raster format conversion" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-format-conversion> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "My Demo" ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:Result [ dcterms:description "The file name resulting of the convertion" ;
+    proc:outputs [ ns3:Result [ dcterms:description "The file name resulting of the convertion" ;
                     dcterms:title "The resulting converted file" ;
                     proc:keywords "GeoTIFF",
                         "raster" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster format conversion -- output `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-format-conversion/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Raster format conversion -- output `raster`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster format conversion -- output `raster`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Raster format conversion -- output `raster`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-format-conversion/outputs/raster> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
                     proc:schema [ proc:type "string" ] ] ] .
 
 
@@ -781,6 +888,11 @@ $defs:
                         href:
                           const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/inputs/targetFormat
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+                  x-jsonld-id: https://w3id.org/ogc/api/processes/minOccurs
             InputDSN:
               required:
               - keywords
@@ -873,6 +985,8 @@ x-jsonld-extra-terms:
   version: https://geolabs.github.io/bblocks-process-profiles/def/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
+  minOccurs: https://w3id.org/ogc/api/processes/minOccurs
+  maxOccurs: https://w3id.org/ogc/api/processes/maxOccurs
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
   metadata:
     x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
@@ -1100,6 +1214,8 @@ Links to the schema:
     "version": "pp:version",
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
+    "minOccurs": "proc:minOccurs",
+    "maxOccurs": "proc:maxOccurs",
     "outputTransmission": "proc:outputTransmission",
     "metadata": {
       "@id": "proc:metadata",
@@ -1322,8 +1438,6 @@ Links to the schema:
       "@id": "proc:enum",
       "@container": "@set"
     },
-    "minOccurs": "proc:minOccurs",
-    "maxOccurs": "proc:maxOccurs",
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",

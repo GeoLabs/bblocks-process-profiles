@@ -14,6 +14,14 @@
     "reference"
   ],
   "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMathX/execution"
+    }
+  ],
   "keywords": [
     "raster",
     "coverage",
@@ -59,6 +67,7 @@
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math-multiband/inputs/rasters"
         }
       ],
+      "maxOccurs": 1024,
       "schema": {
         "oneOf": [
           {
@@ -121,6 +130,7 @@
     "incontext": {
       "title": "A txt file containing user's constants and expressions.",
       "description": "A txt file containing user's constants and expressions.",
+      "minOccurs": 0,
       "schema": {
         "oneOf": [
           {
@@ -144,6 +154,7 @@
     "ram": {
       "title": "Available memory for processing (in MB).",
       "description": "Available memory for processing (in MB).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 256,

@@ -16,6 +16,7 @@
     "Format": {
       "title": "Format of the output data",
       "description": "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform).",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "GTiff",
@@ -25,6 +26,8 @@
     "GCP": {
       "title": "Ground Point Control",
       "description": "Ground Point Control in the form : pixel,line,eating,northing(,elev).",
+      "minOccurs": 0,
+      "maxOccurs": "unbounded",
       "schema": {
         "type": "string",
         "nullable": true
@@ -54,5 +57,18 @@
       }
     }
   },
-  "mutable": false
+  "mutable": false,
+  "metadata": [
+    {
+      "title": "My Demo"
+    }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate/execution"
+    }
+  ]
 }

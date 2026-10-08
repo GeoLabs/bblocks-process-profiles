@@ -16,6 +16,7 @@
     "Format": {
       "title": "Format of the output data",
       "description": "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform).",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "GTiff",
@@ -39,6 +40,7 @@
     "s_srs": {
       "title": "The source Spatial reference Set",
       "description": "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -47,6 +49,7 @@
     "t_srs": {
       "title": "The target Spatial reference Set",
       "description": "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -55,6 +58,7 @@
     "tps": {
       "title": "Thin Plate Spline",
       "description": "Force use of thin plate spline transformer based on available GCPs",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -63,6 +67,7 @@
     "geoloc": {
       "title": "Geolocation",
       "description": "Force use of Geolocation Arrays",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -71,6 +76,7 @@
     "rpc": {
       "title": "RPCs",
       "description": "Force use of RPCs",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -79,6 +85,7 @@
     "r": {
       "title": "Resampling method to use",
       "description": "Available methods are: near (nearest neighbour resampling - default, fastest algorithm, worst interpolation quality), bilinear, cubic, cubicspline, lanczos (Lanczos windowed sinc resampling)",
+      "minOccurs": 0,
       "schema": {
         "type": "boolean",
         "nullable": true
@@ -87,6 +94,7 @@
     "order": {
       "title": "The order of polynomial used for warping (1 to 3)",
       "description": "The default is to select a polynomial order based on the number of GCPs.",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "1",
@@ -96,6 +104,7 @@
     "te": {
       "title": "xmin,ymin,xmax,ymax",
       "description": "set georeferenced extents of output file to be created (in target SRS).",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "nullable": true
@@ -111,5 +120,13 @@
       }
     }
   },
-  "mutable": false
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp/execution"
+    }
+  ]
 }

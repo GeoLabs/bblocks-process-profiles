@@ -1,5 +1,5 @@
 Validation report for ospd.process-profiles.raster.extent - Process profile: OTB.ImageEnvelope
-Generated 2026-10-08T09:15:59.524808+00:00
+Generated 2026-10-08T14:44:16.798820+00:00
 === Files ===
 Using examples/processDescription.inherited.json from examples
 JSON-LD context is present - uplifting

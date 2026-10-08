@@ -1,8 +1,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns4: <http://schema.org/> .
+@prefix ns3: <http://schema.org/> .
+@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -74,27 +74,27 @@
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "0.1.0" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value [ a ns4:Person ;
-                    ns4:name "Cameron Sajedi" ] ;
-            proc:role schema:author ],
+    proc:metadata [ rdf:value [ a ns3:Person ;
+                    ns3:affiliation "GeoLabs" ;
+                    ns3:name "Gérald Fenoy" ] ;
+            proc:role schema:contributor ],
         [ rdf:value "Plot the biomass map and export the results as a STAC Catalog" ;
             proc:role schema:description ],
-        [ rdf:value [ a ns4:Person ;
-                    ns4:affiliation "GeoLabs" ;
-                    ns4:name "Gérald Fenoy" ] ;
-            proc:role schema:contributor ],
+        [ rdf:value [ a ns3:Person ;
+                    ns3:name "Cameron Sajedi" ] ;
+            proc:role schema:author ],
+        [ rdf:value "0.1.0" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
         [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
             proc:role schema:codeRepository ],
         [ rdf:value "export_stac" ;
-            proc:role schema:name ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ] ;
+            proc:role schema:name ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:stac_catalog [ dcterms:description "" ;
+    proc:outputs [ ns4:stac_catalog [ dcterms:description "" ;
                     dcterms:title "stac_catalog" ;
                     proc:schema [ proc:type "object" ;
                             ns2:format "stac-catalog" ;

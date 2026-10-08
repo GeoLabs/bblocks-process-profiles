@@ -7,6 +7,46 @@ Process profile of the live OGC API - Processes process `OTB.RadiometricIndices`
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
+## Description
+
+Process profile of the live OGC API - Processes process `OTB.RadiometricIndices` (ZOO-Project, Geonovum testbed): <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices>.
+
+> This application computes radiometric indices using the relevant channels of the input image. The output is a multi band image into which each channel is one of the selected indices.
+
+(the process's own description, as served)
+
+## The tool behind it
+
+[OTB RadiometricIndices](https://www.orfeo-toolbox.org/CookBook/Applications/app_RadiometricIndices.html) -- Orfeo ToolBox 10.0.0 CookBook (the deployed OTB version is not exposed by the service).
+
+> **Compute radiometric indices.**
+>
+> This application computes radiometric indices using the relevant channels of the input image. The output is a multi band image into which each channel is one of the selected indices.
+
+Quoted from the OTB CookBook, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+
+On this deployment:
+
+- The CookBook's `-list` parameter (the indices to compute, default `ndvi`) is not exposed by the live service, hence the Implementation Profile's `index` stays unbound.
+- The live `channels` input is titled "Blue channel index": the CookBook's `-channels.blue`.
+
+## Implementation Profile
+
+Implements [`Radiometric index`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index) (`generic-profiles.implementation-profile.radiometric-index`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+
+| Live | Implementation Profile |
+|---|---|
+| `in` | input `rasters` |
+| -- | input `index` (unbound: no input of the live service selects the index: OTB RadiometricIndices' `list` parameter is not exposed) |
+| `out`, `channels`, `channels.green`, `channels.red`, `channels.nir`, `channels.mir`, `ram` | -- (live-only inputs, Table 21 footnote b) |
+| `out` | output `raster` |
+
+## Examples
+
+- `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `process-type.json`: its candidate process-type entry.
+
 ## Examples
 
 ### Source (referenced)
@@ -114,6 +154,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "ram": {
       "title": "Available memory for processing (in MB).",
       "description": "Available memory for processing (in MB).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 256,
@@ -146,7 +187,15 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       }
     }
   },
-  "mutable": false
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices/execution"
+    }
+  ]
 }
 
 ```
@@ -252,6 +301,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     "ram": {
       "title": "Available memory for processing (in MB).",
       "description": "Available memory for processing (in MB).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 256,
@@ -284,56 +334,71 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       }
     }
   },
-  "mutable": false
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices/execution"
+    }
+  ]
 }
 ```
 
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
 @prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.RadiometricIndices> dcterms:description "This application computes radiometric indices using the relevant channels of the input image. The output is a multi band image into which each channel is one of the selected indices." ;
     dcterms:title "Compute radiometric indices." ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns2:channels [ dcterms:description "Blue channel index" ;
+    proc:inputs [ ns1:channels [ dcterms:description "Blue channel index" ;
                     dcterms:title "Blue channel index" ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns2:channels.green [ dcterms:description "Green channel index" ;
+            ns1:channels.green [ dcterms:description "Green channel index" ;
                     dcterms:title "Green channel index" ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns2:channels.mir [ dcterms:description "Mir channel index" ;
+            ns1:channels.mir [ dcterms:description "Mir channel index" ;
                     dcterms:title "Mir channel index" ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns2:channels.nir [ dcterms:description "NIR channel index" ;
+            ns1:channels.nir [ dcterms:description "NIR channel index" ;
                     dcterms:title "NIR channel index" ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns2:channels.red [ dcterms:description "Red channel index" ;
+            ns1:channels.red [ dcterms:description "Red channel index" ;
                     dcterms:title "Red channel index" ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns2:in [ dcterms:description "Input image" ;
+            ns1:in [ dcterms:description "Input image" ;
                     dcterms:title "Input image" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ] ] ] ;
-            ns2:out [ dcterms:description "Radiometric indices output image" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/tiff" ] ] ] ;
+            ns1:out [ dcterms:description "Radiometric indices output image" ;
                     dcterms:title "Radiometric indices output image" ;
                     proc:schema [ proc:default "\"float\""^^rdf:JSON ;
                             proc:enum "double",
@@ -343,8 +408,9 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                 "uint16",
                                 "uint8" ;
                             proc:type "string" ] ] ;
-            ns2:ram [ dcterms:description "Available memory for processing (in MB)." ;
+            ns1:ram [ dcterms:description "Available memory for processing (in MB)." ;
                     dcterms:title "Available memory for processing (in MB)." ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "256"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "integer" ] ] ] ;
@@ -356,15 +422,15 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
         "value" ;
     proc:outputs [ ns3:out [ dcterms:description "Radiometric indices output image" ;
                     dcterms:title "Radiometric indices output image" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ] .
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/png" ] ] ] ] .
 
 
 ```
@@ -389,6 +455,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices/execution"
+    }
+  ],
   "keywords": [
     "raster",
     "coverage",
@@ -513,6 +587,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "ram": {
       "title": "Available memory for processing (in MB).",
       "description": "Available memory for processing (in MB).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 256,
@@ -583,6 +658,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices/execution"
+    }
+  ],
   "keywords": [
     "raster",
     "coverage",
@@ -707,6 +790,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "ram": {
       "title": "Available memory for processing (in MB).",
       "description": "Available memory for processing (in MB).",
+      "minOccurs": 0,
       "schema": {
         "type": "integer",
         "default": 256,
@@ -761,12 +845,15 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://w3id.org/ogc/api/schema/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.RadiometricIndices> dcterms:description "This application computes radiometric indices using the relevant channels of the input image. The output is a multi band image into which each channel is one of the selected indices." ;
@@ -776,28 +863,32 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         "radiometric index",
         "raster" ;
     dcterms:title "Compute radiometric indices." ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns2:channels [ dcterms:description "Blue channel index" ;
+    proc:inputs [ ns1:channels [ dcterms:description "Blue channel index" ;
                     dcterms:title "Blue channel index" ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns2:channels.green [ dcterms:description "Green channel index" ;
+            ns1:channels.green [ dcterms:description "Green channel index" ;
                     dcterms:title "Green channel index" ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns2:channels.mir [ dcterms:description "Mir channel index" ;
+            ns1:channels.mir [ dcterms:description "Mir channel index" ;
                     dcterms:title "Mir channel index" ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns2:channels.nir [ dcterms:description "NIR channel index" ;
+            ns1:channels.nir [ dcterms:description "NIR channel index" ;
                     dcterms:title "NIR channel index" ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns2:channels.red [ dcterms:description "Red channel index" ;
+            ns1:channels.red [ dcterms:description "Red channel index" ;
                     dcterms:title "Red channel index" ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns2:in [ dcterms:description "Input image" ;
+            ns1:in [ dcterms:description "Input image" ;
                     dcterms:title "Input image" ;
                     proc:keywords "GeoTIFF",
                         "raster" ;
@@ -807,16 +898,16 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                         [ dcterms:title "Implementation Profile: Radiometric index -- input `rasters`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index/inputs/rasters> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                    proc:schema [ ns3:oneOf [ proc:type "string" ;
+                                    ns3:contentEncoding "base64" ;
+                                    ns3:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ],
+                                    ns3:contentEncoding "base64" ;
+                                    ns3:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns2:out [ dcterms:description "Radiometric indices output image" ;
+                                    ns3:contentEncoding "base64" ;
+                                    ns3:contentMediaType "image/jpeg" ] ] ] ;
+            ns1:out [ dcterms:description "Radiometric indices output image" ;
                     dcterms:title "Radiometric indices output image" ;
                     proc:schema [ proc:default "\"float\""^^rdf:JSON ;
                             proc:enum "double",
@@ -826,45 +917,46 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 "uint16",
                                 "uint8" ;
                             proc:type "string" ] ] ;
-            ns2:ram [ dcterms:description "Available memory for processing (in MB)." ;
+            ns1:ram [ dcterms:description "Available memory for processing (in MB)." ;
                     dcterms:title "Available memory for processing (in MB)." ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "256"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "integer" ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Radiometric index" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+    proc:metadata [ dcterms:title "Implementation Profile: Radiometric index" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ dcterms:title "Process Concept: Raster Coverage Processing" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Implementation Profile: Radiometric index" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+        [ dcterms:title "Generic Profile: Radiometric index" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:out [ dcterms:description "Radiometric indices output image" ;
+    proc:outputs [ ns2:out [ dcterms:description "Radiometric indices output image" ;
                     dcterms:title "Radiometric indices output image" ;
                     proc:keywords "GeoTIFF",
                         "raster" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Radiometric index -- output `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Radiometric index -- output `raster`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Radiometric index -- output `raster`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Radiometric index -- output `raster`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/outputs/raster> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
+                    proc:schema [ ns3:oneOf [ proc:type "string" ;
+                                    ns3:contentEncoding "base64" ;
+                                    ns3:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ],
+                                    ns3:contentEncoding "base64" ;
+                                    ns3:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ] .
+                                    ns3:contentEncoding "base64" ;
+                                    ns3:contentMediaType "image/png" ] ] ] ] .
 
 
 ```
@@ -1187,6 +1279,8 @@ x-jsonld-extra-terms:
   version: https://geolabs.github.io/bblocks-process-profiles/def/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
+  minOccurs: https://w3id.org/ogc/api/processes/minOccurs
+  maxOccurs: https://w3id.org/ogc/api/processes/maxOccurs
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
   metadata:
     x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
@@ -1414,6 +1508,8 @@ Links to the schema:
     "version": "pp:version",
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
+    "minOccurs": "proc:minOccurs",
+    "maxOccurs": "proc:maxOccurs",
     "outputTransmission": "proc:outputTransmission",
     "metadata": {
       "@id": "proc:metadata",
@@ -1636,8 +1732,6 @@ Links to the schema:
       "@id": "proc:enum",
       "@container": "@set"
     },
-    "minOccurs": "proc:minOccurs",
-    "maxOccurs": "proc:maxOccurs",
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",

@@ -2,7 +2,7 @@
   "title": "Validation report for ospd.process-profiles.raster.radiometric-index - Process profile: OTB.RadiometricIndices",
   "bblockName": "Process profile: OTB.RadiometricIndices",
   "bblockId": "ospd.process-profiles.raster.radiometric-index",
-  "generated": "2026-10-08T09:16:02.684870+00:00",
+  "generated": "2026-10-08T14:44:21.946563+00:00",
   "result": true,
   "items": [
     {
@@ -40,7 +40,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_2_1.ttl",
-              "size": 92,
+              "size": 98,
               "isError": false,
               "message": "Output Turtle example_2_1.ttl created"
             }
@@ -95,7 +95,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_3_1.ttl",
-              "size": 129,
+              "size": 135,
               "isError": false,
               "message": "Output Turtle example_3_1.ttl created"
             }

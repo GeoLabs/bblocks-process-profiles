@@ -7,6 +7,30 @@ Process profile of the live OGC API - Processes process `Crosses` (ZOO-Project, 
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
+## Description
+
+Process profile of the live OGC API - Processes process `Crosses` (ZOO-Project, Geonovum testbed): <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Crosses>.
+
+> This service shall return a true value if and only if the geometries g1 and g2 share some but neither is containe in the other, and the dimension of the intersection is less than that of both of the geometries.
+
+(the process's own description, as served)
+
+## Implementation Profile
+
+Implements [`Crosses`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/crosses) (`generic-profiles.implementation-profile.crosses`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+
+| Live | Implementation Profile |
+|---|---|
+| `InputEntity1` | input `geometry1` |
+| `InputEntity2` | input `geometry2` |
+| `Result` | output `result` |
+
+## Examples
+
+- `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `process-type.json`: its candidate process-type entry.
+
 ## Examples
 
 ### Source (referenced)
@@ -78,10 +102,23 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       "description": "true if disjoint.",
       "schema": {
         "type": "boolean"
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     }
   },
-  "mutable": false
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Crosses/execution"
+    }
+  ]
 }
 
 ```
@@ -151,46 +188,66 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       "description": "true if disjoint.",
       "schema": {
         "type": "boolean"
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     }
   },
-  "mutable": false
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Crosses/execution"
+    }
+  ]
 }
 ```
 
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
 @prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/Crosses> dcterms:description "This service shall return a true value if and only if the geometries g1 and g2 share some but neither is containe in the other, and the dimension of the intersection is less than that of both of the geometries." ;
     dcterms:title "Crosses test" ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Crosses/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns2:InputEntity1 [ dcterms:description "the first geometry." ;
+    proc:inputs [ ns1:InputEntity1 [ dcterms:description "the first geometry." ;
                     dcterms:title "the first geometry" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
-                                    ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
-            ns2:InputEntity2 [ dcterms:description "the other geometry." ;
+                                    ns2:contentEncoding "UTF-8" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
+            ns1:InputEntity2 [ dcterms:description "the other geometry." ;
                     dcterms:title "the other geometry" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
-                                    ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "UTF-8" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
@@ -199,6 +256,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
         "value" ;
     proc:outputs [ ns3:Result [ dcterms:description "true if disjoint." ;
                     dcterms:title "Disjoint result" ;
+                    proc:metadata [ dcterms:title "Mon test  " ] ;
                     proc:schema [ proc:type "boolean" ] ] ] .
 
 
@@ -224,6 +282,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Crosses/execution"
+    }
+  ],
   "keywords": [
     "vector",
     "geometry",
@@ -340,6 +406,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Crosses -- output `result`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/crosses/outputs/result"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -369,6 +438,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Crosses/execution"
+    }
+  ],
   "keywords": [
     "vector",
     "geometry",
@@ -485,6 +562,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Crosses -- output `result`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/crosses/outputs/result"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -498,11 +578,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/Crosses> dcterms:description "This service shall return a true value if and only if the geometries g1 and g2 share some but neither is containe in the other, and the dimension of the intersection is less than that of both of the geometries." ;
@@ -513,8 +596,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         "spatial relation",
         "vector" ;
     dcterms:title "Crosses test" ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Crosses/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns2:InputEntity1 [ dcterms:description "the first geometry." ;
+    proc:inputs [ ns3:InputEntity1 [ dcterms:description "the first geometry." ;
                     dcterms:title "the first geometry" ;
                     proc:keywords "GML",
                         "geometry" ;
@@ -524,48 +611,48 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                         [ dcterms:title "Implementation Profile: Crosses -- input `geometry1`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/crosses/inputs/geometry1> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "UTF-8" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
-                                    ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
-            ns2:InputEntity2 [ dcterms:description "the other geometry." ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
+            ns3:InputEntity2 [ dcterms:description "the other geometry." ;
                     dcterms:title "the other geometry" ;
                     proc:keywords "GML",
                         "geometry" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Crosses -- input `geometry2`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/crosses/inputs/geometry2> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Binary spatial predicate -- input `geometry2`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Binary spatial predicate -- input `geometry2`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry2> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
-                                    ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Crosses -- input `geometry2`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/crosses/inputs/geometry2> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+                                    ns2:contentEncoding "UTF-8" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Binary spatial predicate" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Process Concept: Vector Geometry Processing" ;
+    proc:metadata [ dcterms:title "Process Concept: Vector Geometry Processing" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ dcterms:title "Implementation Profile: Crosses" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/crosses> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Generic Profile: Binary spatial predicate" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:Result [ dcterms:description "true if disjoint." ;
+    proc:outputs [ ns1:Result [ dcterms:description "true if disjoint." ;
                     dcterms:title "Disjoint result" ;
                     proc:keywords "boolean" ;
                     proc:metadata [ dcterms:title "Generic Profile: Binary spatial predicate -- output `result`" ;
@@ -573,7 +660,8 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
                         [ dcterms:title "Implementation Profile: Crosses -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/crosses/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
+                        [ dcterms:title "Mon test  " ] ;
                     proc:schema [ proc:type "boolean" ] ] ] .
 
 
@@ -913,6 +1001,8 @@ x-jsonld-extra-terms:
   version: https://geolabs.github.io/bblocks-process-profiles/def/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
+  minOccurs: https://w3id.org/ogc/api/processes/minOccurs
+  maxOccurs: https://w3id.org/ogc/api/processes/maxOccurs
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
   metadata:
     x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
@@ -1140,6 +1230,8 @@ Links to the schema:
     "version": "pp:version",
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
+    "minOccurs": "proc:minOccurs",
+    "maxOccurs": "proc:maxOccurs",
     "outputTransmission": "proc:outputTransmission",
     "metadata": {
       "@id": "proc:metadata",
@@ -1362,8 +1454,6 @@ Links to the schema:
       "@id": "proc:enum",
       "@container": "@set"
     },
-    "minOccurs": "proc:minOccurs",
-    "maxOccurs": "proc:maxOccurs",
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",

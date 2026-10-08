@@ -14,13 +14,6 @@
     "reference"
   ],
   "mutable": false,
-  "keywords": [
-    "raster",
-    "coverage",
-    "format conversion",
-    "GDAL",
-    "gdal_translate"
-  ],
   "metadata": [
     {
       "title": "Process Concept: Raster Coverage Processing",
@@ -36,7 +29,25 @@
       "title": "Implementation Profile: Raster format conversion",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
       "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion"
+    },
+    {
+      "title": "My Demo"
     }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate/execution"
+    }
+  ],
+  "keywords": [
+    "raster",
+    "coverage",
+    "format conversion",
+    "GDAL",
+    "gdal_translate"
   ],
   "inputs": {
     "Format": {
@@ -57,6 +68,7 @@
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/inputs/targetFormat"
         }
       ],
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "GTiff",
@@ -66,6 +78,8 @@
     "GCP": {
       "title": "Ground Point Control",
       "description": "Ground Point Control in the form : pixel,line,eating,northing(,elev).",
+      "minOccurs": 0,
+      "maxOccurs": "unbounded",
       "schema": {
         "type": "string",
         "nullable": true

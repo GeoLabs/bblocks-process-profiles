@@ -7,6 +7,29 @@ Process profile of the live OGC API - Processes process `GetArea` (ZOO-Project, 
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
+## Description
+
+Process profile of the live OGC API - Processes process `GetArea` (ZOO-Project, Geonovum testbed): <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/GetArea>.
+
+> Computes the area of a geometry
+
+(the process's own description, as served)
+
+## Implementation Profile
+
+Implements [`Area`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area) (`generic-profiles.implementation-profile.area`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+
+| Live | Implementation Profile |
+|---|---|
+| `InputPolygon` | input `geometry` |
+| `Area` | output `result` |
+
+## Examples
+
+- `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `process-type.json`: its candidate process-type entry.
+
 ## Examples
 
 ### Source (referenced)
@@ -49,7 +72,12 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
             "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test"
+        }
+      ]
     }
   },
   "outputs": {
@@ -59,10 +87,28 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       "schema": {
         "type": "number",
         "format": "float"
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     }
   },
-  "mutable": false
+  "mutable": false,
+  "metadata": [
+    {
+      "title": "Demo"
+    }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/GetArea/execution"
+    }
+  ]
 }
 
 ```
@@ -103,7 +149,12 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
             "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test"
+        }
+      ]
     }
   },
   "outputs": {
@@ -113,10 +164,28 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
       "schema": {
         "type": "number",
         "format": "float"
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     }
   },
-  "mutable": false
+  "mutable": false,
+  "metadata": [
+    {
+      "title": "Demo"
+    }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/GetArea/execution"
+    }
+  ]
 }
 ```
 
@@ -126,15 +195,23 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/GetArea> dcterms:description "Computes the area of a geometry" ;
     dcterms:title "Compute geometry area." ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/GetArea/execution> ] ;
     pp:version "2.0.0" ;
     proc:inputs [ ns3:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to compute are" ;
+                    proc:metadata [ dcterms:title "Mon test" ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
@@ -146,11 +223,13 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
+    proc:metadata [ dcterms:title "Demo" ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ ns2:Area [ dcterms:description "The Computed Area Value" ;
                     dcterms:title "Computed Area" ;
+                    proc:metadata [ dcterms:title "Mon test  " ] ;
                     proc:schema [ proc:type "number" ;
                             ns1:format "float" ] ] ] .
 
@@ -177,13 +256,6 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
-  "keywords": [
-    "vector",
-    "geometry",
-    "measure",
-    "Area",
-    "ST_Area"
-  ],
   "metadata": [
     {
       "title": "Process Concept: Vector Geometry Processing",
@@ -199,7 +271,25 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Implementation Profile: Area",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
       "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area"
+    },
+    {
+      "title": "Demo"
     }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/GetArea/execution"
+    }
+  ],
+  "keywords": [
+    "vector",
+    "geometry",
+    "measure",
+    "Area",
+    "ST_Area"
   ],
   "inputs": {
     "InputPolygon": {
@@ -219,6 +309,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Area -- input `geometry`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area/inputs/geometry"
+        },
+        {
+          "title": "Mon test"
         }
       ],
       "schema": {
@@ -256,6 +349,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Area -- output `result`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area/outputs/result"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -286,13 +382,6 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
-  "keywords": [
-    "vector",
-    "geometry",
-    "measure",
-    "Area",
-    "ST_Area"
-  ],
   "metadata": [
     {
       "title": "Process Concept: Vector Geometry Processing",
@@ -308,7 +397,25 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Implementation Profile: Area",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
       "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area"
+    },
+    {
+      "title": "Demo"
     }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/GetArea/execution"
+    }
+  ],
+  "keywords": [
+    "vector",
+    "geometry",
+    "measure",
+    "Area",
+    "ST_Area"
   ],
   "inputs": {
     "InputPolygon": {
@@ -328,6 +435,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Area -- input `geometry`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area/inputs/geometry"
+        },
+        {
+          "title": "Mon test"
         }
       ],
       "schema": {
@@ -365,6 +475,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Area -- output `result`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area/outputs/result"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -380,10 +493,13 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/GetArea> dcterms:description "Computes the area of a geometry" ;
@@ -393,23 +509,28 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         "measure",
         "vector" ;
     dcterms:title "Compute geometry area." ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/GetArea/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns2:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+    proc:inputs [ ns3:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to compute are" ;
                     proc:keywords "GML",
                         "geometry" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Area -- input `geometry`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area/inputs/geometry> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                    proc:metadata [ dcterms:title "Mon test" ],
                         [ dcterms:title "Generic Profile: Geometry measure -- input `geometry`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-measure/inputs/geometry> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Area -- input `geometry`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area/inputs/geometry> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
@@ -418,19 +539,21 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     proc:metadata [ dcterms:title "Generic Profile: Geometry measure" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-measure> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Implementation Profile: Area" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Demo" ],
         [ dcterms:title "Process Concept: Vector Geometry Processing" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Implementation Profile: Area" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:Area [ dcterms:description "The Computed Area Value" ;
+    proc:outputs [ ns2:Area [ dcterms:description "The Computed Area Value" ;
                     dcterms:title "Computed Area" ;
                     proc:keywords "number" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Area -- output `result`" ;
+                    proc:metadata [ dcterms:title "Mon test  " ],
+                        [ dcterms:title "Implementation Profile: Area -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area/outputs/result> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
                         [ dcterms:title "Generic Profile: Geometry measure -- output `result`" ;
@@ -736,6 +859,8 @@ x-jsonld-extra-terms:
   version: https://geolabs.github.io/bblocks-process-profiles/def/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
+  minOccurs: https://w3id.org/ogc/api/processes/minOccurs
+  maxOccurs: https://w3id.org/ogc/api/processes/maxOccurs
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
   metadata:
     x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
@@ -963,6 +1088,8 @@ Links to the schema:
     "version": "pp:version",
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
+    "minOccurs": "proc:minOccurs",
+    "maxOccurs": "proc:maxOccurs",
     "outputTransmission": "proc:outputTransmission",
     "metadata": {
       "@id": "proc:metadata",
@@ -1185,8 +1312,6 @@ Links to the schema:
       "@id": "proc:enum",
       "@container": "@set"
     },
-    "minOccurs": "proc:minOccurs",
-    "maxOccurs": "proc:maxOccurs",
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",

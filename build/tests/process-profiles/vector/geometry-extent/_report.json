@@ -2,7 +2,7 @@
   "title": "Validation report for ospd.process-profiles.vector.geometry-extent - Process profile: SAGA.shapes_tools.19",
   "bblockName": "Process profile: SAGA.shapes_tools.19",
   "bblockId": "ospd.process-profiles.vector.geometry-extent",
-  "generated": "2026-10-08T09:16:21.031407+00:00",
+  "generated": "2026-10-08T14:44:55.244379+00:00",
   "result": true,
   "items": [
     {
@@ -40,7 +40,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_2_1.ttl",
-              "size": 49,
+              "size": 55,
               "isError": false,
               "message": "Output Turtle example_2_1.ttl created"
             }
@@ -95,7 +95,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_3_1.ttl",
-              "size": 86,
+              "size": 92,
               "isError": false,
               "message": "Output Turtle example_3_1.ttl created"
             }

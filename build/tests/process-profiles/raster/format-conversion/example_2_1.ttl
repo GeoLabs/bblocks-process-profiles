@@ -1,21 +1,31 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/Gdal_Translate> dcterms:description "http://www.gdal.org/gdal_translate.html" ;
     dcterms:title "Convert raster data from one format to another. " ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns1:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
                     dcterms:title "Format of the output data" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"GTiff\""^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
             ns1:GCP [ dcterms:description "Ground Point Control in the form : pixel,line,eating,northing(,elev)." ;
                     dcterms:title "Ground Point Control" ;
+                    proc:maxOccurs "unbounded" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
             ns1:InputDSN [ dcterms:description "The input data source name to use as source for convertion." ;
@@ -27,6 +37,7 @@
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
+    proc:metadata [ dcterms:title "My Demo" ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;

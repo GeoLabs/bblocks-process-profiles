@@ -2,7 +2,7 @@
   "title": "Validation report for ospd.process-profiles.raster.band-math-multiband - Process profile: OTB.BandMathX",
   "bblockName": "Process profile: OTB.BandMathX",
   "bblockId": "ospd.process-profiles.raster.band-math-multiband",
-  "generated": "2026-10-08T09:15:58.374803+00:00",
+  "generated": "2026-10-08T14:44:14.849360+00:00",
   "result": true,
   "items": [
     {
@@ -40,7 +40,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_2_1.ttl",
-              "size": 95,
+              "size": 103,
               "isError": false,
               "message": "Output Turtle example_2_1.ttl created"
             }
@@ -95,7 +95,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_3_1.ttl",
-              "size": 142,
+              "size": 150,
               "isError": false,
               "message": "Output Turtle example_3_1.ttl created"
             }

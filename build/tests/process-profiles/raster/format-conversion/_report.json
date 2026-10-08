@@ -2,7 +2,7 @@
   "title": "Validation report for ospd.process-profiles.raster.format-conversion - Process profile: Gdal_Translate",
   "bblockName": "Process profile: Gdal_Translate",
   "bblockId": "ospd.process-profiles.raster.format-conversion",
-  "generated": "2026-10-08T09:16:01.621127+00:00",
+  "generated": "2026-10-08T14:44:20.238603+00:00",
   "result": true,
   "items": [
     {
@@ -40,7 +40,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_2_1.ttl",
-              "size": 39,
+              "size": 49,
               "isError": false,
               "message": "Output Turtle example_2_1.ttl created"
             }
@@ -95,7 +95,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_3_1.ttl",
-              "size": 85,
+              "size": 95,
               "isError": false,
               "message": "Output Turtle example_3_1.ttl created"
             }

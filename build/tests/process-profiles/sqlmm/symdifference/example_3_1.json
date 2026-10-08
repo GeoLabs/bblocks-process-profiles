@@ -13,14 +13,6 @@
     "reference"
   ],
   "mutable": false,
-  "keywords": [
-    "vector",
-    "geometry",
-    "spatial analysis",
-    "set operation",
-    "SymDifference",
-    "ST_SymDifference"
-  ],
   "metadata": [
     {
       "title": "Process Concept: Vector Geometry Processing",
@@ -36,7 +28,26 @@
       "title": "Implementation Profile: Symmetric difference",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
       "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference"
+    },
+    {
+      "title": "Demo"
     }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SymDifference/execution"
+    }
+  ],
+  "keywords": [
+    "vector",
+    "geometry",
+    "spatial analysis",
+    "set operation",
+    "SymDifference",
+    "ST_SymDifference"
   ],
   "inputs": {
     "InputEntity1": {
@@ -56,6 +67,9 @@
           "title": "Implementation Profile: Symmetric difference -- input `geometry1`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference/inputs/geometry1"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -92,6 +106,9 @@
           "title": "Implementation Profile: Symmetric difference -- input `geometry2`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference/inputs/geometry2"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -130,6 +147,9 @@
           "title": "Implementation Profile: Symmetric difference -- output `result`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference/outputs/result"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {

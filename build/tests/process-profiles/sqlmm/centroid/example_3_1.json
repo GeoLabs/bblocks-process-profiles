@@ -13,13 +13,6 @@
     "reference"
   ],
   "mutable": false,
-  "keywords": [
-    "vector",
-    "geometry",
-    "derived geometry",
-    "Centroid",
-    "ST_Centroid"
-  ],
   "metadata": [
     {
       "title": "Process Concept: Vector Geometry Processing",
@@ -35,7 +28,25 @@
       "title": "Implementation Profile: Centroid",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
       "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/centroid"
+    },
+    {
+      "title": "Demo"
     }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Centroid/execution"
+    }
+  ],
+  "keywords": [
+    "vector",
+    "geometry",
+    "derived geometry",
+    "Centroid",
+    "ST_Centroid"
   ],
   "inputs": {
     "InputPolygon": {
@@ -55,6 +66,9 @@
           "title": "Implementation Profile: Centroid -- input `geometry`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/centroid/inputs/geometry"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -93,6 +107,9 @@
           "title": "Implementation Profile: Centroid -- output `result`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/centroid/outputs/result"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {

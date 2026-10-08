@@ -2,15 +2,23 @@
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/GetArea> dcterms:description "Computes the area of a geometry" ;
     dcterms:title "Compute geometry area." ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/GetArea/execution> ] ;
     pp:version "2.0.0" ;
     proc:inputs [ ns3:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to compute are" ;
+                    proc:metadata [ dcterms:title "Mon test" ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
@@ -22,11 +30,13 @@
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
+    proc:metadata [ dcterms:title "Demo" ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ ns2:Area [ dcterms:description "The Computed Area Value" ;
                     dcterms:title "Computed Area" ;
+                    proc:metadata [ dcterms:title "Mon test  " ] ;
                     proc:schema [ proc:type "number" ;
                             ns1:format "float" ] ] ] .
 

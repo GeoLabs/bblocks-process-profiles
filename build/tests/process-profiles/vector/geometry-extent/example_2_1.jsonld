@@ -38,6 +38,7 @@
     "OUTPUT": {
       "title": "Get Extent for ...",
       "description": "Get Extent for ...",
+      "minOccurs": 0,
       "schema": {
         "type": "string",
         "default": "each shape",
@@ -73,5 +74,13 @@
       }
     }
   },
-  "mutable": false
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.shapes_tools.19/execution"
+    }
+  ]
 }

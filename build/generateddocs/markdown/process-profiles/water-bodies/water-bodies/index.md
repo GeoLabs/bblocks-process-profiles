@@ -353,10 +353,10 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
     proc:jobControlOptions "async-execute" ;
     proc:metadata [ rdf:value "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
             proc:role schema:description ],
-        [ rdf:value "1.4.1" ;
-            proc:role schema:softwareVersion ],
         [ rdf:value "Water bodies detection based on NDWI and otsu threshold" ;
-            proc:role schema:name ] ;
+            proc:role schema:name ],
+        [ rdf:value "1.4.1" ;
+            proc:role schema:softwareVersion ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
@@ -691,10 +691,10 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
     proc:jobControlOptions "async-execute" ;
     proc:metadata [ rdf:value "1.4.1" ;
             proc:role schema:softwareVersion ],
-        [ rdf:value "Water bodies detection based on NDWI and otsu threshold" ;
-            proc:role schema:name ],
         [ rdf:value "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
-            proc:role schema:description ] ;
+            proc:role schema:description ],
+        [ rdf:value "Water bodies detection based on NDWI and otsu threshold" ;
+            proc:role schema:name ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
@@ -3102,10 +3102,10 @@ id:006f10ba-bce7-4602-bc25-46f0ca2c5724 a wfprov:ProcessRun,
             prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
             prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/water-bodies/node_water_bodies> ] ;
     prov:qualifiedStart [ a prov:Start ;
-            prov:atTime "2026-09-23T22:09:37.996102"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T22:14:43.790754"^^xsd:dateTime ;
             prov:hadActivity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ],
         [ a prov:Start ;
-            prov:atTime "2026-09-23T22:14:43.790754"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T22:09:37.996102"^^xsd:dateTime ;
             prov:hadActivity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ] .
 
 id:0c932b2b-21cb-4d36-8eda-c9d07f86bf53 a prov:Entity,
@@ -3252,9 +3252,9 @@ id:511850b1-b1bc-44cd-8316-bdd367fefd98 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ],
+            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ],
         [ a provext:Membership ;
-            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ] .
+            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ] .
 
 id:5fa19808-d14c-4c01-8bd1-05a7a8845019 a wf4ever:File,
         wfprov:Artifact,
@@ -3298,22 +3298,22 @@ id:afa01c29-85ed-418e-b3a4-99ff6f4b06cf a ro:Folder,
             prov:atTime "2026-09-23T22:17:45.465410"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/primary/stac> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 ],
-        [ a provext:Membership ;
             provext:member id:1d5bc5ed-98ce-4f75-8ca8-c19f497b03c0 ],
         [ a provext:Membership ;
-            provext:member id:0d06dfcd-e7b7-4fad-a2a5-66cddd416313 ],
+            provext:member id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 ],
         [ a provext:Membership ;
-            provext:member id:a782f6a0-89d7-46ac-9c76-c6569903f8e1 ] ;
+            provext:member id:a782f6a0-89d7-46ac-9c76-c6569903f8e1 ],
+        [ a provext:Membership ;
+            provext:member id:0d06dfcd-e7b7-4fad-a2a5-66cddd416313 ] ;
     cwlprov:basename "docker_tmpwngcerl4" .
 
 id:b6924a3c-a25c-4107-bdd7-2b5b2bff912e a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:ba936cb0e062bea4078e8b56371ca8fe054093dd ],
+            provext:member data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ],
         [ a provext:Membership ;
-            provext:member data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ] .
+            provext:member data:ba936cb0e062bea4078e8b56371ca8fe054093dd ] .
 
 id:d8353ab3-7279-484e-a461-b04ae4b52890 a prov:Agent,
         prov:SoftwareAgent ;
@@ -3333,10 +3333,10 @@ id:fbfd9735-117b-4cdd-9707-61f171585925 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_stac" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac> ],
+            prov:agent id:d8353ab3-7279-484e-a461-b04ae4b52890 ],
         [ a prov:Association ;
-            prov:agent id:d8353ab3-7279-484e-a461-b04ae4b52890 ] ;
+            prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:17:45.432570"^^xsd:dateTime ;
             prov:hadActivity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ] ;
@@ -3344,13 +3344,13 @@ id:fbfd9735-117b-4cdd-9707-61f171585925 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:17:40.502305"^^xsd:dateTime ;
             prov:hadActivity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:17:40.582084"^^xsd:dateTime ;
-            prov:entity id:3d637621-61a3-4c53-8aaf-70daadac3593 ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/rasters> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:17:40.581639"^^xsd:dateTime ;
             prov:entity id:25ff238f-e08b-4dee-a1f9-485e90a02a52 ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/item> ] .
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/item> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:17:40.582084"^^xsd:dateTime ;
+            prov:entity id:3d637621-61a3-4c53-8aaf-70daadac3593 ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/rasters> ] .
 
 data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd a wfprov:Artifact,
         prov:Entity ;
@@ -3375,9 +3375,9 @@ id:1d5bc5ed-98ce-4f75-8ca8-c19f497b03c0 a ro:Folder,
     prov:hadDictionaryMember "id:1aa0c641-ea02-485d-a14b-c5a0aa40154b"^^xsd:QName,
         "id:bbd82449-f35c-4d0e-a771-32af085fe0db"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:0825c9ab-8336-4546-bdb6-27a7ec74c6b5 ],
+            provext:member id:8a52cbfa-2822-476c-baed-680f3a070398 ],
         [ a provext:Membership ;
-            provext:member id:8a52cbfa-2822-476c-baed-680f3a070398 ] ;
+            provext:member id:0825c9ab-8336-4546-bdb6-27a7ec74c6b5 ] ;
     cwlprov:basename "S2B_10TFK_20210713_0_L2A" .
 
 id:76afd8f9-b8f8-4b00-88b9-5bbf50509248 a ro:Folder,
@@ -3410,9 +3410,9 @@ id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 a ro:Folder,
     prov:hadDictionaryMember "id:0c932b2b-21cb-4d36-8eda-c9d07f86bf53"^^xsd:QName,
         "id:4c5ac9a5-8f70-4cc6-bb2f-89864afd51b9"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:471cf7c7-1a60-4c28-b3d0-904c5aa74707 ],
+            provext:member id:ac975c99-5d6d-476f-b3ab-750fd0ac460d ],
         [ a provext:Membership ;
-            provext:member id:ac975c99-5d6d-476f-b3ab-750fd0ac460d ] ;
+            provext:member id:471cf7c7-1a60-4c28-b3d0-904c5aa74707 ] ;
     cwlprov:basename "S2A_10TFK_20220524_0_L2A" .
 
 id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 a wfprov:WorkflowRun,
@@ -3590,6 +3590,8 @@ x-jsonld-extra-terms:
   version: https://geolabs.github.io/bblocks-process-profiles/def/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
+  minOccurs: https://w3id.org/ogc/api/processes/minOccurs
+  maxOccurs: https://w3id.org/ogc/api/processes/maxOccurs
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
   metadata:
     x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
@@ -3817,6 +3819,8 @@ Links to the schema:
     "version": "pp:version",
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
+    "minOccurs": "proc:minOccurs",
+    "maxOccurs": "proc:maxOccurs",
     "outputTransmission": "proc:outputTransmission",
     "metadata": {
       "@id": "proc:metadata",
@@ -4039,8 +4043,6 @@ Links to the schema:
       "@id": "proc:enum",
       "@container": "@set"
     },
-    "minOccurs": "proc:minOccurs",
-    "maxOccurs": "proc:maxOccurs",
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",

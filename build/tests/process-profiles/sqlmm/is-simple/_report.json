@@ -2,7 +2,7 @@
   "title": "Validation report for ospd.process-profiles.sqlmm.is-simple - Process profile: IsSimple",
   "bblockName": "Process profile: IsSimple",
   "bblockId": "ospd.process-profiles.sqlmm.is-simple",
-  "generated": "2026-10-08T09:16:16.076984+00:00",
+  "generated": "2026-10-08T14:44:46.508434+00:00",
   "result": true,
   "items": [
     {
@@ -40,7 +40,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_2_1.ttl",
-              "size": 30,
+              "size": 35,
               "isError": false,
               "message": "Output Turtle example_2_1.ttl created"
             }
@@ -95,7 +95,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_3_1.ttl",
-              "size": 66,
+              "size": 71,
               "isError": false,
               "message": "Output Turtle example_3_1.ttl created"
             }

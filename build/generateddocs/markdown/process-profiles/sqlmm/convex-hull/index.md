@@ -7,6 +7,29 @@ Process profile of the live OGC API - Processes process `ConvexHull` (ZOO-Projec
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
+## Description
+
+Process profile of the live OGC API - Processes process `ConvexHull` (ZOO-Project, Geonovum testbed): <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/ConvexHull>.
+
+> This service shall return a feature collection that represents the convex hull of geometry InputPolygon. The convex hull is the smallest convex polygon that contains all points of the geometry. The convex Hull for a geometry of encoding data type Point is the point itself
+
+(the process's own description, as served)
+
+## Implementation Profile
+
+Implements [`Convex hull`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull) (`generic-profiles.implementation-profile.convex-hull`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+
+| Live | Implementation Profile |
+|---|---|
+| `InputPolygon` | input `geometry` |
+| `Result` | output `result` |
+
+## Examples
+
+- `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `process-type.json`: its candidate process-type entry.
+
 ## Examples
 
 ### Source (referenced)
@@ -49,7 +72,12 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
             "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test"
+        }
+      ]
     }
   },
   "outputs": {
@@ -68,10 +96,28 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
             "type": "object"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     }
   },
-  "mutable": false
+  "mutable": false,
+  "metadata": [
+    {
+      "title": "Demo"
+    }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/ConvexHull/execution"
+    }
+  ]
 }
 
 ```
@@ -112,7 +158,12 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
             "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test"
+        }
+      ]
     }
   },
   "outputs": {
@@ -131,10 +182,28 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
             "type": "object"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     }
   },
-  "mutable": false
+  "mutable": false,
+  "metadata": [
+    {
+      "title": "Demo"
+    }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/ConvexHull/execution"
+    }
+  ]
 }
 ```
 
@@ -143,16 +212,24 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/ConvexHull> dcterms:description "This service shall return a feature collection that represents the convex hull of geometry InputPolygon. The convex hull is the smallest convex polygon that contains all points of the geometry. The convex Hull for a geometry of encoding data type Point is the point itself" ;
     dcterms:title "Compute convex hull." ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/ConvexHull/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns3:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+    proc:inputs [ ns4:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to compute convexhull" ;
+                    proc:metadata [ dcterms:title "Mon test" ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
@@ -164,16 +241,18 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
+    proc:metadata [ dcterms:title "Demo" ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ ns2:Result [ dcterms:description "The convex hull of the geometry" ;
                     dcterms:title "The convex hull of the geometry" ;
-                    proc:schema [ ns1:oneOf [ proc:type "object" ],
-                                [ proc:type "string" ;
+                    proc:metadata [ dcterms:title "Mon test  " ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] .
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "object" ] ] ] ] .
 
 
 ```
@@ -198,13 +277,6 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
-  "keywords": [
-    "vector",
-    "geometry",
-    "derived geometry",
-    "ConvexHull",
-    "ST_ConvexHull"
-  ],
   "metadata": [
     {
       "title": "Process Concept: Vector Geometry Processing",
@@ -220,7 +292,25 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Implementation Profile: Convex hull",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
       "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull"
+    },
+    {
+      "title": "Demo"
     }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/ConvexHull/execution"
+    }
+  ],
+  "keywords": [
+    "vector",
+    "geometry",
+    "derived geometry",
+    "ConvexHull",
+    "ST_ConvexHull"
   ],
   "inputs": {
     "InputPolygon": {
@@ -240,6 +330,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Convex hull -- input `geometry`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull/inputs/geometry"
+        },
+        {
+          "title": "Mon test"
         }
       ],
       "schema": {
@@ -278,6 +371,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Convex hull -- output `result`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull/outputs/result"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -317,13 +413,6 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
-  "keywords": [
-    "vector",
-    "geometry",
-    "derived geometry",
-    "ConvexHull",
-    "ST_ConvexHull"
-  ],
   "metadata": [
     {
       "title": "Process Concept: Vector Geometry Processing",
@@ -339,7 +428,25 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Implementation Profile: Convex hull",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
       "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull"
+    },
+    {
+      "title": "Demo"
     }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/ConvexHull/execution"
+    }
+  ],
+  "keywords": [
+    "vector",
+    "geometry",
+    "derived geometry",
+    "ConvexHull",
+    "ST_ConvexHull"
   ],
   "inputs": {
     "InputPolygon": {
@@ -359,6 +466,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Convex hull -- input `geometry`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull/inputs/geometry"
+        },
+        {
+          "title": "Mon test"
         }
       ],
       "schema": {
@@ -397,6 +507,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Convex hull -- output `result`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull/outputs/result"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -423,8 +536,11 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/ConvexHull> dcterms:description "This service shall return a feature collection that represents the convex hull of geometry InputPolygon. The convex hull is the smallest convex polygon that contains all points of the geometry. The convex Hull for a geometry of encoding data type Point is the point itself" ;
@@ -434,37 +550,43 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         "geometry",
         "vector" ;
     dcterms:title "Compute convex hull." ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/ConvexHull/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns3:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to compute convexhull" ;
                     proc:keywords "GML",
                         "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation -- input `geometry`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/inputs/geometry> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                    proc:metadata [ dcterms:title "Mon test" ],
                         [ dcterms:title "Implementation Profile: Convex hull -- input `geometry`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull/inputs/geometry> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Unary geometry operation -- input `geometry`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/inputs/geometry> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Process Concept: Vector Geometry Processing" ;
+    proc:metadata [ dcterms:title "Process Concept: Vector Geometry Processing" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Demo" ],
         [ dcterms:title "Implementation Profile: Convex hull" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Generic Profile: Unary geometry operation" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
@@ -472,17 +594,18 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:title "The convex hull of the geometry" ;
                     proc:keywords "GML",
                         "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation -- output `result`" ;
+                    proc:metadata [ dcterms:title "Mon test  " ],
+                        [ dcterms:title "Generic Profile: Unary geometry operation -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/outputs/result> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
                         [ dcterms:title "Implementation Profile: Convex hull -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull/outputs/result> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                    proc:schema [ ns1:oneOf [ proc:type "object" ],
+                                [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
-                                [ proc:type "object" ] ] ] ] .
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] .
 
 
 ```
@@ -783,6 +906,8 @@ x-jsonld-extra-terms:
   version: https://geolabs.github.io/bblocks-process-profiles/def/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
+  minOccurs: https://w3id.org/ogc/api/processes/minOccurs
+  maxOccurs: https://w3id.org/ogc/api/processes/maxOccurs
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
   metadata:
     x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
@@ -1010,6 +1135,8 @@ Links to the schema:
     "version": "pp:version",
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
+    "minOccurs": "proc:minOccurs",
+    "maxOccurs": "proc:maxOccurs",
     "outputTransmission": "proc:outputTransmission",
     "metadata": {
       "@id": "proc:metadata",
@@ -1232,8 +1359,6 @@ Links to the schema:
       "@id": "proc:enum",
       "@container": "@set"
     },
-    "minOccurs": "proc:minOccurs",
-    "maxOccurs": "proc:maxOccurs",
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",

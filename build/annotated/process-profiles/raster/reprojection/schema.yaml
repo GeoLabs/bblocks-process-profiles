@@ -203,6 +203,11 @@ $defs:
                         href:
                           const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/targetCRS
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+                  x-jsonld-id: https://w3id.org/ogc/api/processes/minOccurs
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
           x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
         outputs:
@@ -260,6 +265,8 @@ x-jsonld-extra-terms:
   version: https://geolabs.github.io/bblocks-process-profiles/def/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
+  minOccurs: https://w3id.org/ogc/api/processes/minOccurs
+  maxOccurs: https://w3id.org/ogc/api/processes/maxOccurs
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
   metadata:
     x-jsonld-id: https://w3id.org/ogc/api/processes/metadata

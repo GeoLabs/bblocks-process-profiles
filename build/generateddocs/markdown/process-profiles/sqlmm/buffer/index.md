@@ -7,6 +7,30 @@ Process profile of the live OGC API - Processes process `Buffer` (ZOO-Project, G
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
+## Description
+
+Process profile of the live OGC API - Processes process `Buffer` (ZOO-Project, Geonovum testbed): <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Buffer>.
+
+> This service shall return a feature collection representing the buffer of geometry InputPolygon at distance BufferDistance. The buffer of a geometry at distance d is the Polygon or MultiPolygon which contains all points within a distance d of the geometry.
+
+(the process's own description, as served)
+
+## Implementation Profile
+
+Implements [`Buffer`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer) (`generic-profiles.implementation-profile.buffer`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+
+| Live | Implementation Profile |
+|---|---|
+| `InputPolygon` | input `geometry` |
+| `BufferDistance` | input `distance` |
+| `Result` | output `result` |
+
+## Examples
+
+- `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `process-type.json`: its candidate process-type entry.
+
 ## Examples
 
 ### Source (referenced)
@@ -46,11 +70,17 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
             "type": "object"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     },
     "BufferDistance": {
       "title": "Buffer Distance",
       "description": "Distance to be used to calculate buffer.",
+      "minOccurs": 0,
       "schema": {
         "type": "number",
         "default": 10,
@@ -75,10 +105,28 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
             "type": "object"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     }
   },
-  "mutable": false
+  "mutable": false,
+  "metadata": [
+    {
+      "title": "Demo"
+    }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Buffer/execution"
+    }
+  ]
 }
 
 ```
@@ -116,11 +164,17 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
             "type": "object"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     },
     "BufferDistance": {
       "title": "Buffer Distance",
       "description": "Distance to be used to calculate buffer.",
+      "minOccurs": 0,
       "schema": {
         "type": "number",
         "default": 10,
@@ -145,48 +199,77 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
             "type": "object"
           }
         ]
-      }
+      },
+      "metadata": [
+        {
+          "title": "Mon test  "
+        }
+      ]
     }
   },
-  "mutable": false
+  "mutable": false,
+  "metadata": [
+    {
+      "title": "Demo"
+    }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Buffer/execution"
+    }
+  ]
 }
 ```
 
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/Buffer> dcterms:description "This service shall return a feature collection representing the buffer of geometry InputPolygon at distance BufferDistance. The buffer of a geometry at distance d is the Polygon or MultiPolygon which contains all points within a distance d of the geometry." ;
     dcterms:title "Create a buffer around a polygon. " ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Buffer/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns1:BufferDistance [ dcterms:description "Distance to be used to calculate buffer." ;
+    proc:inputs [ ns3:BufferDistance [ dcterms:description "Distance to be used to calculate buffer." ;
                     dcterms:title "Buffer Distance" ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "10"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "number" ;
                             ns2:format "float" ] ] ;
-            ns1:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+            ns3:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to be buffered" ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                    proc:metadata [ dcterms:title "Mon test  " ] ;
+                    proc:schema [ ns2:oneOf [ proc:type "object" ],
+                                [ proc:type "string" ;
                                     ns2:contentEncoding "UTF-8" ;
                                     ns2:contentMediaType "text/xml" ;
-                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
-                                [ proc:type "object" ] ] ] ] ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
+    proc:metadata [ dcterms:title "Demo" ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:Result [ dcterms:description "GML stream describing the buffered polygon feature." ;
+    proc:outputs [ ns1:Result [ dcterms:description "GML stream describing the buffered polygon feature." ;
                     dcterms:title "Buffered Polygon" ;
+                    proc:metadata [ dcterms:title "Mon test  " ] ;
                     proc:schema [ ns2:oneOf [ proc:type "string" ;
                                     ns2:contentEncoding "UTF-8" ;
                                     ns2:contentMediaType "text/xml" ;
@@ -216,14 +299,6 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
-  "keywords": [
-    "vector",
-    "geometry",
-    "spatial analysis",
-    "buffer",
-    "Buffer",
-    "ST_Buffer"
-  ],
   "metadata": [
     {
       "title": "Process Concept: Vector Geometry Processing",
@@ -239,7 +314,26 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Implementation Profile: Buffer",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
       "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer"
+    },
+    {
+      "title": "Demo"
     }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Buffer/execution"
+    }
+  ],
+  "keywords": [
+    "vector",
+    "geometry",
+    "spatial analysis",
+    "buffer",
+    "Buffer",
+    "ST_Buffer"
   ],
   "inputs": {
     "InputPolygon": {
@@ -259,6 +353,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Buffer -- input `geometry`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/inputs/geometry"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -293,6 +390,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/inputs/distance"
         }
       ],
+      "minOccurs": 0,
       "schema": {
         "type": "number",
         "default": 10,
@@ -319,6 +417,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Buffer -- output `result`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/outputs/result"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -358,14 +459,6 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reference"
   ],
   "mutable": false,
-  "keywords": [
-    "vector",
-    "geometry",
-    "spatial analysis",
-    "buffer",
-    "Buffer",
-    "ST_Buffer"
-  ],
   "metadata": [
     {
       "title": "Process Concept: Vector Geometry Processing",
@@ -381,7 +474,26 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Implementation Profile: Buffer",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
       "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer"
+    },
+    {
+      "title": "Demo"
     }
+  ],
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Buffer/execution"
+    }
+  ],
+  "keywords": [
+    "vector",
+    "geometry",
+    "spatial analysis",
+    "buffer",
+    "Buffer",
+    "ST_Buffer"
   ],
   "inputs": {
     "InputPolygon": {
@@ -401,6 +513,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Buffer -- input `geometry`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/inputs/geometry"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -435,6 +550,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/inputs/distance"
         }
       ],
+      "minOccurs": 0,
       "schema": {
         "type": "number",
         "default": 10,
@@ -461,6 +577,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
           "title": "Implementation Profile: Buffer -- output `result`",
           "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
           "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/outputs/result"
+        },
+        {
+          "title": "Mon test  "
         }
       ],
       "schema": {
@@ -484,12 +603,15 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns3: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/Buffer> dcterms:description "This service shall return a feature collection representing the buffer of geometry InputPolygon at distance BufferDistance. The buffer of a geometry at distance d is the Polygon or MultiPolygon which contains all points within a distance d of the geometry." ;
@@ -500,47 +622,54 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         "spatial analysis",
         "vector" ;
     dcterms:title "Create a buffer around a polygon. " ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Buffer/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns1:BufferDistance [ dcterms:description "Distance to be used to calculate buffer." ;
+    proc:inputs [ ns3:BufferDistance [ dcterms:description "Distance to be used to calculate buffer." ;
                     dcterms:title "Buffer Distance" ;
                     proc:keywords "distance" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Buffer -- input `distance`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/inputs/distance> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Geometry buffer -- input `distance`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Geometry buffer -- input `distance`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-buffer/inputs/distance> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Buffer -- input `distance`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/inputs/distance> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                    proc:minOccurs 0 ;
                     proc:schema [ proc:default "10"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "number" ;
-                            ns3:format "float" ] ] ;
-            ns1:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+                            ns1:format "float" ] ] ;
+            ns3:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to be buffered" ;
                     proc:keywords "GML",
                         "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Geometry buffer -- input `geometry`" ;
+                    proc:metadata [ dcterms:title "Mon test  " ],
+                        [ dcterms:title "Generic Profile: Geometry buffer -- input `geometry`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-buffer/inputs/geometry> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
                         [ dcterms:title "Implementation Profile: Buffer -- input `geometry`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/inputs/geometry> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
-                    proc:schema [ ns3:oneOf [ proc:type "object" ],
+                    proc:schema [ ns1:oneOf [ proc:type "object" ],
                                 [ proc:type "string" ;
-                                    ns3:contentEncoding "UTF-8" ;
-                                    ns3:contentMediaType "text/xml" ;
-                                    ns3:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Geometry buffer" ;
+    proc:metadata [ dcterms:title "Implementation Profile: Buffer" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Generic Profile: Geometry buffer" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-buffer> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Demo" ],
         [ dcterms:title "Process Concept: Vector Geometry Processing" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Implementation Profile: Buffer" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
@@ -553,12 +682,13 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
                         [ dcterms:title "Implementation Profile: Buffer -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
-                    proc:schema [ ns3:oneOf [ proc:type "string" ;
-                                    ns3:contentEncoding "UTF-8" ;
-                                    ns3:contentMediaType "text/xml" ;
-                                    ns3:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
-                                [ proc:type "object" ] ] ] ] .
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
+                        [ dcterms:title "Mon test  " ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "object" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] .
 
 
 ```
@@ -840,6 +970,11 @@ $defs:
                         href:
                           const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/inputs/distance
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+                  x-jsonld-id: https://w3id.org/ogc/api/processes/minOccurs
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
           x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
         outputs:
@@ -897,6 +1032,8 @@ x-jsonld-extra-terms:
   version: https://geolabs.github.io/bblocks-process-profiles/def/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
+  minOccurs: https://w3id.org/ogc/api/processes/minOccurs
+  maxOccurs: https://w3id.org/ogc/api/processes/maxOccurs
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
   metadata:
     x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
@@ -1124,6 +1261,8 @@ Links to the schema:
     "version": "pp:version",
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
+    "minOccurs": "proc:minOccurs",
+    "maxOccurs": "proc:maxOccurs",
     "outputTransmission": "proc:outputTransmission",
     "metadata": {
       "@id": "proc:metadata",
@@ -1346,8 +1485,6 @@ Links to the schema:
       "@id": "proc:enum",
       "@container": "@set"
     },
-    "minOccurs": "proc:minOccurs",
-    "maxOccurs": "proc:maxOccurs",
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",
