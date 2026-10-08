@@ -1,0 +1,77 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://w3id.org/ogc/api/schema/> .
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/Buffer> dcterms:description "This service shall return a feature collection representing the buffer of geometry InputPolygon at distance BufferDistance. The buffer of a geometry at distance d is the Polygon or MultiPolygon which contains all points within a distance d of the geometry." ;
+    dcterms:subject "Buffer",
+        "ST_Buffer",
+        "buffer",
+        "geometry",
+        "spatial analysis",
+        "vector" ;
+    dcterms:title "Create a buffer around a polygon. " ;
+    pp:version "2.0.0" ;
+    proc:inputs [ ns1:BufferDistance [ dcterms:description "Distance to be used to calculate buffer." ;
+                    dcterms:title "Buffer Distance" ;
+                    proc:keywords "distance" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Buffer -- input `distance`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/inputs/distance> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Geometry buffer -- input `distance`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-buffer/inputs/distance> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                    proc:schema [ proc:default "10"^^rdf:JSON ;
+                            proc:nullable true ;
+                            proc:type "number" ;
+                            ns3:format "float" ] ] ;
+            ns1:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+                    dcterms:title "Polygon to be buffered" ;
+                    proc:keywords "GML",
+                        "geometry" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Geometry buffer -- input `geometry`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-buffer/inputs/geometry> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Buffer -- input `geometry`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/inputs/geometry> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                    proc:schema [ ns3:oneOf [ proc:type "object" ],
+                                [ proc:type "string" ;
+                                    ns3:contentEncoding "UTF-8" ;
+                                    ns3:contentMediaType "text/xml" ;
+                                    ns3:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+    proc:jobControlOptions "async-execute",
+        "dismiss",
+        "sync-execute" ;
+    proc:metadata [ dcterms:title "Generic Profile: Geometry buffer" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-buffer> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Process Concept: Vector Geometry Processing" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Implementation Profile: Buffer" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+    proc:mutable false ;
+    proc:outputTransmission "reference",
+        "value" ;
+    proc:outputs [ ns2:Result [ dcterms:description "GML stream describing the buffered polygon feature." ;
+                    dcterms:title "Buffered Polygon" ;
+                    proc:keywords "GML",
+                        "geometry" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Geometry buffer -- output `result`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-buffer/outputs/result> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Buffer -- output `result`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/outputs/result> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
+                    proc:schema [ ns3:oneOf [ proc:type "string" ;
+                                    ns3:contentEncoding "UTF-8" ;
+                                    ns3:contentMediaType "text/xml" ;
+                                    ns3:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "object" ] ] ] ] .
+

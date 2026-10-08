@@ -7,6 +7,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process/package> .
+
 <urn:example:entity:workflow-earth-search-process:out:chlorophyll_a> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process#outputs/chlorophyll_a> ;
     rdfs:seeAlso [ dcterms:type "image/tiff; application=geotiff" ;
@@ -83,11 +86,13 @@
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process#inputs/product_url> ;
     rdf:value "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_29SPC_20190701_0_L2A" .
 
+<https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process/package> a prov:Plan .
+
 <urn:example:run:algae-bloom:workflow-earth-search-process> a prov:Activity,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-earth-search-process> ;
     prov:endedAtTime "2026-09-23T06:40:34+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process/package> ] ;
     prov:startedAtTime "2026-09-23T06:26:24+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:workflow-earth-search-process:in:product_url> ;
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145> .

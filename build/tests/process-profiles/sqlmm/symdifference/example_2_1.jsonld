@@ -1,0 +1,78 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/symdifference/context.jsonld",
+  "id": "SymDifference",
+  "title": "Compute symmetric difference. ",
+  "description": "This service shall return a feature collection representing the closure of the symmetric difference of two Geometries. The symmetric difference is the set of points which lie on either InputEntity1 or InputEntity2 but not in both.",
+  "version": "2.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "InputEntity1": {
+      "title": "the first geometry",
+      "description": "the first geometry to compare against.",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    },
+    "InputEntity2": {
+      "title": "the other geometry",
+      "description": "the other geometry to compare against.",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "Result": {
+      "title": "The resulting geometry",
+      "description": "The symmetric difference of two geometries",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    }
+  },
+  "mutable": false
+}

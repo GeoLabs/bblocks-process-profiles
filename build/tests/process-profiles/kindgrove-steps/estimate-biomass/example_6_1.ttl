@@ -6,6 +6,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/estimate_biomass/package> .
+
 <urn:example:entity:estimate-biomass:out:analysis_summary_file> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/estimate_biomass#outputs/analysis_summary_file> ;
     rdfs:seeAlso [ dcterms:type "application/json" ;
@@ -69,11 +72,13 @@
 <urn:example:image:ghcr.io/geolabs/kindgrove/estimate-biomass:v0.0.2-rc2> a prov:SoftwareAgent ;
     pp:name "container image ghcr.io/geolabs/kindgrove/estimate-biomass:v0.0.2-rc2" .
 
+<https://ospd.example.org/ogc-api/processes/estimate_biomass/package> a prov:Plan .
+
 <urn:example:run:kindgrove-steps:estimate-biomass> a prov:Activity,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/estimate-biomass> ;
     prov:endedAtTime "2026-09-24T10:59:47+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/estimate_biomass> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/estimate_biomass/package> ] ;
     prov:startedAtTime "2026-09-24T10:59:40+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:estimate-biomass:in:ndvi_file>,
         <urn:example:entity:estimate-biomass:in:ndwi_file>,

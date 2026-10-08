@@ -1,4 +1,10 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 
@@ -9,19 +15,25 @@
     skos:definition "Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest and reprojected to the requested CRS." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Crop a Sentinel-2 COG band to an area of interest" ;
-    pp:candidateCctDependency "eoap.cct.bbox",
-        "eoap.cct.stac",
-        "eoap.cct.string-format" ;
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "load_collection with a spatial_extent (aoi) and a single band selected (filter_bands); the STAC item is given by URL rather than resolved by collection/date/bbox search, and the windowed COG read (no full download) is an implementation detail openEO back-ends make transparently." ] ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/crop/package> ;
     pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/crop> ;
     pp:profile "ospd.process-profiles.water-bodies.crop" ;
     pp:provenanceClass wfprov:ProcessRun ;
-    pp:source [ pp:cwl <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/crop.cwl> ;
-            pp:cwlClass "CommandLineTool" ;
-            pp:cwlId "crop" ;
-            pp:license "https://spdx.org/licenses/CC-BY-SA-4.0" ] ;
     pp:status "submitted" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/crop> pp:version "1.4.1" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/crop> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/crop> ;
+    pp:version "1.4.1" .
+
+<https://ospd.example.org/ogc-api/processes/crop/package> a prov:Plan ;
+    dcterms:license <https://spdx.org/licenses/CC-BY-SA-4.0> ;
+    pp:candidateCctDependency "eoap.cct.bbox",
+        "eoap.cct.stac",
+        "eoap.cct.string-format" ;
+    pp:cwlClass "CommandLineTool" ;
+    pp:cwlId "crop" ;
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/crop.cwl> ] .
 

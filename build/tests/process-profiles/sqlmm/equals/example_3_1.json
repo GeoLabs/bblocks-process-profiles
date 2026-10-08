@@ -1,0 +1,139 @@
+{
+  "id": "Equals",
+  "title": "Equals ",
+  "description": "This service shall return a true value if and only if the geometries g1 and g2 are equal",
+  "version": "2.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "keywords": [
+    "vector",
+    "geometry",
+    "spatial relation",
+    "predicate",
+    "Equals",
+    "ST_Equals"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Vector Geometry Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing"
+    },
+    {
+      "title": "Generic Profile: Binary spatial predicate",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate"
+    },
+    {
+      "title": "Implementation Profile: Equals",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/equals"
+    }
+  ],
+  "inputs": {
+    "InputEntity1": {
+      "title": "the first geometry",
+      "description": "the first geometry.",
+      "keywords": [
+        "geometry",
+        "GML"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Binary spatial predicate -- input `geometry1`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry1"
+        },
+        {
+          "title": "Implementation Profile: Equals -- input `geometry1`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/equals/inputs/geometry1"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    },
+    "InputEntity2": {
+      "title": "the other geometry",
+      "description": "the other geometry.",
+      "keywords": [
+        "geometry",
+        "GML"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Binary spatial predicate -- input `geometry2`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry2"
+        },
+        {
+          "title": "Implementation Profile: Equals -- input `geometry2`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/equals/inputs/geometry2"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "Result": {
+      "title": "Equals result",
+      "description": "Should be true if two geometries are equivalent..",
+      "keywords": [
+        "boolean"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Binary spatial predicate -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Equals -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/equals/outputs/result"
+        }
+      ],
+      "schema": {
+        "type": "boolean"
+      }
+    }
+  }
+}

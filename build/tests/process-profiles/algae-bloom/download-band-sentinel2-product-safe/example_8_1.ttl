@@ -4,7 +4,7 @@
 
 <urn:example:run:algae-bloom:download-band-sentinel2-product-safe> a wfprov:ProcessRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-product-safe> ;
-    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe> ;
+    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe/package> ;
     wfprov:usedInput <urn:example:entity:download-band-sentinel2-product-safe:in:band>,
         <urn:example:entity:download-band-sentinel2-product-safe:in:product_url>,
         <urn:example:entity:download-band-sentinel2-product-safe:in:resolution>,

@@ -7,6 +7,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/norm_diff/package> .
+
 <urn:example:entity:norm-diff:out:ndwi> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/norm_diff#outputs/ndwi> ;
     rdfs:seeAlso [ dcterms:type "image/tiff; application=geotiff" ;
@@ -27,11 +30,13 @@
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff> ;
     prov:endedAtTime "2026-09-23T20:14:35+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/norm_diff> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/norm_diff/package> ] ;
     prov:startedAtTime "2026-09-23T20:14:14+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:norm-diff:in:rasters> ;
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0> .
+
+<https://ospd.example.org/ogc-api/processes/norm_diff/package> a prov:Plan .
 
 <urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .

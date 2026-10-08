@@ -1,0 +1,23 @@
+{
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/within",
+  "type": "ProcessType",
+  "prefLabel": "Within test",
+  "definition": "This service shall return a true value if and only if the geometry InputEntity1 is spatially within geometry InputEntity2; that is if every point on InputEntity1 is also on InputEntity2.",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+  ],
+  "profile": "ospd.process-profiles.sqlmm.within",
+  "processDescription": {
+    "id": "Within",
+    "version": "2.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Within"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/within",
+  "openeoEquivalence": {
+    "level": "none",
+    "rationale": "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/area/context.jsonld",
+  "id": "GetArea",
+  "title": "Compute geometry area.",
+  "description": "Computes the area of a geometry",
+  "version": "2.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "keywords": [
+    "vector",
+    "geometry",
+    "measure",
+    "Area",
+    "ST_Area"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Vector Geometry Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing"
+    },
+    {
+      "title": "Generic Profile: Geometry measure",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-measure"
+    },
+    {
+      "title": "Implementation Profile: Area",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area"
+    }
+  ],
+  "inputs": {
+    "InputPolygon": {
+      "title": "Polygon to compute are",
+      "description": "URI to a set of GML that describes the polygon.",
+      "keywords": [
+        "geometry",
+        "GML"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Geometry measure -- input `geometry`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-measure/inputs/geometry"
+        },
+        {
+          "title": "Implementation Profile: Area -- input `geometry`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area/inputs/geometry"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "Area": {
+      "title": "Computed Area",
+      "description": "The Computed Area Value",
+      "keywords": [
+        "number"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Geometry measure -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-measure/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Area -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area/outputs/result"
+        }
+      ],
+      "schema": {
+        "type": "number",
+        "format": "float"
+      }
+    }
+  }
+}

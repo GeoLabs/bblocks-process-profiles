@@ -1,5 +1,11 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 
@@ -29,14 +35,20 @@
                         pp:stage "turbidity = (8.93*(C/A))-6.39, A=B01 60m, C=B03 60m" ] ) ;
             pp:equivalenceLevel "closeMatch" ;
             pp:rationale "Generic band math (gdal_calc.py with a Python/numpy expression over up to 26 bands A..Z): openEO expresses it as reduce_dimension over the `bands` dimension with a callback built from math processes. closeMatch at the generic level; each W1 instance is a fixed chain of math processes (see decomposition). The expression is free text in CWL, a process graph in openEO." ] ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/calculate-band/package> ;
     pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/calculate-band> ;
     pp:profile "ospd.process-profiles.algae-bloom.calculate-band" ;
     pp:provenanceClass wfprov:ProcessRun ;
-    pp:source [ pp:cwl <https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/calculate-band.cwl> ;
-            pp:cwlClass "CommandLineTool" ;
-            pp:cwlId "calculate-band" ;
-            pp:license "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ] ;
     pp:status "submitted" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/calculate-band> pp:version "1.1.0" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/calculate-band> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/calculate-band> ;
+    pp:version "1.1.0" .
+
+<https://ospd.example.org/ogc-api/processes/calculate-band/package> a prov:Plan ;
+    dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
+    pp:cwlClass "CommandLineTool" ;
+    pp:cwlId "calculate-band" ;
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/calculate-band.cwl> ] .
 

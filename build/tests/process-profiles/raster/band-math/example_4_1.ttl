@@ -1,0 +1,26 @@
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/band-math> a skos:Concept ;
+    skos:broader <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    skos:closeMatch <https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.reduce_dimension> ;
+    skos:definition "This application performs a mathematical operation on several multi-band images and outputs the result into a monoband image. The given expression is computed at each pixel position. Evaluation of the mathematical formula is done by the muParser library.The formula can be written using:* numerical values ( 2.3, -5, 3.1e4, ...)* variables containing pixel values (e.g. ``im2b3`` is the pixel value in 2nd image, 3rd band)* binary operators: * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division * ``^`` raise x to the power of y * ``" ;
+    skos:inScheme pp:process-type ;
+    skos:prefLabel "Outputs a monoband image which is the result of a mathematical operation on several multi-band images." ;
+    skos:relatedMatch <https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.divide>,
+        <https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.multiply>,
+        <https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.power>,
+        <https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.subtract> ;
+    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math> ;
+    pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
+            pp:rationale "Generic band math (muParser expression over an input image list `il`, output forced monoband): the same closeMatch reasoning as W1's `algae-bloom.calculate-band` (also gdal_calc.py-style band math) -- reduce_dimension over the `bands` dimension with a callback built from math processes. The expression is free text here (muParser syntax), a process graph in openEO." ] ;
+    pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.BandMath> ;
+    pp:profile "ospd.process-profiles.raster.band-math" ;
+    pp:provenanceClass wfprov:ProcessRun ;
+    pp:status "submitted" .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.BandMath> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMath> ;
+    pp:version "1.0.0" .
+

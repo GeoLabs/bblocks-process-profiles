@@ -4,7 +4,7 @@
     "id": "urn:example:run:kindgrove-steps:mangrove-workflow-steps",
     "type": "WorkflowRun",
     "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps",
-    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps",
+    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
     "status": "successful",
     "jobID": "kindgrove-steps-mangrove-workflow-steps-0001",

@@ -11,17 +11,24 @@
   "profile": "ospd.process-profiles.kindgrove-steps.calculate-indices",
   "processDescription": {
     "id": "calculate_indices",
-    "version": "0.1.0"
+    "version": "0.1.0",
+    "href": "https://ospd.example.org/ogc-api/processes/calculate_indices"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#calculate_indices",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/calculate_indices/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#calculate_indices",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "calculate_indices",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": []
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [],
   "openeoEquivalence": {
     "level": "none",
     "rationale": "Composite, one tool computing three indices from the same three-band input at once. NDVI alone would be closeMatch `ogc.openeo.processes.cubes.ndvi`; NDWI alone closeMatch `ogc.openeo.processes.math.indices.normalized_difference` (as in `water-bodies.norm-diff` and `kindgrove.mangrove`); SAVI (soil-adjusted, not a plain normalized difference) has no openEO process in this register. Kept `none` for the tool as a whole since no single openEO process covers the composite.",

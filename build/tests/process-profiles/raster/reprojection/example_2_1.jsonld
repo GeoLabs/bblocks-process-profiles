@@ -1,0 +1,116 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/reprojection/context.jsonld",
+  "id": "Gdal_Warp",
+  "title": "GDAL Warp Tool",
+  "description": "The gdalwarp utility is an image mosaicing, reprojection and warping utility. The program can reproject to any supported projection, and can also apply GCPs stored with the image if the image is \"raw\" with control information.",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "Format": {
+      "title": "Format of the output data",
+      "description": "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform).",
+      "schema": {
+        "type": "string",
+        "default": "GTiff",
+        "nullable": true
+      }
+    },
+    "InputDSN": {
+      "title": "The input data source name",
+      "description": "The input data source name to use as source for convertion.",
+      "schema": {
+        "type": "string"
+      }
+    },
+    "OutputDSN": {
+      "title": "The output data source name",
+      "description": "The output data source name to use as source for convertion.",
+      "schema": {
+        "type": "string"
+      }
+    },
+    "s_srs": {
+      "title": "The source Spatial reference Set",
+      "description": "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text.",
+      "schema": {
+        "type": "string",
+        "nullable": true
+      }
+    },
+    "t_srs": {
+      "title": "The target Spatial reference Set",
+      "description": "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text.",
+      "schema": {
+        "type": "string",
+        "nullable": true
+      }
+    },
+    "tps": {
+      "title": "Thin Plate Spline",
+      "description": "Force use of thin plate spline transformer based on available GCPs",
+      "schema": {
+        "type": "boolean",
+        "nullable": true
+      }
+    },
+    "geoloc": {
+      "title": "Geolocation",
+      "description": "Force use of Geolocation Arrays",
+      "schema": {
+        "type": "boolean",
+        "nullable": true
+      }
+    },
+    "rpc": {
+      "title": "RPCs",
+      "description": "Force use of RPCs",
+      "schema": {
+        "type": "boolean",
+        "nullable": true
+      }
+    },
+    "r": {
+      "title": "Resampling method to use",
+      "description": "Available methods are: near (nearest neighbour resampling - default, fastest algorithm, worst interpolation quality), bilinear, cubic, cubicspline, lanczos (Lanczos windowed sinc resampling)",
+      "schema": {
+        "type": "boolean",
+        "nullable": true
+      }
+    },
+    "order": {
+      "title": "The order of polynomial used for warping (1 to 3)",
+      "description": "The default is to select a polynomial order based on the number of GCPs.",
+      "schema": {
+        "type": "string",
+        "default": "1",
+        "nullable": true
+      }
+    },
+    "te": {
+      "title": "xmin,ymin,xmax,ymax",
+      "description": "set georeferenced extents of output file to be created (in target SRS).",
+      "schema": {
+        "type": "string",
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "Result": {
+      "title": "The resulting converted file",
+      "description": "The file name resulting of the convertion",
+      "schema": {
+        "type": "string"
+      }
+    }
+  },
+  "mutable": false
+}

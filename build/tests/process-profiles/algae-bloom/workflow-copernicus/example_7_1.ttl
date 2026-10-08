@@ -7,6 +7,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> .
+
 <urn:example:entity:workflow-copernicus:out:chlorophyll_a> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a> ;
     rdfs:seeAlso [ dcterms:type "image/tiff; application=geotiff" ;
@@ -110,11 +113,13 @@
 <urn:example:entity:workflow-copernicus:in:s3_secret_key> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/s3_secret_key> .
 
+<https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> a prov:Plan .
+
 <urn:example:run:algae-bloom:workflow-copernicus> a prov:Activity,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus> ;
     prov:endedAtTime "2026-09-23T07:33:59+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> ] ;
     prov:startedAtTime "2026-09-23T07:31:01+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:workflow-copernicus:in:aoi>,
         <urn:example:entity:workflow-copernicus:in:cloud_cover>,

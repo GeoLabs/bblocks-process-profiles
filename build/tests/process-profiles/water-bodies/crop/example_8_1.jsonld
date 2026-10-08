@@ -12,21 +12,28 @@
   "profile": "ospd.process-profiles.water-bodies.crop",
   "processDescription": {
     "id": "crop",
-    "version": "1.4.1"
+    "version": "1.4.1",
+    "href": "https://ospd.example.org/ogc-api/processes/crop"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/crop.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/crop/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/crop.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "crop",
-    "license": "https://spdx.org/licenses/CC-BY-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.bbox",
+      "eoap.cct.stac",
+      "eoap.cct.string-format"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.bbox",
-    "eoap.cct.stac",
-    "eoap.cct.string-format"
-  ],
   "closeMatch": [
     "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection",
     "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.filter_bands"

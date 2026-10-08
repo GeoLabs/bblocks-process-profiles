@@ -84,7 +84,7 @@
 
 <urn:example:run:algae-bloom:workflow-copernicus> a wfprov:WorkflowRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus> ;
-    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus> ;
+    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> ;
     wfprov:hadSubProcessRun <urn:example:run:algae-bloom:select-products-sentinel2>,
         <urn:example:run:algae-bloom:workflow-copernicus-process> ;
     prov:endedAtTime "2026-09-23T07:33:59+00:00"^^xsd:dateTime ;

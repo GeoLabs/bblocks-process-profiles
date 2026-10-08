@@ -34,6 +34,150 @@ All mappings are proposed correspondences offered for review, not settled equiva
 
 Candidate entry for the OSPD process-type register (Activity 4), linking a process profile, its six-phase position, its provenance class and its proposed openEO equivalences.
 
+### `ospd.process-profiles.raster.band-math` — Process profile: OTB.BandMath
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `OTB.BandMath` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.raster.band-math-multiband` — Process profile: OTB.BandMathX
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `OTB.BandMathX` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.raster.extent` — Process profile: OTB.ImageEnvelope
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `OTB.ImageEnvelope` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.raster.extract-roi` — Process profile: OTB.ExtractROI
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `OTB.ExtractROI` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.raster.format-conversion` — Process profile: Gdal_Translate
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Gdal_Translate` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.raster.radiometric-index` — Process profile: OTB.RadiometricIndices
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `OTB.RadiometricIndices` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.raster.reprojection` — Process profile: Gdal_Warp
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Gdal_Warp` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.area` — Process profile: GetArea
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `GetArea` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.buffer` — Process profile: Buffer
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Buffer` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.centroid` — Process profile: Centroid
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Centroid` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.contains` — Process profile: Contains
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Contains` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.convex-hull` — Process profile: ConvexHull
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `ConvexHull` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.crosses` — Process profile: Crosses
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Crosses` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.difference` — Process profile: Difference
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Difference` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.disjoint` — Process profile: Disjoint
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Disjoint` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.equals` — Process profile: Equals
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Equals` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.intersection` — Process profile: Intersection
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Intersection` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.intersects` — Process profile: Intersects
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Intersects` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.is-simple` — Process profile: IsSimple
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `IsSimple` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.symdifference` — Process profile: SymDifference
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SymDifference` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.touches` — Process profile: Touches
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Touches` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.union` — Process profile: Union
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Union` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.sqlmm.within` — Process profile: Within
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Within` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.vector.geometry-extent` — Process profile: SAGA.shapes_tools.19
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.shapes_tools.19` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
 ### `ospd.process-profiles.algae-bloom.calculate-band` — Process profile: calculate-band
 
 **Type:** schema

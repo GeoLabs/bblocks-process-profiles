@@ -213,12 +213,12 @@
   "name": "Building Blocks - OSPD Process Profiles",
   "abstract": "OGC API - Processes profiles for the deployable CWL processes of the OSPD 2026 reference\nworkflows (W1 Algae Bloom, W2 KindGrove mangrove biomass, W3 Water Bodies detection, W2b a\nstep-decomposed reimplementation of KindGrove), each linked to its CWL source, the generic\nprovenance profile, the EOAP CWL custom types and the openEO Building Blocks.\n",
   "description": "This register is produced by GeoLabs under OSPD 2026 (D100 Workflow Profiler, D120 OGC API\nProcesses Profiler). It holds one Building Block per deployable CWL process (`CommandLineTool`\nor `Workflow`) identified in the workflow observability investigation.\n\nEach process profile combines:\n\n- a reference to the source CWL (linked by URL at a pinned commit, never copied);\n- an OGC API - Processes Part 1 `processDescription` derived with the\n  `eoap.cct.cwl-to-ogcprocess` mapping (deviations are documented, not hidden);\n- a provenance view expressed as an instance of the generic provenance profile\n  (`ogc.bbr.provenance.*`);\n- a candidate process-type entry (`ospd.process-profiles.process-type`) for the OSPD\n  process-type register (Activity 4);\n- proposed openEO equivalences (`ogc.openeo.*`) with an explicit level\n  (exactMatch / closeMatch / none) and rationale;\n- a representative execution example.\n\nAll mappings are proposed correspondences offered for review, not settled equivalences.\n",
-  "modified": "2026-09-24T12:40:24.312756",
+  "modified": "2026-10-08T09:15:36.797567",
   "tooling": {
     "bblocks-postprocess": {
-      "commitId": "\"6411aed037da38c6d9079d9350eca33d004a4d0c",
-      "shortCommitId": "\"6411ae",
-      "date": "2026-09-23T12:30:49+00:00\""
+      "commitId": "\"864ddcf48e5bf8be9c5660d54d35b5d0e702b41b",
+      "shortCommitId": "\"864ddc",
+      "date": "2026-10-07T14:32:33+00:00\""
     }
   },
   "gitRepository": "https://github.com/GeoLabs/bblocks-process-profiles",
@@ -241,7 +241,8 @@
     "https://geolabs.github.io/ogcapi-processes-standard-as-bblocks/build/register.json",
     "https://ogcincubator.github.io/bblock-prov-schema/build/register.json",
     "https://ogcincubator.github.io/bblocks-wf4ever/build/register.json",
-    "https://ogcincubator.github.io/bblocks-prov-jsonld-alt/build/register.json"
+    "https://ogcincubator.github.io/bblocks-prov-jsonld-alt/build/register.json",
+    "https://geolabs.github.io/bblocks-generic-profiles/build/register.json"
   ],
   "remoteCacheDir": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/_cache",
   "links": [
@@ -278,7 +279,7 @@
       "abstract": "Candidate entry for the OSPD process-type register (Activity 4), linking a process profile, its six-phase position, its provenance class and its proposed openEO equivalences.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -372,27 +373,2307 @@
       }
     },
     {
+      "itemIdentifier": "ospd.process-profiles.raster.band-math",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: OTB.BandMath",
+      "abstract": "Process profile of the live OGC API - Processes process `OTB.BandMath` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "GDAL/OTB",
+        "raster"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/band-math/schema.yaml",
+      "maturity": "development",
+      "group": "Raster/Coverage (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.raster-band-math"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/band-math/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/band-math/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/band-math/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/band-math/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/band-math/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/band-math/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/raster/band-math/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/raster/band-math/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/raster/band-math/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.raster.band-math"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.raster.band-math",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: OTB.BandMath",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.raster.band-math-multiband",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: OTB.BandMathX",
+      "abstract": "Process profile of the live OGC API - Processes process `OTB.BandMathX` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "GDAL/OTB",
+        "raster"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/band-math-multiband/schema.yaml",
+      "maturity": "development",
+      "group": "Raster/Coverage (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.raster-band-math-multiband"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/band-math-multiband/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/band-math-multiband/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/band-math-multiband/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/band-math-multiband/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/band-math-multiband/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/band-math-multiband/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/raster/band-math-multiband/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/raster/band-math-multiband/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/raster/band-math-multiband/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.raster.band-math-multiband"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.raster.band-math-multiband",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: OTB.BandMathX",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.raster.extent",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: OTB.ImageEnvelope",
+      "abstract": "Process profile of the live OGC API - Processes process `OTB.ImageEnvelope` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "GDAL/OTB",
+        "raster"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/extent/schema.yaml",
+      "maturity": "development",
+      "group": "Raster/Coverage (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.raster-extent"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/extent/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/extent/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/extent/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/extent/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/extent/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/extent/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/raster/extent/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/raster/extent/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/raster/extent/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.raster.extent"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.raster.extent",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: OTB.ImageEnvelope",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.raster.extract-roi",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: OTB.ExtractROI",
+      "abstract": "Process profile of the live OGC API - Processes process `OTB.ExtractROI` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "GDAL/OTB",
+        "raster"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/extract-roi/schema.yaml",
+      "maturity": "development",
+      "group": "Raster/Coverage (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.raster-crop"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/extract-roi/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/extract-roi/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/extract-roi/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/extract-roi/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/extract-roi/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/extract-roi/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/raster/extract-roi/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/raster/extract-roi/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/raster/extract-roi/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.raster.extract-roi"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.raster.extract-roi",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: OTB.ExtractROI",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.raster.format-conversion",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Gdal_Translate",
+      "abstract": "Process profile of the live OGC API - Processes process `Gdal_Translate` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "GDAL/OTB",
+        "raster"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/format-conversion/schema.yaml",
+      "maturity": "development",
+      "group": "Raster/Coverage (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.raster-format-conversion"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/format-conversion/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/format-conversion/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/format-conversion/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/format-conversion/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/format-conversion/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/format-conversion/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/raster/format-conversion/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/raster/format-conversion/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/raster/format-conversion/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.raster.format-conversion"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.raster.format-conversion",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Gdal_Translate",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.raster.radiometric-index",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: OTB.RadiometricIndices",
+      "abstract": "Process profile of the live OGC API - Processes process `OTB.RadiometricIndices` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "GDAL/OTB",
+        "raster"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/radiometric-index/schema.yaml",
+      "maturity": "development",
+      "group": "Raster/Coverage (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.radiometric-index"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/radiometric-index/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/radiometric-index/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/radiometric-index/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/radiometric-index/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/radiometric-index/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/radiometric-index/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/raster/radiometric-index/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/raster/radiometric-index/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/raster/radiometric-index/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.raster.radiometric-index"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.raster.radiometric-index",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: OTB.RadiometricIndices",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.raster.reprojection",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Gdal_Warp",
+      "abstract": "Process profile of the live OGC API - Processes process `Gdal_Warp` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "GDAL/OTB",
+        "raster"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/reprojection/schema.yaml",
+      "maturity": "development",
+      "group": "Raster/Coverage (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.raster-reprojection"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/reprojection/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/reprojection/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/reprojection/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/reprojection/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/reprojection/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/raster/reprojection/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/raster/reprojection/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/raster/reprojection/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/raster/reprojection/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.raster.reprojection"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.raster.reprojection",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Gdal_Warp",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.area",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: GetArea",
+      "abstract": "Process profile of the live OGC API - Processes process `GetArea` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/area/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.area"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/area/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/area/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/area/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/area/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/area/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/area/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/area/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/area/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/area/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.area"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.area",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: GetArea",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.buffer",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Buffer",
+      "abstract": "Process profile of the live OGC API - Processes process `Buffer` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/buffer/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.buffer"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/buffer/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/buffer/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/buffer/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/buffer/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/buffer/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/buffer/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/buffer/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/buffer/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/buffer/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.buffer"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.buffer",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Buffer",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.centroid",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Centroid",
+      "abstract": "Process profile of the live OGC API - Processes process `Centroid` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/centroid/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.centroid"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/centroid/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/centroid/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/centroid/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/centroid/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/centroid/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/centroid/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/centroid/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/centroid/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/centroid/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.centroid"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.centroid",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Centroid",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.contains",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Contains",
+      "abstract": "Process profile of the live OGC API - Processes process `Contains` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/contains/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.contains"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/contains/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/contains/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/contains/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/contains/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/contains/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/contains/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/contains/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/contains/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/contains/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.contains"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.contains",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Contains",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.convex-hull",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: ConvexHull",
+      "abstract": "Process profile of the live OGC API - Processes process `ConvexHull` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/convex-hull/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.convex-hull"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/convex-hull/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/convex-hull/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/convex-hull/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/convex-hull/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/convex-hull/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/convex-hull/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/convex-hull/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/convex-hull/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/convex-hull/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.convex-hull"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.convex-hull",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: ConvexHull",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.crosses",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Crosses",
+      "abstract": "Process profile of the live OGC API - Processes process `Crosses` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/crosses/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.crosses"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/crosses/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/crosses/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/crosses/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/crosses/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/crosses/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/crosses/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/crosses/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/crosses/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/crosses/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.crosses"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.crosses",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Crosses",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.difference",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Difference",
+      "abstract": "Process profile of the live OGC API - Processes process `Difference` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/difference/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.difference"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/difference/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/difference/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/difference/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/difference/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/difference/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/difference/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/difference/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/difference/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/difference/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.difference"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.difference",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Difference",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.disjoint",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Disjoint",
+      "abstract": "Process profile of the live OGC API - Processes process `Disjoint` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/disjoint/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.disjoint"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/disjoint/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/disjoint/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/disjoint/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/disjoint/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/disjoint/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/disjoint/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/disjoint/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/disjoint/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/disjoint/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.disjoint"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.disjoint",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Disjoint",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.equals",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Equals",
+      "abstract": "Process profile of the live OGC API - Processes process `Equals` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/equals/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.equals"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/equals/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/equals/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/equals/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/equals/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/equals/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/equals/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/equals/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/equals/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/equals/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.equals"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.equals",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Equals",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.intersection",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Intersection",
+      "abstract": "Process profile of the live OGC API - Processes process `Intersection` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/intersection/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.intersection"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/intersection/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/intersection/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/intersection/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/intersection/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/intersection/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/intersection/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/intersection/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/intersection/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/intersection/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.intersection"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.intersection",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Intersection",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.intersects",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Intersects",
+      "abstract": "Process profile of the live OGC API - Processes process `Intersects` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/intersects/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.intersects"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/intersects/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/intersects/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/intersects/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/intersects/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/intersects/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/intersects/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/intersects/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/intersects/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/intersects/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.intersects"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.intersects",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Intersects",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.is-simple",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: IsSimple",
+      "abstract": "Process profile of the live OGC API - Processes process `IsSimple` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/is-simple/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.is-simple"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/is-simple/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/is-simple/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/is-simple/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/is-simple/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/is-simple/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/is-simple/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/is-simple/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/is-simple/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/is-simple/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.is-simple"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.is-simple",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: IsSimple",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.symdifference",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: SymDifference",
+      "abstract": "Process profile of the live OGC API - Processes process `SymDifference` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/symdifference/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.symdifference"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/symdifference/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/symdifference/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/symdifference/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/symdifference/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/symdifference/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/symdifference/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/symdifference/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/symdifference/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/symdifference/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.symdifference"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.symdifference",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: SymDifference",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.touches",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Touches",
+      "abstract": "Process profile of the live OGC API - Processes process `Touches` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/touches/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.touches"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/touches/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/touches/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/touches/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/touches/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/touches/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/touches/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/touches/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/touches/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/touches/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.touches"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.touches",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Touches",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.union",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Union",
+      "abstract": "Process profile of the live OGC API - Processes process `Union` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/union/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.union"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/union/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/union/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/union/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/union/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/union/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/union/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/union/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/union/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/union/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.union"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.union",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Union",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.sqlmm.within",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: Within",
+      "abstract": "Process profile of the live OGC API - Processes process `Within` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SQL/MM",
+        "sqlmm"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/within/schema.yaml",
+      "maturity": "development",
+      "group": "SQL/MM (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.within"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/within/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/within/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/within/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/within/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/within/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/sqlmm/within/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/sqlmm/within/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/sqlmm/within/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/sqlmm/within/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.sqlmm.within"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.sqlmm.within",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: Within",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
+      "itemIdentifier": "ospd.process-profiles.vector.geometry-extent",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process profile: SAGA.shapes_tools.19",
+      "abstract": "Process profile of the live OGC API - Processes process `SAGA.shapes_tools.19` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-22T00:00:00Z",
+      "dateOfLastChange": "2026-10-08",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "process-profiles",
+      "dependsOn": [
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ospd.process-profiles.process-type"
+      ],
+      "seeAlso": [
+        "ogc.api.processes.part1.requirements.core"
+      ],
+      "conformanceClasses": [
+        "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
+      ],
+      "scope": "dev",
+      "tags": [
+        "OSPD",
+        "process profile",
+        "OGC API - Processes",
+        "SAGA",
+        "vector"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/vector/geometry-extent/schema.yaml",
+      "maturity": "development",
+      "group": "Vector (Geonovum testbed)",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile.geometry-extent"
+      ],
+      "shaclShapes": null,
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/LICENSE"
+      },
+      "ldContext": {
+        "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/vector/geometry-extent/context.jsonld",
+        "prof:hasRole": "role:mapping",
+        "dct:format": "application/ld+json",
+        "dct:conformsTo": "https://www.w3.org/TR/json-ld11/"
+      },
+      "schema": [
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/vector/geometry-extent/schema.yaml",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/yaml",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        },
+        {
+          "prof:hasArtifact": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/vector/geometry-extent/schema.json",
+          "prof:hasRole": "role:schema",
+          "dct:format": "application/json",
+          "dct:conformsTo": "https://json-schema.org/draft/2020-12/schema"
+        }
+      ],
+      "sourceLdContext": "https://geolabs.github.io/bblocks-process-profiles/_sources/vector/geometry-extent/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/vector/geometry-extent/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-process-profiles/_sources/vector/geometry-extent/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-process-profiles/blob/master/build/tests/process-profiles/vector/geometry-extent/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/markdown/process-profiles/vector/geometry-extent/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/build/generateddocs/json-full/process-profiles/vector/geometry-extent/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-process-profiles/bblock/ospd.process-profiles.vector.geometry-extent"
+        }
+      },
+      "@id": "bblocks://ospd.process-profiles.vector.geometry-extent",
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset",
+        "bblocks:BBlock"
+      ],
+      "skos:prefLabel": "Process profile: SAGA.shapes_tools.19",
+      "openAPIDocument": null,
+      "ontology": null,
+      "rdfData": [],
+      "skos:topConceptOf": {
+        "@id": "https://geolabs.github.io/bblocks-process-profiles/"
+      }
+    },
+    {
       "itemIdentifier": "ospd.process-profiles.algae-bloom.calculate-band",
       "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
       "name": "Process profile: calculate-band",
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `calculate-band` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.algae-bloom.workflow-earth-search-process",
@@ -495,21 +2776,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `download-band-sentinel2-product-safe` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.algae-bloom.workflow-copernicus-process",
@@ -610,21 +2891,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `download-band-sentinel2-stac-item` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.algae-bloom.workflow-earth-search-process",
@@ -725,21 +3006,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `plot-image` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.algae-bloom.workflow-earth-search-process",
@@ -840,21 +3121,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `reproject-image` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.algae-bloom.workflow-earth-search-process",
@@ -952,21 +3233,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `select-products-sentinel2` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.algae-bloom.workflow-earth-search",
@@ -1069,21 +3350,21 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `algae-usecase-workflow-copernicus` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
-        "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.bbr.provenance.execution",
-        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue"
+        "bblocks://ospd.process-profiles.process-type",
+        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.algae-bloom.select-products-sentinel2",
@@ -1105,7 +3386,6 @@
       ],
       "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/algae-bloom/workflow-copernicus/schema.yaml",
       "maturity": "development",
-      "highlighted": true,
       "group": "W1 Algae Bloom",
       "shaclShapes": [
         {
@@ -1184,21 +3464,21 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `algae-usecase-workflow-copernicus-process` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
-        "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.bbr.provenance.execution",
-        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue"
+        "bblocks://ospd.process-profiles.process-type",
+        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.algae-bloom.download-band-sentinel2-product-safe",
@@ -1302,21 +3582,21 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `algae-usecase-workflow-earth-search` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
-        "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.bbr.provenance.execution",
-        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue"
+        "bblocks://ospd.process-profiles.process-type",
+        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.algae-bloom.select-products-sentinel2",
@@ -1337,7 +3617,6 @@
       ],
       "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/algae-bloom/workflow-earth-search/schema.yaml",
       "maturity": "development",
-      "highlighted": true,
       "group": "W1 Algae Bloom",
       "shaclShapes": [
         {
@@ -1416,21 +3695,21 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `algae-usecase-workflow-earth-search-process` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
-        "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.bbr.provenance.execution",
-        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue"
+        "bblocks://ospd.process-profiles.process-type",
+        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.algae-bloom.download-band-sentinel2-stac-item",
@@ -1535,21 +3814,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `mangrove_cli` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.kindgrove.mangrove-workflow",
@@ -1660,22 +3939,22 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `mangrove-workflow` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
-        "bblocks://eoap.cct.bbox",
-        "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.bbr.provenance.execution",
-        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue"
+        "bblocks://ospd.process-profiles.process-type",
+        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://eoap.cct.bbox",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.kindgrove.parse-aoi",
@@ -1696,7 +3975,6 @@
       ],
       "sourceSchema": "https://geolabs.github.io/bblocks-process-profiles/_sources/kindgrove/mangrove-workflow/schema.yaml",
       "maturity": "development",
-      "highlighted": true,
       "group": "W2 KindGrove",
       "shaclShapes": [
         {
@@ -1775,22 +4053,22 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `parse_aoi` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
-        "bblocks://eoap.cct.bbox",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://eoap.cct.bbox",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.kindgrove.mangrove-workflow",
@@ -1888,21 +4166,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `calculate_indices` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps",
@@ -2001,21 +4279,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `download_band` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps",
@@ -2114,21 +4392,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `estimate_biomass` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps",
@@ -2225,21 +4503,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `export_stac` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps",
@@ -2338,22 +4616,22 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `mangrove-workflow-steps` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
-        "bblocks://eoap.cct.bbox",
-        "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.bbr.provenance.execution",
-        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue"
+        "bblocks://ospd.process-profiles.process-type",
+        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://eoap.cct.bbox",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.kindgrove-steps.parse-aoi-steps",
@@ -2463,22 +4741,22 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `parse_aoi` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
-        "bblocks://eoap.cct.bbox",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://eoap.cct.bbox",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps",
@@ -2576,21 +4854,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `reproject_band` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps",
@@ -2688,21 +4966,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `select_scene` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps",
@@ -2800,21 +5078,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `crop` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.water-bodies.detect-water-body",
@@ -2913,21 +5191,21 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `detect_water_body` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
-        "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.bbr.provenance.execution",
-        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue"
+        "bblocks://ospd.process-profiles.process-type",
+        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.water-bodies.crop",
@@ -3030,21 +5308,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `norm_diff` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.water-bodies.detect-water-body",
@@ -3142,21 +5420,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `otsu` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.water-bodies.detect-water-body",
@@ -3253,21 +5531,21 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `stac` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
         "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
-        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.water-bodies.water-bodies",
@@ -3366,21 +5644,21 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `water-bodies` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-09-24",
+      "dateOfLastChange": "2026-10-08",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
-        "bblocks://eoap.cct.cwl-to-ogcprocess",
-        "bblocks://ospd.process-profiles.process-type",
-        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
-        "bblocks://ogc.bbr.provenance.provenance",
-        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
-        "bblocks://ogc.api.processes.v1.schemas.link",
-        "bblocks://ogc.api.processes.v1.schemas.process",
-        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
         "bblocks://ogc.bbr.provenance.execution",
-        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue"
+        "bblocks://ospd.process-profiles.process-type",
+        "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue",
+        "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld",
+        "bblocks://ogc.api.processes.v2.schemas.staticIndicator",
+        "bblocks://ogc.api.processes.v2.schemas.ogcapppkg",
+        "bblocks://eoap.cct.cwl-to-ogcprocess",
+        "bblocks://ogc.bbr.provenance.provenance",
+        "bblocks://ogc.api.processes.v1.schemas.process",
+        "bblocks://ogc.api.processes.v1.schemas.link"
       ],
       "seeAlso": [
         "ospd.process-profiles.water-bodies.detect-water-body",
@@ -3477,6 +5755,78 @@
   "skos:hasTopConcept": [
     {
       "@id": "bblocks://ospd.process-profiles.process-type"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.raster.band-math"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.raster.band-math-multiband"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.raster.extent"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.raster.extract-roi"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.raster.format-conversion"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.raster.radiometric-index"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.raster.reprojection"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.area"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.buffer"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.centroid"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.contains"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.convex-hull"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.crosses"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.difference"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.disjoint"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.equals"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.intersection"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.intersects"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.is-simple"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.symdifference"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.touches"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.union"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.sqlmm.within"
+    },
+    {
+      "@id": "bblocks://ospd.process-profiles.vector.geometry-extent"
     },
     {
       "@id": "bblocks://ospd.process-profiles.algae-bloom.calculate-band"

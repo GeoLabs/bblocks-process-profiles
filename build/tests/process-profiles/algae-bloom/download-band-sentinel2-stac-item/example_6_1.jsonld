@@ -17,7 +17,7 @@
       "qualifiedAssociation": [
         {
           "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-          "hadPlan": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item"
+          "hadPlan": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item/package"
         }
       ],
       "endedAtTime": "2026-09-23T06:38:35Z"
@@ -57,6 +57,15 @@
       "id": "urn:example:image:ogc-ospd/algae-usecase/download-band-sentinel2-stac-item:1.1.0",
       "provType": "prov:SoftwareAgent",
       "name": "container image ogc-ospd/algae-usecase/download-band-sentinel2-stac-item:1.1.0"
+    },
+    {
+      "id": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item/package",
+      "provType": "prov:Plan"
+    },
+    {
+      "id": "arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/download_b03_10m_2",
+      "provType": "prov:Plan",
+      "specializationOf": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item/package"
     }
   ]
 }

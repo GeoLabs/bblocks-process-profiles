@@ -156,7 +156,7 @@
 
 <urn:example:run:algae-bloom:workflow-earth-search> a wfprov:WorkflowRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-earth-search> ;
-    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search> ;
+    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package> ;
     wfprov:hadSubProcessRun <urn:example:run:algae-bloom:select-products-sentinel2>,
         <urn:example:run:algae-bloom:workflow-earth-search-process> ;
     prov:endedAtTime "2026-09-23T06:40:34+00:00"^^xsd:dateTime ;

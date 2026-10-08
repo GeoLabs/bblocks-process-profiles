@@ -4,7 +4,7 @@
 
 <urn:example:run:algae-bloom:download-band-sentinel2-stac-item> a wfprov:ProcessRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
-    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item> ;
+    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item/package> ;
     wfprov:usedInput <urn:example:entity:download-band-sentinel2-stac-item:in:band>,
         <urn:example:entity:download-band-sentinel2-stac-item:in:product_url> ;
     wfprov:wasPartOfWorkflowRun <urn:example:run:algae-bloom:workflow-earth-search-process> ;

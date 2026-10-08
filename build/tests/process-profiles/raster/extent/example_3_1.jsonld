@@ -1,0 +1,173 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/extent/context.jsonld",
+  "id": "OTB.ImageEnvelope",
+  "title": "Extracts an image envelope.",
+  "description": "Build a vector data containing the image envelope polygon. Useful for some projection, you can set the polygon with more points with the sr parameter. This filter supports user-specified output projection. If no projection is defined, the standard WGS84 projection will be used.",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "keywords": [
+    "raster",
+    "coverage",
+    "extent",
+    "OTB",
+    "ImageEnvelope"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Raster Coverage Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing"
+    },
+    {
+      "title": "Generic Profile: Raster extent",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent"
+    },
+    {
+      "title": "Implementation Profile: Raster extent",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent"
+    }
+  ],
+  "inputs": {
+    "in": {
+      "title": "Input image filename.",
+      "description": "Input image filename.",
+      "keywords": [
+        "raster",
+        "GeoTIFF"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster extent -- input `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent/inputs/raster"
+        },
+        {
+          "title": "Implementation Profile: Raster extent -- input `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent/inputs/raster"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/jpeg"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "sr": {
+      "title": "Sampling rate for image edges (in pixel).",
+      "description": "Sampling rate for image edges (in pixel).",
+      "schema": {
+        "type": "integer",
+        "default": 0,
+        "nullable": true
+      }
+    },
+    "elev": {
+      "title": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
+      "description": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
+      "schema": {
+        "type": "string",
+        "nullable": true
+      }
+    },
+    "elev.geoid": {
+      "title": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
+      "description": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/octet-stream"
+          }
+        ]
+      }
+    },
+    "elev.default": {
+      "title": "This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.",
+      "description": "This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.",
+      "schema": {
+        "type": "number",
+        "default": 0,
+        "format": "float"
+      }
+    },
+    "proj": {
+      "title": "Projection to be used to compute the envelope (default is WGS84)",
+      "description": "Projection to be used to compute the envelope (default is WGS84)",
+      "schema": {
+        "type": "string",
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "out": {
+      "title": "Vector data file containing the envelope.",
+      "description": "Vector data file containing the envelope.",
+      "keywords": [
+        "geometry",
+        "GML"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster extent -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Raster extent -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent/outputs/result"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "utf-8",
+            "contentMediaType": "text/xml"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "utf-8",
+            "contentMediaType": "application/vnd.google-earth.kml+xml"
+          },
+          {
+            "type": "object"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/zip"
+          }
+        ]
+      }
+    }
+  }
+}

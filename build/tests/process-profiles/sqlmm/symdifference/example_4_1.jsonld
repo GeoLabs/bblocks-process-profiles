@@ -1,0 +1,24 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/symdifference/context.jsonld",
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/symdifference",
+  "type": "ProcessType",
+  "prefLabel": "Compute symmetric difference.",
+  "definition": "This service shall return a feature collection representing the closure of the symmetric difference of two Geometries. The symmetric difference is the set of points which lie on either InputEntity1 or InputEntity2 but not in both.",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+  ],
+  "profile": "ospd.process-profiles.sqlmm.symdifference",
+  "processDescription": {
+    "id": "SymDifference",
+    "version": "2.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SymDifference"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference",
+  "openeoEquivalence": {
+    "level": "none",
+    "rationale": "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."
+  }
+}

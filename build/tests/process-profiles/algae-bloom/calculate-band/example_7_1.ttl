@@ -4,7 +4,7 @@
 
 <urn:example:run:algae-bloom:calculate-band> a wfprov:ProcessRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band> ;
-    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/calculate-band> ;
+    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/calculate-band/package> ;
     wfprov:usedInput <urn:example:entity:calculate-band:in:band_a>,
         <urn:example:entity:calculate-band:in:band_c>,
         <urn:example:entity:calculate-band:in:calc>,

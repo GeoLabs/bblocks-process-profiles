@@ -1,0 +1,68 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/touches/context.jsonld",
+  "id": "Touches",
+  "title": "Compute intersection. ",
+  "description": "Generates a new geometry which is the region of intersection of the two geometries operated on.",
+  "version": "2.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "InputEntity1": {
+      "title": "the first geometry",
+      "description": "the first geometry to compare against.",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    },
+    "InputEntity2": {
+      "title": "the other geometry",
+      "description": "the other geometry to compare against.",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "Result": {
+      "title": "Intersects result",
+      "description": "A value true or false if the geometry1 and geometry2 touches.",
+      "schema": {
+        "type": "boolean"
+      }
+    }
+  },
+  "mutable": false
+}

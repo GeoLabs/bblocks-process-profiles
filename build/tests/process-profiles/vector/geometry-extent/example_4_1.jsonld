@@ -1,0 +1,24 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/vector/geometry-extent/context.jsonld",
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/vector/geometry-extent",
+  "type": "ProcessType",
+  "prefLabel": "Get Shapes Extents",
+  "definition": "Get Shapes Extents",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+  ],
+  "profile": "ospd.process-profiles.vector.geometry-extent",
+  "processDescription": {
+    "id": "SAGA.shapes_tools.19",
+    "version": "1.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.shapes_tools.19"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent",
+  "openeoEquivalence": {
+    "level": "none",
+    "rationale": "No openEO process computes the bounding envelope of a vector geometry/feature collection in the published bblocks-openeo register."
+  }
+}

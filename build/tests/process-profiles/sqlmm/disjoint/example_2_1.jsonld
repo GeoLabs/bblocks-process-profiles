@@ -1,0 +1,68 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/disjoint/context.jsonld",
+  "id": "Disjoint",
+  "title": "Disjoint ",
+  "description": "This servuce shall return a true value if and only if the geometries g1 and g2 have no point in common.",
+  "version": "2.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "InputEntity1": {
+      "title": "the first geometry",
+      "description": "the first geometry.",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    },
+    "InputEntity2": {
+      "title": "the other geometry",
+      "description": "the other geometry.",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "Result": {
+      "title": "Disjoint result",
+      "description": "true if disjoint.",
+      "schema": {
+        "type": "boolean"
+      }
+    }
+  },
+  "mutable": false
+}

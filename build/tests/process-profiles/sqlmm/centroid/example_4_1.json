@@ -1,0 +1,23 @@
+{
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/centroid",
+  "type": "ProcessType",
+  "prefLabel": "Computes the centroid of a polygon.",
+  "definition": "This service shall return the point that is the geometric centre of gravity of the geometry InputPolygon.",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+  ],
+  "profile": "ospd.process-profiles.sqlmm.centroid",
+  "processDescription": {
+    "id": "Centroid",
+    "version": "2.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Centroid"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/centroid",
+  "openeoEquivalence": {
+    "level": "none",
+    "rationale": "No openEO process computes the centroid of a vector geometry in the published bblocks-openeo register."
+  }
+}

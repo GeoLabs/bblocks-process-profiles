@@ -4,7 +4,7 @@
 
 <urn:example:run:algae-bloom:select-products-sentinel2> a wfprov:ProcessRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2> ;
-    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/select-products-sentinel2> ;
+    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package> ;
     wfprov:usedInput <urn:example:entity:select-products-sentinel2:in:aoi>,
         <urn:example:entity:select-products-sentinel2:in:catalog>,
         <urn:example:entity:select-products-sentinel2:in:cloud_cover>,

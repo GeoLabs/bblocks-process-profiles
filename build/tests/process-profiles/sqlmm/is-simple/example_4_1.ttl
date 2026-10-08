@@ -1,0 +1,21 @@
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/is-simple> a skos:Concept ;
+    skos:broader <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    skos:definition "This service shall return a true value if and only if geometry g has no anomalous geometric points, such as self intersection or self tangency. Simple curves intersect themselves only at their endpoints (only if they are also closed, see next function)." ;
+    skos:inScheme pp:process-type ;
+    skos:prefLabel "IsSimple test" ;
+    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/is-simple> ;
+    pp:openeoEquivalence [ pp:equivalenceLevel "none" ;
+            pp:rationale "No openEO process tests a vector geometry for self-intersection/self-tangency in the published bblocks-openeo register." ] ;
+    pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/IsSimple> ;
+    pp:profile "ospd.process-profiles.sqlmm.is-simple" ;
+    pp:provenanceClass wfprov:ProcessRun ;
+    pp:status "submitted" .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/IsSimple> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/IsSimple> ;
+    pp:version "2.0.0" .
+

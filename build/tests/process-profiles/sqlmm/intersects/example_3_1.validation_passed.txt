@@ -1,0 +1,14 @@
+Validation report for ospd.process-profiles.sqlmm.intersects - Process profile: Intersects
+Generated 2026-10-08T09:16:15.059884+00:00
+=== Files ===
+Using examples/processDescription.inherited.json from examples
+JSON-LD context is present - uplifting
+Output JSON-LD example_3_1.jsonld created
+Output Turtle example_3_1.ttl created
+=== End Files ===
+
+=== JSON Schema ===
+Using the following JSON Schema: #/$defs/inheritedProcessDescription
+Validation passed
+=== End JSON Schema ===
+

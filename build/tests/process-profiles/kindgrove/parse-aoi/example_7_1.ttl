@@ -4,7 +4,7 @@
 
 <urn:example:run:kindgrove:parse-aoi> a wfprov:ProcessRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/parse-aoi> ;
-    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/parse_aoi> ;
+    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/parse_aoi/package> ;
     wfprov:usedInput <urn:example:entity:parse-aoi:in:aoi> ;
     wfprov:wasPartOfWorkflowRun <urn:example:run:kindgrove:mangrove-workflow> ;
     prov:startedAtTime "2026-09-23T08:01:11+00:00"^^xsd:dateTime ;

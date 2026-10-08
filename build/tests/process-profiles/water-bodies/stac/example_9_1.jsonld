@@ -12,19 +12,26 @@
   "profile": "ospd.process-profiles.water-bodies.stac",
   "processDescription": {
     "id": "stac",
-    "version": "1.4.1"
+    "version": "1.4.1",
+    "href": "https://ospd.example.org/ogc-api/processes/stac"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/stac.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/stac/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/stac.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "stac",
-    "license": "https://spdx.org/licenses/CC-BY-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.stac"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.stac"
-  ],
   "closeMatch": [
     "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.save_result"
   ],

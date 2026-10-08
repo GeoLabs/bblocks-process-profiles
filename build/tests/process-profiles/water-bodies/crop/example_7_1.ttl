@@ -4,7 +4,7 @@
 
 <urn:example:run:water-bodies:crop> a wfprov:ProcessRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> ;
-    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/crop> ;
+    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/crop/package> ;
     wfprov:usedInput <urn:example:entity:crop:in:aoi>,
         <urn:example:entity:crop:in:band>,
         <urn:example:entity:crop:in:epsg>,

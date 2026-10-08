@@ -1,0 +1,23 @@
+{
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersects",
+  "type": "ProcessType",
+  "prefLabel": "Intersects test",
+  "definition": "This service shall return a true value if and only if the geometries g1 and g2 have at least one boundary point in common, but no interior points.",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+  ],
+  "profile": "ospd.process-profiles.sqlmm.intersects",
+  "processDescription": {
+    "id": "Intersects",
+    "version": "2.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Intersects"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/intersects",
+  "openeoEquivalence": {
+    "level": "none",
+    "rationale": "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."
+  }
+}

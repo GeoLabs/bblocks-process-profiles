@@ -51,7 +51,7 @@ Derived with the `eoap.cct.cwl-to-ogcprocess` jq transform (bblocks-eoap-cct `29
 
 ## Provenance view
 
-Expressed against the generic provenance profile (`ogc.bbr.provenance.provenance`, a W3C PROV chain): one `prov:Activity` whose `activityType` is the process-type IRI, `qualifiedAssociation.hadPlan` pointing to the processDescription, input and output `prov:Entity` objects (literal parameters carry `value`, files carry `links`) and the engine / container image as `prov:SoftwareAgent`.
+Expressed against the generic provenance profile (`ogc.bbr.provenance.provenance`, a W3C PROV chain): one `prov:Activity` whose `activityType` is the process-type IRI, `qualifiedAssociation.hadPlan` pointing to the process's Application Package (`/processes/{id}/package`, OGC API - Processes - Part 2), the same plan as the process-type entry's own `plan` -- the plan as the engine's own CWLProv graph names it (its run-local `arcp:` copy in the research object) is given as a `prov:specializationOf` that Application Package --, input and output `prov:Entity` objects (literal parameters carry `value`, files carry `links`) and the engine / container image as `prov:SoftwareAgent`.
 The run is also given as a `wfprov:ProcessRun` (`ogc.bbr.wf4ever.wfprov.ProcessRun`), because the generic profile has no step-level run (GP-1).
 
 Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
@@ -305,12 +305,12 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
                             ns1:items [ proc:type "string" ;
                                     ns1:contentMediaType "application/octet-stream" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "Process converted from CWL" ;
-            proc:role schema:description ],
+    proc:metadata [ rdf:value "stac" ;
+            proc:role schema:name ],
         [ rdf:value "1.4.1" ;
             proc:role schema:softwareVersion ],
-        [ rdf:value "stac" ;
-            proc:role schema:name ] ;
+        [ rdf:value "Process converted from CWL" ;
+            proc:role schema:description ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
@@ -562,8 +562,8 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -574,13 +574,13 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
 <https://geolabs.github.io/bblocks-process-profiles/def/process/stac> dcterms:description "Process converted from CWL" ;
     dcterms:title "stac" ;
     pp:version "1.4.1" ;
-    proc:inputs [ ns2:item [ dcterms:description "" ;
+    proc:inputs [ ns3:item [ dcterms:description "" ;
                     dcterms:title "item" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ] ] ] ;
-            ns2:rasters [ dcterms:description "" ;
+            ns3:rasters [ dcterms:description "" ;
                     dcterms:title "rasters" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
@@ -588,16 +588,16 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
                             ns1:items [ proc:type "string" ;
                                     ns1:contentMediaType "application/octet-stream" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "stac" ;
+    proc:metadata [ rdf:value "Process converted from CWL" ;
+            proc:role schema:description ],
+        [ rdf:value "stac" ;
             proc:role schema:name ],
         [ rdf:value "1.4.1" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value "Process converted from CWL" ;
-            proc:role schema:description ] ;
+            proc:role schema:softwareVersion ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:stac_catalog [ dcterms:description "" ;
+    proc:outputs [ ns2:stac_catalog [ dcterms:description "" ;
                     dcterms:title "stac_catalog" ;
                     proc:schema [ proc:type "object" ;
                             ns1:format "stac-collection" ;
@@ -662,15 +662,18 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 
 #### ttl
 ```ttl
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/stac> pp:version "1.4.1" .
 
 [] pp:processDescription [ pp:process <https://geolabs.github.io/bblocks-process-profiles/def/process/stac> ] ;
-    proc:executionUnit [ a <https://geolabs.github.io/bblocks-process-profiles/def/application/cwl+yaml> ;
-            pp:href "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/stac.cwl" ;
-            pp:rel "http://www.opengis.net/def/rel/ogc/1.0/executionUnit" ] .
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/stac.cwl> ] .
 
 
 ```
@@ -732,9 +735,9 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 
 [] proc:inputs [ ns1:item "https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2A_10TFK_20220524_0_L2A",
                 "https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2B_10TFK_20210713_0_L2A" ;
-            ns1:rasters [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/S2B_10TFK_20210713_0_L2A/otsu.tif" ;
+            ns1:rasters [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/S2A_10TFK_20220524_0_L2A/otsu.tif" ;
                     proc:type "image/tiff; application=geotiff" ],
-                [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/S2A_10TFK_20220524_0_L2A/otsu.tif" ;
+                [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/S2B_10TFK_20210713_0_L2A/otsu.tif" ;
                     proc:type "image/tiff; application=geotiff" ] ] ;
     proc:response "document" .
 
@@ -797,7 +800,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "qualifiedAssociation": [
       {
         "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-        "hadPlan": "https://ospd.example.org/ogc-api/processes/stac"
+        "hadPlan": "https://ospd.example.org/ogc-api/processes/stac/package"
       }
     ],
     "endedAtTime": "2026-09-23T20:17:45Z"
@@ -849,6 +852,15 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "id": "urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/stac:1.5.0",
     "provType": "prov:SoftwareAgent",
     "name": "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/stac:1.5.0"
+  },
+  {
+    "id": "https://ospd.example.org/ogc-api/processes/stac/package",
+    "provType": "prov:Plan"
+  },
+  {
+    "id": "arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac",
+    "provType": "prov:Plan",
+    "specializationOf": "https://ospd.example.org/ogc-api/processes/stac/package"
   }
 ]
 
@@ -875,7 +887,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "qualifiedAssociation": [
         {
           "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-          "hadPlan": "https://ospd.example.org/ogc-api/processes/stac"
+          "hadPlan": "https://ospd.example.org/ogc-api/processes/stac/package"
         }
       ],
       "endedAtTime": "2026-09-23T20:17:45Z"
@@ -927,6 +939,15 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/stac:1.5.0",
       "provType": "prov:SoftwareAgent",
       "name": "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/stac:1.5.0"
+    },
+    {
+      "id": "https://ospd.example.org/ogc-api/processes/stac/package",
+      "provType": "prov:Plan"
+    },
+    {
+      "id": "arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac",
+      "provType": "prov:Plan",
+      "specializationOf": "https://ospd.example.org/ogc-api/processes/stac/package"
     }
   ]
 }
@@ -943,6 +964,9 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/stac/package> .
+
 <urn:example:entity:stac:out:stac_catalog> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/stac#outputs/stac_catalog> ;
     rdfs:seeAlso [ dcterms:type "application/json" ;
@@ -958,8 +982,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 
 <urn:example:entity:stac:in:rasters> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/stac#inputs/rasters> ;
-    rdf:value [ pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/S2B_10TFK_20210713_0_L2A/otsu.tif" ],
-        [ pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/S2A_10TFK_20220524_0_L2A/otsu.tif" ] .
+    rdf:value [ pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/S2A_10TFK_20220524_0_L2A/otsu.tif" ],
+        [ pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/S2B_10TFK_20210713_0_L2A/otsu.tif" ] .
 
 <urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/stac:1.5.0> a prov:SoftwareAgent ;
     pp:name "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/stac:1.5.0" .
@@ -968,12 +992,14 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/stac> ;
     prov:endedAtTime "2026-09-23T20:17:45+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/stac> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/stac/package> ] ;
     prov:startedAtTime "2026-09-23T20:17:40+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:stac:in:item>,
         <urn:example:entity:stac:in:rasters> ;
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/stac:1.5.0> .
+
+<https://ospd.example.org/ogc-api/processes/stac/package> a prov:Plan .
 
 <urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
@@ -989,7 +1015,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "id": "urn:example:run:water-bodies:stac",
   "type": "ProcessRun",
   "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/stac",
-  "describedByProcess": "https://ospd.example.org/ogc-api/processes/stac",
+  "describedByProcess": "https://ospd.example.org/ogc-api/processes/stac/package",
   "usedInput": [
     {
       "id": "urn:example:entity:stac:in:item"
@@ -1012,7 +1038,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "id": "urn:example:run:water-bodies:stac",
   "type": "ProcessRun",
   "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/stac",
-  "describedByProcess": "https://ospd.example.org/ogc-api/processes/stac",
+  "describedByProcess": "https://ospd.example.org/ogc-api/processes/stac/package",
   "usedInput": [
     {
       "id": "urn:example:entity:stac:in:item"
@@ -1035,7 +1061,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 
 <urn:example:run:water-bodies:stac> a wfprov:ProcessRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/stac> ;
-    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/stac> ;
+    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/stac/package> ;
     wfprov:usedInput <urn:example:entity:stac:in:item>,
         <urn:example:entity:stac:in:rasters> ;
     wfprov:wasPartOfWorkflowRun <urn:example:run:water-bodies:water-bodies> ;
@@ -1062,19 +1088,26 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "profile": "ospd.process-profiles.water-bodies.stac",
   "processDescription": {
     "id": "stac",
-    "version": "1.4.1"
+    "version": "1.4.1",
+    "href": "https://ospd.example.org/ogc-api/processes/stac"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/stac.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/stac/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/stac.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "stac",
-    "license": "https://spdx.org/licenses/CC-BY-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.stac"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.stac"
-  ],
   "closeMatch": [
     "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.save_result"
   ],
@@ -1102,19 +1135,26 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "profile": "ospd.process-profiles.water-bodies.stac",
   "processDescription": {
     "id": "stac",
-    "version": "1.4.1"
+    "version": "1.4.1",
+    "href": "https://ospd.example.org/ogc-api/processes/stac"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/stac.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/stac/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/stac.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "stac",
-    "license": "https://spdx.org/licenses/CC-BY-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.stac"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.stac"
-  ],
   "closeMatch": [
     "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.save_result"
   ],
@@ -1127,7 +1167,13 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 
 #### ttl
 ```ttl
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 
@@ -1137,19 +1183,25 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     skos:definition "Writes a STAC Catalog with one Item per input identifier, each carrying the corresponding water-body raster as an asset." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Assemble a STAC catalog of detected water bodies" ;
-    pp:candidateCctDependency "eoap.cct.stac" ;
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "Writes the final rasters to a self-describing output collection; save_result's STAC-catalog output option is the closest openEO equivalent to hand-assembling one." ] ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/stac/package> ;
     pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/stac> ;
     pp:profile "ospd.process-profiles.water-bodies.stac" ;
     pp:provenanceClass wfprov:ProcessRun ;
-    pp:source [ pp:cwl <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/stac.cwl> ;
-            pp:cwlClass "CommandLineTool" ;
-            pp:cwlId "stac" ;
-            pp:license "https://spdx.org/licenses/CC-BY-SA-4.0" ] ;
     pp:status "submitted" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/stac> pp:version "1.4.1" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/stac> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/stac> ;
+    pp:version "1.4.1" .
+
+<https://ospd.example.org/ogc-api/processes/stac/package> a prov:Plan ;
+    dcterms:license <https://spdx.org/licenses/CC-BY-SA-4.0> ;
+    pp:candidateCctDependency "eoap.cct.stac" ;
+    pp:cwlClass "CommandLineTool" ;
+    pp:cwlId "stac" ;
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/stac.cwl> ] .
 
 
 ```
@@ -2860,17 +2912,17 @@ id:25ff238f-e08b-4dee-a1f9-485e90a02a52 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ],
+            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ],
         [ a provext:Membership ;
-            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ] .
+            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ] .
 
 id:3d637621-61a3-4c53-8aaf-70daadac3593 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:e06b906c-ef24-4174-830c-4a184274216f ],
+            provext:member id:5fa19808-d14c-4c01-8bd1-05a7a8845019 ],
         [ a provext:Membership ;
-            provext:member id:5fa19808-d14c-4c01-8bd1-05a7a8845019 ] .
+            provext:member id:e06b906c-ef24-4174-830c-4a184274216f ] .
 
 id:471cf7c7-1a60-4c28-b3d0-904c5aa74707 a wf4ever:File,
         wfprov:Artifact,
@@ -2883,9 +2935,9 @@ id:511850b1-b1bc-44cd-8316-bdd367fefd98 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ],
+            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ],
         [ a provext:Membership ;
-            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ] .
+            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ] .
 
 id:5fa19808-d14c-4c01-8bd1-05a7a8845019 a wf4ever:File,
         wfprov:Artifact,
@@ -2921,21 +2973,21 @@ id:afa01c29-85ed-418e-b3a4-99ff6f4b06cf a ro:Folder,
         "id:7d9076f9-073d-4667-84e9-131fd7fda68c"^^xsd:QName,
         "id:a9451218-986b-4920-9d23-62638b8aea56"^^xsd:QName ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:fbfd9735-117b-4cdd-9707-61f171585925 ;
-            prov:atTime "2026-09-23T22:17:45.432581"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/stac_catalog> ],
-        [ a prov:Generation ;
             prov:activity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ;
             prov:atTime "2026-09-23T22:17:45.465410"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/primary/stac> ] ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/primary/stac> ],
+        [ a prov:Generation ;
+            prov:activity id:fbfd9735-117b-4cdd-9707-61f171585925 ;
+            prov:atTime "2026-09-23T22:17:45.432581"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/stac_catalog> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 ],
-        [ a provext:Membership ;
             provext:member id:a782f6a0-89d7-46ac-9c76-c6569903f8e1 ],
         [ a provext:Membership ;
-            provext:member id:1d5bc5ed-98ce-4f75-8ca8-c19f497b03c0 ],
+            provext:member id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 ],
         [ a provext:Membership ;
-            provext:member id:0d06dfcd-e7b7-4fad-a2a5-66cddd416313 ] ;
+            provext:member id:0d06dfcd-e7b7-4fad-a2a5-66cddd416313 ],
+        [ a provext:Membership ;
+            provext:member id:1d5bc5ed-98ce-4f75-8ca8-c19f497b03c0 ] ;
     cwlprov:basename "docker_tmpwngcerl4" .
 
 id:b6924a3c-a25c-4107-bdd7-2b5b2bff912e a wfprov:Artifact,
@@ -3041,9 +3093,9 @@ id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 a ro:Folder,
     prov:hadDictionaryMember "id:0c932b2b-21cb-4d36-8eda-c9d07f86bf53"^^xsd:QName,
         "id:4c5ac9a5-8f70-4cc6-bb2f-89864afd51b9"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:ac975c99-5d6d-476f-b3ab-750fd0ac460d ],
+            provext:member id:471cf7c7-1a60-4c28-b3d0-904c5aa74707 ],
         [ a provext:Membership ;
-            provext:member id:471cf7c7-1a60-4c28-b3d0-904c5aa74707 ] ;
+            provext:member id:ac975c99-5d6d-476f-b3ab-750fd0ac460d ] ;
     cwlprov:basename "S2A_10TFK_20220524_0_L2A" .
 
 id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 a wfprov:WorkflowRun,
@@ -3059,10 +3111,6 @@ id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 a wfprov:WorkflowRun,
             prov:atTime "2026-09-23T22:09:35.483879"^^xsd:dateTime ;
             prov:hadActivity id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:37.991132"^^xsd:dateTime ;
-            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/aoi> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:37.993781"^^xsd:dateTime ;
             prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/epsg> ],
@@ -3070,6 +3118,10 @@ id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 a wfprov:WorkflowRun,
             prov:atTime "2026-09-23T22:09:37.995200"^^xsd:dateTime ;
             prov:entity id:511850b1-b1bc-44cd-8316-bdd367fefd98 ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/stac_items> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:09:37.991132"^^xsd:dateTime ;
+            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/aoi> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:37.992978"^^xsd:dateTime ;
             prov:entity id:b6924a3c-a25c-4107-bdd7-2b5b2bff912e ;
@@ -3216,7 +3268,12 @@ x-jsonld-extra-terms:
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
-  metadata: https://w3id.org/ogc/api/processes/metadata
+  metadata:
+    x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+    x-jsonld-context:
+      href:
+        '@id': https://w3id.org/ogc/api/processes/href
+        '@type': '@id'
   role:
     x-jsonld-id: https://w3id.org/ogc/api/processes/role
     x-jsonld-type: '@id'
@@ -3234,8 +3291,27 @@ x-jsonld-extra-terms:
       type: http://purl.org/dc/terms/type
       title: http://www.w3.org/2000/01/rdf-schema#label
   response: https://w3id.org/ogc/api/processes/response
-  executionUnit: https://w3id.org/ogc/api/processes/executionUnit
-  processDescription: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+  executionUnit:
+    x-jsonld-id: https://w3id.org/ogc/api/processes/executionUnit
+    x-jsonld-context:
+      href:
+        '@id': http://www.w3.org/ns/oa#hasTarget
+        '@type': '@id'
+      rel:
+        '@id': http://www.iana.org/assignments/relation
+        '@type': '@id'
+        '@context':
+          '@base': http://www.iana.org/assignments/relation/
+      type: http://purl.org/dc/terms/format
+  processDescription:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+    x-jsonld-context:
+      href:
+        '@id': http://www.w3.org/2000/01/rdf-schema#seeAlso
+        '@type': '@id'
+      license:
+        '@id': http://purl.org/dc/terms/license
+        '@type': '@id'
   result: https://geolabs.github.io/bblocks-process-profiles/def/result
   engine: https://geolabs.github.io/bblocks-process-profiles/def/engine
   run: https://geolabs.github.io/bblocks-process-profiles/def/run
@@ -3270,6 +3346,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   hadPlan:
     x-jsonld-id: http://www.w3.org/ns/prov#hadPlan
+    x-jsonld-type: '@id'
+  specializationOf:
+    x-jsonld-id: http://www.w3.org/ns/prov#specializationOf
     x-jsonld-type: '@id'
   startedAtTime:
     x-jsonld-id: http://www.w3.org/ns/prov#startedAtTime
@@ -3309,14 +3388,20 @@ x-jsonld-extra-terms:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#broader
     x-jsonld-type: '@id'
   profile: https://geolabs.github.io/bblocks-process-profiles/def/profile
-  source: https://geolabs.github.io/bblocks-process-profiles/def/source
-  cwl:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cwl
-    x-jsonld-type: '@id'
+  plan:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
+    x-jsonld-context:
+      license:
+        '@id': http://purl.org/dc/terms/license
+        '@type': '@id'
+  Plan: http://www.w3.org/ns/prov#Plan
   cwlClass: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
   cwlId: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
   provenanceClass:
     x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
+    x-jsonld-type: '@id'
+  implementsProfile:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
     x-jsonld-type: '@id'
   cctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
   candidateCctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
@@ -3410,7 +3495,15 @@ Links to the schema:
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
     "outputTransmission": "proc:outputTransmission",
-    "metadata": "proc:metadata",
+    "metadata": {
+      "@id": "proc:metadata",
+      "@context": {
+        "href": {
+          "@id": "proc:href",
+          "@type": "@id"
+        }
+      }
+    },
     "role": {
       "@id": "proc:role",
       "@type": "@id"
@@ -3434,8 +3527,36 @@ Links to the schema:
       }
     },
     "response": "proc:response",
-    "executionUnit": "proc:executionUnit",
-    "processDescription": "pp:processDescription",
+    "executionUnit": {
+      "@id": "proc:executionUnit",
+      "@context": {
+        "href": {
+          "@id": "oa:hasTarget",
+          "@type": "@id"
+        },
+        "rel": {
+          "@id": "http://www.iana.org/assignments/relation",
+          "@type": "@id",
+          "@context": {
+            "@base": "http://www.iana.org/assignments/relation/"
+          }
+        },
+        "type": "dct:format"
+      }
+    },
+    "processDescription": {
+      "@id": "pp:processDescription",
+      "@context": {
+        "href": {
+          "@id": "rdfs:seeAlso",
+          "@type": "@id"
+        },
+        "license": {
+          "@id": "dct:license",
+          "@type": "@id"
+        }
+      }
+    },
     "result": "pp:result",
     "engine": "pp:engine",
     "run": "pp:run",
@@ -3479,6 +3600,10 @@ Links to the schema:
     },
     "hadPlan": {
       "@id": "prov:hadPlan",
+      "@type": "@id"
+    },
+    "specializationOf": {
+      "@id": "prov:specializationOf",
       "@type": "@id"
     },
     "startedAtTime": {
@@ -3530,15 +3655,24 @@ Links to the schema:
       "@type": "@id"
     },
     "profile": "pp:profile",
-    "source": "pp:source",
-    "cwl": {
-      "@id": "pp:cwl",
-      "@type": "@id"
+    "plan": {
+      "@id": "pp:plan",
+      "@context": {
+        "license": {
+          "@id": "dct:license",
+          "@type": "@id"
+        }
+      }
     },
+    "Plan": "prov:Plan",
     "cwlClass": "pp:cwlClass",
     "cwlId": "pp:cwlId",
     "provenanceClass": {
       "@id": "pp:provenanceClass",
+      "@type": "@id"
+    },
+    "implementsProfile": {
+      "@id": "pp:implementsProfile",
       "@type": "@id"
     },
     "cctDependencies": "pp:cctDependency",

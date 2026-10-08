@@ -1,0 +1,22 @@
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index> a skos:Concept ;
+    skos:broader <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    skos:closeMatch <https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.ndvi> ;
+    skos:definition "This application computes radiometric indices using the relevant channels of the input image. The output is a multi band image into which each channel is one of the selected indices." ;
+    skos:inScheme pp:process-type ;
+    skos:prefLabel "Compute radiometric indices." ;
+    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index> ;
+    pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
+            pp:rationale "OTB.RadiometricIndices computes a *selectable set* of named indices (NDVI, NDWI, and many others via `channels` / `list`) from user-mapped spectral channels (`channels.red`, `channels.nir`, ...), only one of which (NDVI) has a dedicated openEO process (`ndvi`, which also expects band-role mapping via `nir`/`red` parameters). closeMatch, not exactMatch: openEO has no equivalent for the other indices this application can compute." ] ;
+    pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.RadiometricIndices> ;
+    pp:profile "ospd.process-profiles.raster.radiometric-index" ;
+    pp:provenanceClass wfprov:ProcessRun ;
+    pp:status "submitted" .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.RadiometricIndices> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices> ;
+    pp:version "1.0.0" .
+

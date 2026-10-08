@@ -1,0 +1,79 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/Touches> dcterms:description "Generates a new geometry which is the region of intersection of the two geometries operated on." ;
+    dcterms:subject "ST_Touches",
+        "Touches",
+        "geometry",
+        "predicate",
+        "spatial relation",
+        "vector" ;
+    dcterms:title "Compute intersection. " ;
+    pp:version "2.0.0" ;
+    proc:inputs [ ns3:InputEntity1 [ dcterms:description "the first geometry to compare against." ;
+                    dcterms:title "the first geometry" ;
+                    proc:keywords "GML",
+                        "geometry" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Touches -- input `geometry1`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/inputs/geometry1> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Binary spatial predicate -- input `geometry1`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry1> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "UTF-8" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
+            ns3:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
+                    dcterms:title "the other geometry" ;
+                    proc:keywords "GML",
+                        "geometry" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Binary spatial predicate -- input `geometry2`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry2> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Touches -- input `geometry2`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/inputs/geometry2> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "UTF-8" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+    proc:jobControlOptions "async-execute",
+        "dismiss",
+        "sync-execute" ;
+    proc:metadata [ dcterms:title "Generic Profile: Binary spatial predicate" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Implementation Profile: Touches" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Process Concept: Vector Geometry Processing" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+    proc:mutable false ;
+    proc:outputTransmission "reference",
+        "value" ;
+    proc:outputs [ ns1:Result [ dcterms:description "A value true or false if the geometry1 and geometry2 touches." ;
+                    dcterms:title "Intersects result" ;
+                    proc:keywords "boolean" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Touches -- output `result`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/outputs/result> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Binary spatial predicate -- output `result`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/outputs/result> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
+                    proc:schema [ proc:type "boolean" ] ] ] .
+

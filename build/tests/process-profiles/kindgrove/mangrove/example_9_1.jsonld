@@ -16,19 +16,26 @@
   "profile": "ospd.process-profiles.kindgrove.mangrove",
   "processDescription": {
     "id": "mangrove_cli",
-    "version": "0.0.1"
+    "version": "0.0.1",
+    "href": "https://ospd.example.org/ogc-api/processes/mangrove_cli"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/bblocks-eoap-cct/blob/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove_cli",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/mangrove_cli/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove_cli",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "mangrove_cli",
-    "license": "https://spdx.org/licenses/Apache-2.0"
+    "license": "https://spdx.org/licenses/Apache-2.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.bbox"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.bbox"
-  ],
   "openeoEquivalence": {
     "level": "none",
     "rationale": "Opaque: one ipython2cwl binary running the whole notebook. No single openEO process; each notebook stage has a closeMatch (decomposition). run_udf could wrap the binary but expects a data cube in and out, which this tool does not follow (it searches and downloads its own data).",

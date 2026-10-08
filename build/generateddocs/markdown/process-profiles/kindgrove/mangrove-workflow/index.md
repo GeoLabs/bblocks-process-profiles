@@ -36,7 +36,7 @@ Derived with the `eoap.cct.cwl-to-ogcprocess` jq transform (bblocks-eoap-cct `29
 
 ## Provenance view
 
-Expressed against the generic provenance profile (`ogc.bbr.provenance.provenance`, a W3C PROV chain): one `prov:Activity` whose `activityType` is the process-type IRI, `qualifiedAssociation.hadPlan` pointing to the processDescription, input and output `prov:Entity` objects (literal parameters carry `value`, files carry `links`) and the engine / container image as `prov:SoftwareAgent`.
+Expressed against the generic provenance profile (`ogc.bbr.provenance.provenance`, a W3C PROV chain): one `prov:Activity` whose `activityType` is the process-type IRI, `qualifiedAssociation.hadPlan` pointing to the process's Application Package (`/processes/{id}/package`, OGC API - Processes - Part 2), the same plan as the process-type entry's own `plan` -- the plan as the engine's own CWLProv graph names it (its run-local `arcp:` copy in the research object) is given as a `prov:specializationOf` that Application Package --, input and output `prov:Entity` objects (literal parameters carry `value`, files carry `links`) and the engine / container image as `prov:SoftwareAgent`.
 
 The workflow run is also given as an `ogc.bbr.provenance.execution` bundle.
 
@@ -423,12 +423,12 @@ a reusable workflow for analyzing different study areas.
                     proc:schema [ proc:type "object" ;
                             ns1:properties [ ns1:bbox [ proc:type "array" ;
                                             ns1:items [ proc:type "number" ] ;
-                                            ns1:oneOf [ dcterms:description "3D bbox" ;
-                                                    ns1:maxItems 6 ;
-                                                    ns1:minItems 6 ],
-                                                [ dcterms:description "2D bbox" ;
+                                            ns1:oneOf [ dcterms:description "2D bbox" ;
                                                     ns1:maxItems 4 ;
-                                                    ns1:minItems 4 ] ] ;
+                                                    ns1:minItems 4 ],
+                                                [ dcterms:description "3D bbox" ;
+                                                    ns1:maxItems 6 ;
+                                                    ns1:minItems 6 ] ] ;
                                     ns1:crs [ proc:default "\"CRS84\""^^rdf:JSON ;
                                             proc:enum "CRS84",
                                                 "CRS84h" ;
@@ -447,10 +447,6 @@ a reusable workflow for analyzing different study areas.
     proc:jobControlOptions "async-execute" ;
     proc:metadata [ rdf:value "https://github.com/starling-foundries/KindGrove?tab=MIT-1-ov-file#readme" ;
             proc:role schema:license ],
-        [ rdf:value "Mangrove Biomass Workflow" ;
-            proc:role schema:name ],
-        [ rdf:value "0.0.1" ;
-            proc:role schema:softwareVersion ],
         [ rdf:value """Workflow for Mangrove Biomass Analysis
   
 This workflow orchestrates the mangrove biomass estimation process using
@@ -458,15 +454,19 @@ Sentinel-2 imagery. It wraps the mangrove_workflow.cwl tool to provide
 a reusable workflow for analyzing different study areas.
 """ ;
             proc:role schema:description ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
+        [ rdf:value "0.0.1" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value [ a ns3:Person ;
+                    ns3:name "Cameron Sajedi" ] ;
+            proc:role schema:author ],
         [ rdf:value [ a ns3:Person ;
                     ns3:identifier "https://orcid.org/0000-0002-9617-8641" ;
                     ns3:name "Gérald Fenoy" ] ;
             proc:role schema:contributor ],
-        [ rdf:value [ a ns3:Person ;
-                    ns3:name "Cameron Sajedi" ] ;
-            proc:role schema:author ] ;
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value "Mangrove Biomass Workflow" ;
+            proc:role schema:name ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
@@ -844,8 +844,8 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <http://schema.org/> .
+@prefix ns2: <http://schema.org/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -865,7 +865,7 @@ a reusable workflow for analyzing different study areas.
         "mangrove" ;
     dcterms:title "Mangrove Biomass Workflow" ;
     pp:version "0.0.1" ;
-    proc:inputs [ ns2:aoi [ dcterms:description "Area of interest as a bounding box" ;
+    proc:inputs [ ns3:aoi [ dcterms:description "Area of interest as a bounding box" ;
                     dcterms:title "Area of Interest" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
@@ -883,32 +883,32 @@ a reusable workflow for analyzing different study areas.
                                                 "CRS84h" ;
                                             proc:type "string" ] ] ;
                             ns1:required "bbox" ] ] ;
-            ns2:cloud_cover_max [ dcterms:description "Maximum acceptable cloud cover percentage (0-100)" ;
+            ns3:cloud_cover_max [ dcterms:description "Maximum acceptable cloud cover percentage (0-100)" ;
                     dcterms:title "Maximum Cloud Cover" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns2:days_back [ dcterms:description "Number of days to search backwards from current date" ;
+            ns3:days_back [ dcterms:description "Number of days to search backwards from current date" ;
                     dcterms:title "Days Back" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "integer" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "0.0.1" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value [ a ns3:Person ;
-                    ns3:name "Cameron Sajedi" ] ;
+    proc:metadata [ rdf:value [ a ns2:Person ;
+                    ns2:name "Cameron Sajedi" ] ;
             proc:role schema:author ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove?tab=MIT-1-ov-file#readme" ;
-            proc:role schema:license ],
-        [ rdf:value "Mangrove Biomass Workflow" ;
-            proc:role schema:name ],
         [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
             proc:role schema:codeRepository ],
-        [ rdf:value [ a ns3:Person ;
-                    ns3:identifier "https://orcid.org/0000-0002-9617-8641" ;
-                    ns3:name "Gérald Fenoy" ] ;
+        [ rdf:value "0.0.1" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value [ a ns2:Person ;
+                    ns2:identifier "https://orcid.org/0000-0002-9617-8641" ;
+                    ns2:name "Gérald Fenoy" ] ;
             proc:role schema:contributor ],
+        [ rdf:value "Mangrove Biomass Workflow" ;
+            proc:role schema:name ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove?tab=MIT-1-ov-file#readme" ;
+            proc:role schema:license ],
         [ rdf:value """Workflow for Mangrove Biomass Analysis
   
 This workflow orchestrates the mangrove biomass estimation process using
@@ -984,15 +984,18 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 
 #### ttl
 ```ttl
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/mangrove-workflow> pp:version "0.0.1" .
 
 [] pp:processDescription [ pp:process <https://geolabs.github.io/bblocks-process-profiles/def/process/mangrove-workflow> ] ;
-    proc:executionUnit [ a <https://geolabs.github.io/bblocks-process-profiles/def/application/cwl+yaml> ;
-            pp:href "https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove-workflow" ;
-            pp:rel "http://www.opengis.net/def/rel/ogc/1.0/executionUnit" ] .
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove-workflow> ] .
 
 
 ```
@@ -1115,7 +1118,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "qualifiedAssociation": [
       {
         "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-        "hadPlan": "https://ospd.example.org/ogc-api/processes/mangrove-workflow"
+        "hadPlan": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package"
       }
     ],
     "endedAtTime": "2026-09-23T08:03:17Z"
@@ -1164,6 +1167,15 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
     "provType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
+  },
+  {
+    "id": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package",
+    "provType": "prov:Plan"
+  },
+  {
+    "id": "arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main",
+    "provType": "prov:Plan",
+    "specializationOf": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package"
   }
 ]
 
@@ -1190,7 +1202,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "qualifiedAssociation": [
         {
           "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-          "hadPlan": "https://ospd.example.org/ogc-api/processes/mangrove-workflow"
+          "hadPlan": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package"
         }
       ],
       "endedAtTime": "2026-09-23T08:03:17Z"
@@ -1239,6 +1251,15 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
       "provType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
+    },
+    {
+      "id": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package",
+      "provType": "prov:Plan"
+    },
+    {
+      "id": "arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main",
+      "provType": "prov:Plan",
+      "specializationOf": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package"
     }
   ]
 }
@@ -1254,6 +1275,9 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/mangrove-workflow/package> .
 
 <urn:example:entity:mangrove-workflow:out:stac> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/mangrove-workflow#outputs/stac> ;
@@ -1283,12 +1307,14 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove-workflow> ;
     prov:endedAtTime "2026-09-23T08:03:17+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/mangrove-workflow> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/mangrove-workflow/package> ] ;
     prov:startedAtTime "2026-09-23T08:01:10+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:mangrove-workflow:in:aoi>,
         <urn:example:entity:mangrove-workflow:in:cloud_cover_max>,
         <urn:example:entity:mangrove-workflow:in:days_back> ;
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145> .
+
+<https://ospd.example.org/ogc-api/processes/mangrove-workflow/package> a prov:Plan .
 
 <urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
@@ -1305,7 +1331,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "id": "urn:example:run:kindgrove:mangrove-workflow",
     "type": "WorkflowRun",
     "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove-workflow",
-    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/mangrove-workflow",
+    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
     "status": "successful",
     "jobID": "kindgrove-mangrove-workflow-0001",
@@ -1400,7 +1426,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "id": "urn:example:run:kindgrove:mangrove-workflow",
     "type": "WorkflowRun",
     "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove-workflow",
-    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/mangrove-workflow",
+    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
     "status": "successful",
     "jobID": "kindgrove-mangrove-workflow-0001",
@@ -1542,7 +1568,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 
 <urn:example:run:kindgrove:mangrove-workflow> a wfprov:WorkflowRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove-workflow> ;
-    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/mangrove-workflow> ;
+    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/mangrove-workflow/package> ;
     wfprov:hadSubProcessRun <urn:example:run:kindgrove:mangrove>,
         <urn:example:run:kindgrove:parse-aoi> ;
     prov:endedAtTime "2026-09-23T08:03:17+00:00"^^xsd:dateTime ;
@@ -1584,19 +1610,26 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "profile": "ospd.process-profiles.kindgrove.mangrove-workflow",
   "processDescription": {
     "id": "mangrove-workflow",
-    "version": "0.0.1"
+    "version": "0.0.1",
+    "href": "https://ospd.example.org/ogc-api/processes/mangrove-workflow"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/bblocks-eoap-cct/blob/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove-workflow",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove-workflow",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "Workflow",
     "cwlId": "mangrove-workflow",
-    "license": "https://spdx.org/licenses/Apache-2.0"
+    "license": "https://spdx.org/licenses/Apache-2.0",
+    "cctDependencies": [
+      "eoap.cct.bbox"
+    ],
+    "candidateCctDependencies": []
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
-  "cctDependencies": [
-    "eoap.cct.bbox"
-  ],
-  "candidateCctDependencies": [],
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/parse-aoi",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove"
@@ -1644,19 +1677,26 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "profile": "ospd.process-profiles.kindgrove.mangrove-workflow",
   "processDescription": {
     "id": "mangrove-workflow",
-    "version": "0.0.1"
+    "version": "0.0.1",
+    "href": "https://ospd.example.org/ogc-api/processes/mangrove-workflow"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/bblocks-eoap-cct/blob/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove-workflow",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove-workflow",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "Workflow",
     "cwlId": "mangrove-workflow",
-    "license": "https://spdx.org/licenses/Apache-2.0"
+    "license": "https://spdx.org/licenses/Apache-2.0",
+    "cctDependencies": [
+      "eoap.cct.bbox"
+    ],
+    "candidateCctDependencies": []
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
-  "cctDependencies": [
-    "eoap.cct.bbox"
-  ],
-  "candidateCctDependencies": [],
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/parse-aoi",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove"
@@ -1684,8 +1724,14 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 
 #### ttl
 ```ttl
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 
@@ -1699,7 +1745,6 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     skos:definition "Workflow for Mangrove Biomass Analysis This workflow orchestrates the mangrove biomass estimation process using Sentinel-2 imagery. It wraps the mangrove_workflow.cwl tool to provide a reusable workflow for analyzing different study areas." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Mangrove Biomass Workflow" ;
-    pp:cctDependency "eoap.cct.bbox" ;
     pp:hasStep <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove>,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/parse-aoi> ;
     pp:openeoEquivalence [ pp:decomposition ( [ skos:note "structural; bounding box is a native openEO parameter type" ;
@@ -1709,16 +1754,23 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
                         pp:stage "step_1 (mangrove_cli)" ] ) ;
             pp:equivalenceLevel "none" ;
             pp:rationale "Composite of a BBox-unpacking helper and one opaque tool; the openEO equivalent is a process graph (see the `mangrove` profile for the stage-by-stage decomposition). `stac.yaml` is imported in `SchemaDefRequirement` but unused." ] ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/mangrove-workflow/package> ;
     pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/mangrove-workflow> ;
     pp:profile "ospd.process-profiles.kindgrove.mangrove-workflow" ;
     pp:provenanceClass wfprov:WorkflowRun ;
-    pp:source [ pp:cwl <https://github.com/GeoLabs/bblocks-eoap-cct/blob/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove-workflow> ;
-            pp:cwlClass "Workflow" ;
-            pp:cwlId "mangrove-workflow" ;
-            pp:license "https://spdx.org/licenses/Apache-2.0" ] ;
     pp:status "submitted" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/mangrove-workflow> pp:version "0.0.1" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/mangrove-workflow> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/mangrove-workflow> ;
+    pp:version "0.0.1" .
+
+<https://ospd.example.org/ogc-api/processes/mangrove-workflow/package> a prov:Plan ;
+    dcterms:license <https://spdx.org/licenses/Apache-2.0> ;
+    pp:cctDependency "eoap.cct.bbox" ;
+    pp:cwlClass "Workflow" ;
+    pp:cwlId "mangrove-workflow" ;
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove-workflow> ] .
 
 
 ```
@@ -3336,10 +3388,10 @@ id:32497dfb-a6ea-4996-a29e-3700668da867 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/step_1" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:3ad94428-01ae-451b-a3f4-af56b73e6981 ;
-            prov:hadPlan <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1> ],
+            prov:agent id:a6977d92-2fbb-47e7-a784-4bfcb0da723b ],
         [ a prov:Association ;
-            prov:agent id:a6977d92-2fbb-47e7-a784-4bfcb0da723b ] ;
+            prov:agent id:3ad94428-01ae-451b-a3f4-af56b73e6981 ;
+            prov:hadPlan <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T10:03:16.994695"^^xsd:dateTime ;
             prov:hadActivity id:ec5cc9e1-3e83-4551-a759-4745c5b5040b ] ;
@@ -3347,29 +3399,29 @@ id:32497dfb-a6ea-4996-a29e-3700668da867 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T10:01:12.463948"^^xsd:dateTime ;
             prov:hadActivity id:ec5cc9e1-3e83-4551-a759-4745c5b5040b ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:12.503410"^^xsd:dateTime ;
-            prov:entity id:cf0be29b-e4d9-4fd3-bd1b-2ed80a4095a9 ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/days_back> ],
+            prov:atTime "2026-09-23T10:01:12.503903"^^xsd:dateTime ;
+            prov:entity id:d061c0fb-cd9b-4026-acea-7aa18b482246 ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/west> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T10:01:12.503452"^^xsd:dateTime ;
             prov:entity id:930cbb58-e736-4bd6-97e8-f8d6fdb3ecca ;
             prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/north> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:12.503903"^^xsd:dateTime ;
-            prov:entity id:d061c0fb-cd9b-4026-acea-7aa18b482246 ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/west> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:12.503371"^^xsd:dateTime ;
-            prov:entity id:980cdadc-8748-4ee0-8e50-02285fada4ac ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/cloud_cover_max> ],
+            prov:atTime "2026-09-23T10:01:12.503865"^^xsd:dateTime ;
+            prov:entity data:e71003c6b7dd4093ce139ac0c51a6ba38d54a439 ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/output_dir> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T10:01:12.503886"^^xsd:dateTime ;
             prov:entity id:a98d2a32-f817-4ba9-9a35-66d4b22bc9de ;
             prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/south> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:12.503865"^^xsd:dateTime ;
-            prov:entity data:e71003c6b7dd4093ce139ac0c51a6ba38d54a439 ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/output_dir> ],
+            prov:atTime "2026-09-23T10:01:12.503371"^^xsd:dateTime ;
+            prov:entity id:980cdadc-8748-4ee0-8e50-02285fada4ac ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/cloud_cover_max> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T10:01:12.503410"^^xsd:dateTime ;
+            prov:entity id:cf0be29b-e4d9-4fd3-bd1b-2ed80a4095a9 ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/days_back> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T10:01:12.503436"^^xsd:dateTime ;
             prov:entity id:43bb865a-d8cd-4787-8345-a30f5433a956 ;
@@ -3388,9 +3440,9 @@ id:3d909cf5-e433-4f42-a566-ecc18e8648ac a wfprov:Artifact,
     prov:hadDictionaryMember "id:9dc1dc18-e01b-439a-818c-00162dabf4af"^^xsd:QName,
         "id:c78baf60-1897-4153-8e9c-e2eb311497b9"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:639b3f31-e75a-4bcb-891c-0a3a8d2301e3 ],
+            provext:member data:09b42388eb37be1a4b972127a78f691ec6eb3795 ],
         [ a provext:Membership ;
-            provext:member data:09b42388eb37be1a4b972127a78f691ec6eb3795 ] .
+            provext:member id:639b3f31-e75a-4bcb-891c-0a3a8d2301e3 ] .
 
 id:43bb865a-d8cd-4787-8345-a30f5433a956 a prov:Entity ;
     prov:value 9.535e+01 .
@@ -3412,9 +3464,9 @@ id:570b17a1-1129-4b02-b2bc-a4675847cf5d a ro:Folder,
             prov:atTime "2026-09-23T10:03:17.024364"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/primary/stac> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:204e8020-f340-4534-bcb6-378a06cfce69 ],
+            provext:member id:3efd1082-30b0-4081-aac3-595258d0235a ],
         [ a provext:Membership ;
-            provext:member id:3efd1082-30b0-4081-aac3-595258d0235a ] ;
+            provext:member id:204e8020-f340-4534-bcb6-378a06cfce69 ] ;
     cwlprov:basename "outputs" .
 
 id:5aa7a676-73f7-4cd5-bcc3-8c24e71dd6e0 a prov:Entity ;
@@ -3424,13 +3476,13 @@ id:639b3f31-e75a-4bcb-891c-0a3a8d2301e3 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:c5bac52b-0236-4d46-9e95-2715e4ebb57f ],
-        [ a provext:Membership ;
             provext:member id:0b639232-1377-4260-9361-ccfad1f07653 ],
         [ a provext:Membership ;
-            provext:member id:84fd2907-ae91-49e6-b896-5337cf88d4e4 ],
+            provext:member id:c5bac52b-0236-4d46-9e95-2715e4ebb57f ],
         [ a provext:Membership ;
-            provext:member id:8cae0f0e-8136-47a3-91de-2df4cb915caa ] .
+            provext:member id:8cae0f0e-8136-47a3-91de-2df4cb915caa ],
+        [ a provext:Membership ;
+            provext:member id:84fd2907-ae91-49e6-b896-5337cf88d4e4 ] .
 
 id:74500aa8-7eb8-4831-a5d7-b57b0d559a7f a wfprov:Artifact,
         prov:Collection,
@@ -3439,9 +3491,9 @@ id:74500aa8-7eb8-4831-a5d7-b57b0d559a7f a wfprov:Artifact,
     prov:hadDictionaryMember "id:93ea57b4-1913-4209-a534-4f43acc9e037"^^xsd:QName,
         "id:d4edcbc8-d63f-4e4a-b8fe-e640258e0481"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:ef051260-da6b-471f-b7ec-77a3f03338f9 ],
+            provext:member data:09b42388eb37be1a4b972127a78f691ec6eb3795 ],
         [ a provext:Membership ;
-            provext:member data:09b42388eb37be1a4b972127a78f691ec6eb3795 ] .
+            provext:member id:ef051260-da6b-471f-b7ec-77a3f03338f9 ] .
 
 id:84fd2907-ae91-49e6-b896-5337cf88d4e4 a prov:Entity ;
     prov:value 9.515e+01 .
@@ -3489,11 +3541,11 @@ id:ef051260-da6b-471f-b7ec-77a3f03338f9 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:5aa7a676-73f7-4cd5-bcc3-8c24e71dd6e0 ],
+            provext:member id:3d6a2dea-df15-41de-943f-5c75ffc145fd ],
         [ a provext:Membership ;
             provext:member id:05148d8f-b41a-430e-ab3c-e47863420580 ],
         [ a provext:Membership ;
-            provext:member id:3d6a2dea-df15-41de-943f-5c75ffc145fd ],
+            provext:member id:5aa7a676-73f7-4cd5-bcc3-8c24e71dd6e0 ],
         [ a provext:Membership ;
             provext:member id:371c06f9-5e4f-482d-a56d-17457d592305 ] .
 
@@ -3512,13 +3564,13 @@ id:3efd1082-30b0-4081-aac3-595258d0235a a ro:Folder,
         "id:beef0d3b-cdec-4f99-a497-ed54573e9aa0"^^xsd:QName,
         "id:d2617387-2a90-4dc3-8db3-0d71f8e3d6ef"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
+            provext:member id:1a78bcc2-8056-4262-8f95-eff699d2deeb ],
+        [ a provext:Membership ;
             provext:member id:1ec302cf-1d77-48c8-9550-86945f3a70ef ],
         [ a provext:Membership ;
             provext:member id:311c03b4-81b7-421a-8cd4-b744019dc39b ],
         [ a provext:Membership ;
-            provext:member id:30f546f9-0831-4994-946d-88f0365ffd8a ],
-        [ a provext:Membership ;
-            provext:member id:1a78bcc2-8056-4262-8f95-eff699d2deeb ] ;
+            provext:member id:30f546f9-0831-4994-946d-88f0365ffd8a ] ;
     cwlprov:basename "mangrove-analysis-20260923-080315" .
 
 id:3ad94428-01ae-451b-a3f4-af56b73e6981 a wfprov:WorkflowEngine,
@@ -3561,13 +3613,13 @@ id:ec5cc9e1-3e83-4551-a759-4745c5b5040b a wfprov:WorkflowRun,
             prov:atTime "2026-09-23T10:01:10.962463"^^xsd:dateTime ;
             prov:hadActivity id:3ad94428-01ae-451b-a3f4-af56b73e6981 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:11.351399"^^xsd:dateTime ;
-            prov:entity id:74500aa8-7eb8-4831-a5d7-b57b0d559a7f ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/aoi> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T10:01:11.351432"^^xsd:dateTime ;
             prov:entity id:d41afe53-37b5-4d07-a4d3-8f135d5ee9bd ;
             prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/cloud_cover_max> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T10:01:11.351399"^^xsd:dateTime ;
+            prov:entity id:74500aa8-7eb8-4831-a5d7-b57b0d559a7f ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/aoi> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T10:01:11.351454"^^xsd:dateTime ;
             prov:entity id:ab971800-6389-44da-a7db-d85c11161552 ;
@@ -3710,7 +3762,12 @@ x-jsonld-extra-terms:
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
-  metadata: https://w3id.org/ogc/api/processes/metadata
+  metadata:
+    x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+    x-jsonld-context:
+      href:
+        '@id': https://w3id.org/ogc/api/processes/href
+        '@type': '@id'
   role:
     x-jsonld-id: https://w3id.org/ogc/api/processes/role
     x-jsonld-type: '@id'
@@ -3728,8 +3785,27 @@ x-jsonld-extra-terms:
       type: http://purl.org/dc/terms/type
       title: http://www.w3.org/2000/01/rdf-schema#label
   response: https://w3id.org/ogc/api/processes/response
-  executionUnit: https://w3id.org/ogc/api/processes/executionUnit
-  processDescription: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+  executionUnit:
+    x-jsonld-id: https://w3id.org/ogc/api/processes/executionUnit
+    x-jsonld-context:
+      href:
+        '@id': http://www.w3.org/ns/oa#hasTarget
+        '@type': '@id'
+      rel:
+        '@id': http://www.iana.org/assignments/relation
+        '@type': '@id'
+        '@context':
+          '@base': http://www.iana.org/assignments/relation/
+      type: http://purl.org/dc/terms/format
+  processDescription:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+    x-jsonld-context:
+      href:
+        '@id': http://www.w3.org/2000/01/rdf-schema#seeAlso
+        '@type': '@id'
+      license:
+        '@id': http://purl.org/dc/terms/license
+        '@type': '@id'
   result: https://geolabs.github.io/bblocks-process-profiles/def/result
   engine: https://geolabs.github.io/bblocks-process-profiles/def/engine
   run: https://geolabs.github.io/bblocks-process-profiles/def/run
@@ -3764,6 +3840,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   hadPlan:
     x-jsonld-id: http://www.w3.org/ns/prov#hadPlan
+    x-jsonld-type: '@id'
+  specializationOf:
+    x-jsonld-id: http://www.w3.org/ns/prov#specializationOf
     x-jsonld-type: '@id'
   startedAtTime:
     x-jsonld-id: http://www.w3.org/ns/prov#startedAtTime
@@ -3803,14 +3882,20 @@ x-jsonld-extra-terms:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#broader
     x-jsonld-type: '@id'
   profile: https://geolabs.github.io/bblocks-process-profiles/def/profile
-  source: https://geolabs.github.io/bblocks-process-profiles/def/source
-  cwl:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cwl
-    x-jsonld-type: '@id'
+  plan:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
+    x-jsonld-context:
+      license:
+        '@id': http://purl.org/dc/terms/license
+        '@type': '@id'
+  Plan: http://www.w3.org/ns/prov#Plan
   cwlClass: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
   cwlId: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
   provenanceClass:
     x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
+    x-jsonld-type: '@id'
+  implementsProfile:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
     x-jsonld-type: '@id'
   cctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
   candidateCctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
@@ -3904,7 +3989,15 @@ Links to the schema:
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
     "outputTransmission": "proc:outputTransmission",
-    "metadata": "proc:metadata",
+    "metadata": {
+      "@id": "proc:metadata",
+      "@context": {
+        "href": {
+          "@id": "proc:href",
+          "@type": "@id"
+        }
+      }
+    },
     "role": {
       "@id": "proc:role",
       "@type": "@id"
@@ -3928,8 +4021,36 @@ Links to the schema:
       }
     },
     "response": "proc:response",
-    "executionUnit": "proc:executionUnit",
-    "processDescription": "pp:processDescription",
+    "executionUnit": {
+      "@id": "proc:executionUnit",
+      "@context": {
+        "href": {
+          "@id": "oa:hasTarget",
+          "@type": "@id"
+        },
+        "rel": {
+          "@id": "http://www.iana.org/assignments/relation",
+          "@type": "@id",
+          "@context": {
+            "@base": "http://www.iana.org/assignments/relation/"
+          }
+        },
+        "type": "dct:format"
+      }
+    },
+    "processDescription": {
+      "@id": "pp:processDescription",
+      "@context": {
+        "href": {
+          "@id": "rdfs:seeAlso",
+          "@type": "@id"
+        },
+        "license": {
+          "@id": "dct:license",
+          "@type": "@id"
+        }
+      }
+    },
     "result": "pp:result",
     "engine": "pp:engine",
     "run": "pp:run",
@@ -3973,6 +4094,10 @@ Links to the schema:
     },
     "hadPlan": {
       "@id": "prov:hadPlan",
+      "@type": "@id"
+    },
+    "specializationOf": {
+      "@id": "prov:specializationOf",
       "@type": "@id"
     },
     "startedAtTime": {
@@ -4024,15 +4149,24 @@ Links to the schema:
       "@type": "@id"
     },
     "profile": "pp:profile",
-    "source": "pp:source",
-    "cwl": {
-      "@id": "pp:cwl",
-      "@type": "@id"
+    "plan": {
+      "@id": "pp:plan",
+      "@context": {
+        "license": {
+          "@id": "dct:license",
+          "@type": "@id"
+        }
+      }
     },
+    "Plan": "prov:Plan",
     "cwlClass": "pp:cwlClass",
     "cwlId": "pp:cwlId",
     "provenanceClass": {
       "@id": "pp:provenanceClass",
+      "@type": "@id"
+    },
+    "implementsProfile": {
+      "@id": "pp:implementsProfile",
       "@type": "@id"
     },
     "cctDependencies": "pp:cctDependency",

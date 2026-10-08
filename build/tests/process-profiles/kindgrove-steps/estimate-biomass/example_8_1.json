@@ -11,19 +11,26 @@
   "profile": "ospd.process-profiles.kindgrove-steps.estimate-biomass",
   "processDescription": {
     "id": "estimate_biomass",
-    "version": "0.1.0"
+    "version": "0.1.0",
+    "href": "https://ospd.example.org/ogc-api/processes/estimate_biomass"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#estimate_biomass",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/estimate_biomass/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#estimate_biomass",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "estimate_biomass",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.stac"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.stac"
-  ],
   "openeoEquivalence": {
     "level": "none",
     "rationale": "Opaque: a threshold-based mangrove mask (ndvi_min/max, ndwi_min, savi_min) followed by a fixed linear allometric formula (biomass_slope/intercept) and an IPCC carbon_fraction constant. No openEO process expresses a domain-specific regression model, same as `kindgrove.mangrove`."

@@ -1,0 +1,21 @@
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extent> a skos:Concept ;
+    skos:broader <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation> ;
+    skos:definition "Build a vector data containing the image envelope polygon. Useful for some projection, you can set the polygon with more points with the sr parameter. This filter supports user-specified output projection. If no projection is defined, the standard WGS84 projection will be used." ;
+    skos:inScheme pp:process-type ;
+    skos:prefLabel "Extracts an image envelope." ;
+    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent> ;
+    pp:openeoEquivalence [ pp:equivalenceLevel "none" ;
+            pp:rationale "No openEO process computes the bounding envelope of a raster/data cube in the published bblocks-openeo register (filter_bbox takes a bbox as input to filter by, it does not compute one as output)." ] ;
+    pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.ImageEnvelope> ;
+    pp:profile "ospd.process-profiles.raster.extent" ;
+    pp:provenanceClass wfprov:ProcessRun ;
+    pp:status "submitted" .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.ImageEnvelope> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ImageEnvelope> ;
+    pp:version "1.0.0" .
+

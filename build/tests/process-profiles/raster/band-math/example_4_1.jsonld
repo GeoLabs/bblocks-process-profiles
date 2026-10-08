@@ -1,0 +1,33 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/band-math/context.jsonld",
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/band-math",
+  "type": "ProcessType",
+  "prefLabel": "Outputs a monoband image which is the result of a mathematical operation on several multi-band images.",
+  "definition": "This application performs a mathematical operation on several multi-band images and outputs the result into a monoband image. The given expression is computed at each pixel position. Evaluation of the mathematical formula is done by the muParser library.The formula can be written using:* numerical values ( 2.3, -5, 3.1e4, ...)* variables containing pixel values (e.g. ``im2b3`` is the pixel value in 2nd image, 3rd band)* binary operators: * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division * ``^`` raise x to the power of y * ``",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+  ],
+  "profile": "ospd.process-profiles.raster.band-math",
+  "processDescription": {
+    "id": "OTB.BandMath",
+    "version": "1.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMath"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math",
+  "closeMatch": [
+    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.reduce_dimension"
+  ],
+  "relatedMatch": [
+    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.divide",
+    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.power",
+    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.multiply",
+    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.subtract"
+  ],
+  "openeoEquivalence": {
+    "level": "closeMatch",
+    "rationale": "Generic band math (muParser expression over an input image list `il`, output forced monoband): the same closeMatch reasoning as W1's `algae-bloom.calculate-band` (also gdal_calc.py-style band math) -- reduce_dimension over the `bands` dimension with a callback built from math processes. The expression is free text here (muParser syntax), a process graph in openEO."
+  }
+}

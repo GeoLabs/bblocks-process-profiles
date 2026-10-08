@@ -1,0 +1,139 @@
+{
+  "id": "Touches",
+  "title": "Compute intersection. ",
+  "description": "Generates a new geometry which is the region of intersection of the two geometries operated on.",
+  "version": "2.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "keywords": [
+    "vector",
+    "geometry",
+    "spatial relation",
+    "predicate",
+    "Touches",
+    "ST_Touches"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Vector Geometry Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing"
+    },
+    {
+      "title": "Generic Profile: Binary spatial predicate",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate"
+    },
+    {
+      "title": "Implementation Profile: Touches",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches"
+    }
+  ],
+  "inputs": {
+    "InputEntity1": {
+      "title": "the first geometry",
+      "description": "the first geometry to compare against.",
+      "keywords": [
+        "geometry",
+        "GML"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Binary spatial predicate -- input `geometry1`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry1"
+        },
+        {
+          "title": "Implementation Profile: Touches -- input `geometry1`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/inputs/geometry1"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    },
+    "InputEntity2": {
+      "title": "the other geometry",
+      "description": "the other geometry to compare against.",
+      "keywords": [
+        "geometry",
+        "GML"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Binary spatial predicate -- input `geometry2`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry2"
+        },
+        {
+          "title": "Implementation Profile: Touches -- input `geometry2`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/inputs/geometry2"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "Result": {
+      "title": "Intersects result",
+      "description": "A value true or false if the geometry1 and geometry2 touches.",
+      "keywords": [
+        "boolean"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Binary spatial predicate -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Touches -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/outputs/result"
+        }
+      ],
+      "schema": {
+        "type": "boolean"
+      }
+    }
+  }
+}

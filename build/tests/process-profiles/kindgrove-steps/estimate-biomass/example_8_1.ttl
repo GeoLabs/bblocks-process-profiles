@@ -1,4 +1,10 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 
@@ -7,17 +13,23 @@
     skos:definition "Detects mangrove pixels and estimates above-ground biomass and carbon stock from NDVI, NDWI and SAVI." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Mangrove detection, allometric biomass and IPCC carbon stock" ;
-    pp:candidateCctDependency "eoap.cct.stac" ;
     pp:openeoEquivalence [ pp:equivalenceLevel "none" ;
             pp:rationale "Opaque: a threshold-based mangrove mask (ndvi_min/max, ndwi_min, savi_min) followed by a fixed linear allometric formula (biomass_slope/intercept) and an IPCC carbon_fraction constant. No openEO process expresses a domain-specific regression model, same as `kindgrove.mangrove`." ] ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/estimate_biomass/package> ;
     pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/estimate_biomass> ;
     pp:profile "ospd.process-profiles.kindgrove-steps.estimate-biomass" ;
     pp:provenanceClass wfprov:ProcessRun ;
-    pp:source [ pp:cwl <https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#estimate_biomass> ;
-            pp:cwlClass "CommandLineTool" ;
-            pp:cwlId "estimate_biomass" ;
-            pp:license "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ] ;
     pp:status "submitted" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/estimate_biomass> pp:version "0.1.0" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/estimate_biomass> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/estimate_biomass> ;
+    pp:version "0.1.0" .
+
+<https://ospd.example.org/ogc-api/processes/estimate_biomass/package> a prov:Plan ;
+    dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
+    pp:candidateCctDependency "eoap.cct.stac" ;
+    pp:cwlClass "CommandLineTool" ;
+    pp:cwlId "estimate_biomass" ;
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#estimate_biomass> ] .
 

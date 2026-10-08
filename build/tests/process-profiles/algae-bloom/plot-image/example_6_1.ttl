@@ -7,6 +7,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/plot_turbidity_2> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/plot-image/package> .
+
 <urn:example:entity:plot-image:out:output_file> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/plot-image#outputs/output_file> ;
     rdfs:seeAlso [ dcterms:type "image/tiff; application=geotiff" ;
@@ -44,11 +47,13 @@
 <urn:example:image:ogc-ospd/algae-usecase/plot-image:1.0.0> a prov:SoftwareAgent ;
     pp:name "container image ogc-ospd/algae-usecase/plot-image:1.0.0" .
 
+<https://ospd.example.org/ogc-api/processes/plot-image/package> a prov:Plan .
+
 <urn:example:run:algae-bloom:plot-image> a prov:Activity,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/plot-image> ;
     prov:endedAtTime "2026-09-23T06:40:32+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/plot-image> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/plot-image/package> ] ;
     prov:startedAtTime "2026-09-23T06:40:29+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:plot-image:in:color_scale>,
         <urn:example:entity:plot-image:in:input_image>,

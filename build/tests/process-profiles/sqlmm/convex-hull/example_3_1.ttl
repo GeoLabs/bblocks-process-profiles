@@ -1,0 +1,65 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/ConvexHull> dcterms:description "This service shall return a feature collection that represents the convex hull of geometry InputPolygon. The convex hull is the smallest convex polygon that contains all points of the geometry. The convex Hull for a geometry of encoding data type Point is the point itself" ;
+    dcterms:subject "ConvexHull",
+        "ST_ConvexHull",
+        "derived geometry",
+        "geometry",
+        "vector" ;
+    dcterms:title "Compute convex hull." ;
+    pp:version "1.0.0" ;
+    proc:inputs [ ns3:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+                    dcterms:title "Polygon to compute convexhull" ;
+                    proc:keywords "GML",
+                        "geometry" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation -- input `geometry`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/inputs/geometry> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Convex hull -- input `geometry`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull/inputs/geometry> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+    proc:jobControlOptions "async-execute",
+        "dismiss",
+        "sync-execute" ;
+    proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Process Concept: Vector Geometry Processing" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Implementation Profile: Convex hull" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+    proc:mutable false ;
+    proc:outputTransmission "reference",
+        "value" ;
+    proc:outputs [ ns2:Result [ dcterms:description "The convex hull of the geometry" ;
+                    dcterms:title "The convex hull of the geometry" ;
+                    proc:keywords "GML",
+                        "geometry" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation -- output `result`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/outputs/result> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Convex hull -- output `result`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull/outputs/result> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "object" ] ] ] ] .
+

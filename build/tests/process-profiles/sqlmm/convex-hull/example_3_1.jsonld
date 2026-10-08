@@ -1,0 +1,114 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/convex-hull/context.jsonld",
+  "id": "ConvexHull",
+  "title": "Compute convex hull.",
+  "description": "This service shall return a feature collection that represents the convex hull of geometry InputPolygon. The convex hull is the smallest convex polygon that contains all points of the geometry. The convex Hull for a geometry of encoding data type Point is the point itself",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "keywords": [
+    "vector",
+    "geometry",
+    "derived geometry",
+    "ConvexHull",
+    "ST_ConvexHull"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Vector Geometry Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing"
+    },
+    {
+      "title": "Generic Profile: Unary geometry operation",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation"
+    },
+    {
+      "title": "Implementation Profile: Convex hull",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull"
+    }
+  ],
+  "inputs": {
+    "InputPolygon": {
+      "title": "Polygon to compute convexhull",
+      "description": "URI to a set of GML that describes the polygon.",
+      "keywords": [
+        "geometry",
+        "GML"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Unary geometry operation -- input `geometry`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/inputs/geometry"
+        },
+        {
+          "title": "Implementation Profile: Convex hull -- input `geometry`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull/inputs/geometry"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "Result": {
+      "title": "The convex hull of the geometry",
+      "description": "The convex hull of the geometry",
+      "keywords": [
+        "geometry",
+        "GML"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Unary geometry operation -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Convex hull -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull/outputs/result"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    }
+  }
+}

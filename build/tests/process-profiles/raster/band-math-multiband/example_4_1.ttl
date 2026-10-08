@@ -1,0 +1,21 @@
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/band-math-multiband> a skos:Concept ;
+    skos:broader <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    skos:definition "This application performs a mathematical operation on several multi-band images and outputs the result into an image (multi- or mono-band, as opposed to the BandMath OTB-application). The mathematical formula is done by the muParserX library.The list of features and the syntax of muParserX is available at [1].As opposed to muParser (and thus the BandMath OTB-application [2]), muParserX supports vector expressions which allows outputting multi-band images.Hereafter is a brief reference of the muParserX syntaxFundamentals------------The formula can be written using:* numerical values ( 2.3, -5, 3.1e4, ...)* variables containing pixel values (please, note the indexing of inputs from 1 to N). Examples for the first input image: * ``im1`` a pixel from 1st input, made of n components (n bands) * ``im1b2`` the 2nd component of a pixel from 1st input (band index is 1-based) * ``im1b2N3x4`` a 3x4 pixels Neighbourhood of a pixel the 2nd component of a pixel from the 1st input * ``im1PhyX`` horizontal (X-axis) spacing of the 1st input. * ``im1PhyY`` vertical (Y-axis) spacing of the 1st input input. * ``im1b2Mean`` mean of the 2nd component of the 1st input (global statistics) * ``im1b2Mini`` minimum of the 2nd component of the 1st input (global statistics) * ``im1b2Maxi`` maximum of the 2nd component of the 1st input (global statistics) * ``im1b2Sum`` sum of the 2nd component of the 1st input (global statistics) * ``im1b2Var`` variance of the 2nd component of the 1st input (global statistics) * ``idxX`` and ``idxY`` are the indices of the current pixel (generic variables)* binary operators: * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division * ``^`` raise x to the power of y * ``" ;
+    skos:inScheme pp:process-type ;
+    skos:prefLabel "This application performs mathematical operations on several multiband images." ;
+    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math-multiband> ;
+    pp:openeoEquivalence [ pp:equivalenceLevel "none" ;
+            pp:rationale "No openEO process combines several image bands via an arbitrary muParserX-style vector expression with multi-band output in the published bblocks-openeo register (array_apply is closest but applies a unary process per band, not a joint expression)." ] ;
+    pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.BandMathX> ;
+    pp:profile "ospd.process-profiles.raster.band-math-multiband" ;
+    pp:provenanceClass wfprov:ProcessRun ;
+    pp:status "submitted" .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.BandMathX> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMathX> ;
+    pp:version "1.0.0" .
+

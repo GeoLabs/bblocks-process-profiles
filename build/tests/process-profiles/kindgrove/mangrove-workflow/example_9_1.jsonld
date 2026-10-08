@@ -17,19 +17,26 @@
   "profile": "ospd.process-profiles.kindgrove.mangrove-workflow",
   "processDescription": {
     "id": "mangrove-workflow",
-    "version": "0.0.1"
+    "version": "0.0.1",
+    "href": "https://ospd.example.org/ogc-api/processes/mangrove-workflow"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/bblocks-eoap-cct/blob/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove-workflow",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove-workflow",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "Workflow",
     "cwlId": "mangrove-workflow",
-    "license": "https://spdx.org/licenses/Apache-2.0"
+    "license": "https://spdx.org/licenses/Apache-2.0",
+    "cctDependencies": [
+      "eoap.cct.bbox"
+    ],
+    "candidateCctDependencies": []
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
-  "cctDependencies": [
-    "eoap.cct.bbox"
-  ],
-  "candidateCctDependencies": [],
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/parse-aoi",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove"

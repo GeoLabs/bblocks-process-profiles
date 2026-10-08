@@ -3,6 +3,9 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/parse_aoi> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/parse_aoi/package> .
+
 <urn:example:entity:parse-aoi-steps:out:east> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/east> ;
     rdf:value 9.535e+01 ;
@@ -38,11 +41,13 @@
 <urn:example:image:alpine:3.22.2> a prov:SoftwareAgent ;
     pp:name "container image alpine:3.22.2" .
 
+<https://ospd.example.org/ogc-api/processes/parse_aoi/package> a prov:Plan .
+
 <urn:example:run:kindgrove-steps:parse-aoi-steps> a prov:Activity,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps> ;
     prov:endedAtTime "2026-09-24T10:57:48+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/parse_aoi> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/parse_aoi/package> ] ;
     prov:startedAtTime "2026-09-24T10:57:45+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:parse-aoi-steps:in:aoi> ;
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,

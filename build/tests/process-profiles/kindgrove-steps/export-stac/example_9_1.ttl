@@ -1,4 +1,10 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 
@@ -8,17 +14,23 @@
     skos:definition "Plots the biomass map and exports the mangrove analysis results as a STAC Catalog." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Plot the biomass map and export a STAC catalog" ;
-    pp:candidateCctDependency "eoap.cct.stac" ;
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "Writes the final rasters and summaries to a self-describing STAC output, plus a quicklook PNG rendering; save_result's STAC output option is the closest openEO equivalent, same partial match as `algae-bloom.plot-image` and `water-bodies.stac`." ] ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/export_stac/package> ;
     pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/export_stac> ;
     pp:profile "ospd.process-profiles.kindgrove-steps.export-stac" ;
     pp:provenanceClass wfprov:ProcessRun ;
-    pp:source [ pp:cwl <https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#export_stac> ;
-            pp:cwlClass "CommandLineTool" ;
-            pp:cwlId "export_stac" ;
-            pp:license "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ] ;
     pp:status "submitted" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/export_stac> pp:version "0.1.0" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/export_stac> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/export_stac> ;
+    pp:version "0.1.0" .
+
+<https://ospd.example.org/ogc-api/processes/export_stac/package> a prov:Plan ;
+    dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
+    pp:candidateCctDependency "eoap.cct.stac" ;
+    pp:cwlClass "CommandLineTool" ;
+    pp:cwlId "export_stac" ;
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#export_stac> ] .
 

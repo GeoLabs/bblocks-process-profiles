@@ -7,6 +7,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/reproject_b03_60m_2> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/reproject-image/package> .
+
 <urn:example:entity:reproject-image:out:result> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/reproject-image#outputs/result> ;
     rdfs:seeAlso [ dcterms:type "image/tiff; application=geotiff" ;
@@ -31,13 +34,15 @@
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> ;
     prov:endedAtTime "2026-09-23T06:39:38+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/reproject-image> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/reproject-image/package> ] ;
     prov:startedAtTime "2026-09-23T06:39:37+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:reproject-image:in:input_image>,
         <urn:example:entity:reproject-image:in:output_name>,
         <urn:example:entity:reproject-image:in:output_resolution> ;
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ogc-ospd/algae-usecase/reproject-image> .
+
+<https://ospd.example.org/ogc-api/processes/reproject-image/package> a prov:Plan .
 
 <urn:example:entity:reproject-image:in:input_image> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/reproject-image#inputs/input_image> ;

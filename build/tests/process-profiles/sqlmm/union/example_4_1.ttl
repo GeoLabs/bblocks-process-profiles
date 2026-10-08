@@ -1,0 +1,21 @@
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/union> a skos:Concept ;
+    skos:broader <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    skos:definition "This service shall return a bag of geometry values representing a Point set union of geometry InputEntity1 with geometry InputEntity2." ;
+    skos:inScheme pp:process-type ;
+    skos:prefLabel "Compute union." ;
+    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/union> ;
+    pp:openeoEquivalence [ pp:equivalenceLevel "none" ;
+            pp:rationale "No openEO process for this SQL/MM set operation in the published bblocks-openeo register." ] ;
+    pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/Union> ;
+    pp:profile "ospd.process-profiles.sqlmm.union" ;
+    pp:provenanceClass wfprov:ProcessRun ;
+    pp:status "submitted" .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/Union> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Union> ;
+    pp:version "2.0.0" .
+

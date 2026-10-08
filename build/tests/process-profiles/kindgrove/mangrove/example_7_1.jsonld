@@ -22,7 +22,7 @@
       "qualifiedAssociation": [
         {
           "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-          "hadPlan": "https://ospd.example.org/ogc-api/processes/mangrove_cli"
+          "hadPlan": "https://ospd.example.org/ogc-api/processes/mangrove_cli/package"
         }
       ],
       "endedAtTime": "2026-09-23T08:03:16Z"
@@ -92,6 +92,15 @@
       "id": "urn:example:image:ghcr.io/geolabs/kindgrove/mangrove-cwl:v0.0.1-rc7",
       "provType": "prov:SoftwareAgent",
       "name": "container image ghcr.io/geolabs/kindgrove/mangrove-cwl:v0.0.1-rc7"
+    },
+    {
+      "id": "https://ospd.example.org/ogc-api/processes/mangrove_cli/package",
+      "provType": "prov:Plan"
+    },
+    {
+      "id": "arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1",
+      "provType": "prov:Plan",
+      "specializationOf": "https://ospd.example.org/ogc-api/processes/mangrove_cli/package"
     }
   ]
 }

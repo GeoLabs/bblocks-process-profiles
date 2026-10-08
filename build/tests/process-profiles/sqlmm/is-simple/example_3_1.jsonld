@@ -1,0 +1,103 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/is-simple/context.jsonld",
+  "id": "IsSimple",
+  "title": "IsSimple test ",
+  "description": "This service shall return a true value if and only if geometry g has no anomalous geometric points, such as self intersection or self tangency. Simple curves intersect themselves only at their endpoints (only if they are also closed, see next function).",
+  "version": "2.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "keywords": [
+    "vector",
+    "geometry",
+    "predicate",
+    "IsSimple",
+    "ST_IsSimple"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Vector Geometry Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing"
+    },
+    {
+      "title": "Generic Profile: Unary spatial predicate",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-spatial-predicate"
+    },
+    {
+      "title": "Implementation Profile: Is simple",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/is-simple"
+    }
+  ],
+  "inputs": {
+    "InputPolygon": {
+      "title": "the first geometry",
+      "description": "the first geometry to compare against.",
+      "keywords": [
+        "geometry",
+        "GML"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Unary spatial predicate -- input `geometry`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-spatial-predicate/inputs/geometry"
+        },
+        {
+          "title": "Implementation Profile: Is simple -- input `geometry`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/is-simple/inputs/geometry"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "Result": {
+      "title": "IsSimple result",
+      "description": "The boolean result",
+      "keywords": [
+        "boolean"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Unary spatial predicate -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-spatial-predicate/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Is simple -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/is-simple/outputs/result"
+        }
+      ],
+      "schema": {
+        "type": "boolean"
+      }
+    }
+  }
+}

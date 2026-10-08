@@ -1,0 +1,26 @@
+{
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/reprojection",
+  "type": "ProcessType",
+  "prefLabel": "GDAL Warp Tool",
+  "definition": "The gdalwarp utility is an image mosaicing, reprojection and warping utility. The program can reproject to any supported projection, and can also apply GCPs stored with the image if the image is \"raw\" with control information.",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+  ],
+  "profile": "ospd.process-profiles.raster.reprojection",
+  "processDescription": {
+    "id": "Gdal_Warp",
+    "version": "1.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection",
+  "closeMatch": [
+    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
+  ],
+  "openeoEquivalence": {
+    "level": "closeMatch",
+    "rationale": "Gdal_Warp exposes both `s_srs`/`t_srs` (CRS reprojection) and `r`/`te` (resampling method, target extent): a closer match to resample_spatial than W1's own `reproject-image` use of the same underlying tool (which only changes pixel size, `-t_srs` unused) -- here both the `projection` and `resolution`/`method` parameters of resample_spatial are exercised. Not exactMatch: GCP-based warping (`tps`, `rpc`, `geoloc`) and `order` (polynomial order) have no openEO equivalent."
+  }
+}

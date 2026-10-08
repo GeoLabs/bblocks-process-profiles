@@ -1,0 +1,23 @@
+{
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference",
+  "type": "ProcessType",
+  "prefLabel": "Compute difference.",
+  "definition": "This function shall return a bag of geometry values representing the closure of the set difference between the two geometries InputEntity1 and InputEntity2. The difference is the set of all points which lie on InputEntity1 but not on InputEntity2.",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+  ],
+  "profile": "ospd.process-profiles.sqlmm.difference",
+  "processDescription": {
+    "id": "Difference",
+    "version": "2.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Difference"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/difference",
+  "openeoEquivalence": {
+    "level": "none",
+    "rationale": "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."
+  }
+}

@@ -22,7 +22,7 @@
       "qualifiedAssociation": [
         {
           "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-          "hadPlan": "https://ospd.example.org/ogc-api/processes/reproject_band"
+          "hadPlan": "https://ospd.example.org/ogc-api/processes/reproject_band/package"
         }
       ],
       "endedAtTime": "2026-09-24T10:59:18Z"
@@ -101,6 +101,15 @@
       "id": "urn:example:image:ghcr.io/geolabs/kindgrove/reproject-band:v0.0.2-rc2",
       "provType": "prov:SoftwareAgent",
       "name": "container image ghcr.io/geolabs/kindgrove/reproject-band:v0.0.2-rc2"
+    },
+    {
+      "id": "https://ospd.example.org/ogc-api/processes/reproject_band/package",
+      "provType": "prov:Plan"
+    },
+    {
+      "id": "arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band",
+      "provType": "prov:Plan",
+      "specializationOf": "https://ospd.example.org/ogc-api/processes/reproject_band/package"
     }
   ]
 }

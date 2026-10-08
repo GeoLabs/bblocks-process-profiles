@@ -15,7 +15,7 @@
       "qualifiedAssociation": [
         {
           "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-          "hadPlan": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process"
+          "hadPlan": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process/package"
         }
       ],
       "endedAtTime": "2026-09-23T06:40:34Z"
@@ -156,6 +156,15 @@
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
       "provType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
+    },
+    {
+      "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process/package",
+      "provType": "prov:Plan"
+    },
+    {
+      "id": "arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main",
+      "provType": "prov:Plan",
+      "specializationOf": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process/package"
     }
   ]
 }

@@ -1,4 +1,10 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 
@@ -9,14 +15,20 @@
     skos:prefLabel "Otsu binary threshold" ;
     pp:openeoEquivalence [ pp:equivalenceLevel "none" ;
             pp:rationale "openEO has no built-in Otsu (automatic histogram) threshold process; the closest primitive, `ogc.openeo.processes.comparison.gt`, only compares against a caller-supplied constant, not a threshold the process computes itself." ] ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/otsu/package> ;
     pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/otsu> ;
     pp:profile "ospd.process-profiles.water-bodies.otsu" ;
     pp:provenanceClass wfprov:ProcessRun ;
-    pp:source [ pp:cwl <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/otsu.cwl> ;
-            pp:cwlClass "CommandLineTool" ;
-            pp:cwlId "otsu" ;
-            pp:license "https://spdx.org/licenses/CC-BY-SA-4.0" ] ;
     pp:status "submitted" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/otsu> pp:version "1.4.1" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/otsu> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/otsu> ;
+    pp:version "1.4.1" .
+
+<https://ospd.example.org/ogc-api/processes/otsu/package> a prov:Plan ;
+    dcterms:license <https://spdx.org/licenses/CC-BY-SA-4.0> ;
+    pp:cwlClass "CommandLineTool" ;
+    pp:cwlId "otsu" ;
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/otsu.cwl> ] .
 

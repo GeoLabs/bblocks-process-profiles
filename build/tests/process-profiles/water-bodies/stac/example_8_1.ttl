@@ -4,7 +4,7 @@
 
 <urn:example:run:water-bodies:stac> a wfprov:ProcessRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/stac> ;
-    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/stac> ;
+    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/stac/package> ;
     wfprov:usedInput <urn:example:entity:stac:in:item>,
         <urn:example:entity:stac:in:rasters> ;
     wfprov:wasPartOfWorkflowRun <urn:example:run:water-bodies:water-bodies> ;

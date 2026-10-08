@@ -1,0 +1,65 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/buffer/context.jsonld",
+  "id": "Buffer",
+  "title": "Create a buffer around a polygon. ",
+  "description": "This service shall return a feature collection representing the buffer of geometry InputPolygon at distance BufferDistance. The buffer of a geometry at distance d is the Polygon or MultiPolygon which contains all points within a distance d of the geometry.",
+  "version": "2.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "InputPolygon": {
+      "title": "Polygon to be buffered",
+      "description": "URI to a set of GML that describes the polygon.",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    },
+    "BufferDistance": {
+      "title": "Buffer Distance",
+      "description": "Distance to be used to calculate buffer.",
+      "schema": {
+        "type": "number",
+        "default": 10,
+        "format": "float",
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "Result": {
+      "title": "Buffered Polygon",
+      "description": "GML stream describing the buffered polygon feature.",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    }
+  },
+  "mutable": false
+}

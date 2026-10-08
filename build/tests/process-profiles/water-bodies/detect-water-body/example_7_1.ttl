@@ -20,7 +20,7 @@
 
 <urn:example:run:water-bodies:detect-water-body> a wfprov:WorkflowRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body> ;
-    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/detect_water_body> ;
+    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/detect_water_body/package> ;
     wfprov:hadSubProcessRun <urn:example:run:water-bodies:crop>,
         <urn:example:run:water-bodies:norm-diff>,
         <urn:example:run:water-bodies:otsu> ;

@@ -1,0 +1,318 @@
+{
+  "id": "OTB.ExtractROI",
+  "title": "Extract a ROI defined by the user.",
+  "description": "This application extracts a Region Of Interest with user parameters. There are four mode of extraction. The standard mode allows the user to enter one point (upper left corner of the region to extract) and a size. The extent mode needs two points (upper left corner and lower right) and the radius mode need the center of the region and the radius: it will extract the rectangle containing the circle defined and limited by the image dimension. The fit mode needs a reference image or vector and the dimension of the extracted region will be the same as the extent of the reference. Different units are available such as pixel, image physical space or longitude and latitude.",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "in": {
+      "title": "Image to be processed.",
+      "description": "Image to be processed.",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/jpeg"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "out": {
+      "title": "Region of interest from the input image",
+      "description": "Region of interest from the input image",
+      "schema": {
+        "type": "string",
+        "default": "float",
+        "enum": [
+          "uint8",
+          "uint16",
+          "int16",
+          "int32",
+          "int32",
+          "float",
+          "double"
+        ]
+      }
+    },
+    "mode": {
+      "title": "mode",
+      "description": "mode",
+      "schema": {
+        "type": "string",
+        "default": "standard",
+        "enum": [
+          "standard",
+          "fit",
+          "extent",
+          "radius"
+        ]
+      }
+    },
+    "mode.fit.im": {
+      "title": "Reference image to define the ROI",
+      "description": "Reference image to define the ROI",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/jpeg"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "mode.fit.vect": {
+      "title": "The extent of the input vector file is computed and then gives a region of interest that will be extracted.",
+      "description": "The extent of the input vector file is computed and then gives a region of interest that will be extracted.",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "utf-8",
+            "contentMediaType": "text/xml"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "utf-8",
+            "contentMediaType": "application/vnd.google-earth.kml+xml"
+          },
+          {
+            "type": "object"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/zip"
+          }
+        ]
+      }
+    },
+    "mode.extent.ulx": {
+      "title": "X coordinate of upper left corner point.",
+      "description": "X coordinate of upper left corner point.",
+      "schema": {
+        "type": "number",
+        "default": 0,
+        "format": "float"
+      }
+    },
+    "mode.extent.uly": {
+      "title": "Y coordinate of upper left corner point.",
+      "description": "Y coordinate of upper left corner point.",
+      "schema": {
+        "type": "number",
+        "default": 0,
+        "format": "float"
+      }
+    },
+    "mode.extent.lrx": {
+      "title": "X coordinate of lower right corner point.",
+      "description": "X coordinate of lower right corner point.",
+      "schema": {
+        "type": "number",
+        "default": 0,
+        "format": "float"
+      }
+    },
+    "mode.extent.lry": {
+      "title": "Y coordinate of lower right corner point.",
+      "description": "Y coordinate of lower right corner point.",
+      "schema": {
+        "type": "number",
+        "default": 0,
+        "format": "float"
+      }
+    },
+    "mode.extent.unit": {
+      "title": "mode.extent.unit",
+      "description": "mode.extent.unit",
+      "schema": {
+        "type": "string",
+        "default": "pxl",
+        "enum": [
+          "pxl",
+          "phy",
+          "lonlat"
+        ]
+      }
+    },
+    "mode.radius.r": {
+      "title": "This is the radius parameter of the radius mode.",
+      "description": "This is the radius parameter of the radius mode.",
+      "schema": {
+        "type": "number",
+        "default": 0,
+        "format": "float"
+      }
+    },
+    "mode.radius.unitr": {
+      "title": "mode.radius.unitr",
+      "description": "mode.radius.unitr",
+      "schema": {
+        "type": "string",
+        "default": "pxl",
+        "enum": [
+          "pxl",
+          "phy"
+        ]
+      }
+    },
+    "mode.radius.cx": {
+      "title": "This is the center coordinate of the radius mode, it will be either an ordinate or a latitude.",
+      "description": "This is the center coordinate of the radius mode, it will be either an ordinate or a latitude.",
+      "schema": {
+        "type": "number",
+        "default": 0,
+        "format": "float"
+      }
+    },
+    "mode.radius.cy": {
+      "title": "mode.radius.cy",
+      "description": "mode.radius.cy",
+      "schema": {
+        "type": "number",
+        "default": 0,
+        "format": "float"
+      }
+    },
+    "mode.radius.unitc": {
+      "title": "mode.radius.unitc",
+      "description": "mode.radius.unitc",
+      "schema": {
+        "type": "string",
+        "default": "pxl",
+        "enum": [
+          "pxl",
+          "phy",
+          "lonlat"
+        ]
+      }
+    },
+    "startx": {
+      "title": "ROI start x position.",
+      "description": "ROI start x position.",
+      "schema": {
+        "type": "integer",
+        "default": 0
+      }
+    },
+    "starty": {
+      "title": "ROI start y position.",
+      "description": "ROI start y position.",
+      "schema": {
+        "type": "integer",
+        "default": 0
+      }
+    },
+    "sizex": {
+      "title": "size along x in pixels.",
+      "description": "size along x in pixels.",
+      "schema": {
+        "type": "integer",
+        "default": 0
+      }
+    },
+    "sizey": {
+      "title": "size along y in pixels.",
+      "description": "size along y in pixels.",
+      "schema": {
+        "type": "integer",
+        "default": 0
+      }
+    },
+    "elev": {
+      "title": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
+      "description": "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.",
+      "schema": {
+        "type": "string",
+        "nullable": true
+      }
+    },
+    "elev.geoid": {
+      "title": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
+      "description": "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/octet-stream"
+          }
+        ]
+      }
+    },
+    "elev.default": {
+      "title": "This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.",
+      "description": "This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.",
+      "schema": {
+        "type": "number",
+        "default": 0,
+        "format": "float"
+      }
+    },
+    "ram": {
+      "title": "Available memory for processing (in MB).",
+      "description": "Available memory for processing (in MB).",
+      "schema": {
+        "type": "integer",
+        "default": 256,
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "out": {
+      "title": "Region of interest from the input image",
+      "description": "Region of interest from the input image",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/jpeg"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    }
+  },
+  "mutable": false
+}

@@ -2,7 +2,7 @@
   "title": "Validation report for ospd.process-profiles.process-type - Process type register entry",
   "bblockName": "Process type register entry",
   "bblockId": "ospd.process-profiles.process-type",
-  "generated": "2026-09-24T12:40:35.809661+00:00",
+  "generated": "2026-10-08T09:15:55.643230+00:00",
   "result": true,
   "items": [
     {
@@ -40,7 +40,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_1_1.ttl",
-              "size": 19,
+              "size": 24,
               "isError": false,
               "message": "Output Turtle example_1_1.ttl created"
             }
@@ -95,7 +95,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_2_1.ttl",
-              "size": 74,
+              "size": 79,
               "isError": false,
               "message": "Output Turtle example_2_1.ttl created"
             }

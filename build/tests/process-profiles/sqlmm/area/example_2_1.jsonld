@@ -1,0 +1,49 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/area/context.jsonld",
+  "id": "GetArea",
+  "title": "Compute geometry area.",
+  "description": "Computes the area of a geometry",
+  "version": "2.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "InputPolygon": {
+      "title": "Polygon to compute are",
+      "description": "URI to a set of GML that describes the polygon.",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "Area": {
+      "title": "Computed Area",
+      "description": "The Computed Area Value",
+      "schema": {
+        "type": "number",
+        "format": "float"
+      }
+    }
+  },
+  "mutable": false
+}

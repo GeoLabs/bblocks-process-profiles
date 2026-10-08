@@ -1,0 +1,21 @@
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/area> a skos:Concept ;
+    skos:broader <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    skos:definition "Computes the area of a geometry" ;
+    skos:inScheme pp:process-type ;
+    skos:prefLabel "Compute geometry area." ;
+    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area> ;
+    pp:openeoEquivalence [ pp:equivalenceLevel "none" ;
+            pp:rationale "No openEO process computes the area of a vector geometry in the published bblocks-openeo register." ] ;
+    pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/GetArea> ;
+    pp:profile "ospd.process-profiles.sqlmm.area" ;
+    pp:provenanceClass wfprov:ProcessRun ;
+    pp:status "submitted" .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/GetArea> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/GetArea> ;
+    pp:version "2.0.0" .
+

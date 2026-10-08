@@ -16,7 +16,7 @@
       "qualifiedAssociation": [
         {
           "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-          "hadPlan": "https://ospd.example.org/ogc-api/processes/norm_diff"
+          "hadPlan": "https://ospd.example.org/ogc-api/processes/norm_diff/package"
         }
       ],
       "endedAtTime": "2026-09-23T20:14:35Z"
@@ -59,6 +59,15 @@
       "id": "urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0",
       "provType": "prov:SoftwareAgent",
       "name": "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0"
+    },
+    {
+      "id": "https://ospd.example.org/ogc-api/processes/norm_diff/package",
+      "provType": "prov:Plan"
+    },
+    {
+      "id": "arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference",
+      "provType": "prov:Plan",
+      "specializationOf": "https://ospd.example.org/ogc-api/processes/norm_diff/package"
     }
   ]
 }

@@ -1,0 +1,14 @@
+Validation report for ospd.process-profiles.vector.geometry-extent - Process profile: SAGA.shapes_tools.19
+Generated 2026-10-08T09:16:21.031339+00:00
+=== Files ===
+Using examples/process-type.json from examples
+JSON-LD context is present - uplifting
+Output JSON-LD example_4_1.jsonld created
+Output Turtle example_4_1.ttl created
+=== End Files ===
+
+=== JSON Schema ===
+Using the following JSON Schema: #/$defs/processTypeEntry
+Validation passed
+=== End JSON Schema ===
+

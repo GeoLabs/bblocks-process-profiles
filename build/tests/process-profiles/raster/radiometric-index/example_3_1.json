@@ -1,0 +1,188 @@
+{
+  "id": "OTB.RadiometricIndices",
+  "title": "Compute radiometric indices.",
+  "description": "This application computes radiometric indices using the relevant channels of the input image. The output is a multi band image into which each channel is one of the selected indices.",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "keywords": [
+    "raster",
+    "coverage",
+    "radiometric index",
+    "OTB",
+    "RadiometricIndices"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Raster Coverage Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing"
+    },
+    {
+      "title": "Generic Profile: Radiometric index",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index"
+    },
+    {
+      "title": "Implementation Profile: Radiometric index",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index"
+    }
+  ],
+  "inputs": {
+    "in": {
+      "title": "Input image",
+      "description": "Input image",
+      "keywords": [
+        "raster",
+        "GeoTIFF"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Radiometric index -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Radiometric index -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/jpeg"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "out": {
+      "title": "Radiometric indices output image",
+      "description": "Radiometric indices output image",
+      "schema": {
+        "type": "string",
+        "default": "float",
+        "enum": [
+          "uint8",
+          "uint16",
+          "int16",
+          "int32",
+          "int32",
+          "float",
+          "double"
+        ]
+      }
+    },
+    "channels": {
+      "title": "Blue channel index",
+      "description": "Blue channel index",
+      "schema": {
+        "type": "integer",
+        "default": 1
+      }
+    },
+    "channels.green": {
+      "title": "Green channel index",
+      "description": "Green channel index",
+      "schema": {
+        "type": "integer",
+        "default": 1
+      }
+    },
+    "channels.red": {
+      "title": "Red channel index",
+      "description": "Red channel index",
+      "schema": {
+        "type": "integer",
+        "default": 1
+      }
+    },
+    "channels.nir": {
+      "title": "NIR channel index",
+      "description": "NIR channel index",
+      "schema": {
+        "type": "integer",
+        "default": 1
+      }
+    },
+    "channels.mir": {
+      "title": "Mir channel index",
+      "description": "Mir channel index",
+      "schema": {
+        "type": "integer",
+        "default": 1
+      }
+    },
+    "ram": {
+      "title": "Available memory for processing (in MB).",
+      "description": "Available memory for processing (in MB).",
+      "schema": {
+        "type": "integer",
+        "default": 256,
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "out": {
+      "title": "Radiometric indices output image",
+      "description": "Radiometric indices output image",
+      "keywords": [
+        "raster",
+        "GeoTIFF"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Radiometric index -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/outputs/raster"
+        },
+        {
+          "title": "Implementation Profile: Radiometric index -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index/outputs/raster"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/jpeg"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    }
+  }
+}

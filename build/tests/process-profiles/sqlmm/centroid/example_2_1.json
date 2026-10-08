@@ -1,0 +1,57 @@
+{
+  "id": "Centroid",
+  "title": "Computes the centroid of a polygon. ",
+  "description": "This service shall return the point that is the geometric centre of gravity of the geometry InputPolygon.",
+  "version": "2.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "InputPolygon": {
+      "title": "Polygon to get the centroid",
+      "description": "The centroid which is not necessarily within the geometry.",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/polygon.xsd"
+          }
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "Result": {
+      "title": "The Centroid",
+      "description": "JSON String / GML Entity of the centroid",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "UTF-8",
+            "contentMediaType": "text/xml",
+            "contentSchema": "http://fooa/gml/3.1.0/point.xsd"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    }
+  },
+  "mutable": false
+}

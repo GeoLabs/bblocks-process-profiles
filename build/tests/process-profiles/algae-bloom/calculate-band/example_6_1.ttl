@@ -7,6 +7,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/calculate_turbidity_2> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/calculate-band/package> .
+
 <urn:example:entity:calculate-band:out:result> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/calculate-band#outputs/result> ;
     rdfs:seeAlso [ dcterms:type "image/tiff; application=geotiff" ;
@@ -32,7 +35,7 @@
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band> ;
     prov:endedAtTime "2026-09-23T06:40:29+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/calculate-band> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/calculate-band/package> ] ;
     prov:startedAtTime "2026-09-23T06:40:28+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:calculate-band:in:band_a>,
         <urn:example:entity:calculate-band:in:band_c>,
@@ -40,6 +43,8 @@
         <urn:example:entity:calculate-band:in:name> ;
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ogc-ospd/algae-usecase/calculate-band:1.1.0> .
+
+<https://ospd.example.org/ogc-api/processes/calculate-band/package> a prov:Plan .
 
 <urn:example:entity:calculate-band:in:band_a> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/calculate-band#inputs/band_a> ;

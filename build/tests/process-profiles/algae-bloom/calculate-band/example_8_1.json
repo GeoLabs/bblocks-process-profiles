@@ -11,17 +11,24 @@
   "profile": "ospd.process-profiles.algae-bloom.calculate-band",
   "processDescription": {
     "id": "calculate-band",
-    "version": "1.1.0"
+    "version": "1.1.0",
+    "href": "https://ospd.example.org/ogc-api/processes/calculate-band"
   },
-  "source": {
-    "cwl": "https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/calculate-band.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/calculate-band/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/calculate-band.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "calculate-band",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": []
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [],
   "closeMatch": [
     "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.reduce_dimension"
   ],

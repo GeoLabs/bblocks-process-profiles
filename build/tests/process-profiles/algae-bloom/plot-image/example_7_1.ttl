@@ -4,7 +4,7 @@
 
 <urn:example:run:algae-bloom:plot-image> a wfprov:ProcessRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/plot-image> ;
-    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/plot-image> ;
+    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/plot-image/package> ;
     wfprov:usedInput <urn:example:entity:plot-image:in:color_scale>,
         <urn:example:entity:plot-image:in:input_image>,
         <urn:example:entity:plot-image:in:output_name>,

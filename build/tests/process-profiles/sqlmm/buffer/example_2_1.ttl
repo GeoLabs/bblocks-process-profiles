@@ -1,0 +1,39 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/Buffer> dcterms:description "This service shall return a feature collection representing the buffer of geometry InputPolygon at distance BufferDistance. The buffer of a geometry at distance d is the Polygon or MultiPolygon which contains all points within a distance d of the geometry." ;
+    dcterms:title "Create a buffer around a polygon. " ;
+    pp:version "2.0.0" ;
+    proc:inputs [ ns1:BufferDistance [ dcterms:description "Distance to be used to calculate buffer." ;
+                    dcterms:title "Buffer Distance" ;
+                    proc:schema [ proc:default "10"^^rdf:JSON ;
+                            proc:nullable true ;
+                            proc:type "number" ;
+                            ns2:format "float" ] ] ;
+            ns1:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+                    dcterms:title "Polygon to be buffered" ;
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "UTF-8" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "object" ] ] ] ] ;
+    proc:jobControlOptions "async-execute",
+        "dismiss",
+        "sync-execute" ;
+    proc:mutable false ;
+    proc:outputTransmission "reference",
+        "value" ;
+    proc:outputs [ ns3:Result [ dcterms:description "GML stream describing the buffered polygon feature." ;
+                    dcterms:title "Buffered Polygon" ;
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "UTF-8" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "object" ] ] ] ] .
+

@@ -15,19 +15,26 @@
   "profile": "ospd.process-profiles.algae-bloom.workflow-earth-search-process",
   "processDescription": {
     "id": "algae-usecase-workflow-earth-search-process",
-    "version": "2.1.0"
+    "version": "2.1.0",
+    "href": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process"
   },
-  "source": {
-    "cwl": "https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-earth-search-process.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-earth-search-process.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "Workflow",
     "cwlId": "algae-usecase-workflow-earth-search-process",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.string-format"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.string-format"
-  ],
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image",

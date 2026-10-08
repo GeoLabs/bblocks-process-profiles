@@ -19,7 +19,7 @@
       "qualifiedAssociation": [
         {
           "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-          "hadPlan": "https://ospd.example.org/ogc-api/processes/estimate_biomass"
+          "hadPlan": "https://ospd.example.org/ogc-api/processes/estimate_biomass/package"
         }
       ],
       "endedAtTime": "2026-09-24T10:59:47Z"
@@ -181,6 +181,15 @@
       "id": "urn:example:image:ghcr.io/geolabs/kindgrove/estimate-biomass:v0.0.2-rc2",
       "provType": "prov:SoftwareAgent",
       "name": "container image ghcr.io/geolabs/kindgrove/estimate-biomass:v0.0.2-rc2"
+    },
+    {
+      "id": "https://ospd.example.org/ogc-api/processes/estimate_biomass/package",
+      "provType": "prov:Plan"
+    },
+    {
+      "id": "arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass",
+      "provType": "prov:Plan",
+      "specializationOf": "https://ospd.example.org/ogc-api/processes/estimate_biomass/package"
     }
   ]
 }

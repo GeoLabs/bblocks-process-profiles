@@ -1,0 +1,45 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/Intersection> dcterms:description "This function SHALL return a bag of geometry values representing the Point set intersection of geometry InputEntity1 and geometry InputEntity2." ;
+    dcterms:title "Compute intersection. " ;
+    pp:version "2.0.0" ;
+    proc:inputs [ ns2:InputEntity1 [ dcterms:description "the first geometry to compare against." ;
+                    dcterms:title "the first geometry" ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
+            ns2:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
+                    dcterms:title "the other geometry" ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+    proc:jobControlOptions "async-execute",
+        "dismiss",
+        "sync-execute" ;
+    proc:mutable false ;
+    proc:outputTransmission "reference",
+        "value" ;
+    proc:outputs [ ns3:Result [ dcterms:description "A new geometry representing the intersection or NULL if there is no intersection or an error occurs." ;
+                    dcterms:title "Intersection of geometries" ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "object" ] ] ] ] .
+

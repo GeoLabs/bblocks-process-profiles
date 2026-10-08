@@ -52,7 +52,7 @@
 
 <urn:example:run:kindgrove:mangrove-workflow> a wfprov:WorkflowRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove-workflow> ;
-    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/mangrove-workflow> ;
+    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/mangrove-workflow/package> ;
     wfprov:hadSubProcessRun <urn:example:run:kindgrove:mangrove>,
         <urn:example:run:kindgrove:parse-aoi> ;
     prov:endedAtTime "2026-09-23T08:03:17+00:00"^^xsd:dateTime ;

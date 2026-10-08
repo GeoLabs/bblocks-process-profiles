@@ -20,7 +20,7 @@
       "qualifiedAssociation": [
         {
           "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-          "hadPlan": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe"
+          "hadPlan": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe/package"
         }
       ],
       "endedAtTime": "2026-09-23T07:31:32Z"
@@ -76,6 +76,15 @@
       "id": "urn:example:image:ogc-ospd/algae-usecase/download-band-sentinel2-product-safe:1.1.0",
       "provType": "prov:SoftwareAgent",
       "name": "container image ogc-ospd/algae-usecase/download-band-sentinel2-product-safe:1.1.0"
+    },
+    {
+      "id": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe/package",
+      "provType": "prov:Plan"
+    },
+    {
+      "id": "arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_60m",
+      "provType": "prov:Plan",
+      "specializationOf": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe/package"
     }
   ]
 }

@@ -1,4 +1,10 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 
@@ -12,14 +18,20 @@
         <https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.linear_scale_range> ;
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "Partial: the export part (GeoTIFF + PNG) corresponds to save_result with a GTiff or PNG format; `clip_min`/`clip_max` correspond to math.clip. The colour mapping (`color_scale` bins) and the matplotlib figure (title, colour bar) have no stable openEO process (colour maps are back-end-specific format options)." ] ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/plot-image/package> ;
     pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/plot-image> ;
     pp:profile "ospd.process-profiles.algae-bloom.plot-image" ;
     pp:provenanceClass wfprov:ProcessRun ;
-    pp:source [ pp:cwl <https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/plot-image.cwl> ;
-            pp:cwlClass "CommandLineTool" ;
-            pp:cwlId "plot-image" ;
-            pp:license "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ] ;
     pp:status "submitted" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/plot-image> pp:version "1.0.0" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/plot-image> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/plot-image> ;
+    pp:version "1.0.0" .
+
+<https://ospd.example.org/ogc-api/processes/plot-image/package> a prov:Plan ;
+    dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
+    pp:cwlClass "CommandLineTool" ;
+    pp:cwlId "plot-image" ;
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/plot-image.cwl> ] .
 

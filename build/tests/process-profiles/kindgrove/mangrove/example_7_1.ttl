@@ -7,6 +7,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/mangrove_cli/package> .
+
 <urn:example:entity:mangrove:out:result> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/mangrove_cli#outputs/result> ;
     rdfs:seeAlso [ dcterms:type "application/json" ;
@@ -50,7 +53,7 @@
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove> ;
     prov:endedAtTime "2026-09-23T08:03:16+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/mangrove_cli> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/mangrove_cli/package> ] ;
     prov:startedAtTime "2026-09-23T08:01:12+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:mangrove:in:cloud_cover_max>,
         <urn:example:entity:mangrove:in:days_back>,
@@ -61,6 +64,8 @@
         <urn:example:entity:mangrove:in:west> ;
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ghcr.io/geolabs/kindgrove/mangrove-cwl:v0.0.1-rc7> .
+
+<https://ospd.example.org/ogc-api/processes/mangrove_cli/package> a prov:Plan .
 
 <urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .

@@ -1,0 +1,41 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/Equals> dcterms:description "This service shall return a true value if and only if the geometries g1 and g2 are equal" ;
+    dcterms:title "Equals " ;
+    pp:version "2.0.0" ;
+    proc:inputs [ ns1:InputEntity1 [ dcterms:description "the first geometry." ;
+                    dcterms:title "the first geometry" ;
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "UTF-8" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
+            ns1:InputEntity2 [ dcterms:description "the other geometry." ;
+                    dcterms:title "the other geometry" ;
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "string" ;
+                                    ns2:contentEncoding "UTF-8" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+    proc:jobControlOptions "async-execute",
+        "dismiss",
+        "sync-execute" ;
+    proc:mutable false ;
+    proc:outputTransmission "reference",
+        "value" ;
+    proc:outputs [ ns3:Result [ dcterms:description "Should be true if two geometries are equivalent.." ;
+                    dcterms:title "Equals result" ;
+                    proc:schema [ proc:type "boolean" ] ] ] .
+

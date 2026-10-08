@@ -1,0 +1,24 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/contains/context.jsonld",
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/contains",
+  "type": "ProcessType",
+  "prefLabel": "Contains",
+  "definition": "This service shall return a true value if and only if the geometry g2 lies in the closure (boundary union interior) of geometry g1 - the inverse of Within(g1: Geometry, g2: Geometry).",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+  ],
+  "profile": "ospd.process-profiles.sqlmm.contains",
+  "processDescription": {
+    "id": "Contains",
+    "version": "2.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Contains"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/contains",
+  "openeoEquivalence": {
+    "level": "none",
+    "rationale": "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."
+  }
+}

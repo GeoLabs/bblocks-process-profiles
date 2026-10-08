@@ -1,0 +1,171 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/band-math/context.jsonld",
+  "id": "OTB.BandMath",
+  "title": "Outputs a monoband image which is the result of a mathematical operation on several multi-band images.",
+  "description": "This application performs a mathematical operation on several multi-band images and outputs the result into a monoband image. The given expression is computed at each pixel position. Evaluation of the mathematical formula is done by the muParser library.The formula can be written using:* numerical values ( 2.3, -5, 3.1e4, ...)* variables containing pixel values (e.g. ``im2b3`` is the pixel value in 2nd image, 3rd band)* binary operators:  * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division  * ``^`` raise x to the power of y  * ``",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "keywords": [
+    "raster",
+    "coverage",
+    "band math",
+    "OTB",
+    "BandMath"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Raster Coverage Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing"
+    },
+    {
+      "title": "Generic Profile: Raster band math",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math"
+    },
+    {
+      "title": "Implementation Profile: Raster band math",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math"
+    }
+  ],
+  "inputs": {
+    "il": {
+      "title": "Image list of operands to the mathematical expression.",
+      "description": "Image list of operands to the mathematical expression.",
+      "keywords": [
+        "raster",
+        "GeoTIFF"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/jpeg"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "out": {
+      "title": "Output image which is the result of the mathematical expressions on input image list operands.",
+      "description": "Output image which is the result of the mathematical expressions on input image list operands.",
+      "schema": {
+        "type": "string",
+        "default": "float",
+        "enum": [
+          "uint8",
+          "uint16",
+          "int16",
+          "int32",
+          "int32",
+          "float",
+          "double"
+        ]
+      }
+    },
+    "exp": {
+      "title": "The muParser mathematical expression to apply on input images.",
+      "description": "The muParser mathematical expression to apply on input images.",
+      "keywords": [
+        "expression"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `expression`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/expression"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `expression`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/expression"
+        }
+      ],
+      "schema": {
+        "type": "string"
+      }
+    },
+    "ram": {
+      "title": "Available memory for processing (in MB).",
+      "description": "Available memory for processing (in MB).",
+      "schema": {
+        "type": "integer",
+        "default": 256,
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "out": {
+      "title": "Output image which is the result of the mathematical expressions on input image list operands.",
+      "description": "Output image which is the result of the mathematical expressions on input image list operands.",
+      "keywords": [
+        "raster",
+        "GeoTIFF"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/outputs/raster"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/outputs/raster"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/jpeg"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    }
+  }
+}

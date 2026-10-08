@@ -4,7 +4,7 @@
 
 <urn:example:run:kindgrove-steps:reproject-band> a wfprov:ProcessRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
-    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/reproject_band> ;
+    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/reproject_band/package> ;
     wfprov:usedInput <urn:example:entity:reproject-band:in:band_file>,
         <urn:example:entity:reproject-band:in:east>,
         <urn:example:entity:reproject-band:in:epsg>,

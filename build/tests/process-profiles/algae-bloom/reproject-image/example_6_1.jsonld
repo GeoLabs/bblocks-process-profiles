@@ -18,7 +18,7 @@
       "qualifiedAssociation": [
         {
           "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-          "hadPlan": "https://ospd.example.org/ogc-api/processes/reproject-image"
+          "hadPlan": "https://ospd.example.org/ogc-api/processes/reproject-image/package"
         }
       ],
       "endedAtTime": "2026-09-23T06:39:38Z"
@@ -76,6 +76,15 @@
       "id": "urn:example:image:ogc-ospd/algae-usecase/reproject-image",
       "provType": "prov:SoftwareAgent",
       "name": "container image ogc-ospd/algae-usecase/reproject-image"
+    },
+    {
+      "id": "https://ospd.example.org/ogc-api/processes/reproject-image/package",
+      "provType": "prov:Plan"
+    },
+    {
+      "id": "arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/reproject_b03_60m_2",
+      "provType": "prov:Plan",
+      "specializationOf": "https://ospd.example.org/ogc-api/processes/reproject-image/package"
     }
   ]
 }

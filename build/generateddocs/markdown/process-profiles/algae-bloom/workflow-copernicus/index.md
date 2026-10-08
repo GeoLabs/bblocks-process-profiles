@@ -43,7 +43,7 @@ Derived with the `eoap.cct.cwl-to-ogcprocess` jq transform (bblocks-eoap-cct `29
 
 ## Provenance view
 
-Expressed against the generic provenance profile (`ogc.bbr.provenance.provenance`, a W3C PROV chain): one `prov:Activity` whose `activityType` is the process-type IRI, `qualifiedAssociation.hadPlan` pointing to the processDescription, input and output `prov:Entity` objects (literal parameters carry `value`, files carry `links`) and the engine / container image as `prov:SoftwareAgent`.
+Expressed against the generic provenance profile (`ogc.bbr.provenance.provenance`, a W3C PROV chain): one `prov:Activity` whose `activityType` is the process-type IRI, `qualifiedAssociation.hadPlan` pointing to the process's Application Package (`/processes/{id}/package`, OGC API - Processes - Part 2), the same plan as the process-type entry's own `plan` -- the plan as the engine's own CWLProv graph names it (its run-local `arcp:` copy in the research object) is given as a `prov:specializationOf` that Application Package --, input and output `prov:Entity` objects (literal parameters carry `value`, files carry `links`) and the engine / container image as `prov:SoftwareAgent`.
 
 The workflow run is also given as an `ogc.bbr.provenance.execution` bundle.
 
@@ -620,25 +620,25 @@ and https://documentation.dataspace.copernicus.eu/APIs/S3.html#generate-secrets 
                     proc:schema [ proc:type "string" ;
                             ns1:writeOnly true ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value """Algae bloom for water quality assessment on Sentinel-2 imagery offered by Copernicus platform.
-""" ;
-            proc:role schema:name ],
+    proc:metadata [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
+            proc:role schema:codeRepository ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
             proc:role schema:license ],
-        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
-            proc:role schema:codeRepository ],
-        [ rdf:value [ a ns4:Person ;
-                    ns4:email "francis.charette-migneault@crim.ca" ;
-                    ns4:identifier "http://orcid.org/0000-0003-4862-3349" ;
-                    ns4:name "Francis Charette-Migneault" ] ;
-            proc:role schema:author ],
         [ rdf:value """Finds Sentinel-2 products on Copernicus using filtering parameters
 and performs band calculation on retrieved Sentinel-2 products
 to evaluate algae bloom for water quality assessment.
 """ ;
             proc:role schema:description ],
+        [ rdf:value [ a ns4:Person ;
+                    ns4:email "francis.charette-migneault@crim.ca" ;
+                    ns4:identifier "http://orcid.org/0000-0003-4862-3349" ;
+                    ns4:name "Francis Charette-Migneault" ] ;
+            proc:role schema:author ],
         [ rdf:value "2.0.0" ;
-            proc:role schema:softwareVersion ] ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value """Algae bloom for water quality assessment on Sentinel-2 imagery offered by Copernicus platform.
+""" ;
+            proc:role schema:name ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
@@ -1178,10 +1178,10 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <http://schema.org/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
 @prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns4: <http://schema.org/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -1205,8 +1205,8 @@ to evaluate algae bloom for water quality assessment.
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentEncoding "binary" ;
-                            ns1:contentMediaType "application/geo+json" ] ] ;
+                            ns2:contentEncoding "binary" ;
+                            ns2:contentMediaType "application/geo+json" ] ] ;
             ns3:cloud_cover [ dcterms:description "" ;
                     dcterms:title "cloud_cover" ;
                     proc:maxOccurs 1 ;
@@ -1245,82 +1245,82 @@ and https://documentation.dataspace.copernicus.eu/APIs/S3.html#generate-secrets 
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value """Algae bloom for water quality assessment on Sentinel-2 imagery offered by Copernicus platform.
+    proc:metadata [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
+        [ rdf:value """Algae bloom for water quality assessment on Sentinel-2 imagery offered by Copernicus platform.
 """ ;
             proc:role schema:name ],
+        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
+            proc:role schema:codeRepository ],
         [ rdf:value """Finds Sentinel-2 products on Copernicus using filtering parameters
 and performs band calculation on retrieved Sentinel-2 products
 to evaluate algae bloom for water quality assessment.
 """ ;
             proc:role schema:description ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
-        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
-            proc:role schema:codeRepository ],
+        [ rdf:value [ a ns4:Person ;
+                    ns4:email "francis.charette-migneault@crim.ca" ;
+                    ns4:identifier "http://orcid.org/0000-0003-4862-3349" ;
+                    ns4:name "Francis Charette-Migneault" ] ;
+            proc:role schema:author ],
         [ rdf:value "2.0.0" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value [ a ns2:Person ;
-                    ns2:email "francis.charette-migneault@crim.ca" ;
-                    ns2:identifier "http://orcid.org/0000-0003-4862-3349" ;
-                    ns2:name "Francis Charette-Migneault" ] ;
-            proc:role schema:author ] ;
+            proc:role schema:softwareVersion ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns4:chlorophyll_a [ dcterms:description "" ;
+    proc:outputs [ ns1:chlorophyll_a [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns4:chlorophyll_a_color [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns1:chlorophyll_a_color [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a_color" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns4:chlorophyll_a_plot [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns1:chlorophyll_a_plot [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a_plot" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ;
-            ns4:cyanobacteria [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/png" ] ] ] ;
+            ns1:cyanobacteria [ dcterms:description "" ;
                     dcterms:title "cyanobacteria" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns4:cyanobacteria_color [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns1:cyanobacteria_color [ dcterms:description "" ;
                     dcterms:title "cyanobacteria_color" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns4:cyanobacteria_plot [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns1:cyanobacteria_plot [ dcterms:description "" ;
                     dcterms:title "cyanobacteria_plot" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ;
-            ns4:turbidity [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/png" ] ] ] ;
+            ns1:turbidity [ dcterms:description "" ;
                     dcterms:title "turbidity" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns4:turbidity_color [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns1:turbidity_color [ dcterms:description "" ;
                     dcterms:title "turbidity_color" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns4:turbidity_plot [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns1:turbidity_plot [ dcterms:description "" ;
                     dcterms:title "turbidity_plot" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ] .
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/png" ] ] ] ] .
 
 
 ```
@@ -1366,15 +1366,18 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 
 #### ttl
 ```ttl
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-copernicus> pp:version "2.0.0" .
 
 [] pp:processDescription [ pp:process <https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-copernicus> ] ;
-    proc:executionUnit [ a <https://geolabs.github.io/bblocks-process-profiles/def/application/cwl+yaml> ;
-            pp:href "https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-copernicus.cwl" ;
-            pp:rel "http://www.opengis.net/def/rel/ogc/1.0/executionUnit" ] .
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-copernicus.cwl> ] .
 
 
 ```
@@ -1610,7 +1613,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "qualifiedAssociation": [
       {
         "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-        "hadPlan": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus"
+        "hadPlan": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package"
       }
     ],
     "endedAtTime": "2026-09-23T07:33:59Z"
@@ -1818,6 +1821,15 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
     "provType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
+  },
+  {
+    "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package",
+    "provType": "prov:Plan"
+  },
+  {
+    "id": "arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main",
+    "provType": "prov:Plan",
+    "specializationOf": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package"
   }
 ]
 
@@ -1848,7 +1860,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "qualifiedAssociation": [
         {
           "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-          "hadPlan": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus"
+          "hadPlan": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package"
         }
       ],
       "endedAtTime": "2026-09-23T07:33:59Z"
@@ -2056,6 +2068,15 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
       "provType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
+    },
+    {
+      "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package",
+      "provType": "prov:Plan"
+    },
+    {
+      "id": "arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main",
+      "provType": "prov:Plan",
+      "specializationOf": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package"
     }
   ]
 }
@@ -2071,6 +2092,9 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> .
 
 <urn:example:entity:workflow-copernicus:out:chlorophyll_a> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a> ;
@@ -2175,11 +2199,13 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 <urn:example:entity:workflow-copernicus:in:s3_secret_key> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/s3_secret_key> .
 
+<https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> a prov:Plan .
+
 <urn:example:run:algae-bloom:workflow-copernicus> a prov:Activity,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus> ;
     prov:endedAtTime "2026-09-23T07:33:59+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> ] ;
     prov:startedAtTime "2026-09-23T07:31:01+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:workflow-copernicus:in:aoi>,
         <urn:example:entity:workflow-copernicus:in:cloud_cover>,
@@ -2211,7 +2237,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "id": "urn:example:run:algae-bloom:workflow-copernicus",
     "type": "WorkflowRun",
     "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus",
-    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus",
+    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
     "status": "successful",
     "jobID": "algae-bloom-workflow-copernicus-0001",
@@ -2354,7 +2380,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "id": "urn:example:run:algae-bloom:workflow-copernicus",
     "type": "WorkflowRun",
     "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus",
-    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus",
+    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
     "status": "successful",
     "jobID": "algae-bloom-workflow-copernicus-0001",
@@ -2576,7 +2602,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 
 <urn:example:run:algae-bloom:workflow-copernicus> a wfprov:WorkflowRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus> ;
-    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus> ;
+    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> ;
     wfprov:hadSubProcessRun <urn:example:run:algae-bloom:select-products-sentinel2>,
         <urn:example:run:algae-bloom:workflow-copernicus-process> ;
     prov:endedAtTime "2026-09-23T07:33:59+00:00"^^xsd:dateTime ;
@@ -2622,20 +2648,27 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "profile": "ospd.process-profiles.algae-bloom.workflow-copernicus",
   "processDescription": {
     "id": "algae-usecase-workflow-copernicus",
-    "version": "2.0.0"
+    "version": "2.0.0",
+    "href": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus"
   },
-  "source": {
-    "cwl": "https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-copernicus.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-copernicus.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "Workflow",
     "cwlId": "algae-usecase-workflow-copernicus",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.geojson",
+      "eoap.cct.string-format"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.geojson",
-    "eoap.cct.string-format"
-  ],
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process"
@@ -2683,20 +2716,27 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "profile": "ospd.process-profiles.algae-bloom.workflow-copernicus",
   "processDescription": {
     "id": "algae-usecase-workflow-copernicus",
-    "version": "2.0.0"
+    "version": "2.0.0",
+    "href": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus"
   },
-  "source": {
-    "cwl": "https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-copernicus.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-copernicus.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "Workflow",
     "cwlId": "algae-usecase-workflow-copernicus",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.geojson",
+      "eoap.cct.string-format"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.geojson",
-    "eoap.cct.string-format"
-  ],
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process"
@@ -2724,8 +2764,14 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 
 #### ttl
 ```ttl
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 
@@ -2739,8 +2785,6 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     skos:definition "Finds Sentinel-2 products on Copernicus using filtering parameters and performs band calculation on retrieved Sentinel-2 products to evaluate algae bloom for water quality assessment." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Algae bloom for water quality assessment on Sentinel-2 imagery offered by Copernicus platform." ;
-    pp:candidateCctDependency "eoap.cct.geojson",
-        "eoap.cct.string-format" ;
     pp:hasStep <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2>,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process> ;
     pp:openeoEquivalence [ pp:decomposition ( [ pp:equivalenceLevel "closeMatch" ;
@@ -2749,16 +2793,24 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
                         pp:stage "process (scatter over urls)" ] ) ;
             pp:equivalenceLevel "none" ;
             pp:rationale "Composite; same structure as the Earth-Search variant but over Copernicus Data Space (SAFE products on S3, credentials required). openEO hides credentials in the back-end." ] ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> ;
     pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-copernicus> ;
     pp:profile "ospd.process-profiles.algae-bloom.workflow-copernicus" ;
     pp:provenanceClass wfprov:WorkflowRun ;
-    pp:source [ pp:cwl <https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-copernicus.cwl> ;
-            pp:cwlClass "Workflow" ;
-            pp:cwlId "algae-usecase-workflow-copernicus" ;
-            pp:license "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ] ;
     pp:status "submitted" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-copernicus> pp:version "2.0.0" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-copernicus> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus> ;
+    pp:version "2.0.0" .
+
+<https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> a prov:Plan ;
+    dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
+    pp:candidateCctDependency "eoap.cct.geojson",
+        "eoap.cct.string-format" ;
+    pp:cwlClass "Workflow" ;
+    pp:cwlId "algae-usecase-workflow-copernicus" ;
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-copernicus.cwl> ] .
 
 
 ```
@@ -4124,33 +4176,33 @@ id:3b68ba23-95c2-48fc-92bb-753f98188bf2 a wfprov:ProcessRun,
             prov:entity id:c5d12ec5-693c-4ae4-9157-ffaf8e84a5a2 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/cloud_cover> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.392701"^^xsd:dateTime ;
-            prov:entity data:632ab110c744c188c9ae98cb2c6b74767894037a ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/product_level> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:02.391980"^^xsd:dateTime ;
             prov:entity data:8bfeb7b030ae1994f504c6c9ec46111b90434378 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/catalog> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.392720"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/toi> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.391633"^^xsd:dateTime ;
-            prov:entity id:653d2ec7-333d-431e-81c5-d30c4c02282a ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/aoi> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.392236"^^xsd:dateTime ;
-            prov:entity data:d184cbedd77b80cede3f63388a471a8634278cf3 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/collection> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:02.392439"^^xsd:dateTime ;
             prov:entity data:aae1ba7d07b94e0929479a0ed4c1ec64718ac191 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/date> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:02.391633"^^xsd:dateTime ;
+            prov:entity id:653d2ec7-333d-431e-81c5-d30c4c02282a ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/aoi> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:02.392462"^^xsd:dateTime ;
             prov:entity id:fc839955-c480-42b7-a657-730494fc154e ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/delta> ] .
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/delta> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:02.392720"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/toi> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:02.392701"^^xsd:dateTime ;
+            prov:entity data:632ab110c744c188c9ae98cb2c6b74767894037a ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/product_level> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:02.392236"^^xsd:dateTime ;
+            prov:entity data:d184cbedd77b80cede3f63388a471a8634278cf3 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/collection> ] .
 
 id:5001cc2f-8b7b-4b93-9043-8ce09886304f a prov:Agent .
 
@@ -4274,10 +4326,6 @@ id:44c595c3-0138-459e-bff2-432829fe1bf3 a wfprov:WorkflowRun,
             prov:entity id:c719b109-a5e5-414b-8e1a-2fa5262c9394 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/cloud_cover> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.348133"^^xsd:dateTime ;
-            prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/s3_access_key> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:02.347746"^^xsd:dateTime ;
             prov:entity id:97f268f3-383e-43a2-ad2b-3212b43b5676 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/delta> ],
@@ -4286,13 +4334,17 @@ id:44c595c3-0138-459e-bff2-432829fe1bf3 a wfprov:WorkflowRun,
             prov:entity id:cea98bc9-4a78-442d-a99a-eb4850b01d63 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/aoi> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.348450"^^xsd:dateTime ;
-            prov:entity data:f6cab44ac3c9f733bfece9ad8d3ad1452cbf9570 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/s3_secret_key> ],
+            prov:atTime "2026-09-23T09:31:02.348133"^^xsd:dateTime ;
+            prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/s3_access_key> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:02.347208"^^xsd:dateTime ;
             prov:entity data:d184cbedd77b80cede3f63388a471a8634278cf3 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/collection> ] ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/collection> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:02.348450"^^xsd:dateTime ;
+            prov:entity data:f6cab44ac3c9f733bfece9ad8d3ad1452cbf9570 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/s3_secret_key> ] ;
     prov:startedAtTime "2026-09-23T09:31:01.086664"^^xsd:dateTime .
 
 
@@ -4477,7 +4529,12 @@ x-jsonld-extra-terms:
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
-  metadata: https://w3id.org/ogc/api/processes/metadata
+  metadata:
+    x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+    x-jsonld-context:
+      href:
+        '@id': https://w3id.org/ogc/api/processes/href
+        '@type': '@id'
   role:
     x-jsonld-id: https://w3id.org/ogc/api/processes/role
     x-jsonld-type: '@id'
@@ -4495,8 +4552,27 @@ x-jsonld-extra-terms:
       type: http://purl.org/dc/terms/type
       title: http://www.w3.org/2000/01/rdf-schema#label
   response: https://w3id.org/ogc/api/processes/response
-  executionUnit: https://w3id.org/ogc/api/processes/executionUnit
-  processDescription: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+  executionUnit:
+    x-jsonld-id: https://w3id.org/ogc/api/processes/executionUnit
+    x-jsonld-context:
+      href:
+        '@id': http://www.w3.org/ns/oa#hasTarget
+        '@type': '@id'
+      rel:
+        '@id': http://www.iana.org/assignments/relation
+        '@type': '@id'
+        '@context':
+          '@base': http://www.iana.org/assignments/relation/
+      type: http://purl.org/dc/terms/format
+  processDescription:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+    x-jsonld-context:
+      href:
+        '@id': http://www.w3.org/2000/01/rdf-schema#seeAlso
+        '@type': '@id'
+      license:
+        '@id': http://purl.org/dc/terms/license
+        '@type': '@id'
   result: https://geolabs.github.io/bblocks-process-profiles/def/result
   engine: https://geolabs.github.io/bblocks-process-profiles/def/engine
   run: https://geolabs.github.io/bblocks-process-profiles/def/run
@@ -4531,6 +4607,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   hadPlan:
     x-jsonld-id: http://www.w3.org/ns/prov#hadPlan
+    x-jsonld-type: '@id'
+  specializationOf:
+    x-jsonld-id: http://www.w3.org/ns/prov#specializationOf
     x-jsonld-type: '@id'
   startedAtTime:
     x-jsonld-id: http://www.w3.org/ns/prov#startedAtTime
@@ -4570,14 +4649,20 @@ x-jsonld-extra-terms:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#broader
     x-jsonld-type: '@id'
   profile: https://geolabs.github.io/bblocks-process-profiles/def/profile
-  source: https://geolabs.github.io/bblocks-process-profiles/def/source
-  cwl:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cwl
-    x-jsonld-type: '@id'
+  plan:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
+    x-jsonld-context:
+      license:
+        '@id': http://purl.org/dc/terms/license
+        '@type': '@id'
+  Plan: http://www.w3.org/ns/prov#Plan
   cwlClass: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
   cwlId: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
   provenanceClass:
     x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
+    x-jsonld-type: '@id'
+  implementsProfile:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
     x-jsonld-type: '@id'
   cctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
   candidateCctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
@@ -4671,7 +4756,15 @@ Links to the schema:
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
     "outputTransmission": "proc:outputTransmission",
-    "metadata": "proc:metadata",
+    "metadata": {
+      "@id": "proc:metadata",
+      "@context": {
+        "href": {
+          "@id": "proc:href",
+          "@type": "@id"
+        }
+      }
+    },
     "role": {
       "@id": "proc:role",
       "@type": "@id"
@@ -4695,8 +4788,36 @@ Links to the schema:
       }
     },
     "response": "proc:response",
-    "executionUnit": "proc:executionUnit",
-    "processDescription": "pp:processDescription",
+    "executionUnit": {
+      "@id": "proc:executionUnit",
+      "@context": {
+        "href": {
+          "@id": "oa:hasTarget",
+          "@type": "@id"
+        },
+        "rel": {
+          "@id": "http://www.iana.org/assignments/relation",
+          "@type": "@id",
+          "@context": {
+            "@base": "http://www.iana.org/assignments/relation/"
+          }
+        },
+        "type": "dct:format"
+      }
+    },
+    "processDescription": {
+      "@id": "pp:processDescription",
+      "@context": {
+        "href": {
+          "@id": "rdfs:seeAlso",
+          "@type": "@id"
+        },
+        "license": {
+          "@id": "dct:license",
+          "@type": "@id"
+        }
+      }
+    },
     "result": "pp:result",
     "engine": "pp:engine",
     "run": "pp:run",
@@ -4740,6 +4861,10 @@ Links to the schema:
     },
     "hadPlan": {
       "@id": "prov:hadPlan",
+      "@type": "@id"
+    },
+    "specializationOf": {
+      "@id": "prov:specializationOf",
       "@type": "@id"
     },
     "startedAtTime": {
@@ -4791,15 +4916,24 @@ Links to the schema:
       "@type": "@id"
     },
     "profile": "pp:profile",
-    "source": "pp:source",
-    "cwl": {
-      "@id": "pp:cwl",
-      "@type": "@id"
+    "plan": {
+      "@id": "pp:plan",
+      "@context": {
+        "license": {
+          "@id": "dct:license",
+          "@type": "@id"
+        }
+      }
     },
+    "Plan": "prov:Plan",
     "cwlClass": "pp:cwlClass",
     "cwlId": "pp:cwlId",
     "provenanceClass": {
       "@id": "pp:provenanceClass",
+      "@type": "@id"
+    },
+    "implementsProfile": {
+      "@id": "pp:implementsProfile",
       "@type": "@id"
     },
     "cctDependencies": "pp:cctDependency",

@@ -7,6 +7,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/reproject_band/package> .
+
 <urn:example:entity:reproject-band:out:reprojected_file> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/reproject_band#outputs/reprojected_file> ;
     rdfs:seeAlso [ dcterms:type "image/tiff; application=geotiff" ;
@@ -47,7 +50,7 @@
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
     prov:endedAtTime "2026-09-24T10:59:18+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/reproject_band> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/reproject_band/package> ] ;
     prov:startedAtTime "2026-09-24T10:59:12+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:reproject-band:in:band_file>,
         <urn:example:entity:reproject-band:in:east>,
@@ -58,6 +61,8 @@
         <urn:example:entity:reproject-band:in:west> ;
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ghcr.io/geolabs/kindgrove/reproject-band:v0.0.2-rc2> .
+
+<https://ospd.example.org/ogc-api/processes/reproject_band/package> a prov:Plan .
 
 <urn:example:entity:reproject-band:in:band_file> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/reproject_band#inputs/band_file> ;

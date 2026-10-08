@@ -1,0 +1,133 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/vector/geometry-extent/context.jsonld",
+  "id": "SAGA.shapes_tools.19",
+  "title": "Get Shapes Extents",
+  "description": "Get Shapes Extents",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "keywords": [
+    "vector",
+    "geometry",
+    "derived geometry",
+    "Envelope",
+    "SAGA GIS"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Vector Geometry Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing"
+    },
+    {
+      "title": "Generic Profile: Unary geometry operation",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation"
+    },
+    {
+      "title": "Implementation Profile: Geometry extent",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent"
+    }
+  ],
+  "inputs": {
+    "SHAPES": {
+      "title": "Shapes",
+      "description": "Shapes",
+      "keywords": [
+        "geometry",
+        "GML"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Unary geometry operation -- input `geometry`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/inputs/geometry"
+        },
+        {
+          "title": "Implementation Profile: Geometry extent -- input `geometry`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent/inputs/geometry"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "utf-8",
+            "contentMediaType": "text/xml"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/vnd.google-earth.kml+xml"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    },
+    "OUTPUT": {
+      "title": "Get Extent for ...",
+      "description": "Get Extent for ...",
+      "schema": {
+        "type": "string",
+        "default": "each shape",
+        "enum": [
+          "all shapes",
+          "each shape",
+          "each shape's part"
+        ],
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "EXTENTS": {
+      "title": "Extents",
+      "description": "Extents",
+      "keywords": [
+        "geometry",
+        "GML"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Unary geometry operation -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Geometry extent -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent/outputs/result"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "utf-8",
+            "contentMediaType": "text/xml"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/vnd.google-earth.kml+xml"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    }
+  }
+}

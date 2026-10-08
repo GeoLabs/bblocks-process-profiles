@@ -1,0 +1,190 @@
+{
+  "title": "Validation report for ospd.process-profiles.sqlmm.equals - Process profile: Equals",
+  "bblockName": "Process profile: Equals",
+  "bblockId": "ospd.process-profiles.sqlmm.equals",
+  "generated": "2026-10-08T09:16:13.090133+00:00",
+  "result": true,
+  "items": [
+    {
+      "source": {
+        "type": "EXAMPLE",
+        "requireFail": false,
+        "filename": "build/tests/process-profiles/sqlmm/equals/example_2_1.json",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/build/tests/process-profiles/sqlmm/equals/example_2_1.json",
+        "exampleIndex": 2,
+        "snippetIndex": 1,
+        "language": "application/json"
+      },
+      "result": true,
+      "sections": [
+        {
+          "name": "FILES",
+          "title": "Files",
+          "entries": [
+            {
+              "isError": false,
+              "message": "Using examples/processDescription.json from examples"
+            },
+            {
+              "op": "jsonld-uplift",
+              "isError": false,
+              "message": "JSON-LD context is present - uplifting"
+            },
+            {
+              "op": "jsonld-create",
+              "filename": "example_2_1.jsonld",
+              "isError": false,
+              "message": "Output JSON-LD example_2_1.jsonld created"
+            },
+            {
+              "op": "ttl-create",
+              "empty": false,
+              "filename": "example_2_1.ttl",
+              "size": 44,
+              "isError": false,
+              "message": "Output Turtle example_2_1.ttl created"
+            }
+          ]
+        },
+        {
+          "name": "JSON_SCHEMA",
+          "title": "JSON Schema",
+          "entries": [
+            {
+              "op": "validation",
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": {
+        "type": "EXAMPLE",
+        "requireFail": false,
+        "filename": "build/tests/process-profiles/sqlmm/equals/example_3_1.json",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/build/tests/process-profiles/sqlmm/equals/example_3_1.json",
+        "exampleIndex": 3,
+        "snippetIndex": 1,
+        "language": "application/json"
+      },
+      "result": true,
+      "sections": [
+        {
+          "name": "FILES",
+          "title": "Files",
+          "entries": [
+            {
+              "isError": false,
+              "message": "Using examples/processDescription.inherited.json from examples"
+            },
+            {
+              "op": "jsonld-uplift",
+              "isError": false,
+              "message": "JSON-LD context is present - uplifting"
+            },
+            {
+              "op": "jsonld-create",
+              "filename": "example_3_1.jsonld",
+              "isError": false,
+              "message": "Output JSON-LD example_3_1.jsonld created"
+            },
+            {
+              "op": "ttl-create",
+              "empty": false,
+              "filename": "example_3_1.ttl",
+              "size": 91,
+              "isError": false,
+              "message": "Output Turtle example_3_1.ttl created"
+            }
+          ]
+        },
+        {
+          "name": "JSON_SCHEMA",
+          "title": "JSON Schema",
+          "entries": [
+            {
+              "filename": "#/$defs/inheritedProcessDescription",
+              "isError": false,
+              "message": "Using the following JSON Schema: #/$defs/inheritedProcessDescription"
+            },
+            {
+              "op": "validation",
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": {
+        "type": "EXAMPLE",
+        "requireFail": false,
+        "filename": "build/tests/process-profiles/sqlmm/equals/example_4_1.json",
+        "url": "https://geolabs.github.io/bblocks-process-profiles/build/tests/process-profiles/sqlmm/equals/example_4_1.json",
+        "exampleIndex": 4,
+        "snippetIndex": 1,
+        "language": "application/json"
+      },
+      "result": true,
+      "sections": [
+        {
+          "name": "FILES",
+          "title": "Files",
+          "entries": [
+            {
+              "isError": false,
+              "message": "Using examples/process-type.json from examples"
+            },
+            {
+              "op": "jsonld-uplift",
+              "isError": false,
+              "message": "JSON-LD context is present - uplifting"
+            },
+            {
+              "op": "jsonld-create",
+              "filename": "example_4_1.jsonld",
+              "isError": false,
+              "message": "Output JSON-LD example_4_1.jsonld created"
+            },
+            {
+              "op": "ttl-create",
+              "empty": false,
+              "filename": "example_4_1.ttl",
+              "size": 15,
+              "isError": false,
+              "message": "Output Turtle example_4_1.ttl created"
+            }
+          ]
+        },
+        {
+          "name": "JSON_SCHEMA",
+          "title": "JSON Schema",
+          "entries": [
+            {
+              "filename": "#/$defs/processTypeEntry",
+              "isError": false,
+              "message": "Using the following JSON Schema: #/$defs/processTypeEntry"
+            },
+            {
+              "op": "validation",
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "globalErrors": {},
+  "counts": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0
+  }
+}

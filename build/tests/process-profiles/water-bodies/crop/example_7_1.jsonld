@@ -3,7 +3,7 @@
   "id": "urn:example:run:water-bodies:crop",
   "type": "ProcessRun",
   "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
-  "describedByProcess": "https://ospd.example.org/ogc-api/processes/crop",
+  "describedByProcess": "https://ospd.example.org/ogc-api/processes/crop/package",
   "usedInput": [
     {
       "id": "urn:example:entity:crop:in:item"

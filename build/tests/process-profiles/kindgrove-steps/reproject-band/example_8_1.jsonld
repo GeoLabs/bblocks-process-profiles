@@ -12,19 +12,26 @@
   "profile": "ospd.process-profiles.kindgrove-steps.reproject-band",
   "processDescription": {
     "id": "reproject_band",
-    "version": "0.1.0"
+    "version": "0.1.0",
+    "href": "https://ospd.example.org/ogc-api/processes/reproject_band"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#reproject_band",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/reproject_band/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#reproject_band",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "reproject_band",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.bbox"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.bbox"
-  ],
   "closeMatch": [
     "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
   ],

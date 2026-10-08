@@ -84,7 +84,7 @@
 
 <urn:example:run:algae-bloom:workflow-earth-search-process> a wfprov:WorkflowRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-earth-search-process> ;
-    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process> ;
+    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process/package> ;
     wfprov:hadSubProcessRun <urn:example:run:algae-bloom:calculate-band>,
         <urn:example:run:algae-bloom:download-band-sentinel2-stac-item>,
         <urn:example:run:algae-bloom:plot-image>,

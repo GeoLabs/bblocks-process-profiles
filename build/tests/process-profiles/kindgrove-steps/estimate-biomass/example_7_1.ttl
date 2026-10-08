@@ -4,7 +4,7 @@
 
 <urn:example:run:kindgrove-steps:estimate-biomass> a wfprov:ProcessRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/estimate-biomass> ;
-    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/estimate_biomass> ;
+    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/estimate_biomass/package> ;
     wfprov:usedInput <urn:example:entity:estimate-biomass:in:ndvi_file>,
         <urn:example:entity:estimate-biomass:in:ndwi_file>,
         <urn:example:entity:estimate-biomass:in:savi_file>,

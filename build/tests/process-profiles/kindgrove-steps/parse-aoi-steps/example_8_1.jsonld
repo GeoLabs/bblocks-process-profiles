@@ -12,19 +12,26 @@
   "profile": "ospd.process-profiles.kindgrove-steps.parse-aoi-steps",
   "processDescription": {
     "id": "parse_aoi",
-    "version": "0.1.0"
+    "version": "0.1.0",
+    "href": "https://ospd.example.org/ogc-api/processes/parse_aoi"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#parse_aoi",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/parse_aoi/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#parse_aoi",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "parse_aoi",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [
+      "eoap.cct.bbox"
+    ],
+    "candidateCctDependencies": []
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [
-    "eoap.cct.bbox"
-  ],
-  "candidateCctDependencies": [],
   "relatedMatch": [
     "https://www.opengis.net/def/bblocks/ogc.openeo.types.bounding-box"
   ],

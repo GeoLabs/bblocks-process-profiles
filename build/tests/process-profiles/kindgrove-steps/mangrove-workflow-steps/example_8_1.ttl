@@ -68,7 +68,7 @@
 
 <urn:example:run:kindgrove-steps:mangrove-workflow-steps> a wfprov:WorkflowRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps> ;
-    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps> ;
+    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps/package> ;
     wfprov:hadSubProcessRun <urn:example:run:kindgrove-steps:calculate-indices>,
         <urn:example:run:kindgrove-steps:download-band>,
         <urn:example:run:kindgrove-steps:estimate-biomass>,

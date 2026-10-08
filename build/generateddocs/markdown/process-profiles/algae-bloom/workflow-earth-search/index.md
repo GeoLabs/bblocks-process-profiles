@@ -40,7 +40,7 @@ No manual correction: the example is the unmodified transform output.
 
 ## Provenance view
 
-Expressed against the generic provenance profile (`ogc.bbr.provenance.provenance`, a W3C PROV chain): one `prov:Activity` whose `activityType` is the process-type IRI, `qualifiedAssociation.hadPlan` pointing to the processDescription, input and output `prov:Entity` objects (literal parameters carry `value`, files carry `links`) and the engine / container image as `prov:SoftwareAgent`.
+Expressed against the generic provenance profile (`ogc.bbr.provenance.provenance`, a W3C PROV chain): one `prov:Activity` whose `activityType` is the process-type IRI, `qualifiedAssociation.hadPlan` pointing to the process's Application Package (`/processes/{id}/package`, OGC API - Processes - Part 2), the same plan as the process-type entry's own `plan` -- the plan as the engine's own CWLProv graph names it (its run-local `arcp:` copy in the research object) is given as a `prov:specializationOf` that Application Package --, input and output `prov:Entity` objects (literal parameters carry `value`, files carry `links`) and the engine / container image as `prov:SoftwareAgent`.
 
 The workflow run is also given as an `ogc.bbr.provenance.execution` bundle.
 
@@ -533,9 +533,9 @@ OGC API - Processes processDescription derived from the CWL.
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns4: <http://schema.org/> .
+@prefix ns2: <http://schema.org/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -556,52 +556,44 @@ will be named with the ID of the original product to distinguish them in case of
     dcterms:title """Algae bloom for water quality assessment on Sentinel-2 L2A imagery offered by Earth-Search platform.
 """ ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns3:aoi [ dcterms:description "Polygon defining the area of interest." ;
+    proc:inputs [ ns4:aoi [ dcterms:description "Polygon defining the area of interest." ;
                     dcterms:title "Area of interest" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "application/geo+json" ] ] ;
-            ns3:cloud_cover [ dcterms:description "" ;
+            ns4:cloud_cover [ dcterms:description "" ;
                     dcterms:title "cloud_cover" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns3:collection [ dcterms:description "" ;
+            ns4:collection [ dcterms:description "" ;
                     dcterms:title "collection" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:date [ dcterms:description "Date around which ±delta-days will be applied for search. If omitted, 'toi' input must be provided instead." ;
+            ns4:date [ dcterms:description "Date around which ±delta-days will be applied for search. If omitted, 'toi' input must be provided instead." ;
                     dcterms:title "Central date" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:delta [ dcterms:description "" ;
+            ns4:delta [ dcterms:description "" ;
                     dcterms:title "delta" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "4"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns3:toi [ dcterms:description "Start and end date-time strings. Must be provided if 'date' input is omitted." ;
+            ns4:toi [ dcterms:description "Start and end date-time strings. Must be provided if 'date' input is omitted." ;
                     dcterms:title "Time of interest" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
-            proc:role schema:codeRepository ],
-        [ rdf:value "2.0.0" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value [ a ns4:Person ;
-                    ns4:email "francis.charette-migneault@crim.ca" ;
-                    ns4:identifier "http://orcid.org/0000-0003-4862-3349" ;
-                    ns4:name "Francis Charette-Migneault" ] ;
-            proc:role schema:author ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
+    proc:metadata [ rdf:value """Algae bloom for water quality assessment on Sentinel-2 L2A imagery offered by Earth-Search platform.
+""" ;
+            proc:role schema:name ],
         [ rdf:value """Searches for Sentinel-2 L2A products on Earth-Search using filtering parameters
 and performs band calculation on matched Sentinel-2 products to evaluate algae bloom
 for water quality assessment. For each match, reference bands are downloaded, processed,
@@ -609,61 +601,69 @@ and returned as output with raw data, color map and plot visualization. Each out
 will be named with the ID of the original product to distinguish them in case of multiple matches.
 """ ;
             proc:role schema:description ],
-        [ rdf:value """Algae bloom for water quality assessment on Sentinel-2 L2A imagery offered by Earth-Search platform.
-""" ;
-            proc:role schema:name ] ;
+        [ rdf:value [ a ns2:Person ;
+                    ns2:email "francis.charette-migneault@crim.ca" ;
+                    ns2:identifier "http://orcid.org/0000-0003-4862-3349" ;
+                    ns2:name "Francis Charette-Migneault" ] ;
+            proc:role schema:author ],
+        [ rdf:value "2.0.0" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
+        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
+            proc:role schema:codeRepository ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:chlorophyll_a [ dcterms:description "" ;
+    proc:outputs [ ns3:chlorophyll_a [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:chlorophyll_a_color [ dcterms:description "" ;
+            ns3:chlorophyll_a_color [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a_color" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:chlorophyll_a_plot [ dcterms:description "" ;
+            ns3:chlorophyll_a_plot [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a_plot" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/png" ] ] ] ;
-            ns2:cyanobacteria [ dcterms:description "" ;
+            ns3:cyanobacteria [ dcterms:description "" ;
                     dcterms:title "cyanobacteria" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:cyanobacteria_color [ dcterms:description "" ;
+            ns3:cyanobacteria_color [ dcterms:description "" ;
                     dcterms:title "cyanobacteria_color" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:cyanobacteria_plot [ dcterms:description "" ;
+            ns3:cyanobacteria_plot [ dcterms:description "" ;
                     dcterms:title "cyanobacteria_plot" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/png" ] ] ] ;
-            ns2:turbidity [ dcterms:description "" ;
+            ns3:turbidity [ dcterms:description "" ;
                     dcterms:title "turbidity" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:turbidity_color [ dcterms:description "" ;
+            ns3:turbidity_color [ dcterms:description "" ;
                     dcterms:title "turbidity_color" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:turbidity_plot [ dcterms:description "" ;
+            ns3:turbidity_plot [ dcterms:description "" ;
                     dcterms:title "turbidity_plot" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
@@ -714,15 +714,18 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 
 #### ttl
 ```ttl
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-earth-search> pp:version "2.0.0" .
 
 [] pp:processDescription [ pp:process <https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-earth-search> ] ;
-    proc:executionUnit [ a <https://geolabs.github.io/bblocks-process-profiles/def/application/cwl+yaml> ;
-            pp:href "https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-earth-search.cwl" ;
-            pp:rel "http://www.opengis.net/def/rel/ogc/1.0/executionUnit" ] .
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-earth-search.cwl> ] .
 
 
 ```
@@ -989,30 +992,30 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 ```ttl
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 
-[] pp:chlorophyll_a [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_chlorophyll_a.tiff" ],
-        [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_chlorophyll_a.tiff" ] ;
+[] pp:chlorophyll_a [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_chlorophyll_a.tiff" ],
+        [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_chlorophyll_a.tiff" ] ;
     pp:chlorophyll_a_color [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_chlorophyll_a_color.tif" ],
         [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_chlorophyll_a_color.tif" ] ;
     pp:chlorophyll_a_plot [ a <https://geolabs.github.io/bblocks-process-profiles/def/image/png> ;
             pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_chlorophyll_a_plot.png" ],
         [ a <https://geolabs.github.io/bblocks-process-profiles/def/image/png> ;
             pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_chlorophyll_a_plot.png" ] ;
-    pp:cyanobacteria [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_cyanobacteria.tiff" ],
-        [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_cyanobacteria.tiff" ] ;
+    pp:cyanobacteria [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_cyanobacteria.tiff" ],
+        [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_cyanobacteria.tiff" ] ;
     pp:cyanobacteria_color [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_cyanobacteria_color.tif" ],
         [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_cyanobacteria_color.tif" ] ;
     pp:cyanobacteria_plot [ a <https://geolabs.github.io/bblocks-process-profiles/def/image/png> ;
-            pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_cyanobacteria_plot.png" ],
+            pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_cyanobacteria_plot.png" ],
         [ a <https://geolabs.github.io/bblocks-process-profiles/def/image/png> ;
-            pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_cyanobacteria_plot.png" ] ;
+            pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_cyanobacteria_plot.png" ] ;
     pp:turbidity [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_turbidity.tiff" ],
         [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_turbidity.tiff" ] ;
     pp:turbidity_color [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_turbidity_color.tif" ],
         [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_turbidity_color.tif" ] ;
     pp:turbidity_plot [ a <https://geolabs.github.io/bblocks-process-profiles/def/image/png> ;
-            pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_turbidity_plot.png" ],
+            pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_turbidity_plot.png" ],
         [ a <https://geolabs.github.io/bblocks-process-profiles/def/image/png> ;
-            pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_turbidity_plot.png" ] .
+            pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_turbidity_plot.png" ] .
 
 
 ```
@@ -1041,7 +1044,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "qualifiedAssociation": [
       {
         "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-        "hadPlan": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search"
+        "hadPlan": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package"
       }
     ],
     "endedAtTime": "2026-09-23T06:40:34Z"
@@ -1287,6 +1290,15 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
     "provType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
+  },
+  {
+    "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package",
+    "provType": "prov:Plan"
+  },
+  {
+    "id": "arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main",
+    "provType": "prov:Plan",
+    "specializationOf": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package"
   }
 ]
 
@@ -1315,7 +1327,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "qualifiedAssociation": [
         {
           "agent": "urn:example:engine:cwltool-3.1.20260108082145",
-          "hadPlan": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search"
+          "hadPlan": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package"
         }
       ],
       "endedAtTime": "2026-09-23T06:40:34Z"
@@ -1561,6 +1573,15 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
       "provType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
+    },
+    {
+      "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package",
+      "provType": "prov:Plan"
+    },
+    {
+      "id": "arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main",
+      "provType": "prov:Plan",
+      "specializationOf": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package"
     }
   ]
 }
@@ -1576,6 +1597,9 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package> .
 
 <urn:example:entity:workflow-earth-search:out:chlorophyll_a> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/chlorophyll_a> ;
@@ -1593,10 +1617,10 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/chlorophyll_a_color> ;
     rdfs:seeAlso [ dcterms:type "image/tiff; application=geotiff" ;
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
-            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_chlorophyll_a_color.tif> ],
+            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_chlorophyll_a_color.tif> ],
         [ dcterms:type "image/tiff; application=geotiff" ;
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
-            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_chlorophyll_a_color.tif> ] ;
+            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_chlorophyll_a_color.tif> ] ;
     prov:wasAttributedTo <urn:example:engine:cwltool-3.1.20260108082145> ;
     prov:wasDerivedFrom <urn:example:entity:workflow-earth-search:in:aoi> ;
     prov:wasGeneratedBy <urn:example:run:algae-bloom:workflow-earth-search> .
@@ -1605,10 +1629,10 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/chlorophyll_a_plot> ;
     rdfs:seeAlso [ dcterms:type "image/png" ;
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
-            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_chlorophyll_a_plot.png> ],
+            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_chlorophyll_a_plot.png> ],
         [ dcterms:type "image/png" ;
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
-            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_chlorophyll_a_plot.png> ] ;
+            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_chlorophyll_a_plot.png> ] ;
     prov:wasAttributedTo <urn:example:engine:cwltool-3.1.20260108082145> ;
     prov:wasDerivedFrom <urn:example:entity:workflow-earth-search:in:aoi> ;
     prov:wasGeneratedBy <urn:example:run:algae-bloom:workflow-earth-search> .
@@ -1653,10 +1677,10 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/turbidity> ;
     rdfs:seeAlso [ dcterms:type "image/tiff; application=geotiff" ;
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
-            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_turbidity.tiff> ],
+            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_turbidity.tiff> ],
         [ dcterms:type "image/tiff; application=geotiff" ;
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
-            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_turbidity.tiff> ] ;
+            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_turbidity.tiff> ] ;
     prov:wasAttributedTo <urn:example:engine:cwltool-3.1.20260108082145> ;
     prov:wasDerivedFrom <urn:example:entity:workflow-earth-search:in:aoi> ;
     prov:wasGeneratedBy <urn:example:run:algae-bloom:workflow-earth-search> .
@@ -1665,10 +1689,10 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/turbidity_color> ;
     rdfs:seeAlso [ dcterms:type "image/tiff; application=geotiff" ;
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
-            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_turbidity_color.tif> ],
+            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_turbidity_color.tif> ],
         [ dcterms:type "image/tiff; application=geotiff" ;
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
-            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_turbidity_color.tif> ] ;
+            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_turbidity_color.tif> ] ;
     prov:wasAttributedTo <urn:example:engine:cwltool-3.1.20260108082145> ;
     prov:wasDerivedFrom <urn:example:entity:workflow-earth-search:in:aoi> ;
     prov:wasGeneratedBy <urn:example:run:algae-bloom:workflow-earth-search> .
@@ -1677,10 +1701,10 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/turbidity_plot> ;
     rdfs:seeAlso [ dcterms:type "image/png" ;
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
-            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_turbidity_plot.png> ],
+            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_turbidity_plot.png> ],
         [ dcterms:type "image/png" ;
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
-            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_turbidity_plot.png> ] ;
+            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_turbidity_plot.png> ] ;
     prov:wasAttributedTo <urn:example:engine:cwltool-3.1.20260108082145> ;
     prov:wasDerivedFrom <urn:example:entity:workflow-earth-search:in:aoi> ;
     prov:wasGeneratedBy <urn:example:run:algae-bloom:workflow-earth-search> .
@@ -1702,11 +1726,13 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rdf:value "2019-06-25",
         "2019-07-03" .
 
+<https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package> a prov:Plan .
+
 <urn:example:run:algae-bloom:workflow-earth-search> a prov:Activity,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-earth-search> ;
     prov:endedAtTime "2026-09-23T06:40:34+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
-            prov:hadPlan <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search> ] ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package> ] ;
     prov:startedAtTime "2026-09-23T06:26:24+00:00"^^xsd:dateTime ;
     prov:used <urn:example:entity:workflow-earth-search:in:aoi>,
         <urn:example:entity:workflow-earth-search:in:cloud_cover>,
@@ -1736,7 +1762,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "id": "urn:example:run:algae-bloom:workflow-earth-search",
     "type": "WorkflowRun",
     "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-earth-search",
-    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search",
+    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
     "status": "successful",
     "jobID": "algae-bloom-workflow-earth-search-0001",
@@ -1987,7 +2013,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     "id": "urn:example:run:algae-bloom:workflow-earth-search",
     "type": "WorkflowRun",
     "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-earth-search",
-    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search",
+    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
     "status": "successful",
     "jobID": "algae-bloom-workflow-earth-search-0001",
@@ -2389,7 +2415,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 
 <urn:example:run:algae-bloom:workflow-earth-search> a wfprov:WorkflowRun,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-earth-search> ;
-    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search> ;
+    wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package> ;
     wfprov:hadSubProcessRun <urn:example:run:algae-bloom:select-products-sentinel2>,
         <urn:example:run:algae-bloom:workflow-earth-search-process> ;
     prov:endedAtTime "2026-09-23T06:40:34+00:00"^^xsd:dateTime ;
@@ -2444,20 +2470,27 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "profile": "ospd.process-profiles.algae-bloom.workflow-earth-search",
   "processDescription": {
     "id": "algae-usecase-workflow-earth-search",
-    "version": "2.0.0"
+    "version": "2.0.0",
+    "href": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search"
   },
-  "source": {
-    "cwl": "https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-earth-search.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-earth-search.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "Workflow",
     "cwlId": "algae-usecase-workflow-earth-search",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.geojson",
+      "eoap.cct.string-format"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.geojson",
-    "eoap.cct.string-format"
-  ],
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-earth-search-process"
@@ -2506,20 +2539,27 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "profile": "ospd.process-profiles.algae-bloom.workflow-earth-search",
   "processDescription": {
     "id": "algae-usecase-workflow-earth-search",
-    "version": "2.0.0"
+    "version": "2.0.0",
+    "href": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search"
   },
-  "source": {
-    "cwl": "https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-earth-search.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-earth-search.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "Workflow",
     "cwlId": "algae-usecase-workflow-earth-search",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.geojson",
+      "eoap.cct.string-format"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.geojson",
-    "eoap.cct.string-format"
-  ],
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-earth-search-process"
@@ -2548,8 +2588,14 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 
 #### ttl
 ```ttl
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 
@@ -2563,8 +2609,6 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     skos:definition "Searches for Sentinel-2 L2A products on Earth-Search using filtering parameters and performs band calculation on matched Sentinel-2 products to evaluate algae bloom for water quality assessment. For each match, reference bands are downloaded, processed, and returned as output with raw data, color map and plot visualization. Each output file will be named with the ID of the original product to distinguish them in case of multiple matches." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Algae bloom for water quality assessment on Sentinel-2 L2A imagery offered by Earth-Search platform." ;
-    pp:candidateCctDependency "eoap.cct.geojson",
-        "eoap.cct.string-format" ;
     pp:hasStep <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2>,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-earth-search-process> ;
     pp:openeoEquivalence [ pp:decomposition ( [ pp:equivalenceLevel "closeMatch" ;
@@ -2574,16 +2618,24 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
                         pp:stage "process (scatter over urls)" ] ) ;
             pp:equivalenceLevel "none" ;
             pp:rationale "Composite: a CWL Workflow scattering a per-product subworkflow over the product list. The openEO equivalent would be a user-defined process graph, which has no Building Block of its own; the correspondence is carried by the steps." ] ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package> ;
     pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-earth-search> ;
     pp:profile "ospd.process-profiles.algae-bloom.workflow-earth-search" ;
     pp:provenanceClass wfprov:WorkflowRun ;
-    pp:source [ pp:cwl <https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-earth-search.cwl> ;
-            pp:cwlClass "Workflow" ;
-            pp:cwlId "algae-usecase-workflow-earth-search" ;
-            pp:license "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ] ;
     pp:status "submitted" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-earth-search> pp:version "2.0.0" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-earth-search> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search> ;
+    pp:version "2.0.0" .
+
+<https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package> a prov:Plan ;
+    dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
+    pp:candidateCctDependency "eoap.cct.geojson",
+        "eoap.cct.string-format" ;
+    pp:cwlClass "Workflow" ;
+    pp:cwlId "algae-usecase-workflow-earth-search" ;
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-earth-search.cwl> ] .
 
 
 ```
@@ -4156,9 +4208,9 @@ id:042f18c9-28ad-4704-b250-c8dfe82253ab a wfprov:Artifact,
             prov:atTime "2026-09-23T08:40:34.610317"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/primary/chlorophyll_a> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:12b49a35-ae72-4b3d-933e-b2d03c6692b4 ],
+            provext:member id:883ae32e-c86f-491e-bcaf-320d0badfa08 ],
         [ a provext:Membership ;
-            provext:member id:883ae32e-c86f-491e-bcaf-320d0badfa08 ] .
+            provext:member id:12b49a35-ae72-4b3d-933e-b2d03c6692b4 ] .
 
 id:0dd086eb-264f-42f5-bf6e-0e2b215edafc a wfprov:Artifact,
         prov:Collection,
@@ -4180,9 +4232,9 @@ id:0ee12773-4ecf-4b82-9e77-dacfea757a43 a wfprov:Artifact,
             prov:atTime "2026-09-23T08:40:34.610317"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/primary/turbidity_color> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:248923b2-906c-4d76-867f-da6f12462902 ],
+            provext:member id:cc8be8e0-4b98-47f7-8c0c-a757d7a5eff4 ],
         [ a provext:Membership ;
-            provext:member id:cc8be8e0-4b98-47f7-8c0c-a757d7a5eff4 ] .
+            provext:member id:248923b2-906c-4d76-867f-da6f12462902 ] .
 
 id:0f27aaca-13e9-4be4-b2d9-ea39fef6101f a wfprov:Artifact,
         prov:Collection,
@@ -4216,9 +4268,9 @@ id:5855d17a-509f-4d45-91ef-c239bcb938de a wfprov:Artifact,
             prov:atTime "2026-09-23T08:40:34.610317"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/primary/cyanobacteria_color> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:1cfc6922-9537-41b3-a579-31eaab50998e ],
+            provext:member id:f82e4423-a8ac-41d1-9919-25b94a343f05 ],
         [ a provext:Membership ;
-            provext:member id:f82e4423-a8ac-41d1-9919-25b94a343f05 ] .
+            provext:member id:1cfc6922-9537-41b3-a579-31eaab50998e ] .
 
 id:78c77861-3ab8-4a56-a0cc-62899eb92912 a wfprov:Artifact,
         prov:Collection,
@@ -4228,9 +4280,9 @@ id:78c77861-3ab8-4a56-a0cc-62899eb92912 a wfprov:Artifact,
             prov:atTime "2026-09-23T08:40:34.610317"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/primary/turbidity_plot> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:94fcea32-9310-49c6-8684-7517ae960f49 ],
+            provext:member id:6dd26a4a-5269-487b-ad11-0e3cfe83bae2 ],
         [ a provext:Membership ;
-            provext:member id:6dd26a4a-5269-487b-ad11-0e3cfe83bae2 ] .
+            provext:member id:94fcea32-9310-49c6-8684-7517ae960f49 ] .
 
 id:7a4b06ca-ec17-4eac-bbf7-96ba8af7bd86 a wfprov:ProcessRun,
         prov:Activity ;
@@ -4254,10 +4306,10 @@ id:7a4b06ca-ec17-4eac-bbf7-96ba8af7bd86 a wfprov:ProcessRun,
             prov:agent id:2eaf041b-2988-4cd3-bd1b-2c3f2028e2c8 ;
             prov:hadPlan <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/algae-usecase-workflow-earth-search/process> ] ;
     prov:qualifiedStart [ a prov:Start ;
-            prov:atTime "2026-09-23T08:35:40.367661"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T08:26:25.902635"^^xsd:dateTime ;
             prov:hadActivity id:39aa9d6c-b92f-486d-9c56-5289ebc57918 ],
         [ a prov:Start ;
-            prov:atTime "2026-09-23T08:26:25.902635"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T08:35:40.367661"^^xsd:dateTime ;
             prov:hadActivity id:39aa9d6c-b92f-486d-9c56-5289ebc57918 ] .
 
 id:8fb08dce-0549-434c-b6bc-251e3b2227d2 a wfprov:Artifact,
@@ -4268,9 +4320,9 @@ id:8fb08dce-0549-434c-b6bc-251e3b2227d2 a wfprov:Artifact,
             prov:atTime "2026-09-23T08:40:34.610317"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/primary/cyanobacteria_plot> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:a1fdff0a-0d34-46cc-8ad6-0ec1bfee7ad2 ],
+            provext:member id:d1872c35-1d75-47b2-8315-90b2bbf42c23 ],
         [ a provext:Membership ;
-            provext:member id:d1872c35-1d75-47b2-8315-90b2bbf42c23 ] .
+            provext:member id:a1fdff0a-0d34-46cc-8ad6-0ec1bfee7ad2 ] .
 
 id:d5e1a699-e4ec-4961-9136-0c23387faf90 a wfprov:Artifact,
         prov:Collection,
@@ -4292,9 +4344,9 @@ id:ed4239e2-9d57-4b3c-9644-295b0a843de3 a wfprov:Artifact,
             prov:atTime "2026-09-23T08:40:34.610317"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/primary/chlorophyll_a_plot> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:3a29ce4a-c70b-4cb5-ac90-5cc003d32df1 ],
+            provext:member id:372c5307-8059-4cb2-afdb-5417b1e9d278 ],
         [ a provext:Membership ;
-            provext:member id:372c5307-8059-4cb2-afdb-5417b1e9d278 ] .
+            provext:member id:3a29ce4a-c70b-4cb5-ac90-5cc003d32df1 ] .
 
 wf:main a wfdesc:Workflow,
         prov:Entity,
@@ -4441,9 +4493,9 @@ id:50b5b789-1882-4c70-9c6a-59f121c84204 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:e6b6a83d9218e6cb73c53b7fb501615a47a84aaa ],
+            provext:member data:2a63ee24a0e8e4b59a1f6e59f003d4201c3ecba3 ],
         [ a provext:Membership ;
-            provext:member data:2a63ee24a0e8e4b59a1f6e59f003d4201c3ecba3 ] .
+            provext:member data:e6b6a83d9218e6cb73c53b7fb501615a47a84aaa ] .
 
 id:5226a207-b9d6-4693-b683-260e1f1d77cf a wf4ever:File,
         wfprov:Artifact,
@@ -4476,10 +4528,10 @@ id:6eeb1082-3e85-4b8c-87e4-db08b8a54f27 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/select_products" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:74ee65c3-45e0-49ab-9086-fd0704308112 ],
-        [ a prov:Association ;
             prov:agent id:2eaf041b-2988-4cd3-bd1b-2c3f2028e2c8 ;
-            prov:hadPlan <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products> ] ;
+            prov:hadPlan <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products> ],
+        [ a prov:Association ;
+            prov:agent id:74ee65c3-45e0-49ab-9086-fd0704308112 ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T08:26:25.900591"^^xsd:dateTime ;
             prov:hadActivity id:39aa9d6c-b92f-486d-9c56-5289ebc57918 ] ;
@@ -4487,37 +4539,37 @@ id:6eeb1082-3e85-4b8c-87e4-db08b8a54f27 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T08:26:24.581116"^^xsd:dateTime ;
             prov:hadActivity id:39aa9d6c-b92f-486d-9c56-5289ebc57918 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T08:26:24.619722"^^xsd:dateTime ;
-            prov:entity data:632ab110c744c188c9ae98cb2c6b74767894037a ;
-            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/product_level> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T08:26:24.619408"^^xsd:dateTime ;
-            prov:entity data:4c89b83017b6bf2fdefdc95f52a039255235ba37 ;
-            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/collection> ],
+            prov:atTime "2026-09-23T08:26:24.619184"^^xsd:dateTime ;
+            prov:entity id:cf1cca44-d0e6-48b5-ba47-0e7ab8eb2752 ;
+            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/cloud_cover> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T08:26:24.619154"^^xsd:dateTime ;
             prov:entity data:b361b353c05b9c7e9b56b5de806f65ce2c8da7b5 ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/catalog> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T08:26:24.620133"^^xsd:dateTime ;
-            prov:entity id:71200b7e-dd7c-4784-a342-7f5a60ceba87 ;
-            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/toi> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T08:26:24.619184"^^xsd:dateTime ;
-            prov:entity id:cf1cca44-d0e6-48b5-ba47-0e7ab8eb2752 ;
-            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/cloud_cover> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T08:26:24.619429"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/date> ],
+            prov:atTime "2026-09-23T08:26:24.619722"^^xsd:dateTime ;
+            prov:entity data:632ab110c744c188c9ae98cb2c6b74767894037a ;
+            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/product_level> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T08:26:24.619451"^^xsd:dateTime ;
             prov:entity id:4be4827d-8cb6-4720-99c0-164401d97f27 ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/delta> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-23T08:26:24.620133"^^xsd:dateTime ;
+            prov:entity id:71200b7e-dd7c-4784-a342-7f5a60ceba87 ;
+            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/toi> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T08:26:24.619429"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/date> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T08:26:24.618823"^^xsd:dateTime ;
             prov:entity id:bb36ba47-4fd9-4c7e-b7f8-fd944a8f3539 ;
-            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/aoi> ] .
+            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/aoi> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T08:26:24.619408"^^xsd:dateTime ;
+            prov:entity data:4c89b83017b6bf2fdefdc95f52a039255235ba37 ;
+            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/collection> ] .
 
 id:71200b7e-dd7c-4784-a342-7f5a60ceba87 a wfprov:Artifact,
         prov:Collection,
@@ -4660,25 +4712,25 @@ id:39aa9d6c-b92f-486d-9c56-5289ebc57918 a wfprov:WorkflowRun,
             prov:atTime "2026-09-23T08:26:24.309107"^^xsd:dateTime ;
             prov:hadActivity id:2eaf041b-2988-4cd3-bd1b-2c3f2028e2c8 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T08:26:24.577508"^^xsd:dateTime ;
-            prov:entity id:5226a207-b9d6-4693-b683-260e1f1d77cf ;
-            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/aoi> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T08:26:24.577974"^^xsd:dateTime ;
-            prov:entity id:c03c3a8f-fd1a-4796-9014-0da5e9f7866d ;
-            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/delta> ],
+            prov:atTime "2026-09-23T08:26:24.577940"^^xsd:dateTime ;
+            prov:entity data:4c89b83017b6bf2fdefdc95f52a039255235ba37 ;
+            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/collection> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T08:26:24.577548"^^xsd:dateTime ;
             prov:entity id:9841304d-a79d-49fb-ba33-d05f45ce0443 ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/cloud_cover> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-23T08:26:24.577974"^^xsd:dateTime ;
+            prov:entity id:c03c3a8f-fd1a-4796-9014-0da5e9f7866d ;
+            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/delta> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T08:26:24.578511"^^xsd:dateTime ;
             prov:entity id:50b5b789-1882-4c70-9c6a-59f121c84204 ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/toi> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T08:26:24.577940"^^xsd:dateTime ;
-            prov:entity data:4c89b83017b6bf2fdefdc95f52a039255235ba37 ;
-            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/collection> ] ;
+            prov:atTime "2026-09-23T08:26:24.577508"^^xsd:dateTime ;
+            prov:entity id:5226a207-b9d6-4693-b683-260e1f1d77cf ;
+            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/aoi> ] ;
     prov:startedAtTime "2026-09-23T08:26:24.309085"^^xsd:dateTime .
 
 
@@ -4857,7 +4909,12 @@ x-jsonld-extra-terms:
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
   outputTransmission: https://w3id.org/ogc/api/processes/outputTransmission
-  metadata: https://w3id.org/ogc/api/processes/metadata
+  metadata:
+    x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+    x-jsonld-context:
+      href:
+        '@id': https://w3id.org/ogc/api/processes/href
+        '@type': '@id'
   role:
     x-jsonld-id: https://w3id.org/ogc/api/processes/role
     x-jsonld-type: '@id'
@@ -4875,8 +4932,27 @@ x-jsonld-extra-terms:
       type: http://purl.org/dc/terms/type
       title: http://www.w3.org/2000/01/rdf-schema#label
   response: https://w3id.org/ogc/api/processes/response
-  executionUnit: https://w3id.org/ogc/api/processes/executionUnit
-  processDescription: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+  executionUnit:
+    x-jsonld-id: https://w3id.org/ogc/api/processes/executionUnit
+    x-jsonld-context:
+      href:
+        '@id': http://www.w3.org/ns/oa#hasTarget
+        '@type': '@id'
+      rel:
+        '@id': http://www.iana.org/assignments/relation
+        '@type': '@id'
+        '@context':
+          '@base': http://www.iana.org/assignments/relation/
+      type: http://purl.org/dc/terms/format
+  processDescription:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+    x-jsonld-context:
+      href:
+        '@id': http://www.w3.org/2000/01/rdf-schema#seeAlso
+        '@type': '@id'
+      license:
+        '@id': http://purl.org/dc/terms/license
+        '@type': '@id'
   result: https://geolabs.github.io/bblocks-process-profiles/def/result
   engine: https://geolabs.github.io/bblocks-process-profiles/def/engine
   run: https://geolabs.github.io/bblocks-process-profiles/def/run
@@ -4911,6 +4987,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   hadPlan:
     x-jsonld-id: http://www.w3.org/ns/prov#hadPlan
+    x-jsonld-type: '@id'
+  specializationOf:
+    x-jsonld-id: http://www.w3.org/ns/prov#specializationOf
     x-jsonld-type: '@id'
   startedAtTime:
     x-jsonld-id: http://www.w3.org/ns/prov#startedAtTime
@@ -4950,14 +5029,20 @@ x-jsonld-extra-terms:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#broader
     x-jsonld-type: '@id'
   profile: https://geolabs.github.io/bblocks-process-profiles/def/profile
-  source: https://geolabs.github.io/bblocks-process-profiles/def/source
-  cwl:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cwl
-    x-jsonld-type: '@id'
+  plan:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
+    x-jsonld-context:
+      license:
+        '@id': http://purl.org/dc/terms/license
+        '@type': '@id'
+  Plan: http://www.w3.org/ns/prov#Plan
   cwlClass: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
   cwlId: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
   provenanceClass:
     x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
+    x-jsonld-type: '@id'
+  implementsProfile:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
     x-jsonld-type: '@id'
   cctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
   candidateCctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
@@ -5051,7 +5136,15 @@ Links to the schema:
     "mutable": "proc:mutable",
     "jobControlOptions": "proc:jobControlOptions",
     "outputTransmission": "proc:outputTransmission",
-    "metadata": "proc:metadata",
+    "metadata": {
+      "@id": "proc:metadata",
+      "@context": {
+        "href": {
+          "@id": "proc:href",
+          "@type": "@id"
+        }
+      }
+    },
     "role": {
       "@id": "proc:role",
       "@type": "@id"
@@ -5075,8 +5168,36 @@ Links to the schema:
       }
     },
     "response": "proc:response",
-    "executionUnit": "proc:executionUnit",
-    "processDescription": "pp:processDescription",
+    "executionUnit": {
+      "@id": "proc:executionUnit",
+      "@context": {
+        "href": {
+          "@id": "oa:hasTarget",
+          "@type": "@id"
+        },
+        "rel": {
+          "@id": "http://www.iana.org/assignments/relation",
+          "@type": "@id",
+          "@context": {
+            "@base": "http://www.iana.org/assignments/relation/"
+          }
+        },
+        "type": "dct:format"
+      }
+    },
+    "processDescription": {
+      "@id": "pp:processDescription",
+      "@context": {
+        "href": {
+          "@id": "rdfs:seeAlso",
+          "@type": "@id"
+        },
+        "license": {
+          "@id": "dct:license",
+          "@type": "@id"
+        }
+      }
+    },
     "result": "pp:result",
     "engine": "pp:engine",
     "run": "pp:run",
@@ -5120,6 +5241,10 @@ Links to the schema:
     },
     "hadPlan": {
       "@id": "prov:hadPlan",
+      "@type": "@id"
+    },
+    "specializationOf": {
+      "@id": "prov:specializationOf",
       "@type": "@id"
     },
     "startedAtTime": {
@@ -5171,15 +5296,24 @@ Links to the schema:
       "@type": "@id"
     },
     "profile": "pp:profile",
-    "source": "pp:source",
-    "cwl": {
-      "@id": "pp:cwl",
-      "@type": "@id"
+    "plan": {
+      "@id": "pp:plan",
+      "@context": {
+        "license": {
+          "@id": "dct:license",
+          "@type": "@id"
+        }
+      }
     },
+    "Plan": "prov:Plan",
     "cwlClass": "pp:cwlClass",
     "cwlId": "pp:cwlId",
     "provenanceClass": {
       "@id": "pp:provenanceClass",
+      "@type": "@id"
+    },
+    "implementsProfile": {
+      "@id": "pp:implementsProfile",
       "@type": "@id"
     },
     "cctDependencies": "pp:cctDependency",

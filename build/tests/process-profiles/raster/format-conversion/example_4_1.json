@@ -1,0 +1,26 @@
+{
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion",
+  "type": "ProcessType",
+  "prefLabel": "Convert raster data from one format to another.",
+  "definition": "http://www.gdal.org/gdal_translate.html",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+  ],
+  "profile": "ospd.process-profiles.raster.format-conversion",
+  "processDescription": {
+    "id": "Gdal_Translate",
+    "version": "1.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion",
+  "closeMatch": [
+    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.save_result"
+  ],
+  "openeoEquivalence": {
+    "level": "closeMatch",
+    "rationale": "Gdal_Translate re-encodes a raster into another format (`Format`) without changing its content -- the same role save_result's `format` parameter plays when terminating an openEO process graph. Not exactMatch: save_result is a cube-terminal process (no further chaining downstream), while Gdal_Translate is an ordinary mid-pipeline step; `GCP` (ground control point) handling has no openEO equivalent either."
+  }
+}

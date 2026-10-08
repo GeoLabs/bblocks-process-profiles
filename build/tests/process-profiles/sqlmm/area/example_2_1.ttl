@@ -1,0 +1,32 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/GetArea> dcterms:description "Computes the area of a geometry" ;
+    dcterms:title "Compute geometry area." ;
+    pp:version "2.0.0" ;
+    proc:inputs [ ns3:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+                    dcterms:title "Polygon to compute are" ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+    proc:jobControlOptions "async-execute",
+        "dismiss",
+        "sync-execute" ;
+    proc:mutable false ;
+    proc:outputTransmission "reference",
+        "value" ;
+    proc:outputs [ ns2:Area [ dcterms:description "The Computed Area Value" ;
+                    dcterms:title "Computed Area" ;
+                    proc:schema [ proc:type "number" ;
+                            ns1:format "float" ] ] ] .
+

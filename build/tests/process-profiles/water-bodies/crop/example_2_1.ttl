@@ -32,10 +32,10 @@
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "Process converted from CWL" ;
-            proc:role schema:description ],
-        [ rdf:value "crop" ;
+    proc:metadata [ rdf:value "crop" ;
             proc:role schema:name ],
+        [ rdf:value "Process converted from CWL" ;
+            proc:role schema:description ],
         [ rdf:value "1.4.1" ;
             proc:role schema:softwareVersion ] ;
     proc:mutable true ;

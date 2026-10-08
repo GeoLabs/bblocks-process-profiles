@@ -1,0 +1,59 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/format-conversion/context.jsonld",
+  "id": "Gdal_Translate",
+  "title": "Convert raster data from one format to another. ",
+  "description": "http://www.gdal.org/gdal_translate.html",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "Format": {
+      "title": "Format of the output data",
+      "description": "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform).",
+      "schema": {
+        "type": "string",
+        "default": "GTiff",
+        "nullable": true
+      }
+    },
+    "GCP": {
+      "title": "Ground Point Control",
+      "description": "Ground Point Control in the form : pixel,line,eating,northing(,elev).",
+      "schema": {
+        "type": "string",
+        "nullable": true
+      }
+    },
+    "InputDSN": {
+      "title": "The input data source name",
+      "description": "The input data source name to use as source for convertion.",
+      "schema": {
+        "type": "string"
+      }
+    },
+    "OutputDSN": {
+      "title": "The output data source name",
+      "description": "The output data source name to use as source for convertion.",
+      "schema": {
+        "type": "string"
+      }
+    }
+  },
+  "outputs": {
+    "Result": {
+      "title": "The resulting converted file",
+      "description": "The file name resulting of the convertion",
+      "schema": {
+        "type": "string"
+      }
+    }
+  },
+  "mutable": false
+}

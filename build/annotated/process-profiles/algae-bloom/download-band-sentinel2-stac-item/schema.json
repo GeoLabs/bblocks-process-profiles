@@ -179,7 +179,15 @@
     "mutable": "https://w3id.org/ogc/api/processes/mutable",
     "jobControlOptions": "https://w3id.org/ogc/api/processes/jobControlOptions",
     "outputTransmission": "https://w3id.org/ogc/api/processes/outputTransmission",
-    "metadata": "https://w3id.org/ogc/api/processes/metadata",
+    "metadata": {
+      "x-jsonld-id": "https://w3id.org/ogc/api/processes/metadata",
+      "x-jsonld-context": {
+        "href": {
+          "@id": "https://w3id.org/ogc/api/processes/href",
+          "@type": "@id"
+        }
+      }
+    },
     "role": {
       "x-jsonld-id": "https://w3id.org/ogc/api/processes/role",
       "x-jsonld-type": "@id"
@@ -203,8 +211,36 @@
       }
     },
     "response": "https://w3id.org/ogc/api/processes/response",
-    "executionUnit": "https://w3id.org/ogc/api/processes/executionUnit",
-    "processDescription": "https://geolabs.github.io/bblocks-process-profiles/def/processDescription",
+    "executionUnit": {
+      "x-jsonld-id": "https://w3id.org/ogc/api/processes/executionUnit",
+      "x-jsonld-context": {
+        "href": {
+          "@id": "http://www.w3.org/ns/oa#hasTarget",
+          "@type": "@id"
+        },
+        "rel": {
+          "@id": "http://www.iana.org/assignments/relation",
+          "@type": "@id",
+          "@context": {
+            "@base": "http://www.iana.org/assignments/relation/"
+          }
+        },
+        "type": "http://purl.org/dc/terms/format"
+      }
+    },
+    "processDescription": {
+      "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/processDescription",
+      "x-jsonld-context": {
+        "href": {
+          "@id": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+          "@type": "@id"
+        },
+        "license": {
+          "@id": "http://purl.org/dc/terms/license",
+          "@type": "@id"
+        }
+      }
+    },
     "result": "https://geolabs.github.io/bblocks-process-profiles/def/result",
     "engine": "https://geolabs.github.io/bblocks-process-profiles/def/engine",
     "run": "https://geolabs.github.io/bblocks-process-profiles/def/run",
@@ -248,6 +284,10 @@
     },
     "hadPlan": {
       "x-jsonld-id": "http://www.w3.org/ns/prov#hadPlan",
+      "x-jsonld-type": "@id"
+    },
+    "specializationOf": {
+      "x-jsonld-id": "http://www.w3.org/ns/prov#specializationOf",
       "x-jsonld-type": "@id"
     },
     "startedAtTime": {
@@ -299,15 +339,24 @@
       "x-jsonld-type": "@id"
     },
     "profile": "https://geolabs.github.io/bblocks-process-profiles/def/profile",
-    "source": "https://geolabs.github.io/bblocks-process-profiles/def/source",
-    "cwl": {
-      "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/cwl",
-      "x-jsonld-type": "@id"
+    "plan": {
+      "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/plan",
+      "x-jsonld-context": {
+        "license": {
+          "@id": "http://purl.org/dc/terms/license",
+          "@type": "@id"
+        }
+      }
     },
+    "Plan": "http://www.w3.org/ns/prov#Plan",
     "cwlClass": "https://geolabs.github.io/bblocks-process-profiles/def/cwlClass",
     "cwlId": "https://geolabs.github.io/bblocks-process-profiles/def/cwlId",
     "provenanceClass": {
       "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass",
+      "x-jsonld-type": "@id"
+    },
+    "implementsProfile": {
+      "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile",
       "x-jsonld-type": "@id"
     },
     "cctDependencies": "https://geolabs.github.io/bblocks-process-profiles/def/cctDependency",

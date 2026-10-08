@@ -4,7 +4,7 @@
     "id": "urn:example:run:algae-bloom:workflow-copernicus",
     "type": "WorkflowRun",
     "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus",
-    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus",
+    "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
     "status": "successful",
     "jobID": "algae-bloom-workflow-copernicus-0001",

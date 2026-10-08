@@ -1,0 +1,21 @@
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/convex-hull> a skos:Concept ;
+    skos:broader <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    skos:definition "This service shall return a feature collection that represents the convex hull of geometry InputPolygon. The convex hull is the smallest convex polygon that contains all points of the geometry. The convex Hull for a geometry of encoding data type Point is the point itself" ;
+    skos:inScheme pp:process-type ;
+    skos:prefLabel "Compute convex hull." ;
+    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull> ;
+    pp:openeoEquivalence [ pp:equivalenceLevel "none" ;
+            pp:rationale "No openEO process computes the convex hull of a vector geometry in the published bblocks-openeo register." ] ;
+    pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/ConvexHull> ;
+    pp:profile "ospd.process-profiles.sqlmm.convex-hull" ;
+    pp:provenanceClass wfprov:ProcessRun ;
+    pp:status "submitted" .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/ConvexHull> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/ConvexHull> ;
+    pp:version "1.0.0" .
+

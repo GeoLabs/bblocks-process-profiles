@@ -12,17 +12,24 @@
   "profile": "ospd.process-profiles.algae-bloom.plot-image",
   "processDescription": {
     "id": "plot-image",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "href": "https://ospd.example.org/ogc-api/processes/plot-image"
   },
-  "source": {
-    "cwl": "https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/plot-image.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/plot-image/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/plot-image.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "plot-image",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": []
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [],
   "closeMatch": [
     "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.save_result"
   ],

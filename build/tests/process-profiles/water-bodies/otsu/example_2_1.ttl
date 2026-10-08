@@ -1,7 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -11,12 +11,12 @@
 <https://geolabs.github.io/bblocks-process-profiles/def/process/otsu> dcterms:description "Process converted from CWL" ;
     dcterms:title "otsu" ;
     pp:version "1.4.1" ;
-    proc:inputs [ ns2:raster [ dcterms:description "" ;
+    proc:inputs [ ns3:raster [ dcterms:description "" ;
                     dcterms:title "raster" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentMediaType "application/octet-stream" ] ] ] ;
+                            ns2:contentMediaType "application/octet-stream" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
     proc:metadata [ rdf:value "otsu" ;
             proc:role schema:name ],
@@ -27,8 +27,8 @@
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:binary_mask_item [ dcterms:description "" ;
+    proc:outputs [ ns1:binary_mask_item [ dcterms:description "" ;
                     dcterms:title "binary_mask_item" ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentMediaType "application/octet-stream" ] ] ] .
+                            ns2:contentMediaType "application/octet-stream" ] ] ] .
 

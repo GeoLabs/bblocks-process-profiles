@@ -1,0 +1,77 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/vector/geometry-extent/context.jsonld",
+  "id": "SAGA.shapes_tools.19",
+  "title": "Get Shapes Extents",
+  "description": "Get Shapes Extents",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "SHAPES": {
+      "title": "Shapes",
+      "description": "Shapes",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "utf-8",
+            "contentMediaType": "text/xml"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/vnd.google-earth.kml+xml"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    },
+    "OUTPUT": {
+      "title": "Get Extent for ...",
+      "description": "Get Extent for ...",
+      "schema": {
+        "type": "string",
+        "default": "each shape",
+        "enum": [
+          "all shapes",
+          "each shape",
+          "each shape's part"
+        ],
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "EXTENTS": {
+      "title": "Extents",
+      "description": "Extents",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "utf-8",
+            "contentMediaType": "text/xml"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/vnd.google-earth.kml+xml"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    }
+  },
+  "mutable": false
+}

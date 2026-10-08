@@ -24,6 +24,26 @@ type carries the entry `id` in `activityType`. The entry itself is a SKOS concep
   SKOS cannot express, with the rationale and, for composite or opaque processes, a
   stage-by-stage decomposition.
 
+## Type, plan and process description are three things
+
+The entry describes the **type** of activity. What an activity of that type executes is its
+**plan** (`prov:Plan`), kept apart in `plan` with its own IRI: the OGC Application Package served
+at `/processes/{processID}/package` by [OGC API - Processes - Part 2: Deploy, Replace,
+Undeploy](https://docs.ogc.org/DRAFTS/20-044.html) (requirement
+`/req/deploy-replace-undeploy/package-get-op`), whose `executionUnit` is the pinned CWL and which
+also carries the EOAP CWL custom types the CWL uses. Every run of the type records **the same
+IRI** as its `qualifiedAssociation.hadPlan` -- and `wfprov:describedByProcess` /
+`describedByWorkflow`, whose `wfdesc:Workflow` range is itself a `prov:Plan` in wfprov -- so the
+plan named at type level and the plan followed by each run are one resource.
+
+`processDescription` is the third thing: the interface (`/processes/{processID}`) the type is
+profiled from, which the run's input and output entities point into (`#inputs/{name}`).
+
+A process implemented natively by its server (`mutable: false`, as on a ZOO-Project deployment)
+has no Application Package: Part 2 serves `/package` only for dynamically deployed processes
+(requirement `package-get-op`, C). Such an entry has no `plan`; its `processDescription.href` is
+the live process.
+
 Status values follow ISO 19135. Entries in this register are candidates: at most `submitted`.
 
 The `pp:` vocabulary (`https://geolabs.github.io/bblocks-process-profiles/def/`) and the phase IRIs
@@ -47,17 +67,24 @@ are provisional, pending a decision on the process-type register namespace.
   "profile": "ospd.process-profiles.algae-bloom.reproject-image",
   "processDescription": {
     "id": "reproject-image",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "href": "https://ospd.example.org/ogc-api/processes/reproject-image"
   },
-  "source": {
-    "cwl": "https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/reproject-image.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/reproject-image/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/reproject-image.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "reproject-image",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": []
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [],
   "closeMatch": [
     "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
   ],
@@ -85,17 +112,24 @@ are provisional, pending a decision on the process-type register namespace.
   "profile": "ospd.process-profiles.algae-bloom.reproject-image",
   "processDescription": {
     "id": "reproject-image",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "href": "https://ospd.example.org/ogc-api/processes/reproject-image"
   },
-  "source": {
-    "cwl": "https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/reproject-image.cwl",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/reproject-image/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/reproject-image.cwl",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "reproject-image",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": []
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [],
   "closeMatch": [
     "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
   ],
@@ -109,7 +143,12 @@ are provisional, pending a decision on the process-type register namespace.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/ogc/api/processes/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> a skos:Concept ;
@@ -120,16 +159,22 @@ are provisional, pending a decision on the process-type register namespace.
     skos:prefLabel "Performs image reprojection." ;
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "As used in W1 the tool only changes the pixel size (gdalwarp `-tr 60 60`, nearest neighbour by default, no `-t_srs`): resample_spatial with `resolution: 60`, `projection: null`, `method: near`. Not an exactMatch: `output_dimensions` (`-ts`) has no openEO parameter, the output type is forced to Float32 (`-ot Float32`), and the tool works on a file rather than a data cube. Despite its name, no CRS transformation takes place." ] ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/reproject-image/package> ;
     pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/reproject-image> ;
     pp:profile "ospd.process-profiles.algae-bloom.reproject-image" ;
     pp:provenanceClass <http://purl.org/wf4ever/wfprov#ProcessRun> ;
-    pp:source [ dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
-            pp:cwl <https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/reproject-image.cwl> ;
-            pp:cwlClass "CommandLineTool" ;
-            pp:cwlId "reproject-image" ] ;
     pp:status "submitted" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/reproject-image> pp:version "1.0.0" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/reproject-image> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/reproject-image> ;
+    pp:version "1.0.0" .
+
+<https://ospd.example.org/ogc-api/processes/reproject-image/package> a prov:Plan ;
+    dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
+    pp:cwlClass "CommandLineTool" ;
+    pp:cwlId "reproject-image" ;
+    ns2:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/reproject-image.cwl> ] .
 
 
 ```
@@ -155,19 +200,26 @@ are provisional, pending a decision on the process-type register namespace.
   "profile": "ospd.process-profiles.kindgrove.mangrove",
   "processDescription": {
     "id": "mangrove_cli",
-    "version": "0.0.1"
+    "version": "0.0.1",
+    "href": "https://ospd.example.org/ogc-api/processes/mangrove_cli"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/bblocks-eoap-cct/blob/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove_cli",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/mangrove_cli/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove_cli",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "mangrove_cli",
-    "license": "https://spdx.org/licenses/Apache-2.0"
+    "license": "https://spdx.org/licenses/Apache-2.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.bbox"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.bbox"
-  ],
   "openeoEquivalence": {
     "level": "none",
     "rationale": "Opaque: one ipython2cwl binary running the whole notebook. No single openEO process; each notebook stage has a closeMatch (decomposition). run_udf could wrap the binary but expects a data cube in and out, which this tool does not follow (it searches and downloads its own data).",
@@ -263,19 +315,26 @@ are provisional, pending a decision on the process-type register namespace.
   "profile": "ospd.process-profiles.kindgrove.mangrove",
   "processDescription": {
     "id": "mangrove_cli",
-    "version": "0.0.1"
+    "version": "0.0.1",
+    "href": "https://ospd.example.org/ogc-api/processes/mangrove_cli"
   },
-  "source": {
-    "cwl": "https://github.com/GeoLabs/bblocks-eoap-cct/blob/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove_cli",
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/mangrove_cli/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove_cli",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
     "cwlClass": "CommandLineTool",
     "cwlId": "mangrove_cli",
-    "license": "https://spdx.org/licenses/Apache-2.0"
+    "license": "https://spdx.org/licenses/Apache-2.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.bbox"
+    ]
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "cctDependencies": [],
-  "candidateCctDependencies": [
-    "eoap.cct.bbox"
-  ],
   "openeoEquivalence": {
     "level": "none",
     "rationale": "Opaque: one ipython2cwl binary running the whole notebook. No single openEO process; each notebook stage has a closeMatch (decomposition). run_udf could wrap the binary but expects a data cube in and out, which this tool does not follow (it searches and downloads its own data).",
@@ -353,8 +412,13 @@ are provisional, pending a decision on the process-type register namespace.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/ogc/api/processes/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove> a skos:Concept ;
@@ -366,7 +430,6 @@ are provisional, pending a decision on the process-type register namespace.
     skos:definition "Detects mangroves from Sentinel-2 L2A vegetation indices within a bounding box and estimates above-ground biomass and carbon stock (ipython2cwl binary of the KindGrove notebook)." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Mangrove biomass and carbon estimation" ;
-    pp:candidateCctDependency "eoap.cct.bbox" ;
     pp:openeoEquivalence [ pp:decomposition ( [ pp:equivalenceLevel "closeMatch" ;
                         pp:openeo "ogc.openeo.processes.cubes.load_collection" ;
                         pp:stage "STAC search, Earth-Search sentinel-2-l2a, bbox, cloud cover, last N days" ] [ skos:note "epsilon 1e-8 in the denominator" ;
@@ -396,16 +459,23 @@ are provisional, pending a decision on the process-type register namespace.
                         pp:stage "export CSV + GeoTIFF" ] ) ;
             pp:equivalenceLevel "none" ;
             pp:rationale "Opaque: one ipython2cwl binary running the whole notebook. No single openEO process; each notebook stage has a closeMatch (decomposition). run_udf could wrap the binary but expects a data cube in and out, which this tool does not follow (it searches and downloads its own data)." ] ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/mangrove_cli/package> ;
     pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/mangrove_cli> ;
     pp:profile "ospd.process-profiles.kindgrove.mangrove" ;
     pp:provenanceClass <http://purl.org/wf4ever/wfprov#ProcessRun> ;
-    pp:source [ dcterms:license <https://spdx.org/licenses/Apache-2.0> ;
-            pp:cwl <https://github.com/GeoLabs/bblocks-eoap-cct/blob/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove_cli> ;
-            pp:cwlClass "CommandLineTool" ;
-            pp:cwlId "mangrove_cli" ] ;
     pp:status "submitted" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/mangrove_cli> pp:version "0.0.1" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/mangrove_cli> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/mangrove_cli> ;
+    pp:version "0.0.1" .
+
+<https://ospd.example.org/ogc-api/processes/mangrove_cli/package> a prov:Plan ;
+    dcterms:license <https://spdx.org/licenses/Apache-2.0> ;
+    pp:candidateCctDependency "eoap.cct.bbox" ;
+    pp:cwlClass "CommandLineTool" ;
+    pp:cwlId "mangrove_cli" ;
+    ns2:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove_cli> ] .
 
 
 ```
@@ -425,6 +495,26 @@ description: 'Candidate entry for the OSPD process-type register (Activity 4). A
 
   mapping properties.
 
+
+  The entry describes the *type* of activity only. What an activity of this type executes
+  -- its
+
+  plan, a `prov:Plan` -- is kept apart in `plan`: the OGC Application Package served
+  by OGC API -
+
+  Processes - Part 2 (Deploy, Replace, Undeploy) at `/processes/{processID}/package`,
+  whose
+
+  execution unit is the pinned CWL. A run of this type records the same IRI as its
+
+  `qualifiedAssociation.hadPlan`. A process implemented natively by its server (`mutable:
+  false`)
+
+  has no Application Package (Part 2 serves `/package` only for dynamically deployed
+  processes)
+
+  and so no `plan`; `processDescription` is then the only link to what is executed.
+
   '
 type: object
 required:
@@ -436,7 +526,7 @@ required:
 - status
 - phase
 - profile
-- source
+- processDescription
 - provenanceClass
 - openeoEquivalence
 properties:
@@ -493,10 +583,16 @@ properties:
     type: string
     x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/profile
   processDescription:
+    description: The OGC API - Processes processDescription this type is profiled
+      from, at `href` (the `/processes/{processID}` resource). For a CWL-sourced process
+      it is the description the Application Package would deploy, under the illustrative
+      host `ospd.example.org`; for a live process (e.g. a ZOO-Project deployment,
+      `ospd.process-profiles.sqlmm.*`) the real one.
     type: object
     required:
     - id
     - version
+    - href
     properties:
       id:
         type: string
@@ -504,20 +600,62 @@ properties:
       version:
         type: string
         x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/version
+      href:
+        type: string
+        format: uri
+        x-jsonld-id: http://www.w3.org/2000/01/rdf-schema#seeAlso
+        x-jsonld-type: '@id'
+      license:
+        description: Of a live process; omitted, not null, when it declares none --
+          do not assume one.
+        type: string
+        format: uri
+        x-jsonld-id: http://purl.org/dc/terms/license
+        x-jsonld-type: '@id'
     x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
-  source:
+  plan:
+    description: 'The plan (`prov:Plan`) an activity of this type executes: the OGC
+      Application Package at `/processes/{processID}/package` (OGC API - Processes
+      - Part 2, requirement /req/deploy-replace-undeploy/package-get-op), whose `executionUnit`
+      is the pinned CWL. Present only for a CWL-sourced process.'
     type: object
     required:
-    - cwl
+    - id
+    - type
+    - executionUnit
     - cwlClass
     - cwlId
     properties:
-      cwl:
-        description: Pinned URL of the CWL document.
+      id:
         type: string
         format: uri
-        x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cwl
-        x-jsonld-type: '@id'
+        pattern: /processes/[^/]+/package$
+        x-jsonld-id: '@id'
+      type:
+        const: Plan
+        x-jsonld-id: '@type'
+      executionUnit:
+        description: Same link as the Application Package's own `executionUnit` (examples/ogcapppkg.json).
+        type: object
+        required:
+        - href
+        - type
+        properties:
+          href:
+            description: Pinned URL of the CWL document.
+            type: string
+            format: uri
+            x-jsonld-id: http://www.w3.org/ns/oa#hasTarget
+            x-jsonld-type: '@id'
+          type:
+            type: string
+            x-jsonld-id: http://purl.org/dc/terms/format
+          rel:
+            type: string
+            x-jsonld-id: http://www.iana.org/assignments/relation
+            x-jsonld-type: '@id'
+            x-jsonld-base: http://www.iana.org/assignments/relation/
+        x-jsonld-id: https://w3id.org/ogc/api/processes/executionUnit
       cwlClass:
         enum:
         - CommandLineTool
@@ -532,7 +670,22 @@ properties:
         format: uri
         x-jsonld-id: http://purl.org/dc/terms/license
         x-jsonld-type: '@id'
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/source
+      cctDependencies:
+        description: EOAP CWL custom types used by the CWL.
+        type: array
+        items:
+          type: string
+          pattern: ^eoap\.cct\.
+        x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
+      candidateCctDependencies:
+        description: EOAP CWL custom types that could replace plain CWL types (not
+          used by the CWL).
+        type: array
+        items:
+          type: string
+          pattern: ^eoap\.cct\.
+        x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
   provenanceClass:
     description: Class of the run records produced by executing this process.
     type: string
@@ -541,21 +694,19 @@ properties:
     - http://purl.org/wf4ever/wfprov#WorkflowRun
     x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
     x-jsonld-type: '@id'
-  cctDependencies:
-    description: EOAP CWL custom types used by the CWL source.
-    type: array
-    items:
-      type: string
-      pattern: ^eoap\.cct\.
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
-  candidateCctDependencies:
-    description: EOAP CWL custom types that could replace plain CWL types (not used
-      by the source).
-    type: array
-    items:
-      type: string
-      pattern: ^eoap\.cct\.
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
+  implementsProfile:
+    description: "IRI of the nearest applicable profile this process specialises,
+      in the generic-profiles register -- normally an Implementation Profile (generic-profiles.implementation-profile.*,
+      OGC 14-065 WPS 2.0.2 \xA77.5.3: standard data formats, still not one specific
+      deployment's own choice), or a Generic Profile directly when no Implementation
+      Profile exists yet. Optional: most processes have no standardised abstract counterpart
+      at all. `processDescription` and `plan` (this entry's own concrete binding)
+      are what further specialise it to one real, deployed process -- Implementation
+      (instance level) in the same standard's terms."
+    type: string
+    format: uri
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
+    x-jsonld-type: '@id'
   hasStep:
     description: Process types of the steps of a Workflow.
     type: array
@@ -633,9 +784,14 @@ properties:
     x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/openeoEquivalence
 x-jsonld-extra-terms:
   ProcessType: http://www.w3.org/2004/02/skos/core#Concept
+  Plan: http://www.w3.org/ns/prov#Plan
 x-jsonld-prefixes:
   skos: http://www.w3.org/2004/02/skos/core#
+  prov: http://www.w3.org/ns/prov#
   pp: https://geolabs.github.io/bblocks-process-profiles/def/
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  dct: http://purl.org/dc/terms/
+  oa: http://www.w3.org/ns/oa#
 
 ```
 
@@ -651,6 +807,7 @@ Links to the schema:
 {
   "@context": {
     "ProcessType": "skos:Concept",
+    "Plan": "prov:Plan",
     "id": "@id",
     "type": "@type",
     "prefLabel": "skos:prefLabel",
@@ -667,31 +824,56 @@ Links to the schema:
     "profile": "pp:profile",
     "processDescription": {
       "@context": {
-        "version": "pp:version"
+        "version": "pp:version",
+        "href": {
+          "@id": "rdfs:seeAlso",
+          "@type": "@id"
+        },
+        "license": {
+          "@id": "dct:license",
+          "@type": "@id"
+        }
       },
       "@id": "pp:processDescription"
     },
-    "source": {
+    "plan": {
       "@context": {
-        "cwl": {
-          "@id": "pp:cwl",
-          "@type": "@id"
+        "executionUnit": {
+          "@context": {
+            "href": {
+              "@id": "oa:hasTarget",
+              "@type": "@id"
+            },
+            "type": "dct:format",
+            "rel": {
+              "@context": {
+                "@base": "http://www.iana.org/assignments/relation/"
+              },
+              "@id": "http://www.iana.org/assignments/relation",
+              "@type": "@id"
+            }
+          },
+          "@id": "https://w3id.org/ogc/api/processes/executionUnit"
         },
         "cwlClass": "pp:cwlClass",
         "cwlId": "pp:cwlId",
         "license": {
-          "@id": "http://purl.org/dc/terms/license",
+          "@id": "dct:license",
           "@type": "@id"
-        }
+        },
+        "cctDependencies": "pp:cctDependency",
+        "candidateCctDependencies": "pp:candidateCctDependency"
       },
-      "@id": "pp:source"
+      "@id": "pp:plan"
     },
     "provenanceClass": {
       "@id": "pp:provenanceClass",
       "@type": "@id"
     },
-    "cctDependencies": "pp:cctDependency",
-    "candidateCctDependencies": "pp:candidateCctDependency",
+    "implementsProfile": {
+      "@id": "pp:implementsProfile",
+      "@type": "@id"
+    },
     "hasStep": {
       "@id": "pp:hasStep",
       "@type": "@id"
@@ -725,7 +907,11 @@ Links to the schema:
       "@id": "pp:openeoEquivalence"
     },
     "skos": "http://www.w3.org/2004/02/skos/core#",
+    "prov": "http://www.w3.org/ns/prov#",
     "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dct": "http://purl.org/dc/terms/",
+    "oa": "http://www.w3.org/ns/oa#",
     "@version": 1.1
   }
 }
