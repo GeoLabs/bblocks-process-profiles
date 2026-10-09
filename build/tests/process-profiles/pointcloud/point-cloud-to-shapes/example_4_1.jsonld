@@ -1,0 +1,24 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/pointcloud/point-cloud-to-shapes/context.jsonld",
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/pointcloud/point-cloud-to-shapes",
+  "type": "ProcessType",
+  "prefLabel": "Point Cloud to Shapes",
+  "definition": "Point Cloud to Shapes",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+  ],
+  "profile": "ospd.process-profiles.pointcloud.point-cloud-to-shapes",
+  "processDescription": {
+    "id": "SAGA.pointcloud_tools.5",
+    "version": "1.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.5"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-shapes",
+  "openeoEquivalence": {
+    "level": "none",
+    "rationale": "No openEO process handles point clouds in the published bblocks-openeo register."
+  }
+}

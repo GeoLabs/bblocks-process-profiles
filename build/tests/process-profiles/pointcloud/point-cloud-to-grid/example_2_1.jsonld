@@ -1,0 +1,168 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/pointcloud/point-cloud-to-grid/context.jsonld",
+  "id": "SAGA.pointcloud_tools.4",
+  "title": "Point Cloud to Grid",
+  "description": "Point Cloud to Grid",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "POINTS": {
+      "title": "Points",
+      "description": "Points",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-lasf"
+          }
+        ]
+      }
+    },
+    "OUTPUT": {
+      "title": "Output",
+      "description": "Output",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "only z",
+        "enum": [
+          "only z",
+          "all attributes"
+        ],
+        "nullable": true
+      }
+    },
+    "AGGREGATION": {
+      "title": "Aggregation",
+      "description": "Aggregation",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "first value",
+        "enum": [
+          "first value",
+          "last value",
+          "mean value",
+          "lowest z",
+          "highest z"
+        ],
+        "nullable": true
+      }
+    },
+    "CELLSIZE": {
+      "title": "Cellsize",
+      "description": "Cellsize",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 1,
+        "format": "float",
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "GRID": {
+      "title": "Z Value",
+      "description": "Z Value",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "COUNT": {
+      "title": "Number of Points in Cell",
+      "description": "Number of Points in Cell",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "GRIDS": {
+      "title": "Attributes",
+      "description": "Attributes",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    }
+  },
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.4/execution"
+    }
+  ]
+}

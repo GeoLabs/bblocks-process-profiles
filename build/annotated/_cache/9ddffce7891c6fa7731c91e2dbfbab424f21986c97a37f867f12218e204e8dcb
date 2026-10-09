@@ -3,12 +3,12 @@
   "name": "Generic Process Profiles",
   "abstract": "A general-purpose, engine- and format-agnostic vocabulary of Generic Profiles, independent of\nany one project. A Generic Profile gives one or more related operations an abstract I/O\nsignature (named roles and abstract types, no format, no size limit) -- e.g. every binary\nboolean spatial predicate (Intersects, Contains, Within, Touches, Crosses, Equals, Disjoint)\ntakes two Geometry inputs and returns one Boolean, and is one Generic Profile, not seven.\nImplementation Profiles (concrete, deployable processes binding a Generic Profile to real\nformats) are not part of this register; they live wherever the implementation itself is\nprofiled (e.g. `ospd.process-profiles.*` for OSPD's CWL- and OGC-API-Processes-sourced profiles)\nand link back here via their own `implementsGenericProfile` property.\n",
   "description": "Produced by GeoLabs, first grounded in the 12 spatial predicates and set operations of OGC\nSimple Feature Access - Common Architecture (06-103r4) as a worked example: every one of them\nshares one of a small number of I/O shapes, so the Generic Profile layer stays small (3 profiles\ncover all 12 here). SQL/MM Spatial (ISO/IEC 13249-3) binds the same operations to SQL (the\n`ST_Geometry` type, `ST_Intersects`-style function names) and real deployed processes bind them\nfurther still (e.g. to GML 3.1.0 Polygon) -- both are concrete bindings, not part of this\nregister; they are profiled as Implementation Profiles in whichever register profiles the\nconcrete process (e.g. `ospd.process-profiles.*`), linked back here by `implementsGenericProfile`.\nNot limited to spatial operations -- any domain with standardised abstract operations and several\nindependent bindings is a candidate.\n",
-  "modified": "2026-10-08T08:41:03.713381",
+  "modified": "2026-10-09T10:07:42.045109",
   "tooling": {
     "bblocks-postprocess": {
-      "commitId": "\"864ddcf48e5bf8be9c5660d54d35b5d0e702b41b",
-      "shortCommitId": "\"864ddc",
-      "date": "2026-10-07T14:32:33+00:00\""
+      "commitId": "\"d25453cad0e4972e6a638db3dca636f023f9397a",
+      "shortCommitId": "\"d25453",
+      "date": "2026-10-08T14:02:00+00:00\""
     }
   },
   "gitRepository": "https://github.com/GeoLabs/bblocks-generic-profiles",
@@ -32,7 +32,7 @@
       "abstract": "The shape every Process Concept shares: high-level documentation about a general group of processes, no input, no output, no format, no implementation (OGC 14-065 WPS 2.0.2 \u00a77.5.1). Each real Concept (generic-profiles.concept.*) is its own building block that allOf-references this one -- this block is not itself a catalogue, only the common shape plus one illustrative example.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -83,13 +83,145 @@
       }
     },
     {
+      "itemIdentifier": "generic-profiles.data-type",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Data types",
+      "abstract": "Reference vocabulary of the kinds of data process profile inputs and outputs carry (raster, single- or multi-band, elevation model, geometry by type, feature collection, point cloud, TIN, table, bounding box, literals).",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "sources": [
+        {
+          "title": "OGC 09-146r8 Coverage Implementation Schema (CIS) 1.1.1, \u00a76.5 RangeType",
+          "link": "https://docs.ogc.org/is/09-146r8/09-146r8.html"
+        },
+        {
+          "title": "OGC 06-103r4 Simple Feature Access - Part 1: Common Architecture",
+          "link": "https://www.ogc.org/standards/sfa/"
+        },
+        {
+          "title": "OGC 17-030r1 LAS Specification 1.4 OGC Community Standard",
+          "link": "https://www.ogc.org/standards/las/"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "data type",
+        "SKOS",
+        "vocabulary"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/data-type/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/data-type/context.jsonld",
+      "maturity": "development",
+      "group": "Data types",
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/data-type/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/data-type/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/data-type/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/data-type/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/data-type/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/data-type/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/data-type/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/data-type/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.data-type"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "generic-profiles.concept.point-cloud-processing",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process Concept: Point Cloud Processing",
+      "abstract": "Operations on point clouds: converting them to other kinds of data (grids, feature collections) and reducing them (thinning) -- independent of any input/output signature or implementation (OGC 14-065 WPS 2.0.2 \u00a77.5.1).",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.concept"
+      ],
+      "sources": [
+        {
+          "title": "OGC 14-065 WPS 2.0.2 Interface Standard Corrigendum 2, \u00a77.5.1 Process Concept",
+          "link": "https://docs.ogc.org/is/14-065/14-065.html"
+        },
+        {
+          "title": "OGC 17-030r1 LAS Specification 1.4 OGC Community Standard",
+          "link": "https://www.ogc.org/standards/las/"
+        },
+        {
+          "title": "SAGA 7.3.0 tool library Shapes - Point Clouds",
+          "link": "https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/pointcloud_tools.html"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "concept",
+        "SKOS",
+        "Point Cloud Processing"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/concept/point-cloud-processing/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/concept/point-cloud-processing/context.jsonld",
+      "maturity": "development",
+      "group": "Concepts",
+      "isProfileOf": [
+        "bblocks://generic-profiles.concept"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/concept/point-cloud-processing/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/concept/point-cloud-processing/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/concept/point-cloud-processing/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/concept/point-cloud-processing/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/concept/point-cloud-processing/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/concept/point-cloud-processing/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/concept/point-cloud-processing/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/concept/point-cloud-processing/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.concept.point-cloud-processing"
+        }
+      }
+    },
+    {
       "itemIdentifier": "generic-profiles.concept.raster-coverage-processing",
       "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
       "name": "Process Concept: Raster Coverage Processing",
       "abstract": "Operations on raster/coverage data: reprojecting a coverage to another coordinate reference system, deriving a new raster from one or more others via a mathematical expression or a named radiometric index, cropping a coverage to a region of interest, or converting a coverage to another encoding -- independent of any input/output signature or implementation (OGC 14-065 WPS 2.0.2 \u00a77.5.1).",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -145,13 +277,81 @@
       }
     },
     {
+      "itemIdentifier": "generic-profiles.concept.terrain-analysis",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Process Concept: Terrain Analysis",
+      "abstract": "Operations deriving terrain attributes from an elevation model: local surface derivatives (slope, aspect, curvature), neighbourhood indices (terrain ruggedness, topographic position) and illumination (hillshading) -- independent of any input/output signature or implementation (OGC 14-065 WPS 2.0.2 \u00a77.5.1). A kind of raster coverage processing: an elevation model is a single-band raster whose values are elevations.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.concept"
+      ],
+      "sources": [
+        {
+          "title": "OGC 14-065 WPS 2.0.2 Interface Standard Corrigendum 2, \u00a77.5.1 Process Concept",
+          "link": "https://docs.ogc.org/is/14-065/14-065.html"
+        },
+        {
+          "title": "SAGA 7.3.0 tool libraries, category Terrain Analysis",
+          "link": "https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/index.html"
+        },
+        {
+          "title": "Wilson, J.P., Gallant, J.C. (2000): Terrain Analysis: Principles and Applications (cited by SAGA's Topographic Position Index tool)"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "concept",
+        "SKOS",
+        "Terrain Analysis"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/concept/terrain-analysis/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/concept/terrain-analysis/context.jsonld",
+      "maturity": "development",
+      "group": "Concepts",
+      "isProfileOf": [
+        "bblocks://generic-profiles.concept"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/concept/terrain-analysis/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/concept/terrain-analysis/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/concept/terrain-analysis/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/concept/terrain-analysis/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/concept/terrain-analysis/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/concept/terrain-analysis/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/concept/terrain-analysis/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/concept/terrain-analysis/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.concept.terrain-analysis"
+        }
+      }
+    },
+    {
       "itemIdentifier": "generic-profiles.concept.vector-geometry-processing",
       "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
       "name": "Process Concept: Vector Geometry Processing",
       "abstract": "General group covering operations on vector geometries: testing spatial relationships between two geometries, deriving a new geometry from one or two others, and measuring a geometry's own properties -- independent of any input/output signature or implementation (OGC 14-065 WPS 2.0.2 \u00a77.5.1).",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -222,7 +422,7 @@
       "abstract": "The shape every Generic Profile shares: the abstract interface of one process, declaring a signature for its inputs and outputs (OGC 14-065 WPS 2.0.2 \u00a77.5.2), linked to its Process Concept by `broader`. Each real Generic Profile (generic-profiles.generic-profile.*) is its own building block that allOf-references this one -- this block is not itself a catalogue, only the common shape plus one illustrative example.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -276,13 +476,75 @@
       }
     },
     {
+      "itemIdentifier": "generic-profiles.generic-profile.analytical-hillshading",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Generic Profile: Analytical hillshading",
+      "abstract": "Computes how the terrain is lit by a light source. One elevation model and the light source's azimuth and altitude in, one single-band raster out.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.generic-profile"
+      ],
+      "sources": [
+        {
+          "title": "ZOO-Project process-profiles: Concept / Generic Profile / Implementation Profile",
+          "link": "https://zoo-project.github.io/docs/services/process-profiles.html"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "generic profile",
+        "SKOS",
+        "Analytical hillshading"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/analytical-hillshading/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/analytical-hillshading/context.jsonld",
+      "maturity": "development",
+      "group": "Generic Profiles",
+      "isProfileOf": [
+        "bblocks://generic-profiles.generic-profile",
+        "bblocks://generic-profiles.concept.terrain-analysis"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/analytical-hillshading/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/analytical-hillshading/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/analytical-hillshading/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/analytical-hillshading/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/analytical-hillshading/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/generic-profile/analytical-hillshading/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/generic-profile/analytical-hillshading/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/generic-profile/analytical-hillshading/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.generic-profile.analytical-hillshading"
+        }
+      }
+    },
+    {
       "itemIdentifier": "generic-profiles.generic-profile.binary-spatial-operation",
       "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
       "name": "Generic Profile: Binary spatial set operation",
       "abstract": "Computes a new geometry from the point-set relationship of two input geometries. Shared I/O shape of the SQL/MM set-operation family: two Geometry inputs, one Geometry output.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -344,7 +606,7 @@
       "abstract": "Tests a boolean spatial relationship between two geometries. Shared I/O shape of every SQL/MM DE-9IM-family predicate: two Geometry inputs, one Boolean output, no side effect.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -406,7 +668,7 @@
       "abstract": "Computes a new geometry from one input geometry and a scalar distance. A different shape from binary-spatial-operation: one Geometry, one Number, not two Geometries.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -468,7 +730,7 @@
       "abstract": "Computes a scalar measurement of a single geometry. One Geometry input, one Number output.",
       "status": "under-development",
       "dateTimeAddition": "2026-10-06T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -524,13 +786,199 @@
       }
     },
     {
+      "itemIdentifier": "generic-profiles.generic-profile.point-cloud-rasterization",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Generic Profile: Point cloud rasterization",
+      "abstract": "Converts a point cloud to a raster on a grid of a given cell size. One point cloud and one cell size in, one raster out.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.generic-profile"
+      ],
+      "sources": [
+        {
+          "title": "ZOO-Project process-profiles: Concept / Generic Profile / Implementation Profile",
+          "link": "https://zoo-project.github.io/docs/services/process-profiles.html"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "generic profile",
+        "SKOS",
+        "Point cloud rasterization"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/point-cloud-rasterization/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/point-cloud-rasterization/context.jsonld",
+      "maturity": "development",
+      "group": "Generic Profiles",
+      "isProfileOf": [
+        "bblocks://generic-profiles.generic-profile",
+        "bblocks://generic-profiles.concept.point-cloud-processing"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/point-cloud-rasterization/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/point-cloud-rasterization/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/point-cloud-rasterization/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/point-cloud-rasterization/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/point-cloud-rasterization/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/generic-profile/point-cloud-rasterization/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/generic-profile/point-cloud-rasterization/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/generic-profile/point-cloud-rasterization/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.generic-profile.point-cloud-rasterization"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "generic-profiles.generic-profile.point-cloud-thinning",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Generic Profile: Point cloud thinning",
+      "abstract": "Reduces the number of points of a point cloud. One point cloud and the share of points to keep in, one point cloud out.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.generic-profile"
+      ],
+      "sources": [
+        {
+          "title": "ZOO-Project process-profiles: Concept / Generic Profile / Implementation Profile",
+          "link": "https://zoo-project.github.io/docs/services/process-profiles.html"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "generic profile",
+        "SKOS",
+        "Point cloud thinning"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/point-cloud-thinning/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/point-cloud-thinning/context.jsonld",
+      "maturity": "development",
+      "group": "Generic Profiles",
+      "isProfileOf": [
+        "bblocks://generic-profiles.generic-profile",
+        "bblocks://generic-profiles.concept.point-cloud-processing"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/point-cloud-thinning/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/point-cloud-thinning/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/point-cloud-thinning/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/point-cloud-thinning/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/point-cloud-thinning/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/generic-profile/point-cloud-thinning/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/generic-profile/point-cloud-thinning/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/generic-profile/point-cloud-thinning/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.generic-profile.point-cloud-thinning"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "generic-profiles.generic-profile.point-cloud-to-features",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Generic Profile: Point cloud to features",
+      "abstract": "Converts a point cloud to a feature collection. One point cloud in, one feature collection out.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.generic-profile"
+      ],
+      "sources": [
+        {
+          "title": "ZOO-Project process-profiles: Concept / Generic Profile / Implementation Profile",
+          "link": "https://zoo-project.github.io/docs/services/process-profiles.html"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "generic profile",
+        "SKOS",
+        "Point cloud to features"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/point-cloud-to-features/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/point-cloud-to-features/context.jsonld",
+      "maturity": "development",
+      "group": "Generic Profiles",
+      "isProfileOf": [
+        "bblocks://generic-profiles.generic-profile",
+        "bblocks://generic-profiles.concept.point-cloud-processing"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/point-cloud-to-features/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/point-cloud-to-features/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/point-cloud-to-features/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/point-cloud-to-features/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/point-cloud-to-features/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/generic-profile/point-cloud-to-features/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/generic-profile/point-cloud-to-features/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/generic-profile/point-cloud-to-features/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.generic-profile.point-cloud-to-features"
+        }
+      }
+    },
+    {
       "itemIdentifier": "generic-profiles.generic-profile.radiometric-index",
       "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
       "name": "Generic Profile: Radiometric index",
       "abstract": "Computes one or more named radiometric indices (e.g. NDVI, NDWI, SAVI) from the relevant spectral bands of one or more input rasters. One or more Raster inputs, the name(s) of the index/indices to compute, one Raster output (one band per selected index).",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -592,7 +1040,7 @@
       "abstract": "Derives a new raster from one or more input rasters via a user-supplied mathematical expression evaluated per pixel. One or more Raster inputs, an expression, one Raster output -- the output's band structure (one band or several) is not part of this signature, see its Implementation Profiles.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -654,7 +1102,7 @@
       "abstract": "Crops a raster coverage to a region of interest. One Raster input, a bounding box, one Raster output covering only that area.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -720,7 +1168,7 @@
       "abstract": "Computes the bounding envelope of a raster coverage, returned as a geometry (a rectangular polygon in the coverage's CRS). One Raster input, one Geometry output.",
       "status": "under-development",
       "dateTimeAddition": "2026-10-01T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -782,7 +1230,7 @@
       "abstract": "Converts a raster coverage from one encoding to another, without changing its content. One Raster input, a target format, one Raster output in the new encoding.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -844,7 +1292,7 @@
       "abstract": "Reprojects a raster coverage to another coordinate reference system, preserving its content. One Raster input, a target CRS, one Raster output in the new CRS.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -900,13 +1348,75 @@
       }
     },
     {
+      "itemIdentifier": "generic-profiles.generic-profile.terrain-derivative",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Generic Profile: Terrain derivative",
+      "abstract": "Derives one terrain attribute, as a single-band raster, from an elevation model. One elevation model input, one single-band raster output. Covers operations that differ only in the attribute computed (slope, aspect, curvature, terrain ruggedness, topographic position), not in signature.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.generic-profile"
+      ],
+      "sources": [
+        {
+          "title": "ZOO-Project process-profiles: Concept / Generic Profile / Implementation Profile",
+          "link": "https://zoo-project.github.io/docs/services/process-profiles.html"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "generic profile",
+        "SKOS",
+        "Terrain derivative"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/terrain-derivative/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/terrain-derivative/context.jsonld",
+      "maturity": "development",
+      "group": "Generic Profiles",
+      "isProfileOf": [
+        "bblocks://generic-profiles.generic-profile",
+        "bblocks://generic-profiles.concept.terrain-analysis"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/terrain-derivative/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/terrain-derivative/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/terrain-derivative/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/generic-profile/terrain-derivative/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/generic-profile/terrain-derivative/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/generic-profile/terrain-derivative/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/generic-profile/terrain-derivative/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/generic-profile/terrain-derivative/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.generic-profile.terrain-derivative"
+        }
+      }
+    },
+    {
       "itemIdentifier": "generic-profiles.generic-profile.unary-geometry-operation",
       "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
       "name": "Generic Profile: Unary geometry operation",
       "abstract": "Derives a new geometry from a single input geometry. One Geometry input, one Geometry output. Covers operations that differ only in what they compute (bounding envelope, centroid, convex hull), not in signature -- the same principle `binary-spatial-predicate` and `binary-spatial-operation` already use for their own several operations.",
       "status": "under-development",
       "dateTimeAddition": "2026-10-06T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -968,7 +1478,7 @@
       "abstract": "Tests a boolean property of a single geometry. One Geometry input, one Boolean output -- the one-input counterpart to `binary-spatial-predicate`'s two.",
       "status": "under-development",
       "dateTimeAddition": "2026-10-06T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1030,7 +1540,7 @@
       "abstract": "The shape every Implementation Profile shares: a specific named operation refining one Generic Profile, adding the standard data exchange formats it is commonly expressed in (OGC 14-065 WPS 2.0.2 \u00a77.5.3). Each real Implementation Profile (generic-profiles.implementation-profile.*) is its own building block that allOf-references this one.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1084,13 +1594,79 @@
       }
     },
     {
+      "itemIdentifier": "generic-profiles.implementation-profile.analytical-hillshading",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Implementation Profile: Analytical hillshading",
+      "abstract": "For each cell, the angle at which light coming from the position of the light source hits the terrain surface (SAGA's standard method).",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.implementation-profile"
+      ],
+      "sources": [
+        {
+          "title": "SAGA 7.3.0 -- Analytical Hillshading",
+          "link": "https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/ta_lighting_0.html"
+        },
+        {
+          "title": "ZOO-Project Geonovum testbed -- SAGA.ta_lighting.0: Analytical Hillshading",
+          "link": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "implementation profile",
+        "SKOS",
+        "Analytical hillshading"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/analytical-hillshading/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/analytical-hillshading/context.jsonld",
+      "maturity": "development",
+      "group": "Implementation Profiles",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile",
+        "bblocks://generic-profiles.generic-profile.analytical-hillshading"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/analytical-hillshading/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/analytical-hillshading/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/analytical-hillshading/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/analytical-hillshading/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/analytical-hillshading/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/implementation-profile/analytical-hillshading/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/implementation-profile/analytical-hillshading/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/implementation-profile/analytical-hillshading/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.implementation-profile.analytical-hillshading"
+        }
+      }
+    },
+    {
       "itemIdentifier": "generic-profiles.implementation-profile.area",
       "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
       "name": "Implementation Profile: Area",
       "abstract": "The area of this Surface, as measured in the spatial reference system of this Surface.",
       "status": "under-development",
       "dateTimeAddition": "2026-10-06T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1159,7 +1735,7 @@
       "abstract": "Returns a geometric object representing all points whose distance from this geometric object is less than or equal to a given distance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1224,7 +1800,7 @@
       "abstract": "The mathematical centroid for this Surface as a Point. The result is not guaranteed to be on this Surface.",
       "status": "under-development",
       "dateTimeAddition": "2026-10-06T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1293,7 +1869,7 @@
       "abstract": "Returns TRUE if this geometric object spatially contains anotherGeometry (no point of anotherGeometry lies outside this geometric object, and at least one point of the interior of anotherGeometry lies in the interior of this geometric object).",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1358,7 +1934,7 @@
       "abstract": "Returns a geometry that represents the convex hull of this Geometry.",
       "status": "under-development",
       "dateTimeAddition": "2026-10-06T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1427,7 +2003,7 @@
       "abstract": "Returns TRUE if this geometric object 'spatially crosses' anotherGeometry: the intersection results in a geometry of dimension one less than the maximum dimension of the two source geometries, and the intersection set is interior to both.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1492,7 +2068,7 @@
       "abstract": "Returns a geometric object representing the point set difference of this geometric object with anotherGeometry.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1557,7 +2133,7 @@
       "abstract": "Returns TRUE if this geometric object is spatially disjoint from anotherGeometry (they share no point). Equivalent to the negation of Intersects.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1622,7 +2198,7 @@
       "abstract": "Returns TRUE if this geometric object is spatially equal to anotherGeometry (same point set), independent of vertex order or representation.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1687,7 +2263,7 @@
       "abstract": "Computes the minimum bounding rectangle of a set of input geometries, as a geometry.",
       "status": "under-development",
       "dateTimeAddition": "2026-10-01T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1704,7 +2280,7 @@
         },
         {
           "title": "SAGA GIS -- Get Shapes Extents (shapes_tools)",
-          "link": "https://saga-gis.sourceforge.io/saga_tool_doc/9.4.0/shapes_tools_19.html"
+          "link": "https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/shapes_tools_19.html"
         }
       ],
       "scope": "dev",
@@ -1756,7 +2332,7 @@
       "abstract": "Returns a geometric object representing the point set intersection of this geometric object with anotherGeometry.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1821,7 +2397,7 @@
       "abstract": "Returns TRUE if this geometric object spatially intersects anotherGeometry (i.e. they share at least one point). Equivalent to the negation of Disjoint.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1886,7 +2462,7 @@
       "abstract": "Returns 1 (TRUE) if this Geometry has no anomalous geometric points, such as self intersection or self tangency.",
       "status": "under-development",
       "dateTimeAddition": "2026-10-06T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -1949,13 +2525,211 @@
       }
     },
     {
+      "itemIdentifier": "generic-profiles.implementation-profile.point-cloud-thinning",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Implementation Profile: Point cloud thinning (simple)",
+      "abstract": "Reduces the number of points to the given percentage by sequential point removal, which suits points stored in chronological order best.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.implementation-profile"
+      ],
+      "sources": [
+        {
+          "title": "SAGA 7.3.0 -- Point Cloud Thinning (Simple)",
+          "link": "https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/pointcloud_tools_9.html"
+        },
+        {
+          "title": "ZOO-Project Geonovum testbed -- SAGA.pointcloud_tools.9: Point Cloud Thinning (Simple)",
+          "link": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.9"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "implementation profile",
+        "SKOS",
+        "Point cloud thinning (simple)"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/point-cloud-thinning/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/point-cloud-thinning/context.jsonld",
+      "maturity": "development",
+      "group": "Implementation Profiles",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile",
+        "bblocks://generic-profiles.generic-profile.point-cloud-thinning"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/point-cloud-thinning/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/point-cloud-thinning/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/point-cloud-thinning/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/point-cloud-thinning/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/point-cloud-thinning/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/implementation-profile/point-cloud-thinning/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/implementation-profile/point-cloud-thinning/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/implementation-profile/point-cloud-thinning/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.implementation-profile.point-cloud-thinning"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "generic-profiles.implementation-profile.point-cloud-to-grid",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Implementation Profile: Point cloud to grid",
+      "abstract": "Writes one value per grid cell from the points falling in it -- by default the z value of the first point -- as a single-band raster.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.implementation-profile"
+      ],
+      "sources": [
+        {
+          "title": "SAGA 7.3.0 -- Point Cloud to Grid",
+          "link": "https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/pointcloud_tools_4.html"
+        },
+        {
+          "title": "ZOO-Project Geonovum testbed -- SAGA.pointcloud_tools.4: Point Cloud to Grid",
+          "link": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.4"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "implementation profile",
+        "SKOS",
+        "Point cloud to grid"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/point-cloud-to-grid/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/point-cloud-to-grid/context.jsonld",
+      "maturity": "development",
+      "group": "Implementation Profiles",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile",
+        "bblocks://generic-profiles.generic-profile.point-cloud-rasterization"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/point-cloud-to-grid/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/point-cloud-to-grid/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/point-cloud-to-grid/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/point-cloud-to-grid/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/point-cloud-to-grid/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/implementation-profile/point-cloud-to-grid/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/implementation-profile/point-cloud-to-grid/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/implementation-profile/point-cloud-to-grid/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.implementation-profile.point-cloud-to-grid"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "generic-profiles.implementation-profile.point-cloud-to-shapes",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Implementation Profile: Point cloud to shapes",
+      "abstract": "Converts a point cloud to a SAGA shapes layer of points, i.e. a feature collection.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.implementation-profile"
+      ],
+      "sources": [
+        {
+          "title": "SAGA 7.3.0 -- Point Cloud to Shapes",
+          "link": "https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/pointcloud_tools_5.html"
+        },
+        {
+          "title": "ZOO-Project Geonovum testbed -- SAGA.pointcloud_tools.5: Point Cloud to Shapes",
+          "link": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.5"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "implementation profile",
+        "SKOS",
+        "Point cloud to shapes"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/point-cloud-to-shapes/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/point-cloud-to-shapes/context.jsonld",
+      "maturity": "development",
+      "group": "Implementation Profiles",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile",
+        "bblocks://generic-profiles.generic-profile.point-cloud-to-features"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/point-cloud-to-shapes/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/point-cloud-to-shapes/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/point-cloud-to-shapes/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/point-cloud-to-shapes/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/point-cloud-to-shapes/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/implementation-profile/point-cloud-to-shapes/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/implementation-profile/point-cloud-to-shapes/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/implementation-profile/point-cloud-to-shapes/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.implementation-profile.point-cloud-to-shapes"
+        }
+      }
+    },
+    {
       "itemIdentifier": "generic-profiles.implementation-profile.radiometric-index",
       "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
       "name": "Implementation Profile: Radiometric index",
       "abstract": "Computes one or more named radiometric indices (e.g. NDVI, NDWI, SAVI) from the relevant spectral channels of the input raster(s).",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -2021,7 +2795,7 @@
       "abstract": "Evaluates a user-supplied mathematical expression per pixel across one or more input rasters, producing a monoband output raster.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -2087,7 +2861,7 @@
       "abstract": "Evaluates a user-supplied, possibly vector-valued mathematical expression per pixel across one or more input rasters, producing an output raster with one or more bands.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -2157,13 +2931,13 @@
       "abstract": "Extracts the pixels of a raster coverage that fall within a region of interest. `areaOfInterest`'s `schema` $refs `ogc.api.processes.v1.schemas.bbox` directly (OGC API - Processes Part 1 Core's own bbox type), not a bespoke format string.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
       "dependsOn": [
-        "bblocks://ogc.api.processes.v1.schemas.bbox",
-        "bblocks://generic-profiles.implementation-profile"
+        "bblocks://generic-profiles.implementation-profile",
+        "bblocks://ogc.api.processes.v1.schemas.bbox"
       ],
       "sources": [
         {
@@ -2232,7 +3006,7 @@
       "abstract": "Computes the bounding envelope of a raster coverage, as a vector polygon.",
       "status": "under-development",
       "dateTimeAddition": "2026-10-01T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -2298,7 +3072,7 @@
       "abstract": "Re-encodes a raster coverage into another raster format, without altering its content.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -2364,7 +3138,7 @@
       "abstract": "Reprojects a raster coverage to another coordinate reference system, resampling pixel values as needed, preserving the coverage's content.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -2424,13 +3198,82 @@
       }
     },
     {
+      "itemIdentifier": "generic-profiles.implementation-profile.slope",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Implementation Profile: Slope",
+      "abstract": "The slope gradient of an elevation model at each cell, from a local fit of the surface (SAGA's default method: the 9 parameter 2nd order polynom of Zevenbergen & Thorne 1987).",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.implementation-profile"
+      ],
+      "sources": [
+        {
+          "title": "SAGA 7.3.0 -- Slope, Aspect, Curvature",
+          "link": "https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/ta_morphometry_0.html"
+        },
+        {
+          "title": "ZOO-Project Geonovum testbed -- SAGA.ta_morphometry.0: Slope, Aspect, Curvature",
+          "link": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_morphometry.0"
+        },
+        {
+          "title": "Zevenbergen, L.W., Thorne, C.R. (1987): Quantitative analysis of land surface topography. Earth Surface Processes and Landforms, 12: 47-56"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "implementation profile",
+        "SKOS",
+        "Slope"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/slope/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/slope/context.jsonld",
+      "maturity": "development",
+      "group": "Implementation Profiles",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile",
+        "bblocks://generic-profiles.generic-profile.terrain-derivative"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/slope/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/slope/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/slope/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/slope/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/slope/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/implementation-profile/slope/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/implementation-profile/slope/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/implementation-profile/slope/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.implementation-profile.slope"
+        }
+      }
+    },
+    {
       "itemIdentifier": "generic-profiles.implementation-profile.symdifference",
       "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
       "name": "Implementation Profile: Symmetric difference",
       "abstract": "Returns a geometric object representing the point set symmetric difference of this geometric object with anotherGeometry.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -2489,13 +3332,151 @@
       }
     },
     {
+      "itemIdentifier": "generic-profiles.implementation-profile.terrain-ruggedness-index",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Implementation Profile: Terrain ruggedness index",
+      "abstract": "The terrain ruggedness index (TRI) of Riley et al. (1999): how much the elevation of each cell differs from that of its neighbourhood.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.implementation-profile"
+      ],
+      "sources": [
+        {
+          "title": "SAGA 7.3.0 -- Terrain Ruggedness Index (TRI)",
+          "link": "https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/ta_morphometry_16.html"
+        },
+        {
+          "title": "ZOO-Project Geonovum testbed -- SAGA.ta_morphometry.16: Terrain Ruggedness Index (TRI)",
+          "link": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_morphometry.16"
+        },
+        {
+          "title": "Riley, S.J., De Gloria, S.D., Elliot, R. (1999): A Terrain Ruggedness that Quantifies Topographic Heterogeneity. Intermountain Journal of Science, Vol.5, No.1-4, pp.23-27"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "implementation profile",
+        "SKOS",
+        "Terrain ruggedness index"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/terrain-ruggedness-index/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/terrain-ruggedness-index/context.jsonld",
+      "maturity": "development",
+      "group": "Implementation Profiles",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile",
+        "bblocks://generic-profiles.generic-profile.terrain-derivative"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/terrain-ruggedness-index/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/terrain-ruggedness-index/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/terrain-ruggedness-index/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/terrain-ruggedness-index/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/terrain-ruggedness-index/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/implementation-profile/terrain-ruggedness-index/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/implementation-profile/terrain-ruggedness-index/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/implementation-profile/terrain-ruggedness-index/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.implementation-profile.terrain-ruggedness-index"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "generic-profiles.implementation-profile.topographic-position-index",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Implementation Profile: Topographic position index",
+      "abstract": "The topographic position index (TPI) of Guisan et al. (1999): the difference between the elevation of each cell and the mean elevation of its neighbourhood.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-10-08T00:00:00Z",
+      "dateOfLastChange": "2026-10-09",
+      "version": "0.1",
+      "itemClass": "schema",
+      "register": "generic-profiles",
+      "dependsOn": [
+        "bblocks://generic-profiles.implementation-profile"
+      ],
+      "sources": [
+        {
+          "title": "SAGA 7.3.0 -- Topographic Position Index (TPI)",
+          "link": "https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/ta_morphometry_18.html"
+        },
+        {
+          "title": "ZOO-Project Geonovum testbed -- SAGA.ta_morphometry.18: Topographic Position Index (TPI)",
+          "link": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_morphometry.18"
+        },
+        {
+          "title": "Guisan, A., Weiss, S.B., Weiss, A.D. (1999): GLM versus CCA spatial modeling of plant species distribution. Plant Ecology 143: 107-122"
+        }
+      ],
+      "scope": "dev",
+      "tags": [
+        "implementation profile",
+        "SKOS",
+        "Topographic position index"
+      ],
+      "sourceSchema": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/topographic-position-index/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/topographic-position-index/context.jsonld",
+      "maturity": "development",
+      "group": "Implementation Profiles",
+      "isProfileOf": [
+        "bblocks://generic-profiles.implementation-profile",
+        "bblocks://generic-profiles.generic-profile.terrain-derivative"
+      ],
+      "shaclShapes": {},
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/topographic-position-index/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/topographic-position-index/schema.json"
+      },
+      "sourceLdContext": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/topographic-position-index/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-generic-profiles/build/annotated/implementation-profile/topographic-position-index/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-generic-profiles/_sources/implementation-profile/topographic-position-index/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-generic-profiles/blob/master/build/tests/implementation-profile/topographic-position-index/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/markdown/implementation-profile/topographic-position-index/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/build/generateddocs/json-full/implementation-profile/topographic-position-index/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-generic-profiles/bblock/generic-profiles.implementation-profile.topographic-position-index"
+        }
+      }
+    },
+    {
       "itemIdentifier": "generic-profiles.implementation-profile.touches",
       "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
       "name": "Implementation Profile: Touches",
       "abstract": "Returns TRUE if the only points in common between this geometric object and anotherGeometry lie in the union of their boundaries: at least one boundary point in common, but no interior points in common.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -2560,7 +3541,7 @@
       "abstract": "Returns a geometric object representing the point set union of this geometric object with anotherGeometry.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",
@@ -2625,7 +3606,7 @@
       "abstract": "Returns TRUE if this geometric object is spatially within anotherGeometry. The converse of Contains.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-30T00:00:00Z",
-      "dateOfLastChange": "2026-10-07",
+      "dateOfLastChange": "2026-10-09",
       "version": "0.1",
       "itemClass": "schema",
       "register": "generic-profiles",

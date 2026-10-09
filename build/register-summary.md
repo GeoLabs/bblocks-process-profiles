@@ -34,6 +34,24 @@ All mappings are proposed correspondences offered for review, not settled equiva
 
 Candidate entry for the OSPD process-type register (Activity 4), linking a process profile, its six-phase position, its provenance class and its proposed openEO equivalences.
 
+### `ospd.process-profiles.pointcloud.point-cloud-thinning` — Process profile: SAGA.pointcloud_tools.9
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.pointcloud_tools.9` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.pointcloud.point-cloud-to-grid` — Process profile: SAGA.pointcloud_tools.4
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.pointcloud_tools.4` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.pointcloud.point-cloud-to-shapes` — Process profile: SAGA.pointcloud_tools.5
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.pointcloud_tools.5` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
 ### `ospd.process-profiles.raster.band-math` — Process profile: OTB.BandMath
 
 **Type:** schema
@@ -171,6 +189,30 @@ Process profile of the live OGC API - Processes process `Union` (ZOO-Project, Ge
 **Type:** schema
 
 Process profile of the live OGC API - Processes process `Within` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.terrain.hillshading` — Process profile: SAGA.ta_lighting.0
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.ta_lighting.0` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.terrain.slope` — Process profile: SAGA.ta_morphometry.0
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.ta_morphometry.0` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.terrain.terrain-ruggedness-index` — Process profile: SAGA.ta_morphometry.16
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.ta_morphometry.16` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.terrain.topographic-position-index` — Process profile: SAGA.ta_morphometry.18
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.ta_morphometry.18` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
 
 ### `ospd.process-profiles.vector.geometry-extent` — Process profile: SAGA.shapes_tools.19
 

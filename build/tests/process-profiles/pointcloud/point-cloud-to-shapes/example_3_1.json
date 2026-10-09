@@ -1,0 +1,118 @@
+{
+  "id": "SAGA.pointcloud_tools.5",
+  "title": "Point Cloud to Shapes",
+  "description": "Point Cloud to Shapes",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.5/execution"
+    }
+  ],
+  "keywords": [
+    "point cloud",
+    "feature collection",
+    "conversion",
+    "Point Cloud to Shapes",
+    "pointcloud_tools"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Point Cloud Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/point-cloud-processing"
+    },
+    {
+      "title": "Generic Profile: Point cloud to features",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-to-features"
+    },
+    {
+      "title": "Implementation Profile: Point cloud to shapes",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-shapes"
+    }
+  ],
+  "inputs": {
+    "POINTS": {
+      "title": "Points",
+      "description": "Points",
+      "keywords": [
+        "point cloud",
+        "LAS"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Point cloud to features -- input `points`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-to-features/inputs/points"
+        },
+        {
+          "title": "Implementation Profile: Point cloud to shapes -- input `points`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-shapes/inputs/points"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-lasf"
+          }
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "SHAPES": {
+      "title": "Shapes",
+      "description": "Shapes",
+      "keywords": [
+        "feature collection",
+        "GML"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Point cloud to features -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-to-features/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Point cloud to shapes -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-shapes/outputs/result"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "utf-8",
+            "contentMediaType": "text/xml"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/vnd.google-earth.kml+xml"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    }
+  }
+}

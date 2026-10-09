@@ -1,0 +1,161 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/terrain/terrain-ruggedness-index/context.jsonld",
+  "id": "SAGA.ta_morphometry.16",
+  "title": "Terrain Ruggedness Index (TRI)",
+  "description": "References:&lt;br/&gt;Riley, S.J., De Gloria, S.D., Elliot, R. (1999): A Terrain Ruggedness that Quantifies Topographic Heterogeneity. Intermountain Journal of Science, Vol.5, No.1-4, pp.23-27. &lt;a href=\"http://www.fw.msu.edu/~rileysh2/Terrain%20Ruggedness%20Index.pdf\"&gt;online&lt;/a&gt;.&lt;br/&gt;",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "DEM": {
+      "title": "Elevation",
+      "description": "Elevation",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "MODE": {
+      "title": "Search Mode",
+      "description": "Search Mode",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "Circle",
+        "enum": [
+          "Square",
+          "Circle"
+        ],
+        "nullable": true
+      }
+    },
+    "RADIUS": {
+      "title": "Search Radius",
+      "description": "radius in cells",
+      "minOccurs": 0,
+      "schema": {
+        "type": "integer",
+        "default": 1,
+        "nullable": true
+      }
+    },
+    "DW_WEIGHTING": {
+      "title": "Weighting Function",
+      "description": "Weighting Function",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "no distance weighting",
+        "enum": [
+          "no distance weighting",
+          "inverse distance to a power",
+          "exponential",
+          "gaussian weighting"
+        ],
+        "nullable": true
+      }
+    },
+    "DW_IDW_POWER": {
+      "title": "Inverse Distance Weighting Power",
+      "description": "Inverse Distance Weighting Power",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 1,
+        "format": "float",
+        "nullable": true
+      }
+    },
+    "DW_IDW_OFFSET": {
+      "title": "Inverse Distance Offset",
+      "description": "Calculates weights for distance plus one, avoiding division by zero for zero distances",
+      "minOccurs": 0,
+      "schema": {
+        "type": "boolean",
+        "default": true,
+        "enum": [
+          "true",
+          "false"
+        ],
+        "nullable": true
+      }
+    },
+    "DW_BANDWIDTH": {
+      "title": "Gaussian and Exponential Weighting Bandwidth",
+      "description": "Gaussian and Exponential Weighting Bandwidth",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 75,
+        "format": "float",
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "TRI": {
+      "title": "Terrain Ruggedness Index (TRI)",
+      "description": "Terrain Ruggedness Index (TRI)",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    }
+  },
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_morphometry.16/execution"
+    }
+  ]
+}

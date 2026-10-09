@@ -1,5 +1,5 @@
 Validation report for ospd.process-profiles.sqlmm.intersection - Process profile: Intersection
-Generated 2026-10-08T14:44:42.017019+00:00
+Generated 2026-10-09T10:23:42.409955+00:00
 === Files ===
 Using examples/processDescription.inherited.json from examples
 JSON-LD context is present - uplifting

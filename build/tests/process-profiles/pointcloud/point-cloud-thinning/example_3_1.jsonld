@@ -1,0 +1,148 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/pointcloud/point-cloud-thinning/context.jsonld",
+  "id": "SAGA.pointcloud_tools.9",
+  "title": "Point Cloud Thinning (Simple)",
+  "description": "This simple thinning tool reduces the number of points in a point cloud by sequential point removal. It is therefore most suited for points stored in chronological order. ",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.9/execution"
+    }
+  ],
+  "keywords": [
+    "point cloud",
+    "thinning",
+    "Point Cloud Thinning",
+    "pointcloud_tools"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Point Cloud Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/point-cloud-processing"
+    },
+    {
+      "title": "Generic Profile: Point cloud thinning",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-thinning"
+    },
+    {
+      "title": "Implementation Profile: Point cloud thinning (simple)",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning"
+    }
+  ],
+  "inputs": {
+    "INPUT": {
+      "title": "Points",
+      "description": "Points",
+      "keywords": [
+        "point cloud",
+        "LAS"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Point cloud thinning -- input `points`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-thinning/inputs/points"
+        },
+        {
+          "title": "Implementation Profile: Point cloud thinning (simple) -- input `points`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning/inputs/points"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-lasf"
+          }
+        ]
+      }
+    },
+    "PERCENT": {
+      "title": "Percent",
+      "description": "Reduce the number of points to this percentage.",
+      "keywords": [
+        "percentage"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Point cloud thinning -- input `percentage`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-thinning/inputs/percentage"
+        },
+        {
+          "title": "Implementation Profile: Point cloud thinning (simple) -- input `percentage`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning/inputs/percentage"
+        }
+      ],
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 50,
+        "format": "float",
+        "minimum": 0,
+        "maximum": 100,
+        "nullable": true
+      }
+    },
+    "NUMBER": {
+      "title": "Number of Points",
+      "description": "Number of Points",
+      "minOccurs": 0,
+      "schema": {
+        "type": "integer",
+        "default": 0,
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "RESULT": {
+      "title": "Thinned Points",
+      "description": "Thinned Points",
+      "keywords": [
+        "point cloud",
+        "LAS"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Point cloud thinning -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-thinning/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Point cloud thinning (simple) -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning/outputs/result"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-lasf"
+          }
+        ]
+      }
+    }
+  }
+}

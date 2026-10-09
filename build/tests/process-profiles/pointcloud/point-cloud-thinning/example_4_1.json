@@ -1,0 +1,23 @@
+{
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/pointcloud/point-cloud-thinning",
+  "type": "ProcessType",
+  "prefLabel": "Point Cloud Thinning (Simple)",
+  "definition": "This simple thinning tool reduces the number of points in a point cloud by sequential point removal. It is therefore most suited for points stored in chronological order.",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "status": "submitted",
+  "phase": [
+    "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+  ],
+  "profile": "ospd.process-profiles.pointcloud.point-cloud-thinning",
+  "processDescription": {
+    "id": "SAGA.pointcloud_tools.9",
+    "version": "1.0.0",
+    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.9"
+  },
+  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning",
+  "openeoEquivalence": {
+    "level": "none",
+    "rationale": "No openEO process handles point clouds in the published bblocks-openeo register."
+  }
+}

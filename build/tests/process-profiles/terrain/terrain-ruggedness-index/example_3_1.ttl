@@ -1,0 +1,131 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/SAGA.ta_morphometry.16> dcterms:description "References:&lt;br/&gt;Riley, S.J., De Gloria, S.D., Elliot, R. (1999): A Terrain Ruggedness that Quantifies Topographic Heterogeneity. Intermountain Journal of Science, Vol.5, No.1-4, pp.23-27. &lt;a href=\"http://www.fw.msu.edu/~rileysh2/Terrain%20Ruggedness%20Index.pdf\"&gt;online&lt;/a&gt;.&lt;br/&gt;" ;
+    dcterms:subject "TRI",
+        "derivative",
+        "elevation",
+        "raster",
+        "ta_morphometry",
+        "terrain" ;
+    dcterms:title "Terrain Ruggedness Index (TRI)" ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_morphometry.16/execution> ] ;
+    pp:version "1.0.0" ;
+    proc:inputs [ ns3:DEM [ dcterms:description "Elevation" ;
+                    dcterms:title "Elevation" ;
+                    proc:keywords "GeoTIFF",
+                        "elevation" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Terrain derivative -- input `elevation`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/inputs/elevation> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Terrain ruggedness index -- input `elevation`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index/inputs/elevation> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
+            ns3:DW_BANDWIDTH [ dcterms:description "Gaussian and Exponential Weighting Bandwidth" ;
+                    dcterms:title "Gaussian and Exponential Weighting Bandwidth" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "75"^^rdf:JSON ;
+                            proc:nullable true ;
+                            proc:type "number" ;
+                            ns1:format "float" ] ] ;
+            ns3:DW_IDW_OFFSET [ dcterms:description "Calculates weights for distance plus one, avoiding division by zero for zero distances" ;
+                    dcterms:title "Inverse Distance Offset" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "true"^^rdf:JSON ;
+                            proc:enum "false",
+                                "true" ;
+                            proc:nullable true ;
+                            proc:type "boolean" ] ] ;
+            ns3:DW_IDW_POWER [ dcterms:description "Inverse Distance Weighting Power" ;
+                    dcterms:title "Inverse Distance Weighting Power" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "1"^^rdf:JSON ;
+                            proc:nullable true ;
+                            proc:type "number" ;
+                            ns1:format "float" ] ] ;
+            ns3:DW_WEIGHTING [ dcterms:description "Weighting Function" ;
+                    dcterms:title "Weighting Function" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "\"no distance weighting\""^^rdf:JSON ;
+                            proc:enum "exponential",
+                                "gaussian weighting",
+                                "inverse distance to a power",
+                                "no distance weighting" ;
+                            proc:nullable true ;
+                            proc:type "string" ] ] ;
+            ns3:MODE [ dcterms:description "Search Mode" ;
+                    dcterms:title "Search Mode" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "\"Circle\""^^rdf:JSON ;
+                            proc:enum "Circle",
+                                "Square" ;
+                            proc:nullable true ;
+                            proc:type "string" ] ] ;
+            ns3:RADIUS [ dcterms:description "radius in cells" ;
+                    dcterms:title "Search Radius" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "1"^^rdf:JSON ;
+                            proc:nullable true ;
+                            proc:type "integer" ] ] ] ;
+    proc:jobControlOptions "async-execute",
+        "dismiss",
+        "sync-execute" ;
+    proc:metadata [ dcterms:title "Implementation Profile: Terrain ruggedness index" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Generic Profile: Terrain derivative" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Process Concept: Terrain Analysis" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+    proc:mutable false ;
+    proc:outputTransmission "reference",
+        "value" ;
+    proc:outputs [ ns2:TRI [ dcterms:description "Terrain Ruggedness Index (TRI)" ;
+                    dcterms:title "Terrain Ruggedness Index (TRI)" ;
+                    proc:keywords "GeoTIFF",
+                        "raster" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Terrain derivative -- output `result`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/outputs/result> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Terrain ruggedness index -- output `result`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index/outputs/result> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ] .
+

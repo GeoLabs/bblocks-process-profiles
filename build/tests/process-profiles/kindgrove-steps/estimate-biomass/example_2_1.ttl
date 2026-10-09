@@ -83,23 +83,23 @@
                     proc:schema [ proc:type "string" ;
                             ns1:contentMediaType "application/octet-stream" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value [ a ns3:Person ;
+    proc:metadata [ rdf:value "estimate_biomass" ;
+            proc:role schema:name ],
+        [ rdf:value [ a ns3:Person ;
                     ns3:name "Cameron Sajedi" ] ;
             proc:role schema:author ],
-        [ rdf:value "0.1.0" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
         [ rdf:value [ a ns3:Person ;
                     ns3:affiliation "GeoLabs" ;
                     ns3:name "Gérald Fenoy" ] ;
             proc:role schema:contributor ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
         [ rdf:value "Mangrove detection, allometric biomass and IPCC carbon stock" ;
             proc:role schema:description ],
-        [ rdf:value "estimate_biomass" ;
-            proc:role schema:name ] ;
+        [ rdf:value "0.1.0" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;

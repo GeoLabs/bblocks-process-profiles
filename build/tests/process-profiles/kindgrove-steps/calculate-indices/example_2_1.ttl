@@ -25,23 +25,23 @@
                             ns2:items [ proc:type "string" ;
                                     ns2:contentMediaType "application/octet-stream" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value [ a ns1:Person ;
+    proc:metadata [ rdf:value "Compute NDVI, NDWI and SAVI from Sentinel-2 red, green and NIR bands" ;
+            proc:role schema:description ],
+        [ rdf:value "calculate_indices" ;
+            proc:role schema:name ],
+        [ rdf:value "0.1.0" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value [ a ns1:Person ;
                     ns1:affiliation "GeoLabs" ;
                     ns1:name "Gérald Fenoy" ] ;
             proc:role schema:contributor ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
             proc:role schema:license ],
-        [ rdf:value "Compute NDVI, NDWI and SAVI from Sentinel-2 red, green and NIR bands" ;
-            proc:role schema:description ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
         [ rdf:value [ a ns1:Person ;
                     ns1:name "Cameron Sajedi" ] ;
-            proc:role schema:author ],
-        [ rdf:value "calculate_indices" ;
-            proc:role schema:name ],
-        [ rdf:value "0.1.0" ;
-            proc:role schema:softwareVersion ] ;
+            proc:role schema:author ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;

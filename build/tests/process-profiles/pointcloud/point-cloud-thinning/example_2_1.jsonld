@@ -1,0 +1,78 @@
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/pointcloud/point-cloud-thinning/context.jsonld",
+  "id": "SAGA.pointcloud_tools.9",
+  "title": "Point Cloud Thinning (Simple)",
+  "description": "This simple thinning tool reduces the number of points in a point cloud by sequential point removal. It is therefore most suited for points stored in chronological order. ",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "INPUT": {
+      "title": "Points",
+      "description": "Points",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-lasf"
+          }
+        ]
+      }
+    },
+    "PERCENT": {
+      "title": "Percent",
+      "description": "Reduce the number of points to this percentage.",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 50,
+        "format": "float",
+        "minimum": 0,
+        "maximum": 100,
+        "nullable": true
+      }
+    },
+    "NUMBER": {
+      "title": "Number of Points",
+      "description": "Number of Points",
+      "minOccurs": 0,
+      "schema": {
+        "type": "integer",
+        "default": 0,
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "RESULT": {
+      "title": "Thinned Points",
+      "description": "Thinned Points",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-lasf"
+          }
+        ]
+      }
+    }
+  },
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.9/execution"
+    }
+  ]
+}
