@@ -1384,10 +1384,10 @@ def main():
     roots = {"w1": a.w1 or a.sources_root / sources["w1"]["clone"],
              "w2": a.w2 or a.sources_root / sources["w2"]["clone"],
              "w3": a.w3 or a.sources_root / sources["w3"]["clone"],
-             "kindgrove_steps": a.kindgrove_steps or a.sources_root / sources["kindgrove_steps"]["clone"],
-             "sqlmm_geonovum": a.sources_root / sources["sqlmm_geonovum"]["clone"],
-             "raster_geonovum": a.sources_root / sources["raster_geonovum"]["clone"],
-             "vector_geonovum": a.sources_root / sources["vector_geonovum"]["clone"]}
+             "kindgrove_steps": a.kindgrove_steps or a.sources_root / sources["kindgrove_steps"]["clone"]}
+    # every live-process source (sources.yaml `kind: ogcapi-process`) is cached under --sources-root
+    roots.update({k: a.sources_root / v["clone"] for k, v in sources.items()
+                  if isinstance(v, dict) and v.get("kind") == "ogcapi-process"})
     eoap = a.eoap_cct or a.sources_root / sources["eoap_cct"]["clone"]
     jq_path = eoap / sources["eoap_cct"]["transform"]
     # real run records: local research objects, never downloaded (like the CWL clones)

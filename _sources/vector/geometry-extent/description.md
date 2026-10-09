@@ -6,13 +6,14 @@ Process profile of the live OGC API - Processes process `SAGA.shapes_tools.19` (
 
 ## The tool behind it
 
-[SAGA shapes_tools 19 (Get Shapes Extents)](https://saga-gis.sourceforge.io/saga_tool_doc/9.4.0/shapes_tools_19.html) -- SAGA 9.4.0 tool library documentation (the deployed SAGA version is not exposed by the service).
+[SAGA shapes_tools 19 (Get Shapes Extents)](https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/shapes_tools_19.html) -- SAGA 7.3.0 tool library documentation, the version deployed on the testbed (not yet exposed by its processDescription).
 
 Tool 19 of SAGA's Shapes - Tools library (author O. Conrad, 2008; command line `saga_cmd shapes_tools 19`). It builds the extent (bounding rectangle) of the input shapes as polygons -- one for all shapes, one per shape (the default), or one per part of each shape, as chosen by its `OUTPUT` option. The documentation page itself only gives the title.
 
 On this deployment:
 
 - The live `OUTPUT` input is that option (`all shapes`, `each shape`, `each shape's part`); it is a live-only input, not part of the Implementation Profile.
+- SAGA takes and returns *shapes layers* -- feature collections -- where the Implementation Profile has one geometry in and one out: an implementation redefining the supported data, which Table 21 footnote d allows at the instance level ("Implementations may allow more or larger input datasets than the implementation profile, or support additional data exchange formats"). A single geometry is the one-feature case.
 
 ## Implementation Profile
 

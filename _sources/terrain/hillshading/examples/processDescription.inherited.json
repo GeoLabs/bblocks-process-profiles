@@ -1,0 +1,313 @@
+{
+  "id": "SAGA.ta_lighting.0",
+  "title": "Analytical Hillshading",
+  "description": "This tool performs an analytical hillshade computation for an elevation grid. The 'Standard' method simply calculates the angle at which light coming from the position of the light source would hit the surface. This method can produce angles greater than 90 degree. With the second method all values are kept within the range of 0-90 degree. It can be enhanced with shadowing effects, where shadowed cells will be marked with a value of exactly 90 degree. 'Shadows Only' creates a mask for the shadowed areas and sets all other cells to no-data. 'Combined Shading' takes the values of the standard method and multiplies these with the normalized slope. 'Ambient Occlusion' is based on the concepts of Tarini et al. (2006), but only the northern half-space is considered here. ",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0/execution"
+    }
+  ],
+  "keywords": [
+    "terrain",
+    "elevation",
+    "raster",
+    "illumination",
+    "hillshade",
+    "Hillshade",
+    "ta_lighting"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Terrain Analysis",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis"
+    },
+    {
+      "title": "Generic Profile: Analytical hillshading",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading"
+    },
+    {
+      "title": "Implementation Profile: Analytical hillshading",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading"
+    }
+  ],
+  "inputs": {
+    "ELEVATION": {
+      "title": "Elevation",
+      "description": "Elevation",
+      "keywords": [
+        "elevation",
+        "GeoTIFF"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Analytical hillshading -- input `elevation`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/elevation"
+        },
+        {
+          "title": "Implementation Profile: Analytical hillshading -- input `elevation`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/elevation"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "METHOD": {
+      "title": "Shading Method",
+      "description": "Shading Method",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "Standard",
+        "enum": [
+          "Standard",
+          "Limited Maximum",
+          "With Shadows",
+          "Shadows Only",
+          "Ambient Occlusion",
+          "Combined Shading"
+        ],
+        "nullable": true
+      }
+    },
+    "POSITION": {
+      "title": "Sun's Position",
+      "description": "Sun's Position",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "azimuth and height",
+        "enum": [
+          "azimuth and height",
+          "date and time"
+        ],
+        "nullable": true
+      }
+    },
+    "AZIMUTH": {
+      "title": "Azimuth",
+      "description": "Direction of the light source, measured in degree clockwise from the North direction.",
+      "keywords": [
+        "azimuth"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Analytical hillshading -- input `azimuth`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/azimuth"
+        },
+        {
+          "title": "Implementation Profile: Analytical hillshading -- input `azimuth`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/azimuth"
+        }
+      ],
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 315,
+        "format": "float",
+        "minimum": 0,
+        "maximum": 360,
+        "nullable": true
+      }
+    },
+    "DECLINATION": {
+      "title": "Height",
+      "description": "Height of the light source, measured in degree above the horizon.",
+      "keywords": [
+        "altitude"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Analytical hillshading -- input `altitude`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/altitude"
+        },
+        {
+          "title": "Implementation Profile: Analytical hillshading -- input `altitude`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/altitude"
+        }
+      ],
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 45,
+        "format": "float",
+        "minimum": 0,
+        "maximum": 90,
+        "nullable": true
+      }
+    },
+    "DATE_MIN": {
+      "title": "Day (min value)",
+      "description": "Day",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "format": "date",
+        "nullable": true
+      }
+    },
+    "TIME": {
+      "title": "Hour",
+      "description": "Hour",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 12,
+        "format": "float",
+        "minimum": 0,
+        "maximum": 24,
+        "nullable": true
+      }
+    },
+    "EXAGGERATION": {
+      "title": "Exaggeration",
+      "description": "The terrain exaggeration factor allows one to increase the shading contrasts in flat areas.",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 1,
+        "format": "float",
+        "nullable": true
+      }
+    },
+    "UNIT": {
+      "title": "Unit",
+      "description": "Unit",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "radians",
+        "enum": [
+          "radians",
+          "degree"
+        ],
+        "nullable": true
+      }
+    },
+    "SHADOW": {
+      "title": "Shadow",
+      "description": "Choose 'slim' to trace grid node's shadow, 'fat' to trace the whole cell's shadow. The first is slightly faster but might show some artifacts.",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "slim",
+        "enum": [
+          "slim",
+          "fat"
+        ],
+        "nullable": true
+      }
+    },
+    "NDIRS": {
+      "title": "Number of Directions",
+      "description": "Number of sample directions for ambient occlusion. Divides azimuth range (270 to 0 to 90 degree) into sectors. Declination (0 to 90 degree) is divided in (Number of Directions / 4) sectors.",
+      "minOccurs": 0,
+      "schema": {
+        "type": "integer",
+        "default": 8,
+        "nullable": true
+      }
+    },
+    "RADIUS": {
+      "title": "Search Radius",
+      "description": "Radius used to trace for shadows (ambient occlusion) [map units].",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 10,
+        "format": "float",
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "SHADE": {
+      "title": "Analytical Hillshading",
+      "description": "The angle between the surface and the incoming light beams, measured in radians.",
+      "keywords": [
+        "raster",
+        "GeoTIFF"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Analytical hillshading -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Analytical hillshading -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/outputs/result"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -81,6 +81,33 @@ vector_geonovum:
   group: Vector (Geonovum testbed)
   items:   # process ids to fetch, cached as <id>.json under --sources-root/vector-geonovum/
     - SAGA.shapes_tools.19
+terrain_geonovum:
+  title: Terrain analysis (ZOO-Project, Geonovum testbed, SAGA GIS 7.3.0)
+  repo: https://host1.tb.geonovum.geolabs.fr/ogc-api/processes
+  clone: terrain-geonovum
+  base_path: .
+  kind: ogcapi-process
+  license: null   # no license declared by this testbed instance; do not assume one
+  family: SAGA
+  group: Terrain analysis (Geonovum testbed)
+  items:   # process ids to fetch, cached as <id>.json under --sources-root/terrain-geonovum/
+    - SAGA.ta_morphometry.0
+    - SAGA.ta_morphometry.16
+    - SAGA.ta_morphometry.18
+    - SAGA.ta_lighting.0
+pointcloud_geonovum:
+  title: Point cloud processing (ZOO-Project, Geonovum testbed, SAGA GIS 7.3.0)
+  repo: https://host1.tb.geonovum.geolabs.fr/ogc-api/processes
+  clone: pointcloud-geonovum
+  base_path: .
+  kind: ogcapi-process
+  license: null   # no license declared by this testbed instance; do not assume one
+  family: SAGA
+  group: Point clouds (Geonovum testbed)
+  items:   # process ids to fetch, cached as <id>.json under --sources-root/pointcloud-geonovum/
+    - SAGA.pointcloud_tools.4
+    - SAGA.pointcloud_tools.9
+    - SAGA.pointcloud_tools.5
 w3:
   title: W3 Water Bodies (OGC EO Application Package Hands-On, GeoLabs split)
   repo: https://github.com/GeoLabs/ogc-eo-application-package-hands-on

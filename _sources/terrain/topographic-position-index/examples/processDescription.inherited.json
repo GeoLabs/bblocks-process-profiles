@@ -1,0 +1,227 @@
+{
+  "id": "SAGA.ta_morphometry.18",
+  "title": "Topographic Position Index (TPI)",
+  "description": "Topographic Position Index (TPI) calculation as proposed by Guisan et al. (1999). This is literally the same as the difference to the mean calculation (residual analysis) proposed by Wilson & Gallant (2000). The bandwidth parameter for distance weighting is given as percentage of the (outer) radius.",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_morphometry.18/execution"
+    }
+  ],
+  "keywords": [
+    "terrain",
+    "elevation",
+    "raster",
+    "derivative",
+    "TPI",
+    "ta_morphometry"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Terrain Analysis",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis"
+    },
+    {
+      "title": "Generic Profile: Terrain derivative",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative"
+    },
+    {
+      "title": "Implementation Profile: Topographic position index",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/topographic-position-index"
+    }
+  ],
+  "inputs": {
+    "DEM": {
+      "title": "Elevation",
+      "description": "Elevation",
+      "keywords": [
+        "elevation",
+        "GeoTIFF"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Terrain derivative -- input `elevation`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/inputs/elevation"
+        },
+        {
+          "title": "Implementation Profile: Topographic position index -- input `elevation`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/topographic-position-index/inputs/elevation"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "STANDARD": {
+      "title": "Standardize",
+      "description": "Standardize",
+      "minOccurs": 0,
+      "schema": {
+        "type": "boolean",
+        "default": false,
+        "enum": [
+          "true",
+          "false"
+        ],
+        "nullable": true
+      }
+    },
+    "RADIUS_MIN": {
+      "title": "Scale (min value)",
+      "description": "kernel radius in map units",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "format": "float",
+        "nullable": true
+      }
+    },
+    "RADIUS_MAX": {
+      "title": "Scale (max value)",
+      "description": "kernel radius in map units",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "format": "float",
+        "nullable": true
+      }
+    },
+    "DW_WEIGHTING": {
+      "title": "Weighting Function",
+      "description": "Weighting Function",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "no distance weighting",
+        "enum": [
+          "no distance weighting",
+          "inverse distance to a power",
+          "exponential",
+          "gaussian weighting"
+        ],
+        "nullable": true
+      }
+    },
+    "DW_IDW_POWER": {
+      "title": "Inverse Distance Weighting Power",
+      "description": "Inverse Distance Weighting Power",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 1,
+        "format": "float",
+        "nullable": true
+      }
+    },
+    "DW_IDW_OFFSET": {
+      "title": "Inverse Distance Offset",
+      "description": "Calculates weights for distance plus one, avoiding division by zero for zero distances",
+      "minOccurs": 0,
+      "schema": {
+        "type": "boolean",
+        "default": true,
+        "enum": [
+          "true",
+          "false"
+        ],
+        "nullable": true
+      }
+    },
+    "DW_BANDWIDTH": {
+      "title": "Gaussian and Exponential Weighting Bandwidth",
+      "description": "Gaussian and Exponential Weighting Bandwidth",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 75,
+        "format": "float",
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "TPI": {
+      "title": "Topographic Position Index",
+      "description": "Topographic Position Index",
+      "keywords": [
+        "raster",
+        "GeoTIFF"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Terrain derivative -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Topographic position index -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/topographic-position-index/outputs/result"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    }
+  }
+}

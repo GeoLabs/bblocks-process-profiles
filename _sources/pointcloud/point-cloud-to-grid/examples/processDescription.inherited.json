@@ -1,0 +1,238 @@
+{
+  "id": "SAGA.pointcloud_tools.4",
+  "title": "Point Cloud to Grid",
+  "description": "Point Cloud to Grid",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.4/execution"
+    }
+  ],
+  "keywords": [
+    "point cloud",
+    "raster",
+    "rasterization",
+    "Point Cloud to Grid",
+    "pointcloud_tools"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Point Cloud Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/point-cloud-processing"
+    },
+    {
+      "title": "Generic Profile: Point cloud rasterization",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-rasterization"
+    },
+    {
+      "title": "Implementation Profile: Point cloud to grid",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-grid"
+    }
+  ],
+  "inputs": {
+    "POINTS": {
+      "title": "Points",
+      "description": "Points",
+      "keywords": [
+        "point cloud",
+        "LAS"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Point cloud rasterization -- input `points`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-rasterization/inputs/points"
+        },
+        {
+          "title": "Implementation Profile: Point cloud to grid -- input `points`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-grid/inputs/points"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-lasf"
+          }
+        ]
+      }
+    },
+    "OUTPUT": {
+      "title": "Output",
+      "description": "Output",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "only z",
+        "enum": [
+          "only z",
+          "all attributes"
+        ],
+        "nullable": true
+      }
+    },
+    "AGGREGATION": {
+      "title": "Aggregation",
+      "description": "Aggregation",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "first value",
+        "enum": [
+          "first value",
+          "last value",
+          "mean value",
+          "lowest z",
+          "highest z"
+        ],
+        "nullable": true
+      }
+    },
+    "CELLSIZE": {
+      "title": "Cellsize",
+      "description": "Cellsize",
+      "keywords": [
+        "cell size"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Point cloud rasterization -- input `cellSize`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-rasterization/inputs/cellSize"
+        },
+        {
+          "title": "Implementation Profile: Point cloud to grid -- input `cellSize`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-grid/inputs/cellSize"
+        }
+      ],
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 1,
+        "format": "float",
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "GRID": {
+      "title": "Z Value",
+      "description": "Z Value",
+      "keywords": [
+        "raster",
+        "GeoTIFF"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Point cloud rasterization -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-rasterization/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Point cloud to grid -- output `result`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-grid/outputs/result"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "COUNT": {
+      "title": "Number of Points in Cell",
+      "description": "Number of Points in Cell",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "GRIDS": {
+      "title": "Attributes",
+      "description": "Attributes",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    }
+  }
+}

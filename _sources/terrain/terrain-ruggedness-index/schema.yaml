@@ -1,0 +1,188 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+description: 'Profile of the live OGC API - Processes processDescription of `SAGA.ta_morphometry.16`.
+  Pins the process id and the input/output names. No execute/results/provenance $defs or examples: static
+  processDescription only (no CWLProv-style run record exists for a live deployed service).'
+allOf:
+- $ref: bblocks://ogc.api.processes.v1.schemas.process
+- $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+- type: object
+  required:
+  - id
+  - inputs
+  - outputs
+  properties:
+    id:
+      const: SAGA.ta_morphometry.16
+    inputs:
+      type: object
+      required:
+      - DEM
+      - MODE
+      - RADIUS
+      - DW_WEIGHTING
+      - DW_IDW_POWER
+      - DW_IDW_OFFSET
+      - DW_BANDWIDTH
+    outputs:
+      type: object
+      required:
+      - TRI
+$defs:
+  processTypeEntry:
+    $ref: bblocks://ospd.process-profiles.process-type
+  inheritedProcessDescription:
+    allOf:
+    - $ref: bblocks://ogc.api.processes.v1.schemas.process
+    - $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+    - type: object
+      required:
+      - id
+      - inputs
+      - outputs
+      properties:
+        id:
+          const: SAGA.ta_morphometry.16
+        inputs:
+          type: object
+          required:
+          - DEM
+          - MODE
+          - RADIUS
+          - DW_WEIGHTING
+          - DW_IDW_POWER
+          - DW_IDW_OFFSET
+          - DW_BANDWIDTH
+        outputs:
+          type: object
+          required:
+          - TRI
+    - description: '`SAGA.ta_morphometry.16` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index`:
+        Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) inherited from its Implementation
+        Profile.'
+      type: object
+      required:
+      - keywords
+      - metadata
+      properties:
+        keywords:
+          allOf:
+          - contains:
+              const: terrain
+          - contains:
+              const: elevation
+          - contains:
+              const: raster
+          - contains:
+              const: derivative
+          - contains:
+              const: TRI
+          - contains:
+              const: ta_morphometry
+        metadata:
+          allOf:
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index
+        inputs:
+          type: object
+          required:
+          - DEM
+          properties:
+            DEM:
+              required:
+              - keywords
+              - metadata
+              properties:
+                keywords:
+                  allOf:
+                  - contains:
+                      const: elevation
+                  - contains:
+                      const: GeoTIFF
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/inputs/elevation
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index/inputs/elevation
+        outputs:
+          type: object
+          required:
+          - TRI
+          properties:
+            TRI:
+              required:
+              - keywords
+              - metadata
+              properties:
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                  - contains:
+                      const: GeoTIFF
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/outputs/result
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index/outputs/result

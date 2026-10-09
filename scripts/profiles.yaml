@@ -1351,8 +1351,8 @@ ogcapi_processes:
     bindings: {inputs: {SHAPES: geometry}, outputs: {EXTENTS: result}}
     tool:
       name: SAGA shapes_tools 19 (Get Shapes Extents)
-      doc: https://saga-gis.sourceforge.io/saga_tool_doc/9.4.0/shapes_tools_19.html
-      documented: SAGA 9.4.0 tool library documentation (the deployed SAGA version is not exposed by the service)
+      doc: https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/shapes_tools_19.html
+      documented: SAGA 7.3.0 tool library documentation, the version deployed on the testbed (not yet exposed by its processDescription)
       description: >-
         Tool 19 of SAGA's Shapes - Tools library (author O. Conrad, 2008; command line
         `saga_cmd shapes_tools 19`). It builds the extent (bounding rectangle) of the input shapes as
@@ -1360,4 +1360,142 @@ ogcapi_processes:
         chosen by its `OUTPUT` option. The documentation page itself only gives the title.
       notes:
         - "The live `OUTPUT` input is that option (`all shapes`, `each shape`, `each shape's part`); it is a live-only input, not part of the Implementation Profile."
+        - "SAGA takes and returns *shapes layers* -- feature collections -- where the Implementation Profile has one geometry in and one out: an implementation redefining the supported data, which Table 21 footnote d allows at the instance level (\"Implementations may allow more or larger input datasets than the implementation profile, or support additional data exchange formats\"). A single geometry is the one-feature case."
     openeo: {level: none, rationale: "No openEO process computes the bounding envelope of a vector geometry/feature collection in the published bblocks-openeo register."}
+
+# ---------------------------------------------------------------- Terrain analysis (SAGA GIS)
+# (ZOO-Project, Geonovum testbed, SAGA 7.3.0). Implementation Profiles of the terrain-analysis
+# Concept in bblocks-generic-profiles; elevation models are single-band rasters (data-type
+# `elevation-model`).
+  - key: slope
+    workflow: terrain
+    source: {repo: terrain_geonovum, file: SAGA.ta_morphometry.0.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope
+    bindings: {inputs: {ELEVATION: elevation}, outputs: {SLOPE: result}}
+    tool:
+      name: SAGA ta_morphometry 0 (Slope, Aspect, Curvature)
+      doc: https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/ta_morphometry_0.html
+      documented: SAGA 7.3.0 tool library documentation, the version deployed on the testbed (not yet exposed by its processDescription)
+      description: >-
+        Tool 0 of SAGA's Terrain Analysis - Morphometry library (author O. Conrad, 2001; command line
+        `saga_cmd ta_morphometry 0`). It computes the local morphometric parameters of an elevation
+        grid -- slope, aspect and, depending on the chosen method, curvatures (general, profile, plan,
+        tangential, ...) -- from a local fit of the surface; the default method is the 9 parameter 2nd
+        order polynom of Zevenbergen & Thorne (1987).
+      notes:
+        - "One process, many outputs: only `SLOPE` is bound to the Implementation Profile (`slope`); `ASPECT` and the ten curvature grids are supplementary outputs of the live service (Table 21 footnote b)."
+    openeo: {level: none, rationale: "No openEO process computes terrain slope in the published bblocks-openeo register."}
+
+  - key: terrain-ruggedness-index
+    workflow: terrain
+    source: {repo: terrain_geonovum, file: SAGA.ta_morphometry.16.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index
+    bindings: {inputs: {DEM: elevation}, outputs: {TRI: result}}
+    tool:
+      name: SAGA ta_morphometry 16 (Terrain Ruggedness Index)
+      doc: https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/ta_morphometry_16.html
+      documented: SAGA 7.3.0 tool library documentation, the version deployed on the testbed (not yet exposed by its processDescription)
+      description: >-
+        Tool 16 of SAGA's Terrain Analysis - Morphometry library (author O. Conrad, 2010; command line
+        `saga_cmd ta_morphometry 16`), after Riley, De Gloria & Elliot (1999). The documentation page
+        gives no description beyond that reference; the search radius, its shape and an optional
+        distance weighting are the tool's own options.
+    openeo: {level: none, rationale: "No openEO process computes a terrain ruggedness index in the published bblocks-openeo register."}
+
+  - key: topographic-position-index
+    workflow: terrain
+    source: {repo: terrain_geonovum, file: SAGA.ta_morphometry.18.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/topographic-position-index
+    bindings: {inputs: {DEM: elevation}, outputs: {TPI: result}}
+    tool:
+      name: SAGA ta_morphometry 18 (Topographic Position Index)
+      doc: https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/ta_morphometry_18.html
+      documented: SAGA 7.3.0 tool library documentation, the version deployed on the testbed (not yet exposed by its processDescription)
+      description: >-
+        Tool 18 of SAGA's Terrain Analysis - Morphometry library (author O. Conrad, 2011; command line
+        `saga_cmd ta_morphometry 18`): the topographic position index as proposed by Guisan et al.
+        (1999), which the documentation notes is the same as Wilson & Gallant's (2000) difference to
+        the mean, over a neighbourhood given by a minimum and maximum radius.
+    openeo: {level: none, rationale: "No openEO process computes a topographic position index in the published bblocks-openeo register."}
+
+  - key: hillshading
+    workflow: terrain
+    source: {repo: terrain_geonovum, file: SAGA.ta_lighting.0.json}
+    phases: [scientific-computation]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading
+    bindings: {inputs: {ELEVATION: elevation, AZIMUTH: azimuth, DECLINATION: altitude}, outputs: {SHADE: result}}
+    tool:
+      name: SAGA ta_lighting 0 (Analytical Hillshading)
+      doc: https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/ta_lighting_0.html
+      documented: SAGA 7.3.0 tool library documentation, the version deployed on the testbed (not yet exposed by its processDescription)
+      description: >-
+        Tool 0 of SAGA's Terrain Analysis - Lighting library (authors O. Conrad, V. Wichmann,
+        2003-2013; command line `saga_cmd ta_lighting 0`). Its standard method computes, for each
+        cell, the angle at which light from the light source hits the surface; other methods keep
+        the result within 0-90 degrees, add shadows or ambient occlusion.
+      notes:
+        - "The light source's altitude is the live input `DECLINATION`, titled \"Height\": degrees above the horizon (default 45); `AZIMUTH` is in degrees clockwise from north (default 315). Both are optional on the live service, a restriction of the Generic Profile's minimum the register allows."
+    openeo: {level: none, rationale: "No openEO process computes a hillshade in the published bblocks-openeo register."}
+
+# ---------------------------------------------------------------- Point clouds (SAGA GIS)
+# (ZOO-Project, Geonovum testbed, SAGA 7.3.0). Implementation Profiles of the
+# point-cloud-processing Concept in bblocks-generic-profiles (data-type `point-cloud`).
+  - key: point-cloud-to-grid
+    workflow: pointcloud
+    source: {repo: pointcloud_geonovum, file: SAGA.pointcloud_tools.4.json}
+    phases: [pre-processing]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-grid
+    bindings: {inputs: {POINTS: points, CELLSIZE: cellSize}, outputs: {GRID: result}}
+    tool:
+      name: SAGA pointcloud_tools 4 (Point Cloud to Grid)
+      doc: https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/pointcloud_tools_4.html
+      documented: SAGA 7.3.0 tool library documentation, the version deployed on the testbed (not yet exposed by its processDescription)
+      description: >-
+        Tool 4 of SAGA's Shapes - Point Clouds library (author O. Conrad, 2009; command line
+        `saga_cmd pointcloud_tools 4`). It writes the points falling in each cell of a grid of the
+        given cell size to that cell, aggregated as the first, last or mean value, or the lowest or
+        highest z.
+      notes:
+        - "The live service labels its LAS input `application/x-ogc-lasf`, not the IANA-registered `application/vnd.las` the Implementation Profile declares."
+        - "`COUNT` (points per cell) and `GRIDS` (attributes) are supplementary outputs (Table 21 footnote b)."
+    openeo: {level: none, rationale: "No openEO process handles point clouds in the published bblocks-openeo register."}
+
+  - key: point-cloud-thinning
+    workflow: pointcloud
+    source: {repo: pointcloud_geonovum, file: SAGA.pointcloud_tools.9.json}
+    phases: [pre-processing]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning
+    bindings: {inputs: {INPUT: points, PERCENT: percentage}, outputs: {RESULT: result}}
+    tool:
+      name: SAGA pointcloud_tools 9 (Point Cloud Thinning, Simple)
+      doc: https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/pointcloud_tools_9.html
+      documented: SAGA 7.3.0 tool library documentation, the version deployed on the testbed (not yet exposed by its processDescription)
+      description: >-
+        Tool 9 of SAGA's Shapes - Point Clouds library (author V. Wichmann, LASERDATA GmbH, 2010;
+        command line `saga_cmd pointcloud_tools 9`). It reduces the number of points to the given
+        percentage by sequential point removal, which suits points stored in chronological order best.
+      notes:
+        - "The live service labels its LAS input and output `application/x-ogc-lasf`, not the IANA-registered `application/vnd.las` the Implementation Profile declares."
+        - "`NUMBER` (titled \"Number of Points\", default 0; the documentation describes it no further) is a live-only input."
+    openeo: {level: none, rationale: "No openEO process handles point clouds in the published bblocks-openeo register."}
+
+  - key: point-cloud-to-shapes
+    workflow: pointcloud
+    source: {repo: pointcloud_geonovum, file: SAGA.pointcloud_tools.5.json}
+    phases: [pre-processing]
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-shapes
+    bindings: {inputs: {POINTS: points}, outputs: {SHAPES: result}}
+    tool:
+      name: SAGA pointcloud_tools 5 (Point Cloud to Shapes)
+      doc: https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/pointcloud_tools_5.html
+      documented: SAGA 7.3.0 tool library documentation, the version deployed on the testbed (not yet exposed by its processDescription)
+      description: >-
+        Tool 5 of SAGA's Shapes - Point Clouds library (author O. Conrad, 2009; command line
+        `saga_cmd pointcloud_tools 5`): converts a point cloud to a shapes layer of points. The
+        documentation page gives the title only.
+      notes:
+        - "The live service labels its LAS input `application/x-ogc-lasf`, not the IANA-registered `application/vnd.las` the Implementation Profile declares."
+    openeo: {level: none, rationale: "No openEO process handles point clouds in the published bblocks-openeo register."}
