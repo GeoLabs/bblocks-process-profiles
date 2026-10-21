@@ -1,7 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
@@ -14,25 +14,25 @@
     dcterms:title "Outputs a monoband image which is the result of a mathematical operation on several multi-band images." ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMath/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns1:exp [ dcterms:description "The muParser mathematical expression to apply on input images." ;
+    proc:inputs [ ns3:exp [ dcterms:description "The muParser mathematical expression to apply on input images." ;
                     dcterms:title "The muParser mathematical expression to apply on input images." ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns1:il [ dcterms:description "Image list of operands to the mathematical expression." ;
+            ns3:il [ dcterms:description "Image list of operands to the mathematical expression." ;
                     dcterms:title "Image list of operands to the mathematical expression." ;
                     proc:maxOccurs 1024 ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/png" ],
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/tiff" ],
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/jpeg" ] ] ] ;
-            ns1:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
+            ns3:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
                     dcterms:title "Output image which is the result of the mathematical expressions on input image list operands." ;
                     proc:schema [ proc:default "\"float\""^^rdf:JSON ;
                             proc:enum "double",
@@ -42,7 +42,7 @@
                                 "uint16",
                                 "uint8" ;
                             proc:type "string" ] ] ;
-            ns1:ram [ dcterms:description "Available memory for processing (in MB)." ;
+            ns3:ram [ dcterms:description "Available memory for processing (in MB)." ;
                     dcterms:title "Available memory for processing (in MB)." ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "256"^^rdf:JSON ;
@@ -56,13 +56,13 @@
         "value" ;
     proc:outputs [ ns4:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
                     dcterms:title "Output image which is the result of the mathematical expressions on input image list operands." ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/jpeg" ],
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/png" ],
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/tiff" ] ] ] ] .
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/jpeg" ] ] ] ] .
 

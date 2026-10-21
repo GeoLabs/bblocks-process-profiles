@@ -578,5 +578,11 @@
     "prov": "http://www.w3.org/ns/prov#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  },
+  "x-bblocks-metadata": {
+    "itemIdentifier": "ospd.process-profiles.terrain.terrain-ruggedness-index",
+    "register": "https://geolabs.github.io/bblocks-process-profiles/build/register.json",
+    "version": "0.1",
+    "dateOfLastChange": "2026-10-21"
   }
 }

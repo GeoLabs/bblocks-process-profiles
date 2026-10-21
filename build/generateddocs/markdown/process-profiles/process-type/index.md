@@ -143,8 +143,8 @@ are provisional, pending a decision on the process-type register namespace.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://www.iana.org/assignments/> .
-@prefix ns2: <https://w3id.org/ogc/api/processes/> .
+@prefix ns1: <https://w3id.org/ogc/api/processes/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
@@ -172,8 +172,8 @@ are provisional, pending a decision on the process-type register namespace.
     dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
     pp:cwlClass "CommandLineTool" ;
     pp:cwlId "reproject-image" ;
-    ns2:executionUnit [ dcterms:format "application/cwl+yaml" ;
-            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+    ns1:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/reproject-image.cwl> ] .
 
 
@@ -412,8 +412,8 @@ are provisional, pending a decision on the process-type register namespace.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/processes/> .
-@prefix ns2: <http://www.iana.org/assignments/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/ogc/api/processes/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
@@ -473,8 +473,8 @@ are provisional, pending a decision on the process-type register namespace.
     pp:candidateCctDependency "eoap.cct.bbox" ;
     pp:cwlClass "CommandLineTool" ;
     pp:cwlId "mangrove_cli" ;
-    ns1:executionUnit [ dcterms:format "application/cwl+yaml" ;
-            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+    ns2:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove_cli> ] .
 
 
@@ -792,6 +792,11 @@ x-jsonld-prefixes:
   rdfs: http://www.w3.org/2000/01/rdf-schema#
   dct: http://purl.org/dc/terms/
   oa: http://www.w3.org/ns/oa#
+x-bblocks-metadata:
+  itemIdentifier: ospd.process-profiles.process-type
+  register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
+  version: '0.1'
+  dateOfLastChange: '2026-10-21'
 
 ```
 

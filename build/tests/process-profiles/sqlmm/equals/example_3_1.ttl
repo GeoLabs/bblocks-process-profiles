@@ -26,12 +26,12 @@
                     dcterms:title "the first geometry" ;
                     proc:keywords "GML",
                         "geometry" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Equals -- input `geometry1`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/equals/inputs/geometry1> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Binary spatial predicate -- input `geometry1`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Binary spatial predicate -- input `geometry1`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry1> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Equals -- input `geometry1`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/equals/inputs/geometry1> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
@@ -51,11 +51,11 @@
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/equals/inputs/geometry2> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
@@ -76,12 +76,12 @@
     proc:outputs [ ns2:Result [ dcterms:description "Should be true if two geometries are equivalent.." ;
                     dcterms:title "Equals result" ;
                     proc:keywords "boolean" ;
-                    proc:metadata [ dcterms:title "Mon test  " ],
+                    proc:metadata [ dcterms:title "Implementation Profile: Equals -- output `result`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/equals/outputs/result> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
                         [ dcterms:title "Generic Profile: Binary spatial predicate -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/outputs/result> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Equals -- output `result`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/equals/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
+                        [ dcterms:title "Mon test  " ] ;
                     proc:schema [ proc:type "boolean" ] ] ] .
 

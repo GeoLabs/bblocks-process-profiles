@@ -1,6 +1,6 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://www.iana.org/assignments/> .
-@prefix ns2: <https://w3id.org/ogc/api/processes/> .
+@prefix ns1: <https://w3id.org/ogc/api/processes/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
@@ -28,7 +28,7 @@
     dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
     pp:cwlClass "CommandLineTool" ;
     pp:cwlId "reproject-image" ;
-    ns2:executionUnit [ dcterms:format "application/cwl+yaml" ;
-            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+    ns1:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/reproject-image.cwl> ] .
 

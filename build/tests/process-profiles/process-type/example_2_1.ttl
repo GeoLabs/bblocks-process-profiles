@@ -1,6 +1,6 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/processes/> .
-@prefix ns2: <http://www.iana.org/assignments/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/ogc/api/processes/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
@@ -60,7 +60,7 @@
     pp:candidateCctDependency "eoap.cct.bbox" ;
     pp:cwlClass "CommandLineTool" ;
     pp:cwlId "mangrove_cli" ;
-    ns1:executionUnit [ dcterms:format "application/cwl+yaml" ;
-            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+    ns2:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove_cli> ] .
 

@@ -58,16 +58,16 @@
                     dcterms:title "Number of Points in Cell" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
             ns2:GRID [ dcterms:description "Z Value" ;
                     dcterms:title "Z Value" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
@@ -75,13 +75,13 @@
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
             ns2:GRIDS [ dcterms:description "Attributes" ;
                     dcterms:title "Attributes" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
@@ -92,8 +92,8 @@
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ] .
+                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ] .
 

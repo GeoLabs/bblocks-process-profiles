@@ -232,10 +232,10 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://w3id.org/ogc/api/schema/> .
+@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -247,10 +247,10 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     dcterms:title "Get Shapes Extents" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.shapes_tools.19/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns2:OUTPUT [ dcterms:description "Get Extent for ..." ;
+    proc:inputs [ ns4:OUTPUT [ dcterms:description "Get Extent for ..." ;
                     dcterms:title "Get Extent for ..." ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"each shape\""^^rdf:JSON ;
@@ -259,14 +259,14 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                 "each shape's part" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:SHAPES [ dcterms:description "Shapes" ;
+            ns4:SHAPES [ dcterms:description "Shapes" ;
                     dcterms:title "Shapes" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/xml" ],
+                    proc:schema [ ns3:oneOf [ proc:type "string" ;
+                                    ns3:contentEncoding "utf-8" ;
+                                    ns3:contentMediaType "text/xml" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
+                                    ns3:contentEncoding "base64" ;
+                                    ns3:contentMediaType "application/vnd.google-earth.kml+xml" ],
                                 [ proc:type "object" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
@@ -274,15 +274,15 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns4:EXTENTS [ dcterms:description "Extents" ;
+    proc:outputs [ ns2:EXTENTS [ dcterms:description "Extents" ;
                     dcterms:title "Extents" ;
-                    proc:schema [ ns1:oneOf [ proc:type "object" ],
+                    proc:schema [ ns3:oneOf [ proc:type "string" ;
+                                    ns3:contentEncoding "base64" ;
+                                    ns3:contentMediaType "application/vnd.google-earth.kml+xml" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/xml" ] ] ] ] .
+                                    ns3:contentEncoding "utf-8" ;
+                                    ns3:contentMediaType "text/xml" ],
+                                [ proc:type "object" ] ] ] ] .
 
 
 ```
@@ -586,9 +586,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -605,10 +605,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "Get Shapes Extents" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.shapes_tools.19/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns4:OUTPUT [ dcterms:description "Get Extent for ..." ;
+    proc:inputs [ ns2:OUTPUT [ dcterms:description "Get Extent for ..." ;
                     dcterms:title "Get Extent for ..." ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"each shape\""^^rdf:JSON ;
@@ -617,7 +617,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 "each shape's part" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns4:SHAPES [ dcterms:description "Shapes" ;
+            ns2:SHAPES [ dcterms:description "Shapes" ;
                     dcterms:title "Shapes" ;
                     proc:keywords "GML",
                         "geometry" ;
@@ -628,24 +628,24 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent/inputs/geometry> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
+                                    ns1:contentEncoding "utf-8" ;
+                                    ns1:contentMediaType "text/xml" ],
                                 [ proc:type "object" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/xml" ] ] ] ] ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Implementation Profile: Geometry extent" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+    proc:metadata [ dcterms:title "Process Concept: Vector Geometry Processing" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ dcterms:title "Generic Profile: Unary geometry operation" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Process Concept: Vector Geometry Processing" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+        [ dcterms:title "Implementation Profile: Geometry extent" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
@@ -653,19 +653,19 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:title "Extents" ;
                     proc:keywords "GML",
                         "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation -- output `result`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Geometry extent -- output `result`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Geometry extent -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "object" ],
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Unary geometry operation -- output `result`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/outputs/result> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
                                     ns1:contentMediaType "text/xml" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ] ] ] ] .
+                                [ proc:type "object" ] ] ] ] .
 
 
 ```
@@ -1142,6 +1142,11 @@ x-jsonld-prefixes:
   prov: http://www.w3.org/ns/prov#
   xsd: http://www.w3.org/2001/XMLSchema#
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+x-bblocks-metadata:
+  itemIdentifier: ospd.process-profiles.vector.geometry-extent
+  register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
+  version: '0.1'
+  dateOfLastChange: '2026-10-21'
 
 ```
 

@@ -37,10 +37,10 @@
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "Water bodies detection based on NDWI and otsu threshold" ;
-            proc:role schema:name ],
-        [ rdf:value "1.4.1" ;
+    proc:metadata [ rdf:value "1.4.1" ;
             proc:role schema:softwareVersion ],
+        [ rdf:value "Water bodies detection based on NDWI and otsu threshold" ;
+            proc:role schema:name ],
         [ rdf:value "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
             proc:role schema:description ] ;
     proc:mutable true ;

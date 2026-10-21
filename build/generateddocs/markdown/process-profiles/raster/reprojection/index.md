@@ -317,8 +317,8 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns2: <http://www.iana.org/assignments/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -330,7 +330,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     dcterms:title "GDAL Warp Tool" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns1:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
@@ -392,7 +392,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:Result [ dcterms:description "The file name resulting of the convertion" ;
+    proc:outputs [ ns2:Result [ dcterms:description "The file name resulting of the convertion" ;
                     dcterms:title "The resulting converted file" ;
                     proc:schema [ proc:type "string" ] ] ] .
 
@@ -822,8 +822,8 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -840,7 +840,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "GDAL Warp Tool" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns1:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
@@ -926,16 +926,16 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:Result [ dcterms:description "The file name resulting of the convertion" ;
+    proc:outputs [ ns3:Result [ dcterms:description "The file name resulting of the convertion" ;
                     dcterms:title "The resulting converted file" ;
                     proc:keywords "GeoTIFF",
                         "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster reprojection -- output `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
-                        [ dcterms:title "Generic Profile: Raster reprojection -- output `raster`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection -- output `raster`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Raster reprojection -- output `raster`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/outputs/raster> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
                     proc:schema [ proc:type "string" ] ] ] .
 
 
@@ -1476,6 +1476,11 @@ x-jsonld-prefixes:
   prov: http://www.w3.org/ns/prov#
   xsd: http://www.w3.org/2001/XMLSchema#
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+x-bblocks-metadata:
+  itemIdentifier: ospd.process-profiles.raster.reprojection
+  register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
+  version: '0.1'
+  dateOfLastChange: '2026-10-21'
 
 ```
 

@@ -324,5 +324,11 @@
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "dct": "http://purl.org/dc/terms/",
     "oa": "http://www.w3.org/ns/oa#"
+  },
+  "x-bblocks-metadata": {
+    "itemIdentifier": "ospd.process-profiles.process-type",
+    "register": "https://geolabs.github.io/bblocks-process-profiles/build/register.json",
+    "version": "0.1",
+    "dateOfLastChange": "2026-10-21"
   }
 }

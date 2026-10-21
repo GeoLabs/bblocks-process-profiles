@@ -399,16 +399,16 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                     dcterms:title "Elevation" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
             ns2:DW_BANDWIDTH [ dcterms:description "Gaussian and Exponential Weighting Bandwidth" ;
                     dcterms:title "Gaussian and Exponential Weighting Bandwidth" ;
                     proc:minOccurs 0 ;
@@ -465,16 +465,16 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                     dcterms:title "Terrain Ruggedness Index (TRI)" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ] .
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ] .
 
 
 ```
@@ -930,8 +930,8 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix ns4: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
@@ -953,20 +953,17 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
             ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_morphometry.16/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns3:DEM [ dcterms:description "Elevation" ;
+    proc:inputs [ ns2:DEM [ dcterms:description "Elevation" ;
                     dcterms:title "Elevation" ;
                     proc:keywords "GeoTIFF",
                         "elevation" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Terrain derivative -- input `elevation`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/inputs/elevation> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Terrain ruggedness index -- input `elevation`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Terrain ruggedness index -- input `elevation`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index/inputs/elevation> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Terrain derivative -- input `elevation`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/inputs/elevation> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
@@ -974,15 +971,18 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
-            ns3:DW_BANDWIDTH [ dcterms:description "Gaussian and Exponential Weighting Bandwidth" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
+            ns2:DW_BANDWIDTH [ dcterms:description "Gaussian and Exponential Weighting Bandwidth" ;
                     dcterms:title "Gaussian and Exponential Weighting Bandwidth" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "75"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "number" ;
                             ns1:format "float" ] ] ;
-            ns3:DW_IDW_OFFSET [ dcterms:description "Calculates weights for distance plus one, avoiding division by zero for zero distances" ;
+            ns2:DW_IDW_OFFSET [ dcterms:description "Calculates weights for distance plus one, avoiding division by zero for zero distances" ;
                     dcterms:title "Inverse Distance Offset" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "true"^^rdf:JSON ;
@@ -990,14 +990,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 "true" ;
                             proc:nullable true ;
                             proc:type "boolean" ] ] ;
-            ns3:DW_IDW_POWER [ dcterms:description "Inverse Distance Weighting Power" ;
+            ns2:DW_IDW_POWER [ dcterms:description "Inverse Distance Weighting Power" ;
                     dcterms:title "Inverse Distance Weighting Power" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "number" ;
                             ns1:format "float" ] ] ;
-            ns3:DW_WEIGHTING [ dcterms:description "Weighting Function" ;
+            ns2:DW_WEIGHTING [ dcterms:description "Weighting Function" ;
                     dcterms:title "Weighting Function" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"no distance weighting\""^^rdf:JSON ;
@@ -1007,7 +1007,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 "no distance weighting" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns3:MODE [ dcterms:description "Search Mode" ;
+            ns2:MODE [ dcterms:description "Search Mode" ;
                     dcterms:title "Search Mode" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"Circle\""^^rdf:JSON ;
@@ -1015,7 +1015,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 "Square" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns3:RADIUS [ dcterms:description "radius in cells" ;
+            ns2:RADIUS [ dcterms:description "radius in cells" ;
                     dcterms:title "Search Radius" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
@@ -1036,25 +1036,25 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:TRI [ dcterms:description "Terrain Ruggedness Index (TRI)" ;
+    proc:outputs [ ns3:TRI [ dcterms:description "Terrain Ruggedness Index (TRI)" ;
                     dcterms:title "Terrain Ruggedness Index (TRI)" ;
                     proc:keywords "GeoTIFF",
                         "raster" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Terrain derivative -- output `result`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Terrain ruggedness index -- output `result`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Terrain ruggedness index -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Terrain derivative -- output `result`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/outputs/result> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ] ] ] ] .
@@ -1546,6 +1546,11 @@ x-jsonld-prefixes:
   prov: http://www.w3.org/ns/prov#
   xsd: http://www.w3.org/2001/XMLSchema#
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+x-bblocks-metadata:
+  itemIdentifier: ospd.process-profiles.terrain.terrain-ruggedness-index
+  register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
+  version: '0.1'
+  dateOfLastChange: '2026-10-21'
 
 ```
 

@@ -1,5 +1,5 @@
 Validation report for ospd.process-profiles.sqlmm.touches - Process profile: Touches
-Generated 2026-10-09T10:23:46.299471+00:00
+Generated 2026-10-21T17:47:26.072464+00:00
 === Files ===
 Using examples/processDescription.inherited.json from examples
 JSON-LD context is present - uplifting

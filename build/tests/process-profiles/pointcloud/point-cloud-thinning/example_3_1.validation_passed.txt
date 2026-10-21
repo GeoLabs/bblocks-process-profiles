@@ -1,5 +1,5 @@
 Validation report for ospd.process-profiles.pointcloud.point-cloud-thinning - Process profile: SAGA.pointcloud_tools.9
-Generated 2026-10-09T10:23:26.025575+00:00
+Generated 2026-10-21T17:47:04.465867+00:00
 === Files ===
 Using examples/processDescription.inherited.json from examples
 JSON-LD context is present - uplifting

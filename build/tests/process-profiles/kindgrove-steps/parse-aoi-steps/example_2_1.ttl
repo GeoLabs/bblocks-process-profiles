@@ -38,12 +38,12 @@
     proc:jobControlOptions "async-execute" ;
     proc:metadata [ rdf:value "Splits an OGC bounding box into its west, south, east and north coordinates." ;
             proc:role schema:description ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
         [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
             proc:role schema:codeRepository ],
         [ rdf:value "0.1.0" ;
             proc:role schema:softwareVersion ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
         [ rdf:value "Parse area of interest" ;
             proc:role schema:name ] ;
     proc:mutable true ;

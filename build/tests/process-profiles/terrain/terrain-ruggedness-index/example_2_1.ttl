@@ -21,16 +21,16 @@
                     dcterms:title "Elevation" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
             ns2:DW_BANDWIDTH [ dcterms:description "Gaussian and Exponential Weighting Bandwidth" ;
                     dcterms:title "Gaussian and Exponential Weighting Bandwidth" ;
                     proc:minOccurs 0 ;
@@ -87,14 +87,14 @@
                     dcterms:title "Terrain Ruggedness Index (TRI)" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ] .
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ] .
 

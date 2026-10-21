@@ -1,7 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns2: <http://www.iana.org/assignments/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -13,7 +13,7 @@
     dcterms:title "GDAL Warp Tool" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns1:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
@@ -75,7 +75,7 @@
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:Result [ dcterms:description "The file name resulting of the convertion" ;
+    proc:outputs [ ns2:Result [ dcterms:description "The file name resulting of the convertion" ;
                     dcterms:title "The resulting converted file" ;
                     proc:schema [ proc:type "string" ] ] ] .
 

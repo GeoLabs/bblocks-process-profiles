@@ -29,11 +29,11 @@
             ns2:InputEntity2 [ dcterms:description "the other geometry." ;
                     dcterms:title "the other geometry" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
