@@ -1,8 +1,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <http://schema.org/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <http://schema.org/> .
+@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -17,44 +17,44 @@
         "savi" ;
     dcterms:title "calculate_indices" ;
     pp:version "0.1.0" ;
-    proc:inputs [ ns4:band_files [ dcterms:description "" ;
+    proc:inputs [ ns1:band_files [ dcterms:description "" ;
                     dcterms:title "band_files" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentMediaType "application/octet-stream" ] ] ] ] ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentMediaType "application/octet-stream" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value [ a ns2:Person ;
-                    ns2:affiliation "GeoLabs" ;
-                    ns2:name "Gérald Fenoy" ] ;
-            proc:role schema:contributor ],
-        [ rdf:value "Compute NDVI, NDWI and SAVI from Sentinel-2 red, green and NIR bands" ;
-            proc:role schema:description ],
-        [ rdf:value [ a ns2:Person ;
-                    ns2:name "Cameron Sajedi" ] ;
+    proc:metadata [ rdf:value [ a ns3:Person ;
+                    ns3:name "Cameron Sajedi" ] ;
             proc:role schema:author ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
+        [ rdf:value [ a ns3:Person ;
+                    ns3:affiliation "GeoLabs" ;
+                    ns3:name "Gérald Fenoy" ] ;
+            proc:role schema:contributor ],
         [ rdf:value "0.1.0" ;
             proc:role schema:softwareVersion ],
+        [ rdf:value "Compute NDVI, NDWI and SAVI from Sentinel-2 red, green and NIR bands" ;
+            proc:role schema:description ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
         [ rdf:value "calculate_indices" ;
             proc:role schema:name ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:ndvi_file [ dcterms:description "" ;
+    proc:outputs [ ns4:ndvi_file [ dcterms:description "" ;
                     dcterms:title "ndvi_file" ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentMediaType "application/octet-stream" ] ] ;
-            ns3:ndwi_file [ dcterms:description "" ;
+                            ns2:contentMediaType "application/octet-stream" ] ] ;
+            ns4:ndwi_file [ dcterms:description "" ;
                     dcterms:title "ndwi_file" ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentMediaType "application/octet-stream" ] ] ;
-            ns3:savi_file [ dcterms:description "" ;
+                            ns2:contentMediaType "application/octet-stream" ] ] ;
+            ns4:savi_file [ dcterms:description "" ;
                     dcterms:title "savi_file" ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentMediaType "application/octet-stream" ] ] ] .
+                            ns2:contentMediaType "application/octet-stream" ] ] ] .
 

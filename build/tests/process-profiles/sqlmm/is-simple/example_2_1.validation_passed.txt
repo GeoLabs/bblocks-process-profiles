@@ -1,5 +1,5 @@
 Validation report for ospd.process-profiles.sqlmm.is-simple - Process profile: IsSimple
-Generated 2026-10-21T17:47:23.712477+00:00
+Generated 2026-10-21T18:04:36.534459+00:00
 === Files ===
 Using examples/processDescription.json from examples
 JSON-LD context is present - uplifting

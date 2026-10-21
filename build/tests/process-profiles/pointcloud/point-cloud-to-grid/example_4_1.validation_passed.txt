@@ -1,5 +1,5 @@
 Validation report for ospd.process-profiles.pointcloud.point-cloud-to-grid - Process profile: SAGA.pointcloud_tools.4
-Generated 2026-10-21T17:47:05.535032+00:00
+Generated 2026-10-21T18:04:03.585911+00:00
 === Files ===
 Using examples/process-type.json from examples
 JSON-LD context is present - uplifting

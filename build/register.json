@@ -3,7 +3,7 @@
   "name": "OSPD Process Profiles",
   "abstract": "OGC API - Processes profiles for the deployable CWL processes of the OSPD 2026 reference\nworkflows (W1 Algae Bloom, W2 KindGrove mangrove biomass, W3 Water Bodies detection, W2b a\nstep-decomposed reimplementation of KindGrove), each linked to its CWL source, the generic\nprovenance profile, the EOAP CWL custom types and the openEO Building Blocks.\n",
   "description": "This register is produced by GeoLabs under OSPD 2026 (D100 Workflow Profiler, D120 OGC API\nProcesses Profiler). It holds one Building Block per deployable CWL process (`CommandLineTool`\nor `Workflow`) identified in the workflow observability investigation.\n\nEach process profile combines:\n\n- a reference to the source CWL (linked by URL at a pinned commit, never copied);\n- an OGC API - Processes Part 1 `processDescription` derived with the\n  `eoap.cct.cwl-to-ogcprocess` mapping (deviations are documented, not hidden);\n- a provenance view expressed as an instance of the generic provenance profile\n  (`ogc.bbr.provenance.*`);\n- a candidate process-type entry (`ospd.process-profiles.process-type`) for the OSPD\n  process-type register (Activity 4);\n- proposed openEO equivalences (`ogc.openeo.*`) with an explicit level\n  (exactMatch / closeMatch / none) and rationale;\n- a representative execution example.\n\nAll mappings are proposed correspondences offered for review, not settled equivalences.\n",
-  "modified": "2026-10-21T17:46:42.091289",
+  "modified": "2026-10-21T18:03:32.107613",
   "tooling": {
     "bblocks-postprocess": {
       "commitId": "\"dc0fd35d6cd8801a5efabb93634cef74ca14d45d",

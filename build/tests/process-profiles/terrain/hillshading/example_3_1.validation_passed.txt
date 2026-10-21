@@ -1,5 +1,5 @@
 Validation report for ospd.process-profiles.terrain.hillshading - Process profile: SAGA.ta_lighting.0
-Generated 2026-10-21T17:47:28.895134+00:00
+Generated 2026-10-21T18:04:45.455516+00:00
 === Files ===
 Using examples/processDescription.inherited.json from examples
 JSON-LD context is present - uplifting

@@ -1,5 +1,5 @@
 Validation report for ospd.process-profiles.sqlmm.area - Process profile: GetArea
-Generated 2026-10-21T17:47:13.509011+00:00
+Generated 2026-10-21T18:04:18.057280+00:00
 === Files ===
 Using examples/processDescription.json from examples
 JSON-LD context is present - uplifting
