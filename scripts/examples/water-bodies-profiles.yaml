@@ -1,0 +1,42 @@
+# Mapping of the Water Bodies Application Package steps to the process profiles
+# of the bblocks-process-profiles register (OSPD 2026, D101).
+#
+# Each entry matches a step by its base name (`step`, fnmatch pattern; also
+# matched against the repeated instance names node_crop_2, node_crop_3, ...)
+# or by its container image (`image`, substring or fnmatch pattern).
+# `profile: null` marks a step deliberately left without profile.
+# `phase` and `kind` are optional; `kind` defaults to the CWL class found in
+# workflow/packed.cwl.
+title: bblocks-process-profiles (D101)
+subtitle: ospd.process-profiles.water-bodies.*
+mappings:
+  - step: app
+    profile: ospd.process-profiles.water-bodies.water-bodies
+    openeo: none (process graph)
+  - step: node_water_bodies
+    profile: ospd.process-profiles.water-bodies.detect-water-body
+    openeo: none (process graph)
+  - step: node_crop
+    profile: ospd.process-profiles.water-bodies.crop
+    openeo: closeMatch load_collection + filter_bands
+    phase: data retrieval
+  - step: node_normalized_difference
+    profile: ospd.process-profiles.water-bodies.norm-diff
+    openeo: closeMatch normalized_difference
+    phase: scientific computation
+  - step: node_otsu
+    profile: ospd.process-profiles.water-bodies.otsu
+    openeo: none
+    phase: scientific computation
+  - step: node_stac
+    profile: ospd.process-profiles.water-bodies.stac
+    openeo: closeMatch save_result
+    phase: export / aggregation
+  # equivalent match by container image (used only if the step name differs)
+  - image: "*/ogc-eo-application-package-hands-on/crop:*"
+    profile: ospd.process-profiles.water-bodies.crop
+    openeo: closeMatch load_collection + filter_bands
+    phase: data retrieval
+  - step: stage_out_*
+    profile: null
+    note: added by the platform, not part of the Application Package
