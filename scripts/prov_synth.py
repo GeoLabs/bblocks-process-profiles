@@ -139,6 +139,7 @@ class AgentInfo:
     version: str | None
     kind: str  # server | component | engine | account | software
     part_of: str | None = None
+    full_label: str | None = None  # all labels, when there are several or the name is truncated
 
 
 @dataclass
@@ -166,6 +167,11 @@ class Job:
     namespace: str | None = None
     status: str | None = None
     status_document: dict[str, Any] = field(default_factory=dict)
+    process_location: str | None = None
+    plan_associated: bool = True  # process linked to the job by wasAssociatedWith/hadPlan
+    agents: list[str] = field(default_factory=list)  # agents the job activity wasAssociatedWith
+    informed: bool = True  # the workflow run wasInformedBy the job
+    same_as_run: bool = False  # the job and the workflow run share one IRI
 
 
 @dataclass
@@ -181,6 +187,7 @@ class ProvDocument:
     triples: int = 0
     merged_from: list[str] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
+    notice: str | None = None  # gap shown in the band header
 
 
 @dataclass
@@ -279,6 +286,8 @@ class DataEdge:
     drawn_as_entity: bool = False  # already drawn through an output-flow entity box
     platform: bool = False
     note: str | None = None
+    observed: bool = True  # False: declared in the CWL wiring only
+    origin: str = "prov"  # prov | cwl
 
 
 @dataclass
@@ -322,6 +331,7 @@ class Model:
     profiles_title: str | None = None
     profiles_subtitle: str | None = None
     notes: list[str] = field(default_factory=list)
+    notices: list[str] = field(default_factory=list)  # provenance anomalies summarised in the footer
 
 
 # --------------------------------------------------------------------------
@@ -382,6 +392,14 @@ def locate(path: Path) -> Source:
     if prov_dir.name == "provenance" and prov_dir.parent.name == "metadata":
         bag_root = prov_dir.parent.parent
     return Source(prov_dir=prov_dir, bag_root=bag_root, primary=primary, tmp=tmp)
+
+
+def bag_file(root: Path, name: str) -> Path | None:
+    """``workflow/<name>`` (cwltool layout) or ``<name>`` at the bag root (e.g. Weaver exports)."""
+    for p in (root / "workflow" / name, root / name):
+        if p.exists():
+            return p
+    return None
 
 
 def _doc_stem(iri_or_name: str) -> str:
@@ -521,9 +539,11 @@ def _times(g: Graph, act: Any, pred: Any, by: Any = None) -> list[str]:
 class Extractor:
     """Builds a :class:`Model` from the provenance documents of one research object."""
 
-    def __init__(self, src: Source, show_platform: bool = False) -> None:
+    def __init__(self, src: Source, show_platform: bool = False, cwl_fallback: bool = True) -> None:
         self.src = src
         self.show_platform = show_platform
+        self.cwl_fallback = cwl_fallback
+        self.notices: list[str] = []
         self.red = Redactor()
         self.graphs: dict[str, Graph] = {}
         self.docs: list[ProvDocument] = []
@@ -536,8 +556,8 @@ class Extractor:
         root = self.src.bag_root
         if not root:
             return
-        p = root / "workflow" / "packed.cwl"
-        if not p.exists():
+        p = bag_file(root, "packed.cwl")
+        if p is None:
             return
         try:
             txt = p.read_text()
@@ -550,25 +570,77 @@ class Extractor:
         for proc in d.get("$graph", [d]):
             if isinstance(proc, dict) and "id" in proc:
                 self.cwl[str(proc["id"]).lstrip("#")] = proc
+        wfs = [k for k, v in self.cwl.items() if v.get("class") == "Workflow"]
+        if "main" not in self.cwl and len(wfs) == 1:
+            self.cwl["main"] = self.cwl[wfs[0]]  # unpacked single workflow (e.g. Weaver): treat as #main
+
+    @staticmethod
+    def _src_list(v: Any) -> list[str]:
+        if v is None:
+            return []
+        if isinstance(v, dict):
+            return Extractor._src_list(v.get("source"))
+        return [str(x) for x in v] if isinstance(v, list) else [str(v)]
+
+    def _cwl_wf(self, pid: str | None) -> dict | None:
+        """Normalised wiring of CWL workflow ``pid`` (cwltool $graph list form or plain dict form):
+        {inputs: [...], outputs: {name: (sources, type)}, steps: [{name, in: [(port, sources)], out, run, scatter}]}.
+        Sources are "input" or "step/output", relative to the workflow."""
+        proc = self.cwl.get(pid or "")
+        if not proc or proc.get("class") != "Workflow":
+            return None
+        wid = str(proc.get("id", "")).lstrip("#")
+
+        def loc(x: str) -> str:
+            x = str(x).lstrip("#")
+            for pre in (wid + "/", (pid or "") + "/"):
+                if pre != "/" and x.startswith(pre):
+                    x = x[len(pre):]
+            return x
+
+        def items(v: Any) -> list[tuple[str, Any]]:
+            if isinstance(v, dict):
+                return [(str(k), val) for k, val in v.items()]
+            out = []
+            for it in v or []:
+                if isinstance(it, dict):
+                    out.append((loc(it.get("id", "")).rsplit("/", 1)[-1], it))
+                else:
+                    out.append((loc(it).rsplit("/", 1)[-1], it))
+            return out
+
+        wf: dict = {"inputs": [n for n, _ in items(proc.get("inputs"))], "outputs": {}, "steps": []}
+        for n, o in items(proc.get("outputs")):
+            o = o if isinstance(o, dict) else {}
+            wf["outputs"][n] = ([loc(x) for x in self._src_list(o.get("outputSource"))], o.get("type"))
+        for n, st in items(proc.get("steps")):
+            st = st if isinstance(st, dict) else {}
+            ins = []
+            for port, v in items(st.get("in")):
+                srcs = self._src_list(v.get("source")) if isinstance(v, dict) else self._src_list(v)
+                ins.append((port, [loc(x) for x in srcs]))
+            outs = [nm for nm, _ in items(st.get("out"))]
+            sc = st.get("scatter") or []
+            sc = [sc] if isinstance(sc, str) else list(sc)
+            wf["steps"].append({"name": n.rsplit("/", 1)[-1], "id": f"{wid}/{n.rsplit('/', 1)[-1]}", "in": ins,
+                                "out": outs, "run": st.get("run"), "scatter": [local_name(x) for x in sc]})
+        return wf
 
     def _cwl_step(self, process: str | None, name: str) -> tuple[str | None, str | None, dict | None, list[str]]:
         """Find step ``name`` in CWL process ``process`` -> (step id, run id, run object, scatter)."""
-        procs = [self.cwl[process]] if process and process in self.cwl else []
-        procs += [p for k, p in self.cwl.items() if k != process]
-        for proc in procs:
-            for st in proc.get("steps", []) or []:
-                sid = str(st.get("id", ""))
-                if sid.lstrip("#").rsplit("/", 1)[-1] == name:
-                    run = st.get("run")
+        keys = ([process] if process and process in self.cwl else []) + [k for k in self.cwl if k != process]
+        for k in keys:
+            wf = self._cwl_wf(k)
+            for st in (wf or {}).get("steps", []):
+                if st["name"] == name:
+                    run = st["run"]
                     if isinstance(run, str):
                         rid = run.lstrip("#")
                         robj = self.cwl.get(rid)
                     else:
                         robj = run if isinstance(run, dict) else None
                         rid = str(robj.get("id", "")).lstrip("#") if robj else None
-                    sc = st.get("scatter") or []
-                    sc = [sc] if isinstance(sc, str) else list(sc)
-                    return sid.lstrip("#"), rid, robj, [local_name(x) for x in sc]
+                    return st["id"], rid, robj, st["scatter"]
         return None, None, None, []
 
     @staticmethod
@@ -647,9 +719,9 @@ class Extractor:
                         self.red.taint(v)
         root = self.src.bag_root
         if root:
-            for rel in ("workflow/primary-job.json", "workflow/primary-output.json", "metadata/zoo/job-status.json"):
-                p = root / rel
-                if p.exists():
+            for rel in ("primary-job.json", "primary-output.json", "metadata/zoo/job-status.json"):
+                p = bag_file(root, rel) if "/" not in rel else (root / rel if (root / rel).exists() else None)
+                if p is not None:
                     try:
                         _taint_json(json.loads(p.read_text()), self.red)
                     except (ValueError, OSError):
@@ -706,12 +778,19 @@ class Extractor:
         for a in sorted(set(g.subjects(RDF.type, PROV.Agent)) | set(g.subjects(RDF.type, PROV.SoftwareAgent)), key=str):
             if g.value(a, CWLPROV.image) is not None:
                 continue  # container agents are shown on their step
-            label = label_of(g, a) or short_id(str(a))
+            labels = sorted({str(o) for o in g.objects(a, RDFS.label)} | {str(o) for o in g.objects(a, PROV.label)})
+            vre = re.compile(r"^(.*?)(?:\s+|:)v?(\d[\w.+-]*)$")
+            # several labels (e.g. Weaver: "crim-ca/weaver:6.15.0" + a description): prefer a "name version" one
+            label = next((x for x in labels if vre.match(x)), labels[0] if labels else short_id(str(a)))
             name = lit(g, a, SCHEMA.name)
             version = lit(g, a, SCHEMA.softwareVersion)
+            if name and not version and vre.match(name) and ":" in name:
+                m = vre.match(name)
+                name, version = m.group(1), m.group(2)
             if not name:
-                m = re.match(r"^(.*?)\s+v?(\d[\w.+-]*)$", label)
+                m = vre.match(label)
                 name, version = (m.group(1), version or m.group(2)) if m else (label, version)
+            full = "; ".join(labels) if len(labels) > 1 else None
             types = set(g.objects(a, RDF.type))
             if FOAF.OnlineAccount in types:
                 kind, name = "account", lit(g, a, FOAF.accountName) or label
@@ -723,8 +802,11 @@ class Extractor:
                 kind = "server"
             else:
                 kind = "software"
+            if kind == "software" and g.value(a, PROV.atLocation) is not None:
+                kind = "server"  # a located service (e.g. the Weaver WPS endpoint)
             agents.append(AgentInfo(id=short_id(str(a)), label=label, name=name, version=version, kind=kind,
-                                    part_of=short_id(str(g.value(a, SCHEMA.isPartOf))) if g.value(a, SCHEMA.isPartOf) else None))
+                                    part_of=short_id(str(g.value(a, SCHEMA.isPartOf))) if g.value(a, SCHEMA.isPartOf) else None,
+                                    full_label=full))
         dels: list[Delegation] = []
         for d, r in g.subject_objects(PROV.actedOnBehalfOf):
             act = None
@@ -745,23 +827,40 @@ class Extractor:
         cands = [a for a in g.subjects(RDF.type, PROV.Activity)
                  if g.value(a, ZOO.namespace) is not None
                  or (label_of(g, a) or "").startswith("OGC API - Processes job")]
+        if not cands:  # other OGC API - Processes servers (e.g. Weaver): an activity located at …/jobs/<id>
+            cands = [a for a in g.subjects(RDF.type, PROV.Activity)
+                     if "/jobs/" in (lit(g, a, PROV.atLocation) or "")]
         if not cands:
             return None
         a = sorted(cands, key=str)[0]
         job = Job(id=short_id(str(a)), activity=str(a))
         job.location = lit(g, a, PROV.atLocation)
+        if job.location and "/jobs/" in job.location:
+            job.id = job.location.rstrip("/").rsplit("/jobs/", 1)[-1].split("/")[0] or job.id
         job.start = lit(g, a, PROV.startedAtTime)
-        job.end = lit(g, a, PROV.endedAtTime)
+        job.end = lit(g, a, PROV.endedAtTime) or (_times(g, a, PROV.qualifiedEnd) or [None])[-1]
         job.namespace = lit(g, a, ZOO.namespace)
         st = g.value(a, SCHEMA.actionStatus)
         job.status = str(st).rsplit("/", 1)[-1].replace("ActionStatus", "").lower() if st is not None else None
         for q in g.objects(a, PROV.qualifiedAssociation):
             plan = g.value(q, PROV.hadPlan)
-            if plan is not None:
+            if plan is not None and "packed.cwl#" not in str(plan):
                 job.process_iri = str(plan)
+                job.process_location = lit(g, plan, PROV.atLocation)
                 job.process_id = lit(g, plan, DCT.identifier) or str(plan).rstrip("/").rsplit("/", 1)[-1]
                 sp = g.value(plan, PROV.specializationOf)
                 job.process_specializes = str(sp) if sp is not None else None
+        if job.process_iri is None:  # process described but not associated (e.g. Weaver "Process Description")
+            for pe in sorted(g.subjects(RDF.type, WFDESC.Process), key=str):
+                ploc = lit(g, pe, PROV.atLocation) or ""
+                if "/processes/" in ploc and "packed.cwl#" not in str(pe):
+                    job.process_iri, job.process_location, job.plan_associated = str(pe), ploc, False
+                    job.process_id = lit(g, pe, DCT.identifier) or ploc.rstrip("/").rsplit("/", 1)[-1]
+                    sp = g.value(pe, PROV.specializationOf)
+                    job.process_specializes = str(sp) if sp is not None else None
+        job.agents = sorted(short_id(str(x)) for x in g.objects(a, PROV.wasAssociatedWith))
+        job.same_as_run = (a, RDF.type, WFPROV.WorkflowRun) in g
+        job.informed = any(True for _ in g.subjects(PROV.wasInformedBy, a))
         for e in g.subjects(PROV.wasGeneratedBy, a):
             if (e, RDF.type, WFDESC.ProcessRun) in g or str(e).endswith("/jobs/" + job.id):
                 job.entity = str(e)
@@ -776,7 +875,8 @@ class Extractor:
             if loc:
                 job.server = loc
         if not job.server and job.location:
-            job.server = job.location.split("/jobs/")[0]
+            loc = job.location
+            job.server = loc.split("/processes/")[0] if "/processes/" in loc else loc.split("/jobs/")[0]
         root = self.src.bag_root
         if root and (root / "metadata/zoo/job-status.json").exists():
             try:
@@ -899,6 +999,9 @@ class Extractor:
                     t = (str(e), str(r) if r is not None else "", doc)
                     if t not in self._uses.setdefault(str(a), []):
                         self._uses[str(a)].append(t)
+        for d_ in (self._gens, self._uses):  # deterministic order (rdflib iteration order is not)
+            for k_ in d_:
+                d_[k_].sort()
 
     def _entity_graph(self, e: str) -> Graph:
         """The graph that describes entity ``e`` most completely."""
@@ -1269,14 +1372,164 @@ class Extractor:
                 outputs.append(ov)
             flows = [self._trace(o, main, top, step_by_act) for o in outputs]
             dataflow = self._dataflow(main, runs, step_by_act, flows)
+            n_cwl = 0
+            if self.cwl_fallback:
+                extra = self._cwl_wiring(main, runs, outputs, dataflow)
+                n_cwl = len(extra)
+                dataflow += extra
+            self._step_gaps(runs, n_cwl)
+        self._anomalies()
         model = Model(tool=f"prov_synth {__version__}", source=str(self.src.bag_root or self.src.prov_dir),
                       research_object=self._ro_id(), job=job, agents=agents, delegations=dels,
                       documents=self.docs, runs=runs, inputs=inputs, outputs=outputs,
                       platform_params_hidden=hidden, redactions=0, flows=flows if main is not None else [],
-                      dataflow=dataflow if main is not None else [], notes=sorted(set(self.notes), key=self.notes.index))
+                      dataflow=dataflow if main is not None else [], notes=sorted(set(self.notes), key=self.notes.index),
+                      notices=self.notices)
         self.red.scrub(model)
         model.redactions = self.red.count
         return model
+
+    # -- diagnostics ------------------------------------------------------
+    def _step_gaps(self, runs: list[Run], n_cwl: int) -> None:
+        """Flag documents whose step activities record neither used nor wasGeneratedBy."""
+        if not hasattr(self, "_gens"):
+            self._flow_index()
+        generators = {act for gens in self._gens.values() for act, _, _ in gens}
+        for r in runs:
+            bare = []
+            for st in r.steps:
+                acts = [a for a in self._uses if short_id(a) in st.activity_ids]
+                if not acts and not any(short_id(a) in st.activity_ids for a in generators):
+                    bare.append(st.name)
+            if not bare:
+                continue
+            d = next(dd for dd in self.docs if dd.name == r.doc)
+            n = len(bare)
+            how = ("data flow shown from the CWL wiring" if n_cwl else
+                   "their data flow cannot be shown" + ("" if self.cwl_fallback else " (--no-cwl-fallback)"))
+            d.notice = f"{n} step{'s' if n > 1 else ''} {'have' if n > 1 else 'has'} no recorded inputs/outputs in this document — {how}"
+            self.notes.append(f"{ellipsize_doc(d.name)}: step activities {', '.join(bare)} have no used/wasGeneratedBy; "
+                              + ("data flow reconstructed from the CWL wiring (observed: false)" if n_cwl
+                                 else "no data flow can be shown for them"))
+
+    def _anomalies(self) -> None:
+        """Notes (JSON) and short notices (footer) for malformed relations and mixed timezones."""
+        g = self.graphs[self.docs[0].name]
+        acts = set(g.subjects(RDF.type, PROV.Activity))
+        for s_, o in sorted(g.subject_objects(PROV.wasGeneratedBy), key=str):
+            if s_ in acts and o not in acts:
+                self.notes.append(f"wasGeneratedBy({short_id(str(s_))}, {short_id(str(o))}) has its arguments reversed: "
+                                  "the first argument is an activity, the second an entity (ignored)")
+                self._notice("reversed wasGeneratedBy (activity in the entity position) ignored")
+        for s_, o in sorted(g.subject_objects(PROV.wasStartedBy), key=str):
+            if s_ in acts and o not in acts:
+                kind = "an agent" if (o, RDF.type, PROV.Agent) in g else "an entity"
+                self.notes.append(f"wasStartedBy({short_id(str(s_))}, {short_id(str(o))}): the trigger is {kind}, "
+                                  "where PROV expects an entity trigger and/or a starter activity (shown as recorded)")
+                self._notice("wasStartedBy with a non-activity trigger")
+        naive, aware = [], []
+        for o in g.objects(None, None):
+            if isinstance(o, Literal) and o.datatype is not None and str(o.datatype).endswith("#dateTime"):
+                try:
+                    t = datetime.fromisoformat(str(o))
+                except ValueError:
+                    continue
+                (aware if t.tzinfo else naive).append(t)
+        if naive and aware:
+            delta = (min(naive) - min(aware).replace(tzinfo=None)).total_seconds()
+            half_hours = round(delta / 1800)
+            if abs(half_hours) >= 2:
+                off = half_hours / 2
+                sign = "+" if off >= 0 else "−"
+                hh, mm = int(abs(off)), int(round((abs(off) % 1) * 60))
+                self.notes.append(f"engine timestamps carry no timezone while others are in UTC; the earliest naive one is "
+                                  f"{abs(delta) / 3600:.1f} h {'after' if delta > 0 else 'before'} the earliest UTC one, so "
+                                  f"naive times are probably local time (UTC{sign}{hh:02d}:{mm:02d}); shown as recorded")
+                self._notice(f"engine times have no timezone (≈ UTC{sign}{hh:02d}:{mm:02d}), job times are UTC")
+
+    def _notice(self, text: str) -> None:
+        if text not in self.notices:
+            self.notices.append(text)
+
+    # -- CWL wiring fallback ----------------------------------------------
+    def _cwl_wiring(self, main: Any, runs: list[Run], outputs: list[IOValue], dataflow: list[DataEdge]) -> list[DataEdge]:
+        """Data/parameter links declared in the CWL wiring that the provenance does not show (observed: false)."""
+        parent_of: dict[str, str] = {}  # step key -> enclosing step key (nested documents)
+        rkey: dict[str, str] = {runs[0].doc: "run"}
+        for d in self.docs[1:]:
+            if d.parent_step:
+                rkey[d.name] = f"{d.parent_doc}|{d.parent_step}"
+        for r in runs:
+            for st in r.steps:
+                if r.doc in rkey and rkey[r.doc] != "run":
+                    parent_of[f"{r.doc}|{st.name}"] = rkey[r.doc]
+
+        def within(key: str, anc: str) -> bool:
+            while key:
+                if key == anc:
+                    return True
+                key = parent_of.get(key, "")
+            return False
+
+        def kind_of(t: Any) -> str:
+            t = t[-1] if isinstance(t, list) and t else t
+            t = t.get("type") if isinstance(t, dict) else t
+            return {"File": "file", "Directory": "folder", "string": "literal", "boolean": "literal", "int": "literal",
+                    "float": "literal", "double": "literal", "long": "literal"}.get(str(t), "declared")
+
+        extra: list[DataEdge] = []
+        for r in runs:
+            wf = self._cwl_wf(r.cwl_process)
+            if not wf:
+                continue
+            names = {st.name for st in r.steps}
+            out_types = {src: kind_of(t) for _, (srcs, t) in wf["outputs"].items() for src in srcs}
+            for cs in wf["steps"]:
+                if cs["name"] not in names:
+                    continue
+                tk = f"{r.doc}|{cs['name']}"
+                for port, srcs in cs["in"]:
+                    for src in srcs:
+                        if "/" in src:
+                            a, o = src.split("/", 1)
+                            if a not in names:
+                                continue
+                            sk = f"{r.doc}|{a}"
+                            seen = any(e.kind == "data" and e.target == tk and e.target_port == port and
+                                       (within(e.source, sk) or src in e.through) for e in dataflow)
+                            if not seen:
+                                extra.append(DataEdge("data", sk, tk, o, port, out_types.get(src, "declared"), 0,
+                                                      observed=False, origin="cwl"))
+                        else:
+                            seen = any(e.kind == "param" and e.target == tk and e.target_port == port for e in dataflow)
+                            if not seen:
+                                extra.append(DataEdge("param", rkey.get(r.doc, "run"), tk, src, port, "declared", 0,
+                                                      platform=bool(PLATFORM_RE.search(port) or SECRET_RE.search(port)),
+                                                      observed=False, origin="cwl"))
+            # workflow outputs (outputSource)
+            run_iri = next((k for k in self._gens_acts() if short_id(k) == r.activity_id), None)
+            for oname, (srcs, t) in wf["outputs"].items():
+                for src in srcs:
+                    if "/" not in src:
+                        continue
+                    a, o = src.split("/", 1)
+                    if a not in names:
+                        continue
+                    sk = f"{r.doc}|{a}"
+                    if r is runs[0]:
+                        ov = next((x for x in outputs if x.name == oname), None)
+                        seen = ov is not None and a in ov.generated_by
+                        target = f"output:{oname}" if ov is not None else "run"
+                    else:
+                        seen = any(act == run_iri and local_name(role) == oname
+                                   for gens in self._gens.values() for act, role, _ in gens)
+                        target = rkey.get(r.doc, "run")
+                    if not seen:
+                        extra.append(DataEdge("data", sk, target, o, oname, kind_of(t), 0, observed=False, origin="cwl"))
+        return extra
+
+    def _gens_acts(self) -> set[str]:
+        return {act for gens in self._gens.values() for act, _, _ in gens} | set(self._uses)
 
     def _ro_id(self) -> str | None:
         root = self.src.bag_root
@@ -1435,7 +1688,9 @@ def step_lines(st: Step, run: Run, top: bool) -> list[str]:
     if st.images and st.kind != "platform":
         ims = sorted({image_short(i) for i in st.images})
         lines.append(ellipsize(", ".join(ims), 40))
-    t = f"{hhmmss(st.start)}–{hhmmss(st.end)}" if st.start and st.end else ""
+    no_ends = not any(s_.end for s_ in run.steps)  # e.g. Weaver: no wasEndedBy for any step
+    t = f"{hhmmss(st.start)}–{hhmmss(st.end)}" if st.start and st.end else \
+        (f"started {hhmmss(st.start)} (no end recorded)" if st.start and no_ends else "")
     d = duration(st.start, st.end)
     if t:
         lines.append(t + (f" · {d}" if d else ""))
@@ -1453,7 +1708,7 @@ def param_lines(model: Model, key: str, mode: str) -> list[str]:
     if mode == "summary":
         names = []
         for e in vis:
-            n = e.target_port + (f" ∈ {e.source_port}" if e.via == "member" else "")
+            n = e.target_port + (f" ∈ {e.source_port}" if e.via == "member" else "") + ("" if e.observed else " †")
             if n not in names:
                 names.append(n)
         out = wrap_text("params: " + ", ".join(sorted(names)), 330, 10.5) if names else []
@@ -1464,7 +1719,7 @@ def param_lines(model: Model, key: str, mode: str) -> list[str]:
     for e in vis:
         src = "wrapping run" if e.source == "run" else e.source.split("|")[-1]
         out.append(ellipsize(f"{e.target_port} ← {src}.{e.source_port}" + (" (member)" if e.via == "member" else "")
-                             + (f" ×{e.count}" if e.count > 1 else ""), 48))
+                             + (f" ×{e.count}" if e.count > 1 else "") + ("" if e.observed else " †"), 48))
     if hidden:
         out.append(f"+ {hidden} platform parameters")
     return out
@@ -1472,6 +1727,9 @@ def param_lines(model: Model, key: str, mode: str) -> list[str]:
 
 def data_label(e: DataEdge) -> str:
     """``binary_mask_item → rasters · 2 × otsu.tif``."""
+    if not e.observed:
+        tp = e.target_port if not e.target.startswith("output:") else f"output {e.target_port}"
+        return f"{e.source_port} → {tp} (declared in CWL, not observed)"
     if e.names and len(e.names) == 1:
         what = f"{e.count} × {e.names[0]}" if e.count > 1 else e.names[0]
     elif e.names:
@@ -1514,7 +1772,11 @@ def nice_date(t: str | None) -> str:
 def doc_role(model: Model, d: ProvDocument) -> str:
     """Short description of what a document describes, for band headers."""
     if d.level == 0:
-        return "engine document completed by ZOO-Project-DRU" if model.job else "engine document"
+        if not model.job:
+            return "engine document"
+        if any(a.name.startswith("ZOO-Project") for a in model.agents):
+            return "engine document completed by ZOO-Project-DRU"
+        return f"engine document completed by {platform_name(model)}" if platform_name(model) else "engine document"
     step = None
     for r in model.runs:
         for s in r.steps:
@@ -1527,6 +1789,16 @@ def doc_role(model: Model, d: ProvDocument) -> str:
     if step.shared_activity_starts > 1:
         return f"{'both' if step.shared_activity_starts == 2 else 'all ' + str(step.shared_activity_starts)} scatter iterations of {step.name}"
     return f"step {step.name}"
+
+
+def platform_name(model: Model) -> str | None:
+    """Name of the platform that completed the engine document (root of the delegation tree, not engine/account)."""
+    resp = {d.delegate for d in model.delegations}
+    for a in order_agents(model):
+        if a.id not in resp and a.kind not in ("engine", "account"):
+            n = a.name.split("@", 1)[-1]
+            return re.sub(r"[:\s]v?\d[\w.+-]*$", "", n)
+    return None
 
 
 def footer_text(model: Model, title: str | None) -> str:
@@ -1542,6 +1814,8 @@ def footer_text(model: Model, title: str | None) -> str:
     extra = []
     if model.platform_params_hidden:
         extra.append(f"{model.platform_params_hidden} stage-in/stage-out parameters hidden")
+    if model.notices:
+        parts.append("Provenance anomalies: " + "; ".join(model.notices) + ".")
     parts.append("Synthetic view generated by prov_synth from the CWLProv research object: identifiers shortened; "
                  "secret values redacted; container-image agents shown on their step"
                  + ("; " + "; ".join(extra) if extra else "") + ".")
@@ -1605,7 +1879,16 @@ class Svg:
                 self.text(cx, y0 + i * (size + 4), line, size if i else size + 0.5, weight="bold" if i == 0 else "normal")
 
     def node(self, x: float, y: float, w: float, h: float, kind: str, ls: list[str], size: float = 11.5,
-             tag: str | None = None, left: bool = False) -> None:
+             tag: str | None = None, left: bool = False, tooltip: str | None = None) -> None:
+        if tooltip:
+            self.add(f"<g><title>{xml_escape(tooltip)}</title>")
+            self._node(x, y, w, h, kind, ls, size, tag, left)
+            self.add("</g>")
+        else:
+            self._node(x, y, w, h, kind, ls, size, tag, left)
+
+    def _node(self, x: float, y: float, w: float, h: float, kind: str, ls: list[str], size: float,
+              tag: str | None, left: bool) -> None:
         if kind == "act":
             self.add(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" fill="{C_ACT}" stroke="#555"/>')
         elif kind == "ent":
@@ -1663,6 +1946,7 @@ def measure(lines: list[str], size: float, tag: str | None = None, minw: float =
 
 
 C_DATA = "#0b7a75"
+C_WARN = "#a14d00"
 
 
 def render_svg(model: Model, title: str | None = None, dataflow: bool = True, params: str = "summary") -> str:
@@ -1671,26 +1955,57 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
     data_edges = [e for e in model.dataflow if dataflow and e.kind == "data" and not e.drawn_as_entity]
 
     def doc_of(key: str) -> str:
-        return model.documents[0].name if key == "run" else key.split("|")[0]
+        return model.documents[0].name if key == "run" or key.startswith("output:") else key.split("|")[0]
 
-    lane_count: dict[str, int] = {}
-    lane_of: list[tuple[int, int | None]] = []
-    n_cross = 0
-    for e in data_edges:
-        sd, td = doc_of(e.source), doc_of(e.target)
-        k1 = lane_count.get(sd, 0)
-        lane_count[sd] = k1 + 1
-        k2 = None
-        if td != sd:
-            k2 = lane_count.get(td, 0)
-            lane_count[td] = k2 + 1
-            n_cross += 1
-        lane_of.append((k1, k2))
-    rows_bottom: dict[str, float] = {}
+    declared_params = any(e.kind == "param" and not e.observed and (model.platform_params_hidden == 0 or not e.platform)
+                          for e in model.dataflow) and params != "none"
+    n_obs = sum(1 for e in data_edges if e.observed)
+    n_decl = len(data_edges) - n_obs
+
+    # data-flow lanes are assigned per row, below the row of the source (and of a target reached from below)
+    lane_assign: dict[tuple[int, str], tuple[str, int, int]] = {}
+    row_index: dict[str, tuple[str, int]] = {}
+    row_bottoms: dict[tuple[str, int], float] = {}
+    last_lanes: dict[str, int] = {}
+
+    def band_lanes(doc: str, row_of: dict[str, int]) -> dict[int, int]:
+        counts: dict[int, int] = {}
+        for i, e in enumerate(data_edges):
+            sd, td = doc_of(e.source), doc_of(e.target)
+            if sd == doc and e.source in row_of:
+                r = row_of[e.source]
+                lane_assign[(i, "src")] = (doc, r, counts.get(r, 0))
+                counts[r] = counts.get(r, 0) + 1
+            if td == doc and e.target in row_of and (sd != doc or row_of[e.target] < row_of.get(e.source, 0)):
+                r = row_of[e.target]
+                lane_assign[(i, "tgt")] = (doc, r, counts.get(r, 0))
+                counts[r] = counts.get(r, 0) + 1
+        return counts
+
+    def keyname(k: str) -> str:
+        return f"output:{model.outputs[int(k[4:])].name}" if k.startswith("out:") else k
+
+    def lay_band(doc: str, items: list, y0: float) -> tuple[dict[str, Box], list[list[str]], float]:
+        """flow() + room for the data-flow lanes below each row."""
+        placed, rows, bottom = flow(items, y0)
+        row_of = {keyname(k): i for i, row in enumerate(rows) for k in row}
+        counts = band_lanes(doc, row_of)
+        extra = {r: 16 + 18 * n for r, n in counts.items() if r < len(rows) - 1}
+        if extra:
+            placed, rows, bottom = flow(items, y0, row_extra=extra)
+        for i, row in enumerate(rows):
+            row_bottoms[(doc, i)] = max(placed[k].bottom for k in row)
+            for k in row:
+                row_index[keyname(k)] = (doc, i)
+        last_lanes[doc] = counts.get(len(rows) - 1, 0)
+        return placed, rows, bottom
 
     def lane_space(doc: str) -> float:
-        n = lane_count.get(doc, 0)
+        n = last_lanes.get(doc, 0)
         return 16 + 18 * n if n else 0
+
+    def lane_y(t: tuple[str, int, int]) -> float:
+        return row_bottoms[(t[0], t[1])] + 22 + 18 * t[2]
     has_prof = bool(model.profiles)
     X0 = 40  # content left
     GUT = 30  # gutter lane x for cross-band hierarchy links
@@ -1698,23 +2013,40 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
     # ---------- measure fixed rows ----------
     agents = order_agents(model)
     agent_sz = []
+    agent_tip: dict[str, str | None] = {}
     for a in agents:
-        ls = [a.name] + ([a.version] if a.version else []) + (["user account"] if a.kind == "account" else [])
+        ls = [ellipsize(a.name, 26)] + ([ellipsize(a.version, 26)] if a.version else []) + \
+             (["user account"] if a.kind == "account" else [])
         w, h = measure(ls, 11.5, minw=110, pad=26)
         agent_sz.append((ls, w, max(h + 6, 46)))
+        trunc = ls[0] != a.name or (a.version and ls[1] != a.version)
+        agent_tip[a.id] = (a.full_label or a.label) if (trunc or a.full_label) else None
     AG_GAP = 26
     agents_w = sum(w for _, w, _ in agent_sz) + AG_GAP * max(0, len(agent_sz) - 1)
 
     j = model.job
     top = model.runs[0] if model.runs else None
     job_ls = ent_ls = plan_ls = []
+    show_ent = False
+    plan_tip = None
     if j:
-        job_ls = [f"Job {ellipsize_id(j.id)}", "wfprov:ProcessRun · "
-                  + (f"{hhmmss(j.start)}–{hhmmss(j.end)} UTC" if j.start and j.end else (j.status or ""))]
+        tz = "UTC" if j.start and ("+" in j.start[10:] or j.start.endswith("Z")) else "(no timezone)"
+        job_ls = [f"Job {ellipsize_id(j.id)}", ("wfprov:WorkflowRun · " if j.same_as_run else "wfprov:ProcessRun · ")
+                  + (f"{hhmmss(j.start)}–{hhmmss(j.end)} {tz}" if j.start and j.end else (j.status or ""))]
         if j.status:
             job_ls.append(f"status: {j.status}" + (f" · {duration(j.start, j.end)}" if j.start and j.end else ""))
+        if j.same_as_run:
+            job_ls.append("same IRI as the workflow run below")
+        show_ent = bool(j.entity) and j.entity != j.activity
         ent_ls = ["job entity", f"/jobs/{ellipsize_id(j.id)}"]
-        plan_ls = ["process (plan)", f"/processes/{j.process_id}"]
+        if j.process_iri and j.plan_associated:
+            plan_ls = ["process (plan)", f"/processes/{j.process_id}"]
+        elif j.process_iri:
+            host = re.sub(r"^https?://", "", j.process_location or "").split("/processes/")[0]
+            rev = any("reversed wasGeneratedBy" in n for n in model.notices)
+            plan_ls = ["process description", ellipsize(f"/processes/{j.process_id}", 48)] + ([host] if host else []) + \
+                      ["not linked to the job" + (" (reversed wasGeneratedBy ignored)" if rev else "")]
+            plan_tip = j.process_location
     run_ls = ["Wrapping workflow run", "wfprov:WorkflowRun · cwltool"]
     if top and top.start and top.end:
         run_ls.append(f"{hhmmss(top.start)}–{hhmmss(top.end)} · {duration(top.start, top.end)}")
@@ -1724,16 +2056,19 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
     jw, jh = measure(job_ls, 11.5, minw=200) if j else (0, 0)
     rw, rh = measure(run_ls, 11.5, minw=200)
     jw = rw = max(jw, rw)
-    ew, eh = measure(ent_ls, 11.5, minw=150) if j else (0, 0)
-    pw, ph = measure(plan_ls, 11.5, minw=150) if j else (0, 0)
+    ew, eh = measure(ent_ls, 11.5, minw=150) if j and show_ent else (0, 0)
+    pw, ph = measure(plan_ls, 11.5, minw=150) if j and plan_ls else (0, 0)
     iw, ih = measure(in_ls, 11, minw=220, pad=40)
     jh = max(jh, eh, ph)
-    job_row_w = jw + lab_w + ew + 24 + pw if j else 0
+    job_row_w = (jw + (lab_w + ew if show_ent else 0) + (24 if show_ent else 40) + pw) if j else 0
     run_row_w = rw + lab_w + iw
 
     # step boxes
     def step_box(st: Step, run: Run, is_top: bool) -> tuple[list[str], float, float, str | None]:
         ls = step_lines(st, run, is_top) + param_lines(model, f"{run.doc}|{st.name}", params)
+        pre = step_prefix(run)
+        if pre and ls[0].startswith(pre):
+            ls[0] = "…" + ls[0][len(pre):]
         tag = st.profile_short if (has_prof and st.profile_matched) else None
         w, h = measure(ls, 11.5, tag=tag, minw=170)
         return ls, w, h, tag
@@ -1748,6 +2083,11 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
     max_step_w = max([step_box(s, r, i == 0)[1] for i, r in enumerate(model.runs) for s in r.steps] + [0])
     MW = max(700, agents_w, job_row_w, run_row_w, max_step_w, *(w + lab_w + 180 for w, _ in out_sz))
     MW = min(MW, max(1100, agents_w, job_row_w, run_row_w))
+    # let a run's step row (with its flow entities) fit on one line, up to 1600 px
+    for i_, r_ in enumerate(model.runs):
+        ws = [step_box(st_, r_, i_ == 0)[1] for st_ in r_.steps]
+        if ws:
+            MW = max(MW, min(sum(ws) + 22 * (len(ws) - 1), 1600))
     BAND_X, BAND_W = 20, MW + 40
 
     y = 20
@@ -1758,8 +2098,8 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
     boxes: dict[str, Box] = {}  # step key -> box
     band_rects: list[tuple[float, float, ProvDocument]] = []
 
-    def flow(items: list[tuple[str, float, float]], y0: float, gap: float = 22, rowgap: float = 34
-             ) -> tuple[dict[str, Box], list[list[str]], float]:
+    def flow(items: list[tuple[str, float, float]], y0: float, gap: float = 22, rowgap: float = 34,
+             row_extra: dict[int, float] | None = None) -> tuple[dict[str, Box], list[list[str]], float]:
         """Left-to-right flow with wrapping; returns placed boxes, rows and bottom y."""
         placed: dict[str, Box] = {}
         rows: list[list[str]] = [[]]
@@ -1767,7 +2107,7 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
         for key, w, h in items:
             g = gap if not is_ent(key) else lab_w
             if rows[-1] and x + g + w > X0 + MW:
-                rowy += rowh + rowgap
+                rowy += rowh + rowgap + (row_extra or {}).get(len(rows) - 1, 0)
                 x, rowh = X0, 0.0
                 rows.append([])
             elif rows[-1]:
@@ -1797,6 +2137,14 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
             S.text(right, by + 45, "merged with " + ", ".join(ellipsize_doc(m) for m in d.merged_from)
                    + " (same activity, duplicate document)", 10.5, "end", "normal", "#555")
             hh = 54
+        r_ = next((rr for rr in model.runs if rr.doc == d.name), None)
+        if r_ and step_prefix(r_):
+            S.text(right, by + hh + 5, f"step names shown without their common prefix “{step_prefix(r_)}”",
+                   10.5, "end", "normal", "#555")
+            hh += 14
+        if d.notice:
+            S.text(right, by + hh + 5, "⚠ " + d.notice, 10.5, "end", "bold", C_WARN)
+            hh += 14
         return hh
 
 
@@ -1814,7 +2162,7 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
     agent_h = max([h for _, _, h in agent_sz] + [46])
     for a, (ls, w, h) in zip(agents, agent_sz):
         abox[a.id] = Box(x, ay, w, agent_h)
-        S.node(x, ay, w, agent_h, "agt", ls, 11.5)
+        S.node(x, ay, w, agent_h, "agt", ls, 11.5, tooltip=agent_tip.get(a.id))
         x += w + AG_GAP
     for k, d in enumerate(curves):
         b1, b2 = abox[d.delegate], abox[d.responsible]
@@ -1829,29 +2177,40 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
         S.path(f"M{b1.x:.1f},{yy:.1f} L{b2.right + 2:.1f},{yy:.1f}")
     y = ay + agent_h
 
-    server = next((a for a in agents if a.kind == "server"), None)
+    assoc = [a for a in agents if j and a.id in j.agents]
+    server = next((a for a in assoc if a.kind == "server"), assoc[0] if assoc else None)
     jbox = None
     if j:
         jy = y + 58
         jbox = Box(X0, jy, jw, jh)
         S.node(X0, jy, jw, jh, "act", job_ls)
-        ebox = Box(jbox.right + lab_w, jy, ew, jh)
-        S.node(ebox.x, jy, ew, jh, "ent", ent_ls)
-        pbox = Box(ebox.right + 24, jy, pw, jh)
-        S.node(pbox.x, jy, pw, jh, "ent", plan_ls)
-        S.path(f"M{ebox.x:.1f},{jy + jh * 0.6:.1f} L{jbox.right + 2:.1f},{jy + jh * 0.6:.1f}")
-        S.label((ebox.x + jbox.right) / 2, jy + jh * 0.6 - 6, "wasGeneratedBy")
-        sx = jbox.x + jbox.w * 0.72
-        S.path(f"M{sx:.1f},{jy:.1f} C{sx:.1f},{jy - 26:.1f} {pbox.cx:.1f},{jy - 26:.1f} {pbox.cx:.1f},{jy - 1:.1f}")
-        S.label((sx + pbox.cx) / 2, jy - 22, "wasAssociatedWith (hadPlan)")
+        nx = jbox.right + 40
+        if show_ent:
+            ebox = Box(jbox.right + lab_w, jy, ew, jh)
+            S.node(ebox.x, jy, ew, jh, "ent", ent_ls)
+            S.path(f"M{ebox.x:.1f},{jy + jh * 0.6:.1f} L{jbox.right + 2:.1f},{jy + jh * 0.6:.1f}")
+            S.label((ebox.x + jbox.right) / 2, jy + jh * 0.6 - 6, "wasGeneratedBy")
+            nx = ebox.right + 24
+        pbox = Box(nx, jy, pw, jh)
+        if plan_ls:
+            S.node(pbox.x, jy, pw, jh, "ent", plan_ls, tooltip=plan_tip)
+        if plan_ls and j.plan_associated:
+            sx = jbox.x + jbox.w * 0.72
+            S.path(f"M{sx:.1f},{jy:.1f} C{sx:.1f},{jy - 26:.1f} {pbox.cx:.1f},{jy - 26:.1f} {pbox.cx:.1f},{jy - 1:.1f}")
+            S.label((sx + pbox.cx) / 2, jy - 22, "wasAssociatedWith (hadPlan)")
         if j.process_specializes:
             S.text(pbox.cx, jy + jh + 15, "specializationOf " + j.process_specializes.split("#", 1)[-1].join(["wf:", ""])
                    + " (engine plan)", 10.5, color=C_LINE)
         if server:
             sb = abox[server.id]
-            vx = sb.cx if jbox.x < sb.cx < jbox.right else jbox.x + 30
-            S.path(f"M{vx:.1f},{jy:.1f} L{vx:.1f},{sb.bottom + 2:.1f}")
-            S.label(vx + 6, (jy + sb.bottom) / 2 + 4, "wasAssociatedWith", "start")
+            if jbox.x < sb.cx < jbox.right:
+                vx = sb.cx
+                S.path(f"M{vx:.1f},{jy:.1f} L{vx:.1f},{sb.bottom + 2:.1f}")
+                S.label(vx + 6, (jy + sb.bottom) / 2 + 4, "wasAssociatedWith", "start")
+            else:  # agent not above the job box: elbow through the gap between the rows
+                vx, my = jbox.x + 30, sb.bottom + 14
+                S.path(f"M{vx:.1f},{jy:.1f} L{vx:.1f},{my:.1f} L{sb.cx:.1f},{my:.1f} L{sb.cx:.1f},{sb.bottom + 2:.1f}")
+                S.label(vx + 6, (jy + my) / 2 + 8, "wasAssociatedWith (" + server.name.split("/")[-1] + ")", "start")
         y = jy + jh + (20 if j.process_specializes else 0)
 
     rbox = None
@@ -1864,10 +2223,14 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
         S.node(ibox.x, ibox.y, iw, ibox.h, "ent", in_ls, 11, left=True)
         S.path(f"M{rbox.right:.1f},{rbox.y + rh / 2:.1f} L{ibox.x - 2:.1f},{rbox.y + rh / 2:.1f}")
         S.label((rbox.right + ibox.x) / 2, rbox.y + rh / 2 - 6, "used")
-        if jbox:
+        if jbox and (j is None or j.informed):
             vx = jbox.x + 40
             S.path(f"M{vx:.1f},{rbox.y:.1f} L{vx:.1f},{jbox.bottom + 2:.1f}")
             S.label(vx + 6, (rbox.y + jbox.bottom) / 2 + 4, "wasInformedBy", "start")
+        elif jbox and j.same_as_run:
+            vx = jbox.x + 40
+            S.path(f"M{vx:.1f},{rbox.y:.1f} L{vx:.1f},{jbox.bottom:.1f}", dashed=True, head=False)
+            S.label(vx + 6, (rbox.y + jbox.bottom) / 2 + 4, "same IRI (job = workflow run)", "start")
         y = ry + max(row_h, ibox.h)
 
         # steps row(s) + outputs
@@ -1879,23 +2242,42 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
             items.append((key, w, h))
             meta[key] = (ls, tag, st)
             add_flow_entities(items, meta, key)
-        for k, (o, ls) in enumerate(zip(model.outputs, out_ls)):
+        sidx = {st.name: i for i, st in enumerate(top.steps)}
+
+        def producer_pos(k: int) -> tuple:
+            o = model.outputs[k]
+            srcs = list(o.generated_by) + [e.source.split("|")[-1] for e in model.dataflow
+                                           if e.target == f"output:{o.name}"]
+            return (min([sidx.get(x, 99) for x in srcs] or [99]), k)
+        for k in sorted(range(len(model.outputs)), key=producer_pos):
+            o, ls = model.outputs[k], out_ls[k]
             w, h = out_sz[k]
             items.append((f"out:{k}", w, h))
             meta[f"out:{k}"] = (ls, None, None)
-        sy = y + (70 if model.outputs else 44)
-        placed, rows, bottom = flow(items, sy)
+        n_out = len(model.outputs)
+        sy = y + (70 + 14 * max(0, n_out - 1) if model.outputs else 44)
+        placed, rows, bottom = lay_band(top.doc, items, sy)
         draw_flow(S, placed, meta)
         boxes.update({k: v for k, v in placed.items() if not is_ent(k)})
         ent_boxes.update({k[4:]: v for k, v in placed.items() if k.startswith("ent:")})
+        boxes.update({f"output:{o.name}": placed[f"out:{k}"] for k, o in enumerate(model.outputs)})
         hierarchy(S, rbox, [placed[k] for k in rows[0] if not is_ent(k)], sy - 16, rows, placed, GUT)
         # final outputs are also generated by the wrapping run itself
+        simple = n_out == 1 and f"out:0" in rows[0]
         for k, o in enumerate(model.outputs):
             ob = placed[f"out:{k}"]
-            lane = sy - 34
-            tx = rbox.right - 24
-            S.path(f"M{ob.cx:.1f},{ob.y:.1f} L{ob.cx:.1f},{lane:.1f} L{tx:.1f},{lane:.1f} L{tx:.1f},{rbox.bottom + 2:.1f}")
-            S.label((ob.cx + tx) / 2, lane - 5, "wasGeneratedBy (output " + o.name + " of the wrapping run)")
+            lane = sy - 34 - (0 if simple else 14 * k)
+            if simple:
+                tx = rbox.right - 24
+                S.path(f"M{ob.cx:.1f},{ob.y:.1f} L{ob.cx:.1f},{lane:.1f} L{tx:.1f},{lane:.1f} L{tx:.1f},{rbox.bottom + 2:.1f}")
+                S.label((ob.cx + tx) / 2, lane - 5, "wasGeneratedBy (output " + o.name + " of the wrapping run)")
+            else:  # one lane per output, up the right edge of the band (outputs may sit on a wrapped row)
+                tx = rbox.right - 24 - 16 * (n_out - 1) + 16 * k
+                xc = X0 + MW + 6 + 4 * k
+                seg = ob.y - 8 - 4 * (n_out - 1 - k)
+                S.path(f"M{ob.cx:.1f},{ob.y:.1f} L{ob.cx:.1f},{seg:.1f} L{xc:.1f},{seg:.1f} L{xc:.1f},{lane:.1f} "
+                       f"L{tx:.1f},{lane:.1f} L{tx:.1f},{rbox.bottom + 2:.1f}")
+                S.label(tx + 8, lane - 4, "wasGeneratedBy (output " + o.name + " of the wrapping run)", "start")
         for k, o in enumerate(model.outputs):
             ob = placed[f"out:{k}"]
             gens = [boxes[f"{top.doc}|{g}"] for g in o.generated_by if f"{top.doc}|{g}" in boxes]
@@ -1912,7 +2294,6 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
                     S.label((ob.cx + gb.cx) / 2, ly + 13, "wasGeneratedBy")
                     bottom = max(bottom, ly + 14)
         y = bottom
-        rows_bottom[d0.name] = bottom
         y += lane_space(d0.name)
     band_rects.append((band_y, y + 18 - band_y, d0))
     y += 18
@@ -1932,7 +2313,7 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
             add_flow_entities(items, meta, key)
         incoming = any(ent_doc.get(ln.entity) == r.doc and not ln.step.startswith(r.doc + "|") for ln in used_links)
         sy = band_y + hh + 14 + (22 if incoming else 0)
-        placed, rows, bottom = flow(items, sy)
+        placed, rows, bottom = lay_band(r.doc, items, sy)
         draw_flow(S, placed, meta)
         boxes.update({k: v for k, v in placed.items() if not is_ent(k)})
         ent_boxes.update({k[4:]: v for k, v in placed.items() if k.startswith("ent:")})
@@ -1940,7 +2321,6 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
         pb = boxes.get(parent_key)
         if pb and rows[0]:
             hierarchy(S, pb, [placed[k] for k in rows[0] if not is_ent(k)], sy - 8, rows, placed, GUT, cross=True)
-        rows_bottom[d.name] = bottom
         y = bottom + 18 + lane_space(d.name)
         band_rects.append((band_y, y - band_y, d))
 
@@ -1977,35 +2357,59 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
     outs: dict[str, int] = {}
     ins: dict[str, int] = {}
     cross_j = 0
-    labels: list[tuple[float, float, str]] = []
-    for e, (k1, k2) in zip(data_edges, lane_of):
+    labels: list[tuple[float, float, str, bool]] = []
+    label_rects: list[tuple[float, float, float, float]] = []
+    for i, e in enumerate(data_edges):
         a, b = boxes.get(e.source), boxes.get(e.target)
-        if a is None or b is None:
+        if a is None or b is None or (i, "src") not in lane_assign:
             continue
-        sd, td = doc_of(e.source), doc_of(e.target)
         oi, ii = outs.get(e.source, 0), ins.get(e.target, 0)
         outs[e.source], ins[e.target] = oi + 1, ii + 1
         ex = a.x + a.w * 0.62 + 10 * oi
         en = b.x + b.w * 0.38 - 10 * ii
-        ly1 = rows_bottom[sd] + 22 + 18 * k1
-        if k2 is None:
-            d = f"M{ex:.1f},{a.bottom:.1f} L{ex:.1f},{ly1:.1f} L{en:.1f},{ly1:.1f} L{en:.1f},{b.bottom + 3:.1f}"
-            lx, ly, seg = (ex + en) / 2, ly1, abs(en - ex)
+        ly1 = lane_y(lane_assign[(i, "src")])
+        if (i, "tgt") not in lane_assign:
+            below = row_index.get(e.target, (None, 0))[1] > row_index.get(e.source, (None, 0))[1]
+            end = f"L{en:.1f},{b.y - 3:.1f}" if below else f"L{en:.1f},{b.bottom + 3:.1f}"
+            d = f"M{ex:.1f},{a.bottom:.1f} L{ex:.1f},{ly1:.1f} L{en:.1f},{ly1:.1f} {end}"
+            lx, ly, seg = (ex + en) / 2, ly1, abs(en - ex) if not below else 1e9
         else:
-            ly2 = rows_bottom[td] + 22 + 18 * k2
+            ly2 = lane_y(lane_assign[(i, "tgt")])
             cx = BAND_X + BAND_W + 10 + 8 * cross_j
             cross_j += 1
             d = (f"M{ex:.1f},{a.bottom:.1f} L{ex:.1f},{ly1:.1f} L{cx:.1f},{ly1:.1f} L{cx:.1f},{ly2:.1f} "
                  f"L{en:.1f},{ly2:.1f} L{en:.1f},{b.bottom + 3:.1f}")
             lx, ly, seg = (cx + en) / 2, ly2, abs(cx - en)
-        S.add(f'<path d="{d}" fill="none" stroke="{C_DATA}" stroke-width="2.2" marker-end="url(#dh)"/>')
+        if e.observed:
+            S.add(f'<path d="{d}" fill="none" stroke="{C_DATA}" stroke-width="2.2" marker-end="url(#dh)"/>')
+        else:  # declared in the CWL wiring only: same colour, dashed and lighter
+            S.add(f'<path d="{d}" fill="none" stroke="{C_DATA}" stroke-width="1.8" stroke-dasharray="7,4" '
+                  f'stroke-opacity="0.7" marker-end="url(#dh)"/>')
         lab = data_label(e)
-        # above the lane if it fits between the verticals, else below it (where no vertical of this edge goes)
-        labels.append((lx, ly - 5 if text_width(lab, 10.5, True) + 10 < seg else ly + 13, lab))
-    for lx, ly, lab in labels:
+        tw_ = text_width(lab, 10.5, True)
+        # above the lane if it fits between the verticals, else below it (where no vertical of this edge goes);
+        # then alternatives (other side, shifted along the lane) when it would overlap a label or a box
+        first, other = (ly - 5, ly + 13) if tw_ + 10 < seg else (ly + 13, ly - 5)
+        cands = [(lx, first), (lx, other)]
+        for dx in (tw_ / 2 + 20, -(tw_ / 2 + 20), tw_ + 40, -(tw_ + 40)):
+            cands += [(lx + dx, first), (lx + dx, other)]
+        pick = cands[0]
+        for cx_, cy_ in cands:
+            r_ = (cx_ - tw_ / 2 - 2, cy_ - 10, cx_ + tw_ / 2 + 2, cy_ + 3)
+            if r_[0] < BAND_X + 4:
+                continue
+            if not any(r_[0] < q[2] and q[0] < r_[2] and r_[1] < q[3] and q[1] < r_[3] for q in label_rects) and \
+               not any(r_[0] < bx.right and bx.x < r_[2] and r_[1] < bx.bottom and bx.y < r_[3] for bx in boxes.values()):
+                pick = (cx_, cy_)
+                break
+        label_rects.append((pick[0] - tw_ / 2 - 2, pick[1] - 10, pick[0] + tw_ / 2 + 2, pick[1] + 3))
+        labels.append((pick[0], pick[1], lab, e.observed))
+    for lx, ly, lab, obs in labels:
+        style = 'font-weight="bold"' if obs else 'font-style="italic"'
         S.add(f'<text x="{lx:.1f}" y="{ly:.1f}" {FONT} font-size="10.5" text-anchor="middle" fill="{C_DATA}" '
-              f'font-weight="bold" stroke="#fff" stroke-width="3" paint-order="stroke">{xml_escape(lab)}</text>')
+              f'{style} stroke="#fff" stroke-width="3" paint-order="stroke">{xml_escape(lab)}</text>')
 
+    n_cross = cross_j
     # ---------- profiles column ----------
     W = BAND_X + BAND_W + 20 + (8 * n_cross + 10 if n_cross else 0)
     col_bottom = 0.0
@@ -2043,10 +2447,10 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
     leg2 = "child run started by the parent run (wasStartedBy); nested document linked by prov:has_provenance"
     leg3 = ("data flow between steps (generated by one step, used by the next, incl. collection members): "
             "output → input · count")
-    W = max(W, 440 + text_width(leg2, 11) + 40, 440 + text_width(leg3, 11) + 40 if data_edges else 0)
+    W = max(W, 440 + text_width(leg2, 11) + 40, 440 + text_width(leg3, 11) + 40 if n_obs else 0)
     ly = max(content_bottom, col_bottom) + 16
     foot = wrap_text(footer_text(model, title), W - 72, 10.5)
-    lh = 76 + 20 * (bool(data_edges) + (params != "none") + has_prof) + 15 * len(foot) + 8
+    lh = 76 + 20 * (bool(n_obs) + bool(n_decl) + declared_params + (params != "none") + has_prof) + 15 * len(foot) + 8
     S.add(f'<rect x="20" y="{ly:.1f}" width="{W - 40}" height="{lh}" rx="6" fill="#fff" stroke="{C_BANDS}"/>')
     S.text(36, ly + 22, "Legend", 12, "start", "bold")
     S.node(40, ly + 36, 90, 30, "act", ["activity"], 11)
@@ -2057,14 +2461,22 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
     S.path(f"M380,{ly + 64:.1f} L430,{ly + 64:.1f}", dashed=True)
     S.text(440, ly + 68, leg2, 11, "start")
     yy = ly + 88
-    if data_edges:
+    if n_obs:
         S.add(f'<path d="M380,{yy - 4:.1f} L430,{yy - 4:.1f}" stroke="{C_DATA}" stroke-width="2.2" marker-end="url(#dh)"/>')
         S.text(440, yy, "data flow between steps (generated by one step, used by the next, incl. collection members): "
                "output → input · count", 11, "start")
         yy += 20
+    if n_decl:
+        S.add(f'<path d="M380,{yy - 4:.1f} L430,{yy - 4:.1f}" stroke="{C_DATA}" stroke-width="1.8" '
+              f'stroke-dasharray="7,4" stroke-opacity="0.7" marker-end="url(#dh)"/>')
+        S.text(440, yy, "data link declared in the CWL wiring, not observed in the provenance", 11, "start")
+        yy += 20
     if params != "none":
         S.text(440, yy, "params: … inside a step box = inputs passed from the parent run (∈ = member of the parent's array)",
                11, "start")
+        yy += 20
+    if declared_params:
+        S.text(440, yy, "† declared in CWL, not observed in the provenance", 11, "start")
         yy += 20
     if has_prof:
         S.add(f'<rect x="380" y="{yy - 12:.1f}" width="70" height="16" rx="3" fill="{C_TAG}" stroke="{C_TAGS}"/>')
@@ -2111,6 +2523,20 @@ def wrap_text(s: str, width: float, size: float) -> list[str]:
     if cur:
         lines.append(cur)
     return lines
+
+
+def step_prefix(run: Run) -> str:
+    """Long common prefix of sibling step names (e.g. ``ogc-ospd2026-downscaling-``), shortened in boxes."""
+    names = [s.name for s in run.steps]
+    if len(names) < 2:
+        return ""
+    pre = names[0]
+    for n in names[1:]:
+        while not n.startswith(pre):
+            pre = pre[:-1]
+    m = re.match(r"^(.*[-_.])", pre)
+    pre = m.group(1) if m else ""
+    return pre if len(pre) >= 8 and all(len(n) > len(pre) for n in names) else ""
 
 
 def is_ent(key: str) -> bool:
@@ -2229,10 +2655,13 @@ def render_dot(model: Model, title: str | None = None, dataflow: bool = True, pa
     nid = lambda s: '"' + re.sub(r"[^A-Za-z0-9_]", "_", s) + '"'  # noqa: E731
     for i, d in enumerate(model.documents):
         L.append(f"  subgraph cluster_{i} {{")
-        sub = f"GET {d.api_path} — {doc_role(model, d)}"
+        sub = _h(f"GET {d.api_path} — {doc_role(model, d)}")
         if d.merged_from:
             sub += "<br/>merged with " + ", ".join(_h(ellipsize_doc(m)) for m in d.merged_from)
-        L.append(f'    label=<<b>{_h(ellipsize_doc(d.name))}</b><br/><font point-size="9">{_h(sub) if not d.merged_from else sub}</font>>; '
+        if d.notice:
+            sub += f'<br/><font color="{C_WARN}"><b>⚠ {_h(d.notice)}</b></font>'
+
+        L.append(f'    label=<<b>{_h(ellipsize_doc(d.name))}</b><br/><font point-size="9">{sub}</font>>; '
                  f'labeljust=r; style="rounded,filled"; fillcolor="{C_BAND}"; color="{C_BANDS}";')
         run = next((r for r in model.runs if r.doc == d.name), None)
         if i == 0:
@@ -2241,10 +2670,24 @@ def render_dot(model: Model, title: str | None = None, dataflow: bool = True, pa
                 L.append(f"    {nid('ag_' + a.id)} [{agt}, label={_html_label(ls)}];")
             L.append("    { rank=same; " + " ".join(nid("ag_" + a.id) for a in model.agents) + " }")
             if j:
-                L.append(f"    {nid('job')} [{act}, label={_html_label([f'Job {ellipsize_id(j.id)}', 'wfprov:ProcessRun', (hhmmss(j.start) + '–' + hhmmss(j.end) + ' UTC') if j.start else ''])}];")
-                L.append(f"    {nid('jobent')} [{ent}, label={_html_label(['job entity', '/jobs/' + ellipsize_id(j.id)])}];")
-                L.append(f"    {nid('plan')} [{ent}, label={_html_label(['process (plan)', '/processes/' + str(j.process_id)])}];")
-                L.append(f"    {{ rank=same; {nid('job')} {nid('jobent')} {nid('plan')} }}")
+                tz = " UTC" if j.start and ("+" in j.start[10:] or j.start.endswith("Z")) else " (no timezone)"
+                jl = [f'Job {ellipsize_id(j.id)}', "wfprov:WorkflowRun" if j.same_as_run else "wfprov:ProcessRun",
+                      (hhmmss(j.start) + '–' + hhmmss(j.end) + tz) if j.start else '']
+                if j.same_as_run:
+                    jl.append("same IRI as the workflow run")
+                L.append(f"    {nid('job')} [{act}, label={_html_label(jl)}];")
+                same = [nid("job")]
+                if j.entity and j.entity != j.activity:
+                    L.append(f"    {nid('jobent')} [{ent}, label={_html_label(['job entity', '/jobs/' + ellipsize_id(j.id)])}];")
+                    same.append(nid("jobent"))
+                if j.process_iri:
+                    pl = (['process (plan)', '/processes/' + str(j.process_id)] if j.plan_associated else
+                          ['process description', ellipsize('/processes/' + str(j.process_id), 48),
+                           re.sub(r"^https?://", "", j.process_location or "").split("/processes/")[0],
+                           'not linked to the job'])
+                    L.append(f"    {nid('plan')} [{ent}, label={_html_label(pl)}];")
+                    same.append(nid("plan"))
+                L.append("    { rank=same; " + " ".join(same) + " }")
             if run:
                 L.append(f"    {nid('run')} [{act}, label={_html_label(['Wrapping workflow run', 'wfprov:WorkflowRun · cwltool'])}];")
                 ins = ["inputs (prov:role = prov:value)"] + input_lines(model)
@@ -2264,14 +2707,19 @@ def render_dot(model: Model, title: str | None = None, dataflow: bool = True, pa
         L.append("  }")
     # edges
     if j:
-        srv = next((a for a in model.agents if a.kind == "server"), None)
+        assoc = [a for a in order_agents(model) if a.id in j.agents]
+        srv = next((a for a in assoc if a.kind == "server"), assoc[0] if assoc else None)
         if srv:
             # edges written parent->child with dir=back keep agents on top while arrows follow PROV direction
             L.append(f"  {nid('ag_' + srv.id)} -> {nid('job')} [label=wasAssociatedWith, dir=back];")
-        L.append(f"  {nid('job')} -> {nid('jobent')} [label=wasGeneratedBy, dir=back];")
-        L.append(f'  {nid("job")} -> {nid("plan")} [label="wasAssociatedWith (hadPlan)"];')
-        if model.runs:
+        if j.entity and j.entity != j.activity:
+            L.append(f"  {nid('job')} -> {nid('jobent')} [label=wasGeneratedBy, dir=back];")
+        if j.process_iri and j.plan_associated:
+            L.append(f'  {nid("job")} -> {nid("plan")} [label="wasAssociatedWith (hadPlan)"];')
+        if model.runs and j.informed:
             L.append(f"  {nid('job')} -> {nid('run')} [label=wasInformedBy, dir=back];")
+        elif model.runs and j.same_as_run:
+            L.append(f'  {nid("job")} -> {nid("run")} [label="same IRI (job = workflow run)", style=dashed, arrowhead=none];')
     ids = {a.id for a in model.agents}
     for d in model.delegations:
         if d.delegate in ids and d.responsible in ids:
@@ -2288,6 +2736,8 @@ def render_dot(model: Model, title: str | None = None, dataflow: bool = True, pa
         for k, o in enumerate(model.outputs):
             L.append(f'  {nid(f"out{k}")} -> {nid("run")} [label="wasGeneratedBy (output {o.name} of the wrapping run)", '
                      "constraint=false];")
+            if not o.generated_by and top.steps:  # keep outputs without a recorded generating step below the steps
+                L.append(f"  {nid('st_' + top.doc + top.steps[-1].name)} -> {nid(f'out{k}')} [style=invis];")
         for r in model.runs[1:]:
             d = next(dd for dd in model.documents if dd.name == r.doc)
             parent = nid("st_" + str(d.parent_doc) + str(d.parent_step))
@@ -2298,11 +2748,15 @@ def render_dot(model: Model, title: str | None = None, dataflow: bool = True, pa
             for e in model.dataflow:
                 if e.kind != "data" or e.drawn_as_entity:
                     continue
-                a = nid("st_" + e.source.replace("|", "")) if e.source != "run" else nid("run")
-                b = nid("st_" + e.target.replace("|", ""))
+                outk = {f"output:{o.name}": nid(f"out{k}") for k, o in enumerate(model.outputs)}
+
+                def node_of(key: str) -> str:
+                    return nid("run") if key == "run" else outk.get(key) or nid("st_" + key.replace("|", ""))
+                a, b = node_of(e.source), node_of(e.target)
                 same = e.source.split("|")[0] == e.target.split("|")[0]
+                style = "penwidth=2.2" if e.observed else 'penwidth=1.6, style=dashed, fontname="Helvetica-Oblique"'
                 L.append(f'  {a} -> {b} [label="{_dot_str(data_label(e))}", color="{C_DATA}", fontcolor="{C_DATA}", '
-                         f'penwidth=2.2, constraint={"true" if same else "false"}];')
+                         f'{style}, constraint={"true" if same and e.observed else "false"}];')
         # output data flow (entities joined across documents by IRI)
         done = set()
         for f in model.flows:
@@ -2400,7 +2854,7 @@ def self_test(bags: list[Path], scan: list[Path], profiles: Path | None) -> int:
                 for p in (d.rglob("*") if d.is_dir() else [d]):
                     if p.is_file():
                         texts[str(p)] = p.read_bytes()
-            if not any(REDACTED.encode() in data for data in texts.values()):
+            if secrets and not any(REDACTED.encode() in data for data in texts.values()):
                 print(f"FAIL {label}: no [redacted] marker in any output (redaction did not run)")
                 failures += 1
             leaks = [(name, hashlib.sha256(s.encode()).hexdigest()[:10])
@@ -2421,11 +2875,12 @@ def self_test(bags: list[Path], scan: list[Path], profiles: Path | None) -> int:
 # --------------------------------------------------------------------------
 # CLI
 # --------------------------------------------------------------------------
-def build_model(path: Path, show_platform: bool = False, profiles: Path | None = None) -> Model:
+def build_model(path: Path, show_platform: bool = False, profiles: Path | None = None,
+                cwl_fallback: bool = True) -> Model:
     """Locate, load and extract a model from a bag / zip / directory."""
     src = locate(path)
     try:
-        model = Extractor(src, show_platform=show_platform).build()
+        model = Extractor(src, show_platform=show_platform, cwl_fallback=cwl_fallback).build()
     finally:
         if src.tmp:
             src.tmp.cleanup()
@@ -2444,6 +2899,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--json", type=Path, help="also write the intermediate model as JSON")
     ap.add_argument("--title", help="diagram title")
     ap.add_argument("--no-dataflow", action="store_true", help="do not draw step-to-step data-flow edges")
+    ap.add_argument("--no-cwl-fallback", action="store_true",
+                    help="do not add data/parameter links declared in the CWL wiring but missing from the provenance")
     ap.add_argument("--params", choices=["none", "summary", "full"], default="summary",
                     help="parameter passing from parent runs to steps (default: summary)")
     ap.add_argument("--show-platform-params", action="store_true",
@@ -2460,7 +2917,7 @@ def main(argv: list[str] | None = None) -> int:
         return self_test(a.source, a.scan, a.profiles)
     if len(a.source) != 1 or not a.output:
         ap.error("exactly one SOURCE and -o OUTPUT are required")
-    model = build_model(a.source[0], a.show_platform_params, a.profiles)
+    model = build_model(a.source[0], a.show_platform_params, a.profiles, cwl_fallback=not a.no_cwl_fallback)
     if a.json:
         a.json.parent.mkdir(parents=True, exist_ok=True)
         a.json.write_text(json.dumps(asdict(model), indent=2, ensure_ascii=False) + "\n")

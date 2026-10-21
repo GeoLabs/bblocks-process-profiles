@@ -9,7 +9,7 @@ rendering service.
 ```bash
 python3 prov_synth.py BAG_OR_ZIP -o out.svg [--format svg|dot] [--profiles map.yaml] \
         [--json model.json] [--title "..."] [--show-platform-params] \
-        [--no-dataflow] [--params none|summary|full] [-v]
+        [--no-dataflow] [--params none|summary|full] [--no-cwl-fallback] [-v]
 
 # examples
 python3 prov_synth.py job-2378/.../prov -o out/water-bodies.svg \
@@ -21,7 +21,12 @@ python3 prov_synth.py job-2378/.../prov -o out/water-bodies.dot.svg --format dot
 python3 prov_synth.py --self-test BAG1 BAG2 --profiles examples/water-bodies-profiles.yaml --scan out
 ```
 
-`BAG_OR_ZIP` can be a BagIt research object, a `.zip` of one, or a bare directory of `*.cwlprov.ttl` files.
+`BAG_OR_ZIP` can be any of these:
+* a BagIt research object (cwltool layout: `metadata/`, `workflow/packed.cwl`, `workflow/primary-job.json`);
+* a partial research object without BagIt files, with `packed.cwl` / `primary-job.json` at the root instead of under
+  `workflow/` (e.g. CRIM Weaver examples);
+* a `.zip` of one of the above;
+* a bare directory of `*.cwlprov.ttl` files.
 The tool starts from `primary.cwlprov.ttl` (in a bare directory, from the document that no other document
 references) and follows `prov:has_provenance`. It maps `arcp://uuid,…/metadata/provenance/<file>` IRIs to local
 files, preferring `.ttl`, then `.nt`, then `.jsonld`.
@@ -94,6 +99,64 @@ union. The document with the most triples is kept as canonical. The comparison (
 statements) is reported in `notes` and in the band header. Start/end times are de-duplicated by value, so the
 union does not double-count iterations.
 
+## CWL-wiring fallback (`--no-cwl-fallback` to disable)
+
+Some engines record steps without any `used`/`wasGeneratedBy` (see the Weaver notes below). For those, the tool reads
+the workflow wiring from `packed.cwl`. Both the cwltool `$graph` packed form (list-style `steps`/`in`, `#main/step/port`
+ids) and a plain single workflow (`steps` as a dict, `in: {port: source}`, `step/output` sources) are supported. It
+resolves sources (workflow inputs or `step/output`) and workflow outputs (`outputSource`).
+
+Every wiring link that the provenance does not already show is added to `dataflow` with `observed: false` and
+`origin: "cwl"`:
+* step → step data;
+* workflow input → step parameter;
+* step → workflow output.
+
+A link counts as observed when a data edge reaches the same input port from that step, from a step nested inside it,
+or through its recorded sub-workflow output. For parameters, a param edge to the same step and port is enough.
+
+In the SVG, declared data links use the same teal, dashed and lighter, with italic labels such as
+`forecast_files → file_list (declared in CWL, not observed)`. Declared parameters appear in the step box `params:` line
+with a trailing `†`. The legend explains both, but only when such links exist.
+
+For the two ZOO-Project-DRU bags, everything is observed except one genuine gap: `node_water_bodies` takes
+`item ← stac_items` in the CWL (its scatter input), but the provenance has no usage of `item` by that run. It is
+therefore shown as `item †`.
+
+## Diagnostics
+
+The following are reported in the JSON `notes` and shown in the diagram:
+* **Steps with neither `used` nor `wasGeneratedBy`** in a document. The band header gets a warning line, e.g.
+  "⚠ 3 steps have no recorded inputs/outputs in this document — data flow shown from the CWL wiring".
+* **Reversed `wasGeneratedBy`** (an activity in the entity position): ignored for layout.
+* **`wasStartedBy` whose trigger is not an activity** (e.g. an agent).
+* **Engine timestamps without a timezone next to UTC ones**, when the two differ by an hour or more. The offset is
+  estimated (e.g. ≈ UTC−04:00). Times are shown as recorded.
+
+The last three are also summarised in one "Provenance anomalies: …" sentence in the footer, so it only appears when
+they occur.
+
+## Other servers (Weaver)
+
+* **Job:** found from an activity located at `…/jobs/<id>` when no ZOO-Project-DRU job is present. If the job and the
+  workflow run share one IRI (Weaver), the job box says so and a dashed "same IRI" line replaces `wasInformedBy`.
+* **Process:** an entity typed `wfdesc:Process` located at `…/processes/<id>` is shown as "process description" with
+  its host. If it is not linked by `hadPlan`, the box says it is not linked to the job (no arrow).
+* **Agents:** drawn deterministically.
+  * When an agent has several labels, the "name version" one is preferred, and `name:version` is split
+    (`crim-ca/weaver:6.15.0`).
+  * Long names are truncated, with the full value in an SVG `<title>` tooltip.
+  * The job → agent `wasAssociatedWith` arrow is drawn only when recorded (for Weaver, to cwltool).
+* **Band subtitle:** "engine document completed by ZOO-Project-DRU" only when a ZOO agent is present. Otherwise it
+  names the root of the delegation chain (here "crim-ca/weaver").
+* **Step names:** a long common prefix of sibling step names (≥ 8 characters, e.g. `ogc-ospd2026-downscaling-`) is
+  dropped in the boxes (`…unet`), and the header says so.
+* **Steps without an end:** when no step of a run has an end time, each box says "started HH:MM:SS (no end recorded)".
+* **Layout:**
+  * A run's step row may widen the diagram up to 1600 px so that the steps stay on one line.
+  * Data lanes are assigned per row. A target on a lower row is entered from the top.
+  * Several final outputs each get their own lane for their `wasGeneratedBy` to the run.
+
 ## Redaction (always on; it cannot be turned off)
 
 * Values bound to roles or JSON keys matching `(?i)(secret|password|token|access_key|aws_access|credential)` are
@@ -147,8 +210,12 @@ that match nothing are reported in `notes`. Without `--profiles`, the diagram ha
 * Pairing across iterations is not reconstructed: edges are aggregated per step base name. The data shows that
   `node_normalized_difference` (first instance) used the crops of `node_crop_3`/`node_crop_4` (S2A), and
   `node_normalized_difference_2` used those of `node_crop`/`node_crop_2` (S2B). The JSON aggregate does not keep this.
-* Data-flow lanes are placed below a band's last row. With wrapped rows, a vertical from an upper row can cross a box
-  of a lower row.
+* Data-flow lanes sit below the row of the source. With several wrapped rows of steps, a vertical can still cross a box
+  on an intermediate row.
+* In the DOT output, Graphviz may not keep declared-only steps in workflow order (in the Weaver example it draws unet
+  first). The direct SVG keeps the start order.
+* The CWL fallback reads only the wiring of the workflows in `packed.cwl`. When step `run` targets are not embedded
+  (Weaver: `run: <process name>`), their types are unknown and declared links are labelled without a file kind.
 * In the SVG, a flow entity is placed right after its producing step. A `used` arrow from another band is routed
   through a lane above the entity's row. Many cross-band flows would make these lanes busy.
 * The "local STAC catalog" wording is a heuristic: a produced folder that contains `catalog.json`.
