@@ -1,10 +1,27 @@
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersects",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersects",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
+  "hasAction": {
+    "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersects/actions/addition",
+    "type": "RegisterAction",
+    "actionType": "addition",
+    "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+    "startedAtTime": "2026-09-22T00:00:00Z",
+    "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersects"
+  },
   "prefLabel": "Intersects test",
   "definition": "This service shall return a true value if and only if the geometries g1 and g2 have at least one boundary point in common, but no interior points.",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
   "phase": [
     "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
   ],

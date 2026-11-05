@@ -25,8 +25,9 @@
     schema-ref: '#/$defs/inheritedProcessDescription'
 - title: process-type entry
   base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
-  content: Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/is-simple`
-    (`ospd.process-profiles.process-type`), status `submitted`, linking to its Implementation Profile.
+  content: Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/is-simple`
+    (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision, linking
+    to its Implementation Profile.
   snippets:
   - language: json
     ref: examples/process-type.json

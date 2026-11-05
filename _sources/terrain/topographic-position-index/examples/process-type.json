@@ -1,10 +1,27 @@
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/topographic-position-index",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/topographic-position-index",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
+  "hasAction": {
+    "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/topographic-position-index/actions/addition",
+    "type": "RegisterAction",
+    "actionType": "addition",
+    "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+    "startedAtTime": "2026-09-22T00:00:00Z",
+    "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/topographic-position-index"
+  },
   "prefLabel": "Topographic Position Index (TPI)",
   "definition": "Topographic Position Index (TPI) calculation as proposed by Guisan et al. (1999). This is literally the same as the difference to the mean calculation (residual analysis) proposed by Wilson & Gallant (2000). The bandwidth parameter for distance weighting is given as percentage of the (outer) radius.",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
   "phase": [
     "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
   ],

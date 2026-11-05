@@ -1,10 +1,27 @@
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/band-math",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/band-math",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
+  "hasAction": {
+    "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/band-math/actions/addition",
+    "type": "RegisterAction",
+    "actionType": "addition",
+    "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+    "startedAtTime": "2026-09-22T00:00:00Z",
+    "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/band-math"
+  },
   "prefLabel": "Outputs a monoband image which is the result of a mathematical operation on several multi-band images.",
   "definition": "This application performs a mathematical operation on several multi-band images and outputs the result into a monoband image. The given expression is computed at each pixel position. Evaluation of the mathematical formula is done by the muParser library.The formula can be written using:* numerical values ( 2.3, -5, 3.1e4, ...)* variables containing pixel values (e.g. ``im2b3`` is the pixel value in 2nd image, 3rd band)* binary operators: * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division * ``^`` raise x to the power of y * ``",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
   "phase": [
     "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
   ],

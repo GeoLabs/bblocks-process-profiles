@@ -53,4 +53,4 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Process type (Activity 4)
 
-Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process` (`ospd.process-profiles.process-type`), status `submitted`.
+Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

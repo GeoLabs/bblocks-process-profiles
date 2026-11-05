@@ -1,10 +1,27 @@
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
+  "hasAction": {
+    "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches/actions/addition",
+    "type": "RegisterAction",
+    "actionType": "addition",
+    "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+    "startedAtTime": "2026-09-22T00:00:00Z",
+    "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches"
+  },
   "prefLabel": "Compute intersection.",
   "definition": "Generates a new geometry which is the region of intersection of the two geometries operated on.",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
   "phase": [
     "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
   ],

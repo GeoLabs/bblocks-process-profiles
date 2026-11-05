@@ -1,10 +1,27 @@
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
+  "hasAction": {
+    "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps/actions/addition",
+    "type": "RegisterAction",
+    "actionType": "addition",
+    "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+    "startedAtTime": "2026-09-22T00:00:00Z",
+    "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps"
+  },
   "prefLabel": "Mangrove Biomass Workflow (step notebooks)",
   "definition": "Mangrove above-ground biomass and carbon stock estimation from Sentinel-2 L2A, split into one CommandLineTool per processing step, aligned on the steps of the OSPD W1 Algae Bloom workflow: parse_aoi -> select_scene -> download_band (x3) -> reproject_band (x3) -> calculate_indices -> estimate_biomass -> export_stac.",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
   "phase": [
     "https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration",
     "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering",
