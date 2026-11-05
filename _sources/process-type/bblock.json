@@ -1,14 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
   "name": "Process type register entry",
-  "abstract": "Candidate entry for the OSPD process-type register (Activity 4), linking a process profile, its six-phase position, its provenance class and its proposed openEO equivalences.",
+  "abstract": "Candidate ActivityType register entry for each deployable OSPD process, typed as a PROV activity class and linked to its process profile, six-phase position, provenance class and proposed openEO equivalences.",
   "status": "under-development",
   "dateTimeAddition": "2026-09-22T00:00:00Z",
-  "dateOfLastChange": "2026-09-22",
+  "dateOfLastChange": "2026-11-05",
   "version": "0.1",
   "itemClass": "schema",
   "register": "process-profiles",
-  "dependsOn": [],
+  "dependsOn": ["ogc.register.schemas.activity-types-schema"],
   "seeAlso": [
     "ogc.bbr.provenance.activity",
     "ogc.bbr.wf4ever.wfprov.ProcessRun",
@@ -20,8 +20,16 @@
   "ldContext": "context.jsonld",
   "sources": [
     {
-      "title": "ISO 19135-1 Geographic information - Procedures for item registration",
-      "link": "https://www.iso.org/standard/54721.html"
+      "title": "Registered Item Model",
+      "link": "https://ogcincubator.github.io/registered-item-model/"
+    },
+    {
+      "title": "Activity Type Register",
+      "link": "https://ogcincubator.github.io/activity-type-register/"
+    },
+    {
+      "title": "W3C PROV-O: The PROV Ontology",
+      "link": "https://www.w3.org/TR/prov-o/"
     },
     {
       "title": "SKOS Simple Knowledge Organization System Reference",
@@ -30,5 +38,7 @@
   ],
   "maturity": "development",
   "highlighted": true,
-  "group": "OSPD"
+  "group": "OSPD",
+  "isProfileOf": ["ogc.register.schemas.activity-types-schema"],
+  "shaclShapes": ["shapes.shacl"]
 }

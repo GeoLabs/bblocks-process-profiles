@@ -1,193 +1,263 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-description: |
-  Candidate entry for the OSPD process-type register (Activity 4). A process type classifies the
-  activities recorded in provenance: a provenance Activity of this type carries the entry `id` as
-  its `activityType`. The entry is modelled as a SKOS concept; openEO equivalences use the SKOS
-  mapping properties.
+title: Registered Process Activity Type
+description: 'A candidate process-type register item which is also a class used as the PROV rdf:type of
+  executions. It profiles the Registered Item Model activity-type schema; each entry is both an acttype:ActivityType
+  register item and an owl:Class specialising acttype:ActivityType.
 
-  The entry describes the *type* of activity only. What an activity of this type executes -- its
-  plan, a `prov:Plan` -- is kept apart in `plan`: the OGC Application Package served by OGC API -
-  Processes - Part 2 (Deploy, Replace, Undeploy) at `/processes/{processID}/package`, whose
-  execution unit is the pinned CWL. A run of this type records the same IRI as its
-  `qualifiedAssociation.hadPlan`. A process implemented natively by its server (`mutable: false`)
-  has no Application Package (Part 2 serves `/package` only for dynamically deployed processes)
-  and so no `plan`; `processDescription` is then the only link to what is executed.
-type: object
-required:
+
+  The entry describes the *type* of activity only. What an activity of this type executes -- its plan,
+  a `prov:Plan` -- is kept apart in `plan`: the OGC Application Package served by OGC API - Processes
+  - Part 2 (Deploy, Replace, Undeploy) at `/processes/{processID}/package`, whose execution unit is the
+  pinned CWL. A run of this type records the same IRI as its `qualifiedAssociation.hadPlan`. A process
+  implemented natively by its server (`mutable: false`) has no Application Package (Part 2 serves `/package`
+  only for dynamically deployed processes) and so no `plan`; `processDescription` is then the only link
+  to what is executed.'
+allOf:
+- $ref: bblocks://ogc.register.schemas.activity-types-schema
+- type: object
+  required:
   - id
   - type
   - prefLabel
   - definition
   - inScheme
-  - status
   - phase
   - profile
   - processDescription
   - provenanceClass
   - openeoEquivalence
-properties:
-  id:
-    description: IRI of the process type (also used as `activityType` in provenance records).
-    type: string
-    format: uri
-  type:
-    const: ProcessType
-  prefLabel:
-    type: string
-  definition:
-    type: string
-  inScheme:
-    description: IRI of the process-type register (concept scheme) this entry is proposed to.
-    type: string
-    format: uri
-  status:
-    description: ISO 19135 item status. Entries produced here are candidates, hence `submitted` at most.
-    type: string
-    enum: [submitted, valid, invalid, superseded, retired]
-  phase:
-    description: Position(s) in the six-phase workflow framework.
-    type: array
-    minItems: 1
-    items:
+  - objectIdentifier
+  - itemClass
+  - inRegister
+  - validityStatus
+  - publicationStatus
+  - subClassOf
+  - hasAction
+  properties:
+    id:
+      description: IRI of the process type (also used as `activityType` in provenance records).
       type: string
-      enum:
+      format: uri
+    type:
+      const:
+      - ProcessType
+      - owlClass
+      - ActivityType
+    prefLabel:
+      type: string
+    definition:
+      type: string
+    inScheme:
+      description: IRI of the process-type register (concept scheme) this entry is proposed to.
+      type: string
+      format: uri
+    phase:
+      description: Position(s) in the six-phase workflow framework.
+      type: array
+      minItems: 1
+      items:
+        type: string
+        enum:
         - https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration
         - https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering
         - https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval
         - https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing
         - https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation
         - https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation
-  profile:
-    description: Identifier of the process-profile Building Block.
-    type: string
-  processDescription:
-    description: >-
-      The OGC API - Processes processDescription this type is profiled from, at `href` (the
-      `/processes/{processID}` resource). For a CWL-sourced process it is the description the
-      Application Package would deploy, under the illustrative host `ospd.example.org`; for a live
-      process (e.g. a ZOO-Project deployment, `ospd.process-profiles.sqlmm.*`) the real one.
-    type: object
-    required: [id, version, href]
-    properties:
-      id:
-        type: string
-      version:
-        type: string
-      href:
-        type: string
-        format: uri
-      license:
-        description: Of a live process; omitted, not null, when it declares none -- do not assume one.
-        type: string
-        format: uri
-  plan:
-    description: >-
-      The plan (`prov:Plan`) an activity of this type executes: the OGC Application Package at
-      `/processes/{processID}/package` (OGC API - Processes - Part 2, requirement
-      /req/deploy-replace-undeploy/package-get-op), whose `executionUnit` is the pinned CWL.
-      Present only for a CWL-sourced process.
-    type: object
-    required: [id, type, executionUnit, cwlClass, cwlId]
-    properties:
-      id:
-        type: string
-        format: uri
-        pattern: '/processes/[^/]+/package$'
-      type:
-        const: Plan
-      executionUnit:
-        description: Same link as the Application Package's own `executionUnit` (examples/ogcapppkg.json).
-        type: object
-        required: [href, type]
-        properties:
-          href:
-            description: Pinned URL of the CWL document.
-            type: string
-            format: uri
-          type:
-            type: string
-          rel:
-            type: string
-      cwlClass:
-        enum: [CommandLineTool, Workflow, ExpressionTool]
-      cwlId:
-        type: string
-      license:
-        type: string
-        format: uri
-      cctDependencies:
-        description: EOAP CWL custom types used by the CWL.
-        type: array
-        items:
+    profile:
+      description: Identifier of the process-profile Building Block.
+      type: string
+    processDescription:
+      description: The OGC API - Processes processDescription this type is profiled from, at `href` (the
+        `/processes/{processID}` resource). For a CWL-sourced process it is the description the Application
+        Package would deploy, under the illustrative host `ospd.example.org`; for a live process (e.g.
+        a ZOO-Project deployment, `ospd.process-profiles.sqlmm.*`) the real one.
+      type: object
+      required:
+      - id
+      - version
+      - href
+      properties:
+        id:
           type: string
-          pattern: '^eoap\.cct\.'
-      candidateCctDependencies:
-        description: EOAP CWL custom types that could replace plain CWL types (not used by the CWL).
-        type: array
-        items:
+        version:
           type: string
-          pattern: '^eoap\.cct\.'
-  provenanceClass:
-    description: Class of the run records produced by executing this process.
-    type: string
-    enum:
+        href:
+          type: string
+          format: uri
+        license:
+          description: Of a live process; omitted, not null, when it declares none -- do not assume one.
+          type: string
+          format: uri
+    plan:
+      description: 'The plan (`prov:Plan`) an activity of this type executes: the OGC Application Package
+        at `/processes/{processID}/package` (OGC API - Processes - Part 2, requirement /req/deploy-replace-undeploy/package-get-op),
+        whose `executionUnit` is the pinned CWL. Present only for a CWL-sourced process.'
+      type: object
+      required:
+      - id
+      - type
+      - executionUnit
+      - cwlClass
+      - cwlId
+      properties:
+        id:
+          type: string
+          format: uri
+          pattern: /processes/[^/]+/package$
+        type:
+          const: Plan
+        executionUnit:
+          description: Same link as the Application Package's own `executionUnit` (examples/ogcapppkg.json).
+          type: object
+          required:
+          - href
+          - type
+          properties:
+            href:
+              description: Pinned URL of the CWL document.
+              type: string
+              format: uri
+            type:
+              type: string
+            rel:
+              type: string
+        cwlClass:
+          enum:
+          - CommandLineTool
+          - Workflow
+          - ExpressionTool
+        cwlId:
+          type: string
+        license:
+          type: string
+          format: uri
+        cctDependencies:
+          description: EOAP CWL custom types used by the CWL.
+          type: array
+          items:
+            type: string
+            pattern: ^eoap\.cct\.
+        candidateCctDependencies:
+          description: EOAP CWL custom types that could replace plain CWL types (not used by the CWL).
+          type: array
+          items:
+            type: string
+            pattern: ^eoap\.cct\.
+    provenanceClass:
+      description: Class of the run records produced by executing this process.
+      type: string
+      enum:
       - http://purl.org/wf4ever/wfprov#ProcessRun
       - http://purl.org/wf4ever/wfprov#WorkflowRun
-  implementsProfile:
-    description: >-
-      IRI of the nearest applicable profile this process specialises, in the generic-profiles
-      register -- normally an Implementation Profile (generic-profiles.implementation-profile.*,
-      OGC 14-065 WPS 2.0.2 §7.5.3: standard data formats, still not one specific deployment's own
-      choice), or a Generic Profile directly when no Implementation Profile exists yet. Optional:
-      most processes have no standardised abstract counterpart at all. `processDescription` and
-      `plan` (this entry's own concrete binding) are what further specialise it to one real,
-      deployed process -- Implementation (instance level) in the same standard's terms.
-    type: string
-    format: uri
-  hasStep:
-    description: Process types of the steps of a Workflow.
-    type: array
-    items:
+    implementsProfile:
+      description: 'IRI of the nearest applicable profile this process specialises, in the generic-profiles
+        register -- normally an Implementation Profile (generic-profiles.implementation-profile.*, OGC
+        14-065 WPS 2.0.2 §7.5.3: standard data formats, still not one specific deployment''s own choice),
+        or a Generic Profile directly when no Implementation Profile exists yet. Optional: most processes
+        have no standardised abstract counterpart at all. `processDescription` and `plan` (this entry''s
+        own concrete binding) are what further specialise it to one real, deployed process -- Implementation
+        (instance level) in the same standard''s terms.'
       type: string
       format: uri
-  exactMatch:
-    type: array
-    items:
-      type: string
-      format: uri
-  closeMatch:
-    type: array
-    items:
-      type: string
-      format: uri
-  relatedMatch:
-    type: array
-    items:
-      type: string
-      format: uri
-  openeoEquivalence:
-    type: object
-    required: [level, rationale]
-    properties:
-      level:
-        enum: [exactMatch, closeMatch, none]
-      rationale:
+    hasStep:
+      description: Process types of the steps of a Workflow.
+      type: array
+      items:
         type: string
-      decomposition:
-        description: Ordered correspondence of the stages of a composite or opaque process.
-        type: array
-        items:
-          type: object
-          required: [stage, level]
-          properties:
-            stage:
-              type: string
-            openeo:
-              type: array
-              items:
+        format: uri
+    exactMatch:
+      type: array
+      items:
+        type: string
+        format: uri
+    closeMatch:
+      type: array
+      items:
+        type: string
+        format: uri
+    relatedMatch:
+      type: array
+      items:
+        type: string
+        format: uri
+    openeoEquivalence:
+      type: object
+      required:
+      - level
+      - rationale
+      properties:
+        level:
+          enum:
+          - exactMatch
+          - closeMatch
+          - none
+        rationale:
+          type: string
+        decomposition:
+          description: Ordered correspondence of the stages of a composite or opaque process.
+          type: array
+          items:
+            type: object
+            required:
+            - stage
+            - level
+            properties:
+              stage:
                 type: string
-                pattern: '^ogc\.openeo\.'
-            level:
-              enum: [exactMatch, closeMatch, none]
-            note:
-              type: string
+              openeo:
+                type: array
+                items:
+                  type: string
+                  pattern: ^ogc\.openeo\.
+              level:
+                enum:
+                - exactMatch
+                - closeMatch
+                - none
+              note:
+                type: string
+    itemClass:
+      const: https://w3id.org/ogc/rim/activity-type/activityTypeItemClass
+    inRegister:
+      const: https://geolabs.github.io/bblocks-process-profiles/def/register
+    objectIdentifier:
+      type: string
+      format: uri
+      description: The process-type entry IRI; permanently identifies this register item.
+    validityStatus:
+      enum:
+      - valid
+      - invalid
+    publicationStatus:
+      enum:
+      - published
+      - unpublished
+    subClassOf:
+      const: https://w3id.org/ogc/rim/activity-type/ActivityType
+    hasAction:
+      type: object
+      required:
+      - id
+      - type
+      - actionType
+      - proposer
+      - startedAtTime
+      - appliesTo
+      properties:
+        id:
+          type: string
+          format: uri
+        type:
+          const: RegisterAction
+        actionType:
+          const: addition
+        proposer:
+          const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
+        startedAtTime:
+          type: string
+          format: date-time
+        appliesTo:
+          type: string
+          format: uri
+  additionalProperties: true

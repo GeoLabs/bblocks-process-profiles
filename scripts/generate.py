@@ -31,6 +31,14 @@ ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "scripts"
 BASE = "https://geolabs.github.io/bblocks-process-profiles/def/"
 PTYPE_SCHEME = BASE + "process-type"
+PROCESS_TYPE_REGISTER = BASE + "register"
+GEOLABS_AGENT = BASE + "geolabs"
+# Activity Type Register (ATR) terms. This is the only place that spells the ATR item class IRI:
+# upstream branch `model-tweaks` renames it to ActivityTypeItemClass. Entries take it from here
+# and sync_process_type_schema() writes it into _sources/process-type/schema.yaml.
+ACTTYPE_NS = "https://w3id.org/ogc/rim/activity-type/"
+ATR_ITEM_CLASS = ACTTYPE_NS + "activityTypeItemClass"
+ACTIVITY_TYPE_CLASS = ACTTYPE_NS + "ActivityType"
 PHASE_BASE = BASE + "phase/"
 BBLOCK_IRI = "https://www.opengis.net/def/bblocks/"
 PREFIX = "ospd.process-profiles."
@@ -89,6 +97,9 @@ PROFILE_CONTEXT = {
         "xsd": "http://www.w3.org/2001/XMLSchema#",
         "wfprov": "http://purl.org/wf4ever/wfprov#",
         "oa": "http://www.w3.org/ns/oa#",
+        "rim": "https://w3id.org/ogc/rim/",
+        "acttype": ACTTYPE_NS,
+        "owl": "http://www.w3.org/2002/07/owl#",
 
         "id": "@id",
         # `type` must be claimed here: the inherited /links/type binding (proc:type) is
@@ -99,7 +110,10 @@ PROFILE_CONTEXT = {
         "WorkflowRun": "wfprov:WorkflowRun",
         "WorkflowEngine": "wfprov:WorkflowEngine",
         "Artifact": "wfprov:Artifact",
-        "ProcessType": "skos:Concept",
+        "ProcessType": "pp:ProcessType",
+        "ActivityType": "acttype:ActivityType",
+        "owlClass": "owl:Class",
+        "subClassOf": {"@id": "rdfs:subClassOf", "@type": "@id"},
 
         # processDescription (OGC API - Processes Part 1)
         "title": "dct:title",
@@ -167,6 +181,19 @@ PROFILE_CONTEXT = {
         "wasOutputFrom": {"@id": "prov:generated", "@type": "@id"},
 
         # process-type register entry (mirrors _sources/process-type/context.jsonld)
+        "objectIdentifier": {"@id": "rim:objectIdentifier", "@type": "xsd:anyURI"},
+        "itemClass": {"@id": "rim:itemClass", "@type": "@id"},
+        "inRegister": {"@id": "rim:inRegister", "@type": "@id"},
+        "validityStatus": {"@id": "rim:validityStatus", "@type": "@vocab"},
+        "publicationStatus": {"@id": "rim:publicationStatus", "@type": "@vocab"},
+        "invalid": "rim:invalid",
+        "published": "rim:published",
+        "hasAction": {"@id": "rim:hasAction", "@type": "@id"},
+        "RegisterAction": "rim:RegisterAction",
+        "actionType": {"@id": "rim:actionType", "@type": "@vocab"},
+        "addition": "rim:additionAction",
+        "proposer": {"@id": "rim:proposer", "@type": "@id"},
+        "appliesTo": {"@id": "rim:appliesTo", "@type": "@id"},
         "prefLabel": "skos:prefLabel",
         "definition": "skos:definition",
         "inScheme": {"@id": "skos:inScheme", "@type": "@id"},
@@ -716,16 +743,40 @@ def execution_bundle(proc, pd, run_id, info, job_id, d):
     return {"run": run, "engine": engine, "outputs": outputs}
 
 
+def register_item_fields(entry_id):
+    """The Registered Item Model core shared by every process-type entry.
+
+    A candidate awaits a register decision: `invalid` (not yet in force) and `published` (visible).
+    """
+    return {
+        "type": ["ProcessType", "owlClass", "ActivityType"],
+        "objectIdentifier": entry_id,
+        "itemClass": ATR_ITEM_CLASS,
+        "inRegister": PROCESS_TYPE_REGISTER,
+        "validityStatus": "invalid",
+        "publicationStatus": "published",
+        "subClassOf": ACTIVITY_TYPE_CLASS,
+        "hasAction": {
+            "id": entry_id + "/actions/addition",
+            "type": "RegisterAction",
+            "actionType": "addition",
+            "proposer": GEOLABS_AGENT,
+            "startedAtTime": TODAY + "T00:00:00Z",
+            "appliesTo": entry_id,
+        },
+    }
+
+
 def process_type_entry(proc, pd, cwl_el, src, url, by_key):
     oe = proc["openeo"]
+    entry_id = ptype_iri(proc)
     entry = {
-        "id": ptype_iri(proc),
-        "type": "ProcessType",
+        "id": entry_id,
+        **register_item_fields(entry_id),
         "prefLabel": (proc.get("label") or pd.get("title") or pd["id"]).strip(),
         "definition": " ".join((proc.get("definition") or cwl_el.get("doc") or cwl_el.get("label")
                                 or pd.get("description") or "").split()),
         "inScheme": PTYPE_SCHEME,
-        "status": "submitted",
         "phase": [PHASE_BASE + p for p in proc["phases"]],
         "profile": bb_id(proc),
         "processDescription": {"id": pd["id"], "version": pd["version"], "href": pd_url(pd)},
@@ -914,7 +965,7 @@ def description_md(proc, pd, cwl_el, url, src, corrections, has_exec, info, by_k
                   "Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment."]
     parts += ["", "## openEO equivalence", "", md_openeo(proc["openeo"]), "",
               "## Process type (Activity 4)", "",
-              f"Candidate entry `{ptype_iri(proc)}` (`ospd.process-profiles.process-type`), status `submitted`."]
+              f"Registered ActivityType OWL class `{ptype_iri(proc)}` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision."]
     return "\n".join(parts) + "\n"
 
 
@@ -1066,13 +1117,13 @@ def ogcapi_process_type_entry(proc, pd, src, url, by_key):
     oe = proc["openeo"]
     # A natively implemented process (`mutable: false`) has no Application Package -- Part 2's
     # /package is only served for dynamically deployed ones (req. package-get-op C) -- so no plan.
+    entry_id = ptype_iri(proc)
     entry = {
-        "id": ptype_iri(proc),
-        "type": "ProcessType",
+        "id": entry_id,
+        **register_item_fields(entry_id),
         "prefLabel": (proc.get("label") or pd.get("title") or pd["id"]).strip(),
         "definition": " ".join((proc.get("definition") or pd.get("description") or "").split()),
         "inScheme": PTYPE_SCHEME,
-        "status": "submitted",
         "phase": [PHASE_BASE + p for p in proc["phases"]],
         "profile": bb_id(proc),
         "processDescription": {"id": pd["id"], "version": pd["version"], "href": url},
@@ -1277,7 +1328,7 @@ def ogcapi_examples_yaml(proc, url):
          "snippets": [{"language": "json", "ref": "examples/processDescription.inherited.json",
                        "schema-ref": "#/$defs/inheritedProcessDescription"}]},
         {"title": "process-type entry",
-         "content": f"Candidate entry `{ptype_iri(proc)}` (`{PREFIX}process-type`), status `submitted`, linking to its Implementation Profile.",
+         "content": f"Registered ActivityType OWL class `{ptype_iri(proc)}` (`{PREFIX}process-type`), proposed by GeoLabs and awaiting a register decision, linking to its Implementation Profile.",
          "snippets": [{"language": "json", "ref": "examples/process-type.json", "schema-ref": "#/$defs/processTypeEntry"}]},
     ]
     return [e if not e.get("snippets")
@@ -1349,6 +1400,14 @@ def generate_ogcapi_profiles(sources, roots, by_key, ogcapi_procs, gp_root):
         dump_json(out / "bblock.json", ogcapi_bblock_json(proc, pd, src))
         (out / "description.md").write_text(ogcapi_description_md(proc, pd, url, gp_root))
         print(f"{bb_id(proc):60s} {'OGCAPIProcess':16s} (static processDescription only)")
+
+
+def sync_process_type_schema(pt):
+    """Write ATR_ITEM_CLASS into the otherwise hand-written process-type schema."""
+    path = pt / "schema.yaml"
+    schema = yaml.safe_load(path.read_text())
+    schema["allOf"][1]["properties"]["itemClass"]["const"] = ATR_ITEM_CLASS
+    dump_yaml(path, schema)
 
 
 # ------------------------------------------------------------------ main
@@ -1474,6 +1533,7 @@ def main():
 
     # shared process-type example: reproject-image entry
     pt = ROOT / "_sources" / "process-type"
+    sync_process_type_schema(pt)
     dump_json(pt / "examples" / "reproject-image.json",
               json.loads((ROOT / "_sources/algae-bloom/reproject-image/examples/process-type.json").read_text()))
     dump_json(pt / "examples" / "kindgrove-mangrove.json",

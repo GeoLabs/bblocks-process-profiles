@@ -1,0 +1,44 @@
+@prefix pp:      <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
+@prefix rim:     <https://w3id.org/ogc/rim/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+pp: a owl:Ontology ;
+    owl:imports <https://w3id.org/ogc/rim/> , <https://w3id.org/ogc/rim/activity-type/> ;
+    dct:title "OSPD process-type register profile" ;
+    dct:description "Profiles the Registered Item Model ActivityType for deployable OSPD CWL process types. Each process-type record is a governed ActivityType item and an OWL class used as rdf:type on its PROV activity records." ;
+    dct:creator "GeoLabs SARL" .
+
+# ProcessType records are both SKOS concepts and registered ActivityType classes.
+pp:ProcessType a owl:Class ;
+    rdfs:subClassOf acttype:ActivityType, skos:Concept ;
+    rdfs:isDefinedBy pp: ;
+    rdfs:label "OSPD process type" .
+
+pp:register a rim:Register ;
+    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/register"^^xsd:anyURI ;
+    rim:functionalIdentifier "https://geolabs.github.io/bblocks-process-profiles/"^^xsd:anyURI ;
+    dct:title "OSPD Process Profiles"@en ;
+    dct:description "Register of deployable OSPD process profiles and their process types."@en ;
+    rim:registerOwner pp:geolabs ;
+    rim:registerManager pp:geolabs ;
+    rim:runsOn pp:registerSystem .
+
+pp:geolabs a prov:Organization ;
+    rdfs:label "GeoLabs SARL" ;
+    rdfs:seeAlso <https://www.geolabs.fr/> .
+
+pp:registerSystem a rim:RegisterSystem ;
+    rdfs:label "OGC Building Blocks register (bblocks-postprocess, GitHub Pages)" ;
+    rdfs:seeAlso <https://github.com/GeoLabs/bblocks-process-profiles/> .
+
+pp:process-type a rim:ConceptSystem, skos:ConceptScheme ;
+    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type"^^xsd:anyURI ;
+    dct:title "OSPD process types"@en ;
+    skos:prefLabel "OSPD process types"@en ;
+    dct:description "Process types that classify the deployable CWL activities recorded in provenance."@en .

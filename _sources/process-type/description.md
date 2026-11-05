@@ -1,8 +1,33 @@
-Schema of a **candidate process-type register entry** (OSPD Activity 4).
+A **registered ActivityType** for each deployable process in the OSPD workflows. Each entry is both
+a RIM register item and an OWL class; its IRI is the `rdf:type` carried by the PROV activities
+recorded when that process executes.
 
-A process type classifies the activities recorded in provenance. The link is one-way and uses
-plain W3C PROV: a provenance `Activity` (or a `wfprov:ProcessRun` / `wfprov:WorkflowRun`) of this
-type carries the entry `id` in `activityType`. The entry itself is a SKOS concept:
+## Registered Item Model
+
+Each process-type entry is both:
+
+- a `rim:RegisterItem` of the Activity Type Register's item class, held in the OSPD process-profiles
+  register;
+- an `acttype:ActivityType` and an `owl:Class` specialising `acttype:ActivityType`, so that its own
+  IRI can be the RDF type of a provenance activity.
+
+The schema profiles `ogc.register.schemas.activity-types-schema` from the
+[Activity Type Register](https://ogcincubator.github.io/activity-type-register/) and, through it, the
+[Registered Item Model](https://ogcincubator.github.io/registered-item-model/). Each entry has the RIM
+required core (object identifier, item class, validity and publication status) and records its
+addition as a `rim:RegisterAction` proposed by GeoLabs. There is no single-list `status`. A candidate
+awaits a register decision, so it is `invalid` (not yet in force) and `published` (visible).
+
+The item class is defined by the Activity Type Register and reused here: RIM permits reuse of a
+register item class. The entries remain governed by this register and set `rim:inRegister` to its own
+register IRI. `acttype:ActivityTypeShape`, inherited from the Activity Type Register, checks the item
+class. `scripts/generate.py` holds its IRI in one constant, `ATR_ITEM_CLASS`, because upstream prepares
+a rename.
+
+## Additional classification
+
+The link to provenance is one-way and uses plain W3C PROV: a provenance `Activity` (or a
+`wfprov:ProcessRun` / `wfprov:WorkflowRun`) of this type carries the entry `id` in `activityType`.
 
 - `phase` (→ `skos:broader`) positions the process in the six-phase framework
   (filter configuration → selection/filtering → data retrieval → pre-processing →
@@ -33,7 +58,11 @@ has no Application Package: Part 2 serves `/package` only for dynamically deploy
 (requirement `package-get-op`, C). Such an entry has no `plan`; its `processDescription.href` is
 the live process.
 
-Status values follow ISO 19135. Entries in this register are candidates: at most `submitted`.
+## Relation to process profiles and provenance
+
+These entries describe **deployed process types** (tier 4), not the provider-independent WPS
+Implementation Profiles (tier 3) of `bblocks-generic-profiles`. They are therefore the appropriate
+place to profile `acttype:ActivityType`.
 
 The `pp:` vocabulary (`https://geolabs.github.io/bblocks-process-profiles/def/`) and the phase IRIs
 are provisional, pending a decision on the process-type register namespace.

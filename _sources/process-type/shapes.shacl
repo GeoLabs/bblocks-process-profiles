@@ -1,0 +1,21 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix pp:      <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
+@prefix rim:     <https://w3id.org/ogc/rim/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+
+# The activity-type register's inherited shapes enforce acttype:ActivityType and the fixed item class.
+# This profile pins the process-types register, SKOS scheme and class identity used by provenance.
+pp:ProcessTypeShape a sh:NodeShape ;
+    sh:targetClass pp:ProcessType ;
+    sh:property [ sh:path rim:inRegister ; sh:hasValue pp:register ;
+                  sh:message "A process type must be held in the OSPD process-profiles register." ] ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue pp:process-type ;
+                  sh:message "A process type must belong to pp:process-type." ] ;
+    sh:property [ sh:path rdf:type ; sh:hasValue owl:Class ;
+                  sh:message "A process-type IRI must also be an OWL class because provenance uses it as rdf:type." ] ;
+    sh:property [ sh:path rdfs:subClassOf ; sh:hasValue acttype:ActivityType ;
+                  sh:message "A process-type class must specialise acttype:ActivityType." ] .

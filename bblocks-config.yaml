@@ -23,8 +23,8 @@ description: |
     `eoap.cct.cwl-to-ogcprocess` mapping (deviations are documented, not hidden);
   - a provenance view expressed as an instance of the generic provenance profile
     (`ogc.bbr.provenance.*`);
-  - a candidate process-type entry (`ospd.process-profiles.process-type`) for the OSPD
-    process-type register (Activity 4);
+  - a registered ActivityType entry (`ospd.process-profiles.process-type`) for each deployed
+    process, typed as the RDF class carried by its PROV activity (Activity 4);
   - proposed openEO equivalences (`ogc.openeo.*`) with an explicit level
     (exactMatch / closeMatch / none) and rationale;
   - a representative execution example.
@@ -59,6 +59,9 @@ imports:
   - https://geolabs.github.io/bblocks-eoap-cct/build/register.json
   # openEO processes and types
   - https://geolabs.github.io/bblocks-openeo/build/register.json
+  # Registered Item Model and its Activity Type profile, for the OSPD process-type entries
+  - https://ogcincubator.github.io/registered-item-model/build/register.json
+  - https://ogcincubator.github.io/activity-type-register/build/register.json
   # OGC API - Processes: Part 1 schemas, Part 2 (DRU) schemas, standard-as-BBs (Part 1 Core requirements class)
   - https://geolabs.github.io/bblocks-ogcapi-processes/build/register.json
   - https://geolabs.github.io/bblock-ogcapi-processes-part2/build/register.json
