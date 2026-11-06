@@ -24,7 +24,7 @@ IsSimple, GetArea -> `ospd.process-profiles.sqlmm.{centroid,convex-hull,is-simpl
 `bblocks-generic-profiles` side merging the former dedicated `geometry-extent` Generic Profile
 into a new shared `unary-geometry-operation` (alongside `centroid`/`convex-hull`) and adding
 `unary-spatial-predicate` (`is-simple`) and `geometry-measure` (`area`) -- see that register's own
-`docs/ARCHITECTURE.md`. `bblocks-generic-profiles` itself validates separately at **41/41
+`generic-profile/description.md`. `bblocks-generic-profiles` itself validates separately at **41/41
 building blocks, 0 errors**.
 
 Environment note for whoever runs `scripts/generate.py` locally rather than only through
