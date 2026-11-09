@@ -222,6 +222,9 @@ PROFILE_CONTEXT = {
         "stage": "pp:stage",
         "openeo": "pp:openeo",
         "note": "skos:note",
+        "serverSideFiles": {"@id": "pp:serverSideFile", "@context": {
+            "name": "pp:liveName", "side": "pp:side",
+            "implements": {"@id": "pp:implements", "@type": "@id"}, "location": "pp:location"}},
     }
 }
 
@@ -1133,6 +1136,15 @@ def ogcapi_process_type_entry(proc, pd, src, url, by_key):
         entry["processDescription"]["license"] = src["license"]
     if proc.get("implementsProfile"):
         entry["implementsProfile"] = proc["implementsProfile"]
+        # Inputs and outputs that this deployment passes as names of files stored on the server, not
+        # as encoded data: no media type is served for them, by design (profiles.yaml
+        # `server_side_files`). Each names the Implementation Profile role whose format the file has.
+        ssf = proc.get("server_side_files")
+        if ssf:
+            entry["serverSideFiles"] = [
+                {"name": live, "side": side, "implements": f"{proc['implementsProfile']}/{side}/{role}",
+                 "location": " ".join(ssf["location"].split())}
+                for side in ("inputs", "outputs") for live, role in (ssf.get(side) or {}).items()]
     for rel in ("exactMatch", "closeMatch", "relatedMatch"):
         if oe.get(rel):
             entry[rel] = [BBLOCK_IRI + t for t in oe[rel]]
@@ -1358,6 +1370,16 @@ def ogcapi_description_md(proc, pd, url, gp_root):
             parts += [" ".join(tool["description"].split())]
         if tool.get("notes"):
             parts += ["", "On this deployment:", ""] + [f"- {n}" for n in tool["notes"]]
+    ssf = proc.get("server_side_files")
+    if ssf:
+        parts += ["", "## Inputs and outputs passed as server-side file names", "",
+                  " ".join(ssf["location"].split()), "",
+                  "| Live | Side | Implementation Profile role, whose format the file has |", "|---|---|---|"]
+        for side in ("inputs", "outputs"):
+            for live, role in (ssf.get(side) or {}).items():
+                parts.append(f"| `{live}` | {side[:-1]} | [`{role}`]({ip_iri}/{side}/{role}) |")
+        parts += ["", "This deployment serves no media type for them: not a format gap. The entry declares them "
+                  "in `serverSideFiles` of `process-type.json`."]
     b, unbound = proc.get("bindings", {}), proc.get("unbound", {})
     parts += ["", "## Implementation Profile", "",
               f"Implements [`{ip['prefLabel']}`]({ip_iri}) "

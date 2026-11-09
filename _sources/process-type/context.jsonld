@@ -80,6 +80,15 @@
     "decomposition": { "@id": "pp:decomposition", "@container": "@list" },
     "stage": "pp:stage",
     "openeo": "pp:openeo",
-    "note": "skos:note"
+    "note": "skos:note",
+    "serverSideFiles": {
+      "@id": "pp:serverSideFile",
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": { "@id": "pp:implements", "@type": "@id" },
+        "location": "pp:location"
+      }
+    }
   }
 }

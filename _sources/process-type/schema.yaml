@@ -150,6 +150,31 @@ allOf:
       enum:
       - http://purl.org/wf4ever/wfprov#ProcessRun
       - http://purl.org/wf4ever/wfprov#WorkflowRun
+    serverSideFiles:
+      description: Inputs and outputs that this deployment passes as names of files stored on the server
+        (relative to the ZOO-Kernel `dataPath`), not as encoded data, so with no media type. Each names
+        the Implementation Profile role whose format the file has (`implements`).
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+        - name
+        - side
+        - implements
+        - location
+        properties:
+          name:
+            type: string
+          side:
+            enum:
+            - inputs
+            - outputs
+          implements:
+            type: string
+            format: uri
+          location:
+            type: string
     implementsProfile:
       description: 'IRI of the nearest applicable profile this process specialises, in the generic-profiles
         register -- normally an Implementation Profile (generic-profiles.implementation-profile.*, OGC

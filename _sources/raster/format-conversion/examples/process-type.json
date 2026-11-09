@@ -33,6 +33,20 @@
   },
   "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion",
+  "serverSideFiles": [
+    {
+      "name": "InputDSN",
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/inputs/raster",
+      "location": "A file name, relative to the directory set by `dataPath` in the `[main]` section of the ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process reads or writes it there. Its format is the representation of the Implementation Profile role it implements (GeoTIFF for raster)."
+    },
+    {
+      "name": "Result",
+      "side": "outputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/outputs/raster",
+      "location": "A file name, relative to the directory set by `dataPath` in the `[main]` section of the ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process reads or writes it there. Its format is the representation of the Implementation Profile role it implements (GeoTIFF for raster)."
+    }
+  ],
   "closeMatch": [
     "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.save_result"
   ],
