@@ -121,10 +121,13 @@ To run it:
 ```
 
 If the generic provenance profile or the Part 2 register are not published on GitHub Pages
-(Q-PUB), copy `bblocks-config-local.yaml.example` to `bblocks-config-local.yaml` (git-ignored),
-adjust the paths to local builds of those registers and mount them with `.volumes`
-(bblocks-postprocess `url-mappings`, see
-<https://ogcincubator.github.io/bblocks-docs/create/imports#local-url-mappings-for-testing>).
+(Q-PUB), copy `bblocks-config-local.yml.example` to `bblocks-config-local.yml` (git-ignored; the
+postprocessor reads only that name), add the paths to local builds of those registers and mount them
+with `.volumes` (bblocks-postprocess `url-mappings`, see
+<https://ogcincubator.github.io/bblocks-docs/create/imports#local-url-mappings-for-testing>). The
+example already maps the unpublished data-types, data-formats and generic-profiles registers and,
+temporarily, the Registered Item Model: see [`LOCAL-BUILD.md`](LOCAL-BUILD.md), which also says how
+to build the upstream registers (published URL as base URL).
 
 ## Offline pre-check (done)
 
