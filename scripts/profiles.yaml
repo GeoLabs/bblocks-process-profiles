@@ -1187,6 +1187,14 @@ ogcapi_processes:
     phases: [pre-processing]
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection
     bindings: {inputs: {InputDSN: raster, t_srs: targetCRS}, outputs: {Result: raster}}
+    tool:
+      name: GDAL gdalwarp
+      doc: https://gdal.org/programs/gdalwarp.html
+      documented: GDAL documentation, current version (the deployed GDAL version is not exposed by the service)
+      description: >-
+        Image mosaicing, reprojection and warping utility. Cited until 2026-11-09 as a source of the
+        Implementation Profile raster-reprojection of bblocks-generic-profiles, which no longer names
+        tools (decision D4).
     openeo:
       level: closeMatch
       closeMatch: [ogc.openeo.processes.cubes.resample_spatial]
@@ -1291,6 +1299,14 @@ ogcapi_processes:
     phases: [export-aggregation]
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion
     bindings: {inputs: {InputDSN: raster, Format: targetFormat}, outputs: {Result: raster}}
+    tool:
+      name: GDAL gdal_translate
+      doc: https://gdal.org/programs/gdal_translate.html
+      documented: GDAL documentation, current version (the deployed GDAL version is not exposed by the service)
+      description: >-
+        Converts raster data between formats. Cited until 2026-11-09 as a source of the
+        Implementation Profile raster-format-conversion of bblocks-generic-profiles, which no longer
+        names tools (decision D4).
     openeo:
       level: closeMatch
       closeMatch: [ogc.openeo.processes.cubes.save_result]

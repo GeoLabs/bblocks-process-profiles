@@ -4,6 +4,12 @@ Process profile of the live OGC API - Processes process `Gdal_Warp` (ZOO-Project
 
 (the process's own description, as served)
 
+## The tool behind it
+
+[GDAL gdalwarp](https://gdal.org/programs/gdalwarp.html) -- GDAL documentation, current version (the deployed GDAL version is not exposed by the service).
+
+Image mosaicing, reprojection and warping utility. Cited until 2026-11-09 as a source of the Implementation Profile raster-reprojection of bblocks-generic-profiles, which no longer names tools (decision D4).
+
 ## Implementation Profile
 
 Implements [`Raster reprojection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection) (`generic-profiles.implementation-profile.raster-reprojection`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
