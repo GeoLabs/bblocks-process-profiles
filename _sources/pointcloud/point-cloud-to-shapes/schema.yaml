@@ -60,10 +60,6 @@ $defs:
               const: feature collection
           - contains:
               const: conversion
-          - contains:
-              const: Point Cloud to Shapes
-          - contains:
-              const: pointcloud_tools
         metadata:
           allOf:
           - contains:
@@ -110,8 +106,6 @@ $defs:
                   allOf:
                   - contains:
                       const: point cloud
-                  - contains:
-                      const: LAS
                 metadata:
                   allOf:
                   - contains:
@@ -148,8 +142,6 @@ $defs:
                   allOf:
                   - contains:
                       const: feature collection
-                  - contains:
-                      const: GML
                 metadata:
                   allOf:
                   - contains:

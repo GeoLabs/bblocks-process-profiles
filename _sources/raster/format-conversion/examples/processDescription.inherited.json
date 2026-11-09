@@ -44,9 +44,7 @@
   "keywords": [
     "raster",
     "coverage",
-    "format conversion",
-    "GDAL",
-    "gdal_translate"
+    "format conversion"
   ],
   "inputs": {
     "Format": {
@@ -88,8 +86,7 @@
       "title": "The input data source name",
       "description": "The input data source name to use as source for convertion.",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {
@@ -120,8 +117,7 @@
       "title": "The resulting converted file",
       "description": "The file name resulting of the convertion",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

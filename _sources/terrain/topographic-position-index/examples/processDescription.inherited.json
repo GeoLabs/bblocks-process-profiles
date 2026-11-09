@@ -26,8 +26,7 @@
     "elevation",
     "raster",
     "derivative",
-    "TPI",
-    "ta_morphometry"
+    "TPI"
   ],
   "metadata": [
     {
@@ -51,8 +50,7 @@
       "title": "Elevation",
       "description": "Elevation",
       "keywords": [
-        "elevation",
-        "GeoTIFF"
+        "elevation"
       ],
       "metadata": [
         {
@@ -183,8 +181,7 @@
       "title": "Topographic Position Index",
       "description": "Topographic Position Index",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

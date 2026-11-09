@@ -45,16 +45,14 @@
     "vector",
     "geometry",
     "derived geometry",
-    "Centroid",
-    "ST_Centroid"
+    "Centroid"
   ],
   "inputs": {
     "InputPolygon": {
       "title": "Polygon to get the centroid",
       "description": "The centroid which is not necessarily within the geometry.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -94,8 +92,7 @@
       "title": "The Centroid",
       "description": "JSON String / GML Entity of the centroid",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {

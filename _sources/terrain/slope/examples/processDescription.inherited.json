@@ -26,8 +26,7 @@
     "elevation",
     "raster",
     "derivative",
-    "Slope",
-    "ta_morphometry"
+    "Slope"
   ],
   "metadata": [
     {
@@ -51,8 +50,7 @@
       "title": "Elevation",
       "description": "Elevation",
       "keywords": [
-        "elevation",
-        "GeoTIFF"
+        "elevation"
       ],
       "metadata": [
         {
@@ -149,8 +147,7 @@
       "title": "Slope",
       "description": "Slope",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

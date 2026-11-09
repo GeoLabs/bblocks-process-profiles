@@ -26,8 +26,7 @@
     "geometry",
     "spatial relation",
     "predicate",
-    "Equals",
-    "ST_Equals"
+    "Equals"
   ],
   "metadata": [
     {
@@ -51,8 +50,7 @@
       "title": "the first geometry",
       "description": "the first geometry.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -87,8 +85,7 @@
       "title": "the other geometry",
       "description": "the other geometry.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {

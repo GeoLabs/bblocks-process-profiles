@@ -24,9 +24,7 @@
   "keywords": [
     "raster",
     "coverage",
-    "crop",
-    "OTB",
-    "ExtractROI"
+    "crop"
   ],
   "metadata": [
     {
@@ -50,8 +48,7 @@
       "title": "Image to be processed.",
       "description": "Image to be processed.",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {
@@ -346,8 +343,7 @@
       "title": "Region of interest from the input image",
       "description": "Region of interest from the input image",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

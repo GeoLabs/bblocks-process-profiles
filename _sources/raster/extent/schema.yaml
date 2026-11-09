@@ -70,10 +70,6 @@ $defs:
               const: coverage
           - contains:
               const: extent
-          - contains:
-              const: OTB
-          - contains:
-              const: ImageEnvelope
         metadata:
           allOf:
           - contains:
@@ -120,8 +116,6 @@ $defs:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:
@@ -158,8 +152,6 @@ $defs:
                   allOf:
                   - contains:
                       const: geometry
-                  - contains:
-                      const: GML
                 metadata:
                   allOf:
                   - contains:

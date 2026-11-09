@@ -26,8 +26,7 @@
     "elevation",
     "raster",
     "derivative",
-    "TRI",
-    "ta_morphometry"
+    "TRI"
   ],
   "metadata": [
     {
@@ -51,8 +50,7 @@
       "title": "Elevation",
       "description": "Elevation",
       "keywords": [
-        "elevation",
-        "GeoTIFF"
+        "elevation"
       ],
       "metadata": [
         {
@@ -173,8 +171,7 @@
       "title": "Terrain Ruggedness Index (TRI)",
       "description": "Terrain Ruggedness Index (TRI)",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

@@ -104,10 +104,6 @@ $defs:
               const: coverage
           - contains:
               const: crop
-          - contains:
-              const: OTB
-          - contains:
-              const: ExtractROI
         metadata:
           allOf:
           - contains:
@@ -154,8 +150,6 @@ $defs:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:
@@ -192,8 +186,6 @@ $defs:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:

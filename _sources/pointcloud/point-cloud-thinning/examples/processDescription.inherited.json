@@ -23,9 +23,7 @@
   ],
   "keywords": [
     "point cloud",
-    "thinning",
-    "Point Cloud Thinning",
-    "pointcloud_tools"
+    "thinning"
   ],
   "metadata": [
     {
@@ -49,8 +47,7 @@
       "title": "Points",
       "description": "Points",
       "keywords": [
-        "point cloud",
-        "LAS"
+        "point cloud"
       ],
       "metadata": [
         {
@@ -118,8 +115,7 @@
       "title": "Thinned Points",
       "description": "Thinned Points",
       "keywords": [
-        "point cloud",
-        "LAS"
+        "point cloud"
       ],
       "metadata": [
         {

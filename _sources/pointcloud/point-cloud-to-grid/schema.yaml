@@ -70,10 +70,6 @@ $defs:
               const: raster
           - contains:
               const: rasterization
-          - contains:
-              const: Point Cloud to Grid
-          - contains:
-              const: pointcloud_tools
         metadata:
           allOf:
           - contains:
@@ -121,8 +117,6 @@ $defs:
                   allOf:
                   - contains:
                       const: point cloud
-                  - contains:
-                      const: LAS
                 metadata:
                   allOf:
                   - contains:
@@ -194,8 +188,6 @@ $defs:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:

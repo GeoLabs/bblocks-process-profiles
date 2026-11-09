@@ -62,8 +62,6 @@ $defs:
               const: predicate
           - contains:
               const: IsSimple
-          - contains:
-              const: ST_IsSimple
         metadata:
           allOf:
           - contains:
@@ -110,8 +108,6 @@ $defs:
                   allOf:
                   - contains:
                       const: geometry
-                  - contains:
-                      const: GML
                 metadata:
                   allOf:
                   - contains:

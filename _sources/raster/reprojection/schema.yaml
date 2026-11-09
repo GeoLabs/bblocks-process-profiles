@@ -80,10 +80,6 @@ $defs:
               const: coverage
           - contains:
               const: reprojection
-          - contains:
-              const: GDAL
-          - contains:
-              const: gdalwarp
         metadata:
           allOf:
           - contains:
@@ -131,8 +127,6 @@ $defs:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:
@@ -204,8 +198,6 @@ $defs:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:

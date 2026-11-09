@@ -88,8 +88,6 @@ $defs:
               const: hillshade
           - contains:
               const: Hillshade
-          - contains:
-              const: ta_lighting
         metadata:
           allOf:
           - contains:
@@ -138,8 +136,6 @@ $defs:
                   allOf:
                   - contains:
                       const: elevation
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:
@@ -246,8 +242,6 @@ $defs:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:

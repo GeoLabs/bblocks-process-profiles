@@ -45,16 +45,14 @@
     "vector",
     "geometry",
     "derived geometry",
-    "ConvexHull",
-    "ST_ConvexHull"
+    "ConvexHull"
   ],
   "inputs": {
     "InputPolygon": {
       "title": "Polygon to compute convexhull",
       "description": "URI to a set of GML that describes the polygon.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -94,8 +92,7 @@
       "title": "The convex hull of the geometry",
       "description": "The convex hull of the geometry",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {

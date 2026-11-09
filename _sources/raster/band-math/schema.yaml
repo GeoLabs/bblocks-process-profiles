@@ -66,10 +66,6 @@ $defs:
               const: coverage
           - contains:
               const: band math
-          - contains:
-              const: OTB
-          - contains:
-              const: BandMath
         metadata:
           allOf:
           - contains:
@@ -117,8 +113,6 @@ $defs:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:
@@ -186,8 +180,6 @@ $defs:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:

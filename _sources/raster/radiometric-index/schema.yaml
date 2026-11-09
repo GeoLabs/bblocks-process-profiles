@@ -74,10 +74,6 @@ $defs:
               const: coverage
           - contains:
               const: radiometric index
-          - contains:
-              const: OTB
-          - contains:
-              const: RadiometricIndices
         metadata:
           allOf:
           - contains:
@@ -124,8 +120,6 @@ $defs:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:
@@ -162,8 +156,6 @@ $defs:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:

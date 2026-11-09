@@ -64,8 +64,6 @@ $defs:
               const: derived geometry
           - contains:
               const: Envelope
-          - contains:
-              const: SAGA GIS
         metadata:
           allOf:
           - contains:
@@ -112,8 +110,6 @@ $defs:
                   allOf:
                   - contains:
                       const: geometry
-                  - contains:
-                      const: GML
                 metadata:
                   allOf:
                   - contains:
@@ -150,8 +146,6 @@ $defs:
                   allOf:
                   - contains:
                       const: geometry
-                  - contains:
-                      const: GML
                 metadata:
                   allOf:
                   - contains:

@@ -24,9 +24,7 @@
   "keywords": [
     "point cloud",
     "feature collection",
-    "conversion",
-    "Point Cloud to Shapes",
-    "pointcloud_tools"
+    "conversion"
   ],
   "metadata": [
     {
@@ -50,8 +48,7 @@
       "title": "Points",
       "description": "Points",
       "keywords": [
-        "point cloud",
-        "LAS"
+        "point cloud"
       ],
       "metadata": [
         {
@@ -81,8 +78,7 @@
       "title": "Shapes",
       "description": "Shapes",
       "keywords": [
-        "feature collection",
-        "GML"
+        "feature collection"
       ],
       "metadata": [
         {

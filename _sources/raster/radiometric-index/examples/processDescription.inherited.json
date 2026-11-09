@@ -24,9 +24,7 @@
   "keywords": [
     "raster",
     "coverage",
-    "radiometric index",
-    "OTB",
-    "RadiometricIndices"
+    "radiometric index"
   ],
   "metadata": [
     {
@@ -50,8 +48,7 @@
       "title": "Input image",
       "description": "Input image",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {
@@ -158,8 +155,7 @@
       "title": "Radiometric indices output image",
       "description": "Radiometric indices output image",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

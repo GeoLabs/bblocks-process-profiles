@@ -24,9 +24,7 @@
   "keywords": [
     "point cloud",
     "raster",
-    "rasterization",
-    "Point Cloud to Grid",
-    "pointcloud_tools"
+    "rasterization"
   ],
   "metadata": [
     {
@@ -50,8 +48,7 @@
       "title": "Points",
       "description": "Points",
       "keywords": [
-        "point cloud",
-        "LAS"
+        "point cloud"
       ],
       "metadata": [
         {
@@ -138,8 +135,7 @@
       "title": "Z Value",
       "description": "Z Value",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

@@ -66,8 +66,6 @@ $defs:
               const: predicate
           - contains:
               const: Crosses
-          - contains:
-              const: ST_Crosses
         metadata:
           allOf:
           - contains:
@@ -115,8 +113,6 @@ $defs:
                   allOf:
                   - contains:
                       const: geometry
-                  - contains:
-                      const: GML
                 metadata:
                   allOf:
                   - contains:
@@ -148,8 +144,6 @@ $defs:
                   allOf:
                   - contains:
                       const: geometry
-                  - contains:
-                      const: GML
                 metadata:
                   allOf:
                   - contains:

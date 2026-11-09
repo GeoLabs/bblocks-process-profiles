@@ -46,16 +46,14 @@
     "geometry",
     "spatial analysis",
     "buffer",
-    "Buffer",
-    "ST_Buffer"
+    "Buffer"
   ],
   "inputs": {
     "InputPolygon": {
       "title": "Polygon to be buffered",
       "description": "URI to a set of GML that describes the polygon.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -118,8 +116,7 @@
       "title": "Buffered Polygon",
       "description": "GML stream describing the buffered polygon feature.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {

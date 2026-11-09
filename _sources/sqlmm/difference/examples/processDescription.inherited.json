@@ -46,16 +46,14 @@
     "geometry",
     "spatial analysis",
     "set operation",
-    "Difference",
-    "ST_Difference"
+    "Difference"
   ],
   "inputs": {
     "InputEntity1": {
       "title": "the first geometry",
       "description": "the first geometry to compare against.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -93,8 +91,7 @@
       "title": "the other geometry",
       "description": "the other geometry to compare against.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -134,8 +131,7 @@
       "title": "The difference between two geometries",
       "description": "The difference between the two geometries.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {

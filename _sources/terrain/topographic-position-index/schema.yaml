@@ -78,8 +78,6 @@ $defs:
               const: derivative
           - contains:
               const: TPI
-          - contains:
-              const: ta_morphometry
         metadata:
           allOf:
           - contains:
@@ -126,8 +124,6 @@ $defs:
                   allOf:
                   - contains:
                       const: elevation
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:
@@ -164,8 +160,6 @@ $defs:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:

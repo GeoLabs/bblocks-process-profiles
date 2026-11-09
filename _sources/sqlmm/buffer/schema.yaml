@@ -66,8 +66,6 @@ $defs:
               const: buffer
           - contains:
               const: Buffer
-          - contains:
-              const: ST_Buffer
         metadata:
           allOf:
           - contains:
@@ -115,8 +113,6 @@ $defs:
                   allOf:
                   - contains:
                       const: geometry
-                  - contains:
-                      const: GML
                 metadata:
                   allOf:
                   - contains:
@@ -188,8 +184,6 @@ $defs:
                   allOf:
                   - contains:
                       const: geometry
-                  - contains:
-                      const: GML
                 metadata:
                   allOf:
                   - contains:

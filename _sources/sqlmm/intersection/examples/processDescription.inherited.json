@@ -46,16 +46,14 @@
     "geometry",
     "spatial analysis",
     "set operation",
-    "Intersection",
-    "ST_Intersection"
+    "Intersection"
   ],
   "inputs": {
     "InputEntity1": {
       "title": "the first geometry",
       "description": "the first geometry to compare against.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -93,8 +91,7 @@
       "title": "the other geometry",
       "description": "the other geometry to compare against.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -134,8 +131,7 @@
       "title": "Intersection of geometries",
       "description": "A new geometry representing the intersection or NULL if there is no intersection or an error occurs.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {

@@ -27,8 +27,7 @@
     "raster",
     "illumination",
     "hillshade",
-    "Hillshade",
-    "ta_lighting"
+    "Hillshade"
   ],
   "metadata": [
     {
@@ -52,8 +51,7 @@
       "title": "Elevation",
       "description": "Elevation",
       "keywords": [
-        "elevation",
-        "GeoTIFF"
+        "elevation"
       ],
       "metadata": [
         {
@@ -269,8 +267,7 @@
       "title": "Analytical Hillshading",
       "description": "The angle between the surface and the incoming light beams, measured in radians.",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

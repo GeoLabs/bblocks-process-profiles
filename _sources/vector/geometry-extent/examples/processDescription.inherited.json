@@ -25,8 +25,7 @@
     "vector",
     "geometry",
     "derived geometry",
-    "Envelope",
-    "SAGA GIS"
+    "Envelope"
   ],
   "metadata": [
     {
@@ -50,8 +49,7 @@
       "title": "Shapes",
       "description": "Shapes",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -104,8 +102,7 @@
       "title": "Extents",
       "description": "Extents",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {

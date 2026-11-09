@@ -46,16 +46,14 @@
     "geometry",
     "spatial analysis",
     "set operation",
-    "SymDifference",
-    "ST_SymDifference"
+    "SymDifference"
   ],
   "inputs": {
     "InputEntity1": {
       "title": "the first geometry",
       "description": "the first geometry to compare against.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -93,8 +91,7 @@
       "title": "the other geometry",
       "description": "the other geometry to compare against.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -134,8 +131,7 @@
       "title": "The resulting geometry",
       "description": "The symmetric difference of two geometries",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {

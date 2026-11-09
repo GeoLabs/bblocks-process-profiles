@@ -24,9 +24,7 @@
   "keywords": [
     "raster",
     "coverage",
-    "extent",
-    "OTB",
-    "ImageEnvelope"
+    "extent"
   ],
   "metadata": [
     {
@@ -50,8 +48,7 @@
       "title": "Input image filename.",
       "description": "Input image filename.",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {
@@ -142,8 +139,7 @@
       "title": "Vector data file containing the envelope.",
       "description": "Vector data file containing the envelope.",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
