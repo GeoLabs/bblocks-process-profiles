@@ -16,17 +16,19 @@ On this deployment:
 
 ## Implementation Profile
 
-Implements [`Slope`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope) (`generic-profiles.implementation-profile.slope`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+Implements [`Slope`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope) (`generic-profiles.implementation-profile.slope`, bblocks-generic-profiles).
 
-| Live | Implementation Profile |
-|---|---|
-| `ELEVATION` | input `elevation` |
-| `METHOD`, `UNIT_SLOPE`, `UNIT_ASPECT` | -- (live-only inputs, Table 21 footnote b) |
-| `SLOPE` | output `result` |
-| `ASPECT`, `C_GENE`, `C_PROF`, `C_PLAN`, `C_TANG`, `C_LONG`, `C_CROS`, `C_MINI`, `C_MAXI`, `C_TOTA`, `C_ROTO` | -- (live-only outputs, Table 21 footnote b) |
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `ELEVATION` | input `elevation` | `elevation-model` |
+| `METHOD`, `UNIT_SLOPE`, `UNIT_ASPECT` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `SLOPE` | output `result` | `raster-single-band` |
+| `ASPECT`, `C_GENE`, `C_PROF`, `C_PLAN`, `C_TANG`, `C_LONG`, `C_CROS`, `C_MINI`, `C_MAXI`, `C_TOTA`, `C_ROTO` | -- (the deployment's own outputs, Table 21 footnote b) | -- |
 
 ## Examples
 
 - `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
-- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles, and the data type of each bound input/output.
 - `process-type.json`: its candidate process-type entry.

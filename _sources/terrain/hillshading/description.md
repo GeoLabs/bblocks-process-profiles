@@ -16,18 +16,20 @@ On this deployment:
 
 ## Implementation Profile
 
-Implements [`Analytical hillshading`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading) (`generic-profiles.implementation-profile.analytical-hillshading`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+Implements [`Analytical hillshading`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading) (`generic-profiles.implementation-profile.analytical-hillshading`, bblocks-generic-profiles).
 
-| Live | Implementation Profile |
-|---|---|
-| `ELEVATION` | input `elevation` |
-| `AZIMUTH` | input `azimuth` |
-| `DECLINATION` | input `altitude` |
-| `METHOD`, `POSITION`, `DATE_MIN`, `TIME`, `EXAGGERATION`, `UNIT`, `SHADOW`, `NDIRS`, `RADIUS` | -- (live-only inputs, Table 21 footnote b) |
-| `SHADE` | output `result` |
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `ELEVATION` | input `elevation` | `elevation-model` |
+| `AZIMUTH` | input `azimuth` | `number` |
+| `DECLINATION` | input `altitude` | `number` |
+| `METHOD`, `POSITION`, `DATE_MIN`, `TIME`, `EXAGGERATION`, `UNIT`, `SHADOW`, `NDIRS`, `RADIUS` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `SHADE` | output `result` | `raster-single-band` |
 
 ## Examples
 
 - `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
-- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles, and the data type of each bound input/output.
 - `process-type.json`: its candidate process-type entry.

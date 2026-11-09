@@ -47,6 +47,7 @@
     "in": {
       "title": "Input image filename.",
       "description": "Input image filename.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
         "raster"
       ],
@@ -138,6 +139,7 @@
     "out": {
       "title": "Vector data file containing the envelope.",
       "description": "Vector data file containing the envelope.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/surface",
       "keywords": [
         "geometry"
       ],

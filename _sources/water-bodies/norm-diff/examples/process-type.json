@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff/actions/addition",
     "type": "RegisterAction",
@@ -21,15 +20,21 @@
   },
   "prefLabel": "Normalized difference between two rasters",
   "definition": "Computes the normalized difference index ((A-B)/(A+B)) of two co-registered rasters.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
-  ],
-  "profile": "ospd.process-profiles.water-bodies.norm-diff",
-  "processDescription": {
-    "id": "norm_diff",
-    "version": "1.4.1",
-    "href": "https://ospd.example.org/ogc-api/processes/norm_diff"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.water-bodies.norm-diff",
+    "processDescription": {
+      "id": "norm_diff",
+      "version": "1.4.1",
+      "href": "https://ospd.example.org/ogc-api/processes/norm_diff"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/norm_diff/package",
@@ -45,12 +50,13 @@
     "cctDependencies": [],
     "candidateCctDependencies": []
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.indices.normalized_difference"
-  ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "Exact index formula, generic over which two bands are passed: NDWI (green, nir) in this workflow, same as `ogc.openeo.processes.math.indices.normalized_difference` used for NDVI elsewhere in this register (`kindgrove.mangrove`) -- it is the caller's band choice, not the tool, that names the index."
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.indices.normalized_difference"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "Exact index formula, generic over which two bands are passed: NDWI (green, nir) in this workflow, same as `ogc.openeo.processes.math.indices.normalized_difference` used for NDVI elsewhere in this register (`kindgrove.mangrove`) -- it is the caller's band choice, not the tool, that names the index."
+    }
   }
 }

@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-product-safe/actions/addition",
     "type": "RegisterAction",
@@ -21,15 +20,21 @@
   },
   "prefLabel": "Downloads Copernicus products.",
   "definition": "Downloads the Copernicus product from S3 using the Sentinel-2 SAFE manifest.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval"
-  ],
-  "profile": "ospd.process-profiles.algae-bloom.download-band-sentinel2-product-safe",
-  "processDescription": {
-    "id": "download-band-sentinel2-product-safe",
-    "version": "1.1.0",
-    "href": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.algae-bloom.download-band-sentinel2-product-safe",
+    "processDescription": {
+      "id": "download-band-sentinel2-product-safe",
+      "version": "1.1.0",
+      "href": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe/package",
@@ -47,16 +52,17 @@
       "eoap.cct.string-format"
     ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection",
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.filter_bands"
-  ],
-  "relatedMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.types.band-name"
-  ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "Same operation as the STAC-Item variant (one band of one product) but reading the SAFE archive on S3 with user credentials and a `resolution` selector (10m/20m/60m). openEO has no credential parameters (handled by the back-end) and chooses native resolution per band; choosing another resolution is resample_spatial territory."
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection",
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.filter_bands"
+    ],
+    "relatedMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.types.band-name"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "Same operation as the STAC-Item variant (one band of one product) but reading the SAFE archive on S3 with user credentials and a `resolution` selector (10m/20m/60m). openEO has no credential parameters (handled by the back-end) and chooses native resolution per band; choosing another resolution is resample_spatial territory."
+    }
   }
 }

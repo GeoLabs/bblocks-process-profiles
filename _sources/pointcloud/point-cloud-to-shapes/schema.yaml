@@ -99,9 +99,12 @@ $defs:
           properties:
             POINTS:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/point-cloud
                 keywords:
                   allOf:
                   - contains:
@@ -135,9 +138,12 @@ $defs:
           properties:
             SHAPES:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/feature-collection
                 keywords:
                   allOf:
                   - contains:

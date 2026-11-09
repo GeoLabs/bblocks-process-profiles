@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2/actions/addition",
     "type": "RegisterAction",
@@ -21,15 +20,21 @@
   },
   "prefLabel": "Searches the specified catalog for Sentinel-2 products matching filtering criteria.",
   "definition": "Searches a catalog for Sentinel-2 products using filtering parameters and returns all matched locations. Returned matches will be either S3 or direct HTTPS references depending on the catalog.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering"
-  ],
-  "profile": "ospd.process-profiles.algae-bloom.select-products-sentinel2",
-  "processDescription": {
-    "id": "select-products-sentinel2",
-    "version": "1.1.0",
-    "href": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.algae-bloom.select-products-sentinel2",
+    "processDescription": {
+      "id": "select-products-sentinel2",
+      "version": "1.1.0",
+      "href": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package",
@@ -48,18 +53,19 @@
       "eoap.cct.string-format"
     ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection"
-  ],
-  "relatedMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.types.geojson",
-    "https://www.opengis.net/def/bblocks/ogc.openeo.types.temporal-interval",
-    "https://www.opengis.net/def/bblocks/ogc.openeo.types.collection-id",
-    "https://www.opengis.net/def/bblocks/ogc.openeo.types.metadata-filter"
-  ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "Same filter semantics as load_collection's `id` (collection), `spatial_extent` (aoi), `temporal_extent` (date±delta or toi) and `properties` (eo:cloud_cover) parameters. Not an exactMatch: the tool only selects (returns product URLs) and does not load data; the `catalog` switch (copernicus / earth-search) is a back-end choice with no openEO parameter; `date`+`delta` must be turned into an interval; the Earth-Search branch filters `0 < eo:cloud_cover < cloud_cover` (strict, excludes 0) where an openEO `lte` filter would be expected."
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection"
+    ],
+    "relatedMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.types.geojson",
+      "https://www.opengis.net/def/bblocks/ogc.openeo.types.temporal-interval",
+      "https://www.opengis.net/def/bblocks/ogc.openeo.types.collection-id",
+      "https://www.opengis.net/def/bblocks/ogc.openeo.types.metadata-filter"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "Same filter semantics as load_collection's `id` (collection), `spatial_extent` (aoi), `temporal_extent` (date±delta or toi) and `properties` (eo:cloud_cover) parameters. Not an exactMatch: the tool only selects (returns product URLs) and does not load data; the `catalog` switch (copernicus / earth-search) is a back-end choice with no openEO parameter; `date`+`delta` must be turned into an interval; the Earth-Search branch filters `0 < eo:cloud_cover < cloud_cover` (strict, excludes 0) where an openEO `lte` filter would be expected."
+    }
   }
 }

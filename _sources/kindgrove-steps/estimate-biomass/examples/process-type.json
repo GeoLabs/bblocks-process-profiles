@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/estimate-biomass/actions/addition",
     "type": "RegisterAction",
@@ -21,15 +20,21 @@
   },
   "prefLabel": "Mangrove detection, allometric biomass and IPCC carbon stock",
   "definition": "Detects mangrove pixels and estimates above-ground biomass and carbon stock from NDVI, NDWI and SAVI.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
-  ],
-  "profile": "ospd.process-profiles.kindgrove-steps.estimate-biomass",
-  "processDescription": {
-    "id": "estimate_biomass",
-    "version": "0.1.0",
-    "href": "https://ospd.example.org/ogc-api/processes/estimate_biomass"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.kindgrove-steps.estimate-biomass",
+    "processDescription": {
+      "id": "estimate_biomass",
+      "version": "0.1.0",
+      "href": "https://ospd.example.org/ogc-api/processes/estimate_biomass"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/estimate_biomass/package",
@@ -47,9 +52,10 @@
       "eoap.cct.stac"
     ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "Opaque: a threshold-based mangrove mask (ndvi_min/max, ndwi_min, savi_min) followed by a fixed linear allometric formula (biomass_slope/intercept) and an IPCC carbon_fraction constant. No openEO process expresses a domain-specific regression model, same as `kindgrove.mangrove`."
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "Opaque: a threshold-based mangrove mask (ndvi_min/max, ndwi_min, savi_min) followed by a fixed linear allometric formula (biomass_slope/intercept) and an IPCC carbon_fraction constant. No openEO process expresses a domain-specific regression model, same as `kindgrove.mangrove`."
+    }
   }
 }

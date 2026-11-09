@@ -103,9 +103,12 @@ $defs:
           properties:
             SHAPES:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/geometry
                 keywords:
                   allOf:
                   - contains:
@@ -139,9 +142,12 @@ $defs:
           properties:
             EXTENTS:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/surface
                 keywords:
                   allOf:
                   - contains:

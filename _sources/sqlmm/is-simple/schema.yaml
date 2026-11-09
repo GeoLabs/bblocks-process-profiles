@@ -101,9 +101,12 @@ $defs:
           properties:
             InputPolygon:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/geometry
                 keywords:
                   allOf:
                   - contains:
@@ -137,9 +140,12 @@ $defs:
           properties:
             Result:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/boolean
                 keywords:
                   allOf:
                   - contains:

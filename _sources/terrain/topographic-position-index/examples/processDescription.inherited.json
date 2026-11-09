@@ -49,6 +49,7 @@
     "DEM": {
       "title": "Elevation",
       "description": "Elevation",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model",
       "keywords": [
         "elevation"
       ],
@@ -180,6 +181,7 @@
     "TPI": {
       "title": "Topographic Position Index",
       "description": "Topographic Position Index",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
       "keywords": [
         "raster"
       ],

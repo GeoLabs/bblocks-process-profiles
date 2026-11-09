@@ -50,6 +50,7 @@
     "Format": {
       "title": "Format of the output data",
       "description": "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform).",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/format-identifier",
       "keywords": [
         "format"
       ],
@@ -85,6 +86,7 @@
     "InputDSN": {
       "title": "The input data source name",
       "description": "The input data source name to use as source for convertion.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
         "raster"
       ],
@@ -116,6 +118,7 @@
     "Result": {
       "title": "The resulting converted file",
       "description": "The file name resulting of the convertion",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
         "raster"
       ],

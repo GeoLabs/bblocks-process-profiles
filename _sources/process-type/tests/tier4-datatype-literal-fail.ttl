@@ -1,0 +1,12 @@
+# Must fail: the dataType of a bound tier-4 input is a literal. Only pp:Tier4DataTypeReferenceShape can
+# reject it (sh:nodeKind, sh:class).
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix in:   <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix out:  <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ex:   <https://geolabs.github.io/bblocks-process-profiles/def/process/> .
+
+ex:fixture-literal proc:inputs [ in:InputDSN ex:fixture-literal-input ] .
+ex:fixture-literal-input dct:title "Input" ; dct:type "raster" ;
+    proc:metadata [ proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ;
+                   proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster> ] .

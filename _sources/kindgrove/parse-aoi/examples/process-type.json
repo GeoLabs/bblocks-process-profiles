@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/parse-aoi/actions/addition",
     "type": "RegisterAction",
@@ -21,15 +20,21 @@
   },
   "prefLabel": "Parse area of interest",
   "definition": "Unpacks an OGC bounding box (EOAP BBox custom type) into west, south, east and north coordinates.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration"
-  ],
-  "profile": "ospd.process-profiles.kindgrove.parse-aoi",
-  "processDescription": {
-    "id": "parse_aoi",
-    "version": "0.0.1",
-    "href": "https://ospd.example.org/ogc-api/processes/parse_aoi"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.kindgrove.parse-aoi",
+    "processDescription": {
+      "id": "parse_aoi",
+      "version": "0.0.1",
+      "href": "https://ospd.example.org/ogc-api/processes/parse_aoi"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/parse_aoi/package",
@@ -47,12 +52,13 @@
     ],
     "candidateCctDependencies": []
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "relatedMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.types.bounding-box"
-  ],
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "Structural helper: unpacks an OGC BBox record into west/south/east/north floats and emits a constant `output_dir` (\"outputs\"). No openEO process does this, because openEO passes a bounding box object directly (`ogc.openeo.types.bounding-box`, relatedMatch at type level)."
+  "correspondences": {
+    "relatedMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.types.bounding-box"
+    ],
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "Structural helper: unpacks an OGC BBox record into west/south/east/north floats and emits a constant `output_dir` (\"outputs\"). No openEO process does this, because openEO passes a bounding box object directly (`ogc.openeo.types.bounding-box`, relatedMatch at type level)."
+    }
   }
 }

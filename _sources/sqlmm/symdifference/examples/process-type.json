@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/symdifference/actions/addition",
     "type": "RegisterAction",
@@ -21,20 +20,27 @@
   },
   "prefLabel": "Compute symmetric difference.",
   "definition": "This service shall return a feature collection representing the closure of the symmetric difference of two Geometries. The symmetric difference is the set of points which lie on either InputEntity1 or InputEntity2 but not in both.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
-  ],
-  "profile": "ospd.process-profiles.sqlmm.symdifference",
-  "processDescription": {
-    "id": "SymDifference",
-    "version": "2.0.0",
-    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SymDifference"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+    ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "deployment": {
+    "profile": "ospd.process-profiles.sqlmm.symdifference",
+    "processDescription": {
+      "id": "SymDifference",
+      "version": "2.0.0",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SymDifference"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
+  },
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference",
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."
+    }
   }
 }

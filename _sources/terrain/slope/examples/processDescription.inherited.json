@@ -49,6 +49,7 @@
     "ELEVATION": {
       "title": "Elevation",
       "description": "Elevation",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model",
       "keywords": [
         "elevation"
       ],
@@ -146,6 +147,7 @@
     "SLOPE": {
       "title": "Slope",
       "description": "Slope",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
       "keywords": [
         "raster"
       ],

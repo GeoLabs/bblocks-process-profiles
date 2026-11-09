@@ -50,6 +50,10 @@
       "@id": "proc:role",
       "@type": "@id"
     },
+    "dataType": {
+      "@id": "dct:type",
+      "@type": "@id"
+    },
     "inputs": {
       "@id": "proc:inputs",
       "@context": {
@@ -246,9 +250,14 @@
       "@type": "@id"
     },
     "status": "pp:status",
+    "classification": "@nest",
+    "correspondences": "@nest",
     "phase": {
-      "@id": "skos:broader",
+      "@id": "pp:phase",
       "@type": "@id"
+    },
+    "deployment": {
+      "@id": "pp:deployment"
     },
     "profile": "pp:profile",
     "plan": {
@@ -309,6 +318,42 @@
           "@type": "@id"
         },
         "location": "pp:location"
+      }
+    },
+    "roleDecompositions": {
+      "@id": "pp:roleDecomposition",
+      "@context": {
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "parts": {
+          "@id": "pp:part",
+          "@container": "@list"
+        },
+        "selector": {
+          "@id": "pp:selector",
+          "@context": {
+            "name": "pp:liveName",
+            "value": "rdf:value"
+          }
+        },
+        "note": "skos:note"
+      }
+    },
+    "assumedFormatGaps": {
+      "@id": "pp:assumedFormatGap",
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "served": "pp:servedMediaType",
+        "reason": "skos:note",
+        "evidence": "pp:evidence"
       }
     }
   }

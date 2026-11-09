@@ -28,6 +28,12 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: algae-usecase-workflow-earth-search.cwl}
     phases: [filter-configuration, selection-filtering, data-retrieval, pre-processing, scientific-computation, export-aggregation]
+    tier3: &composite
+      status: not attached
+      reason: >-
+        A composite Workflow: catalogue search, data retrieval and processing chained into one
+        application. No Generic Profile describes a whole application, and none should: its steps are
+        compared with the tiers one by one.
     cct: []
     cct_candidates: [eoap.cct.geojson, eoap.cct.string-format]
     steps: [select-products-sentinel2, workflow-earth-search-process]
@@ -53,6 +59,7 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: algae-usecase-workflow-earth-search-process.cwl}
     phases: [data-retrieval, pre-processing, scientific-computation, export-aggregation]
+    tier3: *composite
     cct: []
     cct_candidates: [eoap.cct.string-format]
     steps: [download-band-sentinel2-stac-item, reproject-image, calculate-band, plot-image]
@@ -77,6 +84,7 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: algae-usecase-workflow-copernicus.cwl}
     phases: [filter-configuration, selection-filtering, data-retrieval, pre-processing, scientific-computation, export-aggregation]
+    tier3: *composite
     cct: []
     cct_candidates: [eoap.cct.geojson, eoap.cct.string-format]
     steps: [select-products-sentinel2, workflow-copernicus-process]
@@ -104,6 +112,7 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: algae-usecase-workflow-copernicus-process.cwl}
     phases: [data-retrieval, scientific-computation, export-aggregation]
+    tier3: *composite
     cct: []
     cct_candidates: [eoap.cct.string-format]
     steps: [download-band-sentinel2-product-safe, calculate-band, plot-image]
@@ -130,6 +139,15 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: select-products-sentinel2.cwl}
     phases: [selection-filtering]
+    tier3: &search
+      status: not attached
+      reason: >-
+        Catalogue search: an area, a time window, a collection and filters in, references to products
+        out. No Generic Profile searches a catalogue or selects products.
+      proposal: >-
+        A Generic Profile for product selection (area of interest, time interval, collection, filters
+        -> item references), implemented by algae-bloom.select-products-sentinel2 and
+        kindgrove-steps.select-scene.
     cct: []
     cct_candidates: [eoap.cct.geojson, eoap.cct.string-format]
     parents: [workflow-earth-search, workflow-copernicus]
@@ -181,6 +199,15 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: download-band-sentinel2-stac-item.cwl}
     phases: [data-retrieval]
+    tier3: &retrieval
+      status: not attached
+      reason: >-
+        Data retrieval: its input is a reference to a product and a band name, not a raster, and it
+        returns the band. No Generic Profile retrieves a band from a product.
+      proposal: >-
+        A Generic Profile for band retrieval (product reference, band name, optional area of interest
+        -> raster), implemented by algae-bloom.download-band-sentinel2-stac-item, -product-safe,
+        kindgrove-steps.download-band and water-bodies.crop.
     cct: []
     cct_candidates: [eoap.cct.string-format, eoap.cct.stac]
     parents: [workflow-earth-search-process]
@@ -220,6 +247,7 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: download-band-sentinel2-product-safe.cwl}
     phases: [data-retrieval]
+    tier3: *retrieval
     cct: []
     cct_candidates: [eoap.cct.string-format]
     parents: [workflow-copernicus-process]
@@ -262,6 +290,16 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: reproject-image.cwl}
     phases: [pre-processing]
+    tier3:
+      status: not attached
+      reason: >-
+        Its CWL runs gdalwarp with `-ts`/`-tr` only (target size or resolution) and has no target CRS
+        input (`-t_srs` is never passed): it resamples, it does not reproject. The role `targetCRS` of
+        raster-reprojection would have no input, and that profile's activity type means a change of
+        coordinate reference system.
+      closest: raster-reprojection (raster in, raster out).
+      proposal: >-
+        A Generic Profile for raster resampling (raster, target size or resolution -> raster).
     cct: []
     cct_candidates: []
     parents: [workflow-earth-search-process]
@@ -300,6 +338,22 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: calculate-band.cwl}
     phases: [scientific-computation]
+    tier3:
+      status: attached
+      reason: >-
+        Signature checked against raster-band-math: `calc` (a gdal_calc.py expression) implements
+        `expression`; `band_a`..`band_z` (26 optional files, GeoTIFF, TIFF or JPEG 2000) together
+        implement the list role `rasters`; `result` (one Float32 GeoTIFF band written by gdal_calc.py)
+        implements the output `raster` (raster-single-band). `name`, the output file name, is an input
+        of the deployment's own.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math
+    bindings:
+      inputs: {calc: expression, band_a: rasters, band_b: rasters, band_c: rasters, band_d: rasters, band_e: rasters,
+               band_f: rasters, band_g: rasters, band_h: rasters, band_i: rasters, band_j: rasters, band_k: rasters,
+               band_l: rasters, band_m: rasters, band_n: rasters, band_o: rasters, band_p: rasters, band_q: rasters,
+               band_r: rasters, band_s: rasters, band_t: rasters, band_u: rasters, band_v: rasters, band_w: rasters,
+               band_x: rasters, band_y: rasters, band_z: rasters}
+      outputs: {result: raster}
     cct: []
     cct_candidates: []
     parents: [workflow-earth-search-process, workflow-copernicus-process]
@@ -349,6 +403,13 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: plot-image.cwl}
     phases: [export-aggregation]
+    tier3:
+      status: not attached
+      reason: >-
+        Rendering: applies a colour map to a raster and returns a coloured GeoTIFF and a PNG plot. No
+        Generic Profile renders a raster.
+      proposal: >-
+        A Generic Profile for raster rendering (raster, colour map -> image).
     cct: []
     cct_candidates: []
     parents: [workflow-earth-search-process, workflow-copernicus-process]
@@ -391,6 +452,7 @@ processes:
     workflow: kindgrove
     source: {repo: w2, file: mangrove-workflow.cwl, element: mangrove-workflow}
     phases: [filter-configuration, selection-filtering, data-retrieval, pre-processing, scientific-computation, export-aggregation]
+    tier3: *composite
     cct: [eoap.cct.bbox]
     cct_candidates: []
     steps: [parse-aoi, mangrove]
@@ -420,6 +482,11 @@ processes:
     label: Parse area of interest
     definition: Unpacks an OGC bounding box (EOAP BBox custom type) into west, south, east and north coordinates.
     phases: [filter-configuration]
+    tier3: &utility
+      status: not attached
+      reason: >-
+        Workflow plumbing: splits a bounding box into four numbers for the other steps. Not a
+        geoprocessing operation; no profile is needed.
     cct: [eoap.cct.bbox]
     cct_candidates: []
     parents: [mangrove-workflow]
@@ -462,6 +529,11 @@ processes:
       Detects mangroves from Sentinel-2 L2A vegetation indices within a bounding box and estimates
       above-ground biomass and carbon stock (ipython2cwl binary of the KindGrove notebook).
     phases: [selection-filtering, data-retrieval, pre-processing, scientific-computation, export-aggregation]
+    tier3:
+      status: not attached
+      reason: >-
+        One opaque tool runs scene selection, band retrieval, indices, biomass and carbon estimation
+        and STAC export. No single profile describes it; kindgrove-steps splits it into steps.
     cct: []
     cct_candidates: [eoap.cct.bbox]
     parents: [mangrove-workflow]
@@ -533,6 +605,7 @@ processes:
     workflow: water-bodies
     source: {repo: w3, file: water-bodies.cwl}
     phases: [data-retrieval, scientific-computation, export-aggregation]
+    tier3: *composite
     cct: []
     cct_candidates: [eoap.cct.bbox, eoap.cct.string-format]
     steps: [detect-water-body, stac]
@@ -562,6 +635,7 @@ processes:
     workflow: water-bodies
     source: {repo: w3, file: detect_water_body.cwl}
     phases: [data-retrieval, scientific-computation]
+    tier3: *composite
     cct: []
     cct_candidates: [eoap.cct.bbox, eoap.cct.string-format]
     steps: [crop, norm-diff, otsu]
@@ -602,6 +676,18 @@ processes:
       Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the
       area of interest and reprojected to the requested CRS.
     phases: [data-retrieval]
+    tier3:
+      status: not attached
+      reason: >-
+        Its input is a STAC Item URL and a band common name, not a raster: it reads the band asset,
+        crops it to `aoi` (a comma-separated string) and reprojects it to `epsg`. raster-crop needs a
+        raster input; the retrieval of the band is part of this process.
+      closest: >-
+        raster-crop (crop to an area of interest), after band retrieval.
+      proposal: >-
+        A Generic Profile for band retrieval (product reference, band name, optional area of interest ->
+        raster), implemented by algae-bloom.download-band-sentinel2-stac-item, -product-safe,
+        kindgrove-steps.download-band and water-bodies.crop.
     cct: []
     cct_candidates: [eoap.cct.bbox, eoap.cct.stac, eoap.cct.string-format]
     parents: [detect-water-body]
@@ -643,6 +729,20 @@ processes:
     label: Normalized difference between two rasters
     definition: Computes the normalized difference index ((A-B)/(A+B)) of two co-registered rasters.
     phases: [scientific-computation]
+    tier3:
+      status: not attached
+      reason: >-
+        Normalized difference (A-B)/(A+B) of exactly two single-band rasters (`nargs=2`), one
+        single-band Float32 GeoTIFF out. Its meaning is a radiometric index, but the Implementation
+        Profile radiometric-index restricts `rasters` to one pre-stacked multi-band image (maxOccurs
+        1) and has an `index` role no input selects; raster-band-math means a user-supplied
+        expression, which norm-diff does not take.
+      closest: >-
+        the Generic Profile radiometric-index (tier 2), whose `rasters` takes one or more rasters.
+      proposal: >-
+        A second Implementation Profile of the Generic Profile radiometric-index taking separate
+        single-band rasters (no maxOccurs 1), for water-bodies.norm-diff and
+        kindgrove-steps.calculate-indices.
     cct: []
     cct_candidates: []
     parents: [detect-water-body]
@@ -681,6 +781,13 @@ processes:
     label: Otsu binary threshold
     definition: Thresholds a single-band raster into a binary mask using Otsu's method.
     phases: [scientific-computation]
+    tier3:
+      status: not attached
+      reason: >-
+        Thresholding: one single-band raster in, a binary mask out, by Otsu's method. No Generic
+        Profile classifies or thresholds a raster.
+      proposal: >-
+        A Generic Profile for raster thresholding (raster -> single-band mask raster).
     cct: []
     cct_candidates: []
     parents: [detect-water-body]
@@ -711,6 +818,10 @@ processes:
       Writes a STAC Catalog with one Item per input identifier, each carrying the corresponding
       water-body raster as an asset.
     phases: [export-aggregation]
+    tier3: &export
+      status: not attached
+      reason: >-
+        Export: writes a STAC Catalog of the results. No Generic Profile exports a catalogue.
     cct: []
     cct_candidates: [eoap.cct.stac]
     parents: [water-bodies]
@@ -757,6 +868,7 @@ processes:
     workflow: kindgrove-steps
     source: {repo: kindgrove_steps, file: mangrove-workflow-steps.cwl, element: mangrove-workflow-steps}
     phases: [filter-configuration, selection-filtering, data-retrieval, pre-processing, scientific-computation, export-aggregation]
+    tier3: *composite
     cct: [eoap.cct.bbox]
     cct_candidates: []
     steps: [parse-aoi-steps, select-scene, download-band, reproject-band, calculate-indices, estimate-biomass, export-stac]
@@ -791,6 +903,7 @@ processes:
     label: Parse area of interest
     definition: Splits an OGC bounding box into its west, south, east and north coordinates.
     phases: [filter-configuration]
+    tier3: *utility
     cct: [eoap.cct.bbox]
     cct_candidates: []
     parents: [mangrove-workflow-steps]
@@ -812,6 +925,7 @@ processes:
     label: Select the least cloudy Sentinel-2 L2A scene
     definition: Selects the least cloudy Sentinel-2 L2A scene over a bounding box within a time window.
     phases: [selection-filtering]
+    tier3: *search
     cct: []
     cct_candidates: [eoap.cct.bbox]
     parents: [mangrove-workflow-steps]
@@ -853,6 +967,7 @@ processes:
     label: Download one Sentinel-2 band over a bounding box
     definition: Downloads one Sentinel-2 band over a bounding box from a STAC Item.
     phases: [data-retrieval]
+    tier3: *retrieval
     cct: []
     cct_candidates: [eoap.cct.bbox, eoap.cct.stac]
     parents: [mangrove-workflow-steps]
@@ -885,6 +1000,31 @@ processes:
     label: Reproject a raster onto a regular grid
     definition: Reprojects a raster onto a regular grid covering a bounding box.
     phases: [pre-processing]
+    tier3:
+      status: attached
+      reason: >-
+        Signature checked against raster-reprojection: `band_file` implements `raster`, `epsg` (an
+        EPSG code, default 4326) implements `targetCRS`, `reprojected_file` implements the output
+        `raster`; `west`, `south`, `east`, `north` (extent of the target grid) and `resolution` are
+        inputs of the deployment's own. Its CWL declares no `format`: an assumed format gap.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection
+    bindings: {inputs: {band_file: raster, epsg: targetCRS}, outputs: {reprojected_file: raster}}
+    # A4.3: the representation raster-geotiff of both raster roles is not served (no media type).
+    format_gaps:
+      inputs:
+        band_file: &kindgrove-steps-no-format
+          reason: >-
+            The CWL (GeoLabs/KindGrove v0.0.2-rc2, `reproject_band`) declares no `format` on this File,
+            so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves
+            application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads and
+            writes. Closed upstream if the CWL declares `format: ogc:geotiff`.
+          evidence: >-
+            Run record `kindgrove-steps` (scripts/sources.yaml): the three band_file inputs (red.tif,
+            green.tif, nir.tif) and the three reprojected_file outputs (red_4326.tif, green_4326.tif,
+            nir_4326.tif) start with the TIFF magic number 49 49 2a 00 (observed 2026-11-09); GeoTIFF
+            tags not checked.
+      outputs:
+        reprojected_file: *kindgrove-steps-no-format
     cct: []
     cct_candidates: [eoap.cct.bbox]
     parents: [mangrove-workflow-steps]
@@ -912,6 +1052,17 @@ processes:
     label: Compute NDVI, NDWI and SAVI
     definition: Computes NDVI, NDWI and SAVI from Sentinel-2 red, green and NIR bands.
     phases: [scientific-computation]
+    tier3:
+      status: not attached
+      reason: >-
+        Computes NDVI, NDWI and SAVI from a list of band files, as three separate outputs. The meaning
+        is the Generic Profile radiometric-index, but its single output role cannot take three
+        outputs, its Implementation Profile restricts `rasters` to one multi-band image, and no input
+        selects the index.
+      closest: the Generic Profile radiometric-index (tier 2).
+      proposal: >-
+        A second Implementation Profile of the Generic Profile radiometric-index taking separate
+        single-band rasters (no maxOccurs 1), for water-bodies.norm-diff and kindgrove-steps.calculate-indices.
     cct: []
     cct_candidates: []
     parents: [mangrove-workflow-steps]
@@ -952,6 +1103,12 @@ processes:
     label: Mangrove detection, allometric biomass and IPCC carbon stock
     definition: Detects mangrove pixels and estimates above-ground biomass and carbon stock from NDVI, NDWI and SAVI.
     phases: [scientific-computation]
+    tier3:
+      status: not attached
+      reason: >-
+        Domain model: mangrove detection, allometric biomass and carbon stock from three index rasters
+        and coefficients, with five outputs including summaries. No Generic Profile, and none of
+        general use.
     cct: []
     cct_candidates: [eoap.cct.stac]
     parents: [mangrove-workflow-steps]
@@ -988,6 +1145,7 @@ processes:
     label: Plot the biomass map and export a STAC catalog
     definition: Plots the biomass map and exports the mangrove analysis results as a STAC Catalog.
     phases: [export-aggregation]
+    tier3: *export
     cct: []
     cct_candidates: [eoap.cct.stac]
     parents: [mangrove-workflow-steps]
@@ -1279,7 +1437,19 @@ ogcapi_processes:
     phases: [pre-processing]
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop
     bindings: {inputs: {in: raster}, outputs: {out: raster}}
-    unbound: {areaOfInterest: "four plain numbers on the live service (mode.extent.ulx/uly/lrx/lry, with mode=extent), not one bounding box"}
+    # Decision of 2026-11-09: the bounding box of raster-crop is taken as four corner numbers and their
+    # unit, none of which carries the bbox representation. Declared, not left unbound.
+    role_decompositions:
+      inputs:
+        areaOfInterest:
+          parts: [mode.extent.ulx, mode.extent.uly, mode.extent.lrx, mode.extent.lry, mode.extent.unit]
+          selector: {name: mode, value: extent}
+          note: >-
+            With `mode` set to `extent`, OTB ExtractROI takes the area of interest as the upper-left
+            (`mode.extent.ulx`, `mode.extent.uly`) and lower-right (`mode.extent.lrx`, `mode.extent.lry`)
+            corners, plain numbers, in the unit given by `mode.extent.unit` (`pxl`, `phy` or `lonlat`),
+            not as one OGC API - Processes bounding box: the representation
+            bounding-box-ogcapi-processes-bbox of the role is not served.
     tool:
       name: OTB ExtractROI
       doc: https://www.orfeo-toolbox.org/CookBook/Applications/app_ExtractROI.html

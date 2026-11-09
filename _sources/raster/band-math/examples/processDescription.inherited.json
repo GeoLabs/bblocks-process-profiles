@@ -47,6 +47,7 @@
     "il": {
       "title": "Image list of operands to the mathematical expression.",
       "description": "Image list of operands to the mathematical expression.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
         "raster"
       ],
@@ -103,6 +104,7 @@
     "exp": {
       "title": "The muParser mathematical expression to apply on input images.",
       "description": "The muParser mathematical expression to apply on input images.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/expression",
       "keywords": [
         "expression"
       ],
@@ -137,6 +139,7 @@
     "out": {
       "title": "Output image which is the result of the mathematical expressions on input image list operands.",
       "description": "Output image which is the result of the mathematical expressions on input image list operands.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
       "keywords": [
         "raster"
       ],

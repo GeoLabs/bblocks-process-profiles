@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/addition",
     "type": "RegisterAction",
@@ -21,15 +20,21 @@
   },
   "prefLabel": "Crop a Sentinel-2 COG band to an area of interest",
   "definition": "Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest and reprojected to the requested CRS.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval"
-  ],
-  "profile": "ospd.process-profiles.water-bodies.crop",
-  "processDescription": {
-    "id": "crop",
-    "version": "1.4.1",
-    "href": "https://ospd.example.org/ogc-api/processes/crop"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.water-bodies.crop",
+    "processDescription": {
+      "id": "crop",
+      "version": "1.4.1",
+      "href": "https://ospd.example.org/ogc-api/processes/crop"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/crop/package",
@@ -49,13 +54,14 @@
       "eoap.cct.string-format"
     ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection",
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.filter_bands"
-  ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "load_collection with a spatial_extent (aoi) and a single band selected (filter_bands); the STAC item is given by URL rather than resolved by collection/date/bbox search, and the windowed COG read (no full download) is an implementation detail openEO back-ends make transparently."
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection",
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.filter_bands"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "load_collection with a spatial_extent (aoi) and a single band selected (filter_bands); the STAC item is given by URL rather than resolved by collection/date/bbox search, and the windowed COG read (no full download) is an implementation detail openEO back-ends make transparently."
+    }
   }
 }

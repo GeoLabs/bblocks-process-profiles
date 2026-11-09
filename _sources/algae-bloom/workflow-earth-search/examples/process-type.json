@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-earth-search/actions/addition",
     "type": "RegisterAction",
@@ -21,20 +20,26 @@
   },
   "prefLabel": "Algae bloom for water quality assessment on Sentinel-2 L2A imagery offered by Earth-Search platform.",
   "definition": "Searches for Sentinel-2 L2A products on Earth-Search using filtering parameters and performs band calculation on matched Sentinel-2 products to evaluate algae bloom for water quality assessment. For each match, reference bands are downloaded, processed, and returned as output with raw data, color map and plot visualization. Each output file will be named with the ID of the original product to distinguish them in case of multiple matches.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
-  ],
-  "profile": "ospd.process-profiles.algae-bloom.workflow-earth-search",
-  "processDescription": {
-    "id": "algae-usecase-workflow-earth-search",
-    "version": "2.0.0",
-    "href": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.algae-bloom.workflow-earth-search",
+    "processDescription": {
+      "id": "algae-usecase-workflow-earth-search",
+      "version": "2.0.0",
+      "href": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package",
@@ -53,28 +58,29 @@
       "eoap.cct.string-format"
     ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-earth-search-process"
   ],
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "Composite: a CWL Workflow scattering a per-product subworkflow over the product list. The openEO equivalent would be a user-defined process graph, which has no Building Block of its own; the correspondence is carried by the steps.",
-    "decomposition": [
-      {
-        "stage": "select_products",
-        "openeo": [
-          "ogc.openeo.processes.cubes.load_collection"
-        ],
-        "level": "closeMatch"
-      },
-      {
-        "stage": "process (scatter over urls)",
-        "openeo": [],
-        "level": "none",
-        "note": "openEO has no scatter over products; a collection is loaded as one data cube."
-      }
-    ]
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "Composite: a CWL Workflow scattering a per-product subworkflow over the product list. The openEO equivalent would be a user-defined process graph, which has no Building Block of its own; the correspondence is carried by the steps.",
+      "decomposition": [
+        {
+          "stage": "select_products",
+          "openeo": [
+            "ogc.openeo.processes.cubes.load_collection"
+          ],
+          "level": "closeMatch"
+        },
+        {
+          "stage": "process (scatter over urls)",
+          "openeo": [],
+          "level": "none",
+          "note": "openEO has no scatter over products; a collection is loaded as one data cube."
+        }
+      ]
+    }
   }
 }

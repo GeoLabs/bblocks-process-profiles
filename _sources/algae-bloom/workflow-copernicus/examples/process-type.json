@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus/actions/addition",
     "type": "RegisterAction",
@@ -21,20 +20,26 @@
   },
   "prefLabel": "Algae bloom for water quality assessment on Sentinel-2 imagery offered by Copernicus platform.",
   "definition": "Finds Sentinel-2 products on Copernicus using filtering parameters and performs band calculation on retrieved Sentinel-2 products to evaluate algae bloom for water quality assessment.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
-  ],
-  "profile": "ospd.process-profiles.algae-bloom.workflow-copernicus",
-  "processDescription": {
-    "id": "algae-usecase-workflow-copernicus",
-    "version": "2.0.0",
-    "href": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.algae-bloom.workflow-copernicus",
+    "processDescription": {
+      "id": "algae-usecase-workflow-copernicus",
+      "version": "2.0.0",
+      "href": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package",
@@ -53,27 +58,28 @@
       "eoap.cct.string-format"
     ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process"
   ],
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "Composite; same structure as the Earth-Search variant but over Copernicus Data Space (SAFE products on S3, credentials required). openEO hides credentials in the back-end.",
-    "decomposition": [
-      {
-        "stage": "select_products",
-        "openeo": [
-          "ogc.openeo.processes.cubes.load_collection"
-        ],
-        "level": "closeMatch"
-      },
-      {
-        "stage": "process (scatter over urls)",
-        "openeo": [],
-        "level": "none"
-      }
-    ]
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "Composite; same structure as the Earth-Search variant but over Copernicus Data Space (SAFE products on S3, credentials required). openEO hides credentials in the back-end.",
+      "decomposition": [
+        {
+          "stage": "select_products",
+          "openeo": [
+            "ogc.openeo.processes.cubes.load_collection"
+          ],
+          "level": "closeMatch"
+        },
+        {
+          "stage": "process (scatter over urls)",
+          "openeo": [],
+          "level": "none"
+        }
+      ]
+    }
   }
 }

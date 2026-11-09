@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/addition",
     "type": "RegisterAction",
@@ -21,15 +20,21 @@
   },
   "prefLabel": "Performs image reprojection.",
   "definition": "Performs a reprojection over image bands and returns the resulting GeoTiff.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
-  ],
-  "profile": "ospd.process-profiles.algae-bloom.reproject-image",
-  "processDescription": {
-    "id": "reproject-image",
-    "version": "1.0.0",
-    "href": "https://ospd.example.org/ogc-api/processes/reproject-image"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.algae-bloom.reproject-image",
+    "processDescription": {
+      "id": "reproject-image",
+      "version": "1.0.0",
+      "href": "https://ospd.example.org/ogc-api/processes/reproject-image"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/reproject-image/package",
@@ -45,12 +50,13 @@
     "cctDependencies": [],
     "candidateCctDependencies": []
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
-  ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "As used in W1 the tool only changes the pixel size (gdalwarp `-tr 60 60`, nearest neighbour by default, no `-t_srs`): resample_spatial with `resolution: 60`, `projection: null`, `method: near`. Not an exactMatch: `output_dimensions` (`-ts`) has no openEO parameter, the output type is forced to Float32 (`-ot Float32`), and the tool works on a file rather than a data cube. Despite its name, no CRS transformation takes place."
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "As used in W1 the tool only changes the pixel size (gdalwarp `-tr 60 60`, nearest neighbour by default, no `-t_srs`): resample_spatial with `resolution: 60`, `projection: null`, `method: near`. Not an exactMatch: `output_dimensions` (`-ts`) has no openEO parameter, the output type is forced to Float32 (`-ot Float32`), and the tool works on a file rather than a data cube. Despite its name, no CRS transformation takes place."
+    }
   }
 }

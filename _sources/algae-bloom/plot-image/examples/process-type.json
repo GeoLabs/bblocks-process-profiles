@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/plot-image/actions/addition",
     "type": "RegisterAction",
@@ -21,15 +20,21 @@
   },
   "prefLabel": "Plots an image with colors.",
   "definition": "Applies the specified color mapping with scaled bins to a geospatial image.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
-  ],
-  "profile": "ospd.process-profiles.algae-bloom.plot-image",
-  "processDescription": {
-    "id": "plot-image",
-    "version": "1.0.0",
-    "href": "https://ospd.example.org/ogc-api/processes/plot-image"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.algae-bloom.plot-image",
+    "processDescription": {
+      "id": "plot-image",
+      "version": "1.0.0",
+      "href": "https://ospd.example.org/ogc-api/processes/plot-image"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/plot-image/package",
@@ -45,16 +50,17 @@
     "cctDependencies": [],
     "candidateCctDependencies": []
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.save_result"
-  ],
-  "relatedMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.clip",
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.linear_scale_range"
-  ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "Partial: the export part (GeoTIFF + PNG) corresponds to save_result with a GTiff or PNG format; `clip_min`/`clip_max` correspond to math.clip. The colour mapping (`color_scale` bins) and the matplotlib figure (title, colour bar) have no stable openEO process (colour maps are back-end-specific format options)."
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.save_result"
+    ],
+    "relatedMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.clip",
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.linear_scale_range"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "Partial: the export part (GeoTIFF + PNG) corresponds to save_result with a GTiff or PNG format; `clip_min`/`clip_max` correspond to math.clip. The colour mapping (`color_scale` bins) and the matplotlib figure (title, colour bar) have no stable openEO process (colour maps are back-end-specific format options)."
+    }
   }
 }

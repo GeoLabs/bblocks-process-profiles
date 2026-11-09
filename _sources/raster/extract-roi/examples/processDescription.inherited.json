@@ -47,6 +47,7 @@
     "in": {
       "title": "Image to be processed.",
       "description": "Image to be processed.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
         "raster"
       ],
@@ -342,6 +343,7 @@
     "out": {
       "title": "Region of interest from the input image",
       "description": "Region of interest from the input image",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
         "raster"
       ],

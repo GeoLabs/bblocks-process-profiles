@@ -21,17 +21,19 @@ On this deployment:
 
 ## Implementation Profile
 
-Implements [`Radiometric index`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index) (`generic-profiles.implementation-profile.radiometric-index`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+Implements [`Radiometric index`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index) (`generic-profiles.implementation-profile.radiometric-index`, bblocks-generic-profiles).
 
-| Live | Implementation Profile |
-|---|---|
-| `in` | input `rasters` |
-| -- | input `index` (unbound: no input of the live service selects the index: OTB RadiometricIndices' `list` parameter is not exposed) |
-| `out`, `channels`, `channels.green`, `channels.red`, `channels.nir`, `channels.mir`, `ram` | -- (live-only inputs, Table 21 footnote b) |
-| `out` | output `raster` |
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `in` | input `rasters` | `raster` |
+| -- | input `index` (unbound: no input of the live service selects the index: OTB RadiometricIndices' `list` parameter is not exposed) | `radiometric-index` |
+| `out`, `channels`, `channels.green`, `channels.red`, `channels.nir`, `channels.mir`, `ram` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `out` | output `raster` | `raster` |
 
 ## Examples
 
 - `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
-- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles, and the data type of each bound input/output.
 - `process-type.json`: its candidate process-type entry.

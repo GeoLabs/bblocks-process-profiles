@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/crosses/actions/addition",
     "type": "RegisterAction",
@@ -21,20 +20,27 @@
   },
   "prefLabel": "Crosses test",
   "definition": "This service shall return a true value if and only if the geometries g1 and g2 share some but neither is containe in the other, and the dimension of the intersection is less than that of both of the geometries.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
-  ],
-  "profile": "ospd.process-profiles.sqlmm.crosses",
-  "processDescription": {
-    "id": "Crosses",
-    "version": "2.0.0",
-    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Crosses"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+    ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "deployment": {
+    "profile": "ospd.process-profiles.sqlmm.crosses",
+    "processDescription": {
+      "id": "Crosses",
+      "version": "2.0.0",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Crosses"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
+  },
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/crosses",
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."
+    }
   }
 }

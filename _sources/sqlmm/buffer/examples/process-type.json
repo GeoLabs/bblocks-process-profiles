@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/buffer/actions/addition",
     "type": "RegisterAction",
@@ -21,20 +20,27 @@
   },
   "prefLabel": "Create a buffer around a polygon.",
   "definition": "This service shall return a feature collection representing the buffer of geometry InputPolygon at distance BufferDistance. The buffer of a geometry at distance d is the Polygon or MultiPolygon which contains all points within a distance d of the geometry.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
-  ],
-  "profile": "ospd.process-profiles.sqlmm.buffer",
-  "processDescription": {
-    "id": "Buffer",
-    "version": "2.0.0",
-    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Buffer"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+    ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "deployment": {
+    "profile": "ospd.process-profiles.sqlmm.buffer",
+    "processDescription": {
+      "id": "Buffer",
+      "version": "2.0.0",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Buffer"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
+  },
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer",
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "No openEO process for this SQL/MM operation in the published bblocks-openeo register."
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "No openEO process for this SQL/MM operation in the published bblocks-openeo register."
+    }
   }
 }

@@ -1,21 +1,31 @@
 {
   "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
   "name": "Process type register entry",
-  "abstract": "Candidate ActivityType register entry for each deployable OSPD process, typed as a PROV activity class and linked to its process profile, six-phase position, provenance class and proposed openEO equivalences.",
+  "abstract": "Candidate ActivityType register entry for each deployed OSPD process (decision D5: one per deployed process), its meaning kept apart from its six-phase classification, its deployment, its plan and its openEO correspondences, and linked to the Implementation Profile it implements. Its shapes check the data type of tier-4 inputs and outputs.",
   "status": "under-development",
   "dateTimeAddition": "2026-09-22T00:00:00Z",
-  "dateOfLastChange": "2026-11-05",
+  "dateOfLastChange": "2026-11-09",
   "version": "0.1",
   "itemClass": "schema",
   "register": "process-profiles",
-  "dependsOn": ["ogc.register.schemas.activity-types-schema"],
+  "dependsOn": [
+    "ogc.register.schemas.activity-types-schema",
+    "data-types.vocabulary"
+  ],
   "seeAlso": [
     "ogc.bbr.provenance.activity",
     "ogc.bbr.wf4ever.wfprov.ProcessRun",
     "ogc.bbr.wf4ever.wfprov.WorkflowRun"
   ],
   "scope": "dev",
-  "tags": ["process type", "register", "SKOS", "openEO", "OSPD", "Activity 4"],
+  "tags": [
+    "process type",
+    "register",
+    "SKOS",
+    "openEO",
+    "OSPD",
+    "Activity 4"
+  ],
   "sourceSchema": "schema.yaml",
   "ldContext": "context.jsonld",
   "sources": [
@@ -39,6 +49,10 @@
   "maturity": "development",
   "highlighted": true,
   "group": "OSPD",
-  "isProfileOf": ["ogc.register.schemas.activity-types-schema"],
-  "shaclShapes": ["shapes.shacl"]
+  "isProfileOf": [
+    "ogc.register.schemas.activity-types-schema"
+  ],
+  "shaclShapes": [
+    "shapes.shacl"
+  ]
 }

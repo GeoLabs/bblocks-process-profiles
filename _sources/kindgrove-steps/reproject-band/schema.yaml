@@ -117,3 +117,211 @@ $defs:
         - object
   processRun:
     $ref: bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun
+  inheritedProcessDescription:
+    allOf:
+    - $ref: bblocks://ogc.api.processes.v1.schemas.process
+    - $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+    - type: object
+      required:
+      - id
+      - version
+      - inputs
+      - outputs
+      properties:
+        id:
+          const: reproject_band
+        inputs:
+          type: object
+          required:
+          - band_file
+          - west
+          - south
+          - east
+          - north
+          - epsg
+          - resolution
+          propertyNames:
+            enum:
+            - band_file
+            - west
+            - south
+            - east
+            - north
+            - epsg
+            - resolution
+        outputs:
+          type: object
+          required:
+          - reprojected_file
+          propertyNames:
+            enum:
+            - reprojected_file
+    - description: '`reproject_band` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection`:
+        Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) inherited from its Implementation
+        Profile.'
+      type: object
+      required:
+      - keywords
+      - metadata
+      properties:
+        keywords:
+          allOf:
+          - contains:
+              const: raster
+          - contains:
+              const: coverage
+          - contains:
+              const: reprojection
+        metadata:
+          allOf:
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection
+        inputs:
+          type: object
+          required:
+          - band_file
+          - epsg
+          properties:
+            band_file:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/raster
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            epsg:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/coordinate-reference-system
+                keywords:
+                  allOf:
+                  - contains:
+                      const: CRS
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/targetCRS
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/targetCRS
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+        outputs:
+          type: object
+          required:
+          - reprojected_file
+          properties:
+            reprojected_file:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/outputs/raster
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/outputs/raster

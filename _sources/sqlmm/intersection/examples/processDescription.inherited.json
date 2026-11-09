@@ -52,6 +52,7 @@
     "InputEntity1": {
       "title": "the first geometry",
       "description": "the first geometry to compare against.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
         "geometry"
       ],
@@ -90,6 +91,7 @@
     "InputEntity2": {
       "title": "the other geometry",
       "description": "the other geometry to compare against.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
         "geometry"
       ],
@@ -130,6 +132,7 @@
     "Result": {
       "title": "Intersection of geometries",
       "description": "A new geometry representing the intersection or NULL if there is no intersection or an error occurs.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
         "geometry"
       ],

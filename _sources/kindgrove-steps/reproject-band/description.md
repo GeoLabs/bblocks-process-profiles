@@ -34,6 +34,23 @@ Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
 Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `kindgrove-steps`: the pinned W2b source itself (GeoLabs/KindGrove v0.0.2-rc2 `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by `days_back` on that day, three bands scattered (red, green, nir) through download_band and reproject_band), activity `main/reproject_band` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
 
+## Implementation Profile (tier 3)
+
+Implements [`Raster reprojection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection) (`generic-profiles.implementation-profile.raster-reprojection`, bblocks-generic-profiles). Signature checked against raster-reprojection: `band_file` implements `raster`, `epsg` (an EPSG code, default 4326) implements `targetCRS`, `reprojected_file` implements the output `raster`; `west`, `south`, `east`, `north` (extent of the target grid) and `resolution` are inputs of the deployment's own. Its CWL declares no `format`: an assumed format gap.
+
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `band_file` | input `raster` | `raster` |
+| `epsg` | input `targetCRS` | `coordinate-reference-system` |
+| `west`, `south`, `east`, `north`, `resolution` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `reprojected_file` | output `raster` | `raster` |
+
+**Assumed format gap.** `band_file`: The CWL (GeoLabs/KindGrove v0.0.2-rc2, `reproject_band`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads and writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `kindgrove-steps` (scripts/sources.yaml): the three band_file inputs (red.tif, green.tif, nir.tif) and the three reprojected_file outputs (red_4326.tif, green_4326.tif, nir_4326.tif) start with the TIFF magic number 49 49 2a 00 (observed 2026-11-09); GeoTIFF tags not checked. Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
+
+**Assumed format gap.** `reprojected_file`: The CWL (GeoLabs/KindGrove v0.0.2-rc2, `reproject_band`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads and writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `kindgrove-steps` (scripts/sources.yaml): the three band_file inputs (red.tif, green.tif, nir.tif) and the three reprojected_file outputs (red_4326.tif, green_4326.tif, nir_4326.tif) start with the TIFF magic number 49 49 2a 00 (observed 2026-11-09); GeoTIFF tags not checked. Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
+
 ## openEO equivalence
 
 **Level: closeMatch.** resample_spatial with a target `resolution` and `projection` (epsg); no explicit resampling-method parameter in the CWL (implementation default), same partial match as `algae-bloom.reproject-image`.

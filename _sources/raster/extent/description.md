@@ -16,16 +16,18 @@ Quoted from the OTB CookBook, CC BY-SA 4.0 (https://creativecommons.org/licenses
 
 ## Implementation Profile
 
-Implements [`Raster extent`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent) (`generic-profiles.implementation-profile.raster-extent`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+Implements [`Raster extent`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent) (`generic-profiles.implementation-profile.raster-extent`, bblocks-generic-profiles).
 
-| Live | Implementation Profile |
-|---|---|
-| `in` | input `raster` |
-| `sr`, `elev`, `elev.geoid`, `elev.default`, `proj` | -- (live-only inputs, Table 21 footnote b) |
-| `out` | output `result` |
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `in` | input `raster` | `raster` |
+| `sr`, `elev`, `elev.geoid`, `elev.default`, `proj` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `out` | output `result` | `surface` |
 
 ## Examples
 
 - `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
-- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles, and the data type of each bound input/output.
 - `process-type.json`: its candidate process-type entry.

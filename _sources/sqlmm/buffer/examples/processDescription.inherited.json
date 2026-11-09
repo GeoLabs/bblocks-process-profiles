@@ -52,6 +52,7 @@
     "InputPolygon": {
       "title": "Polygon to be buffered",
       "description": "URI to a set of GML that describes the polygon.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
         "geometry"
       ],
@@ -87,6 +88,7 @@
     "BufferDistance": {
       "title": "Buffer Distance",
       "description": "Distance to be used to calculate buffer.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
       "keywords": [
         "distance"
       ],
@@ -115,6 +117,7 @@
     "Result": {
       "title": "Buffered Polygon",
       "description": "GML stream describing the buffered polygon feature.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/surface",
       "keywords": [
         "geometry"
       ],

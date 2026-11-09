@@ -12,16 +12,18 @@ Tool 16 of SAGA's Terrain Analysis - Morphometry library (author O. Conrad, 2010
 
 ## Implementation Profile
 
-Implements [`Terrain ruggedness index`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index) (`generic-profiles.implementation-profile.terrain-ruggedness-index`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+Implements [`Terrain ruggedness index`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index) (`generic-profiles.implementation-profile.terrain-ruggedness-index`, bblocks-generic-profiles).
 
-| Live | Implementation Profile |
-|---|---|
-| `DEM` | input `elevation` |
-| `MODE`, `RADIUS`, `DW_WEIGHTING`, `DW_IDW_POWER`, `DW_IDW_OFFSET`, `DW_BANDWIDTH` | -- (live-only inputs, Table 21 footnote b) |
-| `TRI` | output `result` |
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `DEM` | input `elevation` | `elevation-model` |
+| `MODE`, `RADIUS`, `DW_WEIGHTING`, `DW_IDW_POWER`, `DW_IDW_OFFSET`, `DW_BANDWIDTH` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `TRI` | output `result` | `raster-single-band` |
 
 ## Examples
 
 - `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
-- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles, and the data type of each bound input/output.
 - `process-type.json`: its candidate process-type entry.

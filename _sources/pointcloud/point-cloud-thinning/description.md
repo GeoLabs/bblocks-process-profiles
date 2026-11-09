@@ -17,17 +17,19 @@ On this deployment:
 
 ## Implementation Profile
 
-Implements [`Point cloud thinning (simple)`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning) (`generic-profiles.implementation-profile.point-cloud-thinning`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+Implements [`Point cloud thinning (simple)`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning) (`generic-profiles.implementation-profile.point-cloud-thinning`, bblocks-generic-profiles).
 
-| Live | Implementation Profile |
-|---|---|
-| `INPUT` | input `points` |
-| `PERCENT` | input `percentage` |
-| `NUMBER` | -- (live-only inputs, Table 21 footnote b) |
-| `RESULT` | output `result` |
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `INPUT` | input `points` | `point-cloud` |
+| `PERCENT` | input `percentage` | `number` |
+| `NUMBER` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `RESULT` | output `result` | `point-cloud` |
 
 ## Examples
 
 - `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
-- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles, and the data type of each bound input/output.
 - `process-type.json`: its candidate process-type entry.

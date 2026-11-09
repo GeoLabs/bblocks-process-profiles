@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process/actions/addition",
     "type": "RegisterAction",
@@ -21,17 +20,23 @@
   },
   "prefLabel": "Processing on Sentinel-2 bands to evaluate algae bloom.",
   "definition": "Performs band calculation on Sentinel-2 product bands to evaluate algae bloom for water quality assessment.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
-  ],
-  "profile": "ospd.process-profiles.algae-bloom.workflow-copernicus-process",
-  "processDescription": {
-    "id": "algae-usecase-workflow-copernicus-process",
-    "version": "2.1.0",
-    "href": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.algae-bloom.workflow-copernicus-process",
+    "processDescription": {
+      "id": "algae-usecase-workflow-copernicus-process",
+      "version": "2.1.0",
+      "href": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process/package",
@@ -49,39 +54,40 @@
       "eoap.cct.string-format"
     ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-product-safe",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/plot-image"
   ],
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "Composite (11 steps). No resampling step: the SAFE product already provides 60 m bands, so B03 60 m is downloaded directly instead of being resampled.",
-    "decomposition": [
-      {
-        "stage": "download_b0x (x5)",
-        "openeo": [
-          "ogc.openeo.processes.cubes.load_collection",
-          "ogc.openeo.processes.cubes.filter_bands"
-        ],
-        "level": "closeMatch"
-      },
-      {
-        "stage": "calculate_* (x3)",
-        "openeo": [
-          "ogc.openeo.processes.cubes.reduce_dimension"
-        ],
-        "level": "closeMatch"
-      },
-      {
-        "stage": "plot_* (x3)",
-        "openeo": [
-          "ogc.openeo.processes.cubes.save_result"
-        ],
-        "level": "closeMatch",
-        "note": "partial"
-      }
-    ]
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "Composite (11 steps). No resampling step: the SAFE product already provides 60 m bands, so B03 60 m is downloaded directly instead of being resampled.",
+      "decomposition": [
+        {
+          "stage": "download_b0x (x5)",
+          "openeo": [
+            "ogc.openeo.processes.cubes.load_collection",
+            "ogc.openeo.processes.cubes.filter_bands"
+          ],
+          "level": "closeMatch"
+        },
+        {
+          "stage": "calculate_* (x3)",
+          "openeo": [
+            "ogc.openeo.processes.cubes.reduce_dimension"
+          ],
+          "level": "closeMatch"
+        },
+        {
+          "stage": "plot_* (x3)",
+          "openeo": [
+            "ogc.openeo.processes.cubes.save_result"
+          ],
+          "level": "closeMatch",
+          "note": "partial"
+        }
+      ]
+    }
   }
 }

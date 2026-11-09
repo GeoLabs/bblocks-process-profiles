@@ -18,4 +18,68 @@ pp:ProcessTypeShape a sh:NodeShape ;
     sh:property [ sh:path rdf:type ; sh:hasValue owl:Class ;
                   sh:message "A process-type IRI must also be an OWL class because provenance uses it as rdf:type." ] ;
     sh:property [ sh:path rdfs:subClassOf ; sh:hasValue acttype:ActivityType ;
-                  sh:message "A process-type class must specialise acttype:ActivityType." ] .
+                  sh:message "A process-type class must specialise acttype:ActivityType." ] ;
+    # Decision D5: the six phases classify a type (pp:phase); they are not broader concepts of it,
+    # and what is deployed is a node of its own (pp:deployment), not statements on the type.
+    sh:property [ sh:path skos:broader ; sh:maxCount 0 ;
+                  sh:message "A process type has no skos:broader: its six-phase position is a classification (pp:phase)." ] ;
+    sh:property [ sh:path pp:phase ; sh:minCount 1 ; sh:nodeKind sh:IRI ;
+                  sh:in ( <https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration>
+                          <https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering>
+                          <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval>
+                          <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing>
+                          <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation>
+                          <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation> ) ;
+                  sh:message "A process type is classified in one or more of the six phases (pp:phase)." ] ;
+    sh:property [ sh:path pp:deployment ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:BlankNodeOrIRI ;
+                  sh:message "A process type has exactly one deployment (pp:deployment)." ] .
+
+# A4.2 and the control inherited from phase 1: the data type of a tier-4 input or output.
+#
+# gp:DataTypeReferenceShape (bblocks-generic-profiles) reaches the roles under gp:inputs and
+# gp:outputs, tiers 2 and 3 only. At tier 4 the inputs and outputs of a processDescription sit under
+# proc:inputs / proc:outputs, with a free name as property, so this SPARQL target (SHACL-AF, run by
+# pyshacl in advanced mode as bblocks-postprocess does) selects them. The shapes sit on this block
+# because every process profile depends on it.
+#
+# - Any input or output that carries a dataType (dct:type) carries one IRI, a dt:DataType concept of
+#   bblocks-data-types: the concepts reach the closure through data-types.vocabulary.
+# - An input or output bound to an Implementation Profile role (a proc:metadata reference whose role
+#   is implementation-input or implementation-output) carries one.
+#
+# An input or output of the deployment's own (Table 21 footnote b) has no tier-3 counterpart and no
+# dataType: not required. tests/ holds one failing fixture per constraint and a control.
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix dt:   <https://geolabs.github.io/bblocks-data-types/def/> .
+
+pp:Tier4DataTypeReferenceShape a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this WHERE {
+                ?process <https://w3id.org/ogc/api/processes/inputs> | <https://w3id.org/ogc/api/processes/outputs> ?roles .
+                ?roles ?role ?this .
+                FILTER (!isLiteral(?this))
+            }
+        """
+    ] ;
+    sh:property [ sh:path dct:type ; sh:maxCount 1 ; sh:nodeKind sh:IRI ; sh:class dt:DataType ;
+                  sh:message "A tier-4 input or output's dataType must be one dt:DataType concept of the bblocks-data-types register." ] .
+
+pp:Tier4BoundRoleDataTypeShape a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT DISTINCT ?this WHERE {
+                ?process <https://w3id.org/ogc/api/processes/inputs> | <https://w3id.org/ogc/api/processes/outputs> ?roles .
+                ?roles ?role ?this .
+                ?this <https://w3id.org/ogc/api/processes/metadata> ?reference .
+                ?reference <https://w3id.org/ogc/api/processes/role> ?referenceRole .
+                FILTER (?referenceRole IN (
+                    <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input>,
+                    <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output>))
+            }
+        """
+    ] ;
+    sh:property [ sh:path dct:type ; sh:minCount 1 ;
+                  sh:message "A tier-4 input or output bound to an Implementation Profile role carries that role's dataType." ] .

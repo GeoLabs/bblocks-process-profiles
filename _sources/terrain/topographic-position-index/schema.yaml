@@ -117,9 +117,12 @@ $defs:
           properties:
             DEM:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model
                 keywords:
                   allOf:
                   - contains:
@@ -153,9 +156,12 @@ $defs:
           properties:
             TPI:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band
                 keywords:
                   allOf:
                   - contains:

@@ -120,9 +120,12 @@ $defs:
           properties:
             InputDSN:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
                 keywords:
                   allOf:
                   - contains:
@@ -151,9 +154,12 @@ $defs:
                           const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster
             t_srs:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/coordinate-reference-system
                 keywords:
                   allOf:
                   - contains:
@@ -191,9 +197,12 @@ $defs:
           properties:
             Result:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
                 keywords:
                   allOf:
                   - contains:

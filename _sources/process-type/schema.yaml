@@ -5,13 +5,19 @@ description: 'A candidate process-type register item which is also a class used 
   register item and an owl:Class specialising acttype:ActivityType.
 
 
-  The entry describes the *type* of activity only. What an activity of this type executes -- its plan,
-  a `prov:Plan` -- is kept apart in `plan`: the OGC Application Package served by OGC API - Processes
-  - Part 2 (Deploy, Replace, Undeploy) at `/processes/{processID}/package`, whose execution unit is the
-  pinned CWL. A run of this type records the same IRI as its `qualifiedAssociation.hadPlan`. A process
-  implemented natively by its server (`mutable: false`) has no Application Package (Part 2 serves `/package`
-  only for dynamically deployed processes) and so no `plan`; `processDescription` is then the only link
-  to what is executed.'
+  Decision D5: one entry per deployed process, in five parts. Its meaning is `prefLabel`, `definition`
+  and `subClassOf`. Its classification (`classification`: the six-phase position), its deployment (`deployment`:
+  profile block, processDescription, run class), its plan (`plan`) and its correspondences (`correspondences`:
+  openEO) are kept apart from that meaning. `implementsProfile` links it to its Implementation Profile
+  (tier 3), with the declarations that qualify the binding (`serverSideFiles`, `roleDecompositions`, `assumedFormatGaps`).
+
+
+  What an activity of this type executes -- its plan, a `prov:Plan` -- is the OGC Application Package
+  served by OGC API - Processes - Part 2 (Deploy, Replace, Undeploy) at `/processes/{processID}/package`,
+  whose execution unit is the pinned CWL. A run of this type records the same IRI as its `qualifiedAssociation.hadPlan`.
+  A process implemented natively by its server (`mutable: false`) has no Application Package (Part 2 serves
+  `/package` only for dynamically deployed processes) and so no `plan`; `deployment.processDescription`
+  is then the only link to what is executed.'
 allOf:
 - $ref: bblocks://ogc.register.schemas.activity-types-schema
 - type: object
@@ -21,11 +27,9 @@ allOf:
   - prefLabel
   - definition
   - inScheme
-  - phase
-  - profile
-  - processDescription
-  - provenanceClass
-  - openeoEquivalence
+  - classification
+  - deployment
+  - correspondences
   - objectIdentifier
   - itemClass
   - inRegister
@@ -51,44 +55,70 @@ allOf:
       description: IRI of the process-type register (concept scheme) this entry is proposed to.
       type: string
       format: uri
-    phase:
-      description: Position(s) in the six-phase workflow framework.
-      type: array
-      minItems: 1
-      items:
-        type: string
-        enum:
-        - https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration
-        - https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering
-        - https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval
-        - https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing
-        - https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation
-        - https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation
-    profile:
-      description: Identifier of the process-profile Building Block.
-      type: string
-    processDescription:
-      description: The OGC API - Processes processDescription this type is profiled from, at `href` (the
-        `/processes/{processID}` resource). For a CWL-sourced process it is the description the Application
-        Package would deploy, under the illustrative host `ospd.example.org`; for a live process (e.g.
-        a ZOO-Project deployment, `ospd.process-profiles.sqlmm.*`) the real one.
+    classification:
+      description: 'Classification of the type, apart from its meaning (decision D5). `phase` (pp:phase,
+        formerly skos:broader) is a separate axis from the Process Concepts of bblocks-generic-profiles:
+        see the block description.'
       type: object
       required:
-      - id
-      - version
-      - href
+      - phase
+      additionalProperties: false
       properties:
-        id:
+        phase:
+          description: Position(s) in the six-phase workflow framework.
+          type: array
+          minItems: 1
+          items:
+            type: string
+            enum:
+            - https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration
+            - https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering
+            - https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval
+            - https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing
+            - https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation
+            - https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation
+    deployment:
+      description: 'What is deployed (decision D5): the process profile block, the processDescription
+        and the class of its run records.'
+      type: object
+      required:
+      - profile
+      - processDescription
+      - provenanceClass
+      additionalProperties: false
+      properties:
+        profile:
+          description: Identifier of the process-profile Building Block.
           type: string
-        version:
+        processDescription:
+          description: The OGC API - Processes processDescription this type is profiled from, at `href`
+            (the `/processes/{processID}` resource). For a CWL-sourced process it is the description the
+            Application Package would deploy, under the illustrative host `ospd.example.org`; for a live
+            process (e.g. a ZOO-Project deployment, `ospd.process-profiles.sqlmm.*`) the real one.
+          type: object
+          required:
+          - id
+          - version
+          - href
+          properties:
+            id:
+              type: string
+            version:
+              type: string
+            href:
+              type: string
+              format: uri
+            license:
+              description: Of a live process; omitted, not null, when it declares none -- do not assume
+                one.
+              type: string
+              format: uri
+        provenanceClass:
+          description: Class of the run records produced by executing this process.
           type: string
-        href:
-          type: string
-          format: uri
-        license:
-          description: Of a live process; omitted, not null, when it declares none -- do not assume one.
-          type: string
-          format: uri
+          enum:
+          - http://purl.org/wf4ever/wfprov#ProcessRun
+          - http://purl.org/wf4ever/wfprov#WorkflowRun
     plan:
       description: 'The plan (`prov:Plan`) an activity of this type executes: the OGC Application Package
         at `/processes/{processID}/package` (OGC API - Processes - Part 2, requirement /req/deploy-replace-undeploy/package-get-op),
@@ -144,12 +174,6 @@ allOf:
           items:
             type: string
             pattern: ^eoap\.cct\.
-    provenanceClass:
-      description: Class of the run records produced by executing this process.
-      type: string
-      enum:
-      - http://purl.org/wf4ever/wfprov#ProcessRun
-      - http://purl.org/wf4ever/wfprov#WorkflowRun
     serverSideFiles:
       description: Inputs and outputs that this deployment passes as names of files stored on the server
         (relative to the ZOO-Kernel `dataPath`), not as encoded data, so with no media type. Each names
@@ -175,6 +199,80 @@ allOf:
             format: uri
           location:
             type: string
+    roleDecompositions:
+      description: Implementation Profile roles that this deployment takes as several inputs (or outputs),
+        none of which is the role and none of which carries its representation -- e.g. the bounding box
+        of raster-crop taken by OTB.ExtractROI as four corner numbers and a unit. Declared so that the
+        gap is explicit (decision of 2026-11-09).
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+        - side
+        - implements
+        - parts
+        - note
+        additionalProperties: false
+        properties:
+          side:
+            enum:
+            - inputs
+            - outputs
+          implements:
+            type: string
+            format: uri
+          parts:
+            type: array
+            minItems: 2
+            items:
+              type: string
+          selector:
+            description: The input, and its value, under which the parts are read.
+            type: object
+            required:
+            - name
+            - value
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+          note:
+            type: string
+    assumedFormatGaps:
+      description: Bound inputs and outputs whose Implementation Profile representation this deployment
+        does not serve (no media type exposed), accepted with a reason and its evidence (A4.3, docs/FORMAT-CHECK.md).
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+        - name
+        - side
+        - implements
+        - served
+        - reason
+        - evidence
+        additionalProperties: false
+        properties:
+          name:
+            type: string
+          side:
+            enum:
+            - inputs
+            - outputs
+          implements:
+            type: string
+            format: uri
+          served:
+            type: array
+            items:
+              type: string
+          reason:
+            type: string
+          evidence:
+            type: string
     implementsProfile:
       description: 'IRI of the nearest applicable profile this process specialises, in the generic-profiles
         register -- normally an Implementation Profile (generic-profiles.implementation-profile.*, OGC
@@ -191,57 +289,66 @@ allOf:
       items:
         type: string
         format: uri
-    exactMatch:
-      type: array
-      items:
-        type: string
-        format: uri
-    closeMatch:
-      type: array
-      items:
-        type: string
-        format: uri
-    relatedMatch:
-      type: array
-      items:
-        type: string
-        format: uri
-    openeoEquivalence:
+    correspondences:
+      description: 'Proposed correspondences with openEO (decision D5: apart from the meaning of the type).
+        The SKOS mapping properties stay on the type; `openeoEquivalence` states the level, including
+        `none`.'
       type: object
       required:
-      - level
-      - rationale
+      - openeoEquivalence
+      additionalProperties: false
       properties:
-        level:
-          enum:
-          - exactMatch
-          - closeMatch
-          - none
-        rationale:
-          type: string
-        decomposition:
-          description: Ordered correspondence of the stages of a composite or opaque process.
+        exactMatch:
           type: array
           items:
-            type: object
-            required:
-            - stage
-            - level
-            properties:
-              stage:
-                type: string
-              openeo:
-                type: array
-                items:
-                  type: string
-                  pattern: ^ogc\.openeo\.
-              level:
-                enum:
-                - exactMatch
-                - closeMatch
-                - none
-              note:
-                type: string
+            type: string
+            format: uri
+        closeMatch:
+          type: array
+          items:
+            type: string
+            format: uri
+        relatedMatch:
+          type: array
+          items:
+            type: string
+            format: uri
+        openeoEquivalence:
+          type: object
+          required:
+          - level
+          - rationale
+          properties:
+            level:
+              enum:
+              - exactMatch
+              - closeMatch
+              - none
+            rationale:
+              type: string
+            decomposition:
+              description: Ordered correspondence of the stages of a composite or opaque process.
+              type: array
+              items:
+                type: object
+                required:
+                - stage
+                - level
+                properties:
+                  stage:
+                    type: string
+                  openeo:
+                    type: array
+                    items:
+                      type: string
+                      pattern: ^ogc\.openeo\.
+                  level:
+                    enum:
+                    - exactMatch
+                    - closeMatch
+                    - none
+                  note:
+                    type: string
     itemClass:
       const: https://w3id.org/ogc/rim/activity-type/activityTypeItemClass
     inRegister:

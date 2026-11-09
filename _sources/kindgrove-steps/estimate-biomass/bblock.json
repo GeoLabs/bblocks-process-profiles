@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
   "name": "Process profile: estimate_biomass",
-  "abstract": "OGC API - Processes profile of the CWL CommandLineTool `estimate_biomass` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
+  "abstract": "OGC API - Processes profile of the CWL CommandLineTool `estimate_biomass` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.",
   "status": "under-development",
   "dateTimeAddition": "2026-09-22T00:00:00Z",
   "dateOfLastChange": "2026-09-22",
@@ -35,5 +35,5 @@
   ],
   "sourceSchema": "schema.yaml",
   "maturity": "development",
-  "group": "W2 KindGrove"
+  "group": "W2b KindGrove (step notebooks)"
 }

@@ -51,6 +51,7 @@
     "InputPolygon": {
       "title": "Polygon to get the centroid",
       "description": "The centroid which is not necessarily within the geometry.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/surface",
       "keywords": [
         "geometry"
       ],
@@ -91,6 +92,7 @@
     "Result": {
       "title": "The Centroid",
       "description": "JSON String / GML Entity of the centroid",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/point",
       "keywords": [
         "geometry"
       ],

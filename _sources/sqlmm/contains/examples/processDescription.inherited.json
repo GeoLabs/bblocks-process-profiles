@@ -49,6 +49,7 @@
     "InputEntity1": {
       "title": "the first geometry",
       "description": "the first geometry.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
         "geometry"
       ],
@@ -84,6 +85,7 @@
     "InputEntity2": {
       "title": "the other geometry",
       "description": "the other geometry.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
         "geometry"
       ],
@@ -121,6 +123,7 @@
     "Result": {
       "title": "Contains result",
       "description": "A value true or false if the geometry1 contains the geometry2.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/boolean",
       "keywords": [
         "boolean"
       ],

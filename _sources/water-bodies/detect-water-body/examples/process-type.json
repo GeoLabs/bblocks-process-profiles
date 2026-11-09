@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body/actions/addition",
     "type": "RegisterAction",
@@ -21,16 +20,22 @@
   },
   "prefLabel": "Water body detection based on NDWI and otsu threshold",
   "definition": "Water body detection based on NDWI and otsu threshold",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
-  ],
-  "profile": "ospd.process-profiles.water-bodies.detect-water-body",
-  "processDescription": {
-    "id": "detect_water_body",
-    "version": "1.4.1",
-    "href": "https://ospd.example.org/ogc-api/processes/detect_water_body"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.water-bodies.detect-water-body",
+    "processDescription": {
+      "id": "detect_water_body",
+      "version": "1.4.1",
+      "href": "https://ospd.example.org/ogc-api/processes/detect_water_body"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/detect_water_body/package",
@@ -49,37 +54,38 @@
       "eoap.cct.string-format"
     ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/otsu"
   ],
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "Composite (3 steps: band crop scattered over 2 bands, NDWI, Otsu threshold). In openEO this is one load_collection with band selection followed by a short process graph.",
-    "decomposition": [
-      {
-        "stage": "node_crop (x2, scatter over bands)",
-        "openeo": [
-          "ogc.openeo.processes.cubes.load_collection",
-          "ogc.openeo.processes.cubes.filter_bands"
-        ],
-        "level": "closeMatch"
-      },
-      {
-        "stage": "node_normalized_difference",
-        "openeo": [
-          "ogc.openeo.processes.math.indices.normalized_difference"
-        ],
-        "level": "closeMatch"
-      },
-      {
-        "stage": "node_otsu",
-        "openeo": [],
-        "level": "none",
-        "note": "no stable Otsu-threshold process in openEO"
-      }
-    ]
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "Composite (3 steps: band crop scattered over 2 bands, NDWI, Otsu threshold). In openEO this is one load_collection with band selection followed by a short process graph.",
+      "decomposition": [
+        {
+          "stage": "node_crop (x2, scatter over bands)",
+          "openeo": [
+            "ogc.openeo.processes.cubes.load_collection",
+            "ogc.openeo.processes.cubes.filter_bands"
+          ],
+          "level": "closeMatch"
+        },
+        {
+          "stage": "node_normalized_difference",
+          "openeo": [
+            "ogc.openeo.processes.math.indices.normalized_difference"
+          ],
+          "level": "closeMatch"
+        },
+        {
+          "stage": "node_otsu",
+          "openeo": [],
+          "level": "none",
+          "note": "no stable Otsu-threshold process in openEO"
+        }
+      ]
+    }
   }
 }

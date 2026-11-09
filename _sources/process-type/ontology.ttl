@@ -42,3 +42,62 @@ pp:process-type a rim:ConceptSystem, skos:ConceptScheme ;
     dct:title "OSPD process types"@en ;
     skos:prefLabel "OSPD process types"@en ;
     dct:description "Process types that classify the deployable CWL activities recorded in provenance."@en .
+
+# Decision D5: a process type keeps its meaning (skos:prefLabel, skos:definition, rdfs:subClassOf)
+# apart from its classification, its deployment, its plan and its correspondences.
+
+pp:phase a owl:ObjectProperty ;
+    rdfs:isDefinedBy pp: ;
+    rdfs:label "phase" ;
+    rdfs:comment "Classification of a process type: its position in the six-phase workflow framework. Not a broader concept of the type (until 2026-11-09 it was skos:broader), and not derived from the Process Concepts of bblocks-generic-profiles, which classify operations by kind of data: the two axes are independent." ;
+    rdfs:range skos:Concept .
+
+pp:deployment a owl:ObjectProperty ;
+    rdfs:isDefinedBy pp: ;
+    rdfs:label "deployment" ;
+    rdfs:comment "What is deployed for a process type: its process profile block (pp:profile), the processDescription it is profiled from (pp:processDescription) and the class of its run records (pp:provenanceClass). Not part of the meaning of the type." .
+
+pp:plan a owl:ObjectProperty ;
+    rdfs:isDefinedBy pp: ;
+    rdfs:label "plan" ;
+    rdfs:comment "The prov:Plan an activity of a CWL-sourced process type executes: its OGC Application Package. Not part of the meaning of the type; acttype:plan, the steps an activity type requires, is a different property (decision D8, pending)." ;
+    rdfs:range prov:Plan .
+
+pp:implementsProfile a owl:ObjectProperty ;
+    rdfs:isDefinedBy pp: ;
+    rdfs:label "implements profile" ;
+    rdfs:comment "The Implementation Profile of bblocks-generic-profiles (tier 3) that the deployed process implements: the canonical tier-4 to tier-3 link. Its declaration as a sub-property of rim:relatedItem waits for decision D8." .
+
+pp:roleDecomposition a owl:ObjectProperty ;
+    rdfs:isDefinedBy pp: ;
+    rdfs:label "role decomposition" ;
+    rdfs:comment "An Implementation Profile role (pp:implements) that the deployment takes as several inputs or outputs (pp:part, in order), none of which carries the role's representation." .
+
+pp:assumedFormatGap a owl:ObjectProperty ;
+    rdfs:isDefinedBy pp: ;
+    rdfs:label "assumed format gap" ;
+    rdfs:comment "A bound input or output whose Implementation Profile representation the deployment does not serve, accepted with its reason (skos:note) and evidence (pp:evidence)." .
+
+pp:six-phases a skos:ConceptScheme ;
+    rdfs:isDefinedBy pp: ;
+    skos:prefLabel "Six-phase workflow framework"@en ;
+    dct:description "Positions of a process in an Earth observation workflow, from filter configuration to export, used to classify the OSPD process types (pp:phase). Provisional IRIs, as the rest of the pp: vocabulary."@en ;
+    skos:hasTopConcept <https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration> ,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering> ,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval> ,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing> ,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration> a skos:Concept ;
+    skos:prefLabel "Filter configuration"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
+<https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering> a skos:Concept ;
+    skos:prefLabel "Selection / filtering"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
+<https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval> a skos:Concept ;
+    skos:prefLabel "Data retrieval"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
+<https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing> a skos:Concept ;
+    skos:prefLabel "Pre-processing"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
+<https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> a skos:Concept ;
+    skos:prefLabel "Scientific computation"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
+<https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation> a skos:Concept ;
+    skos:prefLabel "Export / aggregation"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .

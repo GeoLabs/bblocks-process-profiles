@@ -45,6 +45,15 @@ PREFIX = "ospd.process-profiles."
 TODAY = "2026-09-22"
 PART1_CORE = "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
 GENERIC_PROFILES_BASE = "https://geolabs.github.io/bblocks-generic-profiles/def/"
+DATA_TYPES_BASE = "https://geolabs.github.io/bblocks-data-types/def/data-type/"
+DATA_FORMATS_BASE = "https://w3id.org/geolabs-ospd/data-formats/"
+
+# The two populations of this register (A4.5): the deployable CWL processes of the OSPD reference
+# workflows (`processes` in profiles.yaml) and the live processes of the Geonovum testbed
+# (`ogcapi_processes`). Checked at generation, so that a change in either is seen.
+POPULATIONS = {"cwl": 27, "live": 31}
+WORKFLOW_LABELS = {"algae-bloom": "W1 Algae Bloom", "kindgrove": "W2 KindGrove",
+                   "water-bodies": "W3 Water Bodies", "kindgrove-steps": "W2b KindGrove (step notebooks)"}
 
 PHASE_LABELS = {
     "filter-configuration": "Filter configuration",
@@ -128,6 +137,10 @@ PROFILE_CONTEXT = {
         "metadata": {"@id": "proc:metadata", "@context": {
             "href": {"@id": "proc:href", "@type": "@id"}}},
         "role": {"@id": "proc:role", "@type": "@id"},
+        # The data type of a tier-4 input or output (A4.2), a dt:DataType concept of
+        # bblocks-data-types, inherited from the Implementation Profile role it is bound to. Same
+        # term and property (dct:type) as tiers 2 and 3 in bblocks-generic-profiles.
+        "dataType": {"@id": "dct:type", "@type": "@id"},
         "inputs": {"@id": "proc:inputs", "@context": {"@vocab": BASE + "input/"}},
         "outputs": {"@id": "proc:outputs", "@context": {"@vocab": BASE + "output/"}},
         "links": {"@id": "rdfs:seeAlso", "@context": {
@@ -198,7 +211,16 @@ PROFILE_CONTEXT = {
         "definition": "skos:definition",
         "inScheme": {"@id": "skos:inScheme", "@type": "@id"},
         "status": "pp:status",
-        "phase": {"@id": "skos:broader", "@type": "@id"},
+        # Decision D5: the entry separates the meaning of the type (prefLabel, definition,
+        # subClassOf) from its classification, its deployment, its plan and its correspondences.
+        # `classification` and `correspondences` only group keys in the JSON (@nest): their
+        # statements stay on the type. `phase` is a classification (pp:phase), no longer
+        # skos:broader, which made the six phases broader concepts of the type. `deployment` is a
+        # node of its own: what is deployed, not what the type means.
+        "classification": "@nest",
+        "correspondences": "@nest",
+        "phase": {"@id": "pp:phase", "@type": "@id"},
+        "deployment": {"@id": "pp:deployment"},
         "profile": "pp:profile",
         # The plan (prov:Plan) is the Application Package at /processes/{id}/package, kept apart
         # from the type itself; the same IRI is each run's `hadPlan`.
@@ -225,6 +247,20 @@ PROFILE_CONTEXT = {
         "serverSideFiles": {"@id": "pp:serverSideFile", "@context": {
             "name": "pp:liveName", "side": "pp:side",
             "implements": {"@id": "pp:implements", "@type": "@id"}, "location": "pp:location"}},
+        # An Implementation Profile role that this deployment takes as several inputs, none of
+        # which carries the role's representation (raster-crop's bounding box as OTB.ExtractROI's
+        # four corner numbers). Declared, like serverSideFiles, so that the gap is explicit.
+        "roleDecompositions": {"@id": "pp:roleDecomposition", "@context": {
+            "side": "pp:side", "implements": {"@id": "pp:implements", "@type": "@id"},
+            "parts": {"@id": "pp:part", "@container": "@list"},
+            "selector": {"@id": "pp:selector", "@context": {"name": "pp:liveName", "value": "rdf:value"}},
+            "note": "skos:note"}},
+        # A bound input or output whose Implementation Profile representation this deployment does
+        # not serve (no media type exposed), accepted with its reason (A4.3).
+        "assumedFormatGaps": {"@id": "pp:assumedFormatGap", "@context": {
+            "name": "pp:liveName", "side": "pp:side",
+            "implements": {"@id": "pp:implements", "@type": "@id"},
+            "served": "pp:servedMediaType", "reason": "skos:note", "evidence": "pp:evidence"}},
     }
 }
 
@@ -758,7 +794,6 @@ def register_item_fields(entry_id):
         "inRegister": PROCESS_TYPE_REGISTER,
         "validityStatus": "invalid",
         "publicationStatus": "published",
-        "subClassOf": ACTIVITY_TYPE_CLASS,
         "hasAction": {
             "id": entry_id + "/actions/addition",
             "type": "RegisterAction",
@@ -770,44 +805,61 @@ def register_item_fields(entry_id):
     }
 
 
-def process_type_entry(proc, pd, cwl_el, src, url, by_key):
-    oe = proc["openeo"]
+def build_entry(proc, pd, definition, deployment, plan, assumed, by_key):
+    """A process-type entry, in the five parts of decision D5:
+
+    - meaning: `prefLabel`, `definition`, `subClassOf` (with the RIM fields and `inScheme`);
+    - classification: `classification.phase`, the six-phase position (pp:phase);
+    - deployment: `deployment`, what is deployed (process description, profile block, run class);
+    - plan: `plan`, the Application Package of a CWL process (a prov:Plan of its own);
+    - correspondences: `correspondences`, the proposed openEO equivalences.
+
+    `implementsProfile` and its binding declarations are the link to tier 3; `hasStep` the steps of a
+    Workflow. `subClassOf` stays acttype:ActivityType: specialising the operation's activity type of
+    bblocks-generic-profiles (D5) makes the entry a registered sub-class of
+    geoproc:GeoprocessingActivityType, which must declare its own spatial entity type -- decision D8,
+    pending (docs/OPEN-QUESTIONS.md Q-D8-SPECIALISATION)."""
     entry_id = ptype_iri(proc)
-    entry = {
+    e = {
         "id": entry_id,
         **register_item_fields(entry_id),
         "prefLabel": (proc.get("label") or pd.get("title") or pd["id"]).strip(),
-        "definition": " ".join((proc.get("definition") or cwl_el.get("doc") or cwl_el.get("label")
-                                or pd.get("description") or "").split()),
+        "definition": " ".join(definition.split()),
+        "subClassOf": ACTIVITY_TYPE_CLASS,
         "inScheme": PTYPE_SCHEME,
-        "phase": [PHASE_BASE + p for p in proc["phases"]],
+        "classification": {"phase": [PHASE_BASE + p for p in proc["phases"]]},
+        "deployment": deployment,
+    }
+    if plan:
+        e["plan"] = plan
+    e.update(tier3_link_fields(proc, assumed))
+    if proc.get("steps"):
+        e["hasStep"] = [ptype_iri(by_key[s]) for s in proc["steps"]]
+    e["correspondences"] = correspondences(proc["openeo"])
+    return e
+
+
+def process_type_entry(proc, pd, cwl_el, src, url, by_key, assumed=()):
+    deployment = {
         "profile": bb_id(proc),
         "processDescription": {"id": pd["id"], "version": pd["version"], "href": pd_url(pd)},
-        "plan": {
-            "id": plan_url(pd),
-            "type": "Plan",
-            "executionUnit": execution_unit(url),
-            "cwlClass": cwl_el["class"],
-            "cwlId": cwl_el.get("id", pd["id"]),
-            "license": src["license"],
-            "cctDependencies": proc.get("cct", []),
-            "candidateCctDependencies": proc.get("cct_candidates", []),
-        },
         "provenanceClass": "http://purl.org/wf4ever/wfprov#" + ("WorkflowRun" if cwl_el["class"] == "Workflow" else "ProcessRun"),
     }
-    if proc.get("steps"):
-        entry["hasStep"] = [ptype_iri(by_key[s]) for s in proc["steps"]]
-    for rel in ("exactMatch", "closeMatch", "relatedMatch"):
-        if oe.get(rel):
-            entry[rel] = [BBLOCK_IRI + t for t in oe[rel]]
-    eq = {"level": oe["level"], "rationale": " ".join(oe["rationale"].split())}
-    if oe.get("decomposition"):
-        eq["decomposition"] = oe["decomposition"]
-    entry["openeoEquivalence"] = eq
-    return entry
+    plan = {
+        "id": plan_url(pd),
+        "type": "Plan",
+        "executionUnit": execution_unit(url),
+        "cwlClass": cwl_el["class"],
+        "cwlId": cwl_el.get("id", pd["id"]),
+        "license": src["license"],
+        "cctDependencies": proc.get("cct", []),
+        "candidateCctDependencies": proc.get("cct_candidates", []),
+    }
+    definition = (proc.get("definition") or cwl_el.get("doc") or cwl_el.get("label") or pd.get("description") or "")
+    return build_entry(proc, pd, definition, deployment, plan, list(assumed), by_key)
 
 
-def profile_schema(proc, pd, cwl_el, has_exec):
+def profile_schema(proc, pd, cwl_el, has_exec, inherited=None):
     req_in = [n for n, v in cwl_items(cwl_el.get("inputs")).items()
               if not is_optional(v.get("type")) and "default" not in v and n in pd["inputs"]]
     workflow = cwl_el["class"] == "Workflow"
@@ -854,6 +906,22 @@ def profile_schema(proc, pd, cwl_el, has_exec):
         defs["execution"] = {"$ref": "bblocks://ogc.bbr.provenance.execution"}
     else:
         defs["processRun"] = {"$ref": "bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun"}
+    pins = {
+        "type": "object",
+        "required": ["id", "version", "inputs", "outputs"],
+        "properties": {
+            "id": {"const": pd["id"]},
+            "inputs": {"type": "object", "required": list(pd["inputs"].keys()),
+                       "propertyNames": {"enum": list(pd["inputs"].keys())}},
+            "outputs": {"type": "object", "required": list(pd["outputs"].keys()),
+                        "propertyNames": {"enum": list(pd["outputs"].keys())}},
+        },
+    }
+    if inherited:
+        # deep copies: a shared object would be dumped as a YAML anchor/alias
+        defs["inheritedProcessDescription"] = {"allOf": [
+            {"$ref": "bblocks://ogc.api.processes.v1.schemas.process"},
+            {"$ref": "bblocks://ogc.api.processes.v2.schemas.staticIndicator"}, copy.deepcopy(pins), inherited]}
     return {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "description": (f"Profile of the OGC API - Processes processDescription of `{pd['id']}` "
@@ -862,17 +930,7 @@ def profile_schema(proc, pd, cwl_el, has_exec):
         "allOf": [
             {"$ref": "bblocks://ogc.api.processes.v1.schemas.process"},
             {"$ref": "bblocks://ogc.api.processes.v2.schemas.staticIndicator"},
-            {
-                "type": "object",
-                "required": ["id", "version", "inputs", "outputs"],
-                "properties": {
-                    "id": {"const": pd["id"]},
-                    "inputs": {"type": "object", "required": list(pd["inputs"].keys()),
-                               "propertyNames": {"enum": list(pd["inputs"].keys())}},
-                    "outputs": {"type": "object", "required": list(pd["outputs"].keys()),
-                                "propertyNames": {"enum": list(pd["outputs"].keys())}},
-                },
-            },
+            pins,
         ],
         "$defs": defs,
     }
@@ -893,10 +951,8 @@ def md_openeo(oe):
     return "\n".join(lines)
 
 
-def description_md(proc, pd, cwl_el, url, src, corrections, has_exec, info, by_key, eoap_commit):
-    wf = {"algae-bloom": "W1 Algae Bloom", "kindgrove": "W2 KindGrove",
-          "water-bodies": "W3 Water Bodies",
-          "kindgrove-steps": "W2b KindGrove (step notebooks)"}[proc["workflow"]]
+def description_md(proc, pd, cwl_el, url, src, corrections, has_exec, info, by_key, eoap_commit, gp_root):
+    wf = WORKFLOW_LABELS[proc["workflow"]]
     ins = cwl_items(cwl_el.get("inputs"))
     outs = cwl_items(cwl_el.get("outputs"))
     pin = (f"pinned commit `{src['commit'][:7]}`" if "commit" in src
@@ -966,6 +1022,14 @@ def description_md(proc, pd, cwl_el, url, src, corrections, has_exec, info, by_k
                   f"`{info['activity']['plan']}` ({where}engine {info['engine']['name']} {info['engine']['version']}). "
                   "Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. "
                   "Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment."]
+    parts += ["", "## Implementation Profile (tier 3)", ""]
+    att = proc["tier3"]
+    if proc.get("implementsProfile"):
+        parts += md_binding(proc, pd, gp_root, " ".join(att["reason"].split()))
+    else:
+        parts += ["Not attached to an Implementation Profile of bblocks-generic-profiles: "
+                  + " ".join(att["reason"].split()), "",
+                  "The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`."]
     parts += ["", "## openEO equivalence", "", md_openeo(proc["openeo"]), "",
               "## Process type (Activity 4)", "",
               f"Registered ActivityType OWL class `{ptype_iri(proc)}` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision."]
@@ -994,11 +1058,11 @@ def bblock_json(proc, pd, cwl_el, corrections, has_exec, by_key):
     tags = ["OSPD", "process profile", "CWL", cwl_el["class"], proc["workflow"]]
     if corrections:
         tags.append("manually-corrected")
-    return {
+    meta = {
         "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
         "name": f"Process profile: {pd['id']}",
         "abstract": (f"OGC API - Processes profile of the CWL {cwl_el['class']} `{pd['id']}` "
-                     f"({'W1 Algae Bloom' if proc['workflow'] == 'algae-bloom' else 'W2 KindGrove'}), with its "
+                     f"({WORKFLOW_LABELS[proc['workflow']]}), with its "
                      "provenance view, process-type entry and openEO equivalence."),
         "status": "under-development",
         "dateTimeAddition": f"{TODAY}T00:00:00Z",
@@ -1013,8 +1077,13 @@ def bblock_json(proc, pd, cwl_el, corrections, has_exec, by_key):
         "tags": tags,
         "sourceSchema": "schema.yaml",
         "maturity": "development",
-        "group": "W1 Algae Bloom" if proc["workflow"] == "algae-bloom" else "W2 KindGrove",
+        "group": WORKFLOW_LABELS[proc["workflow"]],
     }
+    if proc.get("implementsProfile"):
+        # as for the live processes (ogcapi_bblock_json): the Implementation is a profile of its
+        # Implementation Profile
+        meta["isProfileOf"] = generic_profiles_identifier(proc["implementsProfile"])
+    return meta
 
 
 def examples_yaml(proc, cwl_el, url, corrected, has_exec):
@@ -1026,6 +1095,8 @@ def examples_yaml(proc, cwl_el, url, corrected, has_exec):
                     + (" (manually corrected, see description)." if corrected else "."),
          "snippets": [{"language": "json", "ref": "examples/processDescription.json"}]},
     ]
+    if proc.get("implementsProfile"):
+        ex.append(inherited_example(proc))
     if corrected:
         ex.append({"title": "Raw cwl-to-ogcprocess output",
                    "content": "Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.",
@@ -1116,40 +1187,19 @@ def load_ogcapi_process(proc, sources, roots):
     return raw, pd, url
 
 
-def ogcapi_process_type_entry(proc, pd, src, url, by_key):
-    oe = proc["openeo"]
+def ogcapi_process_type_entry(proc, pd, src, url, by_key, assumed=()):
     # A natively implemented process (`mutable: false`) has no Application Package -- Part 2's
     # /package is only served for dynamically deployed ones (req. package-get-op C) -- so no plan.
-    entry_id = ptype_iri(proc)
-    entry = {
-        "id": entry_id,
-        **register_item_fields(entry_id),
-        "prefLabel": (proc.get("label") or pd.get("title") or pd["id"]).strip(),
-        "definition": " ".join((proc.get("definition") or pd.get("description") or "").split()),
-        "inScheme": PTYPE_SCHEME,
-        "phase": [PHASE_BASE + p for p in proc["phases"]],
+    deployment = {
         "profile": bb_id(proc),
         "processDescription": {"id": pd["id"], "version": pd["version"], "href": url},
         "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
     }
     if src.get("license"):
-        entry["processDescription"]["license"] = src["license"]
-    if proc.get("implementsProfile"):
-        entry["implementsProfile"] = proc["implementsProfile"]
-        # Inputs and outputs that this deployment passes as names of files stored on the server, not
-        # as encoded data: no media type is served for them, by design (profiles.yaml
-        # `server_side_files`). Each names the Implementation Profile role whose format the file has.
-        ssf = proc.get("server_side_files")
-        if ssf:
-            entry["serverSideFiles"] = [
-                {"name": live, "side": side, "implements": f"{proc['implementsProfile']}/{side}/{role}",
-                 "location": " ".join(ssf["location"].split())}
-                for side in ("inputs", "outputs") for live, role in (ssf.get(side) or {}).items()]
-    for rel in ("exactMatch", "closeMatch", "relatedMatch"):
-        if oe.get(rel):
-            entry[rel] = [BBLOCK_IRI + t for t in oe[rel]]
-    entry["openeoEquivalence"] = {"level": oe["level"], "rationale": " ".join(oe["rationale"].split())}
-    return entry
+        deployment["processDescription"]["license"] = src["license"]
+    # Inputs and outputs that this deployment passes as names of files stored on the server, not
+    # as encoded data (profiles.yaml `server_side_files`), are declared by tier3_link_fields().
+    return build_entry(proc, pd, proc.get("definition") or pd.get("description") or "", deployment, None, list(assumed), by_key)
 
 
 PROFILE_ROLE = "http://www.opengis.net/spec/wps/2.0/def/process-profile/"  # OGC 14-065r1 Table 22
@@ -1173,11 +1223,15 @@ def _contains_refs(refs):
 
 
 def inherited_process_description(proc, pd, gp_root):
-    """The live processDescription with what OGC 14-065r1 Table 21 says the Implementation
-    (instance level) inherits from its Implementation Profile: keywords Extended (E), and, per
-    footnote a, the list of metadata references to superior profiles extended with a Table 22
-    `implementation` reference -- at process level and on every input/output bound to one of the
-    Implementation Profile's (`bindings` in profiles.yaml). Returns the document and the JSON
+    """The processDescription of a deployed process (live, or derived from its CWL) with what OGC
+    14-065r1 Table 21 says the Implementation (instance level) inherits from its Implementation
+    Profile: keywords Extended (E), and, per footnote a, the list of metadata references to superior
+    profiles extended with a Table 22 `implementation` reference -- at process level and on every
+    input/output bound to one of the Implementation Profile's (`bindings` in profiles.yaml) -- plus
+    the `dataType` of the role each bound input/output implements (A4.2). Several inputs may be
+    bound to one role that takes a list (calculate-band's band_a..band_z for `rasters`). A role taken
+    as several inputs none of which is the role (`role_decompositions`) gets no reference and no
+    data type on the parts: the process-type entry declares it. Returns the document and the JSON
     Schema checking exactly that inheritance."""
     ip_iri = proc["implementsProfile"]
     ip_key = ip_iri.rstrip("/").rsplit("/", 1)[-1]
@@ -1190,6 +1244,7 @@ def inherited_process_description(proc, pd, gp_root):
         {"title": f"Implementation Profile: {ip['prefLabel']}", "role": PROFILE_ROLE + "implementation", "href": ip_iri}]
 
     bindings, unbound = proc.get("bindings", {}), proc.get("unbound", {})
+    decomposed = proc.get("role_decompositions", {})
     doc = {k: v for k, v in pd.items() if k not in ("inputs", "outputs")}
     # Extend (E), never replace: the inherited values first, then whatever the live service has.
     doc["keywords"] = _merge(ip["keywords"], pd.get("keywords", []))
@@ -1199,10 +1254,15 @@ def inherited_process_description(proc, pd, gp_root):
         bound = bindings.get(side, {})
         for live, name in bound.items():
             if live not in pd[side] or name not in ip[side]:
-                sys.exit(f"{proc['key']}: binding {side} {live} -> {name}: unknown on the live process or on {ip_key}")
-        missing = set(ip[side]) - set(bound.values()) - set(unbound)
+                sys.exit(f"{proc['key']}: binding {side} {live} -> {name}: unknown on the deployed process or on {ip_key}")
+        for name, d in (decomposed.get(side) or {}).items():
+            unknown = [p for p in d["parts"] + [d["selector"]["name"]] * bool(d.get("selector")) if p not in pd[side]]
+            if name not in ip[side] or unknown or name in bound.values():
+                sys.exit(f"{proc['key']}: role decomposition {side} {name}: unknown role on {ip_key}, "
+                         f"unknown parts {unknown}, or the role is also bound")
+        missing = set(ip[side]) - set(bound.values()) - set(unbound) - set(decomposed.get(side) or {})
         if missing:
-            sys.exit(f"{proc['key']}: {ip_key} {side} {sorted(missing)} neither bound nor `unbound` in profiles.yaml")
+            sys.exit(f"{proc['key']}: {ip_key} {side} {sorted(missing)} neither bound, decomposed nor `unbound` in profiles.yaml")
         out, side_rules = {}, {}
         for live, e in pd[side].items():
             name = bound.get(live)
@@ -1215,11 +1275,16 @@ def inherited_process_description(proc, pd, gp_root):
             meta = list(ipe["metadata"]) + [
                 {"title": f"Implementation Profile: {ip['prefLabel']} -- {side[:-1]} `{name}`",
                  "role": IO_ROLE + side[:-1], "href": f"{ip_iri}/{side}/{name}"}]
-            out[live] = {"title": e["title"], "description": e["description"],
+            # A4.2: the data type of the Implementation Profile role, a dt:DataType concept. Only on
+            # bound inputs and outputs: an addition of the deployment (footnote b) has no tier-3
+            # counterpart to derive one from.
+            out[live] = {**{k: e[k] for k in ("title", "description") if k in e},
+                         "dataType": ipe["dataType"],
                          "keywords": _merge(ipe["keywords"], e.get("keywords", [])),
                          "metadata": meta + list(e.get("metadata", [])),
                          **{k: v for k, v in e.items() if k not in ("title", "description", "keywords", "metadata")}}
-            side_rules[live] = {"required": ["keywords", "metadata"], "properties": {
+            side_rules[live] = {"required": ["dataType", "keywords", "metadata"], "properties": {
+                "dataType": {"const": ipe["dataType"]},
                 "keywords": _contains_all(ipe["keywords"]), "metadata": _contains_refs(meta)}}
             if side == "inputs" and "minOccurs" in e:
                 # Only where the live input declares a cardinality. It may restrict the inherited
@@ -1235,6 +1300,180 @@ def inherited_process_description(proc, pd, gp_root):
                               "inherited from its Implementation Profile."),
               "type": "object", "required": ["keywords", "metadata"], "properties": rules}
     return doc, schema
+
+
+def _media_types(schema):
+    found = set()
+
+    def walk(node):
+        if isinstance(node, dict):
+            if "contentMediaType" in node:
+                found.add(node["contentMediaType"])
+            for v in node.values():
+                walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v)
+    walk(schema)
+    return found
+
+
+def representation_media_types(df_root, iri):
+    """Format and media types of a df:Representation, read from the bblocks-data-formats sources:
+    the representation's df:format, and every df:mediaType of that format (observed and inferred,
+    both media types of the format, as audit_planes.py reads them)."""
+    if not iri.startswith(DATA_FORMATS_BASE + "representation/"):
+        sys.exit(f"{iri}: not a representation of bblocks-data-formats")
+    path = df_root / "_sources" / "representation" / iri.rsplit("/", 1)[-1] / "ontology.ttl"
+    if not path.exists():
+        sys.exit(f"{iri}: no such representation in {df_root} (use --data-formats)")
+    m = re.search(r"df:format\s+<([^>]+)>", path.read_text())
+    fmt = m.group(1).rsplit("/", 1)[-1]
+    types = set(re.findall(r'df:mediaType\s+"([^"]+)"', (df_root / "_sources" / "format" / fmt / "ontology.ttl").read_text()))
+    if not types:
+        sys.exit(f"{iri}: format {fmt} has no media type (a format always has one, decision of 2026-11-09)")
+    return fmt, types
+
+
+def format_check(proc, pd, gp_root, df_root):
+    """A4.3: compare, role by role, the representations of the Implementation Profile with the
+    media types this deployment serves (`schema` of the bound inputs and outputs, decision D6).
+
+    A role with representations is served when one of its bound inputs/outputs serves a media type
+    of the representation's df:Format. Otherwise it must be declared, each with its reason:
+    `server_side_files` (a file name stored on the server), `role_decompositions` (the role is taken
+    as several inputs, none of which is the role) or `format_gaps` (an assumed gap: the deployment
+    exposes no media type for it). An undeclared gap stops the generator, and so does a declaration
+    that no longer matches a gap. Returns the rows of docs/FORMAT-CHECK.md and the entry's
+    assumedFormatGaps."""
+    ip_key = proc["implementsProfile"].rstrip("/").rsplit("/", 1)[-1]
+    ip = json.loads((gp_root / "_sources" / "implementation-profile" / ip_key / "examples" / f"{ip_key}.json").read_text())
+    ssf = proc.get("server_side_files") or {}
+    dec = proc.get("role_decompositions") or {}
+    gaps = proc.get("format_gaps") or {}
+    rows, assumed = [], []
+    for side in ("inputs", "outputs"):
+        lives = {}
+        for live, role in (proc.get("bindings", {}).get(side) or {}).items():
+            lives.setdefault(role, []).append(live)
+        declared_gaps = dict(gaps.get(side) or {})
+        for role, e in ip[side].items():
+            for rep in e.get("representation") or []:
+                fmt, types = representation_media_types(df_root, rep)
+                served = set().union(*(_media_types(pd[side][l].get("schema")) for l in lives.get(role, [])))
+                row = {"process": bb_id(proc), "side": side, "role": role, "lives": lives.get(role, []),
+                       "format": fmt, "types": sorted(types), "served": sorted(served)}
+                ssf_lives = [l for l in lives.get(role, []) if (ssf.get(side) or {}).get(l) == role]
+                gap_lives = [l for l in lives.get(role, []) if l in declared_gaps]
+                if types & served:
+                    row["status"] = "served"
+                    if gap_lives:
+                        sys.exit(f"{proc['key']}: format_gaps {side} {gap_lives}: {fmt} is served, the gap is stale")
+                elif ssf_lives:
+                    row["status"] = "server-side file"
+                elif role in (dec.get(side) or {}):
+                    row["status"] = "role decomposition"
+                elif gap_lives and len(gap_lives) == len(lives.get(role, [])):
+                    row["status"] = "assumed gap"
+                    for l in gap_lives:
+                        g = declared_gaps.pop(l)
+                        assumed.append({"name": l, "side": side, "implements": e["id"],
+                                        "served": sorted(_media_types(pd[side][l].get("schema"))),
+                                        "reason": " ".join(g["reason"].split()),
+                                        "evidence": " ".join(g["evidence"].split())})
+                    row["reason"] = assumed[-1]["reason"]
+                else:
+                    sys.exit(f"{proc['key']}: {side} role `{role}` of {ip_key} has representation {rep} "
+                             f"({fmt} {sorted(types)}), but the deployment serves {sorted(served) or 'nothing'} "
+                             f"for {lives.get(role) or 'no bound input/output'}: declare it (server_side_files, "
+                             "role_decompositions or format_gaps, with a reason) or fix the binding")
+                rows.append(row)
+        if declared_gaps:
+            sys.exit(f"{proc['key']}: format_gaps {side} {sorted(declared_gaps)} match no unserved representation")
+    return rows, assumed
+
+
+FORMAT_CHECK_HEADER = """# Tier-3 representations served by tier 4
+
+Generated by `scripts/generate.py` (A4.3 of the tier separation), from `scripts/profiles.yaml`, the
+Implementation Profiles of `bblocks-generic-profiles` and the formats of `bblocks-data-formats`.
+For each process attached to an Implementation Profile (`implementsProfile`), each role that names a
+representation is compared with the media types the deployment serves on the inputs/outputs bound to
+that role (`schema`, as served). A role is **served** when one of them serves a media type of the
+representation's `df:Format`. Otherwise the gap is declared in `scripts/profiles.yaml`, with its
+reason, and the process-type entry carries it:
+
+- **server-side file**: the deployment takes or returns the name of a file stored on the server, with
+  no media type, by design (`serverSideFiles`);
+- **role decomposition**: the deployment takes the role as several inputs, none of which is the
+  role (`roleDecompositions`);
+- **assumed gap**: the deployment exposes no media type for the role (`assumedFormatGaps`).
+
+An undeclared gap stops the generator, and so does a declaration that no longer matches a gap.
+
+"""
+
+
+def write_format_check(rows, assumed_by_process):
+    lines = [FORMAT_CHECK_HEADER,
+             "## Assumed gaps", ""]
+    if assumed_by_process:
+        lines += ["| Process | Side | Input/output | Implementation Profile role | Served | Reason | Evidence |",
+                  "|---|---|---|---|---|---|---|"]
+        for pid, gaps in assumed_by_process:
+            for g in gaps:
+                lines.append(f"| `{pid}` | {g['side'][:-1]} | `{g['name']}` | `{g['implements'].split('/def/')[-1]}` | "
+                             f"{', '.join('`'+t+'`' for t in g['served']) or '--'} | {g['reason']} | {g['evidence']} |")
+    else:
+        lines.append("None.")
+    lines += ["", "## All roles with a representation", "",
+              "| Process | Side | Role | Bound to | Format | Format media types | Served | Status |",
+              "|---|---|---|---|---|---|---|---|"]
+    for r in rows:
+        lines.append(f"| `{r['process'].replace(PREFIX, '')}` | {r['side'][:-1]} | `{r['role']}` | "
+                     f"{', '.join('`'+l+'`' for l in r['lives']) or '--'} | `{r['format']}` | "
+                     f"{', '.join('`'+t+'`' for t in r['types'])} | {', '.join('`'+t+'`' for t in r['served']) or '--'} | "
+                     f"{r['status']} |")
+    (ROOT / "docs" / "FORMAT-CHECK.md").write_text("\n".join(lines) + "\n")
+
+
+def tier3_link_fields(proc, assumed):
+    """The tier-4 -> tier-3 link of an entry (`implementsProfile`, the canonical relation of
+    docs/tier-links.md in bblocks-generic-profiles) and the declarations that qualify how this
+    deployment binds the Implementation Profile's roles."""
+    if not proc.get("implementsProfile"):
+        return {}
+    ip = proc["implementsProfile"]
+    out = {"implementsProfile": ip}
+    ssf = proc.get("server_side_files")
+    if ssf:
+        out["serverSideFiles"] = [
+            {"name": live, "side": side, "implements": f"{ip}/{side}/{role}",
+             "location": " ".join(ssf["location"].split())}
+            for side in ("inputs", "outputs") for live, role in (ssf.get(side) or {}).items()]
+    dec = proc.get("role_decompositions")
+    if dec:
+        out["roleDecompositions"] = []
+        for side in ("inputs", "outputs"):
+            for role, d in (dec.get(side) or {}).items():
+                item = {"side": side, "implements": f"{ip}/{side}/{role}", "parts": d["parts"]}
+                if d.get("selector"):
+                    item["selector"] = d["selector"]
+                item["note"] = " ".join(d["note"].split())
+                out["roleDecompositions"].append(item)
+    if assumed:
+        out["assumedFormatGaps"] = assumed
+    return out
+
+
+def correspondences(oe):
+    """openEO correspondences of an entry (decision D5: apart from the meaning of the type)."""
+    c = {rel: [BBLOCK_IRI + t for t in oe[rel]] for rel in ("exactMatch", "closeMatch", "relatedMatch") if oe.get(rel)}
+    eq = {"level": oe["level"], "rationale": " ".join(oe["rationale"].split())}
+    if oe.get("decomposition"):
+        eq["decomposition"] = oe["decomposition"]
+    c["openeoEquivalence"] = eq
+    return c
 
 
 def ogcapi_profile_schema(pd, inherited=None):
@@ -1314,31 +1553,40 @@ def ogcapi_bblock_json(proc, pd, src):
     return entry
 
 
-def ogcapi_examples_yaml(proc, url):
+def inherited_example(proc):
     unbound = "".join(f" `{k}` is not bound: {v}." for k, v in proc.get("unbound", {}).items())
+    for side in ("inputs", "outputs"):
+        for k, d in (proc.get("role_decompositions", {}).get(side) or {}).items():
+            unbound += (f" `{k}` is taken as {', '.join('`'+p+'`' for p in d['parts'])}, none of which is the role: "
+                        "declared in `roleDecompositions` of the process-type entry.")
+    return {"title": "processDescription with its inheritance (Implementation, instance level)",
+            "content": ("The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation "
+                        f"(instance level) of `{proc['implementsProfile']}`: the Implementation Profile's keywords "
+                        "(E) on the process and on each bound input/output, and, per footnote a, its list of "
+                        "metadata references to superior profiles extended with a Table 22 `implementation` "
+                        "reference to the Implementation Profile -- on the process only. Each bound input/output "
+                        "keeps its Implementation Profile counterpart's reference to the Generic Profile input/output "
+                        "(`generic-input`/`-output`) and adds one to that counterpart itself "
+                        "(`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`, `implementation-input`/"
+                        "`-output`): roles defined by bblocks-generic-profiles, since Table 22 only names whole "
+                        "profiles. Each bound input/output also carries the `dataType` of that counterpart, a "
+                        "concept of bblocks-data-types. Which deployed "
+                        "input/output is which Implementation Profile one is `bindings` in scripts/profiles.yaml; "
+                        "inputs/outputs bound to none are the deployment's own additions (footnote b)."
+                        + unbound + " Not what the deployment serves today (docs/OPEN-QUESTIONS.md "
+                        "Q-TABLE21-INSTANCE)."),
+            "snippets": [{"language": "json", "ref": "examples/processDescription.inherited.json",
+                          "schema-ref": "#/$defs/inheritedProcessDescription"}]}
+
+
+def ogcapi_examples_yaml(proc, url):
     ex = [
         {"title": "Source (referenced)",
          "content": f"The processDescription is fetched from the live service, not copied: <{url}>."},
         {"title": "processDescription",
          "content": "Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fields dropped).",
          "snippets": [{"language": "json", "ref": "examples/processDescription.json"}]},
-        {"title": "processDescription with its inheritance (Implementation, instance level)",
-         "content": ("The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation "
-                     f"(instance level) of `{proc['implementsProfile']}`: the Implementation Profile's keywords "
-                     "(E) on the process and on each bound input/output, and, per footnote a, its list of "
-                     "metadata references to superior profiles extended with a Table 22 `implementation` "
-                     "reference to the Implementation Profile -- on the process only. Each bound input/output "
-                     "keeps its Implementation Profile counterpart's reference to the Generic Profile input/output "
-                     "(`generic-input`/`-output`) and adds one to that counterpart itself "
-                     "(`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`, `implementation-input`/"
-                     "`-output`): roles defined by bblocks-generic-profiles, since Table 22 only names whole "
-                     "profiles. Which live "
-                     "input/output is which Implementation Profile one is `bindings` in scripts/profiles.yaml; "
-                     "inputs/outputs bound to none are the live service's own additions (footnote b)."
-                     + unbound + " Not what the live service serves today (docs/OPEN-QUESTIONS.md "
-                     "Q-TABLE21-INSTANCE)."),
-         "snippets": [{"language": "json", "ref": "examples/processDescription.inherited.json",
-                       "schema-ref": "#/$defs/inheritedProcessDescription"}]},
+        inherited_example(proc),
         {"title": "process-type entry",
          "content": f"Registered ActivityType OWL class `{ptype_iri(proc)}` (`{PREFIX}process-type`), proposed by GeoLabs and awaiting a register decision, linking to its Implementation Profile.",
          "snippets": [{"language": "json", "ref": "examples/process-type.json", "schema-ref": "#/$defs/processTypeEntry"}]},
@@ -1380,30 +1628,64 @@ def ogcapi_description_md(proc, pd, url, gp_root):
                 parts.append(f"| `{live}` | {side[:-1]} | [`{role}`]({ip_iri}/{side}/{role}) |")
         parts += ["", "This deployment serves no media type for them: not a format gap. The entry declares them "
                   "in `serverSideFiles` of `process-type.json`."]
-    b, unbound = proc.get("bindings", {}), proc.get("unbound", {})
-    parts += ["", "## Implementation Profile", "",
-              f"Implements [`{ip['prefLabel']}`]({ip_iri}) "
-              f"(`{generic_profiles_identifier(ip_iri)}`, bblocks-generic-profiles). Live inputs/outputs and "
-              "the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):", "",
-              "| Live | Implementation Profile |", "|---|---|"]
-    for side in ("inputs", "outputs"):
-        rev = {v: k for k, v in b.get(side, {}).items()}
-        for name in ip[side]:
-            live = rev.get(name)
-            parts.append(f"| {f'`{live}`' if live else '--'} | {side[:-1]} `{name}`"
-                         + (f" (unbound: {unbound[name]})" if not live and name in unbound else "") + " |")
-        extra = [k for k in pd[side] if k not in b.get(side, {})]
-        if extra:
-            parts.append(f"| {', '.join(f'`{k}`' for k in extra)} | -- (live-only {side}, Table 21 footnote b) |")
+    parts += ["", "## Implementation Profile", ""] + md_binding(proc, pd, gp_root, None)
     parts += ["", "## Examples", "",
               "- `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.",
               "- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at "
-              "the Implementation (instance level): keywords and metadata references to its profiles.",
+              "the Implementation (instance level): keywords and metadata references to its profiles, and the "
+              "data type of each bound input/output.",
               "- `process-type.json`: its candidate process-type entry."]
     return "\n".join(parts) + "\n"
 
 
-def generate_ogcapi_profiles(sources, roots, by_key, ogcapi_procs, gp_root):
+def md_binding(proc, pd, gp_root, why):
+    """The binding of a deployed process to its Implementation Profile, as Markdown lines: which
+    deployed input/output implements which role, with the role's data type; the deployment's own
+    additions; role decompositions and assumed format gaps."""
+    ip_iri = proc["implementsProfile"]
+    ip_key = ip_iri.rstrip("/").rsplit("/", 1)[-1]
+    ip = json.loads((gp_root / "_sources" / "implementation-profile" / ip_key / "examples" / f"{ip_key}.json").read_text())
+    b, unbound = proc.get("bindings", {}), proc.get("unbound", {})
+    dec, gaps = proc.get("role_decompositions", {}), proc.get("format_gaps", {})
+    lines = [f"Implements [`{ip['prefLabel']}`]({ip_iri}) "
+             f"(`{generic_profiles_identifier(ip_iri)}`, bblocks-generic-profiles)."
+             + (f" {why}" if why else ""), "",
+             "Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), "
+             "with the data type each bound input/output inherits (`processDescription.inherited.json`):", "",
+             "| Deployed | Implementation Profile | Data type |", "|---|---|---|"]
+    for side in ("inputs", "outputs"):
+        rev = {}
+        for live, role in b.get(side, {}).items():
+            rev.setdefault(role, []).append(live)
+        for name, e in ip[side].items():
+            lives = rev.get(name, [])
+            d = (dec.get(side) or {}).get(name)
+            if d:
+                cell = ", ".join(f"`{p}`" for p in d["parts"]) + " (role decomposition)"
+            else:
+                cell = ", ".join(f"`{l}`" for l in lives) or "--"
+            note = f" (unbound: {unbound[name]})" if not lives and not d and name in unbound else ""
+            lines.append(f"| {cell} | {side[:-1]} `{name}`{note} | `{e['dataType'].rsplit('/', 1)[-1]}` |")
+        parts_of = {p for d in (dec.get(side) or {}).values() for p in d["parts"]}
+        extra = [k for k in pd[side] if k not in b.get(side, {}) and k not in parts_of]
+        if extra:
+            lines.append(f"| {', '.join(f'`{k}`' for k in extra)} | -- (the deployment's own {side}, Table 21 footnote b) | -- |")
+    for side in ("inputs", "outputs"):
+        for name, d in (dec.get(side) or {}).items():
+            lines += ["", f"**Role decomposition.** The {side[:-1]} `{name}` is taken as "
+                      + ", ".join(f"`{p}`" for p in d["parts"])
+                      + (f" (with `{d['selector']['name']}` = `{d['selector']['value']}`)" if d.get("selector") else "")
+                      + ": " + " ".join(d["note"].split())
+                      + " Declared in `roleDecompositions` of `process-type.json`; its representation is not served "
+                      "(`docs/FORMAT-CHECK.md`)."]
+        for live, g in (gaps.get(side) or {}).items():
+            lines += ["", f"**Assumed format gap.** `{live}`: " + " ".join(g["reason"].split())
+                      + " Evidence: " + " ".join(g["evidence"].split())
+                      + " Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`)."]
+    return lines
+
+
+def generate_ogcapi_profiles(sources, roots, by_key, ogcapi_procs, gp_root, df_root, checks):
     for proc in ogcapi_procs:
         src = sources[proc["source"]["repo"]]
         raw, pd, url = load_ogcapi_process(proc, sources, roots)
@@ -1414,7 +1696,9 @@ def generate_ogcapi_profiles(sources, roots, by_key, ogcapi_procs, gp_root):
         dump_json(exd / "processDescription.json", pd)
         inherited, inherited_schema = inherited_process_description(proc, pd, gp_root)
         dump_json(exd / "processDescription.inherited.json", inherited)
-        entry = ogcapi_process_type_entry(proc, pd, src, url, by_key)
+        rows, assumed = format_check(proc, pd, gp_root, df_root)
+        checks.append((proc, rows, assumed))
+        entry = ogcapi_process_type_entry(proc, pd, src, url, by_key, assumed)
         dump_json(exd / "process-type.json", entry)
         dump_json(out / "context.jsonld", PROFILE_CONTEXT)
         dump_yaml(out / "schema.yaml", ogcapi_profile_schema(pd, inherited_schema))
@@ -1448,15 +1732,31 @@ def main():
     ap.add_argument("--generic-profiles", type=Path, default=ROOT.parent / "bblocks-generic-profiles",
                     help="checkout of bblocks-generic-profiles, read for the Implementation Profiles the live "
                          "processes inherit from (default: the sibling directory, as in .volumes)")
+    ap.add_argument("--data-formats", type=Path, default=ROOT.parent / "bblocks-data-formats",
+                    help="checkout of bblocks-data-formats, read for the formats and media types of the "
+                         "Implementation Profiles' representations (A4.3; default: the sibling directory)")
     a = ap.parse_args()
     if not (a.generic_profiles / "_sources" / "implementation-profile").is_dir():
         sys.exit(f"{a.generic_profiles}: not a bblocks-generic-profiles checkout (use --generic-profiles)")
+    if not (a.data_formats / "_sources" / "representation").is_dir():
+        sys.exit(f"{a.data_formats}: not a bblocks-data-formats checkout (use --data-formats)")
 
     sources = yaml.safe_load((SCRIPTS / "sources.yaml").read_text())
     cfg = yaml.safe_load((SCRIPTS / "profiles.yaml").read_text())
     d, procs = cfg["defaults"], cfg["processes"]
     ogcapi_procs = cfg.get("ogcapi_processes", [])
     all_procs = procs + ogcapi_procs
+    if (len(procs), len(ogcapi_procs)) != (POPULATIONS["cwl"], POPULATIONS["live"]):
+        sys.exit(f"scripts/profiles.yaml: {len(procs)} CWL and {len(ogcapi_procs)} live processes, the register "
+                 f"declares {POPULATIONS['cwl']} and {POPULATIONS['live']} (POPULATIONS, bblocks-config.yaml, README)")
+    for proc in procs:
+        # A4.1: every CWL process records whether it is attached to an Implementation Profile, and
+        # why not when it is not; an attachment is a hypothesis checked against the signature.
+        att = proc.get("tier3")
+        if not att or att.get("status") not in ("attached", "not attached") or not att.get("reason"):
+            sys.exit(f"{proc['key']}: `tier3: {{status: attached | not attached, reason: ...}}` is required")
+        if (att["status"] == "attached") != bool(proc.get("implementsProfile")):
+            sys.exit(f"{proc['key']}: tier3.status and implementsProfile disagree")
     by_key = {p["key"]: p for p in all_procs}
     if len(by_key) != len(all_procs):
         dupes = sorted({p["key"] for p in all_procs if [q["key"] for q in all_procs].count(p["key"]) > 1})
@@ -1487,10 +1787,11 @@ def main():
     if openeo_reg.exists():
         known = {b["itemIdentifier"] for b in json.loads(openeo_reg.read_text())["bblocks"]}
 
-    summary = []
+    summary, checks = [], []
     for proc in procs:
         src = sources[proc["source"]["repo"]]
         cwl_doc, cwl_el, url = load_process(proc, sources, roots)
+        proc["cwl_class"] = cwl_el["class"]
         ns = cwl_doc.get("$namespaces", {})
         raw = run_transform(cwl_doc, jq_path)
         pd, corrections = correct(raw, cwl_el, ns, proc.get("secrets"), proc.get("stac_catalog"))
@@ -1535,23 +1836,33 @@ def main():
             parents = proc.get("parents") or []
             parent_run = f"urn:example:run:{proc['workflow']}:{parents[0]}" if parents else None
             dump_json(exd / "process-run.json", process_run(proc, pd, run_id, info, parent_run))
-        entry = process_type_entry(proc, pd, cwl_el, src, url, by_key)
+        inherited_schema, assumed = None, []
+        if proc.get("implementsProfile"):
+            inherited, inherited_schema = inherited_process_description(proc, pd, a.generic_profiles)
+            dump_json(exd / "processDescription.inherited.json", inherited)
+            rows, assumed = format_check(proc, pd, a.generic_profiles, a.data_formats)
+            checks.append((proc, rows, assumed))
+        entry = process_type_entry(proc, pd, cwl_el, src, url, by_key, assumed)
         dump_json(exd / "process-type.json", entry)
         w3c_prov_example(info, exd)
 
         dump_json(out / "context.jsonld", PROFILE_CONTEXT)
-        dump_yaml(out / "schema.yaml", profile_schema(proc, pd, cwl_el, has_exec))
+        dump_yaml(out / "schema.yaml", profile_schema(proc, pd, cwl_el, has_exec, inherited_schema))
         dump_yaml(out / "examples.yaml", examples_yaml(proc, cwl_el, url, corrected, has_exec))
         dump_json(out / "bblock.json", bblock_json(proc, pd, cwl_el, corrections, has_exec, by_key))
-        (out / "description.md").write_text(description_md(proc, pd, cwl_el, url, src, corrections, has_exec, info, by_key, sources["eoap_cct"]["commit"]))
+        (out / "description.md").write_text(description_md(proc, pd, cwl_el, url, src, corrections, has_exec, info, by_key, sources["eoap_cct"]["commit"], a.generic_profiles))
 
         summary.append({"id": bb_id(proc), "key": proc["key"], "class": cwl_el["class"], "pd_id": pd["id"],
                         "phases": proc["phases"], "openeo": proc["openeo"], "corrections": corrections,
                         "execution": has_exec, "cct": proc.get("cct", []),
-                        "inputs": len(pd["inputs"]), "outputs": len(pd["outputs"])})
+                        "inputs": len(pd["inputs"]), "outputs": len(pd["outputs"]),
+                        "implementsProfile": proc.get("implementsProfile")})
         print(f"{bb_id(proc):60s} {cwl_el['class']:16s} corrections={len(corrections)} exec={has_exec}")
 
-    generate_ogcapi_profiles(sources, roots, by_key, ogcapi_procs, a.generic_profiles)
+    generate_ogcapi_profiles(sources, roots, by_key, ogcapi_procs, a.generic_profiles, a.data_formats, checks)
+    write_format_check([r for _, rows, _ in checks for r in rows],
+                       [(bb_id(p).replace(PREFIX, ""), g) for p, _, g in checks if g])
+    write_attachments(procs, a.generic_profiles)
 
     # shared process-type example: reproject-image entry
     pt = ROOT / "_sources" / "process-type"
@@ -1560,22 +1871,43 @@ def main():
               json.loads((ROOT / "_sources/algae-bloom/reproject-image/examples/process-type.json").read_text()))
     dump_json(pt / "examples" / "kindgrove-mangrove.json",
               json.loads((ROOT / "_sources/kindgrove/mangrove/examples/process-type.json").read_text()))
+    dump_json(pt / "examples" / "kindgrove-steps-reproject-band.json",
+              json.loads((ROOT / "_sources/kindgrove-steps/reproject-band/examples/process-type.json").read_text()))
+    dump_json(pt / "examples" / "raster-extract-roi.json",
+              json.loads((ROOT / "_sources/raster/extract-roi/examples/process-type.json").read_text()))
     dump_yaml(pt / "examples.yaml", [
-        {"title": "reproject-image (closeMatch)", "base-uri": PROCESS_BASE,
+        {"title": "reproject-image (closeMatch, not attached to tier 3)", "base-uri": PROCESS_BASE,
          "snippets": [{"language": "json", "ref": "examples/reproject-image.json"}]},
         {"title": "KindGrove mangrove (none, with decomposition)", "base-uri": PROCESS_BASE,
          "snippets": [{"language": "json", "ref": "examples/kindgrove-mangrove.json"}]},
+        {"title": "KindGrove steps reproject-band (CWL, attached to raster-reprojection, assumed format gaps)",
+         "base-uri": PROCESS_BASE,
+         "snippets": [{"language": "json", "ref": "examples/kindgrove-steps-reproject-band.json"}]},
+        {"title": "OTB.ExtractROI (live, attached to raster-crop, role decomposition)", "base-uri": PROCESS_BASE,
+         "snippets": [{"language": "json", "ref": "examples/raster-extract-roi.json"}]},
     ])
 
-    # README table
-    rows = []
+    # README tables, one per population (A4.5), between their markers
+    rows = ["| Identifier | CWL class | Phase(s) | openEO | Implementation Profile (tier 3) |",
+            "|---|---|---|---|---|"]
     for s in summary:
         oe = s["openeo"]
         tgt = ", ".join(t.split("ogc.openeo.")[-1] for t in oe.get("exactMatch", []) + oe.get("closeMatch", []))
-        rows.append(f"| `{s['id']}` | {s['class']} | {', '.join(PHASE_LABELS[p] for p in s['phases'])} | {oe['level']}{(': ' + tgt) if tgt else ''} |")
+        ip = s["implementsProfile"]
+        rows.append(f"| `{s['id']}` | {s['class']} | {', '.join(PHASE_LABELS[p] for p in s['phases'])} | "
+                    f"{oe['level']}{(': ' + tgt) if tgt else ''} | {('`' + generic_profiles_identifier(ip) + '`') if ip else 'not attached'} |")
+    live_rows = ["| Identifier | Live process | Phase(s) | Implementation Profile (tier 3) |", "|---|---|---|---|"]
+    for proc in ogcapi_procs:
+        live_rows.append(f"| `{bb_id(proc)}` | `{Path(proc['source']['file']).stem}` | "
+                         f"{', '.join(PHASE_LABELS[p] for p in proc['phases'])} | "
+                         f"`{generic_profiles_identifier(proc['implementsProfile'])}` |")
     readme = (ROOT / "README.md").read_text()
-    readme = re.sub(r"(\|---\|---\|---\|---\|\n)(?:\|.*\|\n)*(?:PROFILE_TABLE\n)?",
-                    lambda m: m.group(1) + "\n".join(rows) + "\n", readme, count=1)
+    for marker, table in (("CWL_TABLE", rows), ("LIVE_TABLE", live_rows)):
+        start, end = f"<!-- {marker} -->", f"<!-- /{marker} -->"
+        if readme.count(start) != 1 or readme.count(end) != 1:
+            sys.exit(f"README.md: markers {start} ... {end} are required once each")
+        readme = re.sub(re.escape(start) + r".*?" + re.escape(end),
+                        lambda m: start + "\n" + "\n".join(table) + "\n" + end, readme, count=1, flags=re.S)
     (ROOT / "README.md").write_text(readme)
     dump_json(SCRIPTS / "generated-summary.json", summary)
     write_openeo_doc(summary)
@@ -1607,6 +1939,53 @@ bblocks-openeo only models stable processes.
 | # | Profile | Level | exactMatch / closeMatch | relatedMatch | Rationale (short) |
 |---|---|---|---|---|---|
 """
+
+
+ATTACHMENTS_HEADER = """# Attachment of the CWL processes to the tiers
+
+Generated by `scripts/generate.py` from `tier3` in `scripts/profiles.yaml` (A4.1 of the tier
+separation). Each of the {cwl} CWL processes of the OSPD reference workflows is compared with the
+signatures of `bblocks-generic-profiles`: its inputs and outputs (as derived from its CWL) against the
+roles of the candidate Implementation Profile (tier 3), of the Generic Profile it refines (tier 2) and
+of that profile's Process Concept (tier 1). A process is attached (`implementsProfile`) only when
+every role of the Implementation Profile is implemented by one of its inputs/outputs, possibly with
+inputs/outputs of its own (Table 21 footnote b), and when the activity type of that profile means
+what the process does. A process with no fitting profile is listed as not attached, with the reason
+and, where one exists, the closest profile; it is not forced. A gap in the tiers may justify a new
+Generic or Implementation Profile: listed as proposals, none created here.
+
+The {live} live processes of the Geonovum testbed are all attached, one per Implementation Profile
+(README, second table).
+"""
+
+
+def write_attachments(procs, gp_root):
+    load = lambda tier, k: json.loads((gp_root / "_sources" / tier / k / "examples" / f"{k}.json").read_text())
+    tail = lambda iri: iri.rstrip("/").rsplit("/", 1)[-1]
+    lines = [ATTACHMENTS_HEADER.format(cwl=POPULATIONS["cwl"], live=POPULATIONS["live"]),
+             "| Process | CWL class | Status | Tier 3 Implementation Profile | Tier 2 Generic Profile | Tier 1 Process Concept | Reason |",
+             "|---|---|---|---|---|---|---|"]
+    proposals = []
+    for proc in procs:
+        att = proc["tier3"]
+        t3 = t2 = t1 = "--"
+        if proc.get("implementsProfile"):
+            ip = load("implementation-profile", tail(proc["implementsProfile"]))
+            gp = load("generic-profile", tail(ip["refinesGenericProfile"]))
+            t3, t2 = f"`{tail(ip['id'])}`", f"`{tail(gp['id'])}`"
+            t1 = ", ".join(f"`{tail(c)}`" for c in gp["broader"])
+        reason = " ".join(att["reason"].split())
+        if att.get("closest"):
+            reason += f" Closest: {' '.join(att['closest'].split())}"
+        if att.get("proposal"):
+            text = " ".join(att["proposal"].split())
+            if text not in [t for t, _ in proposals]:
+                proposals.append((text, []))
+            next(ps for t, ps in proposals if t == text).append(bb_id(proc).replace(PREFIX, ""))
+        lines.append(f"| `{bb_id(proc).replace(PREFIX, '')}` | {proc.get('cwl_class', '')} | {att['status']} | {t3} | {t2} | {t1} | {reason} |")
+    lines += ["", "## Proposals (for GeoLabs to decide; nothing created)", ""]
+    lines += [f"- {t} (from {', '.join('`' + p + '`' for p in ps)})" for t, ps in proposals] or ["None."]
+    (ROOT / "docs" / "ATTACHMENTS.md").write_text("\n".join(lines) + "\n")
 
 
 def write_openeo_doc(summary):

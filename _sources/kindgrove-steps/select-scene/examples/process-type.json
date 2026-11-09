@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/select-scene/actions/addition",
     "type": "RegisterAction",
@@ -21,15 +20,21 @@
   },
   "prefLabel": "Select the least cloudy Sentinel-2 L2A scene",
   "definition": "Selects the least cloudy Sentinel-2 L2A scene over a bounding box within a time window.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering"
-  ],
-  "profile": "ospd.process-profiles.kindgrove-steps.select-scene",
-  "processDescription": {
-    "id": "select_scene",
-    "version": "0.1.0",
-    "href": "https://ospd.example.org/ogc-api/processes/select_scene"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.kindgrove-steps.select-scene",
+    "processDescription": {
+      "id": "select_scene",
+      "version": "0.1.0",
+      "href": "https://ospd.example.org/ogc-api/processes/select_scene"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/select_scene/package",
@@ -47,12 +52,13 @@
       "eoap.cct.bbox"
     ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection"
-  ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "Same filter semantics as load_collection's `spatial_extent` (west/south/east/north) and a `properties` cloud-cover filter; `days_back` is a relative time window resolved against the execution date, not an explicit `temporal_extent` -- the same non-reproducibility already documented for `kindgrove.mangrove-workflow` (Q-W2-DAYSBACK)."
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "Same filter semantics as load_collection's `spatial_extent` (west/south/east/north) and a `properties` cloud-cover filter; `days_back` is a relative time window resolved against the execution date, not an explicit `temporal_extent` -- the same non-reproducibility already documented for `kindgrove.mangrove-workflow` (Q-W2-DAYSBACK)."
+    }
   }
 }

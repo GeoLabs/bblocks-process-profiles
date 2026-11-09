@@ -48,6 +48,7 @@
     "SHAPES": {
       "title": "Shapes",
       "description": "Shapes",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
         "geometry"
       ],
@@ -101,6 +102,7 @@
     "EXTENTS": {
       "title": "Extents",
       "description": "Extents",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/surface",
       "keywords": [
         "geometry"
       ],

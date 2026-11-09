@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/addition",
     "type": "RegisterAction",
@@ -21,15 +20,21 @@
   },
   "prefLabel": "Reproject a raster onto a regular grid",
   "definition": "Reprojects a raster onto a regular grid covering a bounding box.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
-  ],
-  "profile": "ospd.process-profiles.kindgrove-steps.reproject-band",
-  "processDescription": {
-    "id": "reproject_band",
-    "version": "0.1.0",
-    "href": "https://ospd.example.org/ogc-api/processes/reproject_band"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.kindgrove-steps.reproject-band",
+    "processDescription": {
+      "id": "reproject_band",
+      "version": "0.1.0",
+      "href": "https://ospd.example.org/ogc-api/processes/reproject_band"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/reproject_band/package",
@@ -47,12 +52,36 @@
       "eoap.cct.bbox"
     ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection",
+  "assumedFormatGaps": [
+    {
+      "name": "band_file",
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster",
+      "served": [
+        "application/octet-stream"
+      ],
+      "reason": "The CWL (GeoLabs/KindGrove v0.0.2-rc2, `reproject_band`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads and writes. Closed upstream if the CWL declares `format: ogc:geotiff`.",
+      "evidence": "Run record `kindgrove-steps` (scripts/sources.yaml): the three band_file inputs (red.tif, green.tif, nir.tif) and the three reprojected_file outputs (red_4326.tif, green_4326.tif, nir_4326.tif) start with the TIFF magic number 49 49 2a 00 (observed 2026-11-09); GeoTIFF tags not checked."
+    },
+    {
+      "name": "reprojected_file",
+      "side": "outputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/outputs/raster",
+      "served": [
+        "application/octet-stream"
+      ],
+      "reason": "The CWL (GeoLabs/KindGrove v0.0.2-rc2, `reproject_band`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads and writes. Closed upstream if the CWL declares `format: ogc:geotiff`.",
+      "evidence": "Run record `kindgrove-steps` (scripts/sources.yaml): the three band_file inputs (red.tif, green.tif, nir.tif) and the three reprojected_file outputs (red_4326.tif, green_4326.tif, nir_4326.tif) start with the TIFF magic number 49 49 2a 00 (observed 2026-11-09); GeoTIFF tags not checked."
+    }
   ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "resample_spatial with a target `resolution` and `projection` (epsg); no explicit resampling-method parameter in the CWL (implementation default), same partial match as `algae-bloom.reproject-image`."
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "resample_spatial with a target `resolution` and `projection` (epsg); no explicit resampling-method parameter in the CWL (implementation default), same partial match as `algae-bloom.reproject-image`."
+    }
   }
 }

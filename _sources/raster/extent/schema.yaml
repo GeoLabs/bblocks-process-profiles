@@ -109,9 +109,12 @@ $defs:
           properties:
             in:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
                 keywords:
                   allOf:
                   - contains:
@@ -145,9 +148,12 @@ $defs:
           properties:
             out:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/surface
                 keywords:
                   allOf:
                   - contains:

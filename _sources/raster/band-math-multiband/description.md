@@ -20,18 +20,20 @@ On this deployment:
 
 ## Implementation Profile
 
-Implements [`Raster band math (multi-band output)`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math-multiband) (`generic-profiles.implementation-profile.raster-band-math-multiband`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+Implements [`Raster band math (multi-band output)`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math-multiband) (`generic-profiles.implementation-profile.raster-band-math-multiband`, bblocks-generic-profiles).
 
-| Live | Implementation Profile |
-|---|---|
-| `il` | input `rasters` |
-| `exp` | input `expression` |
-| `out`, `incontext`, `ram` | -- (live-only inputs, Table 21 footnote b) |
-| `out` | output `raster` |
-| `outcontext` | -- (live-only outputs, Table 21 footnote b) |
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `il` | input `rasters` | `raster` |
+| `exp` | input `expression` | `expression` |
+| `out`, `incontext`, `ram` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `out` | output `raster` | `raster` |
+| `outcontext` | -- (the deployment's own outputs, Table 21 footnote b) | -- |
 
 ## Examples
 
 - `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
-- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles, and the data type of each bound input/output.
 - `process-type.json`: its candidate process-type entry.

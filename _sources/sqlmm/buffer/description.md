@@ -6,16 +6,18 @@ Process profile of the live OGC API - Processes process `Buffer` (ZOO-Project, G
 
 ## Implementation Profile
 
-Implements [`Buffer`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer) (`generic-profiles.implementation-profile.buffer`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+Implements [`Buffer`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer) (`generic-profiles.implementation-profile.buffer`, bblocks-generic-profiles).
 
-| Live | Implementation Profile |
-|---|---|
-| `InputPolygon` | input `geometry` |
-| `BufferDistance` | input `distance` |
-| `Result` | output `result` |
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `InputPolygon` | input `geometry` | `geometry` |
+| `BufferDistance` | input `distance` | `number` |
+| `Result` | output `result` | `surface` |
 
 ## Examples
 
 - `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
-- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles, and the data type of each bound input/output.
 - `process-type.json`: its candidate process-type entry.

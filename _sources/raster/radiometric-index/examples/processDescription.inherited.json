@@ -47,6 +47,7 @@
     "in": {
       "title": "Input image",
       "description": "Input image",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
         "raster"
       ],
@@ -154,6 +155,7 @@
     "out": {
       "title": "Radiometric indices output image",
       "description": "Radiometric indices output image",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
         "raster"
       ],

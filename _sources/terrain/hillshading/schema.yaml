@@ -129,9 +129,12 @@ $defs:
           properties:
             ELEVATION:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model
                 keywords:
                   allOf:
                   - contains:
@@ -160,9 +163,12 @@ $defs:
                           const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/elevation
             AZIMUTH:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/number
                 keywords:
                   allOf:
                   - contains:
@@ -195,9 +201,12 @@ $defs:
                   maximum: 1
             DECLINATION:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/number
                 keywords:
                   allOf:
                   - contains:
@@ -235,9 +244,12 @@ $defs:
           properties:
             SHADE:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band
                 keywords:
                   allOf:
                   - contains:

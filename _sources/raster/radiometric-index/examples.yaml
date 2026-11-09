@@ -16,10 +16,11 @@
     Implementation Profile counterpart''s reference to the Generic Profile input/output (`generic-input`/`-output`)
     and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`,
     `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only
-    names whole profiles. Which live input/output is which Implementation Profile one is `bindings` in
-    scripts/profiles.yaml; inputs/outputs bound to none are the live service''s own additions (footnote
+    names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept
+    of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings`
+    in scripts/profiles.yaml; inputs/outputs bound to none are the deployment''s own additions (footnote
     b). `index` is not bound: no input of the live service selects the index: OTB RadiometricIndices''
-    `list` parameter is not exposed. Not what the live service serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).'
+    `list` parameter is not exposed. Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).'
   snippets:
   - language: json
     ref: examples/processDescription.inherited.json

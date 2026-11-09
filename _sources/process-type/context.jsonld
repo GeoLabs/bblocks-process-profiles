@@ -16,49 +16,107 @@
     "ProcessType": "pp:ProcessType",
     "ActivityType": "acttype:ActivityType",
     "owlClass": "owl:Class",
-    "subClassOf": { "@id": "rdfs:subClassOf", "@type": "@id" },
+    "subClassOf": {
+      "@id": "rdfs:subClassOf",
+      "@type": "@id"
+    },
     "Plan": "prov:Plan",
     "prefLabel": "skos:prefLabel",
     "definition": "skos:definition",
-    "inScheme": { "@id": "skos:inScheme", "@type": "@id" },
-    "objectIdentifier": { "@id": "rim:objectIdentifier", "@type": "xsd:anyURI" },
-    "itemClass": { "@id": "rim:itemClass", "@type": "@id" },
-    "inRegister": { "@id": "rim:inRegister", "@type": "@id" },
-    "validityStatus": { "@id": "rim:validityStatus", "@type": "@vocab" },
-    "publicationStatus": { "@id": "rim:publicationStatus", "@type": "@vocab" },
+    "inScheme": {
+      "@id": "skos:inScheme",
+      "@type": "@id"
+    },
+    "objectIdentifier": {
+      "@id": "rim:objectIdentifier",
+      "@type": "xsd:anyURI"
+    },
+    "itemClass": {
+      "@id": "rim:itemClass",
+      "@type": "@id"
+    },
+    "inRegister": {
+      "@id": "rim:inRegister",
+      "@type": "@id"
+    },
+    "validityStatus": {
+      "@id": "rim:validityStatus",
+      "@type": "@vocab"
+    },
+    "publicationStatus": {
+      "@id": "rim:publicationStatus",
+      "@type": "@vocab"
+    },
     "valid": "rim:valid",
     "invalid": "rim:invalid",
     "published": "rim:published",
     "unpublished": "rim:unpublished",
-    "hasAction": { "@id": "rim:hasAction", "@type": "@id" },
-    "actionType": { "@id": "rim:actionType", "@type": "@vocab" },
+    "hasAction": {
+      "@id": "rim:hasAction",
+      "@type": "@id"
+    },
+    "actionType": {
+      "@id": "rim:actionType",
+      "@type": "@vocab"
+    },
     "addition": "rim:additionAction",
-    "proposer": { "@id": "rim:proposer", "@type": "@id" },
-    "appliesTo": { "@id": "rim:appliesTo", "@type": "@id" },
-    "startedAtTime": { "@id": "prov:startedAtTime", "@type": "xsd:dateTime" },
-    "phase": { "@id": "skos:broader", "@type": "@id" },
+    "proposer": {
+      "@id": "rim:proposer",
+      "@type": "@id"
+    },
+    "appliesTo": {
+      "@id": "rim:appliesTo",
+      "@type": "@id"
+    },
+    "startedAtTime": {
+      "@id": "prov:startedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "classification": "@nest",
+    "correspondences": "@nest",
+    "phase": {
+      "@id": "pp:phase",
+      "@type": "@id"
+    },
+    "deployment": {
+      "@id": "pp:deployment"
+    },
     "profile": "pp:profile",
     "processDescription": {
       "@id": "pp:processDescription",
       "@context": {
-        "href": { "@id": "rdfs:seeAlso", "@type": "@id" },
-        "license": { "@id": "dct:license", "@type": "@id" }
+        "href": {
+          "@id": "rdfs:seeAlso",
+          "@type": "@id"
+        },
+        "license": {
+          "@id": "dct:license",
+          "@type": "@id"
+        }
       }
     },
     "plan": {
       "@id": "pp:plan",
       "@context": {
-        "license": { "@id": "dct:license", "@type": "@id" }
+        "license": {
+          "@id": "dct:license",
+          "@type": "@id"
+        }
       }
     },
     "executionUnit": {
       "@id": "https://w3id.org/ogc/api/processes/executionUnit",
       "@context": {
-        "href": { "@id": "oa:hasTarget", "@type": "@id" },
+        "href": {
+          "@id": "oa:hasTarget",
+          "@type": "@id"
+        },
         "rel": {
           "@id": "http://www.iana.org/assignments/relation",
           "@type": "@id",
-          "@context": { "@base": "http://www.iana.org/assignments/relation/" }
+          "@context": {
+            "@base": "http://www.iana.org/assignments/relation/"
+          }
         },
         "type": "dct:format"
       }
@@ -66,18 +124,39 @@
     "cwlClass": "pp:cwlClass",
     "cwlId": "pp:cwlId",
     "version": "pp:version",
-    "provenanceClass": { "@id": "pp:provenanceClass", "@type": "@id" },
-    "implementsProfile": { "@id": "pp:implementsProfile", "@type": "@id" },
+    "provenanceClass": {
+      "@id": "pp:provenanceClass",
+      "@type": "@id"
+    },
+    "implementsProfile": {
+      "@id": "pp:implementsProfile",
+      "@type": "@id"
+    },
     "cctDependencies": "pp:cctDependency",
     "candidateCctDependencies": "pp:candidateCctDependency",
-    "hasStep": { "@id": "pp:hasStep", "@type": "@id" },
-    "exactMatch": { "@id": "skos:exactMatch", "@type": "@id" },
-    "closeMatch": { "@id": "skos:closeMatch", "@type": "@id" },
-    "relatedMatch": { "@id": "skos:relatedMatch", "@type": "@id" },
+    "hasStep": {
+      "@id": "pp:hasStep",
+      "@type": "@id"
+    },
+    "exactMatch": {
+      "@id": "skos:exactMatch",
+      "@type": "@id"
+    },
+    "closeMatch": {
+      "@id": "skos:closeMatch",
+      "@type": "@id"
+    },
+    "relatedMatch": {
+      "@id": "skos:relatedMatch",
+      "@type": "@id"
+    },
     "openeoEquivalence": "pp:openeoEquivalence",
     "level": "pp:equivalenceLevel",
     "rationale": "pp:rationale",
-    "decomposition": { "@id": "pp:decomposition", "@container": "@list" },
+    "decomposition": {
+      "@id": "pp:decomposition",
+      "@container": "@list"
+    },
     "stage": "pp:stage",
     "openeo": "pp:openeo",
     "note": "skos:note",
@@ -86,8 +165,48 @@
       "@context": {
         "name": "pp:liveName",
         "side": "pp:side",
-        "implements": { "@id": "pp:implements", "@type": "@id" },
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
         "location": "pp:location"
+      }
+    },
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "roleDecompositions": {
+      "@id": "pp:roleDecomposition",
+      "@context": {
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "parts": {
+          "@id": "pp:part",
+          "@container": "@list"
+        },
+        "selector": {
+          "@id": "pp:selector",
+          "@context": {
+            "name": "pp:liveName",
+            "value": "rdf:value"
+          }
+        },
+        "note": "skos:note"
+      }
+    },
+    "assumedFormatGaps": {
+      "@id": "pp:assumedFormatGap",
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "served": "pp:servedMediaType",
+        "reason": "skos:note",
+        "evidence": "pp:evidence"
       }
     }
   }

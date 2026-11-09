@@ -10,7 +10,6 @@
   "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "hasAction": {
     "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/addition",
     "type": "RegisterAction",
@@ -21,23 +20,30 @@
   },
   "prefLabel": "Compute radiometric indices.",
   "definition": "This application computes radiometric indices using the relevant channels of the input image. The output is a multi band image into which each channel is one of the selected indices.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
-  ],
-  "profile": "ospd.process-profiles.raster.radiometric-index",
-  "processDescription": {
-    "id": "OTB.RadiometricIndices",
-    "version": "1.0.0",
-    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+    ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "deployment": {
+    "profile": "ospd.process-profiles.raster.radiometric-index",
+    "processDescription": {
+      "id": "OTB.RadiometricIndices",
+      "version": "1.0.0",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
+  },
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.ndvi"
-  ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "OTB.RadiometricIndices computes a *selectable set* of named indices (NDVI, NDWI, and many others via `channels` / `list`) from user-mapped spectral channels (`channels.red`, `channels.nir`, ...), only one of which (NDVI) has a dedicated openEO process (`ndvi`, which also expects band-role mapping via `nir`/`red` parameters). closeMatch, not exactMatch: openEO has no equivalent for the other indices this application can compute."
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.ndvi"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "OTB.RadiometricIndices computes a *selectable set* of named indices (NDVI, NDWI, and many others via `channels` / `list`) from user-mapped spectral channels (`channels.red`, `channels.nir`, ...), only one of which (NDVI) has a dedicated openEO process (`ndvi`, which also expects band-role mapping via `nir`/`red` parameters). closeMatch, not exactMatch: openEO has no equivalent for the other indices this application can compute."
+    }
   }
 }
