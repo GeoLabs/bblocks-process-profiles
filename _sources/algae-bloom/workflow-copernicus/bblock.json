@@ -22,7 +22,7 @@
     "ospd.process-profiles.algae-bloom.select-products-sentinel2",
     "ospd.process-profiles.algae-bloom.workflow-copernicus-process",
     "ogc.openeo.processes.cubes.load_collection",
-    "ogc.api.processes.part1.requirements.core"
+    "ogc.api.processes.part1.v1.requirements.core"
   ],
   "conformanceClasses": [
     "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"

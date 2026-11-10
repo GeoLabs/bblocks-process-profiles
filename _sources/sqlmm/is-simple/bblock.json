@@ -14,7 +14,7 @@
     "ospd.process-profiles.process-type"
   ],
   "seeAlso": [
-    "ogc.api.processes.part1.requirements.core"
+    "ogc.api.processes.part1.v1.requirements.core"
   ],
   "conformanceClasses": [
     "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"

@@ -23,7 +23,7 @@
     "ogc.openeo.processes.cubes.load_collection",
     "ogc.openeo.processes.cubes.filter_bands",
     "ogc.openeo.types.band-name",
-    "ogc.api.processes.part1.requirements.core"
+    "ogc.api.processes.part1.v1.requirements.core"
   ],
   "conformanceClasses": [
     "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
