@@ -31,6 +31,12 @@ processDescription, but CWL cannot declare it). Outputs are globbed with
 `ogc:geotiff` and `iana:image/png` are resolved by the transform to their respective
 media types (M-01, fixed 2026-09-23 in `eoap.cct.cwl-to-ogcprocess` itself).
 
+**`output_file` is not a GeoTIFF.** It is declared `ogc:geotiff`, but the 9 `*_color.tif` of
+the two W1 runs (`results/`, `results1/`) are RGBA TIFFs (4 samples) carrying none of the
+GeoTIFF tags 33550, 33922, 34735; the `calculate-band` outputs of the same runs
+(`*_<indicator>.tiff`) carry them (observed 2026-11-10). An upstream defect of the CRIM CWL or of
+its tool (docs/OPEN-QUESTIONS.md Q-PLOT-GEOTIFF), not corrected here.
+
 **Provenance.** Two outputs derived from one input; `color_scale` is the parameter that
 makes the rendering reproducible.
 

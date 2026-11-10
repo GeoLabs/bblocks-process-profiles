@@ -265,7 +265,13 @@ PROFILE_CONTEXT = {
             "side": "pp:side", "implements": {"@id": "pp:implements", "@type": "@id"},
             "parts": {"@id": "pp:part", "@container": "@list"},
             "selectors": {"@id": "pp:selector", "@context": {"name": "pp:liveName", "values": "rdf:value"}},
+            "reproducible": {"@id": "pp:reproducible", "@type": "xsd:boolean"},
             "note": "skos:note"}},
+        # A role with a representation that the deployment takes (or returns) as a URL of the data
+        # instead of the data (C1, 2026-11-10): reported apart, like serverSideFiles.
+        "byReference": {"@id": "pp:byReference", "@context": {
+            "name": "pp:liveName", "side": "pp:side",
+            "implements": {"@id": "pp:implements", "@type": "@id"}, "note": "skos:note"}},
         # A bound input or output whose Implementation Profile representation this deployment does
         # not serve (no media type exposed), accepted with its reason (A4.3).
         "assumedFormatGaps": {"@id": "pp:assumedFormatGap", "@context": {
@@ -1336,6 +1342,18 @@ def inherited_process_description(proc, pd, gp_root):
         missing = set(ip[side]) - set(bound.values()) - set(unbound) - set(decomposed.get(side) or {})
         if missing:
             sys.exit(f"{proc['key']}: {ip_key} {side} {sorted(missing)} neither bound, decomposed nor `unbound` in profiles.yaml")
+        for name in set(unbound) & set(ip[side]):
+            # C2 (2026-11-10): a deployment may leave unbound a role whose minOccurs is 0 at tier 3,
+            # with a reason. The testbed exception (docs/ATTACHMENTS.md): a live process may also
+            # leave unbound an input its deployment does not expose, with a reason.
+            if name in bound.values() or name in (decomposed.get(side) or {}):
+                sys.exit(f"{proc['key']}: role `{name}` is both `unbound` and bound or decomposed")
+            if not str(unbound[name]).strip():
+                sys.exit(f"{proc['key']}: `unbound` {name} needs a reason")
+            floor = 1 if side == "outputs" else ip[side][name].get("minOccurs", gp[side][name].get("minOccurs", 1))
+            if floor > 0 and proc.get("cwl_class"):
+                sys.exit(f"{proc['key']}: {side} role `{name}` of {ip_key} is left unbound but its minOccurs at tier 3 "
+                         f"is {floor}: only a role of minOccurs 0 may be (testbed exception: live processes only)")
         out, side_rules = {}, {}
         for live, e in pd[side].items():
             name = bound.get(live)
@@ -1446,26 +1464,36 @@ def binding_check(proc, pd, ip):
     role_decompositions entry must also be needed: one whose role names no representation stops
     the generator, as one whose representation is served does (format_check)."""
     ssf = proc.get("server_side_files") or {}
+    byref = proc.get("by_reference") or {}
     for side in ("inputs", "outputs"):
         bound = (proc.get("bindings", {}).get(side) or {})
-        for live, role in (ssf.get(side) or {}).items():
-            if bound.get(live) != role:
-                sys.exit(f"{proc['key']}: server_side_files {side} {live} -> {role}: not a binding of that role")
-            if not ip[side][role].get("representation"):
-                sys.exit(f"{proc['key']}: server_side_files {side} {live}: role `{role}` names no representation, "
-                         "the declaration is unnecessary")
+        for kind, decl in (("server_side_files", ssf), ("by_reference", byref)):
+            for live, role in (decl.get(side) or {}).items():
+                if bound.get(live) != role:
+                    sys.exit(f"{proc['key']}: {kind} {side} {live} -> {role}: not a binding of that role")
+                if not ip[side][role].get("representation"):
+                    sys.exit(f"{proc['key']}: {kind} {side} {live}: role `{role}` names no representation, "
+                             "the declaration is unnecessary")
+                if (ssf.get(side) or {}).get(live) and (byref.get(side) or {}).get(live):
+                    sys.exit(f"{proc['key']}: {side} {live} is declared both a server-side file and by reference")
         for role, d in ((proc.get("role_decompositions") or {}).get(side) or {}).items():
-            if not ip[side][role].get("representation"):
-                sys.exit(f"{proc['key']}: role_decompositions {side} {role}: the role names no representation, "
-                         "the declaration is unnecessary")
+            # C11 (2026-11-10): a decomposition may take a literal role (a time interval given by
+            # `days_back`, or by `date` + `delta`) as well as a role with a representation.
+            if not d.get("parts") or not str(d.get("note", "")).strip():
+                sys.exit(f"{proc['key']}: role_decompositions {side} {role}: parts and a note are required")
+            if not ip[side][role].get("representation") and "reproducible" not in d:
+                sys.exit(f"{proc['key']}: role_decompositions {side} {role}: a literal role's decomposition states "
+                         "`reproducible` (false when the parts depend on the time of execution, as `days_back`)")
         for live, role in bound.items():
             e, schema = ip[side][role], pd[side][live].get("schema")
             dtype = e["dataType"].rsplit("/", 1)[-1]
             media, types = _media_types(schema), _json_types(schema)
             if e.get("representation"):
-                if not media and not ((ssf.get(side) or {}).get(live) == role and types == {"string"}):
+                declared = (ssf.get(side) or {}).get(live) == role or (byref.get(side) or {}).get(live) == role
+                if not media and not (declared and types == {"string"}):
                     sys.exit(f"{proc['key']}: {side} {live} ({sorted(types)}, no media type) is bound to `{role}`, "
-                             f"a {dtype} role with a representation: neither encoded data nor a declared server-side file")
+                             f"a {dtype} role with a representation: neither encoded data nor a declared "
+                             "server-side file or reference (by_reference)")
             else:
                 if dtype not in LITERAL_TYPES:
                     sys.exit(f"{proc['key']}: {side} {live} -> `{role}`: data type {dtype} has no entry in LITERAL_TYPES")
@@ -1489,6 +1517,7 @@ def format_check(proc, pd, gp_root, df_root):
     ip = json.loads((gp_root / "_sources" / "implementation-profile" / ip_key / "examples" / f"{ip_key}.json").read_text())
     binding_check(proc, pd, ip)
     ssf = proc.get("server_side_files") or {}
+    byref = proc.get("by_reference") or {}
     dec = proc.get("role_decompositions") or {}
     gaps = proc.get("format_gaps") or {}
     rows, assumed = [], []
@@ -1504,6 +1533,7 @@ def format_check(proc, pd, gp_root, df_root):
                 row = {"process": bb_id(proc), "side": side, "role": role, "lives": lives.get(role, []),
                        "format": fmt, "types": sorted(types), "served": sorted(served)}
                 ssf_lives = [l for l in lives.get(role, []) if (ssf.get(side) or {}).get(l) == role]
+                ref_lives = [l for l in lives.get(role, []) if (byref.get(side) or {}).get(l) == role]
                 gap_lives = [l for l in lives.get(role, []) if l in declared_gaps]
                 dec_served = set().union(*(_media_types(pd[side][p].get("schema"))
                                            for p in ((dec.get(side) or {}).get(role) or {}).get("parts", [])))
@@ -1514,14 +1544,20 @@ def format_check(proc, pd, gp_root, df_root):
                     row["status"] = "served"
                     if gap_lives:
                         sys.exit(f"{proc['key']}: format_gaps {side} {gap_lives}: {fmt} is served, the gap is stale")
-                    stale = [l for l in lives.get(role, []) if (ssf.get(side) or {}).get(l) == role
-                             and types & _media_types(pd[side][l].get("schema"))]
+                    stale = [l for l in lives.get(role, []) if ((ssf.get(side) or {}).get(l) == role
+                             or (byref.get(side) or {}).get(l) == role) and types & _media_types(pd[side][l].get("schema"))]
                     if stale:
-                        sys.exit(f"{proc['key']}: server_side_files {side} {stale}: {fmt} is served, the declaration is unnecessary")
+                        sys.exit(f"{proc['key']}: server_side_files or by_reference {side} {stale}: {fmt} is served, "
+                                 "the declaration is unnecessary")
                 elif ssf_lives:
                     row["status"] = "server-side file"
+                elif ref_lives:
+                    row["status"] = "by reference"
                 elif role in (dec.get(side) or {}):
                     row["status"] = "role decomposition"
+                elif not lives.get(role) and role in (proc.get("unbound") or {}):
+                    row["status"] = "unbound"
+                    row["reason"] = " ".join(str(proc["unbound"][role]).split())
                 elif gap_lives and len(gap_lives) == len(lives.get(role, [])):
                     row["status"] = "assumed gap"
                     for l in gap_lives:
@@ -1554,8 +1590,11 @@ reason, and the process-type entry carries it:
 
 - **server-side file**: the deployment takes or returns the name of a file stored on the server, with
   no media type, by design (`serverSideFiles`);
+- **by reference**: the deployment takes or returns a URL of the data, not the data
+  (`byReference`);
 - **role decomposition**: the deployment takes the role as several inputs, none of which is the
   role (`roleDecompositions`);
+- **unbound**: the deployment leaves an optional role (minOccurs 0 at tier 3) unbound, with a reason;
 - **assumed gap**: the deployment exposes no media type for the role (`assumedFormatGaps`).
 
 An undeclared gap stops the generator, and so does a declaration that no longer matches a gap.
@@ -1600,6 +1639,11 @@ def tier3_link_fields(proc, assumed):
             {"name": live, "side": side, "implements": f"{ip}/{side}/{role}",
              "location": " ".join(ssf["location"].split())}
             for side in ("inputs", "outputs") for live, role in (ssf.get(side) or {}).items()]
+    ref = proc.get("by_reference")
+    if ref:
+        out["byReference"] = [
+            {"name": live, "side": side, "implements": f"{ip}/{side}/{role}", "note": " ".join(ref["note"].split())}
+            for side in ("inputs", "outputs") for live, role in (ref.get(side) or {}).items()]
     dec = proc.get("role_decompositions")
     if dec:
         out["roleDecompositions"] = []
@@ -1608,6 +1652,8 @@ def tier3_link_fields(proc, assumed):
                 item = {"side": side, "implements": f"{ip}/{side}/{role}", "parts": d["parts"]}
                 if d.get("selectors"):
                     item["selectors"] = d["selectors"]
+                if "reproducible" in d:
+                    item["reproducible"] = d["reproducible"]
                 item["note"] = " ".join(d["note"].split())
                 out["roleDecompositions"].append(item)
     if assumed:
@@ -1826,8 +1872,13 @@ def md_binding(proc, pd, gp_root, why):
                       + (" (only with " + " and ".join(f"`{c['name']}` in " + ", ".join(f"`{v}`" for v in c["values"])
                                                        for c in d["selectors"]) + ")" if d.get("selectors") else "")
                       + ": " + " ".join(d["note"].split())
-                      + " Declared in `roleDecompositions` of `process-type.json`; its representation is not served "
-                      "(`docs/FORMAT-CHECK.md`)."]
+                      + (" Not reproducible: the parts depend on the time of execution." if d.get("reproducible") is False else "")
+                      + " Declared in `roleDecompositions` of `process-type.json`"
+                      + ("; its representation is not served (`docs/FORMAT-CHECK.md`)." if ip[side][name].get("representation") else ".")]
+        for live, role in ((proc.get("by_reference") or {}).get(side) or {}).items():
+            lines += ["", f"**By reference.** `{live}` (role `{role}`) is a URL of the data, not the data: "
+                      + " ".join(proc["by_reference"]["note"].split())
+                      + " Declared in `byReference` of `process-type.json` (`docs/FORMAT-CHECK.md`)."]
         for live, g in (gaps.get(side) or {}).items():
             lines += ["", f"**Assumed format gap.** `{live}`: " + " ".join(g["reason"].split())
                       + " Evidence: " + " ".join(g["evidence"].split())
@@ -1882,8 +1933,13 @@ def write_process_type_fixtures(pt):
     """JSON fixtures of the process-type schema, each the entry of kindgrove-steps.reproject-band
     with one defect, so that they follow the entries: an amendment without classification or
     classified correctional (not available, pp:specification), a parent class outside the enum,
-    a specialisation without entity type."""
+    a specialisation without entity type; a `byReference` entry (control) and one without
+    `implements`, a literal role decomposition (control) and one without parts. The controls check
+    the schema only: they do not describe the deployment of reproject-band."""
     base = json.loads((ROOT / "_sources/kindgrove-steps/reproject-band/examples/process-type.json").read_text())
+
+    IP_RASTER_IN = GENERIC_PROFILES_BASE + "implementation-profile/raster-reprojection/inputs/raster"
+    IP_CRS_IN = GENERIC_PROFILES_BASE + "implementation-profile/raster-reprojection/inputs/targetCRS"
 
     def amendment(d):
         return next(a for a in d["hasAction"] if a["actionType"] == AMENDMENT_ACTION)
@@ -1892,6 +1948,15 @@ def write_process_type_fixtures(pt):
         "amendment-correctional-fail.json": lambda d: amendment(d).update(changeClassification="correctional"),
         "arbitrary-parent-fail.json": lambda d: d.update(subClassOf="https://example.org/not-an-activity-type"),
         "specialised-without-entity-type-fail.json": lambda d: [d.pop(k) for k in ("usedEntityType", "generatedEntityType")],
+        # C1 and C11 (2026-11-10): a reference to the data, and a decomposition of a literal role
+        "by-reference-control.json": lambda d: d.update(byReference=[
+            {"name": "band_file", "side": "inputs", "implements": IP_RASTER_IN, "note": "A URL of the GeoTIFF."}]),
+        "by-reference-without-implements-fail.json": lambda d: d.update(byReference=[
+            {"name": "band_file", "side": "inputs", "note": "A URL of the GeoTIFF."}]),
+        "literal-decomposition-control.json": lambda d: d.update(roleDecompositions=[
+            {"side": "inputs", "implements": IP_CRS_IN, "parts": ["epsg"], "reproducible": True, "note": "An EPSG code."}]),
+        "role-decomposition-without-parts-fail.json": lambda d: d.update(roleDecompositions=[
+            {"side": "inputs", "implements": IP_CRS_IN, "parts": [], "reproducible": True, "note": "No part."}]),
     }
     for name, defect in cases.items():
         d = copy.deepcopy(base)
@@ -1962,10 +2027,6 @@ def main():
             sys.exit(f"{proc['key']}: `tier3: {{status: attached | not attached, reason: ...}}` is required")
         if (att["status"] == "attached") != bool(proc.get("implementsProfile")):
             sys.exit(f"{proc['key']}: tier3.status and implementsProfile disagree")
-        if proc.get("unbound"):
-            # The attachment rule for the CWL processes (docs/ATTACHMENTS.md): every role of the
-            # Implementation Profile is implemented, by binding or declared decomposition.
-            sys.exit(f"{proc['key']}: a CWL process attached to tier 3 leaves no role `unbound`")
     by_key = {p["key"]: p for p in all_procs}
     if len(by_key) != len(all_procs):
         dupes = sorted({p["key"] for p in all_procs if [q["key"] for q in all_procs].count(p["key"]) > 1})
@@ -2164,21 +2225,22 @@ signatures of `bblocks-generic-profiles`: its inputs and outputs (as derived fro
 roles of the candidate Implementation Profile (tier 3), of the Generic Profile it refines (tier 2) and
 of that profile's Process Concept (tier 1).
 
-**The rule, as applied.** A CWL process is attached (`implementsProfile`) when the activity type of the
-profile means what the process does, and every role of the Implementation Profile is implemented:
+**The rule, as applied.** A process is attached (`implementsProfile`) when the activity type of the
+profile means what the process does, and every role of the Implementation Profile is accounted for:
 bound to one or more of its inputs/outputs of the role's nature and within the role's cardinality
-(`bindings`; the generator checks the nature), or taken as several inputs declared as a role
-decomposition (`role_decompositions`). It may have inputs/outputs of its own (Table 21 footnote b).
-A CWL process may leave no role unbound; the generator stops if one does. A process with no fitting
+(`bindings`; the generator checks the nature), taken as several inputs declared as a role
+decomposition (`role_decompositions`, for a role with a representation or a literal role), or, for
+a role whose `minOccurs` is 0 at tier 3, left unbound with a reason (`unbound`, decision C2 of
+2026-11-10). It may have inputs/outputs of its own (Table 21 footnote b). A process with no fitting
 profile is listed as not attached, with the reason and, where one exists, the closest profile; it is
 not forced. A gap in the tiers may justify a new Generic or Implementation Profile: listed as
-proposals, none created here.
+proposals; those decided on 2026-11-10 are being created in bblocks-generic-profiles.
 
 **The testbed exception.** The {live} live processes of the Geonovum testbed are all attached, one per
 Implementation Profile (README, second table): each is the deployment from which its Implementation
-Profile was written. They follow the same rule with one exception: a role the deployment exposes no
-input for may be left `unbound`, with its reason. One is: `raster.radiometric-index` leaves `index`
-of radiometric-index unbound (OTB RadiometricIndices' `list` parameter is not exposed).
+Profile was written. They may in addition leave unbound a role of `minOccurs` 1 that the deployment
+exposes no input for, with its reason. One does: `raster.radiometric-index` leaves `index` of
+radiometric-index unbound (OTB RadiometricIndices' `list` parameter is not exposed).
 `raster.extract-roi` takes `areaOfInterest` of raster-crop as a declared role decomposition, which
 the rule allows, only with `mode.extent.unit` in `phy` or `lonlat`.
 """

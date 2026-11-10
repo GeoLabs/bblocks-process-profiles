@@ -10,8 +10,11 @@ reason, and the process-type entry carries it:
 
 - **server-side file**: the deployment takes or returns the name of a file stored on the server, with
   no media type, by design (`serverSideFiles`);
+- **by reference**: the deployment takes or returns a URL of the data, not the data
+  (`byReference`);
 - **role decomposition**: the deployment takes the role as several inputs, none of which is the
   role (`roleDecompositions`);
+- **unbound**: the deployment leaves an optional role (minOccurs 0 at tier 3) unbound, with a reason;
 - **assumed gap**: the deployment exposes no media type for the role (`assumedFormatGaps`).
 
 An undeclared gap stops the generator, and so does a declaration that no longer matches a gap.

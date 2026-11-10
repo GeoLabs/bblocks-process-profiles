@@ -6,21 +6,22 @@ signatures of `bblocks-generic-profiles`: its inputs and outputs (as derived fro
 roles of the candidate Implementation Profile (tier 3), of the Generic Profile it refines (tier 2) and
 of that profile's Process Concept (tier 1).
 
-**The rule, as applied.** A CWL process is attached (`implementsProfile`) when the activity type of the
-profile means what the process does, and every role of the Implementation Profile is implemented:
+**The rule, as applied.** A process is attached (`implementsProfile`) when the activity type of the
+profile means what the process does, and every role of the Implementation Profile is accounted for:
 bound to one or more of its inputs/outputs of the role's nature and within the role's cardinality
-(`bindings`; the generator checks the nature), or taken as several inputs declared as a role
-decomposition (`role_decompositions`). It may have inputs/outputs of its own (Table 21 footnote b).
-A CWL process may leave no role unbound; the generator stops if one does. A process with no fitting
+(`bindings`; the generator checks the nature), taken as several inputs declared as a role
+decomposition (`role_decompositions`, for a role with a representation or a literal role), or, for
+a role whose `minOccurs` is 0 at tier 3, left unbound with a reason (`unbound`, decision C2 of
+2026-11-10). It may have inputs/outputs of its own (Table 21 footnote b). A process with no fitting
 profile is listed as not attached, with the reason and, where one exists, the closest profile; it is
 not forced. A gap in the tiers may justify a new Generic or Implementation Profile: listed as
-proposals, none created here.
+proposals; those decided on 2026-11-10 are being created in bblocks-generic-profiles.
 
 **The testbed exception.** The 31 live processes of the Geonovum testbed are all attached, one per
 Implementation Profile (README, second table): each is the deployment from which its Implementation
-Profile was written. They follow the same rule with one exception: a role the deployment exposes no
-input for may be left `unbound`, with its reason. One is: `raster.radiometric-index` leaves `index`
-of radiometric-index unbound (OTB RadiometricIndices' `list` parameter is not exposed).
+Profile was written. They may in addition leave unbound a role of `minOccurs` 1 that the deployment
+exposes no input for, with its reason. One does: `raster.radiometric-index` leaves `index` of
+radiometric-index unbound (OTB RadiometricIndices' `list` parameter is not exposed).
 `raster.extract-roi` takes `areaOfInterest` of raster-crop as a declared role decomposition, which
 the rule allows, only with `mode.extent.unit` in `phy` or `lonlat`.
 
@@ -41,7 +42,7 @@ the rule allows, only with `mode.extent.unit` in `phy` or `lonlat`.
 | `kindgrove.mangrove` | CommandLineTool | not attached | -- | -- | -- | One opaque tool runs scene selection, band retrieval, indices, biomass and carbon estimation and STAC export. No single profile describes it; kindgrove-steps splits it into steps. |
 | `water-bodies.water-bodies` | Workflow | not attached | -- | -- | -- | A composite Workflow: catalogue search, data retrieval and processing chained into one application. No Generic Profile describes a whole application, and none should: its steps are compared with the tiers one by one. |
 | `water-bodies.detect-water-body` | Workflow | not attached | -- | -- | -- | A composite Workflow: catalogue search, data retrieval and processing chained into one application. No Generic Profile describes a whole application, and none should: its steps are compared with the tiers one by one. |
-| `water-bodies.crop` | CommandLineTool | not attached | -- | -- | -- | Its input is a STAC Item URL and a band common name, not a raster: it reads the band asset, crops it to `aoi` (a comma-separated string) and reprojects it to `epsg`. raster-crop needs a raster input; the retrieval of the band is part of this process. Closest: raster-crop (crop to an area of interest), after band retrieval. |
+| `water-bodies.crop` | CommandLineTool | not attached | -- | -- | -- | Its input is a STAC Item URL and a band common name, not a raster: it reads the band asset and crops it to `aoi` (a comma-separated string, in the CRS given by `epsg`). raster-crop needs a raster input; the retrieval of the band is part of this process. Closest: raster-crop (crop to an area of interest), after band retrieval. |
 | `water-bodies.norm-diff` | CommandLineTool | not attached | -- | -- | -- | Normalized difference (A-B)/(A+B) of exactly two single-band rasters (`nargs=2`), one single-band Float32 GeoTIFF out. Its meaning is a radiometric index, but the Implementation Profile radiometric-index restricts `rasters` to maxOccurs 1 (one pre-stacked multi-band image), and norm-diff takes two. raster-band-math means a user-supplied expression, which norm-diff does not take. Closest: the Generic Profile radiometric-index (tier 2), whose `rasters` takes one or more rasters. |
 | `water-bodies.otsu` | CommandLineTool | not attached | -- | -- | -- | Thresholding: one single-band raster in, a binary mask out, by Otsu's method. No Generic Profile classifies or thresholds a raster. |
 | `water-bodies.stac` | CommandLineTool | not attached | -- | -- | -- | Export: writes a STAC Catalog of the results. No Generic Profile exports a catalogue. |
@@ -50,7 +51,7 @@ the rule allows, only with `mode.extent.unit` in `phy` or `lonlat`.
 | `kindgrove-steps.select-scene` | CommandLineTool | not attached | -- | -- | -- | Catalogue search: an area, a time window, a collection and filters in, references to products out. No Generic Profile searches a catalogue or selects products. |
 | `kindgrove-steps.download-band` | CommandLineTool | not attached | -- | -- | -- | Data retrieval: its input is a reference to a product and a band name, not a raster, and it returns the band. No Generic Profile retrieves a band from a product. |
 | `kindgrove-steps.reproject-band` | CommandLineTool | attached | `raster-reprojection` | `raster-reprojection` | `raster-coverage-processing` | Signature checked against raster-reprojection: `band_file` implements `raster`, `epsg` (an EPSG code, default 4326) implements `targetCRS`, `reprojected_file` implements the output `raster`; `west`, `south`, `east`, `north` (extent of the target grid) and `resolution` are inputs of the deployment's own. Its CWL declares no `format`: an assumed format gap. |
-| `kindgrove-steps.calculate-indices` | CommandLineTool | not attached | -- | -- | -- | Computes NDVI, NDWI and SAVI from a list of band files, as three separate outputs. The meaning is the Generic Profile radiometric-index, but its single output role cannot take three outputs, and no input selects the index; its Implementation Profile also restricts `rasters` to maxOccurs 1. Closest: the Generic Profile radiometric-index (tier 2). |
+| `kindgrove-steps.calculate-indices` | CommandLineTool | not attached | -- | -- | -- | Computes NDVI, NDWI and SAVI from a list of single-band files, as three single-band outputs. The meaning is the Generic Profile radiometric-index, but its only Implementation Profile restricts `rasters` to maxOccurs 1 (one pre-stacked multi-band image), and its `index` role, which no input selects, has minOccurs 1. Closest: the Generic Profile radiometric-index (tier 2). |
 | `kindgrove-steps.estimate-biomass` | CommandLineTool | not attached | -- | -- | -- | Domain model: mangrove detection, allometric biomass and carbon stock from three index rasters and coefficients, with five outputs including summaries. No Generic Profile, and none of general use. |
 | `kindgrove-steps.export-stac` | CommandLineTool | not attached | -- | -- | -- | Export: writes a STAC Catalog of the results. No Generic Profile exports a catalogue. |
 
@@ -60,5 +61,5 @@ the rule allows, only with `mode.extent.unit` in `phy` or `lonlat`.
 - A Generic Profile for band retrieval (product reference, band name, optional area of interest -> raster), implemented by algae-bloom.download-band-sentinel2-stac-item, -product-safe, kindgrove-steps.download-band and water-bodies.crop. (from `algae-bloom.download-band-sentinel2-stac-item`, `algae-bloom.download-band-sentinel2-product-safe`, `water-bodies.crop`, `kindgrove-steps.download-band`)
 - A Generic Profile for raster resampling (raster, target size or resolution -> raster). (from `algae-bloom.reproject-image`)
 - A Generic Profile for raster rendering (raster, colour map -> image). (from `algae-bloom.plot-image`)
-- A Generic Profile for the normalized difference (two single-band rasters in a fixed order -> one single-band raster), under the Process Concept raster-coverage-processing, and its Implementation Profile with GeoTIFF representations, for water-bodies.norm-diff. A second Implementation Profile of radiometric-index would not do: it keeps the role `index`, which no input of norm-diff selects, and its single output role. kindgrove-steps.calculate-indices (three fixed indices, three outputs) is not covered; no proposal for it. (from `water-bodies.norm-diff`)
+- A second Implementation Profile of the Generic Profile radiometric-index, radiometric-index-single-band (decided 2026-11-10, C3): `rasters` as single-band GeoTIFF rasters, 1..unbounded; `index` optional (minOccurs 0), the index a deployment computes being recorded as a fixed value at tier 4; output `raster` a single-band GeoTIFF raster, one per index. For water-bodies.norm-diff (index fixed: the normalized difference) and kindgrove-steps.calculate-indices (NDVI, NDWI and SAVI, its three outputs bound to the output role). (from `water-bodies.norm-diff`, `kindgrove-steps.calculate-indices`)
 - A Generic Profile for raster thresholding (raster -> single-band mask raster). (from `water-bodies.otsu`)

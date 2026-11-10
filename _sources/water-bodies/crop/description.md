@@ -20,8 +20,11 @@ Process profile of **`crop`** (CommandLineTool, W3 Water Bodies).
 
 **Behaviour.** `python -m app`, `ghcr.io/terradue/ogc-eo-application-package-hands-on/crop:1.5.0`.
 Reads one asset of the given STAC item directly over the network (`NetworkAccess`; no `File`
-input -- `item` is a plain STAC item URL string), windowed-reads and reprojects the requested
-`band` to `epsg` cropped to `aoi`, writes one GeoTIFF (`crop_<band>.tif`).
+input -- `item` is a plain STAC item URL string), windowed-reads the requested `band` cropped to
+`aoi`, writes one GeoTIFF (`crop_<band>.tif`). It does not reproject: `epsg` is passed to
+`gdal.Translate` as `projWinSRS`, the CRS of `aoi`, not a target CRS (read, `app.py`). Observed
+(run record `water-bodies`, 2026-11-10): with `epsg: "EPSG:4326"`, the four `crop_*.tif` stay
+in the CRS of the asset, EPSG:32610 (UTM zone 10N), at 10 m.
 
 **CWL specifics.** `item`, `aoi`, `epsg`, `band` are all plain strings: `item` is a STAC Item
 URL (candidate `eoap.cct.stac` or `eoap.cct.string-format`), `aoi` a comma-separated bbox
@@ -49,7 +52,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Its input is a STAC Item URL and a band common name, not a raster: it reads the band asset, crops it to `aoi` (a comma-separated string) and reprojects it to `epsg`. raster-crop needs a raster input; the retrieval of the band is part of this process.
+Not attached to an Implementation Profile of bblocks-generic-profiles: Its input is a STAC Item URL and a band common name, not a raster: it reads the band asset and crops it to `aoi` (a comma-separated string, in the CRS given by `epsg`). raster-crop needs a raster input; the retrieval of the band is part of this process.
 
 The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
 

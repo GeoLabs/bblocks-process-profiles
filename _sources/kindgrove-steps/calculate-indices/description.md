@@ -18,12 +18,15 @@ Process profile of **`calculate_indices`** (CommandLineTool, W2b KindGrove (step
 ## Analysis
 
 **Behaviour.** `/app/cwl/bin/steps/04_calculate_indices`, `ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc2`.
-Reads the three reprojected bands (positional-order `File[]`: red, green, nir) and writes
-NDVI, NDWI and SAVI as three separate GeoTIFFs.
+Reads the three reprojected bands and writes NDVI, NDWI and SAVI as three separate GeoTIFFs.
+It identifies each band by its **file name**, not its position: `Path(path).stem.split("_")[0]`
+must give `red`, `green` and `nir`, and it fails if one is missing (read, the notebook
+`steps/04_calculate_indices.ipynb`).
 
-**CWL specifics.** `band_files` is `File[]` with **no positional labels**, the same gap as
-`water-bodies.norm-diff`'s `rasters`: which file is red/green/nir depends entirely on the
-caller's array order, not expressed in the processDescription.
+**CWL specifics.** `band_files` is `File[]` with no labels: that the files must be named
+`red_*`, `green_*` and `nir_*` is not expressed in the processDescription. Unlike
+`water-bodies.norm-diff`'s `rasters`, which is positional (`rasters[0]` minus `rasters[1]`),
+the array order does not matter.
 
 **Provenance.** Three file inputs, three file outputs; a plain `wasDerivedFrom` fan-out.
 
@@ -44,7 +47,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Computes NDVI, NDWI and SAVI from a list of band files, as three separate outputs. The meaning is the Generic Profile radiometric-index, but its single output role cannot take three outputs, and no input selects the index; its Implementation Profile also restricts `rasters` to maxOccurs 1.
+Not attached to an Implementation Profile of bblocks-generic-profiles: Computes NDVI, NDWI and SAVI from a list of single-band files, as three single-band outputs. The meaning is the Generic Profile radiometric-index, but its only Implementation Profile restricts `rasters` to maxOccurs 1 (one pre-stacked multi-band image), and its `index` role, which no input selects, has minOccurs 1.
 
 The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
 

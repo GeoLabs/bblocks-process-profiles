@@ -31,7 +31,7 @@
     }
   ],
   "prefLabel": "Crop a Sentinel-2 COG band to an area of interest",
-  "definition": "Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest and reprojected to the requested CRS.",
+  "definition": "Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest, whose CRS is given by `epsg`; the output keeps the CRS of the asset.",
   "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
   "classification": {

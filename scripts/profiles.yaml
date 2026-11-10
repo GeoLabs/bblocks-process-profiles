@@ -434,6 +434,12 @@ processes:
       `ogc:geotiff` and `iana:image/png` are resolved by the transform to their respective
       media types (M-01, fixed 2026-09-23 in `eoap.cct.cwl-to-ogcprocess` itself).
 
+      **`output_file` is not a GeoTIFF.** It is declared `ogc:geotiff`, but the 9 `*_color.tif` of
+      the two W1 runs (`results/`, `results1/`) are RGBA TIFFs (4 samples) carrying none of the
+      GeoTIFF tags 33550, 33922, 34735; the `calculate-band` outputs of the same runs
+      (`*_<indicator>.tiff`) carry them (observed 2026-11-10). An upstream defect of the CRIM CWL or of
+      its tool (docs/OPEN-QUESTIONS.md Q-PLOT-GEOTIFF), not corrected here.
+
       **Provenance.** Two outputs derived from one input; `color_scale` is the parameter that
       makes the rendering reproducible.
     run: {prov: w1-earth-search, step: plot_turbidity, iteration: 2}
@@ -675,13 +681,13 @@ processes:
     label: Crop a Sentinel-2 COG band to an area of interest
     definition: >-
       Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the
-      area of interest and reprojected to the requested CRS.
+      area of interest, whose CRS is given by `epsg`; the output keeps the CRS of the asset.
     phases: [data-retrieval]
     tier3:
       status: not attached
       reason: >-
-        Its input is a STAC Item URL and a band common name, not a raster: it reads the band asset,
-        crops it to `aoi` (a comma-separated string) and reprojects it to `epsg`. raster-crop needs a
+        Its input is a STAC Item URL and a band common name, not a raster: it reads the band asset and
+        crops it to `aoi` (a comma-separated string, in the CRS given by `epsg`). raster-crop needs a
         raster input; the retrieval of the band is part of this process.
       closest: >-
         raster-crop (crop to an area of interest), after band retrieval.
@@ -703,8 +709,11 @@ processes:
     analysis: |
       **Behaviour.** `python -m app`, `ghcr.io/terradue/ogc-eo-application-package-hands-on/crop:1.5.0`.
       Reads one asset of the given STAC item directly over the network (`NetworkAccess`; no `File`
-      input -- `item` is a plain STAC item URL string), windowed-reads and reprojects the requested
-      `band` to `epsg` cropped to `aoi`, writes one GeoTIFF (`crop_<band>.tif`).
+      input -- `item` is a plain STAC item URL string), windowed-reads the requested `band` cropped to
+      `aoi`, writes one GeoTIFF (`crop_<band>.tif`). It does not reproject: `epsg` is passed to
+      `gdal.Translate` as `projWinSRS`, the CRS of `aoi`, not a target CRS (read, `app.py`). Observed
+      (run record `water-bodies`, 2026-11-10): with `epsg: "EPSG:4326"`, the four `crop_*.tif` stay
+      in the CRS of the asset, EPSG:32610 (UTM zone 10N), at 10 m.
 
       **CWL specifics.** `item`, `aoi`, `epsg`, `band` are all plain strings: `item` is a STAC Item
       URL (candidate `eoap.cct.stac` or `eoap.cct.string-format`), `aoi` a comma-separated bbox
@@ -741,12 +750,13 @@ processes:
       closest: >-
         the Generic Profile radiometric-index (tier 2), whose `rasters` takes one or more rasters.
       proposal: >-
-        A Generic Profile for the normalized difference (two single-band rasters in a fixed order ->
-        one single-band raster), under the Process Concept raster-coverage-processing, and its
-        Implementation Profile with GeoTIFF representations, for water-bodies.norm-diff. A second
-        Implementation Profile of radiometric-index would not do: it keeps the role `index`, which
-        no input of norm-diff selects, and its single output role. kindgrove-steps.calculate-indices
-        (three fixed indices, three outputs) is not covered; no proposal for it.
+        A second Implementation Profile of the Generic Profile radiometric-index,
+        radiometric-index-single-band (decided 2026-11-10, C3): `rasters` as single-band GeoTIFF rasters,
+        1..unbounded; `index` optional (minOccurs 0), the index a deployment computes being recorded as
+        a fixed value at tier 4; output `raster` a single-band GeoTIFF raster, one per index. For
+        water-bodies.norm-diff (index fixed: the normalized difference) and
+        kindgrove-steps.calculate-indices (NDVI, NDWI and SAVI, its three outputs bound to the output
+        role).
     cct: []
     cct_candidates: []
     parents: [detect-water-body]
@@ -1061,11 +1071,19 @@ processes:
     tier3:
       status: not attached
       reason: >-
-        Computes NDVI, NDWI and SAVI from a list of band files, as three separate outputs. The meaning
-        is the Generic Profile radiometric-index, but its single output role cannot take three
-        outputs, and no input selects the index; its Implementation Profile also restricts `rasters`
-        to maxOccurs 1.
+        Computes NDVI, NDWI and SAVI from a list of single-band files, as three single-band outputs.
+        The meaning is the Generic Profile radiometric-index, but its only Implementation Profile
+        restricts `rasters` to maxOccurs 1 (one pre-stacked multi-band image), and its `index` role,
+        which no input selects, has minOccurs 1.
       closest: the Generic Profile radiometric-index (tier 2).
+      proposal: >-
+        A second Implementation Profile of the Generic Profile radiometric-index,
+        radiometric-index-single-band (decided 2026-11-10, C3): `rasters` as single-band GeoTIFF rasters,
+        1..unbounded; `index` optional (minOccurs 0), the index a deployment computes being recorded as
+        a fixed value at tier 4; output `raster` a single-band GeoTIFF raster, one per index. For
+        water-bodies.norm-diff (index fixed: the normalized difference) and
+        kindgrove-steps.calculate-indices (NDVI, NDWI and SAVI, its three outputs bound to the output
+        role).
     cct: []
     cct_candidates: []
     parents: [mangrove-workflow-steps]
@@ -1084,12 +1102,15 @@ processes:
         - {stage: savi, openeo: [], level: none, note: "soil-adjusted vegetation index, no openEO process in this register"}
     analysis: |
       **Behaviour.** `/app/cwl/bin/steps/04_calculate_indices`, `ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc2`.
-      Reads the three reprojected bands (positional-order `File[]`: red, green, nir) and writes
-      NDVI, NDWI and SAVI as three separate GeoTIFFs.
+      Reads the three reprojected bands and writes NDVI, NDWI and SAVI as three separate GeoTIFFs.
+      It identifies each band by its **file name**, not its position: `Path(path).stem.split("_")[0]`
+      must give `red`, `green` and `nir`, and it fails if one is missing (read, the notebook
+      `steps/04_calculate_indices.ipynb`).
 
-      **CWL specifics.** `band_files` is `File[]` with **no positional labels**, the same gap as
-      `water-bodies.norm-diff`'s `rasters`: which file is red/green/nir depends entirely on the
-      caller's array order, not expressed in the processDescription.
+      **CWL specifics.** `band_files` is `File[]` with no labels: that the files must be named
+      `red_*`, `green_*` and `nir_*` is not expressed in the processDescription. Unlike
+      `water-bodies.norm-diff`'s `rasters`, which is positional (`rasters[0]` minus `rasters[1]`),
+      the array order does not matter.
 
       **Provenance.** Three file inputs, three file outputs; a plain `wasDerivedFrom` fan-out.
     run: {prov: kindgrove-steps, step: calculate_indices}

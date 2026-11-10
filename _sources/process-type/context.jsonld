@@ -192,6 +192,10 @@
             "name": "pp:liveName",
             "values": "rdf:value"
           }
+        },
+        "reproducible": {
+          "@id": "pp:reproducible",
+          "@type": "xsd:boolean"
         }
       }
     },
@@ -223,6 +227,18 @@
       "@type": "@vocab"
     },
     "substantive": "rim:substantiveChange",
-    "clarifying": "rim:clarifyingChange"
+    "clarifying": "rim:clarifyingChange",
+    "byReference": {
+      "@id": "pp:byReference",
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "note": "skos:note"
+      }
+    }
   }
 }

@@ -201,11 +201,38 @@ allOf:
             format: uri
           location:
             type: string
+    byReference:
+      description: 'Bound inputs and outputs, of a role with a representation, that this deployment takes
+        or returns as a URL of the data instead of the data (C1, 2026-11-10): the representation describes
+        what the URL resolves to. Reported apart, like serverSideFiles.'
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+        - name
+        - side
+        - implements
+        - note
+        additionalProperties: false
+        properties:
+          name:
+            type: string
+          side:
+            enum:
+            - inputs
+            - outputs
+          implements:
+            type: string
+            format: uri
+          note:
+            type: string
     roleDecompositions:
-      description: Implementation Profile roles that this deployment takes as several inputs (or outputs),
-        none of which is the role and none of which carries its representation -- e.g. the bounding box
-        of raster-crop taken by OTB.ExtractROI as four corner numbers and a unit. Declared so that the
-        gap is explicit (decision of 2026-11-09).
+      description: 'Implementation Profile roles that this deployment takes as one or more inputs (or
+        outputs) none of which is the role: a role with a representation none of the parts carries (the
+        bounding box of raster-crop taken by OTB.ExtractROI as four corner numbers), or a literal role
+        (C11, 2026-11-10: a time interval given by `days_back`, or by `date` + `delta`). `reproducible`
+        is false when the parts depend on the time of execution.'
       type: array
       minItems: 1
       items:
@@ -226,7 +253,7 @@ allOf:
             format: uri
           parts:
             type: array
-            minItems: 2
+            minItems: 1
             items:
               type: string
           note:
@@ -250,6 +277,8 @@ allOf:
                   minItems: 1
                   items:
                     type: string
+          reproducible:
+            type: boolean
     assumedFormatGaps:
       description: Bound inputs and outputs whose Implementation Profile representation this deployment
         does not serve (no media type exposed), accepted with a reason and its evidence (A4.3, docs/FORMAT-CHECK.md).

@@ -353,6 +353,22 @@
             "values": "rdf:value"
           }
         },
+        "reproducible": {
+          "@id": "pp:reproducible",
+          "@type": "xsd:boolean"
+        },
+        "note": "skos:note"
+      }
+    },
+    "byReference": {
+      "@id": "pp:byReference",
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
         "note": "skos:note"
       }
     },
