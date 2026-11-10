@@ -109,10 +109,10 @@ Shared: `ospd.process-profiles.process-type` — schema of a candidate process-t
 
 | Artefact | Validated against |
 |---|---|
-| `processDescription` (default schema) | this profile = `ogc.api.processes.v1.schemas.process` + `ogc.api.processes.v2.schemas.staticIndicator` + id/input/output constraints |
-| raw `cwl-to-ogcprocess` output (when a manual correction was needed) | `ogc.api.processes.v1.schemas.process` |
-| OGC Application Package (Part 2 deploy body, `executionUnit` = link to the CWL) | `ogc.api.processes.v2.schemas.ogcapppkg` |
-| execute request / results | `ogc.api.processes.v1.schemas.execute` / `results` |
+| `processDescription` (default schema) | this profile = `ogc.api.processes.part1.v1.schemas.process` + `ogc.api.processes.part2.v1.schemas.staticIndicator` + id/input/output constraints |
+| raw `cwl-to-ogcprocess` output (when a manual correction was needed) | `ogc.api.processes.part1.v1.schemas.process` |
+| OGC Application Package (Part 2 deploy body, `executionUnit` = link to the CWL) | `ogc.api.processes.part2.v1.schemas.ogcapppkg` |
+| execute request / results | `ogc.api.processes.part1.v1.schemas.execute` / `results` |
 | provenance chain | `ogc.bbr.provenance.provenance` |
 | process run (CommandLineTool) | `ogc.bbr.wf4ever.wfprov.ProcessRun` (gap GP-1 in the generic profile) |
 | execution bundle (Workflow) | `ogc.bbr.provenance.execution` |

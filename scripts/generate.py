@@ -944,15 +944,15 @@ def profile_schema(proc, pd, cwl_el, has_exec, inherited=None):
               if not is_optional(v.get("type")) and "default" not in v and n in pd["inputs"]]
     workflow = cwl_el["class"] == "Workflow"
     defs = {
-        "rawProcessDescription": {"$ref": "bblocks://ogc.api.processes.v1.schemas.process"},
-        "applicationPackage": {"$ref": "bblocks://ogc.api.processes.v2.schemas.ogcapppkg"},
+        "rawProcessDescription": {"$ref": "bblocks://ogc.api.processes.part1.v1.schemas.process"},
+        "applicationPackage": {"$ref": "bblocks://ogc.api.processes.part2.v1.schemas.ogcapppkg"},
         "provenance": {"$ref": "bblocks://ogc.bbr.provenance.provenance"},
         "processTypeEntry": {"$ref": f"bblocks://{PREFIX}process-type"},
         "w3cProvJsonLd": {"$ref": "bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld"},
         "execute": {
             "description": ("Execute request for this process. Built on the processDescription input "
-                            "schemas and on ogc.api.processes.v1.schemas.link / qualifiedInputValue, "
-                            "because ogc.api.processes.v1.schemas.execute rejects plain strings and "
+                            "schemas and on ogc.api.processes.part1.v1.schemas.link / qualifiedInputValue, "
+                            "because ogc.api.processes.part1.v1.schemas.execute rejects plain strings and "
                             "numbers (upstream issue U-01)."),
             "type": "object",
             "required": ["inputs"],
@@ -962,8 +962,8 @@ def profile_schema(proc, pd, cwl_el, has_exec, inherited=None):
                     "required": req_in,
                     "propertyNames": {"enum": list(pd["inputs"].keys())},
                     "additionalProperties": {"anyOf": [
-                        {"$ref": "bblocks://ogc.api.processes.v1.schemas.link"},
-                        {"$ref": "bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue"},
+                        {"$ref": "bblocks://ogc.api.processes.part1.v1.schemas.link"},
+                        {"$ref": "bblocks://ogc.api.processes.part1.v1.schemas.qualifiedInputValue"},
                         {"type": ["string", "number", "integer", "boolean", "array", "object"]},
                     ]},
                 },
@@ -976,8 +976,8 @@ def profile_schema(proc, pd, cwl_el, has_exec, inherited=None):
             "type": "object",
             "propertyNames": {"enum": list(pd["outputs"].keys())},
             "additionalProperties": {"anyOf": [
-                {"$ref": "bblocks://ogc.api.processes.v1.schemas.link"},
-                {"type": "array", "items": {"$ref": "bblocks://ogc.api.processes.v1.schemas.link"}},
+                {"$ref": "bblocks://ogc.api.processes.part1.v1.schemas.link"},
+                {"type": "array", "items": {"$ref": "bblocks://ogc.api.processes.part1.v1.schemas.link"}},
                 {"type": ["string", "number", "integer", "boolean", "array", "object"]},
             ]},
         },
@@ -1000,16 +1000,16 @@ def profile_schema(proc, pd, cwl_el, has_exec, inherited=None):
     if inherited:
         # deep copies: a shared object would be dumped as a YAML anchor/alias
         defs["inheritedProcessDescription"] = {"allOf": [
-            {"$ref": "bblocks://ogc.api.processes.v1.schemas.process"},
-            {"$ref": "bblocks://ogc.api.processes.v2.schemas.staticIndicator"}, copy.deepcopy(pins), inherited]}
+            {"$ref": "bblocks://ogc.api.processes.part1.v1.schemas.process"},
+            {"$ref": "bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator"}, copy.deepcopy(pins), inherited]}
     return {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "description": (f"Profile of the OGC API - Processes processDescription of `{pd['id']}` "
                         f"(CWL {cwl_el['class']}). Pins the process id and the input/output names; "
                         "the input/output schemas are those derived from the CWL."),
         "allOf": [
-            {"$ref": "bblocks://ogc.api.processes.v1.schemas.process"},
-            {"$ref": "bblocks://ogc.api.processes.v2.schemas.staticIndicator"},
+            {"$ref": "bblocks://ogc.api.processes.part1.v1.schemas.process"},
+            {"$ref": "bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator"},
             pins,
         ],
         "$defs": defs,
@@ -1126,8 +1126,8 @@ def bblock_json(proc, pd, cwl_el, corrections, has_exec, by_key):
     # and the viewer render as navigable links, in both directions.
     related = [bb_id(by_key[s]) for s in proc.get("steps", [])] + [bb_id(by_key[s]) for s in proc.get("parents", [])]
     see = related + [t for t in dict.fromkeys(targets) if t not in related]
-    depends = ["ogc.api.processes.v1.schemas.process", "ogc.api.processes.v2.schemas.staticIndicator",
-               "ogc.api.processes.v2.schemas.ogcapppkg", "ogc.bbr.provenance.provenance",
+    depends = ["ogc.api.processes.part1.v1.schemas.process", "ogc.api.processes.part2.v1.schemas.staticIndicator",
+               "ogc.api.processes.part2.v1.schemas.ogcapppkg", "ogc.bbr.provenance.provenance",
                f"{PREFIX}process-type", "eoap.cct.cwl-to-ogcprocess",
                "ogc.ogc-utils.prov.w3c-prov-jsonld"]
     if cwl_el["class"] == "Workflow":
@@ -1719,8 +1719,8 @@ def ogcapi_profile_schema(pd, inherited=None):
             "outputs": {"type": "object", "required": list(pd["outputs"].keys())},
         },
     }
-    base = [{"$ref": "bblocks://ogc.api.processes.v1.schemas.process"},
-            {"$ref": "bblocks://ogc.api.processes.v2.schemas.staticIndicator"}, pins]
+    base = [{"$ref": "bblocks://ogc.api.processes.part1.v1.schemas.process"},
+            {"$ref": "bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator"}, pins]
     defs = {"processTypeEntry": {"$ref": f"bblocks://{PREFIX}process-type"}}
     if inherited:
         # deep copies: a shared object would be dumped as a YAML anchor/alias
@@ -1748,7 +1748,7 @@ def generic_profiles_identifier(iri):
 
 
 def ogcapi_bblock_json(proc, pd, src):
-    depends = ["ogc.api.processes.v1.schemas.process", "ogc.api.processes.v2.schemas.staticIndicator",
+    depends = ["ogc.api.processes.part1.v1.schemas.process", "ogc.api.processes.part2.v1.schemas.staticIndicator",
                f"{PREFIX}process-type"]
     family = src.get("family", "OGC API - Processes")
     group = src.get("group", src.get("title", "OGC API - Processes"))

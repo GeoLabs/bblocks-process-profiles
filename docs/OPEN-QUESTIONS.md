@@ -10,7 +10,7 @@ CWL files linked, not copied; openEO equivalence levels as in the Step 0 table.
 |---|---|
 | Q-LIC | **Derived text from CC-BY-NC-SA-4.0 files.** The W1 CWL files are linked, not copied, but the generated processDescriptions and process-type entries reproduce their `label`/`doc` texts and the input/output names, and the run examples reuse file names from the CRIM logs. Is that acceptable in an Apache-2.0 repository with attribution, or should the W1 descriptive texts be replaced / that subtree be licensed CC-BY-NC-SA? |
 | Q-BUILD | **Resolved 2026-09-22.** `./build.sh` passes (see `docs/VALIDATION.md`); it first required a JSON-LD context per profile. |
-| Q-PUB | Are `https://geolabs.github.io/bblocks-generic-provenance-profile/build/register.json` and `https://geolabs.github.io/bblock-ogcapi-processes-part2/build/register.json` published? Neither repository contains a `build/` directory. If not, the build cannot resolve `ogc.bbr.provenance.*` / `ogc.api.processes.v2.*` (workaround for local testing: `bblocks-config-local.yml.example`, see `docs/LOCAL-BUILD.md`). |
+| Q-PUB | Are `https://geolabs.github.io/bblocks-generic-provenance-profile/build/register.json` and `https://geolabs.github.io/bblock-ogcapi-processes-part2/build/register.json` published? Neither repository contains a `build/` directory. If not, the build cannot resolve `ogc.bbr.provenance.*` / `ogc.api.processes.part2.v1.*` (workaround for local testing: `bblocks-config-local.yml.example`, see `docs/LOCAL-BUILD.md`). |
 
 ## Sources and examples
 
@@ -36,7 +36,7 @@ CWL files linked, not copied; openEO equivalence levels as in the Step 0 table.
 |---|---|
 | Q-M02 | Multi-format file inputs use `oneOf` (Part 1 convention); the branches differ only by `contentMediaType`, so strict validators match all of them. Keep `oneOf` or switch to `anyOf`? |
 | Q-M03 | Should a tool isolated from a packed `$graph` inherit the document-level annotations (version, author, license, keywords)? Done here; changes `version` from the transform default `1.0.0` to `0.0.1`. |
-| Q-M07 | BBox CCT `crs` (`CRS84`/`CRS84h`) vs Part 1 CRS URIs: an execute request built from the CWL type is rejected by `ogc.api.processes.v1.schemas.bbox` (checked). Raise at eoap/schemas, or map in the transform? |
+| Q-M07 | BBox CCT `crs` (`CRS84`/`CRS84h`) vs Part 1 CRS URIs: an execute request built from the CWL type is rejected by `ogc.api.processes.part1.v1.schemas.bbox` (checked). Raise at eoap/schemas, or map in the transform? |
 | Q-M12 | Which mapping artefact is normative: jq transform or JSON-LD + SHACL uplift? Inline or `-refs` jq variant? (inline used) |
 | Q-CCT | Should CCT-upgraded variants of the W1 tools be profiled too (`aoi` → `eoap.cct.geojson`, `date`/`toi` → `eoap.cct.string-format`)? Recorded as `candidateCctDependencies` only. |
 

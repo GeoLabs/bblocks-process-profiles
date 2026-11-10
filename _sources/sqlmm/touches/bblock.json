@@ -9,8 +9,8 @@
   "itemClass": "schema",
   "register": "process-profiles",
   "dependsOn": [
-    "ogc.api.processes.v1.schemas.process",
-    "ogc.api.processes.v2.schemas.staticIndicator",
+    "ogc.api.processes.part1.v1.schemas.process",
+    "ogc.api.processes.part2.v1.schemas.staticIndicator",
     "ospd.process-profiles.process-type"
   ],
   "seeAlso": [
