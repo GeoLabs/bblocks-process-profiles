@@ -6,6 +6,25 @@
   snippets:
   - language: json
     ref: examples/processDescription.json
+- title: processDescription with its inheritance (Implementation, instance level)
+  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  content: 'The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance
+    level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval`:
+    the Implementation Profile''s keywords (E) on the process and on each bound input/output, and, per
+    footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation`
+    reference to the Implementation Profile -- on the process only. Each bound input/output keeps its
+    Implementation Profile counterpart''s reference to the Generic Profile input/output (`generic-input`/`-output`)
+    and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`,
+    `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only
+    names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept
+    of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings`
+    in scripts/profiles.yaml; inputs/outputs bound to none are the deployment''s own additions (footnote
+    b). `areaOfInterest` is not bound: no input restricts the area: the whole band of the product is retrieved.
+    Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).'
+  snippets:
+  - language: json
+    ref: examples/processDescription.inherited.json
+    schema-ref: '#/$defs/inheritedProcessDescription'
 - title: OGC Application Package (deploy)
   base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
   content: 'Part 2 deploy body: the execution unit is a link to the pinned CWL.'

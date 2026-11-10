@@ -269,6 +269,9 @@ PROFILE_CONTEXT = {
             "note": "skos:note"}},
         # A role with a representation that the deployment takes (or returns) as a URL of the data
         # instead of the data (C1, 2026-11-10): reported apart, like serverSideFiles.
+        "fixedRoleValues": {"@id": "pp:fixedRoleValue", "@context": {
+            "side": "pp:side", "implements": {"@id": "pp:implements", "@type": "@id"},
+            "values": "rdf:value", "reason": "skos:note"}},
         "byReference": {"@id": "pp:byReference", "@context": {
             "name": "pp:liveName", "side": "pp:side",
             "implements": {"@id": "pp:implements", "@type": "@id"}, "note": "skos:note"}},
@@ -809,11 +812,13 @@ def amendments(proc, parent):
             "and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped "
             "apart. The plan was already a node of its own.")]
     if proc.get("cwl_class") and proc.get("implementsProfile"):
-        out.append(("tier3-2026-11-09", "2026-11-09", "substantive",
+        on = str(proc["tier3"].get("attached_on", "2026-11-09"))
+        out.append((f"tier3-{on}", on, "substantive",
                     f"Attached to the Implementation Profile {proc['implementsProfile']} (implementsProfile), after "
                     "checking its signature (docs/ATTACHMENTS.md)."))
     if parent:
-        out.append(("specialisation-2026-11-10", "2026-11-10", "substantive",
+        on = max("2026-11-10", str((proc.get("tier3") or {}).get("attached_on", "2026-11-10")))
+        out.append((f"specialisation-{on}", on, "substantive",
                     f"subClassOf changes from {ACTIVITY_TYPE_CLASS} to {parent['id']}, the activity type of the "
                     "operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): "
                     + ", ".join(v for k in ("usedEntityType", "generatedEntityType") for v in _lst(parent.get(k) or []))
@@ -1339,6 +1344,9 @@ def inherited_process_description(proc, pd, gp_root):
                 if not allowed or set(c["values"]) - set(allowed):
                     sys.exit(f"{proc['key']}: role decomposition {side} {name}: selector {c['name']} {c['values']} "
                              f"not within the values the deployment accepts ({allowed})")
+        for name in ((proc.get("fixed_roles") or {}).get(side) or {}):
+            if name not in unbound:
+                sys.exit(f"{proc['key']}: fixed_roles {side} {name}: a fixed value is declared only for an unbound role")
         missing = set(ip[side]) - set(bound.values()) - set(unbound) - set(decomposed.get(side) or {})
         if missing:
             sys.exit(f"{proc['key']}: {ip_key} {side} {sorted(missing)} neither bound, decomposed nor `unbound` in profiles.yaml")
@@ -1351,6 +1359,9 @@ def inherited_process_description(proc, pd, gp_root):
             if not str(unbound[name]).strip():
                 sys.exit(f"{proc['key']}: `unbound` {name} needs a reason")
             floor = 1 if side == "outputs" else ip[side][name].get("minOccurs", gp[side][name].get("minOccurs", 1))
+            fixed = ((proc.get("fixed_roles") or {}).get(side) or {}).get(name)
+            if fixed and (floor > 0 or not fixed.get("values") or not str(fixed.get("reason", "")).strip()):
+                sys.exit(f"{proc['key']}: fixed_roles {side} {name}: only an unbound role of minOccurs 0, with values and a reason")
             if floor > 0 and proc.get("cwl_class"):
                 sys.exit(f"{proc['key']}: {side} role `{name}` of {ip_key} is left unbound but its minOccurs at tier 3 "
                          f"is {floor}: only a role of minOccurs 0 may be (testbed exception: live processes only)")
@@ -1435,6 +1446,12 @@ LITERAL_TYPES = {
     "format-identifier": {"string"},
     "coordinate-reference-system": {"string", "integer"},
     "radiometric-index": {"string"},
+    # the new profiles of 2026-11-10
+    "band-identifier": {"string"},
+    "grid-resolution": {"number", "integer"},
+    "colour-map": {"string"},
+    "time-interval": {"string"},
+    "collection-identifier": {"string"},
 }
 
 
@@ -1639,6 +1656,12 @@ def tier3_link_fields(proc, assumed):
             {"name": live, "side": side, "implements": f"{ip}/{side}/{role}",
              "location": " ".join(ssf["location"].split())}
             for side in ("inputs", "outputs") for live, role in (ssf.get(side) or {}).items()]
+    fixed = proc.get("fixed_roles")
+    if fixed:
+        # C3 (2026-11-10): the value a deployment fixes for an optional role it leaves unbound
+        out["fixedRoleValues"] = [
+            {"side": side, "implements": f"{ip}/{side}/{role}", "values": f["values"], "reason": " ".join(f["reason"].split())}
+            for side in ("inputs", "outputs") for role, f in (fixed.get(side) or {}).items()]
     ref = proc.get("by_reference")
     if ref:
         out["byReference"] = [
@@ -1859,7 +1882,10 @@ def md_binding(proc, pd, gp_root, why):
                 cell = ", ".join(f"`{p}`" for p in d["parts"]) + " (role decomposition)"
             else:
                 cell = ", ".join(f"`{l}`" for l in lives) or "--"
-            note = f" (unbound: {unbound[name]})" if not lives and not d and name in unbound else ""
+            note = f" (unbound: {' '.join(str(unbound[name]).split())})" if not lives and not d and name in unbound else ""
+            fx = ((proc.get("fixed_roles") or {}).get(side) or {}).get(name)
+            if fx:
+                note += f"; fixed by the deployment: {', '.join(fx['values'])}"
             lines.append(f"| {cell} | {side[:-1]} `{name}`{note} | `{e['dataType'].rsplit('/', 1)[-1]}` |")
         parts_of = {p for d in (dec.get(side) or {}).values() for p in d["parts"]}
         extra = [k for k in pd[side] if k not in b.get(side, {}) and k not in parts_of]
@@ -1955,6 +1981,11 @@ def write_process_type_fixtures(pt):
             {"name": "band_file", "side": "inputs", "note": "A URL of the GeoTIFF."}]),
         "literal-decomposition-control.json": lambda d: d.update(roleDecompositions=[
             {"side": "inputs", "implements": IP_CRS_IN, "parts": ["epsg"], "reproducible": True, "note": "An EPSG code."}]),
+        # C3 (2026-11-10): the value fixed for an optional role left unbound
+        "fixed-role-values-without-reason-fail.json": lambda d: d.update(fixedRoleValues=[
+            {"side": "inputs", "implements": IP_CRS_IN, "values": ["EPSG:4326"]}]),
+        "fixed-role-values-empty-fail.json": lambda d: d.update(fixedRoleValues=[
+            {"side": "inputs", "implements": IP_CRS_IN, "values": [], "reason": "No value."}]),
         "role-decomposition-without-parts-fail.json": lambda d: d.update(roleDecompositions=[
             {"side": "inputs", "implements": IP_CRS_IN, "parts": [], "reproducible": True, "note": "No part."}]),
     }
@@ -2234,7 +2265,8 @@ a role whose `minOccurs` is 0 at tier 3, left unbound with a reason (`unbound`, 
 2026-11-10). It may have inputs/outputs of its own (Table 21 footnote b). A process with no fitting
 profile is listed as not attached, with the reason and, where one exists, the closest profile; it is
 not forced. A gap in the tiers may justify a new Generic or Implementation Profile: listed as
-proposals; those decided on 2026-11-10 are being created in bblocks-generic-profiles.
+proposals. The six profiles decided on 2026-11-10 exist in bblocks-generic-profiles (`5e5a808`);
+the ten processes they serve were attached the same day.
 
 **The testbed exception.** The {live} live processes of the Geonovum testbed are all attached, one per
 Implementation Profile (README, second table): each is the deployment from which its Implementation

@@ -19,7 +19,7 @@ description: |
 
   - 27 CWL processes of the OSPD reference workflows (`CommandLineTool` or `Workflow`, identified
     in the workflow observability investigation): `algae-bloom.*` (10), `kindgrove.*` (3),
-    `water-bodies.*` (6), `kindgrove-steps.*` (8). 2 of them implement an Implementation Profile
+    `water-bodies.*` (6), `kindgrove-steps.*` (8). 12 of them implement an Implementation Profile
     of bblocks-generic-profiles; the others are listed with the reason in docs/ATTACHMENTS.md;
   - 31 live processes of the Geonovum testbed (`host1.tb.geonovum.geolabs.fr`, ZOO-Project), each
     the Implementation of one Implementation Profile: `sqlmm.*` (16), `raster.*` (7), `vector.*`

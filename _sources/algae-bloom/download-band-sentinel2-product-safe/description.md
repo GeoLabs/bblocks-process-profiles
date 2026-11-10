@@ -54,7 +54,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Data retrieval: its input is a reference to a product and a band name, not a raster, and it returns the band. No Generic Profile retrieves a band from a product.
+Not attached to an Implementation Profile of bblocks-generic-profiles: Band retrieval from a SAFE product on S3, returning JPEG 2000. Its Implementation Profile would need a SAFE format, which has no media type, and a format always has one (decision C8 of 2026-11-10): band-retrieval-safe was not created, so this process stays unattached.
 
 The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
 

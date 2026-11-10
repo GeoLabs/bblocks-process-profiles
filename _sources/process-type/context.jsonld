@@ -239,6 +239,18 @@
         },
         "note": "skos:note"
       }
+    },
+    "fixedRoleValues": {
+      "@id": "pp:fixedRoleValue",
+      "@context": {
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "values": "rdf:value",
+        "reason": "skos:note"
+      }
     }
   }
 }

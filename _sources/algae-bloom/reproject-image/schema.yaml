@@ -105,3 +105,205 @@ $defs:
         - object
   processRun:
     $ref: bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun
+  inheritedProcessDescription:
+    allOf:
+    - $ref: bblocks://ogc.api.processes.v1.schemas.process
+    - $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+    - type: object
+      required:
+      - id
+      - version
+      - inputs
+      - outputs
+      properties:
+        id:
+          const: reproject-image
+        inputs:
+          type: object
+          required:
+          - input_image
+          - output_dimensions
+          - output_resolution
+          - output_name
+          propertyNames:
+            enum:
+            - input_image
+            - output_dimensions
+            - output_resolution
+            - output_name
+        outputs:
+          type: object
+          required:
+          - result
+          propertyNames:
+            enum:
+            - result
+    - description: '`reproject-image` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling`:
+        Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) inherited from its Implementation
+        Profile.'
+      type: object
+      required:
+      - keywords
+      - metadata
+      properties:
+        keywords:
+          allOf:
+          - contains:
+              const: raster
+          - contains:
+              const: coverage
+          - contains:
+              const: resampling
+        metadata:
+          allOf:
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-resampling
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling
+        inputs:
+          type: object
+          required:
+          - input_image
+          - output_resolution
+          properties:
+            input_image:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-resampling/inputs/raster
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling/inputs/raster
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            output_resolution:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/grid-resolution
+                keywords:
+                  allOf:
+                  - contains:
+                      const: grid resolution
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-resampling/inputs/resolution
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling/inputs/resolution
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+        outputs:
+          type: object
+          required:
+          - result
+          properties:
+            result:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-resampling/outputs/raster
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling/outputs/raster

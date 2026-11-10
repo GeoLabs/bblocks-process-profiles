@@ -58,9 +58,19 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Catalogue search: an area, a time window, a collection and filters in, references to products out. No Generic Profile searches a catalogue or selects products.
+Implements [`Product selection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection) (`generic-profiles.implementation-profile.product-selection`, bblocks-generic-profiles). Signature checked against product-selection: `aoi` (a GeoJSON file) implements `areaOfInterest`; `toi` (start and end dates, optional at tier 4) implements `timeInterval`; `collection` implements `collection`; `urls` (references to the products) implements the output `products`, by reference. `date` + `delta` (the other encoding of the time window, documented as an alternative to `toi`), `catalog`, `product_level` and `cloud_cover` are inputs of the deployment's own.
 
-The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `aoi` | input `areaOfInterest` | `geometry` |
+| `toi` | input `timeInterval` | `time-interval` |
+| `collection` | input `collection` | `collection-identifier` |
+| `date`, `delta`, `product_level`, `catalog`, `cloud_cover` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `urls` | output `products` | `eo-product` |
+
+**By reference.** `urls` (role `products`) is a URL of the data, not the data: The products are returned as URLs, not as STAC Items: STAC Item URLs for `catalog: earth-search` (served as application/geo+json by the STAC API: read, not observed), S3 URLs of SAFE products for `catalog: copernicus`, a format this Implementation Profile does not name. Declared in `byReference` of `process-type.json` (`docs/FORMAT-CHECK.md`).
 
 ## openEO equivalence
 

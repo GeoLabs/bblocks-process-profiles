@@ -28,11 +28,33 @@
       "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff/actions/tier3-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff/actions/specialisation-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff"
     }
   ],
   "prefLabel": "Normalized difference between two rasters",
   "definition": "Computes the normalized difference index ((A-B)/(A+B)) of two co-registered rasters.",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
+  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index",
+  "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
+  "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
   "classification": {
     "phase": [
@@ -62,6 +84,39 @@
     "cctDependencies": [],
     "candidateCctDependencies": []
   },
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band",
+  "fixedRoleValues": [
+    {
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/inputs/index",
+      "values": [
+        "normalized difference"
+      ],
+      "reason": "the tool computes (A-B)/(A+B) of rasters[0] and rasters[1] (app.py); which index it is depends on the bands passed (NDWI for green and NIR in W3)"
+    }
+  ],
+  "assumedFormatGaps": [
+    {
+      "name": "rasters",
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/inputs/rasters",
+      "served": [
+        "application/octet-stream"
+      ],
+      "reason": "The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `norm_diff.cwl`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or writes. Closed upstream if the CWL declares `format: ogc:geotiff`.",
+      "evidence": "Run record `water-bodies` (scripts/sources.yaml): the `rasters` files of node_normalized_difference (crop_green.tif, crop_nir.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10)."
+    },
+    {
+      "name": "ndwi",
+      "side": "outputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/outputs/raster",
+      "served": [
+        "application/octet-stream"
+      ],
+      "reason": "The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `norm_diff.cwl`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or writes. Closed upstream if the CWL declares `format: ogc:geotiff`.",
+      "evidence": "Run record `water-bodies`: the `ndwi` outputs (norm_diff.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10)."
+    }
+  ],
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.indices.normalized_difference"

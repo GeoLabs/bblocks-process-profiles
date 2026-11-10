@@ -25,7 +25,7 @@ process-type entry. No identifier says which population a block belongs to; this
 Each live process implements one Implementation Profile of
 [bblocks-generic-profiles](https://github.com/GeoLabs/bblocks-generic-profiles) (tier 3), one per
 profile. A CWL process is attached to an Implementation Profile only when its inputs and outputs
-implement that profile's signature: 2 of the 27 are, the others are listed with the reason in
+implement that profile's signature: 12 of the 27 are, the others are listed with the reason in
 [docs/ATTACHMENTS.md](docs/ATTACHMENTS.md). The representations of each attached profile are
 compared with the formats the deployment serves in [docs/FORMAT-CHECK.md](docs/FORMAT-CHECK.md).
 
@@ -40,27 +40,27 @@ compared with the formats the deployment serves in [docs/FORMAT-CHECK.md](docs/F
 | `ospd.process-profiles.algae-bloom.workflow-earth-search-process` | Workflow | Data retrieval, Pre-processing, Scientific computation, Export / aggregation | none | not attached |
 | `ospd.process-profiles.algae-bloom.workflow-copernicus` | Workflow | Filter configuration, Selection / filtering, Data retrieval, Pre-processing, Scientific computation, Export / aggregation | none | not attached |
 | `ospd.process-profiles.algae-bloom.workflow-copernicus-process` | Workflow | Data retrieval, Scientific computation, Export / aggregation | none | not attached |
-| `ospd.process-profiles.algae-bloom.select-products-sentinel2` | CommandLineTool | Selection / filtering | closeMatch: processes.cubes.load_collection | not attached |
-| `ospd.process-profiles.algae-bloom.download-band-sentinel2-stac-item` | CommandLineTool | Data retrieval | closeMatch: processes.cubes.load_collection, processes.cubes.filter_bands | not attached |
+| `ospd.process-profiles.algae-bloom.select-products-sentinel2` | CommandLineTool | Selection / filtering | closeMatch: processes.cubes.load_collection | `generic-profiles.implementation-profile.product-selection` |
+| `ospd.process-profiles.algae-bloom.download-band-sentinel2-stac-item` | CommandLineTool | Data retrieval | closeMatch: processes.cubes.load_collection, processes.cubes.filter_bands | `generic-profiles.implementation-profile.band-retrieval` |
 | `ospd.process-profiles.algae-bloom.download-band-sentinel2-product-safe` | CommandLineTool | Data retrieval | closeMatch: processes.cubes.load_collection, processes.cubes.filter_bands | not attached |
-| `ospd.process-profiles.algae-bloom.reproject-image` | CommandLineTool | Pre-processing | closeMatch: processes.cubes.resample_spatial | not attached |
+| `ospd.process-profiles.algae-bloom.reproject-image` | CommandLineTool | Pre-processing | closeMatch: processes.cubes.resample_spatial | `generic-profiles.implementation-profile.raster-resampling` |
 | `ospd.process-profiles.algae-bloom.calculate-band` | CommandLineTool | Scientific computation | closeMatch: processes.cubes.reduce_dimension | `generic-profiles.implementation-profile.raster-band-math` |
-| `ospd.process-profiles.algae-bloom.plot-image` | CommandLineTool | Export / aggregation | closeMatch: processes.cubes.save_result | not attached |
+| `ospd.process-profiles.algae-bloom.plot-image` | CommandLineTool | Export / aggregation | closeMatch: processes.cubes.save_result | `generic-profiles.implementation-profile.raster-rendering` |
 | `ospd.process-profiles.kindgrove.mangrove-workflow` | Workflow | Filter configuration, Selection / filtering, Data retrieval, Pre-processing, Scientific computation, Export / aggregation | none | not attached |
 | `ospd.process-profiles.kindgrove.parse-aoi` | CommandLineTool | Filter configuration | none | not attached |
 | `ospd.process-profiles.kindgrove.mangrove` | CommandLineTool | Selection / filtering, Data retrieval, Pre-processing, Scientific computation, Export / aggregation | none | not attached |
 | `ospd.process-profiles.water-bodies.water-bodies` | Workflow | Data retrieval, Scientific computation, Export / aggregation | none | not attached |
 | `ospd.process-profiles.water-bodies.detect-water-body` | Workflow | Data retrieval, Scientific computation | none | not attached |
-| `ospd.process-profiles.water-bodies.crop` | CommandLineTool | Data retrieval | closeMatch: processes.cubes.load_collection, processes.cubes.filter_bands | not attached |
-| `ospd.process-profiles.water-bodies.norm-diff` | CommandLineTool | Scientific computation | closeMatch: processes.math.indices.normalized_difference | not attached |
-| `ospd.process-profiles.water-bodies.otsu` | CommandLineTool | Scientific computation | none | not attached |
+| `ospd.process-profiles.water-bodies.crop` | CommandLineTool | Data retrieval | closeMatch: processes.cubes.load_collection, processes.cubes.filter_bands | `generic-profiles.implementation-profile.band-retrieval` |
+| `ospd.process-profiles.water-bodies.norm-diff` | CommandLineTool | Scientific computation | closeMatch: processes.math.indices.normalized_difference | `generic-profiles.implementation-profile.radiometric-index-single-band` |
+| `ospd.process-profiles.water-bodies.otsu` | CommandLineTool | Scientific computation | none | `generic-profiles.implementation-profile.otsu-thresholding` |
 | `ospd.process-profiles.water-bodies.stac` | CommandLineTool | Export / aggregation | closeMatch: processes.cubes.save_result | not attached |
 | `ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps` | Workflow | Filter configuration, Selection / filtering, Data retrieval, Pre-processing, Scientific computation, Export / aggregation | none | not attached |
 | `ospd.process-profiles.kindgrove-steps.parse-aoi-steps` | CommandLineTool | Filter configuration | none | not attached |
-| `ospd.process-profiles.kindgrove-steps.select-scene` | CommandLineTool | Selection / filtering | closeMatch: processes.cubes.load_collection | not attached |
-| `ospd.process-profiles.kindgrove-steps.download-band` | CommandLineTool | Data retrieval | closeMatch: processes.cubes.load_collection, processes.cubes.filter_bands | not attached |
+| `ospd.process-profiles.kindgrove-steps.select-scene` | CommandLineTool | Selection / filtering | closeMatch: processes.cubes.load_collection | `generic-profiles.implementation-profile.product-selection` |
+| `ospd.process-profiles.kindgrove-steps.download-band` | CommandLineTool | Data retrieval | closeMatch: processes.cubes.load_collection, processes.cubes.filter_bands | `generic-profiles.implementation-profile.band-retrieval` |
 | `ospd.process-profiles.kindgrove-steps.reproject-band` | CommandLineTool | Pre-processing | closeMatch: processes.cubes.resample_spatial | `generic-profiles.implementation-profile.raster-reprojection` |
-| `ospd.process-profiles.kindgrove-steps.calculate-indices` | CommandLineTool | Scientific computation | none | not attached |
+| `ospd.process-profiles.kindgrove-steps.calculate-indices` | CommandLineTool | Scientific computation | none | `generic-profiles.implementation-profile.radiometric-index-single-band` |
 | `ospd.process-profiles.kindgrove-steps.estimate-biomass` | CommandLineTool | Scientific computation | none | not attached |
 | `ospd.process-profiles.kindgrove-steps.export-stac` | CommandLineTool | Export / aggregation | closeMatch: processes.cubes.save_result | not attached |
 <!-- /CWL_TABLE -->

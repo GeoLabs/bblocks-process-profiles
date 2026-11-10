@@ -52,9 +52,22 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Its input is a STAC Item URL and a band common name, not a raster: it reads the band asset and crops it to `aoi` (a comma-separated string, in the CRS given by `epsg`). raster-crop needs a raster input; the retrieval of the band is part of this process.
+Implements [`Band retrieval`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval) (`generic-profiles.implementation-profile.band-retrieval`, bblocks-generic-profiles). Signature checked against band-retrieval: `item` (a STAC Item URL) implements `product`, by reference; `band` (a band common name) implements `band`; `aoi` and `epsg` (four numbers in one string, and their CRS) implement `areaOfInterest` as a role decomposition; `cropped` implements the output `raster`. It does not reproject: the output keeps the CRS of the asset.
 
-The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `item` | input `product` | `eo-product` |
+| `band` | input `band` | `band-identifier` |
+| `aoi`, `epsg` (role decomposition) | input `areaOfInterest` | `bounding-box` |
+| `cropped` | output `raster` | `raster` |
+
+**Role decomposition.** The input `areaOfInterest` is taken as `aoi`, `epsg`: The area of interest is taken as one string of four comma-separated numbers (`aoi`) and the identifier of their CRS (`epsg`, passed to gdal.Translate as `projWinSRS`), not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served. Declared in `roleDecompositions` of `process-type.json`; its representation is not served (`docs/FORMAT-CHECK.md`).
+
+**By reference.** `item` (role `product`) is a URL of the data, not the data: The product is given as the URL of its STAC Item, a string, not as the STAC Item itself. Declared in `byReference` of `process-type.json` (`docs/FORMAT-CHECK.md`).
+
+**Assumed format gap.** `cropped`: The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `crop.cwl`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `water-bodies`: the `cropped` outputs (crop_green.tif, crop_nir.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
 
 ## openEO equivalence
 

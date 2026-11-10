@@ -8,6 +8,9 @@
     acttype:generatedEntityType <http://www.opengis.net/ont/geosparql#Feature> .
 <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/area> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;
     acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Geometry> .
+<https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;
+    acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Feature> ;
+    acttype:generatedEntityType <http://www.opengis.net/ont/geosparql#Feature> .
 <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/buffer> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;
     acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Geometry> ;
     acttype:generatedEntityType <http://www.opengis.net/ont/geosparql#Geometry> .
@@ -38,6 +41,9 @@
     acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Geometry> .
 <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/is-simple> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;
     acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Geometry> .
+<https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/otsu-thresholding> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;
+    acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Feature> ;
+    acttype:generatedEntityType <http://www.opengis.net/ont/geosparql#Feature> .
 <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-thinning> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;
     acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Feature> ;
     acttype:generatedEntityType <http://www.opengis.net/ont/geosparql#Feature> .
@@ -47,6 +53,9 @@
 <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-to-shapes> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;
     acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Feature> ;
     acttype:generatedEntityType <http://www.opengis.net/ont/geosparql#FeatureCollection> .
+<https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/product-selection> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;
+    acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Geometry> ;
+    acttype:generatedEntityType <http://www.opengis.net/ont/geosparql#Feature> .
 <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;
     acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Feature> ;
     acttype:generatedEntityType <http://www.opengis.net/ont/geosparql#Feature> .
@@ -65,7 +74,12 @@
 <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-format-conversion> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;
     acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Feature> ;
     acttype:generatedEntityType <http://www.opengis.net/ont/geosparql#Feature> .
+<https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-rendering> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;
+    acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Feature> .
 <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;
+    acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Feature> ;
+    acttype:generatedEntityType <http://www.opengis.net/ont/geosparql#Feature> .
+<https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;
     acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Feature> ;
     acttype:generatedEntityType <http://www.opengis.net/ont/geosparql#Feature> .
 <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/slope> rdfs:subClassOf <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType> ;

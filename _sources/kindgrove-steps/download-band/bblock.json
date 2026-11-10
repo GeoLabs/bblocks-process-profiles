@@ -37,5 +37,6 @@
   ],
   "sourceSchema": "schema.yaml",
   "maturity": "development",
-  "group": "W2b KindGrove (step notebooks)"
+  "group": "W2b KindGrove (step notebooks)",
+  "isProfileOf": "generic-profiles.implementation-profile.band-retrieval"
 }

@@ -28,11 +28,33 @@
       "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2/actions/tier3-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2/actions/specialisation-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/product-selection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2"
     }
   ],
   "prefLabel": "Searches the specified catalog for Sentinel-2 products matching filtering criteria.",
   "definition": "Searches a catalog for Sentinel-2 products using filtering parameters and returns all matched locations. Returned matches will be either S3 or direct HTTPS references depending on the catalog.",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
+  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/product-selection",
+  "usedEntityType": "http://www.opengis.net/ont/geosparql#Geometry",
+  "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
   "classification": {
     "phase": [
@@ -65,6 +87,15 @@
       "eoap.cct.string-format"
     ]
   },
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection",
+  "byReference": [
+    {
+      "name": "urls",
+      "side": "outputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection/outputs/products",
+      "note": "The products are returned as URLs, not as STAC Items: STAC Item URLs for `catalog: earth-search` (served as application/geo+json by the STAC API: read, not observed), S3 URLs of SAFE products for `catalog: copernicus`, a format this Implementation Profile does not name."
+    }
+  ],
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection"

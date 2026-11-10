@@ -47,9 +47,18 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Data retrieval: its input is a reference to a product and a band name, not a raster, and it returns the band. No Generic Profile retrieves a band from a product.
+Implements [`Band retrieval`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval) (`generic-profiles.implementation-profile.band-retrieval`, bblocks-generic-profiles). Signature checked against band-retrieval: `product_url` (a STAC Item URL) implements `product`, by reference; `band` implements `band`; `product` (GeoTIFF) implements the output `raster`. The optional `areaOfInterest` (minOccurs 0) is left unbound: the whole band is retrieved.
 
-The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `product_url` | input `product` | `eo-product` |
+| `band` | input `band` | `band-identifier` |
+| -- | input `areaOfInterest` (unbound: no input restricts the area: the whole band of the product is retrieved) | `bounding-box` |
+| `product` | output `raster` | `raster` |
+
+**By reference.** `product_url` (role `product`) is a URL of the data, not the data: The product is given as the URL of its STAC Item, a string, not as the STAC Item itself. Declared in `byReference` of `process-type.json` (`docs/FORMAT-CHECK.md`).
 
 ## openEO equivalence
 

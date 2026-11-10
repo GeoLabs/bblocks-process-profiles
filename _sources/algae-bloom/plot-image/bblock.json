@@ -39,5 +39,6 @@
   ],
   "sourceSchema": "schema.yaml",
   "maturity": "development",
-  "group": "W1 Algae Bloom"
+  "group": "W1 Algae Bloom",
+  "isProfileOf": "generic-profiles.implementation-profile.raster-rendering"
 }

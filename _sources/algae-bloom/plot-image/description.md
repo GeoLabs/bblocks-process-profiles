@@ -57,9 +57,17 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Rendering: applies a colour map to a raster and returns a coloured GeoTIFF and a PNG plot. No Generic Profile renders a raster.
+Implements [`Raster rendering`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering) (`generic-profiles.implementation-profile.raster-rendering`, bblocks-generic-profiles). Signature checked against raster-rendering: `input_image` (GeoTIFF, TIFF or JPEG 2000) implements `raster`; `color_scale` (a JSON array of value bins and colours, in a string) implements `colourMap`; `output_plot` (PNG) implements the output `image`. `output_file`, the coloured RGBA TIFF on the input grid (declared GeoTIFF but not georeferenced, Q-PLOT-GEOTIFF), is an output of the deployment's own, as are `output_name`, `plot_name`, `plot_title`, `clip_min` and `clip_max`.
 
-The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `input_image` | input `raster` | `raster` |
+| `color_scale` | input `colourMap` | `colour-map` |
+| `output_name`, `plot_name`, `plot_title`, `clip_min`, `clip_max` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `output_plot` | output `image` | `rendered-image` |
+| `output_file` | -- (the deployment's own outputs, Table 21 footnote b) | -- |
 
 ## openEO equivalence
 

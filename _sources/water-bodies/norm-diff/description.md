@@ -44,9 +44,19 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Normalized difference (A-B)/(A+B) of exactly two single-band rasters (`nargs=2`), one single-band Float32 GeoTIFF out. Its meaning is a radiometric index, but the Implementation Profile radiometric-index restricts `rasters` to maxOccurs 1 (one pre-stacked multi-band image), and norm-diff takes two. raster-band-math means a user-supplied expression, which norm-diff does not take.
+Implements [`Radiometric index (single-band rasters)`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band) (`generic-profiles.implementation-profile.radiometric-index-single-band`, bblocks-generic-profiles). Signature checked against radiometric-index-single-band: `rasters` (two single-band files, `nargs=2`, positional: `rasters[0]` minus `rasters[1]`) implements `rasters`; `ndwi` (one single-band Float32 GeoTIFF) implements the output `raster`. The optional `index` (minOccurs 0) is not an input: the tool always computes the normalized difference of the two rasters, the index it is (NDWI in W3) depending on the bands the caller passes.
 
-The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `rasters` | input `rasters` | `raster-single-band` |
+| -- | input `index` (unbound: no input selects the index: the tool computes the normalized difference (A-B)/(A+B) of the two rasters); fixed by the deployment: normalized difference | `radiometric-index` |
+| `ndwi` | output `raster` | `raster-single-band` |
+
+**Assumed format gap.** `rasters`: The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `norm_diff.cwl`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `water-bodies` (scripts/sources.yaml): the `rasters` files of node_normalized_difference (crop_green.tif, crop_nir.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
+
+**Assumed format gap.** `ndwi`: The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `norm_diff.cwl`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `water-bodies`: the `ndwi` outputs (norm_diff.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
 
 ## openEO equivalence
 

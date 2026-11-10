@@ -38,9 +38,18 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Thresholding: one single-band raster in, a binary mask out, by Otsu's method. No Generic Profile classifies or thresholds a raster.
+Implements [`Otsu thresholding`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding) (`generic-profiles.implementation-profile.otsu-thresholding`, bblocks-generic-profiles). Signature checked against otsu-thresholding: `raster` (a single-band file) implements `raster`; `binary_mask_item` (a uint8 GeoTIFF, 1 above the threshold, 0 declared NoData) implements the output `mask`.
 
-The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `raster` | input `raster` | `raster-single-band` |
+| `binary_mask_item` | output `mask` | `binary-mask` |
+
+**Assumed format gap.** `raster`: The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `otsu.cwl`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `water-bodies`: the `raster` inputs of node_otsu (norm_diff.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
+
+**Assumed format gap.** `binary_mask_item`: The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `otsu.cwl`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `water-bodies`: the outputs otsu.tif are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
 
 ## openEO equivalence
 

@@ -139,15 +139,24 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: select-products-sentinel2.cwl}
     phases: [selection-filtering]
-    tier3: &search
-      status: not attached
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
       reason: >-
-        Catalogue search: an area, a time window, a collection and filters in, references to products
-        out. No Generic Profile searches a catalogue or selects products.
-      proposal: >-
-        A Generic Profile for product selection (area of interest, time interval, collection, filters
-        -> item references), implemented by algae-bloom.select-products-sentinel2 and
-        kindgrove-steps.select-scene.
+        Signature checked against product-selection: `aoi` (a GeoJSON file) implements
+        `areaOfInterest`; `toi` (start and end dates, optional at tier 4) implements `timeInterval`;
+        `collection` implements `collection`; `urls` (references to the products) implements the output
+        `products`, by reference. `date` + `delta` (the other encoding of the time window, documented as
+        an alternative to `toi`), `catalog`, `product_level` and `cloud_cover` are inputs of the
+        deployment's own.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection
+    bindings: {inputs: {aoi: areaOfInterest, toi: timeInterval, collection: collection}, outputs: {urls: products}}
+    by_reference:
+      outputs: {urls: products}
+      note: >-
+        The products are returned as URLs, not as STAC Items: STAC Item URLs for `catalog:
+        earth-search` (served as application/geo+json by the STAC API: read, not observed), S3 URLs of
+        SAFE products for `catalog: copernicus`, a format this Implementation Profile does not name.
     cct: []
     cct_candidates: [eoap.cct.geojson, eoap.cct.string-format]
     parents: [workflow-earth-search, workflow-copernicus]
@@ -199,15 +208,21 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: download-band-sentinel2-stac-item.cwl}
     phases: [data-retrieval]
-    tier3: &retrieval
-      status: not attached
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
       reason: >-
-        Data retrieval: its input is a reference to a product and a band name, not a raster, and it
-        returns the band. No Generic Profile retrieves a band from a product.
-      proposal: >-
-        A Generic Profile for band retrieval (product reference, band name, optional area of interest
-        -> raster), implemented by algae-bloom.download-band-sentinel2-stac-item, -product-safe,
-        kindgrove-steps.download-band and water-bodies.crop.
+        Signature checked against band-retrieval: `product_url` (a STAC Item URL) implements
+        `product`, by reference; `band` implements `band`; `product` (GeoTIFF) implements the output
+        `raster`. The optional `areaOfInterest` (minOccurs 0) is left unbound: the whole band is
+        retrieved.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval
+    bindings: {inputs: {product_url: product, band: band}, outputs: {product: raster}}
+    unbound: {areaOfInterest: "no input restricts the area: the whole band of the product is retrieved"}
+    by_reference:
+      inputs: {product_url: product}
+      note: >-
+        The product is given as the URL of its STAC Item, a string, not as the STAC Item itself.
     cct: []
     cct_candidates: [eoap.cct.string-format, eoap.cct.stac]
     parents: [workflow-earth-search-process]
@@ -247,7 +262,13 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: download-band-sentinel2-product-safe.cwl}
     phases: [data-retrieval]
-    tier3: *retrieval
+    tier3:
+      status: not attached
+      reason: >-
+        Band retrieval from a SAFE product on S3, returning JPEG 2000. Its Implementation Profile would
+        need a SAFE format, which has no media type, and a format always has one (decision C8 of
+        2026-11-10): band-retrieval-safe was not created, so this process stays unattached.
+      closest: the Generic Profile band-retrieval (tier 2).
     cct: []
     cct_candidates: [eoap.cct.string-format]
     parents: [workflow-copernicus-process]
@@ -291,16 +312,17 @@ processes:
     source: {repo: w1, file: reproject-image.cwl}
     phases: [pre-processing]
     tier3:
-      status: not attached
+      status: attached
+      attached_on: "2026-11-10"
       reason: >-
-        Its CWL runs gdalwarp with `-ts`/`-tr` only (target size or resolution) and has no target CRS
-        input (`-t_srs` is never passed): it resamples, it does not reproject. The role `targetCRS` of
-        raster-reprojection would have no input, and that profile's activity type means a change of
-        coordinate reference system. raster-format-conversion is ruled out too: the output format is
-        fixed by the CWL (`-of GTiff`), so its role `targetFormat` would have no input either.
-      closest: raster-reprojection (raster in, raster out).
-      proposal: >-
-        A Generic Profile for raster resampling (raster, target size or resolution -> raster).
+        Signature checked against raster-resampling: `input_image` (GeoTIFF, TIFF or JPEG 2000)
+        implements `raster`; `output_resolution` (`-tr`, an integer pair, optional at tier 4) implements
+        `resolution`; `result` (GeoTIFF) implements the output `raster`. `output_dimensions` (`-ts`, the
+        other way to define the target grid) and `output_name` are inputs of the deployment's own. Not
+        raster-reprojection: no target CRS (`-t_srs` is never passed). Not exposed: the interpolation
+        method (gdalwarp's default) and the forced Float32 type.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling
+    bindings: {inputs: {input_image: raster, output_resolution: resolution}, outputs: {result: raster}}
     cct: []
     cct_candidates: []
     parents: [workflow-earth-search-process]
@@ -405,12 +427,17 @@ processes:
     source: {repo: w1, file: plot-image.cwl}
     phases: [export-aggregation]
     tier3:
-      status: not attached
+      status: attached
+      attached_on: "2026-11-10"
       reason: >-
-        Rendering: applies a colour map to a raster and returns a coloured GeoTIFF and a PNG plot. No
-        Generic Profile renders a raster.
-      proposal: >-
-        A Generic Profile for raster rendering (raster, colour map -> image).
+        Signature checked against raster-rendering: `input_image` (GeoTIFF, TIFF or JPEG 2000)
+        implements `raster`; `color_scale` (a JSON array of value bins and colours, in a string)
+        implements `colourMap`; `output_plot` (PNG) implements the output `image`. `output_file`, the
+        coloured RGBA TIFF on the input grid (declared GeoTIFF but not georeferenced, Q-PLOT-GEOTIFF), is
+        an output of the deployment's own, as are `output_name`, `plot_name`, `plot_title`, `clip_min`
+        and `clip_max`.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering
+    bindings: {inputs: {input_image: raster, color_scale: colourMap}, outputs: {output_plot: image}}
     cct: []
     cct_candidates: []
     parents: [workflow-earth-search-process, workflow-copernicus-process]
@@ -684,17 +711,38 @@ processes:
       area of interest, whose CRS is given by `epsg`; the output keeps the CRS of the asset.
     phases: [data-retrieval]
     tier3:
-      status: not attached
+      status: attached
+      attached_on: "2026-11-10"
       reason: >-
-        Its input is a STAC Item URL and a band common name, not a raster: it reads the band asset and
-        crops it to `aoi` (a comma-separated string, in the CRS given by `epsg`). raster-crop needs a
-        raster input; the retrieval of the band is part of this process.
-      closest: >-
-        raster-crop (crop to an area of interest), after band retrieval.
-      proposal: >-
-        A Generic Profile for band retrieval (product reference, band name, optional area of interest ->
-        raster), implemented by algae-bloom.download-band-sentinel2-stac-item, -product-safe,
-        kindgrove-steps.download-band and water-bodies.crop.
+        Signature checked against band-retrieval: `item` (a STAC Item URL) implements `product`, by
+        reference; `band` (a band common name) implements `band`; `aoi` and `epsg` (four numbers in one
+        string, and their CRS) implement `areaOfInterest` as a role decomposition; `cropped` implements
+        the output `raster`. It does not reproject: the output keeps the CRS of the asset.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval
+    bindings: {inputs: {item: product, band: band}, outputs: {cropped: raster}}
+    by_reference:
+      inputs: {item: product}
+      note: >-
+        The product is given as the URL of its STAC Item, a string, not as the STAC Item itself.
+    role_decompositions:
+      inputs:
+        areaOfInterest:
+          parts: [aoi, epsg]
+          note: >-
+            The area of interest is taken as one string of four comma-separated numbers (`aoi`) and the
+            identifier of their CRS (`epsg`, passed to gdal.Translate as `projWinSRS`), not as one OGC
+            API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the
+            role is not served.
+    format_gaps:
+      outputs:
+        cropped: &w3-crop-out
+          reason: >-
+            The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `crop.cwl`) declares no `format`
+            on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves
+            application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or
+            writes. Closed upstream if the CWL declares `format: ogc:geotiff`.
+          evidence: >-
+            Run record `water-bodies`: the `cropped` outputs (crop_green.tif, crop_nir.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10).
     cct: []
     cct_candidates: [eoap.cct.bbox, eoap.cct.stac, eoap.cct.string-format]
     parents: [detect-water-body]
@@ -740,23 +788,39 @@ processes:
     definition: Computes the normalized difference index ((A-B)/(A+B)) of two co-registered rasters.
     phases: [scientific-computation]
     tier3:
-      status: not attached
+      status: attached
+      attached_on: "2026-11-10"
       reason: >-
-        Normalized difference (A-B)/(A+B) of exactly two single-band rasters (`nargs=2`), one
-        single-band Float32 GeoTIFF out. Its meaning is a radiometric index, but the Implementation
-        Profile radiometric-index restricts `rasters` to maxOccurs 1 (one pre-stacked multi-band
-        image), and norm-diff takes two. raster-band-math means a user-supplied expression, which
-        norm-diff does not take.
-      closest: >-
-        the Generic Profile radiometric-index (tier 2), whose `rasters` takes one or more rasters.
-      proposal: >-
-        A second Implementation Profile of the Generic Profile radiometric-index,
-        radiometric-index-single-band (decided 2026-11-10, C3): `rasters` as single-band GeoTIFF rasters,
-        1..unbounded; `index` optional (minOccurs 0), the index a deployment computes being recorded as
-        a fixed value at tier 4; output `raster` a single-band GeoTIFF raster, one per index. For
-        water-bodies.norm-diff (index fixed: the normalized difference) and
-        kindgrove-steps.calculate-indices (NDVI, NDWI and SAVI, its three outputs bound to the output
-        role).
+        Signature checked against radiometric-index-single-band: `rasters` (two single-band files,
+        `nargs=2`, positional: `rasters[0]` minus `rasters[1]`) implements `rasters`; `ndwi` (one
+        single-band Float32 GeoTIFF) implements the output `raster`. The optional `index` (minOccurs 0) is
+        not an input: the tool always computes the normalized difference of the two rasters, the index
+        it is (NDWI in W3) depending on the bands the caller passes.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band
+    bindings: {inputs: {rasters: rasters}, outputs: {ndwi: raster}}
+    unbound: {index: "no input selects the index: the tool computes the normalized difference (A-B)/(A+B) of the two rasters"}
+    fixed_roles:
+      inputs:
+        index: {values: [normalized difference], reason: "the tool computes (A-B)/(A+B) of rasters[0] and rasters[1] (app.py); which index it is depends on the bands passed (NDWI for green and NIR in W3)"}
+    format_gaps:
+      inputs:
+        rasters: &w3-norm-diff-in
+          reason: >-
+            The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `norm_diff.cwl`) declares no `format`
+            on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves
+            application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or
+            writes. Closed upstream if the CWL declares `format: ogc:geotiff`.
+          evidence: >-
+            Run record `water-bodies` (scripts/sources.yaml): the `rasters` files of node_normalized_difference (crop_green.tif, crop_nir.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10).
+      outputs:
+        ndwi: &w3-norm-diff-out
+          reason: >-
+            The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `norm_diff.cwl`) declares no `format`
+            on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves
+            application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or
+            writes. Closed upstream if the CWL declares `format: ogc:geotiff`.
+          evidence: >-
+            Run record `water-bodies`: the `ndwi` outputs (norm_diff.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10).
     cct: []
     cct_candidates: []
     parents: [detect-water-body]
@@ -796,12 +860,33 @@ processes:
     definition: Thresholds a single-band raster into a binary mask using Otsu's method.
     phases: [scientific-computation]
     tier3:
-      status: not attached
+      status: attached
+      attached_on: "2026-11-10"
       reason: >-
-        Thresholding: one single-band raster in, a binary mask out, by Otsu's method. No Generic
-        Profile classifies or thresholds a raster.
-      proposal: >-
-        A Generic Profile for raster thresholding (raster -> single-band mask raster).
+        Signature checked against otsu-thresholding: `raster` (a single-band file) implements `raster`;
+        `binary_mask_item` (a uint8 GeoTIFF, 1 above the threshold, 0 declared NoData) implements the
+        output `mask`.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding
+    bindings: {inputs: {raster: raster}, outputs: {binary_mask_item: mask}}
+    format_gaps:
+      inputs:
+        raster: &w3-otsu-in
+          reason: >-
+            The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `otsu.cwl`) declares no `format`
+            on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves
+            application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or
+            writes. Closed upstream if the CWL declares `format: ogc:geotiff`.
+          evidence: >-
+            Run record `water-bodies`: the `raster` inputs of node_otsu (norm_diff.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10).
+      outputs:
+        binary_mask_item: &w3-otsu-out
+          reason: >-
+            The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `otsu.cwl`) declares no `format`
+            on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves
+            application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or
+            writes. Closed upstream if the CWL declares `format: ogc:geotiff`.
+          evidence: >-
+            Run record `water-bodies`: the outputs otsu.tif are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10).
     cct: []
     cct_candidates: []
     parents: [detect-water-body]
@@ -939,7 +1024,41 @@ processes:
     label: Select the least cloudy Sentinel-2 L2A scene
     definition: Selects the least cloudy Sentinel-2 L2A scene over a bounding box within a time window.
     phases: [selection-filtering]
-    tier3: *search
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
+      reason: >-
+        Signature checked against product-selection: `west`, `south`, `east`, `north` implement
+        `areaOfInterest` as a role decomposition (a bounding box in EPSG:4326, implicit); `days_back`
+        implements `timeInterval` as a literal role decomposition, not reproducible; `collection`
+        implements `collection`; `stac_item` (one STAC Item file) implements the output `products`.
+        `cloud_cover_max` and `stac_api` are inputs of the deployment's own.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection
+    bindings: {inputs: {collection: collection}, outputs: {stac_item: products}}
+    role_decompositions:
+      inputs:
+        areaOfInterest:
+          parts: [west, south, east, north]
+          note: >-
+            The area of interest is taken as the four bounds of a bounding box, in EPSG:4326 (implicit:
+            passed as the `bbox` of pystac_client, read), not as a GeoJSON geometry: the representation
+            geometry-geojson of the role is not served.
+        timeInterval:
+          parts: [days_back]
+          reproducible: false
+          note: >-
+            The time interval is the `days_back` days before the time of execution: the same input gives
+            another interval on another day, so a run cannot be repeated from its inputs alone.
+    format_gaps:
+      outputs:
+        stac_item:
+          reason: >-
+            The CWL (GeoLabs/KindGrove v0.0.2-rc2, `select_scene`) declares no `format` on this File, so the
+            processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream:
+            the deployment exposes no media type for the STAC Item it writes. Closed upstream if the CWL declares a STAC Item format.
+          evidence: >-
+            Run record `kindgrove-steps`: the output `stac_item` is a JSON document, `"type": "Feature"`,
+            `stac_version` 1.1.0 (observed 2026-11-10).
     cct: []
     cct_candidates: [eoap.cct.bbox]
     parents: [mangrove-workflow-steps]
@@ -981,7 +1100,43 @@ processes:
     label: Download one Sentinel-2 band over a bounding box
     definition: Downloads one Sentinel-2 band over a bounding box from a STAC Item.
     phases: [data-retrieval]
-    tier3: *retrieval
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
+      reason: >-
+        Signature checked against band-retrieval: `stac_item` (a STAC Item file) implements
+        `product`; `band` (a STAC asset key) implements `band`; `west`, `south`, `east`, `north`
+        implement `areaOfInterest` as a role decomposition (EPSG:4326, hard-coded); `band_file`
+        implements the output `raster`.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval
+    bindings: {inputs: {stac_item: product, band: band}, outputs: {band_file: raster}}
+    role_decompositions:
+      inputs:
+        areaOfInterest:
+          parts: [west, south, east, north]
+          note: >-
+            The area of interest is taken as the four bounds of a bounding box, in EPSG:4326
+            (hard-coded in the notebook, read), not as one OGC API - Processes bounding box: the
+            representation bounding-box-ogcapi-processes-bbox of the role is not served.
+    format_gaps:
+      inputs:
+        stac_item:
+          reason: >-
+            The CWL (GeoLabs/KindGrove v0.0.2-rc2, `download_band`) declares no `format` on this File, so the
+            processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream:
+            the deployment exposes no media type for the STAC Item it reads. Closed upstream if the CWL declares a STAC Item format.
+          evidence: >-
+            Run record `kindgrove-steps`: the `stac_item` inputs are JSON documents, `"type": "Feature"`,
+            `stac_version` 1.1.0 (observed 2026-11-10).
+      outputs:
+        band_file:
+          reason: >-
+            The CWL (GeoLabs/KindGrove v0.0.2-rc2, `download_band`) declares no `format` on this File, so the
+            processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream:
+            the deployment exposes no media type for the GeoTIFF it writes. Closed upstream if the CWL declares `format: ogc:geotiff`.
+          evidence: >-
+            Run record `kindgrove-steps`: the `band_file` outputs (red.tif, green.tif, nir.tif) are
+            single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32646 (observed 2026-11-10).
     cct: []
     cct_candidates: [eoap.cct.bbox, eoap.cct.stac]
     parents: [mangrove-workflow-steps]
@@ -1069,21 +1224,40 @@ processes:
     definition: Computes NDVI, NDWI and SAVI from Sentinel-2 red, green and NIR bands.
     phases: [scientific-computation]
     tier3:
-      status: not attached
+      status: attached
+      attached_on: "2026-11-10"
       reason: >-
-        Computes NDVI, NDWI and SAVI from a list of single-band files, as three single-band outputs.
-        The meaning is the Generic Profile radiometric-index, but its only Implementation Profile
-        restricts `rasters` to maxOccurs 1 (one pre-stacked multi-band image), and its `index` role,
-        which no input selects, has minOccurs 1.
-      closest: the Generic Profile radiometric-index (tier 2).
-      proposal: >-
-        A second Implementation Profile of the Generic Profile radiometric-index,
-        radiometric-index-single-band (decided 2026-11-10, C3): `rasters` as single-band GeoTIFF rasters,
-        1..unbounded; `index` optional (minOccurs 0), the index a deployment computes being recorded as
-        a fixed value at tier 4; output `raster` a single-band GeoTIFF raster, one per index. For
-        water-bodies.norm-diff (index fixed: the normalized difference) and
-        kindgrove-steps.calculate-indices (NDVI, NDWI and SAVI, its three outputs bound to the output
-        role).
+        Signature checked against radiometric-index-single-band: `band_files` (single-band files
+        named `red_*`, `green_*`, `nir_*`, identified by file name) implements `rasters`; `ndvi_file`,
+        `ndwi_file` and `savi_file` (single-band Float32 GeoTIFFs, one per index) implement the output
+        `raster`. The optional `index` (minOccurs 0) is not an input: the tool always computes NDVI,
+        NDWI and SAVI.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band
+    bindings: {inputs: {band_files: rasters}, outputs: {ndvi_file: raster, ndwi_file: raster, savi_file: raster}}
+    unbound: {index: "no input selects the indices: the tool always computes NDVI, NDWI and SAVI"}
+    fixed_roles:
+      inputs:
+        index: {values: [NDVI, NDWI, SAVI], reason: "computed by the notebook steps/04_calculate_indices.ipynb, one output each, in this order"}
+    format_gaps:
+      inputs:
+        band_files: &kg-indices-in
+          reason: >-
+            The CWL (GeoLabs/KindGrove v0.0.2-rc2, `calculate_indices`) declares no `format` on this File, so the
+            processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream:
+            the deployment exposes no media type for the GeoTIFFs it reads. Closed upstream if the CWL declares `format: ogc:geotiff`.
+          evidence: >-
+            Run record `kindgrove-steps`: the three `band_files` (red_4326.tif, green_4326.tif, nir_4326.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:4326 (observed 2026-11-10).
+      outputs:
+        ndvi_file: &kg-indices-out
+          reason: >-
+            The CWL (GeoLabs/KindGrove v0.0.2-rc2, `calculate_indices`) declares no `format` on this File, so the
+            processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream:
+            the deployment exposes no media type for the GeoTIFFs it writes. Closed upstream if the CWL declares `format: ogc:geotiff`.
+          evidence: >-
+            Run record `kindgrove-steps`: ndvi.tif, ndwi.tif and savi.tif are single-band TIFFs with the
+            GeoTIFF tags 33550, 33922, 34735, EPSG:4326 (observed 2026-11-10).
+        ndwi_file: *kg-indices-out
+        savi_file: *kg-indices-out
     cct: []
     cct_candidates: []
     parents: [mangrove-workflow-steps]

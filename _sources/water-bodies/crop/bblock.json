@@ -37,5 +37,6 @@
   ],
   "sourceSchema": "schema.yaml",
   "maturity": "development",
-  "group": "W3 Water Bodies"
+  "group": "W3 Water Bodies",
+  "isProfileOf": "generic-profiles.implementation-profile.band-retrieval"
 }

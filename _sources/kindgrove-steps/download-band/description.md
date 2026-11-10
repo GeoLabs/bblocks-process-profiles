@@ -43,9 +43,22 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Data retrieval: its input is a reference to a product and a band name, not a raster, and it returns the band. No Generic Profile retrieves a band from a product.
+Implements [`Band retrieval`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval) (`generic-profiles.implementation-profile.band-retrieval`, bblocks-generic-profiles). Signature checked against band-retrieval: `stac_item` (a STAC Item file) implements `product`; `band` (a STAC asset key) implements `band`; `west`, `south`, `east`, `north` implement `areaOfInterest` as a role decomposition (EPSG:4326, hard-coded); `band_file` implements the output `raster`.
 
-The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `stac_item` | input `product` | `eo-product` |
+| `band` | input `band` | `band-identifier` |
+| `west`, `south`, `east`, `north` (role decomposition) | input `areaOfInterest` | `bounding-box` |
+| `band_file` | output `raster` | `raster` |
+
+**Role decomposition.** The input `areaOfInterest` is taken as `west`, `south`, `east`, `north`: The area of interest is taken as the four bounds of a bounding box, in EPSG:4326 (hard-coded in the notebook, read), not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served. Declared in `roleDecompositions` of `process-type.json`; its representation is not served (`docs/FORMAT-CHECK.md`).
+
+**Assumed format gap.** `stac_item`: The CWL (GeoLabs/KindGrove v0.0.2-rc2, `download_band`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the STAC Item it reads. Closed upstream if the CWL declares a STAC Item format. Evidence: Run record `kindgrove-steps`: the `stac_item` inputs are JSON documents, `"type": "Feature"`, `stac_version` 1.1.0 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
+
+**Assumed format gap.** `band_file`: The CWL (GeoLabs/KindGrove v0.0.2-rc2, `download_band`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `kindgrove-steps`: the `band_file` outputs (red.tif, green.tif, nir.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32646 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
 
 ## openEO equivalence
 

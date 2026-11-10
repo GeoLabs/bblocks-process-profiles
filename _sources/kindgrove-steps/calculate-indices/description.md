@@ -47,9 +47,23 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Computes NDVI, NDWI and SAVI from a list of single-band files, as three single-band outputs. The meaning is the Generic Profile radiometric-index, but its only Implementation Profile restricts `rasters` to maxOccurs 1 (one pre-stacked multi-band image), and its `index` role, which no input selects, has minOccurs 1.
+Implements [`Radiometric index (single-band rasters)`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band) (`generic-profiles.implementation-profile.radiometric-index-single-band`, bblocks-generic-profiles). Signature checked against radiometric-index-single-band: `band_files` (single-band files named `red_*`, `green_*`, `nir_*`, identified by file name) implements `rasters`; `ndvi_file`, `ndwi_file` and `savi_file` (single-band Float32 GeoTIFFs, one per index) implement the output `raster`. The optional `index` (minOccurs 0) is not an input: the tool always computes NDVI, NDWI and SAVI.
 
-The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `band_files` | input `rasters` | `raster-single-band` |
+| -- | input `index` (unbound: no input selects the indices: the tool always computes NDVI, NDWI and SAVI); fixed by the deployment: NDVI, NDWI, SAVI | `radiometric-index` |
+| `ndvi_file`, `ndwi_file`, `savi_file` | output `raster` | `raster-single-band` |
+
+**Assumed format gap.** `band_files`: The CWL (GeoLabs/KindGrove v0.0.2-rc2, `calculate_indices`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFFs it reads. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `kindgrove-steps`: the three `band_files` (red_4326.tif, green_4326.tif, nir_4326.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:4326 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
+
+**Assumed format gap.** `ndvi_file`: The CWL (GeoLabs/KindGrove v0.0.2-rc2, `calculate_indices`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFFs it writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `kindgrove-steps`: ndvi.tif, ndwi.tif and savi.tif are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:4326 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
+
+**Assumed format gap.** `ndwi_file`: The CWL (GeoLabs/KindGrove v0.0.2-rc2, `calculate_indices`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFFs it writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `kindgrove-steps`: ndvi.tif, ndwi.tif and savi.tif are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:4326 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
+
+**Assumed format gap.** `savi_file`: The CWL (GeoLabs/KindGrove v0.0.2-rc2, `calculate_indices`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFFs it writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `kindgrove-steps`: ndvi.tif, ndwi.tif and savi.tif are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:4326 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
 
 ## openEO equivalence
 

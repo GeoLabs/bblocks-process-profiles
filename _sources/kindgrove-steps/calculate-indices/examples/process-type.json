@@ -28,11 +28,33 @@
       "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/tier3-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/specialisation-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
     }
   ],
   "prefLabel": "Compute NDVI, NDWI and SAVI",
   "definition": "Computes NDVI, NDWI and SAVI from Sentinel-2 red, green and NIR bands.",
-  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
+  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index",
+  "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
+  "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
   "classification": {
     "phase": [
@@ -62,6 +84,61 @@
     "cctDependencies": [],
     "candidateCctDependencies": []
   },
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band",
+  "fixedRoleValues": [
+    {
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/inputs/index",
+      "values": [
+        "NDVI",
+        "NDWI",
+        "SAVI"
+      ],
+      "reason": "computed by the notebook steps/04_calculate_indices.ipynb, one output each, in this order"
+    }
+  ],
+  "assumedFormatGaps": [
+    {
+      "name": "band_files",
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/inputs/rasters",
+      "served": [
+        "application/octet-stream"
+      ],
+      "reason": "The CWL (GeoLabs/KindGrove v0.0.2-rc2, `calculate_indices`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFFs it reads. Closed upstream if the CWL declares `format: ogc:geotiff`.",
+      "evidence": "Run record `kindgrove-steps`: the three `band_files` (red_4326.tif, green_4326.tif, nir_4326.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:4326 (observed 2026-11-10)."
+    },
+    {
+      "name": "ndvi_file",
+      "side": "outputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/outputs/raster",
+      "served": [
+        "application/octet-stream"
+      ],
+      "reason": "The CWL (GeoLabs/KindGrove v0.0.2-rc2, `calculate_indices`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFFs it writes. Closed upstream if the CWL declares `format: ogc:geotiff`.",
+      "evidence": "Run record `kindgrove-steps`: ndvi.tif, ndwi.tif and savi.tif are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:4326 (observed 2026-11-10)."
+    },
+    {
+      "name": "ndwi_file",
+      "side": "outputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/outputs/raster",
+      "served": [
+        "application/octet-stream"
+      ],
+      "reason": "The CWL (GeoLabs/KindGrove v0.0.2-rc2, `calculate_indices`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFFs it writes. Closed upstream if the CWL declares `format: ogc:geotiff`.",
+      "evidence": "Run record `kindgrove-steps`: ndvi.tif, ndwi.tif and savi.tif are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:4326 (observed 2026-11-10)."
+    },
+    {
+      "name": "savi_file",
+      "side": "outputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/outputs/raster",
+      "served": [
+        "application/octet-stream"
+      ],
+      "reason": "The CWL (GeoLabs/KindGrove v0.0.2-rc2, `calculate_indices`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFFs it writes. Closed upstream if the CWL declares `format: ogc:geotiff`.",
+      "evidence": "Run record `kindgrove-steps`: ndvi.tif, ndwi.tif and savi.tif are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:4326 (observed 2026-11-10)."
+    }
+  ],
   "correspondences": {
     "openeoEquivalence": {
       "level": "none",

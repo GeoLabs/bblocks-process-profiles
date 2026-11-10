@@ -227,6 +227,35 @@ allOf:
             format: uri
           note:
             type: string
+    fixedRoleValues:
+      description: 'Optional Implementation Profile roles (minOccurs 0) that this deployment leaves unbound
+        because it fixes their value (C3, 2026-11-10): e.g. the index computed by a normalized-difference
+        tool.'
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+        - side
+        - implements
+        - values
+        - reason
+        additionalProperties: false
+        properties:
+          side:
+            enum:
+            - inputs
+            - outputs
+          implements:
+            type: string
+            format: uri
+          values:
+            type: array
+            minItems: 1
+            items:
+              type: string
+          reason:
+            type: string
     roleDecompositions:
       description: 'Implementation Profile roles that this deployment takes as one or more inputs (or
         outputs) none of which is the role: a role with a representation none of the parts carries (the
@@ -413,6 +442,7 @@ allOf:
       - https://w3id.org/ogc/rim/activity-type/ActivityType
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/analytical-hillshading
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/area
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/buffer
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/centroid
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/contains
@@ -425,16 +455,20 @@ allOf:
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersection
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersects
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/is-simple
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/otsu-thresholding
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-thinning
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-to-grid
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-to-shapes
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/product-selection
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math-multiband
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-crop
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-extent
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-format-conversion
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-rendering
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/slope
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/symdifference
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/terrain-ruggedness-index

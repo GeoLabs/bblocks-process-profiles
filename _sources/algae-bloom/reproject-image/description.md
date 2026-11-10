@@ -48,9 +48,16 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Its CWL runs gdalwarp with `-ts`/`-tr` only (target size or resolution) and has no target CRS input (`-t_srs` is never passed): it resamples, it does not reproject. The role `targetCRS` of raster-reprojection would have no input, and that profile's activity type means a change of coordinate reference system. raster-format-conversion is ruled out too: the output format is fixed by the CWL (`-of GTiff`), so its role `targetFormat` would have no input either.
+Implements [`Raster resampling`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling) (`generic-profiles.implementation-profile.raster-resampling`, bblocks-generic-profiles). Signature checked against raster-resampling: `input_image` (GeoTIFF, TIFF or JPEG 2000) implements `raster`; `output_resolution` (`-tr`, an integer pair, optional at tier 4) implements `resolution`; `result` (GeoTIFF) implements the output `raster`. `output_dimensions` (`-ts`, the other way to define the target grid) and `output_name` are inputs of the deployment's own. Not raster-reprojection: no target CRS (`-t_srs` is never passed). Not exposed: the interpolation method (gdalwarp's default) and the forced Float32 type.
 
-The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `input_image` | input `raster` | `raster` |
+| `output_resolution` | input `resolution` | `grid-resolution` |
+| `output_dimensions`, `output_name` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `result` | output `raster` | `raster` |
 
 ## openEO equivalence
 

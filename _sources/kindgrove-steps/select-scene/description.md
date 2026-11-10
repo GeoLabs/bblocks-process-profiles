@@ -53,9 +53,23 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Catalogue search: an area, a time window, a collection and filters in, references to products out. No Generic Profile searches a catalogue or selects products.
+Implements [`Product selection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection) (`generic-profiles.implementation-profile.product-selection`, bblocks-generic-profiles). Signature checked against product-selection: `west`, `south`, `east`, `north` implement `areaOfInterest` as a role decomposition (a bounding box in EPSG:4326, implicit); `days_back` implements `timeInterval` as a literal role decomposition, not reproducible; `collection` implements `collection`; `stac_item` (one STAC Item file) implements the output `products`. `cloud_cover_max` and `stac_api` are inputs of the deployment's own.
 
-The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `west`, `south`, `east`, `north` (role decomposition) | input `areaOfInterest` | `geometry` |
+| `days_back` (role decomposition) | input `timeInterval` | `time-interval` |
+| `collection` | input `collection` | `collection-identifier` |
+| `cloud_cover_max`, `stac_api` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `stac_item` | output `products` | `eo-product` |
+
+**Role decomposition.** The input `areaOfInterest` is taken as `west`, `south`, `east`, `north`: The area of interest is taken as the four bounds of a bounding box, in EPSG:4326 (implicit: passed as the `bbox` of pystac_client, read), not as a GeoJSON geometry: the representation geometry-geojson of the role is not served. Declared in `roleDecompositions` of `process-type.json`; its representation is not served (`docs/FORMAT-CHECK.md`).
+
+**Role decomposition.** The input `timeInterval` is taken as `days_back`: The time interval is the `days_back` days before the time of execution: the same input gives another interval on another day, so a run cannot be repeated from its inputs alone. Not reproducible: the parts depend on the time of execution. Declared in `roleDecompositions` of `process-type.json`.
+
+**Assumed format gap.** `stac_item`: The CWL (GeoLabs/KindGrove v0.0.2-rc2, `select_scene`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the STAC Item it writes. Closed upstream if the CWL declares a STAC Item format. Evidence: Run record `kindgrove-steps`: the output `stac_item` is a JSON document, `"type": "Feature"`, `stac_version` 1.1.0 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
 
 ## openEO equivalence
 

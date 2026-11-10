@@ -1,0 +1,183 @@
+{
+  "id": "calculate_indices",
+  "version": "0.1.0",
+  "title": "calculate_indices",
+  "description": "Process converted from CWL",
+  "mutable": true,
+  "keywords": [
+    "raster",
+    "coverage",
+    "radiometric index",
+    "ospd",
+    "mangrove",
+    "ndvi",
+    "ndwi",
+    "savi"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Raster Coverage Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing"
+    },
+    {
+      "title": "Generic Profile: Radiometric index",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index"
+    },
+    {
+      "title": "Implementation Profile: Radiometric index (single-band rasters)",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band"
+    },
+    {
+      "role": "https://schema.org/name",
+      "value": "calculate_indices"
+    },
+    {
+      "role": "https://schema.org/softwareVersion",
+      "value": "0.1.0"
+    },
+    {
+      "role": "https://schema.org/codeRepository",
+      "value": "https://github.com/starling-foundries/KindGrove"
+    },
+    {
+      "role": "https://schema.org/license",
+      "value": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    },
+    {
+      "role": "https://schema.org/author",
+      "value": {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Cameron Sajedi"
+      }
+    },
+    {
+      "role": "https://schema.org/contributor",
+      "value": {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Gérald Fenoy",
+        "affiliation": "GeoLabs"
+      }
+    },
+    {
+      "role": "https://schema.org/description",
+      "value": "Compute NDVI, NDWI and SAVI from Sentinel-2 red, green and NIR bands"
+    }
+  ],
+  "jobControlOptions": [
+    "async-execute"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "band_files": {
+      "title": "band_files",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Radiometric index -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Radiometric index (single-band rasters) -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "contentMediaType": "application/octet-stream"
+        }
+      },
+      "minOccurs": 1,
+      "maxOccurs": 1
+    }
+  },
+  "outputs": {
+    "ndvi_file": {
+      "title": "ndvi_file",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Radiometric index -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/outputs/raster"
+        },
+        {
+          "title": "Implementation Profile: Radiometric index (single-band rasters) -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/outputs/raster"
+        }
+      ],
+      "schema": {
+        "type": "string",
+        "contentMediaType": "application/octet-stream"
+      }
+    },
+    "ndwi_file": {
+      "title": "ndwi_file",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Radiometric index -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/outputs/raster"
+        },
+        {
+          "title": "Implementation Profile: Radiometric index (single-band rasters) -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/outputs/raster"
+        }
+      ],
+      "schema": {
+        "type": "string",
+        "contentMediaType": "application/octet-stream"
+      }
+    },
+    "savi_file": {
+      "title": "savi_file",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Radiometric index -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/outputs/raster"
+        },
+        {
+          "title": "Implementation Profile: Radiometric index (single-band rasters) -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/outputs/raster"
+        }
+      ],
+      "schema": {
+        "type": "string",
+        "contentMediaType": "application/octet-stream"
+      }
+    }
+  }
+}
