@@ -8,7 +8,8 @@
   snippets:
   - language: json
     ref: examples/kindgrove-mangrove.json
-- title: KindGrove steps reproject-band (CWL, attached to raster-reprojection, assumed format gaps)
+- title: KindGrove steps reproject-band (CWL, attached to raster-reprojection, specialising its activity
+    type)
   base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
   snippets:
   - language: json

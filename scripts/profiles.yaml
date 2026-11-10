@@ -1098,7 +1098,8 @@ processes:
         Signature checked against raster-reprojection: `band_file` implements `raster`, `epsg` (an
         EPSG code, default 4326) implements `targetCRS`, `reprojected_file` implements the output
         `raster`; `west`, `south`, `east`, `north` (extent of the target grid) and `resolution` are
-        inputs of the deployment's own. Its CWL declares no `format`: an assumed format gap.
+        inputs of the deployment's own. Both rasters are served as GeoTIFF: the CWL of GeoLabs/KindGrove
+        10887a4 declares `format: ogc:geotiff` (read through the local override until rc3, docs/LOCAL-BUILD.md).
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection
     bindings: {inputs: {band_file: raster, epsg: targetCRS}, outputs: {reprojected_file: raster}}
     cct: []

@@ -227,6 +227,7 @@ allOf:
             format: uri
           note:
             type: string
+            minLength: 1
     unboundRoles:
       description: 'Implementation Profile roles this deployment leaves unbound, each with its reason:
         a role of minOccurs 0 at tier 3 (C2, 2026-11-10), or, for a live process of the testbed, an input
@@ -280,6 +281,7 @@ allOf:
               type: string
           reason:
             type: string
+            minLength: 1
     roleDecompositions:
       description: 'Implementation Profile roles that this deployment takes as one or more inputs (or
         outputs) none of which is the role: a role with a representation none of the parts carries (the

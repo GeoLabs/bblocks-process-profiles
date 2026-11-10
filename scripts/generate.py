@@ -2001,6 +2001,10 @@ def write_process_type_fixtures(pt):
             {"side": "inputs", "implements": IP_CRS_IN}]),
         "fixed-role-values-without-reason-fail.json": lambda d: d.update(fixedRoleValues=[
             {"side": "inputs", "implements": IP_CRS_IN, "values": ["EPSG:4326"]}]),
+        "fixed-role-values-empty-reason-fail.json": lambda d: d.update(fixedRoleValues=[
+            {"side": "inputs", "implements": IP_CRS_IN, "values": ["EPSG:4326"], "reason": ""}]),
+        "by-reference-empty-note-fail.json": lambda d: d.update(byReference=[
+            {"name": "band_file", "side": "inputs", "implements": IP_RASTER_IN, "note": ""}]),
         "fixed-role-values-empty-fail.json": lambda d: d.update(fixedRoleValues=[
             {"side": "inputs", "implements": IP_CRS_IN, "values": [], "reason": "No value."}]),
         "role-decomposition-without-parts-fail.json": lambda d: d.update(roleDecompositions=[
@@ -2214,7 +2218,7 @@ def main():
          "snippets": [{"language": "json", "ref": "examples/reproject-image.json"}]},
         {"title": "KindGrove mangrove (none, with decomposition)", "base-uri": PROCESS_BASE,
          "snippets": [{"language": "json", "ref": "examples/kindgrove-mangrove.json"}]},
-        {"title": "KindGrove steps reproject-band (CWL, attached to raster-reprojection, assumed format gaps)",
+        {"title": "KindGrove steps reproject-band (CWL, attached to raster-reprojection, specialising its activity type)",
          "base-uri": PROCESS_BASE,
          "snippets": [{"language": "json", "ref": "examples/kindgrove-steps-reproject-band.json"}]},
         {"title": "OTB.ExtractROI (live, attached to raster-crop, role decomposition)", "base-uri": PROCESS_BASE,

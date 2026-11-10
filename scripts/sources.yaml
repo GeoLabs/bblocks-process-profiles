@@ -112,8 +112,10 @@ w3:
   title: W3 Water Bodies (OGC EO Application Package Hands-On, GeoLabs split)
   repo: https://github.com/GeoLabs/ogc-eo-application-package-hands-on
   # 664d242 (branch feature/cwl-format, from f472585, 2026-11-10): `format: ogc:geotiff` on the
-  # GeoTIFF Files of crop, norm_diff, otsu and detect_water_body. Local commit, pushed before this
-  # register (decision of 2026-11-10 on the formats invariant). The run record `water-bodies` was
+  # GeoTIFF Files of crop, norm_diff, otsu and detect_water_body (decision of 2026-11-10 on the
+  # formats invariant). LOCAL-ONLY FOR NOW: 664d242 is not on GitHub, so this pin and the
+  # executionUnit links built from it do not resolve until the fix is pushed, which must happen
+  # before this register is pushed. The run record `water-bodies` was
   # made with f472585, whose CWL differs only by these `format` lines.
   commit: 664d242f70e1fb870599bf06858daa7ce5a50ddb
   clone: ogc-eo-application-package-hands-on
