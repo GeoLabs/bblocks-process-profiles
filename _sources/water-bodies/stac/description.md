@@ -4,7 +4,7 @@ Process profile of **`stac`** (CommandLineTool, W3 Water Bodies).
 
 ## Source
 
-- CWL: [stac.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/stac.cwl) (pinned commit `f472585`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
+- CWL: [stac.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/664d242f70e1fb870599bf06858daa7ce5a50ddb/water-bodies/app-pkg-multiple/stac.cwl) (pinned commit `664d242`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
 - Six-phase position: Export / aggregation
 - EOAP CWL custom types used: none; candidates: `eoap.cct.stac`
 - Used by: `ospd.process-profiles.water-bodies.water-bodies`

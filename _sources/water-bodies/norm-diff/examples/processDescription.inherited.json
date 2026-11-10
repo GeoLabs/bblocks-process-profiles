@@ -69,7 +69,8 @@
         "type": "array",
         "items": {
           "type": "string",
-          "contentMediaType": "application/octet-stream"
+          "contentMediaType": "image/tiff; application=geotiff",
+          "contentEncoding": "binary"
         }
       },
       "minOccurs": 1,
@@ -98,7 +99,8 @@
       ],
       "schema": {
         "type": "string",
-        "contentMediaType": "application/octet-stream"
+        "contentMediaType": "image/tiff; application=geotiff",
+        "contentEncoding": "binary"
       }
     }
   }

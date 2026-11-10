@@ -2086,6 +2086,18 @@ def main():
              "w2": a.w2 or a.sources_root / sources["w2"]["clone"],
              "w3": a.w3 or a.sources_root / sources["w3"]["clone"],
              "kindgrove_steps": a.kindgrove_steps or a.sources_root / sources["kindgrove_steps"]["clone"]}
+    # Local only (docs/LOCAL-BUILD.md): scripts/sources-local.yaml, git-ignored, may point a source to
+    # another local directory, e.g. a CWL generated from an unreleased commit, while sources.yaml
+    # keeps the committed pin. Announced on stderr, so that a regeneration with it is not mistaken
+    # for one from the pins.
+    local_overrides = SCRIPTS / "sources-local.yaml"
+    if local_overrides.exists():
+        for key, o in (yaml.safe_load(local_overrides.read_text()) or {}).items():
+            if key not in roots or not (Path(o["path"]) / sources[key]["base_path"]).is_dir():
+                sys.exit(f"scripts/sources-local.yaml: {key}: unknown source or missing directory {o.get('path')}")
+            roots[key] = Path(o["path"])
+            print(f"LOCAL OVERRIDE {key}: {o['path']} instead of the pin of scripts/sources.yaml ({' '.join(o['note'].split())})",
+                  file=sys.stderr)
     # every live-process source (sources.yaml `kind: ogcapi-process`) is cached under --sources-root
     roots.update({k: a.sources_root / v["clone"] for k, v in sources.items()
                   if isinstance(v, dict) and v.get("kind") == "ogcapi-process"})

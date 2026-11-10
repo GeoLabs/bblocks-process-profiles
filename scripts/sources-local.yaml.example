@@ -1,0 +1,9 @@
+# Local-only source overrides, see docs/LOCAL-BUILD.md. Copy to scripts/sources-local.yaml
+# (git-ignored). Each key of scripts/sources.yaml listed here is read from `path` instead of
+# --sources-root/<clone>; the pin of scripts/sources.yaml is kept, and the generator says so on stderr.
+kindgrove_steps:
+  # mangrove-workflow-steps.cwl generated from GeoLabs/KindGrove 10887a4 (branch feature/cwl-format,
+  # format annotations; rc3 not released) with the CI command of .github/workflows/build-cwl-docker.yml
+  # plus --skip-build, --docker-pull ghcr.io/geolabs/kindgrove/mangrove-cwl:v0.0.2-rc2.
+  path: /path/to/KindGrove/myApplication/cwl_output
+  note: KindGrove 10887a4, unreleased rc3 formats, images of rc2

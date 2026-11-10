@@ -4,7 +4,7 @@ Process profile of **`water-bodies`** (Workflow, W3 Water Bodies).
 
 ## Source
 
-- CWL: [water-bodies.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/water-bodies.cwl) (pinned commit `f472585`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
+- CWL: [water-bodies.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/664d242f70e1fb870599bf06858daa7ce5a50ddb/water-bodies/app-pkg-multiple/water-bodies.cwl) (pinned commit `664d242`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
 - Six-phase position: Data retrieval → Scientific computation → Export / aggregation
 - EOAP CWL custom types used: none; candidates: `eoap.cct.bbox`, `eoap.cct.string-format`
 - Steps (profiles): `ospd.process-profiles.water-bodies.detect-water-body`, `ospd.process-profiles.water-bodies.stac`

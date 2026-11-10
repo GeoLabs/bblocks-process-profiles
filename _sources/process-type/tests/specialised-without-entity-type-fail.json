@@ -85,28 +85,6 @@
     ]
   },
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection",
-  "assumedFormatGaps": [
-    {
-      "name": "band_file",
-      "side": "inputs",
-      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster",
-      "served": [
-        "application/octet-stream"
-      ],
-      "reason": "The CWL (GeoLabs/KindGrove v0.0.2-rc2, `reproject_band`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads and writes. Closed upstream if the CWL declares `format: ogc:geotiff`.",
-      "evidence": "Run record `kindgrove-steps` (scripts/sources.yaml): the three band_file inputs (red.tif, green.tif, nir.tif) and the three reprojected_file outputs (red_4326.tif, green_4326.tif, nir_4326.tif), the files of runs/kindgrove-steps/ro/data/ that primary.cwlprov.provn links to them by specializationOf (lines 157-268), are TIFF files (magic number 49 49 2a 00) carrying the GeoTIFF tags GeoKeyDirectory (34735), ModelTiepoint (33922) and ModelPixelScale (33550), observed 2026-11-10."
-    },
-    {
-      "name": "reprojected_file",
-      "side": "outputs",
-      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/outputs/raster",
-      "served": [
-        "application/octet-stream"
-      ],
-      "reason": "The CWL (GeoLabs/KindGrove v0.0.2-rc2, `reproject_band`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads and writes. Closed upstream if the CWL declares `format: ogc:geotiff`.",
-      "evidence": "Run record `kindgrove-steps` (scripts/sources.yaml): the three band_file inputs (red.tif, green.tif, nir.tif) and the three reprojected_file outputs (red_4326.tif, green_4326.tif, nir_4326.tif), the files of runs/kindgrove-steps/ro/data/ that primary.cwlprov.provn links to them by specializationOf (lines 157-268), are TIFF files (magic number 49 49 2a 00) carrying the GeoTIFF tags GeoKeyDirectory (34735), ModelTiepoint (33922) and ModelPixelScale (33550), observed 2026-11-10."
-    }
-  ],
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"

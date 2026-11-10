@@ -101,28 +101,6 @@
       "note": "The area of interest is taken as the four bounds of a bounding box, in EPSG:4326 (hard-coded in the notebook, read), not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served."
     }
   ],
-  "assumedFormatGaps": [
-    {
-      "name": "stac_item",
-      "side": "inputs",
-      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/product",
-      "served": [
-        "application/octet-stream"
-      ],
-      "reason": "The CWL (GeoLabs/KindGrove v0.0.2-rc2, `download_band`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the STAC Item it reads. Closed upstream if the CWL declares a STAC Item format.",
-      "evidence": "Run record `kindgrove-steps`: the `stac_item` inputs are JSON documents, `\"type\": \"Feature\"`, `stac_version` 1.1.0 (observed 2026-11-10)."
-    },
-    {
-      "name": "band_file",
-      "side": "outputs",
-      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/outputs/raster",
-      "served": [
-        "application/octet-stream"
-      ],
-      "reason": "The CWL (GeoLabs/KindGrove v0.0.2-rc2, `download_band`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it writes. Closed upstream if the CWL declares `format: ogc:geotiff`.",
-      "evidence": "Run record `kindgrove-steps`: the `band_file` outputs (red.tif, green.tif, nir.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32646 (observed 2026-11-10)."
-    }
-  ],
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection",

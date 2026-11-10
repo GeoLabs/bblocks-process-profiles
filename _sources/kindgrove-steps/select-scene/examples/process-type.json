@@ -109,18 +109,6 @@
       "note": "The time interval is the `days_back` days before the time of execution: the same input gives another interval on another day, so a run cannot be repeated from its inputs alone."
     }
   ],
-  "assumedFormatGaps": [
-    {
-      "name": "stac_item",
-      "side": "outputs",
-      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection/outputs/products",
-      "served": [
-        "application/octet-stream"
-      ],
-      "reason": "The CWL (GeoLabs/KindGrove v0.0.2-rc2, `select_scene`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the STAC Item it writes. Closed upstream if the CWL declares a STAC Item format.",
-      "evidence": "Run record `kindgrove-steps`: the output `stac_item` is a JSON document, `\"type\": \"Feature\"`, `stac_version` 1.1.0 (observed 2026-11-10)."
-    }
-  ],
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection"

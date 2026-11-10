@@ -4,7 +4,7 @@ Process profile of **`norm_diff`** (CommandLineTool, W3 Water Bodies).
 
 ## Source
 
-- CWL: [norm_diff.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/norm_diff.cwl) (pinned commit `f472585`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
+- CWL: [norm_diff.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/664d242f70e1fb870599bf06858daa7ce5a50ddb/water-bodies/app-pkg-multiple/norm_diff.cwl) (pinned commit `664d242`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
 - Six-phase position: Scientific computation
 - EOAP CWL custom types used: none
 - Used by: `ospd.process-profiles.water-bodies.detect-water-body`
@@ -53,10 +53,6 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 | `rasters` | input `rasters` | `raster-single-band` |
 | -- | input `index` (unbound: no input selects the index: the tool computes the normalized difference (A-B)/(A+B) of the two rasters); fixed by the deployment: normalized difference | `radiometric-index` |
 | `ndwi` | output `raster` | `raster-single-band` |
-
-**Assumed format gap.** `rasters`: The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `norm_diff.cwl`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `water-bodies` (scripts/sources.yaml): the `rasters` files of node_normalized_difference (crop_green.tif, crop_nir.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
-
-**Assumed format gap.** `ndwi`: The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `norm_diff.cwl`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `water-bodies`: the `ndwi` outputs (norm_diff.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
 
 ## openEO equivalence
 

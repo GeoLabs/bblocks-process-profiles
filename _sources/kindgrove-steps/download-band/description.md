@@ -56,10 +56,6 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 **Role decomposition.** The input `areaOfInterest` is taken as `west`, `south`, `east`, `north`: The area of interest is taken as the four bounds of a bounding box, in EPSG:4326 (hard-coded in the notebook, read), not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served. Declared in `roleDecompositions` of `process-type.json`; its representation is not served (`docs/FORMAT-CHECK.md`).
 
-**Assumed format gap.** `stac_item`: The CWL (GeoLabs/KindGrove v0.0.2-rc2, `download_band`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the STAC Item it reads. Closed upstream if the CWL declares a STAC Item format. Evidence: Run record `kindgrove-steps`: the `stac_item` inputs are JSON documents, `"type": "Feature"`, `stac_version` 1.1.0 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
-
-**Assumed format gap.** `band_file`: The CWL (GeoLabs/KindGrove v0.0.2-rc2, `download_band`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `kindgrove-steps`: the `band_file` outputs (red.tif, green.tif, nir.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32646 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
-
 ## openEO equivalence
 
 **Level: closeMatch.** load_collection with a spatial_extent and a single band selected (filter_bands); the STAC item is a resolved File (the output of `select-scene`) rather than resolved in-process, same pattern as `algae-bloom.download-band-sentinel2-stac-item`.

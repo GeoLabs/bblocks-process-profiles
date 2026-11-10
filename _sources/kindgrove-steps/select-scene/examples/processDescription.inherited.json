@@ -188,7 +188,8 @@
       ],
       "schema": {
         "type": "string",
-        "contentMediaType": "application/octet-stream"
+        "contentMediaType": "application/geo+json",
+        "contentEncoding": "binary"
       }
     }
   }

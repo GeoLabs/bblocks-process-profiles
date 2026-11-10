@@ -69,8 +69,6 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 **Role decomposition.** The input `timeInterval` is taken as `days_back`: The time interval is the `days_back` days before the time of execution: the same input gives another interval on another day, so a run cannot be repeated from its inputs alone. Not reproducible: the parts depend on the time of execution. Declared in `roleDecompositions` of `process-type.json`.
 
-**Assumed format gap.** `stac_item`: The CWL (GeoLabs/KindGrove v0.0.2-rc2, `select_scene`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the STAC Item it writes. Closed upstream if the CWL declares a STAC Item format. Evidence: Run record `kindgrove-steps`: the output `stac_item` is a JSON document, `"type": "Feature"`, `stac_version` 1.1.0 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
-
 ## openEO equivalence
 
 **Level: closeMatch.** Same filter semantics as load_collection's `spatial_extent` (west/south/east/north) and a `properties` cloud-cover filter; `days_back` is a relative time window resolved against the execution date, not an explicit `temporal_extent` -- the same non-reproducibility already documented for `kindgrove.mangrove-workflow` (Q-W2-DAYSBACK).

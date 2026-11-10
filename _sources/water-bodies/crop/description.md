@@ -4,7 +4,7 @@ Process profile of **`crop`** (CommandLineTool, W3 Water Bodies).
 
 ## Source
 
-- CWL: [crop.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/crop.cwl) (pinned commit `f472585`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
+- CWL: [crop.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/664d242f70e1fb870599bf06858daa7ce5a50ddb/water-bodies/app-pkg-multiple/crop.cwl) (pinned commit `664d242`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
 - Six-phase position: Data retrieval
 - EOAP CWL custom types used: none; candidates: `eoap.cct.bbox`, `eoap.cct.stac`, `eoap.cct.string-format`
 - Used by: `ospd.process-profiles.water-bodies.detect-water-body`
@@ -66,8 +66,6 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 **Role decomposition.** The input `areaOfInterest` is taken as `aoi`, `epsg`: The area of interest is taken as one string of four comma-separated numbers (`aoi`) and the identifier of their CRS (`epsg`, passed to gdal.Translate as `projWinSRS`), not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served. Declared in `roleDecompositions` of `process-type.json`; its representation is not served (`docs/FORMAT-CHECK.md`).
 
 **By reference.** `item` (role `product`) is a URL of the data, not the data: The product is given as the URL of its STAC Item, a string, not as the STAC Item itself. Declared in `byReference` of `process-type.json` (`docs/FORMAT-CHECK.md`).
-
-**Assumed format gap.** `cropped`: The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `crop.cwl`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `water-bodies`: the `cropped` outputs (crop_green.tif, crop_nir.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
 
 ## openEO equivalence
 

@@ -4,7 +4,7 @@ Process profile of **`otsu`** (CommandLineTool, W3 Water Bodies).
 
 ## Source
 
-- CWL: [otsu.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/otsu.cwl) (pinned commit `f472585`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
+- CWL: [otsu.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/664d242f70e1fb870599bf06858daa7ce5a50ddb/water-bodies/app-pkg-multiple/otsu.cwl) (pinned commit `664d242`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
 - Six-phase position: Scientific computation
 - EOAP CWL custom types used: none
 - Used by: `ospd.process-profiles.water-bodies.detect-water-body`
@@ -46,10 +46,6 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 |---|---|---|
 | `raster` | input `raster` | `raster-single-band` |
 | `binary_mask_item` | output `mask` | `binary-mask` |
-
-**Assumed format gap.** `raster`: The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `otsu.cwl`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `water-bodies`: the `raster` inputs of node_otsu (norm_diff.tif) are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
-
-**Assumed format gap.** `binary_mask_item`: The CWL (GeoLabs/ogc-eo-application-package-hands-on f472585, `otsu.cwl`) declares no `format` on this File, so the processDescription derived by eoap.cct.cwl-to-ogcprocess serves application/octet-stream: the deployment exposes no media type for the GeoTIFF it reads or writes. Closed upstream if the CWL declares `format: ogc:geotiff`. Evidence: Run record `water-bodies`: the outputs otsu.tif are single-band TIFFs with the GeoTIFF tags 33550, 33922, 34735, EPSG:32610 (observed 2026-11-10). Declared in `assumedFormatGaps` of `process-type.json` (`docs/FORMAT-CHECK.md`).
 
 ## openEO equivalence
 
