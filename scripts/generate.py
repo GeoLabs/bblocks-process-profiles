@@ -269,6 +269,8 @@ PROFILE_CONTEXT = {
             "note": "skos:note"}},
         # A role with a representation that the deployment takes (or returns) as a URL of the data
         # instead of the data (C1, 2026-11-10): reported apart, like serverSideFiles.
+        "unboundRoles": {"@id": "pp:unboundRole", "@context": {
+            "side": "pp:side", "implements": {"@id": "pp:implements", "@type": "@id"}, "reason": "skos:note"}},
         "fixedRoleValues": {"@id": "pp:fixedRoleValue", "@context": {
             "side": "pp:side", "implements": {"@id": "pp:implements", "@type": "@id"},
             "values": "rdf:value", "reason": "skos:note"}},
@@ -1642,6 +1644,9 @@ def write_format_check(rows, assumed_by_process):
     (ROOT / "docs" / "FORMAT-CHECK.md").write_text("\n".join(lines) + "\n")
 
 
+GP_ROOT = ROOT.parent / "bblocks-generic-profiles"
+
+
 def tier3_link_fields(proc, assumed):
     """The tier-4 -> tier-3 link of an entry (`implementsProfile`, the canonical relation of
     docs/tier-links.md in bblocks-generic-profiles) and the declarations that qualify how this
@@ -1656,6 +1661,16 @@ def tier3_link_fields(proc, assumed):
             {"name": live, "side": side, "implements": f"{ip}/{side}/{role}",
              "location": " ".join(ssf["location"].split())}
             for side in ("inputs", "outputs") for live, role in (ssf.get(side) or {}).items()]
+    unbound = {k: v for k, v in (proc.get("unbound") or {}).items()}
+    if unbound:
+        # C2 (2026-11-10): the roles this deployment leaves unbound, each with its reason, so that the
+        # entry declares them (audit_planes.py reads them for an optional role with a representation).
+        sides = {side: set(json.loads((GP_ROOT / "_sources" / "implementation-profile" / ip.rsplit("/", 1)[-1]
+                                       / "examples" / (ip.rsplit("/", 1)[-1] + ".json")).read_text())[side])
+                 for side in ("inputs", "outputs")}
+        out["unboundRoles"] = [
+            {"side": side, "implements": f"{ip}/{side}/{role}", "reason": " ".join(str(reason).split())}
+            for side in ("inputs", "outputs") for role, reason in unbound.items() if role in sides[side]]
     fixed = proc.get("fixed_roles")
     if fixed:
         # C3 (2026-11-10): the value a deployment fixes for an optional role it leaves unbound
@@ -1982,6 +1997,8 @@ def write_process_type_fixtures(pt):
         "literal-decomposition-control.json": lambda d: d.update(roleDecompositions=[
             {"side": "inputs", "implements": IP_CRS_IN, "parts": ["epsg"], "reproducible": True, "note": "An EPSG code."}]),
         # C3 (2026-11-10): the value fixed for an optional role left unbound
+        "unbound-role-without-reason-fail.json": lambda d: d.update(unboundRoles=[
+            {"side": "inputs", "implements": IP_CRS_IN}]),
         "fixed-role-values-without-reason-fail.json": lambda d: d.update(fixedRoleValues=[
             {"side": "inputs", "implements": IP_CRS_IN, "values": ["EPSG:4326"]}]),
         "fixed-role-values-empty-fail.json": lambda d: d.update(fixedRoleValues=[
@@ -2037,6 +2054,8 @@ def main():
                     help="checkout of bblocks-data-formats, read for the formats and media types of the "
                          "Implementation Profiles' representations (A4.3; default: the sibling directory)")
     a = ap.parse_args()
+    global GP_ROOT
+    GP_ROOT = a.generic_profiles
     if not (a.generic_profiles / "_sources" / "implementation-profile").is_dir():
         sys.exit(f"{a.generic_profiles}: not a bblocks-generic-profiles checkout (use --generic-profiles)")
     if not (a.data_formats / "_sources" / "representation").is_dir():

@@ -61,6 +61,13 @@
     "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index",
+  "unboundRoles": [
+    {
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index/inputs/index",
+      "reason": "no input of the live service selects the index: OTB RadiometricIndices' `list` parameter is not exposed"
+    }
+  ],
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.ndvi"

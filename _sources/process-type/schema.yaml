@@ -227,6 +227,30 @@ allOf:
             format: uri
           note:
             type: string
+    unboundRoles:
+      description: 'Implementation Profile roles this deployment leaves unbound, each with its reason:
+        a role of minOccurs 0 at tier 3 (C2, 2026-11-10), or, for a live process of the testbed, an input
+        its deployment does not expose.'
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+        - side
+        - implements
+        - reason
+        additionalProperties: false
+        properties:
+          side:
+            enum:
+            - inputs
+            - outputs
+          implements:
+            type: string
+            format: uri
+          reason:
+            type: string
+            minLength: 1
     fixedRoleValues:
       description: 'Optional Implementation Profile roles (minOccurs 0) that this deployment leaves unbound
         because it fixes their value (C3, 2026-11-10): e.g. the index computed by a normalized-difference

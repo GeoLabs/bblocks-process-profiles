@@ -85,6 +85,13 @@
     "candidateCctDependencies": []
   },
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band",
+  "unboundRoles": [
+    {
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/inputs/index",
+      "reason": "no input selects the indices: the tool always computes NDVI, NDWI and SAVI"
+    }
+  ],
   "fixedRoleValues": [
     {
       "side": "inputs",

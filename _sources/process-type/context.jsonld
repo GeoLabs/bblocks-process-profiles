@@ -251,6 +251,17 @@
         "values": "rdf:value",
         "reason": "skos:note"
       }
+    },
+    "unboundRoles": {
+      "@id": "pp:unboundRole",
+      "@context": {
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "reason": "skos:note"
+      }
     }
   }
 }

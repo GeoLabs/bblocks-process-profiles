@@ -88,6 +88,13 @@
     ]
   },
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval",
+  "unboundRoles": [
+    {
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/areaOfInterest",
+      "reason": "no input restricts the area: the whole band of the product is retrieved"
+    }
+  ],
   "byReference": [
     {
       "name": "product_url",
