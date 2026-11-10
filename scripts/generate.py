@@ -39,6 +39,10 @@ GEOLABS_AGENT = BASE + "geolabs"
 ACTTYPE_NS = "https://w3id.org/ogc/rim/activity-type/"
 ATR_ITEM_CLASS = ACTTYPE_NS + "activityTypeItemClass"
 ACTIVITY_TYPE_CLASS = ACTTYPE_NS + "ActivityType"
+GEOPROC_CLASS = "https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType"
+# The action type of an in-place change to a proposal, defined by this register's specification
+# (pp:specification, _sources/process-type/ontology.ttl), as gp:, dt: and df: define theirs.
+AMENDMENT_ACTION = BASE + "amendmentAction"
 PHASE_BASE = BASE + "phase/"
 BBLOCK_IRI = "https://www.opengis.net/def/bblocks/"
 PREFIX = "ospd.process-profiles."
@@ -141,6 +145,13 @@ PROFILE_CONTEXT = {
         # bblocks-data-types, inherited from the Implementation Profile role it is bound to. Same
         # term and property (dct:type) as tiers 2 and 3 in bblocks-generic-profiles.
         "dataType": {"@id": "dct:type", "@type": "@id"},
+        # Entity types of a process type that specialises a geoprocessing activity type (the same
+        # GeoSPARQL classes as that activity type), and the classification of an amendment.
+        "usedEntityType": {"@id": "acttype:usedEntityType", "@type": "@id"},
+        "generatedEntityType": {"@id": "acttype:generatedEntityType", "@type": "@id"},
+        "changeClassification": {"@id": "rim:changeClassification", "@type": "@vocab"},
+        "substantive": "rim:substantiveChange",
+        "clarifying": "rim:clarifyingChange",
         "inputs": {"@id": "proc:inputs", "@context": {"@vocab": BASE + "input/"}},
         "outputs": {"@id": "proc:outputs", "@context": {"@vocab": BASE + "output/"}},
         "links": {"@id": "rdfs:seeAlso", "@context": {
@@ -253,7 +264,7 @@ PROFILE_CONTEXT = {
         "roleDecompositions": {"@id": "pp:roleDecomposition", "@context": {
             "side": "pp:side", "implements": {"@id": "pp:implements", "@type": "@id"},
             "parts": {"@id": "pp:part", "@container": "@list"},
-            "selector": {"@id": "pp:selector", "@context": {"name": "pp:liveName", "value": "rdf:value"}},
+            "selectors": {"@id": "pp:selector", "@context": {"name": "pp:liveName", "values": "rdf:value"}},
             "note": "skos:note"}},
         # A bound input or output whose Implementation Profile representation this deployment does
         # not serve (no media type exposed), accepted with its reason (A4.3).
@@ -782,11 +793,55 @@ def execution_bundle(proc, pd, run_id, info, job_id, d):
     return {"run": run, "engine": engine, "outputs": outputs}
 
 
-def register_item_fields(entry_id):
+def amendments(proc, parent):
+    """The classified amendments of a proposal entry, amended in place (pp:specification): those of
+    every entry, those of an entry attached to tier 3, and those recorded in profiles.yaml
+    (`amendments`). Each is a rim:RegisterAction of type pp:amendmentAction."""
+    out = [("d5-2026-11-09", "2026-11-09", "substantive",
+            "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. "
+            "The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription "
+            "and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped "
+            "apart. The plan was already a node of its own.")]
+    if proc.get("cwl_class") and proc.get("implementsProfile"):
+        out.append(("tier3-2026-11-09", "2026-11-09", "substantive",
+                    f"Attached to the Implementation Profile {proc['implementsProfile']} (implementsProfile), after "
+                    "checking its signature (docs/ATTACHMENTS.md)."))
+    if parent:
+        out.append(("specialisation-2026-11-10", "2026-11-10", "substantive",
+                    f"subClassOf changes from {ACTIVITY_TYPE_CLASS} to {parent['id']}, the activity type of the "
+                    "operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): "
+                    + ", ".join(v for k in ("usedEntityType", "generatedEntityType") for v in _lst(parent.get(k) or []))
+                    + "."))
+    for a in proc.get("amendments") or []:
+        out.append((a["id"], a["date"], a["classification"], " ".join(a["description"].split())))
+    return sorted(out, key=lambda a: a[1])
+
+
+def register_item_fields(entry_id, proc=None, parent=None):
     """The Registered Item Model core shared by every process-type entry.
 
     A candidate awaits a register decision: `invalid` (not yet in force) and `published` (visible).
+    `hasAction` records its addition, then each classified amendment (amended in place, no new IRI).
     """
+    actions = [{
+        "id": entry_id + "/actions/addition",
+        "type": "RegisterAction",
+        "actionType": "addition",
+        "proposer": GEOLABS_AGENT,
+        "startedAtTime": TODAY + "T00:00:00Z",
+        "appliesTo": entry_id,
+    }]
+    for name, date, classification, description in (amendments(proc, parent) if proc else []):
+        actions.append({
+            "id": f"{entry_id}/actions/{name}",
+            "type": "RegisterAction",
+            "actionType": AMENDMENT_ACTION,
+            "changeClassification": classification,
+            "description": description,
+            "proposer": GEOLABS_AGENT,
+            "startedAtTime": date + "T00:00:00Z",
+            "appliesTo": entry_id,
+        })
     return {
         "type": ["ProcessType", "owlClass", "ActivityType"],
         "objectIdentifier": entry_id,
@@ -794,18 +849,26 @@ def register_item_fields(entry_id):
         "inRegister": PROCESS_TYPE_REGISTER,
         "validityStatus": "invalid",
         "publicationStatus": "published",
-        "hasAction": {
-            "id": entry_id + "/actions/addition",
-            "type": "RegisterAction",
-            "actionType": "addition",
-            "proposer": GEOLABS_AGENT,
-            "startedAtTime": TODAY + "T00:00:00Z",
-            "appliesTo": entry_id,
-        },
+        "hasAction": actions,
     }
 
 
-def build_entry(proc, pd, definition, deployment, plan, assumed, by_key):
+def parent_activity_type(proc, gp_root):
+    """The activity type of the operation a deployed process implements: the `activityType` of its
+    Implementation Profile, read from bblocks-generic-profiles. None for a process attached to no
+    Implementation Profile, which keeps acttype:ActivityType as its parent."""
+    if not proc.get("implementsProfile"):
+        return None
+    ip_key = proc["implementsProfile"].rstrip("/").rsplit("/", 1)[-1]
+    ip = json.loads((gp_root / "_sources" / "implementation-profile" / ip_key / "examples" / f"{ip_key}.json").read_text())
+    at_key = ip["activityType"].rstrip("/").rsplit("/", 1)[-1]
+    at = json.loads((gp_root / "_sources" / "activity-type" / at_key / "examples" / f"{at_key}.json").read_text())
+    if at["subClassOf"] != GEOPROC_CLASS or not (at.get("usedEntityType") or at.get("generatedEntityType")):
+        sys.exit(f"{proc['key']}: activity type {at['id']} is not a geoprocessing activity type with an entity type")
+    return at
+
+
+def build_entry(proc, pd, definition, deployment, plan, assumed, by_key, parent=None):
     """A process-type entry, in the five parts of decision D5:
 
     - meaning: `prefLabel`, `definition`, `subClassOf` (with the RIM fields and `inScheme`);
@@ -815,21 +878,25 @@ def build_entry(proc, pd, definition, deployment, plan, assumed, by_key):
     - correspondences: `correspondences`, the proposed openEO equivalences.
 
     `implementsProfile` and its binding declarations are the link to tier 3; `hasStep` the steps of a
-    Workflow. `subClassOf` stays acttype:ActivityType: specialising the operation's activity type of
-    bblocks-generic-profiles (D5) makes the entry a registered sub-class of
-    geoproc:GeoprocessingActivityType, which must declare its own spatial entity type -- decision D8,
-    pending (docs/OPEN-QUESTIONS.md Q-D8-SPECIALISATION)."""
+    Workflow. An entry attached to an Implementation Profile specialises the activity type of its
+    operation in bblocks-generic-profiles (D5; decision of 2026-11-10): `subClassOf` is that activity
+    type, and the entry declares the same GeoSPARQL entity type(s), as a registered sub-class of
+    geoproc:GeoprocessingActivityType must. Any other entry keeps acttype:ActivityType."""
     entry_id = ptype_iri(proc)
     e = {
         "id": entry_id,
-        **register_item_fields(entry_id),
+        **register_item_fields(entry_id, proc, parent),
         "prefLabel": (proc.get("label") or pd.get("title") or pd["id"]).strip(),
         "definition": " ".join(definition.split()),
-        "subClassOf": ACTIVITY_TYPE_CLASS,
+        "subClassOf": parent["id"] if parent else ACTIVITY_TYPE_CLASS,
+    }
+    if parent:
+        e.update({k: parent[k] for k in ("usedEntityType", "generatedEntityType") if parent.get(k)})
+    e.update({
         "inScheme": PTYPE_SCHEME,
         "classification": {"phase": [PHASE_BASE + p for p in proc["phases"]]},
         "deployment": deployment,
-    }
+    })
     if plan:
         e["plan"] = plan
     e.update(tier3_link_fields(proc, assumed))
@@ -839,7 +906,7 @@ def build_entry(proc, pd, definition, deployment, plan, assumed, by_key):
     return e
 
 
-def process_type_entry(proc, pd, cwl_el, src, url, by_key, assumed=()):
+def process_type_entry(proc, pd, cwl_el, src, url, by_key, assumed=(), parent=None):
     deployment = {
         "profile": bb_id(proc),
         "processDescription": {"id": pd["id"], "version": pd["version"], "href": pd_url(pd)},
@@ -856,7 +923,7 @@ def process_type_entry(proc, pd, cwl_el, src, url, by_key, assumed=()):
         "candidateCctDependencies": proc.get("cct_candidates", []),
     }
     definition = (proc.get("definition") or cwl_el.get("doc") or cwl_el.get("label") or pd.get("description") or "")
-    return build_entry(proc, pd, definition, deployment, plan, list(assumed), by_key)
+    return build_entry(proc, pd, definition, deployment, plan, list(assumed), by_key, parent)
 
 
 def profile_schema(proc, pd, cwl_el, has_exec, inherited=None):
@@ -1187,7 +1254,7 @@ def load_ogcapi_process(proc, sources, roots):
     return raw, pd, url
 
 
-def ogcapi_process_type_entry(proc, pd, src, url, by_key, assumed=()):
+def ogcapi_process_type_entry(proc, pd, src, url, by_key, assumed=(), parent=None):
     # A natively implemented process (`mutable: false`) has no Application Package -- Part 2's
     # /package is only served for dynamically deployed ones (req. package-get-op C) -- so no plan.
     deployment = {
@@ -1199,7 +1266,7 @@ def ogcapi_process_type_entry(proc, pd, src, url, by_key, assumed=()):
         deployment["processDescription"]["license"] = src["license"]
     # Inputs and outputs that this deployment passes as names of files stored on the server, not
     # as encoded data (profiles.yaml `server_side_files`), are declared by tier3_link_fields().
-    return build_entry(proc, pd, proc.get("definition") or pd.get("description") or "", deployment, None, list(assumed), by_key)
+    return build_entry(proc, pd, proc.get("definition") or pd.get("description") or "", deployment, None, list(assumed), by_key, parent)
 
 
 PROFILE_ROLE = "http://www.opengis.net/spec/wps/2.0/def/process-profile/"  # OGC 14-065r1 Table 22
@@ -1256,10 +1323,16 @@ def inherited_process_description(proc, pd, gp_root):
             if live not in pd[side] or name not in ip[side]:
                 sys.exit(f"{proc['key']}: binding {side} {live} -> {name}: unknown on the deployed process or on {ip_key}")
         for name, d in (decomposed.get(side) or {}).items():
-            unknown = [p for p in d["parts"] + [d["selector"]["name"]] * bool(d.get("selector")) if p not in pd[side]]
+            unknown = [p for p in d["parts"] + [c["name"] for c in d.get("selectors", [])] if p not in pd[side]]
             if name not in ip[side] or unknown or name in bound.values():
                 sys.exit(f"{proc['key']}: role decomposition {side} {name}: unknown role on {ip_key}, "
                          f"unknown parts {unknown}, or the role is also bound")
+            for c in d.get("selectors", []):
+                # a selector value must be one the deployed input accepts
+                allowed = pd[side][c["name"]].get("schema", {}).get("enum")
+                if not allowed or set(c["values"]) - set(allowed):
+                    sys.exit(f"{proc['key']}: role decomposition {side} {name}: selector {c['name']} {c['values']} "
+                             f"not within the values the deployment accepts ({allowed})")
         missing = set(ip[side]) - set(bound.values()) - set(unbound) - set(decomposed.get(side) or {})
         if missing:
             sys.exit(f"{proc['key']}: {ip_key} {side} {sorted(missing)} neither bound, decomposed nor `unbound` in profiles.yaml")
@@ -1335,6 +1408,72 @@ def representation_media_types(df_root, iri):
     return fmt, types
 
 
+# The JSON types a deployed input/output may have to be bound to a role that names no
+# representation, by the role's data type. A data type not listed here stops the generator.
+LITERAL_TYPES = {
+    "number": {"number", "integer"},
+    "boolean": {"boolean"},
+    "expression": {"string"},
+    "format-identifier": {"string"},
+    "coordinate-reference-system": {"string", "integer"},
+    "radiometric-index": {"string"},
+}
+
+
+def _json_types(schema):
+    found = set()
+
+    def walk(node):
+        if isinstance(node, dict):
+            t = node.get("type")
+            if t == "array" and "items" in node:
+                walk(node["items"])
+            elif t:
+                found.update(t if isinstance(t, list) else [t])
+            for k in ("oneOf", "anyOf", "allOf"):
+                for v in node.get(k, []):
+                    walk(v)
+    walk(schema)
+    return found
+
+
+def binding_check(proc, pd, ip):
+    """c6 of the phase-4 review: a deployed input/output bound to a role must have the nature of the
+    role, before any format is compared. Bound to a role with a representation (data: raster,
+    geometry, ...), it carries a media type, or it is a file name stored on the server
+    (`server_side_files`) and a string. Bound to a role without one, its JSON type is one of
+    LITERAL_TYPES for the role's data type, and it carries no media type. A server_side_files or
+    role_decompositions entry must also be needed: one whose role names no representation stops
+    the generator, as one whose representation is served does (format_check)."""
+    ssf = proc.get("server_side_files") or {}
+    for side in ("inputs", "outputs"):
+        bound = (proc.get("bindings", {}).get(side) or {})
+        for live, role in (ssf.get(side) or {}).items():
+            if bound.get(live) != role:
+                sys.exit(f"{proc['key']}: server_side_files {side} {live} -> {role}: not a binding of that role")
+            if not ip[side][role].get("representation"):
+                sys.exit(f"{proc['key']}: server_side_files {side} {live}: role `{role}` names no representation, "
+                         "the declaration is unnecessary")
+        for role, d in ((proc.get("role_decompositions") or {}).get(side) or {}).items():
+            if not ip[side][role].get("representation"):
+                sys.exit(f"{proc['key']}: role_decompositions {side} {role}: the role names no representation, "
+                         "the declaration is unnecessary")
+        for live, role in bound.items():
+            e, schema = ip[side][role], pd[side][live].get("schema")
+            dtype = e["dataType"].rsplit("/", 1)[-1]
+            media, types = _media_types(schema), _json_types(schema)
+            if e.get("representation"):
+                if not media and not ((ssf.get(side) or {}).get(live) == role and types == {"string"}):
+                    sys.exit(f"{proc['key']}: {side} {live} ({sorted(types)}, no media type) is bound to `{role}`, "
+                             f"a {dtype} role with a representation: neither encoded data nor a declared server-side file")
+            else:
+                if dtype not in LITERAL_TYPES:
+                    sys.exit(f"{proc['key']}: {side} {live} -> `{role}`: data type {dtype} has no entry in LITERAL_TYPES")
+                if media or not types or types - LITERAL_TYPES[dtype]:
+                    sys.exit(f"{proc['key']}: {side} {live} ({sorted(types)}{', media ' + str(sorted(media)) if media else ''}) "
+                             f"is bound to `{role}`, a {dtype} role, which takes {sorted(LITERAL_TYPES[dtype])}")
+
+
 def format_check(proc, pd, gp_root, df_root):
     """A4.3: compare, role by role, the representations of the Implementation Profile with the
     media types this deployment serves (`schema` of the bound inputs and outputs, decision D6).
@@ -1348,6 +1487,7 @@ def format_check(proc, pd, gp_root, df_root):
     assumedFormatGaps."""
     ip_key = proc["implementsProfile"].rstrip("/").rsplit("/", 1)[-1]
     ip = json.loads((gp_root / "_sources" / "implementation-profile" / ip_key / "examples" / f"{ip_key}.json").read_text())
+    binding_check(proc, pd, ip)
     ssf = proc.get("server_side_files") or {}
     dec = proc.get("role_decompositions") or {}
     gaps = proc.get("format_gaps") or {}
@@ -1365,10 +1505,19 @@ def format_check(proc, pd, gp_root, df_root):
                        "format": fmt, "types": sorted(types), "served": sorted(served)}
                 ssf_lives = [l for l in lives.get(role, []) if (ssf.get(side) or {}).get(l) == role]
                 gap_lives = [l for l in lives.get(role, []) if l in declared_gaps]
+                dec_served = set().union(*(_media_types(pd[side][p].get("schema"))
+                                           for p in ((dec.get(side) or {}).get(role) or {}).get("parts", [])))
+                if types & dec_served:
+                    sys.exit(f"{proc['key']}: role_decompositions {side} {role}: a part serves {fmt}, "
+                             "the declaration is unnecessary")
                 if types & served:
                     row["status"] = "served"
                     if gap_lives:
                         sys.exit(f"{proc['key']}: format_gaps {side} {gap_lives}: {fmt} is served, the gap is stale")
+                    stale = [l for l in lives.get(role, []) if (ssf.get(side) or {}).get(l) == role
+                             and types & _media_types(pd[side][l].get("schema"))]
+                    if stale:
+                        sys.exit(f"{proc['key']}: server_side_files {side} {stale}: {fmt} is served, the declaration is unnecessary")
                 elif ssf_lives:
                     row["status"] = "server-side file"
                 elif role in (dec.get(side) or {}):
@@ -1457,8 +1606,8 @@ def tier3_link_fields(proc, assumed):
         for side in ("inputs", "outputs"):
             for role, d in (dec.get(side) or {}).items():
                 item = {"side": side, "implements": f"{ip}/{side}/{role}", "parts": d["parts"]}
-                if d.get("selector"):
-                    item["selector"] = d["selector"]
+                if d.get("selectors"):
+                    item["selectors"] = d["selectors"]
                 item["note"] = " ".join(d["note"].split())
                 out["roleDecompositions"].append(item)
     if assumed:
@@ -1674,7 +1823,8 @@ def md_binding(proc, pd, gp_root, why):
         for name, d in (dec.get(side) or {}).items():
             lines += ["", f"**Role decomposition.** The {side[:-1]} `{name}` is taken as "
                       + ", ".join(f"`{p}`" for p in d["parts"])
-                      + (f" (with `{d['selector']['name']}` = `{d['selector']['value']}`)" if d.get("selector") else "")
+                      + (" (only with " + " and ".join(f"`{c['name']}` in " + ", ".join(f"`{v}`" for v in c["values"])
+                                                       for c in d["selectors"]) + ")" if d.get("selectors") else "")
                       + ": " + " ".join(d["note"].split())
                       + " Declared in `roleDecompositions` of `process-type.json`; its representation is not served "
                       "(`docs/FORMAT-CHECK.md`)."]
@@ -1698,7 +1848,7 @@ def generate_ogcapi_profiles(sources, roots, by_key, ogcapi_procs, gp_root, df_r
         dump_json(exd / "processDescription.inherited.json", inherited)
         rows, assumed = format_check(proc, pd, gp_root, df_root)
         checks.append((proc, rows, assumed))
-        entry = ogcapi_process_type_entry(proc, pd, src, url, by_key, assumed)
+        entry = ogcapi_process_type_entry(proc, pd, src, url, by_key, assumed, parent_activity_type(proc, gp_root))
         dump_json(exd / "process-type.json", entry)
         dump_json(out / "context.jsonld", PROFILE_CONTEXT)
         dump_yaml(out / "schema.yaml", ogcapi_profile_schema(pd, inherited_schema))
@@ -1708,12 +1858,67 @@ def generate_ogcapi_profiles(sources, roots, by_key, ogcapi_procs, gp_root, df_r
         print(f"{bb_id(proc):60s} {'OGCAPIProcess':16s} (static processDescription only)")
 
 
-def sync_process_type_schema(pt):
-    """Write ATR_ITEM_CLASS into the otherwise hand-written process-type schema."""
+def all_activity_types(gp_root):
+    out = {}
+    for f in sorted((gp_root / "_sources" / "activity-type").glob("*/examples/*.json")):
+        at = json.loads(f.read_text())
+        out[at["id"]] = at
+    return out
+
+
+def sync_process_type_schema(pt, gp_root):
+    """Write into the otherwise hand-written process-type schema what comes from elsewhere:
+    ATR_ITEM_CLASS, and the parents an entry may specialise -- acttype:ActivityType, or one of the
+    activity types of bblocks-generic-profiles (an enum, so that no other value passes)."""
     path = pt / "schema.yaml"
     schema = yaml.safe_load(path.read_text())
-    schema["allOf"][1]["properties"]["itemClass"]["const"] = ATR_ITEM_CLASS
+    props = schema["allOf"][1]["properties"]
+    props["itemClass"]["const"] = ATR_ITEM_CLASS
+    props["subClassOf"]["enum"] = [ACTIVITY_TYPE_CLASS] + sorted(all_activity_types(gp_root))
     dump_yaml(path, schema)
+
+
+def write_process_type_fixtures(pt):
+    """JSON fixtures of the process-type schema, each the entry of kindgrove-steps.reproject-band
+    with one defect, so that they follow the entries: an amendment without classification or
+    classified correctional (not available, pp:specification), a parent class outside the enum,
+    a specialisation without entity type."""
+    base = json.loads((ROOT / "_sources/kindgrove-steps/reproject-band/examples/process-type.json").read_text())
+
+    def amendment(d):
+        return next(a for a in d["hasAction"] if a["actionType"] == AMENDMENT_ACTION)
+    cases = {
+        "amendment-without-classification-fail.json": lambda d: amendment(d).pop("changeClassification"),
+        "amendment-correctional-fail.json": lambda d: amendment(d).update(changeClassification="correctional"),
+        "arbitrary-parent-fail.json": lambda d: d.update(subClassOf="https://example.org/not-an-activity-type"),
+        "specialised-without-entity-type-fail.json": lambda d: [d.pop(k) for k in ("usedEntityType", "generatedEntityType")],
+    }
+    for name, defect in cases.items():
+        d = copy.deepcopy(base)
+        defect(d)
+        dump_json(pt / "tests" / name, d)
+
+
+def write_parent_closure(pt, gp_root):
+    """_sources/process-type/activity-type-parents.ttl, a data resource of the process-type block,
+    so in the SHACL closure of every process profile: for each activity type of
+    bblocks-generic-profiles, its rdfs:subClassOf geoproc:GeoprocessingActivityType and its entity
+    types, as that register states them. With it, geoproc:GeoprocessingActivityTypesShape (Activity
+    Type Register) reaches a process type that specialises one of them, and pp:ProcessTypeShape
+    compares the entity types. The activity types are not typed here: they are items of
+    bblocks-generic-profiles, validated there, and the shapes that target acttype:ActivityType must
+    not run on them in this register."""
+    lines = ["# Generated by scripts/generate.py from the activity types of bblocks-generic-profiles. Do not edit.",
+             "# Only what the shapes of this register need: each activity type's parent class and entity types.",
+             "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .",
+             f"@prefix acttype: <{ACTTYPE_NS}> .", ""]
+    for iri, at in all_activity_types(gp_root).items():
+        triples = [f"rdfs:subClassOf <{at['subClassOf']}>"]
+        for k in ("usedEntityType", "generatedEntityType"):
+            for v in _lst(at.get(k) or []):
+                triples.append(f"acttype:{k} <{v}>")
+        lines.append(f"<{iri}> " + " ;\n    ".join(triples) + " .")
+    (pt / "activity-type-parents.ttl").write_text("\n".join(lines) + "\n")
 
 
 # ------------------------------------------------------------------ main
@@ -1757,6 +1962,10 @@ def main():
             sys.exit(f"{proc['key']}: `tier3: {{status: attached | not attached, reason: ...}}` is required")
         if (att["status"] == "attached") != bool(proc.get("implementsProfile")):
             sys.exit(f"{proc['key']}: tier3.status and implementsProfile disagree")
+        if proc.get("unbound"):
+            # The attachment rule for the CWL processes (docs/ATTACHMENTS.md): every role of the
+            # Implementation Profile is implemented, by binding or declared decomposition.
+            sys.exit(f"{proc['key']}: a CWL process attached to tier 3 leaves no role `unbound`")
     by_key = {p["key"]: p for p in all_procs}
     if len(by_key) != len(all_procs):
         dupes = sorted({p["key"] for p in all_procs if [q["key"] for q in all_procs].count(p["key"]) > 1})
@@ -1842,7 +2051,7 @@ def main():
             dump_json(exd / "processDescription.inherited.json", inherited)
             rows, assumed = format_check(proc, pd, a.generic_profiles, a.data_formats)
             checks.append((proc, rows, assumed))
-        entry = process_type_entry(proc, pd, cwl_el, src, url, by_key, assumed)
+        entry = process_type_entry(proc, pd, cwl_el, src, url, by_key, assumed, parent_activity_type(proc, a.generic_profiles))
         dump_json(exd / "process-type.json", entry)
         w3c_prov_example(info, exd)
 
@@ -1866,7 +2075,9 @@ def main():
 
     # shared process-type example: reproject-image entry
     pt = ROOT / "_sources" / "process-type"
-    sync_process_type_schema(pt)
+    sync_process_type_schema(pt, a.generic_profiles)
+    write_process_type_fixtures(pt)
+    write_parent_closure(pt, a.generic_profiles)
     dump_json(pt / "examples" / "reproject-image.json",
               json.loads((ROOT / "_sources/algae-bloom/reproject-image/examples/process-type.json").read_text()))
     dump_json(pt / "examples" / "kindgrove-mangrove.json",
@@ -1885,6 +2096,10 @@ def main():
          "snippets": [{"language": "json", "ref": "examples/kindgrove-steps-reproject-band.json"}]},
         {"title": "OTB.ExtractROI (live, attached to raster-crop, role decomposition)", "base-uri": PROCESS_BASE,
          "snippets": [{"language": "json", "ref": "examples/raster-extract-roi.json"}]},
+        {"title": "The register, its specification and its amendment action type",
+         "content": "The ontology of this block, validated as data: this checks `pp:register` and `pp:specification` "
+                    "against the shapes of the Registered Item Model.",
+         "snippets": [{"language": "turtle", "ref": "ontology.ttl"}]},
     ])
 
     # README tables, one per population (A4.5), between their markers
@@ -1947,15 +2162,25 @@ Generated by `scripts/generate.py` from `tier3` in `scripts/profiles.yaml` (A4.1
 separation). Each of the {cwl} CWL processes of the OSPD reference workflows is compared with the
 signatures of `bblocks-generic-profiles`: its inputs and outputs (as derived from its CWL) against the
 roles of the candidate Implementation Profile (tier 3), of the Generic Profile it refines (tier 2) and
-of that profile's Process Concept (tier 1). A process is attached (`implementsProfile`) only when
-every role of the Implementation Profile is implemented by one of its inputs/outputs, possibly with
-inputs/outputs of its own (Table 21 footnote b), and when the activity type of that profile means
-what the process does. A process with no fitting profile is listed as not attached, with the reason
-and, where one exists, the closest profile; it is not forced. A gap in the tiers may justify a new
-Generic or Implementation Profile: listed as proposals, none created here.
+of that profile's Process Concept (tier 1).
 
-The {live} live processes of the Geonovum testbed are all attached, one per Implementation Profile
-(README, second table).
+**The rule, as applied.** A CWL process is attached (`implementsProfile`) when the activity type of the
+profile means what the process does, and every role of the Implementation Profile is implemented:
+bound to one or more of its inputs/outputs of the role's nature and within the role's cardinality
+(`bindings`; the generator checks the nature), or taken as several inputs declared as a role
+decomposition (`role_decompositions`). It may have inputs/outputs of its own (Table 21 footnote b).
+A CWL process may leave no role unbound; the generator stops if one does. A process with no fitting
+profile is listed as not attached, with the reason and, where one exists, the closest profile; it is
+not forced. A gap in the tiers may justify a new Generic or Implementation Profile: listed as
+proposals, none created here.
+
+**The testbed exception.** The {live} live processes of the Geonovum testbed are all attached, one per
+Implementation Profile (README, second table): each is the deployment from which its Implementation
+Profile was written. They follow the same rule with one exception: a role the deployment exposes no
+input for may be left `unbound`, with its reason. One is: `raster.radiometric-index` leaves `index`
+of radiometric-index unbound (OTB RadiometricIndices' `list` parameter is not exposed).
+`raster.extract-roi` takes `areaOfInterest` of raster-crop as a declared role decomposition, which
+the rule allows, only with `mode.extent.unit` in `phy` or `lonlat`.
 """
 
 

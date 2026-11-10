@@ -1,15 +1,16 @@
 {
   "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
   "name": "Process type register entry",
-  "abstract": "Candidate ActivityType register entry for each deployed OSPD process (decision D5: one per deployed process), its meaning kept apart from its six-phase classification, its deployment, its plan and its openEO correspondences, and linked to the Implementation Profile it implements. Its shapes check the data type of tier-4 inputs and outputs.",
+  "abstract": "Candidate ActivityType register entry for each deployed OSPD process (decision D5: one per deployed process), its meaning kept apart from its six-phase classification, its deployment, its plan and its openEO correspondences, and linked to the Implementation Profile it implements, whose operation's activity type it then specialises. Its shapes check the data type of tier-4 inputs and outputs.",
   "status": "under-development",
   "dateTimeAddition": "2026-09-22T00:00:00Z",
-  "dateOfLastChange": "2026-11-09",
+  "dateOfLastChange": "2026-11-10",
   "version": "0.1",
   "itemClass": "schema",
   "register": "process-profiles",
   "dependsOn": [
     "ogc.register.schemas.activity-types-schema",
+    "ogc.register.geoprocessing-activity-types",
     "data-types.vocabulary"
   ],
   "seeAlso": [
@@ -54,5 +55,13 @@
   ],
   "shaclShapes": [
     "shapes.shacl"
+  ],
+  "resources": [
+    {
+      "role": "data",
+      "ref": "activity-type-parents.ttl",
+      "format": "text/turtle",
+      "title": "Parent class and entity types of each activity type of bblocks-generic-profiles (generated), for the shapes of this block"
+    }
   ]
 }

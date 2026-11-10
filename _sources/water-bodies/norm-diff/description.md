@@ -44,7 +44,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Normalized difference (A-B)/(A+B) of exactly two single-band rasters (`nargs=2`), one single-band Float32 GeoTIFF out. Its meaning is a radiometric index, but the Implementation Profile radiometric-index restricts `rasters` to one pre-stacked multi-band image (maxOccurs 1) and has an `index` role no input selects; raster-band-math means a user-supplied expression, which norm-diff does not take.
+Not attached to an Implementation Profile of bblocks-generic-profiles: Normalized difference (A-B)/(A+B) of exactly two single-band rasters (`nargs=2`), one single-band Float32 GeoTIFF out. Its meaning is a radiometric index, but the Implementation Profile radiometric-index restricts `rasters` to maxOccurs 1 (one pre-stacked multi-band image), and norm-diff takes two. raster-band-math means a user-supplied expression, which norm-diff does not take.
 
 The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
 

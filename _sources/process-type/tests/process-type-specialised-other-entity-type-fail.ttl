@@ -1,0 +1,34 @@
+# Must fail: an otherwise valid process type that specialises raster-reprojection with a spatial
+# entity type other than its parent's (geo:Geometry used, where the parent uses geo:Feature).
+# Only pp:ProcessTypeShape can reject it (entity types of the parent).
+@prefix pp:      <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
+@prefix rim:     <https://w3id.org/ogc/rim/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix phase:   <https://geolabs.github.io/bblocks-process-profiles/def/phase/> .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/fixture/specialised-other-entity-type-fail> a pp:ProcessType , acttype:ActivityType , owl:Class ;
+    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/fixture/specialised-other-entity-type-fail"^^xsd:anyURI ;
+    rim:itemClass acttype:activityTypeItemClass ;
+    rim:inRegister pp:register ;
+    rim:validityStatus rim:invalid ;
+    rim:publicationStatus rim:published ;
+    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/fixture/specialised-other-entity-type-fail/actions/addition> ;
+    skos:prefLabel "Fixture" ;
+    skos:definition "A fixture process type." ;
+    rdfs:subClassOf <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection> ;
+    acttype:usedEntityType <http://www.opengis.net/ont/geosparql#Geometry> ;
+    acttype:generatedEntityType <http://www.opengis.net/ont/geosparql#Feature> ;
+    skos:inScheme pp:process-type ;
+    pp:phase phase:pre-processing ;
+    pp:deployment [ pp:profile "ospd.process-profiles.fixture" ; pp:provenanceClass <http://purl.org/wf4ever/wfprov#ProcessRun> ] .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/fixture/specialised-other-entity-type-fail/actions/addition> a rim:RegisterAction ;
+    rim:actionType rim:additionAction ;
+    rim:proposer pp:geolabs ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/fixture/specialised-other-entity-type-fail> ;
+    prov:startedAtTime "2026-11-09T00:00:00Z"^^xsd:dateTime .

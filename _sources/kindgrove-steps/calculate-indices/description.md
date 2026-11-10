@@ -44,7 +44,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Computes NDVI, NDWI and SAVI from a list of band files, as three separate outputs. The meaning is the Generic Profile radiometric-index, but its single output role cannot take three outputs, its Implementation Profile restricts `rasters` to one multi-band image, and no input selects the index.
+Not attached to an Implementation Profile of bblocks-generic-profiles: Computes NDVI, NDWI and SAVI from a list of band files, as three separate outputs. The meaning is the Generic Profile radiometric-index, but its single output role cannot take three outputs, and no input selects the index; its Implementation Profile also restricts `rasters` to maxOccurs 1.
 
 The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
 

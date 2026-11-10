@@ -48,7 +48,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Not attached to an Implementation Profile of bblocks-generic-profiles: Its CWL runs gdalwarp with `-ts`/`-tr` only (target size or resolution) and has no target CRS input (`-t_srs` is never passed): it resamples, it does not reproject. The role `targetCRS` of raster-reprojection would have no input, and that profile's activity type means a change of coordinate reference system.
+Not attached to an Implementation Profile of bblocks-generic-profiles: Its CWL runs gdalwarp with `-ts`/`-tr` only (target size or resolution) and has no target CRS input (`-t_srs` is never passed): it resamples, it does not reproject. The role `targetCRS` of raster-reprojection would have no input, and that profile's activity type means a change of coordinate reference system. raster-format-conversion is ruled out too: the output format is fixed by the CWL (`-of GTiff`), so its role `targetFormat` would have no input either.
 
 The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
 

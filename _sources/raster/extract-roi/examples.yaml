@@ -20,8 +20,8 @@
     of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings`
     in scripts/profiles.yaml; inputs/outputs bound to none are the deployment''s own additions (footnote
     b). `areaOfInterest` is taken as `mode.extent.ulx`, `mode.extent.uly`, `mode.extent.lrx`, `mode.extent.lry`,
-    `mode.extent.unit`, none of which is the role: declared in `roleDecompositions` of the process-type
-    entry. Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).'
+    none of which is the role: declared in `roleDecompositions` of the process-type entry. Not what the
+    deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).'
   snippets:
   - language: json
     ref: examples/processDescription.inherited.json

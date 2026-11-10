@@ -27,11 +27,11 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 | Deployed | Implementation Profile | Data type |
 |---|---|---|
 | `in` | input `raster` | `raster` |
-| `mode.extent.ulx`, `mode.extent.uly`, `mode.extent.lrx`, `mode.extent.lry`, `mode.extent.unit` (role decomposition) | input `areaOfInterest` | `bounding-box` |
-| `out`, `mode`, `mode.fit.im`, `mode.fit.vect`, `mode.radius.r`, `mode.radius.unitr`, `mode.radius.cx`, `mode.radius.cy`, `mode.radius.unitc`, `startx`, `starty`, `sizex`, `sizey`, `elev`, `elev.geoid`, `elev.default`, `ram` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `mode.extent.ulx`, `mode.extent.uly`, `mode.extent.lrx`, `mode.extent.lry` (role decomposition) | input `areaOfInterest` | `bounding-box` |
+| `out`, `mode`, `mode.fit.im`, `mode.fit.vect`, `mode.extent.unit`, `mode.radius.r`, `mode.radius.unitr`, `mode.radius.cx`, `mode.radius.cy`, `mode.radius.unitc`, `startx`, `starty`, `sizex`, `sizey`, `elev`, `elev.geoid`, `elev.default`, `ram` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
 | `out` | output `raster` | `raster` |
 
-**Role decomposition.** The input `areaOfInterest` is taken as `mode.extent.ulx`, `mode.extent.uly`, `mode.extent.lrx`, `mode.extent.lry`, `mode.extent.unit` (with `mode` = `extent`): With `mode` set to `extent`, OTB ExtractROI takes the area of interest as the upper-left (`mode.extent.ulx`, `mode.extent.uly`) and lower-right (`mode.extent.lrx`, `mode.extent.lry`) corners, plain numbers, in the unit given by `mode.extent.unit` (`pxl`, `phy` or `lonlat`), not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served. Declared in `roleDecompositions` of `process-type.json`; its representation is not served (`docs/FORMAT-CHECK.md`).
+**Role decomposition.** The input `areaOfInterest` is taken as `mode.extent.ulx`, `mode.extent.uly`, `mode.extent.lrx`, `mode.extent.lry` (only with `mode` in `extent` and `mode.extent.unit` in `phy`, `lonlat`): With `mode` set to `extent` and `mode.extent.unit` set to `phy` (coordinates in the image's physical space, its CRS) or `lonlat` (longitude and latitude), OTB ExtractROI takes the area of interest as the upper-left (`mode.extent.ulx`, `mode.extent.uly`) and lower-right (`mode.extent.lrx`, `mode.extent.lry`) corners, plain numbers, not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served. With the default unit `pxl` the four numbers are pixel indices, not a bounding box, and the role is not implemented. Declared in `roleDecompositions` of `process-type.json`; its representation is not served (`docs/FORMAT-CHECK.md`).
 
 ## Examples
 

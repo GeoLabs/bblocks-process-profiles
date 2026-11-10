@@ -17,8 +17,37 @@ pp:ProcessTypeShape a sh:NodeShape ;
                   sh:message "A process type must belong to pp:process-type." ] ;
     sh:property [ sh:path rdf:type ; sh:hasValue owl:Class ;
                   sh:message "A process-type IRI must also be an OWL class because provenance uses it as rdf:type." ] ;
-    sh:property [ sh:path rdfs:subClassOf ; sh:hasValue acttype:ActivityType ;
-                  sh:message "A process-type class must specialise acttype:ActivityType." ] ;
+    # Decision D5, applied 2026-11-10: a process type specialises acttype:ActivityType or, when it
+    # implements an Implementation Profile, the activity type of its operation in
+    # bblocks-generic-profiles. geoproc:GeoprocessingActivityTypesShape (Activity Type Register,
+    # loaded through dependsOn) then requires it to declare a spatial entity type; the parent's
+    # subClassOf reaches the data graph through activity-type-parents.ttl, a data resource of this block.
+    sh:property [ sh:path rdfs:subClassOf ; sh:minCount 1 ; sh:maxCount 1 ;
+                  sh:or ( [ sh:in ( acttype:ActivityType ) ]
+                          [ sh:nodeKind sh:IRI ;
+                            sh:pattern "^https://geolabs\\.github\\.io/bblocks-generic-profiles/def/activity-type/[a-z0-9-]+$" ] ) ;
+                  sh:message "A process-type class specialises acttype:ActivityType or one activity type of bblocks-generic-profiles." ] ;
+    # The decision of 2026-11-10 (B of phase 3 at tier 4): the same entity types as the parent
+    # activity type, no more and no fewer.
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "A process type that specialises an activity type declares the same entity types as it." ;
+        sh:select """
+            SELECT $this ?path ?value WHERE {
+                $this <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?parent .
+                FILTER (STRSTARTS(STR(?parent), "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/"))
+                {
+                    ?parent ?path ?value .
+                    FILTER NOT EXISTS { $this ?path ?value }
+                } UNION {
+                    $this ?path ?value .
+                    FILTER NOT EXISTS { ?parent ?path ?value }
+                }
+                FILTER (?path IN (<https://w3id.org/ogc/rim/activity-type/usedEntityType>,
+                                  <https://w3id.org/ogc/rim/activity-type/generatedEntityType>))
+            }
+        """
+    ] ;
     # Decision D5: the six phases classify a type (pp:phase); they are not broader concepts of it,
     # and what is deployed is a node of its own (pp:deployment), not statements on the type.
     sh:property [ sh:path skos:broader ; sh:maxCount 0 ;

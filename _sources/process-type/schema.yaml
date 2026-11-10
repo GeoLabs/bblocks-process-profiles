@@ -2,7 +2,9 @@ $schema: https://json-schema.org/draft/2020-12/schema
 title: Registered Process Activity Type
 description: 'A candidate process-type register item which is also a class used as the PROV rdf:type of
   executions. It profiles the Registered Item Model activity-type schema; each entry is both an acttype:ActivityType
-  register item and an owl:Class specialising acttype:ActivityType.
+  register item and an owl:Class specialising acttype:ActivityType, or, when it implements an Implementation
+  Profile, the activity type of its operation in bblocks-generic-profiles, with the same GeoSPARQL entity
+  types.
 
 
   Decision D5: one entry per deployed process, in five parts. Its meaning is `prefLabel`, `definition`
@@ -227,19 +229,27 @@ allOf:
             minItems: 2
             items:
               type: string
-          selector:
-            description: The input, and its value, under which the parts are read.
-            type: object
-            required:
-            - name
-            - value
-            properties:
-              name:
-                type: string
-              value:
-                type: string
           note:
             type: string
+          selectors:
+            description: 'The conditions under which the parts implement the role: each a deployed input
+              and the values it must take.'
+            type: array
+            minItems: 1
+            items:
+              type: object
+              required:
+              - name
+              - values
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                values:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: string
     assumedFormatGaps:
       description: Bound inputs and outputs whose Implementation Profile representation this deployment
         does not serve (no media type exposed), accepted with a reason and its evidence (A4.3, docs/FORMAT-CHECK.md).
@@ -366,30 +376,185 @@ allOf:
       - published
       - unpublished
     subClassOf:
-      const: https://w3id.org/ogc/rim/activity-type/ActivityType
+      description: 'The parent class: acttype:ActivityType, or, for a process attached to an Implementation
+        Profile, the activity type of its operation in bblocks-generic-profiles (decision D5, 2026-11-10).
+        The enum is written by scripts/generate.py from the activity types of that register, so that no
+        other value passes.'
+      enum:
+      - https://w3id.org/ogc/rim/activity-type/ActivityType
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/analytical-hillshading
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/area
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/buffer
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/centroid
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/contains
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/convex-hull
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/crosses
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/difference
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/disjoint
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/equals
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/geometry-extent
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersection
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersects
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/is-simple
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-thinning
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-to-grid
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-to-shapes
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math-multiband
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-crop
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-extent
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-format-conversion
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/slope
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/symdifference
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/terrain-ruggedness-index
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/topographic-position-index
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/touches
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/union
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/within
     hasAction:
-      type: object
-      required:
-      - id
-      - type
-      - actionType
-      - proposer
-      - startedAtTime
-      - appliesTo
-      properties:
-        id:
-          type: string
-          format: uri
-        type:
-          const: RegisterAction
-        actionType:
-          const: addition
-        proposer:
-          const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
-        startedAtTime:
-          type: string
-          format: date-time
-        appliesTo:
-          type: string
-          format: uri
+      description: 'The register actions of the entry: its addition, then each in-place amendment of the
+        proposal (pp:amendmentAction, always classified substantive or clarifying, pp:specification).'
+      type: array
+      minItems: 1
+      items:
+        oneOf:
+        - type: object
+          required:
+          - id
+          - type
+          - actionType
+          - proposer
+          - startedAtTime
+          - appliesTo
+          properties:
+            id:
+              type: string
+              format: uri
+            type:
+              const: RegisterAction
+            actionType:
+              const: addition
+            proposer:
+              const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
+            startedAtTime:
+              type: string
+              format: date-time
+            appliesTo:
+              type: string
+              format: uri
+        - type: object
+          required:
+          - id
+          - type
+          - actionType
+          - changeClassification
+          - description
+          - proposer
+          - startedAtTime
+          - appliesTo
+          properties:
+            id:
+              type: string
+              format: uri
+            type:
+              const: RegisterAction
+            actionType:
+              const: https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction
+            changeClassification:
+              enum:
+              - substantive
+              - clarifying
+            description:
+              type: string
+            proposer:
+              const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
+            startedAtTime:
+              type: string
+              format: date-time
+            appliesTo:
+              type: string
+              format: uri
+      contains:
+        type: object
+        required:
+        - id
+        - type
+        - actionType
+        - proposer
+        - startedAtTime
+        - appliesTo
+        properties:
+          id:
+            type: string
+            format: uri
+          type:
+            const: RegisterAction
+          actionType:
+            const: addition
+          proposer:
+            const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
+          startedAtTime:
+            type: string
+            format: date-time
+          appliesTo:
+            type: string
+            format: uri
+    usedEntityType:
+      description: 'acttype:usedEntityType: the GeoSPARQL class(es) of the parent activity type, repeated
+        (decision of 2026-11-10).'
+      anyOf:
+      - enum:
+        - http://www.opengis.net/ont/geosparql#SpatialObject
+        - http://www.opengis.net/ont/geosparql#Feature
+        - http://www.opengis.net/ont/geosparql#Geometry
+        - http://www.opengis.net/ont/geosparql#SpatialObjectCollection
+        - http://www.opengis.net/ont/geosparql#FeatureCollection
+        - http://www.opengis.net/ont/geosparql#GeometryCollection
+      - type: array
+        minItems: 1
+        items:
+          enum:
+          - http://www.opengis.net/ont/geosparql#SpatialObject
+          - http://www.opengis.net/ont/geosparql#Feature
+          - http://www.opengis.net/ont/geosparql#Geometry
+          - http://www.opengis.net/ont/geosparql#SpatialObjectCollection
+          - http://www.opengis.net/ont/geosparql#FeatureCollection
+          - http://www.opengis.net/ont/geosparql#GeometryCollection
+    generatedEntityType:
+      description: 'acttype:generatedEntityType: the GeoSPARQL class(es) of the parent activity type,
+        repeated (decision of 2026-11-10).'
+      anyOf:
+      - enum:
+        - http://www.opengis.net/ont/geosparql#SpatialObject
+        - http://www.opengis.net/ont/geosparql#Feature
+        - http://www.opengis.net/ont/geosparql#Geometry
+        - http://www.opengis.net/ont/geosparql#SpatialObjectCollection
+        - http://www.opengis.net/ont/geosparql#FeatureCollection
+        - http://www.opengis.net/ont/geosparql#GeometryCollection
+      - type: array
+        minItems: 1
+        items:
+          enum:
+          - http://www.opengis.net/ont/geosparql#SpatialObject
+          - http://www.opengis.net/ont/geosparql#Feature
+          - http://www.opengis.net/ont/geosparql#Geometry
+          - http://www.opengis.net/ont/geosparql#SpatialObjectCollection
+          - http://www.opengis.net/ont/geosparql#FeatureCollection
+          - http://www.opengis.net/ont/geosparql#GeometryCollection
   additionalProperties: true
+  allOf:
+  - if:
+      required:
+      - subClassOf
+      properties:
+        subClassOf:
+          not:
+            const: https://w3id.org/ogc/rim/activity-type/ActivityType
+    then:
+      anyOf:
+      - required:
+        - usedEntityType
+      - required:
+        - generatedEntityType

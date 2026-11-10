@@ -296,7 +296,8 @@ processes:
         Its CWL runs gdalwarp with `-ts`/`-tr` only (target size or resolution) and has no target CRS
         input (`-t_srs` is never passed): it resamples, it does not reproject. The role `targetCRS` of
         raster-reprojection would have no input, and that profile's activity type means a change of
-        coordinate reference system.
+        coordinate reference system. raster-format-conversion is ruled out too: the output format is
+        fixed by the CWL (`-of GTiff`), so its role `targetFormat` would have no input either.
       closest: raster-reprojection (raster in, raster out).
       proposal: >-
         A Generic Profile for raster resampling (raster, target size or resolution -> raster).
@@ -734,15 +735,18 @@ processes:
       reason: >-
         Normalized difference (A-B)/(A+B) of exactly two single-band rasters (`nargs=2`), one
         single-band Float32 GeoTIFF out. Its meaning is a radiometric index, but the Implementation
-        Profile radiometric-index restricts `rasters` to one pre-stacked multi-band image (maxOccurs
-        1) and has an `index` role no input selects; raster-band-math means a user-supplied
-        expression, which norm-diff does not take.
+        Profile radiometric-index restricts `rasters` to maxOccurs 1 (one pre-stacked multi-band
+        image), and norm-diff takes two. raster-band-math means a user-supplied expression, which
+        norm-diff does not take.
       closest: >-
         the Generic Profile radiometric-index (tier 2), whose `rasters` takes one or more rasters.
       proposal: >-
-        A second Implementation Profile of the Generic Profile radiometric-index taking separate
-        single-band rasters (no maxOccurs 1), for water-bodies.norm-diff and
-        kindgrove-steps.calculate-indices.
+        A Generic Profile for the normalized difference (two single-band rasters in a fixed order ->
+        one single-band raster), under the Process Concept raster-coverage-processing, and its
+        Implementation Profile with GeoTIFF representations, for water-bodies.norm-diff. A second
+        Implementation Profile of radiometric-index would not do: it keeps the role `index`, which
+        no input of norm-diff selects, and its single output role. kindgrove-steps.calculate-indices
+        (three fixed indices, three outputs) is not covered; no proposal for it.
     cct: []
     cct_candidates: []
     parents: [detect-water-body]
@@ -1021,8 +1025,10 @@ processes:
           evidence: >-
             Run record `kindgrove-steps` (scripts/sources.yaml): the three band_file inputs (red.tif,
             green.tif, nir.tif) and the three reprojected_file outputs (red_4326.tif, green_4326.tif,
-            nir_4326.tif) start with the TIFF magic number 49 49 2a 00 (observed 2026-11-09); GeoTIFF
-            tags not checked.
+            nir_4326.tif), the files of runs/kindgrove-steps/ro/data/ that primary.cwlprov.provn links to
+            them by specializationOf (lines 157-268), are TIFF files (magic number 49 49 2a 00) carrying
+            the GeoTIFF tags GeoKeyDirectory (34735), ModelTiepoint (33922) and ModelPixelScale (33550),
+            observed 2026-11-10.
       outputs:
         reprojected_file: *kindgrove-steps-no-format
     cct: []
@@ -1057,12 +1063,9 @@ processes:
       reason: >-
         Computes NDVI, NDWI and SAVI from a list of band files, as three separate outputs. The meaning
         is the Generic Profile radiometric-index, but its single output role cannot take three
-        outputs, its Implementation Profile restricts `rasters` to one multi-band image, and no input
-        selects the index.
+        outputs, and no input selects the index; its Implementation Profile also restricts `rasters`
+        to maxOccurs 1.
       closest: the Generic Profile radiometric-index (tier 2).
-      proposal: >-
-        A second Implementation Profile of the Generic Profile radiometric-index taking separate
-        single-band rasters (no maxOccurs 1), for water-bodies.norm-diff and kindgrove-steps.calculate-indices.
     cct: []
     cct_candidates: []
     parents: [mangrove-workflow-steps]
@@ -1353,6 +1356,14 @@ ogcapi_processes:
         ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process
         reads or writes it there. Its format is the representation of the Implementation Profile
         role it implements (GeoTIFF for raster).
+    amendments:
+      - id: server-side-files-2026-11-09
+        date: "2026-11-09"
+        classification: substantive
+        description: >-
+          serverSideFiles added: the raster input and output are names of files stored on the server
+          (ZOO-Kernel dataPath), with no media type, each naming the Implementation Profile role it
+          implements.
     tool:
       name: GDAL gdalwarp
       doc: https://gdal.org/programs/gdalwarp.html
@@ -1442,14 +1453,34 @@ ogcapi_processes:
     role_decompositions:
       inputs:
         areaOfInterest:
-          parts: [mode.extent.ulx, mode.extent.uly, mode.extent.lrx, mode.extent.lry, mode.extent.unit]
-          selector: {name: mode, value: extent}
+          parts: [mode.extent.ulx, mode.extent.uly, mode.extent.lrx, mode.extent.lry]
+          # pxl, the default of mode.extent.unit, gives pixel indices, not a bounding box: the role is
+          # implemented only with phy (image physical space, the image's CRS) or lonlat.
+          selectors:
+            - {name: mode, values: [extent]}
+            - {name: mode.extent.unit, values: [phy, lonlat]}
           note: >-
-            With `mode` set to `extent`, OTB ExtractROI takes the area of interest as the upper-left
-            (`mode.extent.ulx`, `mode.extent.uly`) and lower-right (`mode.extent.lrx`, `mode.extent.lry`)
-            corners, plain numbers, in the unit given by `mode.extent.unit` (`pxl`, `phy` or `lonlat`),
-            not as one OGC API - Processes bounding box: the representation
-            bounding-box-ogcapi-processes-bbox of the role is not served.
+            With `mode` set to `extent` and `mode.extent.unit` set to `phy` (coordinates in the
+            image's physical space, its CRS) or `lonlat` (longitude and latitude), OTB ExtractROI takes
+            the area of interest as the upper-left (`mode.extent.ulx`, `mode.extent.uly`) and lower-right
+            (`mode.extent.lrx`, `mode.extent.lry`) corners, plain numbers, not as one OGC API - Processes
+            bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not
+            served. With the default unit `pxl` the four numbers are pixel indices, not a bounding box,
+            and the role is not implemented.
+    amendments:
+      - id: role-decomposition-2026-11-09
+        date: "2026-11-09"
+        classification: substantive
+        description: >-
+          roleDecompositions added: the role areaOfInterest of raster-crop is taken as
+          mode.extent.ulx, uly, lrx, lry and mode.extent.unit, with mode = extent (decision of
+          2026-11-09); before, the role was left unbound.
+      - id: role-decomposition-unit-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          The role decomposition is restricted to mode.extent.unit in phy or lonlat, a selector instead
+          of a part: with the default unit pxl the four numbers are pixel indices, not a bounding box.
     tool:
       name: OTB ExtractROI
       doc: https://www.orfeo-toolbox.org/CookBook/Applications/app_ExtractROI.html
@@ -1485,6 +1516,14 @@ ogcapi_processes:
         ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process
         reads or writes it there. Its format is the representation of the Implementation Profile
         role it implements (GeoTIFF for raster).
+    amendments:
+      - id: server-side-files-2026-11-09
+        date: "2026-11-09"
+        classification: substantive
+        description: >-
+          serverSideFiles added: the raster input and output are names of files stored on the server
+          (ZOO-Kernel dataPath), with no media type, each naming the Implementation Profile role it
+          implements.
     tool:
       name: GDAL gdal_translate
       doc: https://gdal.org/programs/gdal_translate.html

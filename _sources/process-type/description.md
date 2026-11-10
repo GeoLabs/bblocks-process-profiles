@@ -42,14 +42,20 @@ this deployment implements), with the declarations that qualify how the deployme
 profile's roles: `serverSideFiles`, `roleDecompositions` and `assumedFormatGaps`
 (`docs/FORMAT-CHECK.md`). `hasStep` lists the types of a Workflow's steps.
 
-**Specialisation, not done.** D5 has each type specialise the activity type of its operation in
-bblocks-generic-profiles when one exists (`subClassOf`). That activity type is a sub-class of
-`geoproc:GeoprocessingActivityType`, and the Activity Type Register requires every registered
-sub-class of it, at any depth, to declare its own spatial `acttype:usedEntityType` or
-`acttype:generatedEntityType` (`geoproc:GeoprocessingActivityTypesShape`). Which entity type a process
-type declares is decision D8, still pending, so `subClassOf` stays `acttype:ActivityType` and the
-`const` on `subClassOf` and `type` is kept. The operation's meaning is reached today through
-`implementsProfile`, whose Implementation Profile points to its activity type.
+**Specialisation (decision of 2026-11-10).** A process type that implements an Implementation
+Profile specialises the activity type of its operation in bblocks-generic-profiles (the
+`activityType` of that profile): `subClassOf` is that activity type, and the entry declares the same
+GeoSPARQL entity type(s) (`usedEntityType`, `generatedEntityType`), as decision B of phase 3 does for
+the activity types. That activity type is a sub-class of `geoproc:GeoprocessingActivityType`, and the
+Activity Type Register requires every registered sub-class of it, at any depth, to declare a spatial
+entity type: `geoproc:GeoprocessingActivityTypesShape`, loaded through `dependsOn`, checks it. It
+reaches the process types through `activity-type-parents.ttl`, a data resource of this block
+generated from bblocks-generic-profiles, which states each activity type's parent class and entity
+types (and does not type them, so that the shapes of activity types do not run on another
+register's items). `pp:ProcessTypeShape` checks that the parent is acttype:ActivityType or one of
+those activity types, and that the entity types are the parent's. A process type attached to no
+Implementation Profile keeps acttype:ActivityType. Narrower entity classes, `acttype:plan` and the
+`rdf:type` of runs wait for decision D8.
 
 ### The six phases and the Process Concepts: two axes
 
@@ -81,11 +87,21 @@ equivalence level explicitly, including `none`, which SKOS cannot express, with 
 for composite or opaque processes, a stage-by-stage decomposition. They are proposed
 correspondences, not part of the definition of the type.
 
-### Amendments
+### Register actions
 
-The entries are proposals (`invalid`, `published`) and are amended in place, keeping their IRIs.
-This register defines no amendment action and has no register specification: an entry records its
-addition only, so the D5 restructuring of 2026-11-09 is not recorded as an action on each entry.
+The entries are proposals (`invalid`, `published`), amended in place, keeping their IRIs. The
+register specification (`pp:specification`, in this block's ontology) defines `pp:amendmentAction`,
+the type of such an in-place change, always classified substantive or clarifying, as the
+specifications of bblocks-data-types, bblocks-data-formats and bblocks-generic-profiles do. Each
+entry's `hasAction` records its addition, then its amendments:
+
+- `d5-2026-11-09` (every entry, substantive): the D5 restructuring above;
+- `tier3-2026-11-09` (the two attached CWL processes, substantive): `implementsProfile` added;
+- `specialisation-2026-11-10` (the 33 attached processes, substantive): the parent class and entity
+  types;
+- declarations added to a binding (substantive): `serverSideFiles` of `raster.reprojection` and
+  `raster.format-conversion`, `roleDecompositions` of `raster.extract-roi` and its restriction to
+  `mode.extent.unit` in `phy` or `lonlat`.
 
 ## Data types at tier 4
 

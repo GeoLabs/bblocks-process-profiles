@@ -18,3 +18,9 @@
   snippets:
   - language: json
     ref: examples/raster-extract-roi.json
+- title: The register, its specification and its amendment action type
+  content: 'The ontology of this block, validated as data: this checks `pp:register` and `pp:specification`
+    against the shapes of the Registered Item Model.'
+  snippets:
+  - language: turtle
+    ref: ontology.ttl

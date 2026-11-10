@@ -54,6 +54,20 @@
       "@id": "dct:type",
       "@type": "@id"
     },
+    "usedEntityType": {
+      "@id": "acttype:usedEntityType",
+      "@type": "@id"
+    },
+    "generatedEntityType": {
+      "@id": "acttype:generatedEntityType",
+      "@type": "@id"
+    },
+    "changeClassification": {
+      "@id": "rim:changeClassification",
+      "@type": "@vocab"
+    },
+    "substantive": "rim:substantiveChange",
+    "clarifying": "rim:clarifyingChange",
     "inputs": {
       "@id": "proc:inputs",
       "@context": {
@@ -332,11 +346,11 @@
           "@id": "pp:part",
           "@container": "@list"
         },
-        "selector": {
+        "selectors": {
           "@id": "pp:selector",
           "@context": {
             "name": "pp:liveName",
-            "value": "rdf:value"
+            "values": "rdf:value"
           }
         },
         "note": "skos:note"

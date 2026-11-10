@@ -185,14 +185,14 @@
           "@id": "pp:part",
           "@container": "@list"
         },
-        "selector": {
+        "note": "skos:note",
+        "selectors": {
           "@id": "pp:selector",
           "@context": {
             "name": "pp:liveName",
-            "value": "rdf:value"
+            "values": "rdf:value"
           }
-        },
-        "note": "skos:note"
+        }
       }
     },
     "assumedFormatGaps": {
@@ -208,6 +208,21 @@
         "reason": "skos:note",
         "evidence": "pp:evidence"
       }
-    }
+    },
+    "description": "dct:description",
+    "usedEntityType": {
+      "@id": "acttype:usedEntityType",
+      "@type": "@id"
+    },
+    "generatedEntityType": {
+      "@id": "acttype:generatedEntityType",
+      "@type": "@id"
+    },
+    "changeClassification": {
+      "@id": "rim:changeClassification",
+      "@type": "@vocab"
+    },
+    "substantive": "rim:substantiveChange",
+    "clarifying": "rim:clarifyingChange"
   }
 }

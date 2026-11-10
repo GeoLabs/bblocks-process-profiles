@@ -27,7 +27,39 @@ pp:register a rim:Register ;
     dct:description "Register of deployable OSPD process profiles and their process types."@en ;
     rim:registerOwner pp:geolabs ;
     rim:registerManager pp:geolabs ;
+    rim:controlBody pp:geolabs ;
+    rim:hasSpecification pp:specification ;
     rim:runsOn pp:registerSystem .
+
+# The register specification (decision of 2026-11-10), on the pattern of the specifications of
+# bblocks-data-types, bblocks-data-formats and bblocks-generic-profiles. rim:definesSubstantiveChange
+# and the rule for proposals are the texts validated for all the registers of this project, word for
+# word. The version rule is specific to these registers and does not come from ISO 19135. The
+# substantive/clarifying row for this register is a proposal of 2026-11-10, not yet validated.
+# tests/specification-without-title-fail.ttl proves that rim:RegisterSpecificationShape runs, and
+# examples.yaml validates this file against it.
+pp:specification a rim:RegisterSpecification ;
+    dct:title "OSPD Process Profiles register specification"@en ;
+    dct:description
+        "Scope. This register holds the Implementation (instance level) of OGC 14-065 WPS 2.0.2 §7.5: one process profile and one process type per deployed process, in two populations, the CWL processes of the OSPD reference workflows and the live processes of the Geonovum testbed. The process types are its register items (pp:ProcessType, of the item class of the Activity Type Register). The tiers above, Process Concepts, Generic and Implementation Profiles and the activity types of operations, are items of bblocks-generic-profiles, not of this register."@en ,
+        "Register type. A content register, as the Registered Item Model uses the term: items carry their own name and definition, and there is no concept plane."@en ,
+        "Roles. GeoLabs SARL is the register owner, the register manager and, for now, the control body. GeoLabs intends to delegate the control body role to the OGC or to an OSPD working group."@en ,
+        "Identifiers. The object identifier of a process type is its IRI, https://geolabs.github.io/bblocks-process-profiles/def/process-type/<group>/<name>. These IRIs are provisional, pending a decision on the namespace of the process-type register. An object identifier never redirects; only a functional identifier may. The identifier of a published item changes only by an explicit decision."@en ,
+        "Versions. An addition is an action of type addition, with no classification. A substantive change creates a new item or a new version, linked by rim:supersededBy, with an action classified substantive. A clarifying change keeps the item and its version, with an action classified clarifying. This version rule is specific to the registers of this project and does not come from ISO 19135. The classification correctional is not available. An item is retired by unpublishing it, not by deleting it."@en ,
+        "What is substantive here (proposed 2026-11-10, not yet validated). Substantive: the parent class (subClassOf) or an entity type changed; the Implementation Profile implemented (implementsProfile) added, removed or changed; a binding declaration (serverSideFiles, roleDecompositions, assumedFormatGaps) added, removed or changed; the processDescription or the plan that is deployed changed; the six-phase classification changed, or the form in which a part of the entry is stated. Clarifying: the label, a reworded definition with the same meaning, the openEO correspondences and their rationale, notes and descriptions."@en ,
+        "Proposals. While an item is a proposal, with no control-body decision recorded, it is amended in place, with a classified `rim:RegisterAction`. The substantive rule applies once it has been accepted."@en ,
+        "Amendment. pp:amendmentAction is the action type of an in-place change to a proposal, an item with no control-body decision recorded. Such an action is always classified, clarifying or substantive: it is the classified rim:RegisterAction of the rule for proposals. This type is specific to this register and will be replaced if the Registered Item Model defines one."@en ,
+        "Eligibility. Process type: one deployed process, its meaning (label, definition, parent class: acttype:ActivityType, or the activity type of its operation with the same GeoSPARQL entity types when it implements an Implementation Profile), its six-phase classification, its deployment, its plan for a CWL process, and its proposed openEO correspondences. GeoLabs is the only proposer recorded so far; no criteria for other proposers have been set."@en ,
+        "Commitments. No commitment to register users has been set."@en ;
+    rim:definesSubstantiveChange "A change is substantive when a register user may have to change their data, profiles or processes because of it, or when it changes what an item means. Any other change to an existing item is clarifying." .
+
+# rim:actionType is required and the Registered Item Model has no type for an in-place change of a
+# proposal; it lets a register specification define further action types. Defined by
+# pp:specification, specific to this register.
+pp:amendmentAction a rim:RegisterActionType , skos:Concept ;
+    rdfs:isDefinedBy pp: ;
+    skos:prefLabel "amendment"@en ;
+    skos:definition "An in-place change to a proposal, an item with no control-body decision recorded. Always classified, clarifying or substantive."@en .
 
 pp:geolabs a prov:Organization ;
     rdfs:label "GeoLabs SARL" ;
