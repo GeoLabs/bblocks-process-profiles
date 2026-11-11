@@ -38,6 +38,16 @@
       "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/unbound-roles-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "unboundRoles added: the role index of radiometric-index (minOccurs 1) is left unbound, the live service not exposing OTB RadiometricIndices' list parameter (the testbed exception of docs/ATTACHMENTS.md). The binding was already incomplete; the entry now declares it.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index"
     }
   ],
   "prefLabel": "Compute radiometric indices.",

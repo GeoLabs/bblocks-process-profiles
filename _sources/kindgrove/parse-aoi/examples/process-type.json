@@ -28,6 +28,16 @@
       "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/parse-aoi"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/parse-aoi/actions/not-attached-2026-11-11",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "clarifying",
+      "description": "notAttached added (absent -> {reason}): the entry now states that this CommandLineTool implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md (profiles.yaml tier3.reason). Nothing else changes: the process was not attached before and is not attached now (decision Q1 of 2026-11-11).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-11T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/parse-aoi"
     }
   ],
   "prefLabel": "Parse area of interest",

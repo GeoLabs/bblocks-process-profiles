@@ -48,6 +48,46 @@
       "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/inherited-description-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription.inherited.json added with the attachment to the Implementation Profile radiometric-index-single-band: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/fixed-role-values-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "fixedRoleValues added: the optional role index of radiometric-index-single-band is fixed to NDVI, NDWI and SAVI, the three indices the notebook always computes (decision C3 of 2026-11-10).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/unbound-roles-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "unboundRoles added: the role index of radiometric-index-single-band (minOccurs 0) is left unbound, no input selecting the indices (decision C2 of 2026-11-10).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/plan-2026-11-11",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#calculate_indices). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_files and the outputs ndvi_file, ndwi_file and savi_file, in processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on 2026-11-10 for band_files, ndvi_file, ndwi_file and savi_file were removed the same day, when the corrected CWL served these formats; the entry has none.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-11T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
     }
   ],
   "prefLabel": "Compute NDVI, NDWI and SAVI",

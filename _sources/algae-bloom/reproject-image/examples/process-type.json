@@ -48,6 +48,16 @@
       "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/inherited-description-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription.inherited.json added with the attachment to the Implementation Profile raster-resampling: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"
     }
   ],
   "prefLabel": "Performs image reprojection.",

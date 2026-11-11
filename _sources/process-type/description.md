@@ -39,8 +39,9 @@ things said about it:
 
 `implementsProfile` is the link to tier 3 (the Implementation Profile of bblocks-generic-profiles
 this deployment implements), with the declarations that qualify how the deployment binds that
-profile's roles: `serverSideFiles`, `roleDecompositions` and `assumedFormatGaps`
-(`docs/FORMAT-CHECK.md`). `hasStep` lists the types of a Workflow's steps.
+profile's roles: `serverSideFiles`, `roleDecompositions`, `assumedFormatGaps`, `byReference`,
+`unboundRoles` and `fixedRoleValues` (`docs/FORMAT-CHECK.md`). `hasStep` lists the types of a
+Workflow's steps.
 
 **Not attached (decision Q1 of 2026-11-11).** A CWL CommandLineTool (an entry with `plan` and no
 `hasStep`) that implements no Implementation Profile states why in `notAttached.reason`
@@ -101,15 +102,31 @@ The entries are proposals (`invalid`, `published`), amended in place, keeping th
 register specification (`pp:specification`, in this block's ontology) defines `pp:amendmentAction`,
 the type of such an in-place change, always classified substantive or clarifying, as the
 specifications of bblocks-data-types, bblocks-data-formats and bblocks-generic-profiles do. Each
-entry's `hasAction` records its addition, then its amendments:
+entry's `hasAction` records its addition, then its amendments. What is substantive and what is
+clarifying is the row of `pp:specification` for this register:
+
+> What is substantive here (validated 2026-11-10, extended 2026-11-11). Substantive: the parent class (subClassOf) or an entity type changed; the Implementation Profile implemented (implementsProfile) added, removed or changed; a binding declaration (serverSideFiles, roleDecompositions, assumedFormatGaps, byReference, unboundRoles, fixedRoleValues) added, removed or changed; the processDescription or the plan that is deployed changed; the six-phase classification changed, or the form in which a part of the entry is stated. Clarifying: the label, a reworded definition with the same meaning, the openEO correspondences and their rationale, notes and descriptions; the statement that a process is not attached (notAttached) added, removed or changed.
+
+`scripts/generate.py` stops if this quotation differs from the literal of the ontology. The
+amendments recorded so far:
 
 - `d5-2026-11-09` (every entry, substantive): the D5 restructuring above;
-- `tier3-2026-11-09` (the two attached CWL processes, substantive): `implementsProfile` added;
-- `specialisation-2026-11-10` (the 33 attached processes, substantive): the parent class and entity
+- `tier3-<date>` (each attached CWL process, substantive): `implementsProfile` added;
+- `specialisation-2026-11-10` (the 43 attached processes, substantive): the parent class and entity
   types;
 - declarations added to a binding (substantive): `serverSideFiles` of `raster.reprojection` and
   `raster.format-conversion`, `roleDecompositions` of `raster.extract-roi` and its restriction to
-  `mode.extent.unit` in `phy` or `lonlat`.
+  `mode.extent.unit` in `phy` or `lonlat`; for the ten CWL processes attached on 2026-11-10, their
+  `processDescription.inherited.json`, `byReference`, `roleDecompositions`, `fixedRoleValues` and
+  `unboundRoles`; `unboundRoles` of `raster.radiometric-index`;
+- the definition of `water-bodies.crop` (substantive: it no longer says the output is reprojected);
+- the plans of 2026-11-11 (substantive): the KindGrove steps pinned on `v0.0.2-rc3`, the W3 CWL on
+  `72a76ae`, with the processDescriptions derived from them, which now declare their formats;
+- `not-attached-2026-11-11` (the seven CWL CommandLineTools attached to no profile, clarifying):
+  `notAttached` added.
+
+`scripts/check_actions.py` compares each entry and its processDescription files with `ea01115` and
+reports every changed field that no action dated on or after the change names.
 
 ## Data types at tier 4
 

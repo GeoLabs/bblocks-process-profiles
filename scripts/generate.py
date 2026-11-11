@@ -828,6 +828,12 @@ def amendments(proc, parent):
                     "operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): "
                     + ", ".join(v for k in ("usedEntityType", "generatedEntityType") for v in _lst(parent.get(k) or []))
                     + "."))
+    if proc.get("cwl_class") and not_attached(proc):
+        out.append(("not-attached-2026-11-11", "2026-11-11", "clarifying",
+                    "notAttached added (absent -> {reason}): the entry now states that this CommandLineTool "
+                    "implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md "
+                    "(profiles.yaml tier3.reason). Nothing else changes: the process was not attached before "
+                    "and is not attached now (decision Q1 of 2026-11-11)."))
     for a in proc.get("amendments") or []:
         out.append((a["id"], a["date"], a["classification"], " ".join(a["description"].split())))
     return sorted(out, key=lambda a: a[1])
@@ -2235,6 +2241,12 @@ def main():
 
     # shared process-type example: reproject-image entry
     pt = ROOT / "_sources" / "process-type"
+    # The substantive/clarifying row of pp:specification is quoted word for word in the block
+    # description (decision Q3, 2026-11-11): stop if the two differ.
+    rule = re.search(r'"(What is substantive here[^"]*)"@en', (pt / "ontology.ttl").read_text())
+    if not rule or rule.group(1) not in (pt / "description.md").read_text():
+        sys.exit("_sources/process-type/description.md does not quote the substantive/clarifying row of "
+                 "pp:specification (ontology.ttl) word for word")
     sync_process_type_schema(pt, a.generic_profiles)
     write_process_type_fixtures(pt)
     write_parent_closure(pt, a.generic_profiles)
