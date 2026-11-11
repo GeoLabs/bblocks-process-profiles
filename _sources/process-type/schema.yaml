@@ -372,7 +372,7 @@ allOf:
     notAttached:
       description: A CWL CommandLineTool (an entry with `plan` and no `hasStep`) that implements no Implementation
         Profile, with the reason (decision Q1, 2026-11-11). Exclusive of `implementsProfile`; a Workflow
-        carries neither.
+        carries neither. The reason holds at least one non-blank character (2026-11-11).
       type: object
       required:
       - reason
@@ -381,6 +381,7 @@ allOf:
         reason:
           type: string
           minLength: 1
+          pattern: \S
     implementsProfile:
       description: 'IRI of the nearest applicable profile this process specialises, in the generic-profiles
         register -- normally an Implementation Profile (generic-profiles.implementation-profile.*, OGC

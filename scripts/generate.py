@@ -1998,7 +1998,7 @@ def write_process_type_fixtures(pt):
     checks the type or classification of an amendment (decision Q5, option b, of 2026-11-11), so
     the fixtures amendment-without-classification-fail and amendment-correctional-fail are gone.
     `notAttached` (decision Q1, 2026-11-11): on the entry of kindgrove-steps.export-stac, a
-    CommandLineTool attached to no profile, a control and a reason empty or missing; on
+    CommandLineTool attached to no profile, a control and a reason empty, blank or missing; on
     reproject-band, `notAttached` next to `implementsProfile`."""
     base = json.loads((ROOT / "_sources/kindgrove-steps/reproject-band/examples/process-type.json").read_text())
     unattached = json.loads((ROOT / "_sources/kindgrove-steps/export-stac/examples/process-type.json").read_text())
@@ -2040,6 +2040,8 @@ def write_process_type_fixtures(pt):
         "not-attached-control.json": lambda d: None,
         "not-attached-empty-reason-fail.json": lambda d: d.update(notAttached={"reason": ""}),
         "not-attached-without-reason-fail.json": lambda d: d.update(notAttached={}),
+        # a reason made of blanks only (pattern \S, 2026-11-11), which minLength 1 lets through
+        "not-attached-blank-reason-fail.json": lambda d: d.update(notAttached={"reason": " \t\n "}),
     }
     for name, defect in unattached_cases.items():
         d = copy.deepcopy(unattached)
