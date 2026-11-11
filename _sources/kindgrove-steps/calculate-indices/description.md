@@ -4,7 +4,7 @@ Process profile of **`calculate_indices`** (CommandLineTool, W2b KindGrove (step
 
 ## Source
 
-- CWL: [mangrove-workflow-steps.cwl#calculate_indices](https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#calculate_indices) (GitHub Release `v0.0.2-rc2`, sha256 `361cb6a75d54`, license <https://spdx.org/licenses/CC-BY-NC-SA-4.0>). Referenced, not copied.
+- CWL: [mangrove-workflow-steps.cwl#calculate_indices](https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#calculate_indices) (GitHub Release `v0.0.2-rc3`, sha256 `886e1b011995`, license <https://spdx.org/licenses/CC-BY-NC-SA-4.0>). Referenced, not copied.
 - Six-phase position: Scientific computation
 - EOAP CWL custom types used: none
 - Used by: `ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps`
@@ -17,7 +17,7 @@ Process profile of **`calculate_indices`** (CommandLineTool, W2b KindGrove (step
 
 ## Analysis
 
-**Behaviour.** `/app/cwl/bin/steps/04_calculate_indices`, `ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc2`.
+**Behaviour.** `/app/cwl/bin/steps/04_calculate_indices`, `ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc3`.
 Reads the three reprojected bands and writes NDVI, NDWI and SAVI as three separate GeoTIFFs.
 It identifies each band by its **file name**, not its position: `Path(path).stem.split("_")[0]`
 must give `red`, `green` and `nir`, and it fails if one is missing (read, the notebook
@@ -43,7 +43,7 @@ The run is also given as a `wfprov:ProcessRun` (`ogc.bbr.wf4ever.wfprov.ProcessR
 
 Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
-Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `kindgrove-steps`: the pinned W2b source itself (GeoLabs/KindGrove v0.0.2-rc2 `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by `days_back` on that day, three bands scattered (red, green, nir) through download_band and reproject_band), activity `main/calculate_indices` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
+Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `kindgrove-steps`: the W2b source as pinned then (GeoLabs/KindGrove v0.0.2-rc2, whose CWL differs from the rc3 pinned now only by the `format` lines, the namespaces and the image tags; `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by `days_back` on that day, three bands scattered (red, green, nir) through download_band and reproject_band), activity `main/calculate_indices` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
 
 ## Implementation Profile (tier 3)
 

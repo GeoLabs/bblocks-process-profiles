@@ -126,10 +126,16 @@ w3:
   license: https://spdx.org/licenses/CC-BY-SA-4.0
   upstream: https://github.com/Terradue/ogc-eo-application-package-hands-on   # the tools' own origin (docker images), same TBW license gap
 kindgrove_steps:
-  title: W2b KindGrove mangrove biomass (step notebooks, GeoLabs, prerelease)
+  title: W2b KindGrove mangrove biomass (step notebooks, GeoLabs)
   repo: https://github.com/GeoLabs/KindGrove
-  release: v0.0.2-rc2   # GitHub prerelease; CI-built, never committed to the repo tree (unlike every other source above)
-  sha256: 361cb6a75d541fdd480a41d75aab83896afebea3c096f1893d1ac2537bb80f3d   # of mangrove-workflow-steps.cwl, checked 2026-09-24
+  # v0.0.2-rc3: a full GitHub Release (not a prerelease, unlike rc2), published 2026-11-11 from
+  # commit 9ad6e37 (89e3d36, branch feature/cwl-format, plus a CI-only change pinning ipython2cwl
+  # @5421312). Its CWL declares `format: ogc:geotiff` on the GeoTIFF Files (14) and
+  # `format: iana:application/geo+json` on the STAC Items (4) (decision of 2026-11-10 on the formats
+  # invariant); apart from those lines, the namespaces and the image tags, it does not differ from
+  # rc2. CI-built, never committed to the repo tree (unlike every other source above).
+  release: v0.0.2-rc3
+  sha256: 886e1b0119955524c435d8368b5827d3ab7fcd89fbc8552292fe3184fa89bb73   # of mangrove-workflow-steps.cwl, checked 2026-11-11
   clone: kindgrove-steps
   base_path: .
   assets: [mangrove-workflow-steps.cwl]   # one packed $graph document: the Workflow + 8 steps; no element collides (only one top-level Workflow), unlike W3's M-13
@@ -224,7 +230,8 @@ runs:
       days_back: 90
     cwltool_args: [--enable-ext]
     note: >-
-      the pinned W2b source itself (GeoLabs/KindGrove v0.0.2-rc2
+      the W2b source as pinned then (GeoLabs/KindGrove v0.0.2-rc2, whose CWL differs from the rc3
+      pinned now only by the `format` lines, the namespaces and the image tags;
       `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as
       `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`,
       2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by

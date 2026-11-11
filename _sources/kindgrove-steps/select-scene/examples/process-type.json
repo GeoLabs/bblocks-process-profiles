@@ -74,7 +74,7 @@
     "id": "https://ospd.example.org/ogc-api/processes/select_scene/package",
     "type": "Plan",
     "executionUnit": {
-      "href": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#select_scene",
+      "href": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#select_scene",
       "type": "application/cwl+yaml",
       "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
     },

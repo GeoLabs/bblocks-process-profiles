@@ -85,9 +85,9 @@ register side by side, under different `workflow:` keys, neither replacing the o
 |---|---|---|
 | Granularity | one opaque `mangrove` tool, everything inside it | 6 CommandLineTools, one per notebook |
 | License | Apache-2.0 | CC-BY-NC-SA-4.0 |
-| Docker images | one ipython2cwl binary | `ghcr.io/geolabs/kindgrove/<step>:v0.0.2-rc2`, one per step |
+| Docker images | one ipython2cwl binary | `ghcr.io/geolabs/kindgrove/<step>:v0.0.2-rc3`, one per step |
 | Source pin | git commit (`bblocks-eoap-cct`) | GitHub Release asset + sha256 (`GeoLabs/KindGrove`, no commit — the CWL is never committed to that repo's tree) |
-| Status | stable, pinned commit | explicitly a prerelease (`v0.0.2-rc2`) |
+| Status | stable, pinned commit | release candidate `v0.0.2-rc3`, published as a full release (rc2 was a prerelease) |
 | Vegetation indices | opaque (inside `mangrove`) | NDVI (closeMatch `ogc.openeo.processes.cubes.ndvi`), NDWI (closeMatch `normalized_difference`), SAVI (no openEO process in this register) all computed by one tool, `calculate-indices` |
 | Biomass model | opaque | still opaque in `estimate-biomass` (`biomass = biomass_slope * ndvi + biomass_intercept`, then `* carbon_fraction`) — the regression itself is visible in the execute inputs even though the openEO mapping stays `none` |
 

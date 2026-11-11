@@ -4,7 +4,7 @@ Process profile of **`reproject_band`** (CommandLineTool, W2b KindGrove (step no
 
 ## Source
 
-- CWL: [mangrove-workflow-steps.cwl#reproject_band](https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#reproject_band) (GitHub Release `v0.0.2-rc2`, sha256 `361cb6a75d54`, license <https://spdx.org/licenses/CC-BY-NC-SA-4.0>). Referenced, not copied.
+- CWL: [mangrove-workflow-steps.cwl#reproject_band](https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#reproject_band) (GitHub Release `v0.0.2-rc3`, sha256 `886e1b011995`, license <https://spdx.org/licenses/CC-BY-NC-SA-4.0>). Referenced, not copied.
 - Six-phase position: Pre-processing
 - EOAP CWL custom types used: none; candidates: `eoap.cct.bbox`
 - Used by: `ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps`
@@ -32,11 +32,11 @@ The run is also given as a `wfprov:ProcessRun` (`ogc.bbr.wf4ever.wfprov.ProcessR
 
 Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
-Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `kindgrove-steps`: the pinned W2b source itself (GeoLabs/KindGrove v0.0.2-rc2 `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by `days_back` on that day, three bands scattered (red, green, nir) through download_band and reproject_band), activity `main/reproject_band` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
+Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `kindgrove-steps`: the W2b source as pinned then (GeoLabs/KindGrove v0.0.2-rc2, whose CWL differs from the rc3 pinned now only by the `format` lines, the namespaces and the image tags; `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by `days_back` on that day, three bands scattered (red, green, nir) through download_band and reproject_band), activity `main/reproject_band` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
 
 ## Implementation Profile (tier 3)
 
-Implements [`Raster reprojection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection) (`generic-profiles.implementation-profile.raster-reprojection`, bblocks-generic-profiles). Signature checked against raster-reprojection: `band_file` implements `raster`, `epsg` (an EPSG code, default 4326) implements `targetCRS`, `reprojected_file` implements the output `raster`; `west`, `south`, `east`, `north` (extent of the target grid) and `resolution` are inputs of the deployment's own. Both rasters are served as GeoTIFF: the CWL of GeoLabs/KindGrove 89e3d36 declares `format: ogc:geotiff` (read through the local override until rc3, docs/LOCAL-BUILD.md).
+Implements [`Raster reprojection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection) (`generic-profiles.implementation-profile.raster-reprojection`, bblocks-generic-profiles). Signature checked against raster-reprojection: `band_file` implements `raster`, `epsg` (an EPSG code, default 4326) implements `targetCRS`, `reprojected_file` implements the output `raster`; `west`, `south`, `east`, `north` (extent of the target grid) and `resolution` are inputs of the deployment's own. Both rasters are served as GeoTIFF: the CWL of the GeoLabs/KindGrove release v0.0.2-rc3 declares `format: ogc:geotiff`.
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

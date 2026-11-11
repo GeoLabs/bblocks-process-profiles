@@ -9,7 +9,7 @@ Geonovum testbed (see [Two populations](#two-populations)). Identifier prefix: `
 | W1 Algae Bloom | [`crim-ca/ogc-ospd-phase1@5edd4ec`](https://github.com/crim-ca/ogc-ospd-phase1/tree/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg) (CC-BY-NC-SA-4.0) |
 | W2 KindGrove | [`GeoLabs/bblocks-eoap-cct@291a741`](https://github.com/GeoLabs/bblocks-eoap-cct/blob/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl) |
 | W3 Water Bodies | [`GeoLabs/ogc-eo-application-package-hands-on@f472585`](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/tree/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple) (license unassigned upstream and in this fork; CC-BY-SA-4.0 assumed, see `scripts/sources.yaml` `w3`; tool images from `Terradue/ogc-eo-application-package-hands-on`) |
-| W2b KindGrove (step notebooks) | [`GeoLabs/KindGrove` release `v0.0.2-rc2`](https://github.com/GeoLabs/KindGrove/releases/tag/v0.0.2-rc2) (CC-BY-NC-SA-4.0; prerelease, a GitHub Release asset pinned by sha256 rather than a git commit — the CWL is never committed to the repo tree, see `scripts/sources.yaml` `kindgrove_steps`). A ground-up reimplementation added alongside `kindgrove`, not replacing it — see `docs/WORKFLOW-COMPARISON.md` |
+| W2b KindGrove (step notebooks) | [`GeoLabs/KindGrove` release `v0.0.2-rc3`](https://github.com/GeoLabs/KindGrove/releases/tag/v0.0.2-rc3) (CC-BY-NC-SA-4.0; a GitHub Release asset pinned by sha256 rather than a git commit — the CWL is never committed to the repo tree, see `scripts/sources.yaml` `kindgrove_steps`). A ground-up reimplementation added alongside `kindgrove`, not replacing it — see `docs/WORKFLOW-COMPARISON.md` |
 
 ## Two populations
 

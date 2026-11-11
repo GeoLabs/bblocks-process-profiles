@@ -910,7 +910,7 @@ processes:
       stac_catalog: {href: catalog.json, type: application/json, stac: true}
 
   # ---------------------------------------------------------------- W2b kindgrove-steps (GeoLabs
-  # KindGrove v0.0.2-rc2, a GitHub Release asset, not a git commit -- see scripts/sources.yaml
+  # KindGrove v0.0.2-rc3, a GitHub Release asset, not a git commit -- see scripts/sources.yaml
   # `kindgrove_steps`). A ground-up reimplementation of the W2 KindGrove computation as one
   # CommandLineTool per notebook, added ALONGSIDE `kindgrove`, not replacing it: different tools,
   # different Docker images (ghcr.io/geolabs/kindgrove/*), different license (CC-BY-NC-SA-4.0 vs
@@ -1013,7 +1013,7 @@ processes:
         execution date, not an explicit `temporal_extent` -- the same non-reproducibility already
         documented for `kindgrove.mangrove-workflow` (Q-W2-DAYSBACK).
     analysis: |
-      **Behaviour.** `/app/cwl/bin/steps/01_select_scene`, `ghcr.io/geolabs/kindgrove/select-scene:v0.0.2-rc2`.
+      **Behaviour.** `/app/cwl/bin/steps/01_select_scene`, `ghcr.io/geolabs/kindgrove/select-scene:v0.0.2-rc3`.
       Searches `stac_api`/`collection` (both defaulted to Earth Search / sentinel-2-l2a) for the
       least cloudy scene intersecting the bounding box within `days_back` days of the execution
       date, under `cloud_cover_max`, and writes its STAC Item as `scene_item.json`.
@@ -1071,7 +1071,7 @@ processes:
         item is a resolved File (the output of `select-scene`) rather than resolved in-process,
         same pattern as `algae-bloom.download-band-sentinel2-stac-item`.
     analysis: |
-      **Behaviour.** `/app/cwl/bin/steps/02_download_band`, `ghcr.io/geolabs/kindgrove/download-band:v0.0.2-rc2`.
+      **Behaviour.** `/app/cwl/bin/steps/02_download_band`, `ghcr.io/geolabs/kindgrove/download-band:v0.0.2-rc3`.
       Reads the given `band` asset of `stac_item`, windowed to the bounding box, writes one COG.
 
       **Provenance.** One file input (`stac_item`), literal `band`/bbox inputs, one file output; a
@@ -1098,8 +1098,8 @@ processes:
         Signature checked against raster-reprojection: `band_file` implements `raster`, `epsg` (an
         EPSG code, default 4326) implements `targetCRS`, `reprojected_file` implements the output
         `raster`; `west`, `south`, `east`, `north` (extent of the target grid) and `resolution` are
-        inputs of the deployment's own. Both rasters are served as GeoTIFF: the CWL of GeoLabs/KindGrove
-        89e3d36 declares `format: ogc:geotiff` (read through the local override until rc3, docs/LOCAL-BUILD.md).
+        inputs of the deployment's own. Both rasters are served as GeoTIFF: the CWL of the GeoLabs/KindGrove
+        release v0.0.2-rc3 declares `format: ogc:geotiff`.
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection
     bindings: {inputs: {band_file: raster, epsg: targetCRS}, outputs: {reprojected_file: raster}}
     cct: []
@@ -1161,7 +1161,7 @@ processes:
         - {stage: ndwi, openeo: [ogc.openeo.processes.math.indices.normalized_difference], level: closeMatch}
         - {stage: savi, openeo: [], level: none, note: "soil-adjusted vegetation index, no openEO process in this register"}
     analysis: |
-      **Behaviour.** `/app/cwl/bin/steps/04_calculate_indices`, `ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc2`.
+      **Behaviour.** `/app/cwl/bin/steps/04_calculate_indices`, `ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc3`.
       Reads the three reprojected bands and writes NDVI, NDWI and SAVI as three separate GeoTIFFs.
       It identifies each band by its **file name**, not its position: `Path(path).stem.split("_")[0]`
       must give `red`, `green` and `nir`, and it fails if one is missing (read, the notebook
@@ -1204,7 +1204,7 @@ processes:
         constant. No openEO process expresses a domain-specific regression model, same as
         `kindgrove.mangrove`.
     analysis: |
-      **Behaviour.** `/app/cwl/bin/steps/05_estimate_biomass`, `ghcr.io/geolabs/kindgrove/estimate-biomass:v0.0.2-rc2`.
+      **Behaviour.** `/app/cwl/bin/steps/05_estimate_biomass`, `ghcr.io/geolabs/kindgrove/estimate-biomass:v0.0.2-rc3`.
       Masks pixels within the `ndvi_min`/`ndvi_max`/`ndwi_min`/`savi_min` thresholds as mangrove,
       applies `biomass = biomass_slope * ndvi + biomass_intercept` per masked pixel, and
       `carbon = biomass * carbon_fraction`; writes the mask, the biomass raster, two CSV summaries
@@ -1241,7 +1241,7 @@ processes:
         PNG rendering; save_result's STAC output option is the closest openEO equivalent, same
         partial match as `algae-bloom.plot-image` and `water-bodies.stac`.
     analysis: |
-      **Behaviour.** `/app/cwl/bin/steps/06_export_stac`, `ghcr.io/geolabs/kindgrove/export-stac:v0.0.2-rc2`.
+      **Behaviour.** `/app/cwl/bin/steps/06_export_stac`, `ghcr.io/geolabs/kindgrove/export-stac:v0.0.2-rc3`.
       Renders a `biomass_quicklook.png` from the biomass raster, then writes a STAC Catalog with
       one Item (`mangrove-analysis-<timestamp>`, timestamped at run time like `kindgrove.mangrove`'s
       own output) carrying the mask, biomass raster, two summary CSVs, the analysis JSON and the

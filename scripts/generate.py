@@ -2087,7 +2087,7 @@ def main():
              "w2": a.w2 or a.sources_root / sources["w2"]["clone"],
              "w3": a.w3 or a.sources_root / sources["w3"]["clone"],
              "kindgrove_steps": a.kindgrove_steps or a.sources_root / sources["kindgrove_steps"]["clone"]}
-    # Local only (docs/LOCAL-BUILD.md): scripts/sources-local.yaml, git-ignored, may point a source to
+    # Local only: scripts/sources-local.yaml (git-ignored; none in use since 2026-11-11), may point a source to
     # another local directory, e.g. a CWL generated from an unreleased commit, while sources.yaml
     # keeps the committed pin. Announced on stderr, so that a regeneration with it is not mistaken
     # for one from the pins.
