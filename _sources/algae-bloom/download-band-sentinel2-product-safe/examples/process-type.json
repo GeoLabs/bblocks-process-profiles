@@ -64,6 +64,9 @@
       "eoap.cct.string-format"
     ]
   },
+  "notAttached": {
+    "reason": "Band retrieval from a SAFE product on S3, returning JPEG 2000. Its Implementation Profile would need a SAFE format, which has no media type, and a format always has one (decision C8 of 2026-11-10): band-retrieval-safe was not created, so this process stays unattached."
+  },
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection",

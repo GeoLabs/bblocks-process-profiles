@@ -42,6 +42,14 @@ this deployment implements), with the declarations that qualify how the deployme
 profile's roles: `serverSideFiles`, `roleDecompositions` and `assumedFormatGaps`
 (`docs/FORMAT-CHECK.md`). `hasStep` lists the types of a Workflow's steps.
 
+**Not attached (decision Q1 of 2026-11-11).** A CWL CommandLineTool (an entry with `plan` and no
+`hasStep`) that implements no Implementation Profile states why in `notAttached.reason`
+(`pp:notAttached`, the reason as `skos:note`), written by `scripts/generate.py` from `tier3.reason`
+in `scripts/profiles.yaml` (`docs/ATTACHMENTS.md`). The schema requires a non-empty reason and
+forbids `notAttached` next to `implementsProfile`; a Workflow carries neither, its steps are compared
+with the tiers one by one. `tests/` holds the failing fixtures (empty reason, no reason, both fields)
+and a control.
+
 **Specialisation (decision of 2026-11-10).** A process type that implements an Implementation
 Profile specialises the activity type of its operation in bblocks-generic-profiles (the
 `activityType` of that profile): `subClassOf` is that activity type, and the entry declares the same

@@ -64,6 +64,9 @@
     ],
     "candidateCctDependencies": []
   },
+  "notAttached": {
+    "reason": "Workflow plumbing: splits a bounding box into four numbers for the other steps. Not a geoprocessing operation; no profile is needed."
+  },
   "correspondences": {
     "relatedMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.types.bounding-box"

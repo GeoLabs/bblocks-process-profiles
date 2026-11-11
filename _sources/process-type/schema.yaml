@@ -11,7 +11,9 @@ description: 'A candidate process-type register item which is also a class used 
   and `subClassOf`. Its classification (`classification`: the six-phase position), its deployment (`deployment`:
   profile block, processDescription, run class), its plan (`plan`) and its correspondences (`correspondences`:
   openEO) are kept apart from that meaning. `implementsProfile` links it to its Implementation Profile
-  (tier 3), with the declarations that qualify the binding (`serverSideFiles`, `roleDecompositions`, `assumedFormatGaps`).
+  (tier 3), with the declarations that qualify the binding (`serverSideFiles`, `roleDecompositions`, `assumedFormatGaps`,
+  `byReference`, `unboundRoles`, `fixedRoleValues`); a CWL CommandLineTool attached to no Implementation
+  Profile states why in `notAttached`.
 
 
   What an activity of this type executes -- its plan, a `prov:Plan` -- is the OGC Application Package
@@ -367,6 +369,18 @@ allOf:
             type: string
           evidence:
             type: string
+    notAttached:
+      description: A CWL CommandLineTool (an entry with `plan` and no `hasStep`) that implements no Implementation
+        Profile, with the reason (decision Q1, 2026-11-11). Exclusive of `implementsProfile`; a Workflow
+        carries neither.
+      type: object
+      required:
+      - reason
+      additionalProperties: false
+      properties:
+        reason:
+          type: string
+          minLength: 1
     implementsProfile:
       description: 'IRI of the nearest applicable profile this process specialises, in the generic-profiles
         register -- normally an Implementation Profile (generic-profiles.implementation-profile.*, OGC
@@ -631,6 +645,10 @@ allOf:
           - http://www.opengis.net/ont/geosparql#GeometryCollection
   additionalProperties: true
   allOf:
+  - not:
+      required:
+      - notAttached
+      - implementsProfile
   - if:
       required:
       - subClassOf

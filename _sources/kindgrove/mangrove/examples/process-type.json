@@ -68,6 +68,9 @@
       "eoap.cct.bbox"
     ]
   },
+  "notAttached": {
+    "reason": "One opaque tool runs scene selection, band retrieval, indices, biomass and carbon estimation and STAC export. No single profile describes it; kindgrove-steps splits it into steps."
+  },
   "correspondences": {
     "openeoEquivalence": {
       "level": "none",

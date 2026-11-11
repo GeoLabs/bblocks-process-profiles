@@ -64,6 +64,9 @@
       "eoap.cct.stac"
     ]
   },
+  "notAttached": {
+    "reason": "Domain model: mangrove detection, allometric biomass and carbon stock from three index rasters and coefficients, with five outputs including summaries. No Generic Profile, and none of general use."
+  },
   "correspondences": {
     "openeoEquivalence": {
       "level": "none",

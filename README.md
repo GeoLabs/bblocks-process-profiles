@@ -25,8 +25,10 @@ process-type entry. No identifier says which population a block belongs to; this
 Each live process implements one Implementation Profile of
 [bblocks-generic-profiles](https://github.com/GeoLabs/bblocks-generic-profiles) (tier 3), one per
 profile. A CWL process is attached to an Implementation Profile only when its inputs and outputs
-implement that profile's signature: 12 of the 27 are, the others are listed with the reason in
-[docs/ATTACHMENTS.md](docs/ATTACHMENTS.md). The representations of each attached profile are
+implement that profile's signature: 12 of the 27 are. Of the 15 others, the 8 Workflows are compared
+with the tiers step by step, and the 7 CommandLineTools state why they are not attached in
+`notAttached.reason` of their process-type entry (decision Q1 of 2026-11-11); all are listed with the
+reason in [docs/ATTACHMENTS.md](docs/ATTACHMENTS.md). The representations of each attached profile are
 compared with the formats the deployment serves in [docs/FORMAT-CHECK.md](docs/FORMAT-CHECK.md).
 
 ## Building blocks

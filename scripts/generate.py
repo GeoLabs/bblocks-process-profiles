@@ -279,6 +279,9 @@ PROFILE_CONTEXT = {
             "implements": {"@id": "pp:implements", "@type": "@id"}, "note": "skos:note"}},
         # A bound input or output whose Implementation Profile representation this deployment does
         # not serve (no media type exposed), accepted with its reason (A4.3).
+        # A CWL CommandLineTool attached to no Implementation Profile, with the reason (decision Q1,
+        # 2026-11-11): exclusive of implementsProfile.
+        "notAttached": {"@id": "pp:notAttached", "@context": {"reason": "skos:note"}},
         "assumedFormatGaps": {"@id": "pp:assumedFormatGap", "@context": {
             "name": "pp:liveName", "side": "pp:side",
             "implements": {"@id": "pp:implements", "@type": "@id"},
@@ -881,6 +884,12 @@ def parent_activity_type(proc, gp_root):
     return at
 
 
+def not_attached(proc, plan=True):
+    """Decision Q1 (2026-11-11): a CWL entry (with a plan) that is no Workflow (no steps) and implements
+    no Implementation Profile carries `notAttached`, with the reason of profiles.yaml `tier3`."""
+    return bool(plan) and not proc.get("steps") and not proc.get("implementsProfile")
+
+
 def build_entry(proc, pd, definition, deployment, plan, assumed, by_key, parent=None):
     """A process-type entry, in the five parts of decision D5:
 
@@ -913,6 +922,10 @@ def build_entry(proc, pd, definition, deployment, plan, assumed, by_key, parent=
     if plan:
         e["plan"] = plan
     e.update(tier3_link_fields(proc, assumed))
+    if not_attached(proc, plan):
+        # Decision Q1 (2026-11-11): a CWL CommandLineTool attached to no Implementation Profile
+        # records why, from `tier3.reason` in profiles.yaml; audit_planes.py requires one or the other.
+        e["notAttached"] = {"reason": " ".join(proc["tier3"]["reason"].split())}
     if proc.get("steps"):
         e["hasStep"] = [ptype_iri(by_key[s]) for s in proc["steps"]]
     e["correspondences"] = correspondences(proc["openeo"])
@@ -1977,8 +1990,14 @@ def write_process_type_fixtures(pt):
     `implements`, a literal role decomposition (control) and one without parts. The controls check
     the schema only: they do not describe the deployment of reproject-band. The schema no longer
     checks the type or classification of an amendment (decision Q5, option b, of 2026-11-11), so
-    the fixtures amendment-without-classification-fail and amendment-correctional-fail are gone."""
+    the fixtures amendment-without-classification-fail and amendment-correctional-fail are gone.
+    `notAttached` (decision Q1, 2026-11-11): on the entry of kindgrove-steps.export-stac, a
+    CommandLineTool attached to no profile, a control and a reason empty or missing; on
+    reproject-band, `notAttached` next to `implementsProfile`."""
     base = json.loads((ROOT / "_sources/kindgrove-steps/reproject-band/examples/process-type.json").read_text())
+    unattached = json.loads((ROOT / "_sources/kindgrove-steps/export-stac/examples/process-type.json").read_text())
+    if "notAttached" not in unattached or "notAttached" in base:
+        sys.exit("process-type fixtures: export-stac must carry notAttached and reproject-band must not")
 
     IP_RASTER_IN = GENERIC_PROFILES_BASE + "implementation-profile/raster-reprojection/inputs/raster"
     IP_CRS_IN = GENERIC_PROFILES_BASE + "implementation-profile/raster-reprojection/inputs/targetCRS"
@@ -2011,6 +2030,18 @@ def write_process_type_fixtures(pt):
         d = copy.deepcopy(base)
         defect(d)
         dump_json(pt / "tests" / name, d)
+    unattached_cases = {
+        "not-attached-control.json": lambda d: None,
+        "not-attached-empty-reason-fail.json": lambda d: d.update(notAttached={"reason": ""}),
+        "not-attached-without-reason-fail.json": lambda d: d.update(notAttached={}),
+    }
+    for name, defect in unattached_cases.items():
+        d = copy.deepcopy(unattached)
+        defect(d)
+        dump_json(pt / "tests" / name, d)
+    d = copy.deepcopy(base)
+    d["notAttached"] = {"reason": "Not attached, yet implementsProfile is set."}
+    dump_json(pt / "tests" / "not-attached-with-implements-fail.json", d)
 
 
 def write_parent_closure(pt, gp_root):
@@ -2125,6 +2156,11 @@ def main():
         src = sources[proc["source"]["repo"]]
         cwl_doc, cwl_el, url = load_process(proc, sources, roots)
         proc["cwl_class"] = cwl_el["class"]
+        # Decision Q1: a Workflow is recognised by its steps, and only a CommandLineTool gets notAttached.
+        if (cwl_el["class"] == "Workflow") != bool(proc.get("steps")):
+            sys.exit(f"{proc['key']}: CWL class {cwl_el['class']} but steps {proc.get('steps')}")
+        if not_attached(proc) and cwl_el["class"] != "CommandLineTool":
+            sys.exit(f"{proc['key']}: notAttached is for a CommandLineTool, not a {cwl_el['class']}")
         ns = cwl_doc.get("$namespaces", {})
         raw = run_transform(cwl_doc, jq_path)
         pd, corrections = correct(raw, cwl_el, ns, proc.get("secrets"), proc.get("stac_catalog"))
@@ -2300,6 +2336,13 @@ not forced. A gap in the tiers may justify a new Generic or Implementation Profi
 proposals. The six profiles decided on 2026-11-10 exist in bblocks-generic-profiles (`5e5a808`);
 the ten processes they serve were attached the same day.
 
+**What the entry records (decision Q1 of 2026-11-11).** Every CWL CommandLineTool (an entry with
+`plan` and no `hasStep`) has either `implementsProfile` or `notAttached` with a non-empty reason, the
+reason of this table, in its `process-type.json`; never both. A Workflow (`hasStep`) carries neither:
+its steps are compared with the tiers one by one. Of the {cwl} CWL processes, {clt} are
+CommandLineTools, {attached} attached and {not_attached} not attached, and {workflows} are Workflows.
+`audit_planes.py` checks this rule.
+
 **The testbed exception.** The {live} live processes of the Geonovum testbed are all attached, one per
 Implementation Profile (README, second table): each is the deployment from which its Implementation
 Profile was written. They may in addition leave unbound a role of `minOccurs` 1 that the deployment
@@ -2313,7 +2356,11 @@ the rule allows, only with `mode.extent.unit` in `phy` or `lonlat`.
 def write_attachments(procs, gp_root):
     load = lambda tier, k: json.loads((gp_root / "_sources" / tier / k / "examples" / f"{k}.json").read_text())
     tail = lambda iri: iri.rstrip("/").rsplit("/", 1)[-1]
-    lines = [ATTACHMENTS_HEADER.format(cwl=POPULATIONS["cwl"], live=POPULATIONS["live"]),
+    workflows = sum(bool(p.get("steps")) for p in procs)
+    attached = sum(bool(p.get("implementsProfile")) for p in procs if not p.get("steps"))
+    lines = [ATTACHMENTS_HEADER.format(cwl=POPULATIONS["cwl"], live=POPULATIONS["live"],
+                                       clt=len(procs) - workflows, attached=attached,
+                                       not_attached=sum(not_attached(p) for p in procs), workflows=workflows),
              "| Process | CWL class | Status | Tier 3 Implementation Profile | Tier 2 Generic Profile | Tier 1 Process Concept | Reason |",
              "|---|---|---|---|---|---|---|"]
     proposals = []

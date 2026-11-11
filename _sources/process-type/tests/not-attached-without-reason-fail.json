@@ -1,0 +1,77 @@
+{
+  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/export-stac",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/export-stac",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "hasAction": [
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/export-stac/actions/addition",
+      "type": "RegisterAction",
+      "actionType": "addition",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-09-22T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/export-stac"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/export-stac/actions/d5-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/export-stac"
+    }
+  ],
+  "prefLabel": "Plot the biomass map and export a STAC catalog",
+  "definition": "Plots the biomass map and exports the mangrove analysis results as a STAC Catalog.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.kindgrove-steps.export-stac",
+    "processDescription": {
+      "id": "export_stac",
+      "version": "0.1.0",
+      "href": "https://ospd.example.org/ogc-api/processes/export_stac"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
+  },
+  "plan": {
+    "id": "https://ospd.example.org/ogc-api/processes/export_stac/package",
+    "type": "Plan",
+    "executionUnit": {
+      "href": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#export_stac",
+      "type": "application/cwl+yaml",
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+    },
+    "cwlClass": "CommandLineTool",
+    "cwlId": "export_stac",
+    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
+    "cctDependencies": [],
+    "candidateCctDependencies": [
+      "eoap.cct.stac"
+    ]
+  },
+  "notAttached": {},
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.save_result"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "Writes the final rasters and summaries to a self-describing STAC output, plus a quicklook PNG rendering; save_result's STAC output option is the closest openEO equivalent, same partial match as `algae-bloom.plot-image` and `water-bodies.stac`."
+    }
+  }
+}

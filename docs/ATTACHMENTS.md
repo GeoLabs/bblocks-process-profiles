@@ -18,6 +18,13 @@ not forced. A gap in the tiers may justify a new Generic or Implementation Profi
 proposals. The six profiles decided on 2026-11-10 exist in bblocks-generic-profiles (`5e5a808`);
 the ten processes they serve were attached the same day.
 
+**What the entry records (decision Q1 of 2026-11-11).** Every CWL CommandLineTool (an entry with
+`plan` and no `hasStep`) has either `implementsProfile` or `notAttached` with a non-empty reason, the
+reason of this table, in its `process-type.json`; never both. A Workflow (`hasStep`) carries neither:
+its steps are compared with the tiers one by one. Of the 27 CWL processes, 19 are
+CommandLineTools, 12 attached and 7 not attached, and 8 are Workflows.
+`audit_planes.py` checks this rule.
+
 **The testbed exception.** The 31 live processes of the Geonovum testbed are all attached, one per
 Implementation Profile (README, second table): each is the deployment from which its Implementation
 Profile was written. They may in addition leave unbound a role of `minOccurs` 1 that the deployment

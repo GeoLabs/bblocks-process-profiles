@@ -64,6 +64,9 @@
       "eoap.cct.stac"
     ]
   },
+  "notAttached": {
+    "reason": "Export: writes a STAC Catalog of the results. No Generic Profile exports a catalogue."
+  },
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.save_result"

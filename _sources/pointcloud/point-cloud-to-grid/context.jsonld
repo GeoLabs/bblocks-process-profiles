@@ -395,6 +395,12 @@
         "note": "skos:note"
       }
     },
+    "notAttached": {
+      "@id": "pp:notAttached",
+      "@context": {
+        "reason": "skos:note"
+      }
+    },
     "assumedFormatGaps": {
       "@id": "pp:assumedFormatGap",
       "@context": {

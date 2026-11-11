@@ -110,6 +110,11 @@ pp:assumedFormatGap a owl:ObjectProperty ;
     rdfs:label "assumed format gap" ;
     rdfs:comment "A bound input or output whose Implementation Profile representation the deployment does not serve, accepted with its reason (skos:note) and evidence (pp:evidence)." .
 
+pp:notAttached a owl:ObjectProperty ;
+    rdfs:isDefinedBy pp: ;
+    rdfs:label "not attached" ;
+    rdfs:comment "States that a CWL CommandLineTool implements no Implementation Profile of bblocks-generic-profiles, with the reason (skos:note); exclusive of pp:implementsProfile, and absent from a Workflow (decision Q1, 2026-11-11)." .
+
 pp:six-phases a skos:ConceptScheme ;
     rdfs:isDefinedBy pp: ;
     skos:prefLabel "Six-phase workflow framework"@en ;
