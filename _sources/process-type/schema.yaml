@@ -504,11 +504,13 @@ allOf:
       - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/within
     hasAction:
       description: 'The register actions of the entry: its addition, then each in-place amendment of the
-        proposal (pp:amendmentAction, always classified substantive or clarifying, pp:specification).'
+        proposal (pp:amendmentAction, pp:specification). The schema requires the addition; it does not
+        constrain the action type or the classification of the other actions (decision Q5, option b, of
+        2026-11-11: pending a decision common to all registers).'
       type: array
       minItems: 1
       items:
-        oneOf:
+        anyOf:
         - type: object
           required:
           - id
@@ -538,7 +540,6 @@ allOf:
           - id
           - type
           - actionType
-          - changeClassification
           - description
           - proposer
           - startedAtTime
@@ -550,11 +551,7 @@ allOf:
             type:
               const: RegisterAction
             actionType:
-              const: https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction
-            changeClassification:
-              enum:
-              - substantive
-              - clarifying
+              type: string
             description:
               type: string
             proposer:

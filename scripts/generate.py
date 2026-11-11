@@ -1972,21 +1972,18 @@ def sync_process_type_schema(pt, gp_root):
 
 def write_process_type_fixtures(pt):
     """JSON fixtures of the process-type schema, each the entry of kindgrove-steps.reproject-band
-    with one defect, so that they follow the entries: an amendment without classification or
-    classified correctional (not available, pp:specification), a parent class outside the enum,
+    with one defect, so that they follow the entries: a parent class outside the enum,
     a specialisation without entity type; a `byReference` entry (control) and one without
     `implements`, a literal role decomposition (control) and one without parts. The controls check
-    the schema only: they do not describe the deployment of reproject-band."""
+    the schema only: they do not describe the deployment of reproject-band. The schema no longer
+    checks the type or classification of an amendment (decision Q5, option b, of 2026-11-11), so
+    the fixtures amendment-without-classification-fail and amendment-correctional-fail are gone."""
     base = json.loads((ROOT / "_sources/kindgrove-steps/reproject-band/examples/process-type.json").read_text())
 
     IP_RASTER_IN = GENERIC_PROFILES_BASE + "implementation-profile/raster-reprojection/inputs/raster"
     IP_CRS_IN = GENERIC_PROFILES_BASE + "implementation-profile/raster-reprojection/inputs/targetCRS"
 
-    def amendment(d):
-        return next(a for a in d["hasAction"] if a["actionType"] == AMENDMENT_ACTION)
     cases = {
-        "amendment-without-classification-fail.json": lambda d: amendment(d).pop("changeClassification"),
-        "amendment-correctional-fail.json": lambda d: amendment(d).update(changeClassification="correctional"),
         "arbitrary-parent-fail.json": lambda d: d.update(subClassOf="https://example.org/not-an-activity-type"),
         "specialised-without-entity-type-fail.json": lambda d: [d.pop(k) for k in ("usedEntityType", "generatedEntityType")],
         # C1 and C11 (2026-11-10): a reference to the data, and a decomposition of a literal role
