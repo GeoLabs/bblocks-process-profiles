@@ -50,7 +50,7 @@ reports name no `geonovum-labs` shape URL and the annotated `$ref`s none.
 ## The KindGrove step CWL before its release (temporary)
 
 `scripts/sources.yaml` pins the KindGrove step CWL on the GitHub Release `v0.0.2-rc2`, whose CWL
-declares no `format`. The fix (GeoLabs/KindGrove `10887a4`, branch `feature/cwl-format`: `format:
+declares no `format`. The fix (GeoLabs/KindGrove `89e3d36`, branch `feature/cwl-format`, pushed: `format:
 ogc:geotiff` on the GeoTIFF Files, `format: iana:application/geo+json` on the STAC Items; decision of
 2026-11-10 on the formats invariant) is not released yet. Until `v0.0.2-rc3` is, the generator reads
 the CWL generated locally from that commit through `scripts/sources-local.yaml` (git-ignored; copy
@@ -65,11 +65,11 @@ To produce the CWL (the CI command of `.github/workflows/build-cwl-docker.yml`, 
 and the rc2 images, which the run record used):
 
 ```bash
-git -C KindGrove archive 10887a4 | tar -x -C kg && cd kg && mkdir -p myApplication/cwl_output && cd myApplication
+git -C KindGrove archive 89e3d36 | tar -x -C kg && cd kg && mkdir -p myApplication/cwl_output && cd myApplication
 cp ../*for_cwl.ipynb ../requirements.txt . ; cp -r ../steps ../cwl ../workflow.yml .
 jupyter-repo2cwl . -o cwl_output --workflow-manifest workflow.yml \
   --docker-pull ghcr.io/geolabs/kindgrove/mangrove-cwl:v0.0.2-rc2 --per-step-images --skip-build
 ```
 
-with `jupyter-repo2cwl` from `gfenoy/ipython2cwl` `b076f9e`. Remove the override and update the pin
+with `jupyter-repo2cwl` from `gfenoy/ipython2cwl` `5421312` (branch `feature/cwl-format`). Remove the override and update the pin
 (`release`, `sha256`) once rc3 is released, and check it before any push.

@@ -4,7 +4,7 @@ Process profile of **`crop`** (CommandLineTool, W3 Water Bodies).
 
 ## Source
 
-- CWL: [crop.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/664d242f70e1fb870599bf06858daa7ce5a50ddb/water-bodies/app-pkg-multiple/crop.cwl) (pinned commit `664d242`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
+- CWL: [crop.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/crop.cwl) (pinned commit `72a76ae`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
 - Six-phase position: Data retrieval
 - EOAP CWL custom types used: none; candidates: `eoap.cct.bbox`, `eoap.cct.stac`, `eoap.cct.string-format`
 - Used by: `ospd.process-profiles.water-bodies.detect-water-body`
