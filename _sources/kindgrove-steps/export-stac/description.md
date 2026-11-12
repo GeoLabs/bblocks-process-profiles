@@ -4,7 +4,7 @@ Process profile of **`export_stac`** (CommandLineTool, W2b KindGrove (step noteb
 
 ## Source
 
-- CWL: [mangrove-workflow-steps.cwl#export_stac](https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#export_stac) (GitHub Release `v0.0.2-rc2`, sha256 `361cb6a75d54`, license <https://spdx.org/licenses/CC-BY-NC-SA-4.0>). Referenced, not copied.
+- CWL: [mangrove-workflow-steps.cwl#export_stac](https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#export_stac) (GitHub Release `v0.0.2-rc3`, sha256 `886e1b011995`, license <https://spdx.org/licenses/CC-BY-NC-SA-4.0>). Referenced, not copied.
 - Six-phase position: Export / aggregation
 - EOAP CWL custom types used: none; candidates: `eoap.cct.stac`
 - Used by: `ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps`
@@ -24,7 +24,7 @@ Process profile of **`export_stac`** (CommandLineTool, W2b KindGrove (step noteb
 
 ## Analysis
 
-**Behaviour.** `/app/cwl/bin/steps/06_export_stac`, `ghcr.io/geolabs/kindgrove/export-stac:v0.0.2-rc2`.
+**Behaviour.** `/app/cwl/bin/steps/06_export_stac`, `ghcr.io/geolabs/kindgrove/export-stac:v0.0.2-rc3`.
 Renders a `biomass_quicklook.png` from the biomass raster, then writes a STAC Catalog with
 one Item (`mangrove-analysis-<timestamp>`, timestamped at run time like `kindgrove.mangrove`'s
 own output) carrying the mask, biomass raster, two summary CSVs, the analysis JSON and the
@@ -55,7 +55,13 @@ The run is also given as a `wfprov:ProcessRun` (`ogc.bbr.wf4ever.wfprov.ProcessR
 
 Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
-Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `kindgrove-steps`: the pinned W2b source itself (GeoLabs/KindGrove v0.0.2-rc2 `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by `days_back` on that day, three bands scattered (red, green, nir) through download_band and reproject_band), activity `main/export_stac` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
+Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `kindgrove-steps`: the W2b source as pinned then (GeoLabs/KindGrove v0.0.2-rc2, whose CWL differs from the rc3 pinned now only by the `format` lines, the namespaces and the image tags; `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by `days_back` on that day, three bands scattered (red, green, nir) through download_band and reproject_band), activity `main/export_stac` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
+
+## Implementation Profile (tier 3)
+
+Not attached to an Implementation Profile of bblocks-generic-profiles: Export: writes a STAC Catalog of the results. No Generic Profile exports a catalogue.
+
+The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
 
 ## openEO equivalence
 
@@ -65,4 +71,4 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Process type (Activity 4)
 
-Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/export-stac` (`ospd.process-profiles.process-type`), status `submitted`.
+Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/export-stac` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

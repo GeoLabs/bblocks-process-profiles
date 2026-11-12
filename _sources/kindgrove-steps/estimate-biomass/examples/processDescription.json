@@ -55,7 +55,8 @@
       "description": "",
       "schema": {
         "type": "string",
-        "contentMediaType": "application/octet-stream"
+        "contentMediaType": "image/tiff; application=geotiff",
+        "contentEncoding": "binary"
       },
       "minOccurs": 1,
       "maxOccurs": 1
@@ -65,7 +66,8 @@
       "description": "",
       "schema": {
         "type": "string",
-        "contentMediaType": "application/octet-stream"
+        "contentMediaType": "image/tiff; application=geotiff",
+        "contentEncoding": "binary"
       },
       "minOccurs": 1,
       "maxOccurs": 1
@@ -75,7 +77,8 @@
       "description": "",
       "schema": {
         "type": "string",
-        "contentMediaType": "application/octet-stream"
+        "contentMediaType": "image/tiff; application=geotiff",
+        "contentEncoding": "binary"
       },
       "minOccurs": 1,
       "maxOccurs": 1
@@ -85,7 +88,8 @@
       "description": "",
       "schema": {
         "type": "string",
-        "contentMediaType": "application/octet-stream"
+        "contentMediaType": "application/geo+json",
+        "contentEncoding": "binary"
       },
       "minOccurs": 1,
       "maxOccurs": 1
@@ -167,7 +171,8 @@
       "description": "",
       "schema": {
         "type": "string",
-        "contentMediaType": "application/octet-stream"
+        "contentMediaType": "image/tiff; application=geotiff",
+        "contentEncoding": "binary"
       }
     },
     "biomass_file": {
@@ -175,7 +180,8 @@
       "description": "",
       "schema": {
         "type": "string",
-        "contentMediaType": "application/octet-stream"
+        "contentMediaType": "image/tiff; application=geotiff",
+        "contentEncoding": "binary"
       }
     },
     "biomass_summary_file": {

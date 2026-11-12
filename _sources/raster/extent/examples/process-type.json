@@ -1,23 +1,70 @@
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extent",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extent",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "hasAction": [
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extent/actions/addition",
+      "type": "RegisterAction",
+      "actionType": "addition",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-09-22T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extent"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extent/actions/d5-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extent"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extent/actions/specialisation-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-extent, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Geometry.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extent"
+    }
+  ],
   "prefLabel": "Extracts an image envelope.",
   "definition": "Build a vector data containing the image envelope polygon. Useful for some projection, you can set the polygon with more points with the sr parameter. This filter supports user-specified output projection. If no projection is defined, the standard WGS84 projection will be used.",
+  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-extent",
+  "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
+  "generatedEntityType": "http://www.opengis.net/ont/geosparql#Geometry",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
-  ],
-  "profile": "ospd.process-profiles.raster.extent",
-  "processDescription": {
-    "id": "OTB.ImageEnvelope",
-    "version": "1.0.0",
-    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ImageEnvelope"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+    ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "deployment": {
+    "profile": "ospd.process-profiles.raster.extent",
+    "processDescription": {
+      "id": "OTB.ImageEnvelope",
+      "version": "1.0.0",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ImageEnvelope"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
+  },
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent",
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "No openEO process computes the bounding envelope of a raster/data cube in the published bblocks-openeo register (filter_bbox takes a bbox as input to filter by, it does not compute one as output)."
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "No openEO process computes the bounding envelope of a raster/data cube in the published bblocks-openeo register (filter_bbox takes a bbox as input to filter by, it does not compute one as output)."
+    }
   }
 }

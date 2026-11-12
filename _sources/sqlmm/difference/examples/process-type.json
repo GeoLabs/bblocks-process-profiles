@@ -1,23 +1,70 @@
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "hasAction": [
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference/actions/addition",
+      "type": "RegisterAction",
+      "actionType": "addition",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-09-22T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference/actions/d5-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference/actions/specialisation-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/difference, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference"
+    }
+  ],
   "prefLabel": "Compute difference.",
   "definition": "This function shall return a bag of geometry values representing the closure of the set difference between the two geometries InputEntity1 and InputEntity2. The difference is the set of all points which lie on InputEntity1 but not on InputEntity2.",
+  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/difference",
+  "usedEntityType": "http://www.opengis.net/ont/geosparql#Geometry",
+  "generatedEntityType": "http://www.opengis.net/ont/geosparql#Geometry",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
-  ],
-  "profile": "ospd.process-profiles.sqlmm.difference",
-  "processDescription": {
-    "id": "Difference",
-    "version": "2.0.0",
-    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Difference"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+    ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "deployment": {
+    "profile": "ospd.process-profiles.sqlmm.difference",
+    "processDescription": {
+      "id": "Difference",
+      "version": "2.0.0",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Difference"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
+  },
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/difference",
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."
+    }
   }
 }

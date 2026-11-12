@@ -24,9 +24,7 @@
   "keywords": [
     "raster",
     "coverage",
-    "extent",
-    "OTB",
-    "ImageEnvelope"
+    "extent"
   ],
   "metadata": [
     {
@@ -49,9 +47,9 @@
     "in": {
       "title": "Input image filename.",
       "description": "Input image filename.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {
@@ -141,9 +139,9 @@
     "out": {
       "title": "Vector data file containing the envelope.",
       "description": "Vector data file containing the envelope.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/surface",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {

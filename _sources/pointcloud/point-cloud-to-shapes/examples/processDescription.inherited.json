@@ -24,9 +24,7 @@
   "keywords": [
     "point cloud",
     "feature collection",
-    "conversion",
-    "Point Cloud to Shapes",
-    "pointcloud_tools"
+    "conversion"
   ],
   "metadata": [
     {
@@ -49,9 +47,9 @@
     "POINTS": {
       "title": "Points",
       "description": "Points",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/point-cloud",
       "keywords": [
-        "point cloud",
-        "LAS"
+        "point cloud"
       ],
       "metadata": [
         {
@@ -80,9 +78,9 @@
     "SHAPES": {
       "title": "Shapes",
       "description": "Shapes",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/feature-collection",
       "keywords": [
-        "feature collection",
-        "GML"
+        "feature collection"
       ],
       "metadata": [
         {

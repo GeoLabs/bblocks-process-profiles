@@ -31,6 +31,12 @@ processDescription, but CWL cannot declare it). Outputs are globbed with
 `ogc:geotiff` and `iana:image/png` are resolved by the transform to their respective
 media types (M-01, fixed 2026-09-23 in `eoap.cct.cwl-to-ogcprocess` itself).
 
+**`output_file` is not a GeoTIFF.** It is declared `ogc:geotiff`, but the 9 `*_color.tif` of
+the two W1 runs (`results/`, `results1/`) are RGBA TIFFs (4 samples) carrying none of the
+GeoTIFF tags 33550, 33922, 34735; the `calculate-band` outputs of the same runs
+(`*_<indicator>.tiff`) carry them (observed 2026-11-10). An upstream defect of the CRIM CWL or of
+its tool (docs/OPEN-QUESTIONS.md Q-PLOT-GEOTIFF), not corrected here.
+
 **Provenance.** Two outputs derived from one input; `color_scale` is the parameter that
 makes the rendering reproducible.
 
@@ -49,6 +55,20 @@ Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
 Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `w1-earth-search`: earth-search variant of the pinned W1 package, `cwltool --outdir ./results --provenance ./PROV algae-usecase-workflow-earth-search.cwl example/algae-usecase-job-earth-search.yml`, 2026-09-23, cwltool 3.1.20260108082145 on an arm64 macOS host; two products scattered (S2A_29SPC_20190701_1_L2A then S2A_29SPC_20190701_0_L2A). Three local deviations were needed to run the package at all, none touching the CWL (docs/DEVIATIONS.md U-03, U-04)), activity `main/plot_turbidity_2` (scatter iteration 2, engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
 
+## Implementation Profile (tier 3)
+
+Implements [`Raster rendering`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering) (`generic-profiles.implementation-profile.raster-rendering`, bblocks-generic-profiles). Signature checked against raster-rendering: `input_image` (GeoTIFF, TIFF or JPEG 2000) implements `raster`; `color_scale` (a JSON array of value bins and colours, in a string) implements `colourMap`; `output_plot` (PNG) implements the output `image`. `output_file`, the coloured RGBA TIFF on the input grid (declared GeoTIFF but not georeferenced, Q-PLOT-GEOTIFF), is an output of the deployment's own, as are `output_name`, `plot_name`, `plot_title`, `clip_min` and `clip_max`.
+
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `input_image` | input `raster` | `raster` |
+| `color_scale` | input `colourMap` | `colour-map` |
+| `output_name`, `plot_name`, `plot_title`, `clip_min`, `clip_max` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `output_plot` | output `image` | `rendered-image` |
+| `output_file` | -- (the deployment's own outputs, Table 21 footnote b) | -- |
+
 ## openEO equivalence
 
 **Level: closeMatch.** Partial: the export part (GeoTIFF + PNG) corresponds to save_result with a GTiff or PNG format; `clip_min`/`clip_max` correspond to math.clip. The colour mapping (`color_scale` bins) and the matplotlib figure (title, colour bar) have no stable openEO process (colour maps are back-end-specific format options).
@@ -58,4 +78,4 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Process type (Activity 4)
 
-Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/plot-image` (`ospd.process-profiles.process-type`), status `submitted`.
+Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/plot-image` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

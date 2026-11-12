@@ -40,6 +40,12 @@ Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
 Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `w1-copernicus`: Copernicus variant of the pinned W1 package, `cwltool --outdir ./results1 --provenance ./PROV1 algae-usecase-workflow-copernicus.cwl example/algae-usecase-job-copernicus.yml` with Copernicus Data Space S3 credentials, 2026-09-23, cwltool 3.1.20260108082145 on an arm64 macOS host; one product (S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542). cwltool writes the `cwltool:Secrets` inputs as `(secret-<uuid>)` placeholders in the research object), activity `main` (scatter iteration 1, engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
 
+## Implementation Profile (tier 3)
+
+Not attached to an Implementation Profile of bblocks-generic-profiles: A composite Workflow: catalogue search, data retrieval and processing chained into one application. No Generic Profile describes a whole application, and none should: its steps are compared with the tiers one by one.
+
+The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+
 ## openEO equivalence
 
 **Level: none.** Composite (11 steps). No resampling step: the SAFE product already provides 60 m bands, so B03 60 m is downloaded directly instead of being resampled.
@@ -53,4 +59,4 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Process type (Activity 4)
 
-Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process` (`ospd.process-profiles.process-type`), status `submitted`.
+Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

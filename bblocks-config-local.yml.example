@@ -1,0 +1,12 @@
+# Local-only url-mappings, see docs/LOCAL-BUILD.md. Copy to bblocks-config-local.yml (git-ignored)
+# and mount each target directory at the path given.
+url-mappings:
+  # data-types, built with --base-url https://geolabs.github.io/bblocks-data-types/
+  https://geolabs.github.io/bblocks-data-types/build/: /ext/dt/build-local/
+  https://geolabs.github.io/bblocks-data-types/: /ext/dt/
+  # data-formats, built with --base-url https://geolabs.github.io/bblocks-data-formats/
+  https://geolabs.github.io/bblocks-data-formats/build/: /ext/df/build-local/
+  https://geolabs.github.io/bblocks-data-formats/: /ext/df/
+  # generic-profiles, built with --base-url https://geolabs.github.io/bblocks-generic-profiles/
+  https://geolabs.github.io/bblocks-generic-profiles/build/: /ext/generic/build-local/
+  https://geolabs.github.io/bblocks-generic-profiles/: /ext/generic/

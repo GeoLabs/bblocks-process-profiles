@@ -4,7 +4,7 @@ Process profile of **`mangrove-workflow-steps`** (Workflow, W2b KindGrove (step 
 
 ## Source
 
-- CWL: [mangrove-workflow-steps.cwl#mangrove-workflow-steps](https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#mangrove-workflow-steps) (GitHub Release `v0.0.2-rc2`, sha256 `361cb6a75d54`, license <https://spdx.org/licenses/CC-BY-NC-SA-4.0>). Referenced, not copied.
+- CWL: [mangrove-workflow-steps.cwl#mangrove-workflow-steps](https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#mangrove-workflow-steps) (GitHub Release `v0.0.2-rc3`, sha256 `886e1b011995`, license <https://spdx.org/licenses/CC-BY-NC-SA-4.0>). Referenced, not copied.
 - Six-phase position: Filter configuration → Selection / filtering → Data retrieval → Pre-processing → Scientific computation → Export / aggregation
 - EOAP CWL custom types used: `eoap.cct.bbox`
 - Steps (profiles): `ospd.process-profiles.kindgrove-steps.parse-aoi-steps`, `ospd.process-profiles.kindgrove-steps.select-scene`, `ospd.process-profiles.kindgrove-steps.download-band`, `ospd.process-profiles.kindgrove-steps.reproject-band`, `ospd.process-profiles.kindgrove-steps.calculate-indices`, `ospd.process-profiles.kindgrove-steps.estimate-biomass`, `ospd.process-profiles.kindgrove-steps.export-stac`
@@ -42,7 +42,13 @@ The workflow run is also given as an `ogc.bbr.provenance.execution` bundle.
 
 Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
-Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `kindgrove-steps`: the pinned W2b source itself (GeoLabs/KindGrove v0.0.2-rc2 `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by `days_back` on that day, three bands scattered (red, green, nir) through download_band and reproject_band), activity `main` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
+Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `kindgrove-steps`: the W2b source as pinned then (GeoLabs/KindGrove v0.0.2-rc2, whose CWL differs from the rc3 pinned now only by the `format` lines, the namespaces and the image tags; `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by `days_back` on that day, three bands scattered (red, green, nir) through download_band and reproject_band), activity `main` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
+
+## Implementation Profile (tier 3)
+
+Not attached to an Implementation Profile of bblocks-generic-profiles: A composite Workflow: catalogue search, data retrieval and processing chained into one application. No Generic Profile describes a whole application, and none should: its steps are compared with the tiers one by one.
+
+The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
 
 ## openEO equivalence
 
@@ -60,4 +66,4 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Process type (Activity 4)
 
-Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps` (`ospd.process-profiles.process-type`), status `submitted`.
+Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

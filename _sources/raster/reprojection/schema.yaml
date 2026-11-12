@@ -3,8 +3,8 @@ description: 'Profile of the live OGC API - Processes processDescription of `Gda
   id and the input/output names. No execute/results/provenance $defs or examples: static processDescription
   only (no CWLProv-style run record exists for a live deployed service).'
 allOf:
-- $ref: bblocks://ogc.api.processes.v1.schemas.process
-- $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+- $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
+- $ref: bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator
 - type: object
   required:
   - id
@@ -36,8 +36,8 @@ $defs:
     $ref: bblocks://ospd.process-profiles.process-type
   inheritedProcessDescription:
     allOf:
-    - $ref: bblocks://ogc.api.processes.v1.schemas.process
-    - $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+    - $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
+    - $ref: bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator
     - type: object
       required:
       - id
@@ -80,10 +80,6 @@ $defs:
               const: coverage
           - contains:
               const: reprojection
-          - contains:
-              const: GDAL
-          - contains:
-              const: gdalwarp
         metadata:
           allOf:
           - contains:
@@ -124,15 +120,16 @@ $defs:
           properties:
             InputDSN:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
                 keywords:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:
@@ -157,9 +154,12 @@ $defs:
                           const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster
             t_srs:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/coordinate-reference-system
                 keywords:
                   allOf:
                   - contains:
@@ -197,15 +197,16 @@ $defs:
           properties:
             Result:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
                 keywords:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:

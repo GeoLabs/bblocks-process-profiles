@@ -3,8 +3,8 @@ description: 'Profile of the live OGC API - Processes processDescription of `SAG
   Pins the process id and the input/output names. No execute/results/provenance $defs or examples: static
   processDescription only (no CWLProv-style run record exists for a live deployed service).'
 allOf:
-- $ref: bblocks://ogc.api.processes.v1.schemas.process
-- $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+- $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
+- $ref: bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator
 - type: object
   required:
   - id
@@ -28,8 +28,8 @@ $defs:
     $ref: bblocks://ospd.process-profiles.process-type
   inheritedProcessDescription:
     allOf:
-    - $ref: bblocks://ogc.api.processes.v1.schemas.process
-    - $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+    - $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
+    - $ref: bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator
     - type: object
       required:
       - id
@@ -62,10 +62,6 @@ $defs:
               const: point cloud
           - contains:
               const: thinning
-          - contains:
-              const: Point Cloud Thinning
-          - contains:
-              const: pointcloud_tools
         metadata:
           allOf:
           - contains:
@@ -106,15 +102,16 @@ $defs:
           properties:
             INPUT:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/point-cloud
                 keywords:
                   allOf:
                   - contains:
                       const: point cloud
-                  - contains:
-                      const: LAS
                 metadata:
                   allOf:
                   - contains:
@@ -139,9 +136,12 @@ $defs:
                           const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning/inputs/points
             PERCENT:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/number
                 keywords:
                   allOf:
                   - contains:
@@ -179,15 +179,16 @@ $defs:
           properties:
             RESULT:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/point-cloud
                 keywords:
                   allOf:
                   - contains:
                       const: point cloud
-                  - contains:
-                      const: LAS
                 metadata:
                   allOf:
                   - contains:

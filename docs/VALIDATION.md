@@ -24,7 +24,7 @@ IsSimple, GetArea -> `ospd.process-profiles.sqlmm.{centroid,convex-hull,is-simpl
 `bblocks-generic-profiles` side merging the former dedicated `geometry-extent` Generic Profile
 into a new shared `unary-geometry-operation` (alongside `centroid`/`convex-hull`) and adding
 `unary-spatial-predicate` (`is-simple`) and `geometry-measure` (`area`) -- see that register's own
-`docs/ARCHITECTURE.md`. `bblocks-generic-profiles` itself validates separately at **41/41
+`generic-profile/description.md`. `bblocks-generic-profiles` itself validates separately at **41/41
 building blocks, 0 errors**.
 
 Environment note for whoever runs `scripts/generate.py` locally rather than only through
@@ -121,10 +121,13 @@ To run it:
 ```
 
 If the generic provenance profile or the Part 2 register are not published on GitHub Pages
-(Q-PUB), copy `bblocks-config-local.yaml.example` to `bblocks-config-local.yaml` (git-ignored),
-adjust the paths to local builds of those registers and mount them with `.volumes`
-(bblocks-postprocess `url-mappings`, see
-<https://ogcincubator.github.io/bblocks-docs/create/imports#local-url-mappings-for-testing>).
+(Q-PUB), copy `bblocks-config-local.yml.example` to `bblocks-config-local.yml` (git-ignored; the
+postprocessor reads only that name), add the paths to local builds of those registers and mount them
+with `.volumes` (bblocks-postprocess `url-mappings`, see
+<https://ogcincubator.github.io/bblocks-docs/create/imports#local-url-mappings-for-testing>). The
+example already maps the unpublished data-types, data-formats and generic-profiles registers and,
+temporarily, the Registered Item Model: see [`LOCAL-BUILD.md`](LOCAL-BUILD.md), which also says how
+to build the upstream registers (published URL as base URL).
 
 ## Offline pre-check (done)
 

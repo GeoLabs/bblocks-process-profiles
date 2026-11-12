@@ -2,8 +2,8 @@ $schema: https://json-schema.org/draft/2020-12/schema
 description: Profile of the OGC API - Processes processDescription of `otsu` (CWL CommandLineTool). Pins
   the process id and the input/output names; the input/output schemas are those derived from the CWL.
 allOf:
-- $ref: bblocks://ogc.api.processes.v1.schemas.process
-- $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+- $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
+- $ref: bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator
 - type: object
   required:
   - id
@@ -29,9 +29,9 @@ allOf:
         - binary_mask_item
 $defs:
   rawProcessDescription:
-    $ref: bblocks://ogc.api.processes.v1.schemas.process
+    $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
   applicationPackage:
-    $ref: bblocks://ogc.api.processes.v2.schemas.ogcapppkg
+    $ref: bblocks://ogc.api.processes.part2.v1.schemas.ogcapppkg
   provenance:
     $ref: bblocks://ogc.bbr.provenance.provenance
   processTypeEntry:
@@ -40,7 +40,7 @@ $defs:
     $ref: bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld
   execute:
     description: Execute request for this process. Built on the processDescription input schemas and on
-      ogc.api.processes.v1.schemas.link / qualifiedInputValue, because ogc.api.processes.v1.schemas.execute
+      ogc.api.processes.part1.v1.schemas.link / qualifiedInputValue, because ogc.api.processes.part1.v1.schemas.execute
       rejects plain strings and numbers (upstream issue U-01).
     type: object
     required:
@@ -55,8 +55,8 @@ $defs:
           - raster
         additionalProperties:
           anyOf:
-          - $ref: bblocks://ogc.api.processes.v1.schemas.link
-          - $ref: bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue
+          - $ref: bblocks://ogc.api.processes.part1.v1.schemas.link
+          - $ref: bblocks://ogc.api.processes.part1.v1.schemas.qualifiedInputValue
           - type:
             - string
             - number
@@ -81,10 +81,10 @@ $defs:
       - binary_mask_item
     additionalProperties:
       anyOf:
-      - $ref: bblocks://ogc.api.processes.v1.schemas.link
+      - $ref: bblocks://ogc.api.processes.part1.v1.schemas.link
       - type: array
         items:
-          $ref: bblocks://ogc.api.processes.v1.schemas.link
+          $ref: bblocks://ogc.api.processes.part1.v1.schemas.link
       - type:
         - string
         - number
@@ -94,3 +94,160 @@ $defs:
         - object
   processRun:
     $ref: bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun
+  inheritedProcessDescription:
+    allOf:
+    - $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
+    - $ref: bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator
+    - type: object
+      required:
+      - id
+      - version
+      - inputs
+      - outputs
+      properties:
+        id:
+          const: otsu
+        inputs:
+          type: object
+          required:
+          - raster
+          propertyNames:
+            enum:
+            - raster
+        outputs:
+          type: object
+          required:
+          - binary_mask_item
+          propertyNames:
+            enum:
+            - binary_mask_item
+    - description: '`otsu` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding`:
+        Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) inherited from its Implementation
+        Profile.'
+      type: object
+      required:
+      - keywords
+      - metadata
+      properties:
+        keywords:
+          allOf:
+          - contains:
+              const: raster
+          - contains:
+              const: coverage
+          - contains:
+              const: thresholding
+        metadata:
+          allOf:
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-thresholding
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding
+        inputs:
+          type: object
+          required:
+          - raster
+          properties:
+            raster:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-thresholding/inputs/raster
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding/inputs/raster
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+        outputs:
+          type: object
+          required:
+          - binary_mask_item
+          properties:
+            binary_mask_item:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/binary-mask
+                keywords:
+                  allOf:
+                  - contains:
+                      const: mask
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-thresholding/outputs/mask
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding/outputs/mask

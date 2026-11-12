@@ -67,6 +67,12 @@ Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
 Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `w2-pinned`: the register's pinned W2 source itself (bblocks-eoap-cct c27c60d `mangrove-workflow.cwl#mangrove-workflow`) run with the profile's execute inputs, `cwltool --no-match-user --provenance ro --outdir out`, 2026-09-23, cwltool 3.1.20260108082145 on an arm64 macOS host, 126 s; scene selected by `days_back` on that day: S2C_46PGC_20260913_0_L2A), activity `main/step_1` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
 
+## Implementation Profile (tier 3)
+
+Not attached to an Implementation Profile of bblocks-generic-profiles: One opaque tool runs scene selection, band retrieval, indices, biomass and carbon estimation and STAC export. No single profile describes it; kindgrove-steps splits it into steps.
+
+The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+
 ## openEO equivalence
 
 **Level: none.** Opaque: one ipython2cwl binary running the whole notebook. No single openEO process; each notebook stage has a closeMatch (decomposition). run_udf could wrap the binary but expects a data cube in and out, which this tool does not follow (it searches and downloads its own data).
@@ -85,4 +91,4 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Process type (Activity 4)
 
-Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove` (`ospd.process-profiles.process-type`), status `submitted`.
+Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

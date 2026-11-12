@@ -12,13 +12,22 @@
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "wfprov": "http://purl.org/wf4ever/wfprov#",
     "oa": "http://www.w3.org/ns/oa#",
+    "rim": "https://w3id.org/ogc/rim/",
+    "acttype": "https://w3id.org/ogc/rim/activity-type/",
+    "owl": "http://www.w3.org/2002/07/owl#",
     "id": "@id",
     "type": "@type",
     "ProcessRun": "wfprov:ProcessRun",
     "WorkflowRun": "wfprov:WorkflowRun",
     "WorkflowEngine": "wfprov:WorkflowEngine",
     "Artifact": "wfprov:Artifact",
-    "ProcessType": "skos:Concept",
+    "ProcessType": "pp:ProcessType",
+    "ActivityType": "acttype:ActivityType",
+    "owlClass": "owl:Class",
+    "subClassOf": {
+      "@id": "rdfs:subClassOf",
+      "@type": "@id"
+    },
     "title": "dct:title",
     "description": "dct:description",
     "keywords": "dct:subject",
@@ -41,6 +50,24 @@
       "@id": "proc:role",
       "@type": "@id"
     },
+    "dataType": {
+      "@id": "dct:type",
+      "@type": "@id"
+    },
+    "usedEntityType": {
+      "@id": "acttype:usedEntityType",
+      "@type": "@id"
+    },
+    "generatedEntityType": {
+      "@id": "acttype:generatedEntityType",
+      "@type": "@id"
+    },
+    "changeClassification": {
+      "@id": "rim:changeClassification",
+      "@type": "@vocab"
+    },
+    "substantive": "rim:substantiveChange",
+    "clarifying": "rim:clarifyingChange",
     "inputs": {
       "@id": "proc:inputs",
       "@context": {
@@ -190,6 +217,46 @@
       "@id": "prov:generated",
       "@type": "@id"
     },
+    "objectIdentifier": {
+      "@id": "rim:objectIdentifier",
+      "@type": "xsd:anyURI"
+    },
+    "itemClass": {
+      "@id": "rim:itemClass",
+      "@type": "@id"
+    },
+    "inRegister": {
+      "@id": "rim:inRegister",
+      "@type": "@id"
+    },
+    "validityStatus": {
+      "@id": "rim:validityStatus",
+      "@type": "@vocab"
+    },
+    "publicationStatus": {
+      "@id": "rim:publicationStatus",
+      "@type": "@vocab"
+    },
+    "invalid": "rim:invalid",
+    "published": "rim:published",
+    "hasAction": {
+      "@id": "rim:hasAction",
+      "@type": "@id"
+    },
+    "RegisterAction": "rim:RegisterAction",
+    "actionType": {
+      "@id": "rim:actionType",
+      "@type": "@vocab"
+    },
+    "addition": "rim:additionAction",
+    "proposer": {
+      "@id": "rim:proposer",
+      "@type": "@id"
+    },
+    "appliesTo": {
+      "@id": "rim:appliesTo",
+      "@type": "@id"
+    },
     "prefLabel": "skos:prefLabel",
     "definition": "skos:definition",
     "inScheme": {
@@ -197,9 +264,14 @@
       "@type": "@id"
     },
     "status": "pp:status",
+    "classification": "@nest",
+    "correspondences": "@nest",
     "phase": {
-      "@id": "skos:broader",
+      "@id": "pp:phase",
       "@type": "@id"
+    },
+    "deployment": {
+      "@id": "pp:deployment"
     },
     "profile": "pp:profile",
     "plan": {
@@ -249,6 +321,99 @@
     },
     "stage": "pp:stage",
     "openeo": "pp:openeo",
-    "note": "skos:note"
+    "note": "skos:note",
+    "serverSideFiles": {
+      "@id": "pp:serverSideFile",
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "location": "pp:location"
+      }
+    },
+    "roleDecompositions": {
+      "@id": "pp:roleDecomposition",
+      "@context": {
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "parts": {
+          "@id": "pp:part",
+          "@container": "@list"
+        },
+        "selectors": {
+          "@id": "pp:selector",
+          "@context": {
+            "name": "pp:liveName",
+            "values": "rdf:value"
+          }
+        },
+        "reproducible": {
+          "@id": "pp:reproducible",
+          "@type": "xsd:boolean"
+        },
+        "note": "skos:note"
+      }
+    },
+    "unboundRoles": {
+      "@id": "pp:unboundRole",
+      "@context": {
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "reason": "skos:note"
+      }
+    },
+    "fixedRoleValues": {
+      "@id": "pp:fixedRoleValue",
+      "@context": {
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "values": "rdf:value",
+        "reason": "skos:note"
+      }
+    },
+    "byReference": {
+      "@id": "pp:byReference",
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "note": "skos:note"
+      }
+    },
+    "notAttached": {
+      "@id": "pp:notAttached",
+      "@context": {
+        "reason": "skos:note"
+      }
+    },
+    "assumedFormatGaps": {
+      "@id": "pp:assumedFormatGap",
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "served": "pp:servedMediaType",
+        "reason": "skos:note",
+        "evidence": "pp:evidence"
+      }
+    }
   }
 }

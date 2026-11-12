@@ -52,6 +52,12 @@ Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
 Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `w1-copernicus`: Copernicus variant of the pinned W1 package, `cwltool --outdir ./results1 --provenance ./PROV1 algae-usecase-workflow-copernicus.cwl example/algae-usecase-job-copernicus.yml` with Copernicus Data Space S3 credentials, 2026-09-23, cwltool 3.1.20260108082145 on an arm64 macOS host; one product (S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542). cwltool writes the `cwltool:Secrets` inputs as `(secret-<uuid>)` placeholders in the research object), activity `main/download_b03_60m` (scatter iteration 1, engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
 
+## Implementation Profile (tier 3)
+
+Not attached to an Implementation Profile of bblocks-generic-profiles: Band retrieval from a SAFE product on S3, returning JPEG 2000. Its Implementation Profile would need a SAFE format, which has no media type, and a format always has one (decision C8 of 2026-11-10): band-retrieval-safe was not created, so this process stays unattached.
+
+The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+
 ## openEO equivalence
 
 **Level: closeMatch.** Same operation as the STAC-Item variant (one band of one product) but reading the SAFE archive on S3 with user credentials and a `resolution` selector (10m/20m/60m). openEO has no credential parameters (handled by the back-end) and chooses native resolution per band; choosing another resolution is resample_spatial territory.
@@ -61,4 +67,4 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Process type (Activity 4)
 
-Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-product-safe` (`ospd.process-profiles.process-type`), status `submitted`.
+Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-product-safe` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

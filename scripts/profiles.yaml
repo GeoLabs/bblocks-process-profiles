@@ -28,6 +28,12 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: algae-usecase-workflow-earth-search.cwl}
     phases: [filter-configuration, selection-filtering, data-retrieval, pre-processing, scientific-computation, export-aggregation]
+    tier3: &composite
+      status: not attached
+      reason: >-
+        A composite Workflow: catalogue search, data retrieval and processing chained into one
+        application. No Generic Profile describes a whole application, and none should: its steps are
+        compared with the tiers one by one.
     cct: []
     cct_candidates: [eoap.cct.geojson, eoap.cct.string-format]
     steps: [select-products-sentinel2, workflow-earth-search-process]
@@ -53,6 +59,7 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: algae-usecase-workflow-earth-search-process.cwl}
     phases: [data-retrieval, pre-processing, scientific-computation, export-aggregation]
+    tier3: *composite
     cct: []
     cct_candidates: [eoap.cct.string-format]
     steps: [download-band-sentinel2-stac-item, reproject-image, calculate-band, plot-image]
@@ -77,6 +84,7 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: algae-usecase-workflow-copernicus.cwl}
     phases: [filter-configuration, selection-filtering, data-retrieval, pre-processing, scientific-computation, export-aggregation]
+    tier3: *composite
     cct: []
     cct_candidates: [eoap.cct.geojson, eoap.cct.string-format]
     steps: [select-products-sentinel2, workflow-copernicus-process]
@@ -104,6 +112,7 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: algae-usecase-workflow-copernicus-process.cwl}
     phases: [data-retrieval, scientific-computation, export-aggregation]
+    tier3: *composite
     cct: []
     cct_candidates: [eoap.cct.string-format]
     steps: [download-band-sentinel2-product-safe, calculate-band, plot-image]
@@ -130,6 +139,41 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: select-products-sentinel2.cwl}
     phases: [selection-filtering]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: inherited-description-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          processDescription.inherited.json added with the attachment to the Implementation Profile
+          product-selection: the deployed processDescription with each bound input and output linked to
+          the role it implements (metadata, role implementation-input or implementation-output) and
+          carrying that role's dataType; the profile schema inherits it. The deployed processDescription
+          is unchanged.
+      - id: by-reference-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          byReference added: the output urls implements the role products of product-selection as URLs of
+          the STAC Items, not the Items themselves (decision C1 of 2026-11-10).
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
+      reason: >-
+        Signature checked against product-selection: `aoi` (a GeoJSON file) implements
+        `areaOfInterest`; `toi` (start and end dates, optional at tier 4) implements `timeInterval`;
+        `collection` implements `collection`; `urls` (references to the products) implements the output
+        `products`, by reference. `date` + `delta` (the other encoding of the time window, documented as
+        an alternative to `toi`), `catalog`, `product_level` and `cloud_cover` are inputs of the
+        deployment's own.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection
+    bindings: {inputs: {aoi: areaOfInterest, toi: timeInterval, collection: collection}, outputs: {urls: products}}
+    by_reference:
+      outputs: {urls: products}
+      note: >-
+        The products are returned as URLs, not as STAC Items: STAC Item URLs for `catalog:
+        earth-search` (served as application/geo+json by the STAC API: read, not observed), S3 URLs of
+        SAFE products for `catalog: copernicus`, a format this Implementation Profile does not name.
     cct: []
     cct_candidates: [eoap.cct.geojson, eoap.cct.string-format]
     parents: [workflow-earth-search, workflow-copernicus]
@@ -181,6 +225,44 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: download-band-sentinel2-stac-item.cwl}
     phases: [data-retrieval]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: inherited-description-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          processDescription.inherited.json added with the attachment to the Implementation Profile
+          band-retrieval: the deployed processDescription with each bound input and output linked to the
+          role it implements (metadata, role implementation-input or implementation-output) and carrying
+          that role's dataType; the profile schema inherits it. The deployed processDescription is
+          unchanged.
+      - id: by-reference-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          byReference added: the input product_url implements the role product of band-retrieval as the
+          URL of a STAC Item, not the Item itself (decision C1 of 2026-11-10).
+      - id: unbound-roles-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          unboundRoles added: the role areaOfInterest of band-retrieval (minOccurs 0) is left unbound, no
+          input restricting the area (decision C2 of 2026-11-10).
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
+      reason: >-
+        Signature checked against band-retrieval: `product_url` (a STAC Item URL) implements
+        `product`, by reference; `band` implements `band`; `product` (GeoTIFF) implements the output
+        `raster`. The optional `areaOfInterest` (minOccurs 0) is left unbound: the whole band is
+        retrieved.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval
+    bindings: {inputs: {product_url: product, band: band}, outputs: {product: raster}}
+    unbound: {areaOfInterest: "no input restricts the area: the whole band of the product is retrieved"}
+    by_reference:
+      inputs: {product_url: product}
+      note: >-
+        The product is given as the URL of its STAC Item, a string, not as the STAC Item itself.
     cct: []
     cct_candidates: [eoap.cct.string-format, eoap.cct.stac]
     parents: [workflow-earth-search-process]
@@ -220,6 +302,13 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: download-band-sentinel2-product-safe.cwl}
     phases: [data-retrieval]
+    tier3:
+      status: not attached
+      reason: >-
+        Band retrieval from a SAFE product on S3, returning JPEG 2000. Its Implementation Profile would
+        need a SAFE format, which has no media type, and a format always has one (decision C8 of
+        2026-11-10): band-retrieval-safe was not created, so this process stays unattached.
+      closest: the Generic Profile band-retrieval (tier 2).
     cct: []
     cct_candidates: [eoap.cct.string-format]
     parents: [workflow-copernicus-process]
@@ -262,6 +351,29 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: reproject-image.cwl}
     phases: [pre-processing]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: inherited-description-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          processDescription.inherited.json added with the attachment to the Implementation Profile
+          raster-resampling: the deployed processDescription with each bound input and output linked to
+          the role it implements (metadata, role implementation-input or implementation-output) and
+          carrying that role's dataType; the profile schema inherits it. The deployed processDescription
+          is unchanged.
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
+      reason: >-
+        Signature checked against raster-resampling: `input_image` (GeoTIFF, TIFF or JPEG 2000)
+        implements `raster`; `output_resolution` (`-tr`, an integer pair, optional at tier 4) implements
+        `resolution`; `result` (GeoTIFF) implements the output `raster`. `output_dimensions` (`-ts`, the
+        other way to define the target grid) and `output_name` are inputs of the deployment's own. Not
+        raster-reprojection: no target CRS (`-t_srs` is never passed). Not exposed: the interpolation
+        method (gdalwarp's default) and the forced Float32 type.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling
+    bindings: {inputs: {input_image: raster, output_resolution: resolution}, outputs: {result: raster}}
     cct: []
     cct_candidates: []
     parents: [workflow-earth-search-process]
@@ -300,6 +412,22 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: calculate-band.cwl}
     phases: [scientific-computation]
+    tier3:
+      status: attached
+      reason: >-
+        Signature checked against raster-band-math: `calc` (a gdal_calc.py expression) implements
+        `expression`; `band_a`..`band_z` (26 optional files, GeoTIFF, TIFF or JPEG 2000) together
+        implement the list role `rasters`; `result` (one Float32 GeoTIFF band written by gdal_calc.py)
+        implements the output `raster` (raster-single-band). `name`, the output file name, is an input
+        of the deployment's own.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math
+    bindings:
+      inputs: {calc: expression, band_a: rasters, band_b: rasters, band_c: rasters, band_d: rasters, band_e: rasters,
+               band_f: rasters, band_g: rasters, band_h: rasters, band_i: rasters, band_j: rasters, band_k: rasters,
+               band_l: rasters, band_m: rasters, band_n: rasters, band_o: rasters, band_p: rasters, band_q: rasters,
+               band_r: rasters, band_s: rasters, band_t: rasters, band_u: rasters, band_v: rasters, band_w: rasters,
+               band_x: rasters, band_y: rasters, band_z: rasters}
+      outputs: {result: raster}
     cct: []
     cct_candidates: []
     parents: [workflow-earth-search-process, workflow-copernicus-process]
@@ -349,6 +477,29 @@ processes:
     workflow: algae-bloom
     source: {repo: w1, file: plot-image.cwl}
     phases: [export-aggregation]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: inherited-description-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          processDescription.inherited.json added with the attachment to the Implementation Profile
+          raster-rendering: the deployed processDescription with each bound input and output linked to the
+          role it implements (metadata, role implementation-input or implementation-output) and carrying
+          that role's dataType; the profile schema inherits it. The deployed processDescription is
+          unchanged.
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
+      reason: >-
+        Signature checked against raster-rendering: `input_image` (GeoTIFF, TIFF or JPEG 2000)
+        implements `raster`; `color_scale` (a JSON array of value bins and colours, in a string)
+        implements `colourMap`; `output_plot` (PNG) implements the output `image`. `output_file`, the
+        coloured RGBA TIFF on the input grid (declared GeoTIFF but not georeferenced, Q-PLOT-GEOTIFF), is
+        an output of the deployment's own, as are `output_name`, `plot_name`, `plot_title`, `clip_min`
+        and `clip_max`.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering
+    bindings: {inputs: {input_image: raster, color_scale: colourMap}, outputs: {output_plot: image}}
     cct: []
     cct_candidates: []
     parents: [workflow-earth-search-process, workflow-copernicus-process]
@@ -372,6 +523,12 @@ processes:
       `ogc:geotiff` and `iana:image/png` are resolved by the transform to their respective
       media types (M-01, fixed 2026-09-23 in `eoap.cct.cwl-to-ogcprocess` itself).
 
+      **`output_file` is not a GeoTIFF.** It is declared `ogc:geotiff`, but the 9 `*_color.tif` of
+      the two W1 runs (`results/`, `results1/`) are RGBA TIFFs (4 samples) carrying none of the
+      GeoTIFF tags 33550, 33922, 34735; the `calculate-band` outputs of the same runs
+      (`*_<indicator>.tiff`) carry them (observed 2026-11-10). An upstream defect of the CRIM CWL or of
+      its tool (docs/OPEN-QUESTIONS.md Q-PLOT-GEOTIFF), not corrected here.
+
       **Provenance.** Two outputs derived from one input; `color_scale` is the parameter that
       makes the rendering reproducible.
     run: {prov: w1-earth-search, step: plot_turbidity, iteration: 2}
@@ -391,6 +548,7 @@ processes:
     workflow: kindgrove
     source: {repo: w2, file: mangrove-workflow.cwl, element: mangrove-workflow}
     phases: [filter-configuration, selection-filtering, data-retrieval, pre-processing, scientific-computation, export-aggregation]
+    tier3: *composite
     cct: [eoap.cct.bbox]
     cct_candidates: []
     steps: [parse-aoi, mangrove]
@@ -420,6 +578,11 @@ processes:
     label: Parse area of interest
     definition: Unpacks an OGC bounding box (EOAP BBox custom type) into west, south, east and north coordinates.
     phases: [filter-configuration]
+    tier3: &utility
+      status: not attached
+      reason: >-
+        Workflow plumbing: splits a bounding box into four numbers for the other steps. Not a
+        geoprocessing operation; no profile is needed.
     cct: [eoap.cct.bbox]
     cct_candidates: []
     parents: [mangrove-workflow]
@@ -462,6 +625,11 @@ processes:
       Detects mangroves from Sentinel-2 L2A vegetation indices within a bounding box and estimates
       above-ground biomass and carbon stock (ipython2cwl binary of the KindGrove notebook).
     phases: [selection-filtering, data-retrieval, pre-processing, scientific-computation, export-aggregation]
+    tier3:
+      status: not attached
+      reason: >-
+        One opaque tool runs scene selection, band retrieval, indices, biomass and carbon estimation
+        and STAC export. No single profile describes it; kindgrove-steps splits it into steps.
     cct: []
     cct_candidates: [eoap.cct.bbox]
     parents: [mangrove-workflow]
@@ -533,6 +701,16 @@ processes:
     workflow: water-bodies
     source: {repo: w3, file: water-bodies.cwl}
     phases: [data-retrieval, scientific-computation, export-aggregation]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to
+          72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/water-bodies.cwl). The
+          processDescription is unchanged.
+    tier3: *composite
     cct: []
     cct_candidates: [eoap.cct.bbox, eoap.cct.string-format]
     steps: [detect-water-body, stac]
@@ -562,6 +740,18 @@ processes:
     workflow: water-bodies
     source: {repo: w3, file: detect_water_body.cwl}
     phases: [data-retrieval, scientific-computation]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to
+          72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/detect_water_body.cwl). The 72a76ae
+          CWL declares the format of its Files, so the processDescription derived from it changes:
+          contentMediaType application/octet-stream -> image/tiff; application=geotiff (with
+          contentEncoding binary) for the output detected_water_body.
+    tier3: *composite
     cct: []
     cct_candidates: [eoap.cct.bbox, eoap.cct.string-format]
     steps: [crop, norm-diff, otsu]
@@ -600,8 +790,77 @@ processes:
     label: Crop a Sentinel-2 COG band to an area of interest
     definition: >-
       Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the
-      area of interest and reprojected to the requested CRS.
+      area of interest, whose CRS is given by `epsg`; the output keeps the CRS of the asset.
     phases: [data-retrieval]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: definition-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          definition: "Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped
+          to the area of interest and reprojected to the requested CRS." -> "Cloud-native windowed read of
+          one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest, whose CRS is
+          given by `epsg`; the output keeps the CRS of the asset." The tool does not reproject: epsg is
+          passed to gdal.Translate as projWinSRS, the CRS of aoi (read, app.py), and the four crop_*.tif
+          of the run record water-bodies stay in EPSG:32610 (observed 2026-11-10). Substantive: it changes
+          what the item means.
+      - id: inherited-description-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          processDescription.inherited.json added with the attachment to the Implementation Profile
+          band-retrieval: the deployed processDescription with each bound input and output linked to the
+          role it implements (metadata, role implementation-input or implementation-output) and carrying
+          that role's dataType; the profile schema inherits it. The deployed processDescription is
+          unchanged.
+      - id: by-reference-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          byReference added: the input item implements the role product of band-retrieval as the URL of a
+          STAC Item, not the Item itself (decision C1 of 2026-11-10).
+      - id: role-decompositions-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          roleDecompositions added: the role areaOfInterest of band-retrieval is taken as the two inputs
+          aoi (four numbers in one string) and epsg (their CRS), neither of which carries its
+          representation.
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to
+          72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/crop.cwl). The 72a76ae CWL declares
+          the format of its Files, so the processDescription derived from it changes: contentMediaType
+          application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for
+          the output cropped, in processDescription.json and processDescription.inherited.json. The
+          assumedFormatGaps recorded at the attachment on 2026-11-10 for cropped were removed the same
+          day, when the corrected CWL served these formats; the entry has none.
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
+      reason: >-
+        Signature checked against band-retrieval: `item` (a STAC Item URL) implements `product`, by
+        reference; `band` (a band common name) implements `band`; `aoi` and `epsg` (four numbers in one
+        string, and their CRS) implement `areaOfInterest` as a role decomposition; `cropped` implements
+        the output `raster`. It does not reproject: the output keeps the CRS of the asset.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval
+    bindings: {inputs: {item: product, band: band}, outputs: {cropped: raster}}
+    by_reference:
+      inputs: {item: product}
+      note: >-
+        The product is given as the URL of its STAC Item, a string, not as the STAC Item itself.
+    role_decompositions:
+      inputs:
+        areaOfInterest:
+          parts: [aoi, epsg]
+          note: >-
+            The area of interest is taken as one string of four comma-separated numbers (`aoi`) and the
+            identifier of their CRS (`epsg`, passed to gdal.Translate as `projWinSRS`), not as one OGC
+            API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the
+            role is not served.
     cct: []
     cct_candidates: [eoap.cct.bbox, eoap.cct.stac, eoap.cct.string-format]
     parents: [detect-water-body]
@@ -616,8 +875,11 @@ processes:
     analysis: |
       **Behaviour.** `python -m app`, `ghcr.io/terradue/ogc-eo-application-package-hands-on/crop:1.5.0`.
       Reads one asset of the given STAC item directly over the network (`NetworkAccess`; no `File`
-      input -- `item` is a plain STAC item URL string), windowed-reads and reprojects the requested
-      `band` to `epsg` cropped to `aoi`, writes one GeoTIFF (`crop_<band>.tif`).
+      input -- `item` is a plain STAC item URL string), windowed-reads the requested `band` cropped to
+      `aoi`, writes one GeoTIFF (`crop_<band>.tif`). It does not reproject: `epsg` is passed to
+      `gdal.Translate` as `projWinSRS`, the CRS of `aoi`, not a target CRS (read, `app.py`). Observed
+      (run record `water-bodies`, 2026-11-10): with `epsg: "EPSG:4326"`, the four `crop_*.tif` stay
+      in the CRS of the asset, EPSG:32610 (UTM zone 10N), at 10 m.
 
       **CWL specifics.** `item`, `aoi`, `epsg`, `band` are all plain strings: `item` is a STAC Item
       URL (candidate `eoap.cct.stac` or `eoap.cct.string-format`), `aoi` a comma-separated bbox
@@ -643,6 +905,56 @@ processes:
     label: Normalized difference between two rasters
     definition: Computes the normalized difference index ((A-B)/(A+B)) of two co-registered rasters.
     phases: [scientific-computation]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: inherited-description-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          processDescription.inherited.json added with the attachment to the Implementation Profile
+          radiometric-index-single-band: the deployed processDescription with each bound input and output
+          linked to the role it implements (metadata, role implementation-input or implementation-output)
+          and carrying that role's dataType; the profile schema inherits it. The deployed
+          processDescription is unchanged.
+      - id: fixed-role-values-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          fixedRoleValues added: the optional role index of radiometric-index-single-band is fixed to
+          "normalized difference", the (A-B)/(A+B) the tool always computes (decision C3 of 2026-11-10).
+      - id: unbound-roles-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          unboundRoles added: the role index of radiometric-index-single-band (minOccurs 0) is left
+          unbound, no input selecting the index (decision C2 of 2026-11-10).
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to
+          72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/norm_diff.cwl). The 72a76ae CWL
+          declares the format of its Files, so the processDescription derived from it changes:
+          contentMediaType application/octet-stream -> image/tiff; application=geotiff (with
+          contentEncoding binary) for the input rasters and the output ndwi, in processDescription.json
+          and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on
+          2026-11-10 for rasters and ndwi were removed the same day, when the corrected CWL served these
+          formats; the entry has none.
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
+      reason: >-
+        Signature checked against radiometric-index-single-band: `rasters` (two single-band files,
+        `nargs=2`, positional: `rasters[0]` minus `rasters[1]`) implements `rasters`; `ndwi` (one
+        single-band Float32 GeoTIFF) implements the output `raster`. The optional `index` (minOccurs 0) is
+        not an input: the tool always computes the normalized difference of the two rasters, the index
+        it is (NDWI in W3) depending on the bands the caller passes.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band
+    bindings: {inputs: {rasters: rasters}, outputs: {ndwi: raster}}
+    unbound: {index: "no input selects the index: the tool computes the normalized difference (A-B)/(A+B) of the two rasters"}
+    fixed_roles:
+      inputs:
+        index: {values: [normalized difference], reason: "the tool computes (A-B)/(A+B) of rasters[0] and rasters[1] (app.py); which index it is depends on the bands passed (NDWI for green and NIR in W3)"}
     cct: []
     cct_candidates: []
     parents: [detect-water-body]
@@ -681,6 +993,38 @@ processes:
     label: Otsu binary threshold
     definition: Thresholds a single-band raster into a binary mask using Otsu's method.
     phases: [scientific-computation]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: inherited-description-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          processDescription.inherited.json added with the attachment to the Implementation Profile
+          otsu-thresholding: the deployed processDescription with each bound input and output linked to
+          the role it implements (metadata, role implementation-input or implementation-output) and
+          carrying that role's dataType; the profile schema inherits it. The deployed processDescription
+          is unchanged.
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to
+          72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/otsu.cwl). The 72a76ae CWL declares
+          the format of its Files, so the processDescription derived from it changes: contentMediaType
+          application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for
+          the input raster and the output binary_mask_item, in processDescription.json and
+          processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on
+          2026-11-10 for raster and binary_mask_item were removed the same day, when the corrected CWL
+          served these formats; the entry has none.
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
+      reason: >-
+        Signature checked against otsu-thresholding: `raster` (a single-band file) implements `raster`;
+        `binary_mask_item` (a uint8 GeoTIFF, 1 above the threshold, 0 declared NoData) implements the
+        output `mask`.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding
+    bindings: {inputs: {raster: raster}, outputs: {binary_mask_item: mask}}
     cct: []
     cct_candidates: []
     parents: [detect-water-body]
@@ -711,6 +1055,19 @@ processes:
       Writes a STAC Catalog with one Item per input identifier, each carrying the corresponding
       water-body raster as an asset.
     phases: [export-aggregation]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to
+          72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/stac.cwl). The processDescription
+          is unchanged.
+    tier3: &export
+      status: not attached
+      reason: >-
+        Export: writes a STAC Catalog of the results. No Generic Profile exports a catalogue.
     cct: []
     cct_candidates: [eoap.cct.stac]
     parents: [water-bodies]
@@ -748,7 +1105,7 @@ processes:
       stac_catalog: {href: catalog.json, type: application/json, stac: true}
 
   # ---------------------------------------------------------------- W2b kindgrove-steps (GeoLabs
-  # KindGrove v0.0.2-rc2, a GitHub Release asset, not a git commit -- see scripts/sources.yaml
+  # KindGrove v0.0.2-rc3, a GitHub Release asset, not a git commit -- see scripts/sources.yaml
   # `kindgrove_steps`). A ground-up reimplementation of the W2 KindGrove computation as one
   # CommandLineTool per notebook, added ALONGSIDE `kindgrove`, not replacing it: different tools,
   # different Docker images (ghcr.io/geolabs/kindgrove/*), different license (CC-BY-NC-SA-4.0 vs
@@ -757,6 +1114,16 @@ processes:
     workflow: kindgrove-steps
     source: {repo: kindgrove_steps, file: mangrove-workflow-steps.cwl, element: mangrove-workflow-steps}
     phases: [filter-configuration, selection-filtering, data-retrieval, pre-processing, scientific-computation, export-aggregation]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the
+          v0.0.2-rc3 release (mangrove-workflow-steps.cwl#mangrove-workflow-steps). The processDescription
+          is unchanged.
+    tier3: *composite
     cct: [eoap.cct.bbox]
     cct_candidates: []
     steps: [parse-aoi-steps, select-scene, download-band, reproject-band, calculate-indices, estimate-biomass, export-stac]
@@ -791,6 +1158,15 @@ processes:
     label: Parse area of interest
     definition: Splits an OGC bounding box into its west, south, east and north coordinates.
     phases: [filter-configuration]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the
+          v0.0.2-rc3 release (mangrove-workflow-steps.cwl#parse_aoi). The processDescription is unchanged.
+    tier3: *utility
     cct: [eoap.cct.bbox]
     cct_candidates: []
     parents: [mangrove-workflow-steps]
@@ -812,6 +1188,61 @@ processes:
     label: Select the least cloudy Sentinel-2 L2A scene
     definition: Selects the least cloudy Sentinel-2 L2A scene over a bounding box within a time window.
     phases: [selection-filtering]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: inherited-description-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          processDescription.inherited.json added with the attachment to the Implementation Profile
+          product-selection: the deployed processDescription with each bound input and output linked to
+          the role it implements (metadata, role implementation-input or implementation-output) and
+          carrying that role's dataType; the profile schema inherits it. The deployed processDescription
+          is unchanged.
+      - id: role-decompositions-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          roleDecompositions added: the role areaOfInterest of product-selection is taken as the four
+          inputs west, south, east and north, and the literal role timeInterval as days_back, not
+          reproducible since it depends on the time of execution (decision C11 of 2026-11-10).
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the
+          v0.0.2-rc3 release (mangrove-workflow-steps.cwl#select_scene). The rc3 CWL declares the format
+          of its Files (the ipython2cwl format annotation), so the processDescription derived from it
+          changes: contentMediaType application/octet-stream -> application/geo+json (with contentEncoding
+          binary) for the output stac_item, in processDescription.json and
+          processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on
+          2026-11-10 for stac_item were removed the same day, when the corrected CWL served these formats;
+          the entry has none.
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
+      reason: >-
+        Signature checked against product-selection: `west`, `south`, `east`, `north` implement
+        `areaOfInterest` as a role decomposition (a bounding box in EPSG:4326, implicit); `days_back`
+        implements `timeInterval` as a literal role decomposition, not reproducible; `collection`
+        implements `collection`; `stac_item` (one STAC Item file) implements the output `products`.
+        `cloud_cover_max` and `stac_api` are inputs of the deployment's own.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection
+    bindings: {inputs: {collection: collection}, outputs: {stac_item: products}}
+    role_decompositions:
+      inputs:
+        areaOfInterest:
+          parts: [west, south, east, north]
+          note: >-
+            The area of interest is taken as the four bounds of a bounding box, in EPSG:4326 (implicit:
+            passed as the `bbox` of pystac_client, read), not as a GeoJSON geometry: the representation
+            geometry-geojson of the role is not served.
+        timeInterval:
+          parts: [days_back]
+          reproducible: false
+          note: >-
+            The time interval is the `days_back` days before the time of execution: the same input gives
+            another interval on another day, so a run cannot be repeated from its inputs alone.
     cct: []
     cct_candidates: [eoap.cct.bbox]
     parents: [mangrove-workflow-steps]
@@ -824,7 +1255,7 @@ processes:
         execution date, not an explicit `temporal_extent` -- the same non-reproducibility already
         documented for `kindgrove.mangrove-workflow` (Q-W2-DAYSBACK).
     analysis: |
-      **Behaviour.** `/app/cwl/bin/steps/01_select_scene`, `ghcr.io/geolabs/kindgrove/select-scene:v0.0.2-rc2`.
+      **Behaviour.** `/app/cwl/bin/steps/01_select_scene`, `ghcr.io/geolabs/kindgrove/select-scene:v0.0.2-rc3`.
       Searches `stac_api`/`collection` (both defaulted to Earth Search / sentinel-2-l2a) for the
       least cloudy scene intersecting the bounding box within `days_back` days of the execution
       date, under `cloud_cover_max`, and writes its STAC Item as `scene_item.json`.
@@ -853,6 +1284,54 @@ processes:
     label: Download one Sentinel-2 band over a bounding box
     definition: Downloads one Sentinel-2 band over a bounding box from a STAC Item.
     phases: [data-retrieval]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: inherited-description-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          processDescription.inherited.json added with the attachment to the Implementation Profile
+          band-retrieval: the deployed processDescription with each bound input and output linked to the
+          role it implements (metadata, role implementation-input or implementation-output) and carrying
+          that role's dataType; the profile schema inherits it. The deployed processDescription is
+          unchanged.
+      - id: role-decompositions-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          roleDecompositions added: the role areaOfInterest of band-retrieval is taken as the four inputs
+          west, south, east and north, none of which carries its representation.
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the
+          v0.0.2-rc3 release (mangrove-workflow-steps.cwl#download_band). The rc3 CWL declares the format
+          of its Files (the ipython2cwl format annotation), so the processDescription derived from it
+          changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with
+          contentEncoding binary) for the output band_file and application/octet-stream ->
+          application/geo+json (with contentEncoding binary) for the input stac_item, in
+          processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at
+          the attachment on 2026-11-10 for stac_item and band_file were removed the same day, when the
+          corrected CWL served these formats; the entry has none.
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
+      reason: >-
+        Signature checked against band-retrieval: `stac_item` (a STAC Item file) implements
+        `product`; `band` (a STAC asset key) implements `band`; `west`, `south`, `east`, `north`
+        implement `areaOfInterest` as a role decomposition (EPSG:4326, hard-coded); `band_file`
+        implements the output `raster`.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval
+    bindings: {inputs: {stac_item: product, band: band}, outputs: {band_file: raster}}
+    role_decompositions:
+      inputs:
+        areaOfInterest:
+          parts: [west, south, east, north]
+          note: >-
+            The area of interest is taken as the four bounds of a bounding box, in EPSG:4326
+            (hard-coded in the notebook, read), not as one OGC API - Processes bounding box: the
+            representation bounding-box-ogcapi-processes-bbox of the role is not served.
     cct: []
     cct_candidates: [eoap.cct.bbox, eoap.cct.stac]
     parents: [mangrove-workflow-steps]
@@ -864,7 +1343,7 @@ processes:
         item is a resolved File (the output of `select-scene`) rather than resolved in-process,
         same pattern as `algae-bloom.download-band-sentinel2-stac-item`.
     analysis: |
-      **Behaviour.** `/app/cwl/bin/steps/02_download_band`, `ghcr.io/geolabs/kindgrove/download-band:v0.0.2-rc2`.
+      **Behaviour.** `/app/cwl/bin/steps/02_download_band`, `ghcr.io/geolabs/kindgrove/download-band:v0.0.2-rc3`.
       Reads the given `band` asset of `stac_item`, windowed to the bounding box, writes one COG.
 
       **Provenance.** One file input (`stac_item`), literal `band`/bbox inputs, one file output; a
@@ -885,6 +1364,31 @@ processes:
     label: Reproject a raster onto a regular grid
     definition: Reprojects a raster onto a regular grid covering a bounding box.
     phases: [pre-processing]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the
+          v0.0.2-rc3 release (mangrove-workflow-steps.cwl#reproject_band). The rc3 CWL declares the format
+          of its Files (the ipython2cwl format annotation), so the processDescription derived from it
+          changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with
+          contentEncoding binary) for the input band_file and the output reprojected_file, in
+          processDescription.json and processDescription.inherited.json. assumedFormatGaps removed: its
+          two gaps, band_file and reprojected_file served as application/octet-stream, are closed by the
+          format the CWL now declares, as their reason anticipated (removed on 2026-11-10 with the
+          corrected CWL, pinned on 2026-11-11).
+    tier3:
+      status: attached
+      reason: >-
+        Signature checked against raster-reprojection: `band_file` implements `raster`, `epsg` (an
+        EPSG code, default 4326) implements `targetCRS`, `reprojected_file` implements the output
+        `raster`; `west`, `south`, `east`, `north` (extent of the target grid) and `resolution` are
+        inputs of the deployment's own. Both rasters are served as GeoTIFF: the CWL of the GeoLabs/KindGrove
+        release v0.0.2-rc3 declares `format: ogc:geotiff`.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection
+    bindings: {inputs: {band_file: raster, epsg: targetCRS}, outputs: {reprojected_file: raster}}
     cct: []
     cct_candidates: [eoap.cct.bbox]
     parents: [mangrove-workflow-steps]
@@ -912,6 +1416,57 @@ processes:
     label: Compute NDVI, NDWI and SAVI
     definition: Computes NDVI, NDWI and SAVI from Sentinel-2 red, green and NIR bands.
     phases: [scientific-computation]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: inherited-description-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          processDescription.inherited.json added with the attachment to the Implementation Profile
+          radiometric-index-single-band: the deployed processDescription with each bound input and output
+          linked to the role it implements (metadata, role implementation-input or implementation-output)
+          and carrying that role's dataType; the profile schema inherits it. The deployed
+          processDescription is unchanged.
+      - id: fixed-role-values-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          fixedRoleValues added: the optional role index of radiometric-index-single-band is fixed to
+          NDVI, NDWI and SAVI, the three indices the notebook always computes (decision C3 of 2026-11-10).
+      - id: unbound-roles-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          unboundRoles added: the role index of radiometric-index-single-band (minOccurs 0) is left
+          unbound, no input selecting the indices (decision C2 of 2026-11-10).
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the
+          v0.0.2-rc3 release (mangrove-workflow-steps.cwl#calculate_indices). The rc3 CWL declares the
+          format of its Files (the ipython2cwl format annotation), so the processDescription derived from
+          it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with
+          contentEncoding binary) for the input band_files and the outputs ndvi_file, ndwi_file and
+          savi_file, in processDescription.json and processDescription.inherited.json. The
+          assumedFormatGaps recorded at the attachment on 2026-11-10 for band_files, ndvi_file, ndwi_file
+          and savi_file were removed the same day, when the corrected CWL served these formats; the entry
+          has none.
+    tier3:
+      status: attached
+      attached_on: "2026-11-10"
+      reason: >-
+        Signature checked against radiometric-index-single-band: `band_files` (single-band files
+        named `red_*`, `green_*`, `nir_*`, identified by file name) implements `rasters`; `ndvi_file`,
+        `ndwi_file` and `savi_file` (single-band Float32 GeoTIFFs, one per index) implement the output
+        `raster`. The optional `index` (minOccurs 0) is not an input: the tool always computes NDVI,
+        NDWI and SAVI.
+    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band
+    bindings: {inputs: {band_files: rasters}, outputs: {ndvi_file: raster, ndwi_file: raster, savi_file: raster}}
+    unbound: {index: "no input selects the indices: the tool always computes NDVI, NDWI and SAVI"}
+    fixed_roles:
+      inputs:
+        index: {values: [NDVI, NDWI, SAVI], reason: "computed by the notebook steps/04_calculate_indices.ipynb, one output each, in this order"}
     cct: []
     cct_candidates: []
     parents: [mangrove-workflow-steps]
@@ -929,13 +1484,16 @@ processes:
         - {stage: ndwi, openeo: [ogc.openeo.processes.math.indices.normalized_difference], level: closeMatch}
         - {stage: savi, openeo: [], level: none, note: "soil-adjusted vegetation index, no openEO process in this register"}
     analysis: |
-      **Behaviour.** `/app/cwl/bin/steps/04_calculate_indices`, `ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc2`.
-      Reads the three reprojected bands (positional-order `File[]`: red, green, nir) and writes
-      NDVI, NDWI and SAVI as three separate GeoTIFFs.
+      **Behaviour.** `/app/cwl/bin/steps/04_calculate_indices`, `ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc3`.
+      Reads the three reprojected bands and writes NDVI, NDWI and SAVI as three separate GeoTIFFs.
+      It identifies each band by its **file name**, not its position: `Path(path).stem.split("_")[0]`
+      must give `red`, `green` and `nir`, and it fails if one is missing (read, the notebook
+      `steps/04_calculate_indices.ipynb`).
 
-      **CWL specifics.** `band_files` is `File[]` with **no positional labels**, the same gap as
-      `water-bodies.norm-diff`'s `rasters`: which file is red/green/nir depends entirely on the
-      caller's array order, not expressed in the processDescription.
+      **CWL specifics.** `band_files` is `File[]` with no labels: that the files must be named
+      `red_*`, `green_*` and `nir_*` is not expressed in the processDescription. Unlike
+      `water-bodies.norm-diff`'s `rasters`, which is positional (`rasters[0]` minus `rasters[1]`),
+      the array order does not matter.
 
       **Provenance.** Three file inputs, three file outputs; a plain `wasDerivedFrom` fan-out.
     run: {prov: kindgrove-steps, step: calculate_indices}
@@ -952,6 +1510,25 @@ processes:
     label: Mangrove detection, allometric biomass and IPCC carbon stock
     definition: Detects mangrove pixels and estimates above-ground biomass and carbon stock from NDVI, NDWI and SAVI.
     phases: [scientific-computation]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the
+          v0.0.2-rc3 release (mangrove-workflow-steps.cwl#estimate_biomass). The rc3 CWL declares the
+          format of its Files (the ipython2cwl format annotation), so the processDescription derived from
+          it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with
+          contentEncoding binary) for the inputs ndvi_file, ndwi_file and savi_file and the outputs
+          biomass_file and mangrove_mask_file, and application/octet-stream -> application/geo+json (with
+          contentEncoding binary) for the input stac_item.
+    tier3:
+      status: not attached
+      reason: >-
+        Domain model: mangrove detection, allometric biomass and carbon stock from three index rasters
+        and coefficients, with five outputs including summaries. No Generic Profile, and none of
+        general use.
     cct: []
     cct_candidates: [eoap.cct.stac]
     parents: [mangrove-workflow-steps]
@@ -963,7 +1540,7 @@ processes:
         constant. No openEO process expresses a domain-specific regression model, same as
         `kindgrove.mangrove`.
     analysis: |
-      **Behaviour.** `/app/cwl/bin/steps/05_estimate_biomass`, `ghcr.io/geolabs/kindgrove/estimate-biomass:v0.0.2-rc2`.
+      **Behaviour.** `/app/cwl/bin/steps/05_estimate_biomass`, `ghcr.io/geolabs/kindgrove/estimate-biomass:v0.0.2-rc3`.
       Masks pixels within the `ndvi_min`/`ndvi_max`/`ndwi_min`/`savi_min` thresholds as mangrove,
       applies `biomass = biomass_slope * ndvi + biomass_intercept` per masked pixel, and
       `carbon = biomass * carbon_fraction`; writes the mask, the biomass raster, two CSV summaries
@@ -988,6 +1565,20 @@ processes:
     label: Plot the biomass map and export a STAC catalog
     definition: Plots the biomass map and exports the mangrove analysis results as a STAC Catalog.
     phases: [export-aggregation]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: plan-2026-11-11
+        date: "2026-11-11"
+        classification: substantive
+        description: >-
+          plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the
+          v0.0.2-rc3 release (mangrove-workflow-steps.cwl#export_stac). The rc3 CWL declares the format of
+          its Files (the ipython2cwl format annotation), so the processDescription derived from it
+          changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with
+          contentEncoding binary) for the inputs biomass_file and mangrove_mask_file, and
+          application/octet-stream -> application/geo+json (with contentEncoding binary) for the input
+          stac_item, in processDescription.json and processDescription.raw.json.
+    tier3: *export
     cct: []
     cct_candidates: [eoap.cct.stac]
     parents: [mangrove-workflow-steps]
@@ -999,7 +1590,7 @@ processes:
         PNG rendering; save_result's STAC output option is the closest openEO equivalent, same
         partial match as `algae-bloom.plot-image` and `water-bodies.stac`.
     analysis: |
-      **Behaviour.** `/app/cwl/bin/steps/06_export_stac`, `ghcr.io/geolabs/kindgrove/export-stac:v0.0.2-rc2`.
+      **Behaviour.** `/app/cwl/bin/steps/06_export_stac`, `ghcr.io/geolabs/kindgrove/export-stac:v0.0.2-rc3`.
       Renders a `biomass_quicklook.png` from the biomass raster, then writes a STAC Catalog with
       one Item (`mangrove-analysis-<timestamp>`, timestamped at run time like `kindgrove.mangrove`'s
       own output) carrying the mask, biomass raster, two summary CSVs, the analysis JSON and the
@@ -1187,6 +1778,30 @@ ogcapi_processes:
     phases: [pre-processing]
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection
     bindings: {inputs: {InputDSN: raster, t_srs: targetCRS}, outputs: {Result: raster}}
+    server_side_files:
+      inputs: {InputDSN: raster}
+      outputs: {Result: raster}
+      location: >-
+        A file name, relative to the directory set by `dataPath` in the `[main]` section of the
+        ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process
+        reads or writes it there. Its format is the representation of the Implementation Profile
+        role it implements (GeoTIFF for raster).
+    amendments:
+      - id: server-side-files-2026-11-09
+        date: "2026-11-09"
+        classification: substantive
+        description: >-
+          serverSideFiles added: the raster input and output are names of files stored on the server
+          (ZOO-Kernel dataPath), with no media type, each naming the Implementation Profile role it
+          implements.
+    tool:
+      name: GDAL gdalwarp
+      doc: https://gdal.org/programs/gdalwarp.html
+      documented: GDAL documentation, current version (the deployed GDAL version is not exposed by the service)
+      description: >-
+        Image mosaicing, reprojection and warping utility. Cited until 2026-11-09 as a source of the
+        Implementation Profile raster-reprojection of bblocks-generic-profiles, which no longer names
+        tools (decision D4).
     openeo:
       level: closeMatch
       closeMatch: [ogc.openeo.processes.cubes.resample_spatial]
@@ -1232,6 +1847,15 @@ ogcapi_processes:
     workflow: raster
     source: {repo: raster_geonovum, file: OTB.RadiometricIndices.json}
     phases: [scientific-computation]
+    # Decision Q3 (2026-11-11): the changes since ea01115 that no earlier action describes.
+    amendments:
+      - id: unbound-roles-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          unboundRoles added: the role index of radiometric-index (minOccurs 1) is left unbound, the live
+          service not exposing OTB RadiometricIndices' list parameter (the testbed exception of
+          docs/ATTACHMENTS.md). The binding was already incomplete; the entry now declares it.
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index
     bindings: {inputs: {in: rasters}, outputs: {out: raster}}
     unbound: {index: "no input of the live service selects the index: OTB RadiometricIndices' `list` parameter is not exposed"}
@@ -1263,7 +1887,39 @@ ogcapi_processes:
     phases: [pre-processing]
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop
     bindings: {inputs: {in: raster}, outputs: {out: raster}}
-    unbound: {areaOfInterest: "four plain numbers on the live service (mode.extent.ulx/uly/lrx/lry, with mode=extent), not one bounding box"}
+    # Decision of 2026-11-09: the bounding box of raster-crop is taken as four corner numbers and their
+    # unit, none of which carries the bbox representation. Declared, not left unbound.
+    role_decompositions:
+      inputs:
+        areaOfInterest:
+          parts: [mode.extent.ulx, mode.extent.uly, mode.extent.lrx, mode.extent.lry]
+          # pxl, the default of mode.extent.unit, gives pixel indices, not a bounding box: the role is
+          # implemented only with phy (image physical space, the image's CRS) or lonlat.
+          selectors:
+            - {name: mode, values: [extent]}
+            - {name: mode.extent.unit, values: [phy, lonlat]}
+          note: >-
+            With `mode` set to `extent` and `mode.extent.unit` set to `phy` (coordinates in the
+            image's physical space, its CRS) or `lonlat` (longitude and latitude), OTB ExtractROI takes
+            the area of interest as the upper-left (`mode.extent.ulx`, `mode.extent.uly`) and lower-right
+            (`mode.extent.lrx`, `mode.extent.lry`) corners, plain numbers, not as one OGC API - Processes
+            bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not
+            served. With the default unit `pxl` the four numbers are pixel indices, not a bounding box,
+            and the role is not implemented.
+    amendments:
+      - id: role-decomposition-2026-11-09
+        date: "2026-11-09"
+        classification: substantive
+        description: >-
+          roleDecompositions added: the role areaOfInterest of raster-crop is taken as
+          mode.extent.ulx, uly, lrx, lry and mode.extent.unit, with mode = extent (decision of
+          2026-11-09); before, the role was left unbound.
+      - id: role-decomposition-unit-2026-11-10
+        date: "2026-11-10"
+        classification: substantive
+        description: >-
+          The role decomposition is restricted to mode.extent.unit in phy or lonlat, a selector instead
+          of a part: with the default unit pxl the four numbers are pixel indices, not a bounding box.
     tool:
       name: OTB ExtractROI
       doc: https://www.orfeo-toolbox.org/CookBook/Applications/app_ExtractROI.html
@@ -1291,6 +1947,30 @@ ogcapi_processes:
     phases: [export-aggregation]
     implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion
     bindings: {inputs: {InputDSN: raster, Format: targetFormat}, outputs: {Result: raster}}
+    server_side_files:
+      inputs: {InputDSN: raster}
+      outputs: {Result: raster}
+      location: >-
+        A file name, relative to the directory set by `dataPath` in the `[main]` section of the
+        ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process
+        reads or writes it there. Its format is the representation of the Implementation Profile
+        role it implements (GeoTIFF for raster).
+    amendments:
+      - id: server-side-files-2026-11-09
+        date: "2026-11-09"
+        classification: substantive
+        description: >-
+          serverSideFiles added: the raster input and output are names of files stored on the server
+          (ZOO-Kernel dataPath), with no media type, each naming the Implementation Profile role it
+          implements.
+    tool:
+      name: GDAL gdal_translate
+      doc: https://gdal.org/programs/gdal_translate.html
+      documented: GDAL documentation, current version (the deployed GDAL version is not exposed by the service)
+      description: >-
+        Converts raster data between formats. Cited until 2026-11-09 as a source of the
+        Implementation Profile raster-format-conversion of bblocks-generic-profiles, which no longer
+        names tools (decision D4).
     openeo:
       level: closeMatch
       closeMatch: [ogc.openeo.processes.cubes.save_result]

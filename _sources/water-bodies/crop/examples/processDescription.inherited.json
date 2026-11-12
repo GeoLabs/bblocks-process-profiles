@@ -1,0 +1,145 @@
+{
+  "id": "crop",
+  "version": "1.4.1",
+  "title": "crop",
+  "description": "Process converted from CWL",
+  "mutable": true,
+  "metadata": [
+    {
+      "title": "Process Concept: Data Discovery and Access",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/data-discovery-and-access"
+    },
+    {
+      "title": "Generic Profile: Band retrieval",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval"
+    },
+    {
+      "title": "Implementation Profile: Band retrieval",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval"
+    },
+    {
+      "role": "https://schema.org/name",
+      "value": "crop"
+    },
+    {
+      "role": "https://schema.org/description",
+      "value": "Process converted from CWL"
+    },
+    {
+      "role": "https://schema.org/softwareVersion",
+      "value": "1.4.1"
+    }
+  ],
+  "jobControlOptions": [
+    "async-execute"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "keywords": [
+    "product",
+    "band",
+    "retrieval"
+  ],
+  "inputs": {
+    "item": {
+      "title": "item",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/eo-product",
+      "keywords": [
+        "product"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Band retrieval -- input `product`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/inputs/product"
+        },
+        {
+          "title": "Implementation Profile: Band retrieval -- input `product`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/product"
+        }
+      ],
+      "schema": {
+        "type": "string"
+      },
+      "minOccurs": 1,
+      "maxOccurs": 1
+    },
+    "aoi": {
+      "title": "aoi",
+      "description": "",
+      "schema": {
+        "type": "string"
+      },
+      "minOccurs": 1,
+      "maxOccurs": 1
+    },
+    "epsg": {
+      "title": "epsg",
+      "description": "",
+      "schema": {
+        "type": "string"
+      },
+      "minOccurs": 1,
+      "maxOccurs": 1
+    },
+    "band": {
+      "title": "band",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/band-identifier",
+      "keywords": [
+        "band"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Band retrieval -- input `band`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/inputs/band"
+        },
+        {
+          "title": "Implementation Profile: Band retrieval -- input `band`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/band"
+        }
+      ],
+      "schema": {
+        "type": "string"
+      },
+      "minOccurs": 1,
+      "maxOccurs": 1
+    }
+  },
+  "outputs": {
+    "cropped": {
+      "title": "cropped",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Band retrieval -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/outputs/raster"
+        },
+        {
+          "title": "Implementation Profile: Band retrieval -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/outputs/raster"
+        }
+      ],
+      "schema": {
+        "type": "string",
+        "contentMediaType": "image/tiff; application=geotiff",
+        "contentEncoding": "binary"
+      }
+    }
+  }
+}

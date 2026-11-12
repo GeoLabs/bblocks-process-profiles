@@ -23,9 +23,7 @@
   ],
   "keywords": [
     "point cloud",
-    "thinning",
-    "Point Cloud Thinning",
-    "pointcloud_tools"
+    "thinning"
   ],
   "metadata": [
     {
@@ -48,9 +46,9 @@
     "INPUT": {
       "title": "Points",
       "description": "Points",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/point-cloud",
       "keywords": [
-        "point cloud",
-        "LAS"
+        "point cloud"
       ],
       "metadata": [
         {
@@ -77,6 +75,7 @@
     "PERCENT": {
       "title": "Percent",
       "description": "Reduce the number of points to this percentage.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
       "keywords": [
         "percentage"
       ],
@@ -117,9 +116,9 @@
     "RESULT": {
       "title": "Thinned Points",
       "description": "Thinned Points",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/point-cloud",
       "keywords": [
-        "point cloud",
-        "LAS"
+        "point cloud"
       ],
       "metadata": [
         {

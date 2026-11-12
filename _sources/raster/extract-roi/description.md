@@ -20,17 +20,21 @@ On this deployment:
 
 ## Implementation Profile
 
-Implements [`Raster crop`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop) (`generic-profiles.implementation-profile.raster-crop`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+Implements [`Raster crop`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop) (`generic-profiles.implementation-profile.raster-crop`, bblocks-generic-profiles).
 
-| Live | Implementation Profile |
-|---|---|
-| `in` | input `raster` |
-| -- | input `areaOfInterest` (unbound: four plain numbers on the live service (mode.extent.ulx/uly/lrx/lry, with mode=extent), not one bounding box) |
-| `out`, `mode`, `mode.fit.im`, `mode.fit.vect`, `mode.extent.ulx`, `mode.extent.uly`, `mode.extent.lrx`, `mode.extent.lry`, `mode.extent.unit`, `mode.radius.r`, `mode.radius.unitr`, `mode.radius.cx`, `mode.radius.cy`, `mode.radius.unitc`, `startx`, `starty`, `sizex`, `sizey`, `elev`, `elev.geoid`, `elev.default`, `ram` | -- (live-only inputs, Table 21 footnote b) |
-| `out` | output `raster` |
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `in` | input `raster` | `raster` |
+| `mode.extent.ulx`, `mode.extent.uly`, `mode.extent.lrx`, `mode.extent.lry` (role decomposition) | input `areaOfInterest` | `bounding-box` |
+| `out`, `mode`, `mode.fit.im`, `mode.fit.vect`, `mode.extent.unit`, `mode.radius.r`, `mode.radius.unitr`, `mode.radius.cx`, `mode.radius.cy`, `mode.radius.unitc`, `startx`, `starty`, `sizex`, `sizey`, `elev`, `elev.geoid`, `elev.default`, `ram` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `out` | output `raster` | `raster` |
+
+**Role decomposition.** The input `areaOfInterest` is taken as `mode.extent.ulx`, `mode.extent.uly`, `mode.extent.lrx`, `mode.extent.lry` (only with `mode` in `extent` and `mode.extent.unit` in `phy`, `lonlat`): With `mode` set to `extent` and `mode.extent.unit` set to `phy` (coordinates in the image's physical space, its CRS) or `lonlat` (longitude and latitude), OTB ExtractROI takes the area of interest as the upper-left (`mode.extent.ulx`, `mode.extent.uly`) and lower-right (`mode.extent.lrx`, `mode.extent.lry`) corners, plain numbers, not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served. With the default unit `pxl` the four numbers are pixel indices, not a bounding box, and the role is not implemented. Declared in `roleDecompositions` of `process-type.json`; its representation is not served (`docs/FORMAT-CHECK.md`).
 
 ## Examples
 
 - `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
-- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles, and the data type of each bound input/output.
 - `process-type.json`: its candidate process-type entry.

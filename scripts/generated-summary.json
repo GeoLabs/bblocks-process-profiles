@@ -35,7 +35,8 @@
     "execution": true,
     "cct": [],
     "inputs": 6,
-    "outputs": 9
+    "outputs": 9,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.algae-bloom.workflow-earth-search-process",
@@ -88,7 +89,8 @@
     "execution": true,
     "cct": [],
     "inputs": 1,
-    "outputs": 9
+    "outputs": 9,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.algae-bloom.workflow-copernicus",
@@ -128,7 +130,8 @@
     "execution": true,
     "cct": [],
     "inputs": 7,
-    "outputs": 9
+    "outputs": 9,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.algae-bloom.workflow-copernicus-process",
@@ -176,7 +179,8 @@
     "execution": true,
     "cct": [],
     "inputs": 3,
-    "outputs": 9
+    "outputs": 9,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.algae-bloom.select-products-sentinel2",
@@ -203,7 +207,8 @@
     "execution": false,
     "cct": [],
     "inputs": 8,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection"
   },
   {
     "id": "ospd.process-profiles.algae-bloom.download-band-sentinel2-stac-item",
@@ -229,7 +234,8 @@
     "execution": false,
     "cct": [],
     "inputs": 2,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval"
   },
   {
     "id": "ospd.process-profiles.algae-bloom.download-band-sentinel2-product-safe",
@@ -257,7 +263,8 @@
     "execution": false,
     "cct": [],
     "inputs": 6,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.algae-bloom.reproject-image",
@@ -278,7 +285,8 @@
     "execution": false,
     "cct": [],
     "inputs": 4,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling"
   },
   {
     "id": "ospd.process-profiles.algae-bloom.calculate-band",
@@ -335,7 +343,8 @@
     "execution": false,
     "cct": [],
     "inputs": 28,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math"
   },
   {
     "id": "ospd.process-profiles.algae-bloom.plot-image",
@@ -360,7 +369,8 @@
     "execution": false,
     "cct": [],
     "inputs": 7,
-    "outputs": 2
+    "outputs": 2,
+    "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering"
   },
   {
     "id": "ospd.process-profiles.kindgrove.mangrove-workflow",
@@ -401,7 +411,8 @@
       "eoap.cct.bbox"
     ],
     "inputs": 3,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.kindgrove.parse-aoi",
@@ -424,7 +435,8 @@
       "eoap.cct.bbox"
     ],
     "inputs": 1,
-    "outputs": 5
+    "outputs": 5,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.kindgrove.mangrove",
@@ -515,7 +527,8 @@
     "execution": false,
     "cct": [],
     "inputs": 7,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.water-bodies.water-bodies",
@@ -552,7 +565,8 @@
     "execution": true,
     "cct": [],
     "inputs": 4,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.water-bodies.detect-water-body",
@@ -594,7 +608,8 @@
     "execution": true,
     "cct": [],
     "inputs": 4,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.water-bodies.crop",
@@ -616,7 +631,8 @@
     "execution": false,
     "cct": [],
     "inputs": 4,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval"
   },
   {
     "id": "ospd.process-profiles.water-bodies.norm-diff",
@@ -637,7 +653,8 @@
     "execution": false,
     "cct": [],
     "inputs": 1,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band"
   },
   {
     "id": "ospd.process-profiles.water-bodies.otsu",
@@ -655,7 +672,8 @@
     "execution": false,
     "cct": [],
     "inputs": 1,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding"
   },
   {
     "id": "ospd.process-profiles.water-bodies.stac",
@@ -678,7 +696,8 @@
     "execution": false,
     "cct": [],
     "inputs": 2,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps",
@@ -751,7 +770,8 @@
       "eoap.cct.bbox"
     ],
     "inputs": 14,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.kindgrove-steps.parse-aoi-steps",
@@ -774,7 +794,8 @@
       "eoap.cct.bbox"
     ],
     "inputs": 1,
-    "outputs": 4
+    "outputs": 4,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.kindgrove-steps.select-scene",
@@ -795,7 +816,8 @@
     "execution": false,
     "cct": [],
     "inputs": 8,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection"
   },
   {
     "id": "ospd.process-profiles.kindgrove-steps.download-band",
@@ -817,7 +839,8 @@
     "execution": false,
     "cct": [],
     "inputs": 6,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval"
   },
   {
     "id": "ospd.process-profiles.kindgrove-steps.reproject-band",
@@ -838,7 +861,8 @@
     "execution": false,
     "cct": [],
     "inputs": 7,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection"
   },
   {
     "id": "ospd.process-profiles.kindgrove-steps.calculate-indices",
@@ -878,7 +902,8 @@
     "execution": false,
     "cct": [],
     "inputs": 1,
-    "outputs": 3
+    "outputs": 3,
+    "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band"
   },
   {
     "id": "ospd.process-profiles.kindgrove-steps.estimate-biomass",
@@ -896,7 +921,8 @@
     "execution": false,
     "cct": [],
     "inputs": 11,
-    "outputs": 5
+    "outputs": 5,
+    "implementsProfile": null
   },
   {
     "id": "ospd.process-profiles.kindgrove-steps.export-stac",
@@ -919,6 +945,7 @@
     "execution": false,
     "cct": [],
     "inputs": 10,
-    "outputs": 1
+    "outputs": 1,
+    "implementsProfile": null
   }
 ]

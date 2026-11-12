@@ -1,4 +1,4 @@
-- title: reproject-image (closeMatch)
+- title: reproject-image (closeMatch, not attached to tier 3)
   base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
   snippets:
   - language: json
@@ -8,3 +8,20 @@
   snippets:
   - language: json
     ref: examples/kindgrove-mangrove.json
+- title: KindGrove steps reproject-band (CWL, attached to raster-reprojection, specialising its activity
+    type)
+  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  snippets:
+  - language: json
+    ref: examples/kindgrove-steps-reproject-band.json
+- title: OTB.ExtractROI (live, attached to raster-crop, role decomposition)
+  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  snippets:
+  - language: json
+    ref: examples/raster-extract-roi.json
+- title: The register, its specification and its amendment action type
+  content: 'The ontology of this block, validated as data: this checks `pp:register` and `pp:specification`
+    against the shapes of the Registered Item Model.'
+  snippets:
+  - language: turtle
+    ref: ontology.ttl

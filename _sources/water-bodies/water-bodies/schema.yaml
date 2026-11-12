@@ -2,8 +2,8 @@ $schema: https://json-schema.org/draft/2020-12/schema
 description: Profile of the OGC API - Processes processDescription of `water-bodies` (CWL Workflow). Pins
   the process id and the input/output names; the input/output schemas are those derived from the CWL.
 allOf:
-- $ref: bblocks://ogc.api.processes.v1.schemas.process
-- $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+- $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
+- $ref: bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator
 - type: object
   required:
   - id
@@ -35,9 +35,9 @@ allOf:
         - stac
 $defs:
   rawProcessDescription:
-    $ref: bblocks://ogc.api.processes.v1.schemas.process
+    $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
   applicationPackage:
-    $ref: bblocks://ogc.api.processes.v2.schemas.ogcapppkg
+    $ref: bblocks://ogc.api.processes.part2.v1.schemas.ogcapppkg
   provenance:
     $ref: bblocks://ogc.bbr.provenance.provenance
   processTypeEntry:
@@ -46,7 +46,7 @@ $defs:
     $ref: bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld
   execute:
     description: Execute request for this process. Built on the processDescription input schemas and on
-      ogc.api.processes.v1.schemas.link / qualifiedInputValue, because ogc.api.processes.v1.schemas.execute
+      ogc.api.processes.part1.v1.schemas.link / qualifiedInputValue, because ogc.api.processes.part1.v1.schemas.execute
       rejects plain strings and numbers (upstream issue U-01).
     type: object
     required:
@@ -65,8 +65,8 @@ $defs:
           - bands
         additionalProperties:
           anyOf:
-          - $ref: bblocks://ogc.api.processes.v1.schemas.link
-          - $ref: bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue
+          - $ref: bblocks://ogc.api.processes.part1.v1.schemas.link
+          - $ref: bblocks://ogc.api.processes.part1.v1.schemas.qualifiedInputValue
           - type:
             - string
             - number
@@ -91,10 +91,10 @@ $defs:
       - stac
     additionalProperties:
       anyOf:
-      - $ref: bblocks://ogc.api.processes.v1.schemas.link
+      - $ref: bblocks://ogc.api.processes.part1.v1.schemas.link
       - type: array
         items:
-          $ref: bblocks://ogc.api.processes.v1.schemas.link
+          $ref: bblocks://ogc.api.processes.part1.v1.schemas.link
       - type:
         - string
         - number

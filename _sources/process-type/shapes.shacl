@@ -1,0 +1,114 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix pp:      <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
+@prefix rim:     <https://w3id.org/ogc/rim/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+
+# The activity-type register's inherited shapes enforce acttype:ActivityType and the fixed item class.
+# This profile pins the process-types register, SKOS scheme and class identity used by provenance.
+pp:ProcessTypeShape a sh:NodeShape ;
+    sh:targetClass pp:ProcessType ;
+    sh:property [ sh:path rim:inRegister ; sh:hasValue pp:register ;
+                  sh:message "A process type must be held in the OSPD process-profiles register." ] ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue pp:process-type ;
+                  sh:message "A process type must belong to pp:process-type." ] ;
+    sh:property [ sh:path rdf:type ; sh:hasValue owl:Class ;
+                  sh:message "A process-type IRI must also be an OWL class because provenance uses it as rdf:type." ] ;
+    # Decision D5, applied 2026-11-10: a process type specialises acttype:ActivityType or, when it
+    # implements an Implementation Profile, the activity type of its operation in
+    # bblocks-generic-profiles. geoproc:GeoprocessingActivityTypesShape (Activity Type Register,
+    # loaded through dependsOn) then requires it to declare a spatial entity type; the parent's
+    # subClassOf reaches the data graph through activity-type-parents.ttl, a data resource of this block.
+    sh:property [ sh:path rdfs:subClassOf ; sh:minCount 1 ; sh:maxCount 1 ;
+                  sh:or ( [ sh:in ( acttype:ActivityType ) ]
+                          [ sh:nodeKind sh:IRI ;
+                            sh:pattern "^https://geolabs\\.github\\.io/bblocks-generic-profiles/def/activity-type/[a-z0-9-]+$" ] ) ;
+                  sh:message "A process-type class specialises acttype:ActivityType or one activity type of bblocks-generic-profiles." ] ;
+    # The decision of 2026-11-10 (B of phase 3 at tier 4): the same entity types as the parent
+    # activity type, no more and no fewer.
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "A process type that specialises an activity type declares the same entity types as it." ;
+        sh:select """
+            SELECT $this ?path ?value WHERE {
+                $this <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?parent .
+                FILTER (STRSTARTS(STR(?parent), "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/"))
+                {
+                    ?parent ?path ?value .
+                    FILTER NOT EXISTS { $this ?path ?value }
+                } UNION {
+                    $this ?path ?value .
+                    FILTER NOT EXISTS { ?parent ?path ?value }
+                }
+                FILTER (?path IN (<https://w3id.org/ogc/rim/activity-type/usedEntityType>,
+                                  <https://w3id.org/ogc/rim/activity-type/generatedEntityType>))
+            }
+        """
+    ] ;
+    # Decision D5: the six phases classify a type (pp:phase); they are not broader concepts of it,
+    # and what is deployed is a node of its own (pp:deployment), not statements on the type.
+    sh:property [ sh:path skos:broader ; sh:maxCount 0 ;
+                  sh:message "A process type has no skos:broader: its six-phase position is a classification (pp:phase)." ] ;
+    sh:property [ sh:path pp:phase ; sh:minCount 1 ; sh:nodeKind sh:IRI ;
+                  sh:in ( <https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration>
+                          <https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering>
+                          <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval>
+                          <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing>
+                          <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation>
+                          <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation> ) ;
+                  sh:message "A process type is classified in one or more of the six phases (pp:phase)." ] ;
+    sh:property [ sh:path pp:deployment ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:BlankNodeOrIRI ;
+                  sh:message "A process type has exactly one deployment (pp:deployment)." ] .
+
+# A4.2 and the control inherited from phase 1: the data type of a tier-4 input or output.
+#
+# gp:DataTypeReferenceShape (bblocks-generic-profiles) reaches the roles under gp:inputs and
+# gp:outputs, tiers 2 and 3 only. At tier 4 the inputs and outputs of a processDescription sit under
+# proc:inputs / proc:outputs, with a free name as property, so this SPARQL target (SHACL-AF, run by
+# pyshacl in advanced mode as bblocks-postprocess does) selects them. The shapes sit on this block
+# because every process profile depends on it.
+#
+# - Any input or output that carries a dataType (dct:type) carries one IRI, a dt:DataType concept of
+#   bblocks-data-types: the concepts reach the closure through data-types.vocabulary.
+# - An input or output bound to an Implementation Profile role (a proc:metadata reference whose role
+#   is implementation-input or implementation-output) carries one.
+#
+# An input or output of the deployment's own (Table 21 footnote b) has no tier-3 counterpart and no
+# dataType: not required. tests/ holds one failing fixture per constraint and a control.
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix dt:   <https://geolabs.github.io/bblocks-data-types/def/> .
+
+pp:Tier4DataTypeReferenceShape a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this WHERE {
+                ?process <https://w3id.org/ogc/api/processes/inputs> | <https://w3id.org/ogc/api/processes/outputs> ?roles .
+                ?roles ?role ?this .
+                FILTER (!isLiteral(?this))
+            }
+        """
+    ] ;
+    sh:property [ sh:path dct:type ; sh:maxCount 1 ; sh:nodeKind sh:IRI ; sh:class dt:DataType ;
+                  sh:message "A tier-4 input or output's dataType must be one dt:DataType concept of the bblocks-data-types register." ] .
+
+pp:Tier4BoundRoleDataTypeShape a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT DISTINCT ?this WHERE {
+                ?process <https://w3id.org/ogc/api/processes/inputs> | <https://w3id.org/ogc/api/processes/outputs> ?roles .
+                ?roles ?role ?this .
+                ?this <https://w3id.org/ogc/api/processes/metadata> ?reference .
+                ?reference <https://w3id.org/ogc/api/processes/role> ?referenceRole .
+                FILTER (?referenceRole IN (
+                    <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input>,
+                    <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output>))
+            }
+        """
+    ] ;
+    sh:property [ sh:path dct:type ; sh:minCount 1 ;
+                  sh:message "A tier-4 input or output bound to an Implementation Profile role carries that role's dataType." ] .

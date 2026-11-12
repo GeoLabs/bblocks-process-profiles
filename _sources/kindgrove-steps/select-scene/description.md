@@ -4,7 +4,7 @@ Process profile of **`select_scene`** (CommandLineTool, W2b KindGrove (step note
 
 ## Source
 
-- CWL: [mangrove-workflow-steps.cwl#select_scene](https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#select_scene) (GitHub Release `v0.0.2-rc2`, sha256 `361cb6a75d54`, license <https://spdx.org/licenses/CC-BY-NC-SA-4.0>). Referenced, not copied.
+- CWL: [mangrove-workflow-steps.cwl#select_scene](https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#select_scene) (GitHub Release `v0.0.2-rc3`, sha256 `886e1b011995`, license <https://spdx.org/licenses/CC-BY-NC-SA-4.0>). Referenced, not copied.
 - Six-phase position: Selection / filtering
 - EOAP CWL custom types used: none; candidates: `eoap.cct.bbox`
 - Used by: `ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps`
@@ -22,7 +22,7 @@ Process profile of **`select_scene`** (CommandLineTool, W2b KindGrove (step note
 
 ## Analysis
 
-**Behaviour.** `/app/cwl/bin/steps/01_select_scene`, `ghcr.io/geolabs/kindgrove/select-scene:v0.0.2-rc2`.
+**Behaviour.** `/app/cwl/bin/steps/01_select_scene`, `ghcr.io/geolabs/kindgrove/select-scene:v0.0.2-rc3`.
 Searches `stac_api`/`collection` (both defaulted to Earth Search / sentinel-2-l2a) for the
 least cloudy scene intersecting the bounding box within `days_back` days of the execution
 date, under `cloud_cover_max`, and writes its STAC Item as `scene_item.json`.
@@ -49,7 +49,25 @@ The run is also given as a `wfprov:ProcessRun` (`ogc.bbr.wf4ever.wfprov.ProcessR
 
 Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
-Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `kindgrove-steps`: the pinned W2b source itself (GeoLabs/KindGrove v0.0.2-rc2 `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by `days_back` on that day, three bands scattered (red, green, nir) through download_band and reproject_band), activity `main/select_scene` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
+Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `kindgrove-steps`: the W2b source as pinned then (GeoLabs/KindGrove v0.0.2-rc2, whose CWL differs from the rc3 pinned now only by the `format` lines, the namespaces and the image tags; `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by `days_back` on that day, three bands scattered (red, green, nir) through download_band and reproject_band), activity `main/select_scene` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
+
+## Implementation Profile (tier 3)
+
+Implements [`Product selection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection) (`generic-profiles.implementation-profile.product-selection`, bblocks-generic-profiles). Signature checked against product-selection: `west`, `south`, `east`, `north` implement `areaOfInterest` as a role decomposition (a bounding box in EPSG:4326, implicit); `days_back` implements `timeInterval` as a literal role decomposition, not reproducible; `collection` implements `collection`; `stac_item` (one STAC Item file) implements the output `products`. `cloud_cover_max` and `stac_api` are inputs of the deployment's own.
+
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `west`, `south`, `east`, `north` (role decomposition) | input `areaOfInterest` | `geometry` |
+| `days_back` (role decomposition) | input `timeInterval` | `time-interval` |
+| `collection` | input `collection` | `collection-identifier` |
+| `cloud_cover_max`, `stac_api` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `stac_item` | output `products` | `eo-product` |
+
+**Role decomposition.** The input `areaOfInterest` is taken as `west`, `south`, `east`, `north`: The area of interest is taken as the four bounds of a bounding box, in EPSG:4326 (implicit: passed as the `bbox` of pystac_client, read), not as a GeoJSON geometry: the representation geometry-geojson of the role is not served. Declared in `roleDecompositions` of `process-type.json`; its representation is not served (`docs/FORMAT-CHECK.md`).
+
+**Role decomposition.** The input `timeInterval` is taken as `days_back`: The time interval is the `days_back` days before the time of execution: the same input gives another interval on another day, so a run cannot be repeated from its inputs alone. Not reproducible: the parts depend on the time of execution. Declared in `roleDecompositions` of `process-type.json`.
 
 ## openEO equivalence
 
@@ -59,4 +77,4 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Process type (Activity 4)
 
-Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/select-scene` (`ospd.process-profiles.process-type`), status `submitted`.
+Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/select-scene` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

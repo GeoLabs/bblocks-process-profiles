@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
   "name": "Process profile: otsu",
-  "abstract": "OGC API - Processes profile of the CWL CommandLineTool `otsu` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
+  "abstract": "OGC API - Processes profile of the CWL CommandLineTool `otsu` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.",
   "status": "under-development",
   "dateTimeAddition": "2026-09-22T00:00:00Z",
   "dateOfLastChange": "2026-09-22",
@@ -9,9 +9,9 @@
   "itemClass": "schema",
   "register": "process-profiles",
   "dependsOn": [
-    "ogc.api.processes.v1.schemas.process",
-    "ogc.api.processes.v2.schemas.staticIndicator",
-    "ogc.api.processes.v2.schemas.ogcapppkg",
+    "ogc.api.processes.part1.v1.schemas.process",
+    "ogc.api.processes.part2.v1.schemas.staticIndicator",
+    "ogc.api.processes.part2.v1.schemas.ogcapppkg",
     "ogc.bbr.provenance.provenance",
     "ospd.process-profiles.process-type",
     "eoap.cct.cwl-to-ogcprocess",
@@ -20,7 +20,7 @@
   ],
   "seeAlso": [
     "ospd.process-profiles.water-bodies.detect-water-body",
-    "ogc.api.processes.part1.requirements.core"
+    "ogc.api.processes.part1.v1.requirements.core"
   ],
   "conformanceClasses": [
     "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
@@ -35,5 +35,6 @@
   ],
   "sourceSchema": "schema.yaml",
   "maturity": "development",
-  "group": "W2 KindGrove"
+  "group": "W3 Water Bodies",
+  "isProfileOf": "generic-profiles.implementation-profile.otsu-thresholding"
 }

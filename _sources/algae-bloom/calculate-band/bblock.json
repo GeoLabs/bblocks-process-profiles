@@ -9,9 +9,9 @@
   "itemClass": "schema",
   "register": "process-profiles",
   "dependsOn": [
-    "ogc.api.processes.v1.schemas.process",
-    "ogc.api.processes.v2.schemas.staticIndicator",
-    "ogc.api.processes.v2.schemas.ogcapppkg",
+    "ogc.api.processes.part1.v1.schemas.process",
+    "ogc.api.processes.part2.v1.schemas.staticIndicator",
+    "ogc.api.processes.part2.v1.schemas.ogcapppkg",
     "ogc.bbr.provenance.provenance",
     "ospd.process-profiles.process-type",
     "eoap.cct.cwl-to-ogcprocess",
@@ -26,7 +26,7 @@
     "ogc.openeo.processes.math.power",
     "ogc.openeo.processes.math.multiply",
     "ogc.openeo.processes.math.subtract",
-    "ogc.api.processes.part1.requirements.core"
+    "ogc.api.processes.part1.v1.requirements.core"
   ],
   "conformanceClasses": [
     "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
@@ -41,5 +41,6 @@
   ],
   "sourceSchema": "schema.yaml",
   "maturity": "development",
-  "group": "W1 Algae Bloom"
+  "group": "W1 Algae Bloom",
+  "isProfileOf": "generic-profiles.implementation-profile.raster-band-math"
 }

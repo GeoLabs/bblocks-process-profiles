@@ -76,6 +76,19 @@ Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
 Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `w1-earth-search`: earth-search variant of the pinned W1 package, `cwltool --outdir ./results --provenance ./PROV algae-usecase-workflow-earth-search.cwl example/algae-usecase-job-earth-search.yml`, 2026-09-23, cwltool 3.1.20260108082145 on an arm64 macOS host; two products scattered (S2A_29SPC_20190701_1_L2A then S2A_29SPC_20190701_0_L2A). Three local deviations were needed to run the package at all, none touching the CWL (docs/DEVIATIONS.md U-03, U-04)), activity `main/calculate_turbidity_2` (scatter iteration 2, engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
 
+## Implementation Profile (tier 3)
+
+Implements [`Raster band math`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math) (`generic-profiles.implementation-profile.raster-band-math`, bblocks-generic-profiles). Signature checked against raster-band-math: `calc` (a gdal_calc.py expression) implements `expression`; `band_a`..`band_z` (26 optional files, GeoTIFF, TIFF or JPEG 2000) together implement the list role `rasters`; `result` (one Float32 GeoTIFF band written by gdal_calc.py) implements the output `raster` (raster-single-band). `name`, the output file name, is an input of the deployment's own.
+
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `band_a`, `band_b`, `band_c`, `band_d`, `band_e`, `band_f`, `band_g`, `band_h`, `band_i`, `band_j`, `band_k`, `band_l`, `band_m`, `band_n`, `band_o`, `band_p`, `band_q`, `band_r`, `band_s`, `band_t`, `band_u`, `band_v`, `band_w`, `band_x`, `band_y`, `band_z` | input `rasters` | `raster` |
+| `calc` | input `expression` | `expression` |
+| `name` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `result` | output `raster` | `raster-single-band` |
+
 ## openEO equivalence
 
 **Level: closeMatch.** Generic band math (gdal_calc.py with a Python/numpy expression over up to 26 bands A..Z): openEO expresses it as reduce_dimension over the `bands` dimension with a callback built from math processes. closeMatch at the generic level; each W1 instance is a fixed chain of math processes (see decomposition). The expression is free text in CWL, a process graph in openEO.
@@ -91,4 +104,4 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Process type (Activity 4)
 
-Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band` (`ospd.process-profiles.process-type`), status `submitted`.
+Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

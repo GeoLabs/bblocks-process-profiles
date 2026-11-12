@@ -1,18 +1,74 @@
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "hasAction": [
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band/actions/addition",
+      "type": "RegisterAction",
+      "actionType": "addition",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-09-22T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band/actions/d5-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band/actions/tier3-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band/actions/specialisation-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band"
+    }
+  ],
   "prefLabel": "Performs a calculation with bands.",
   "definition": "Performs a calculation over JPEG bands and returns the resulting GeoTiff.",
+  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math",
+  "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
+  "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
-  ],
-  "profile": "ospd.process-profiles.algae-bloom.calculate-band",
-  "processDescription": {
-    "id": "calculate-band",
-    "version": "1.1.0",
-    "href": "https://ospd.example.org/ogc-api/processes/calculate-band"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.algae-bloom.calculate-band",
+    "processDescription": {
+      "id": "calculate-band",
+      "version": "1.1.0",
+      "href": "https://ospd.example.org/ogc-api/processes/calculate-band"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/calculate-band/package",
@@ -28,48 +84,50 @@
     "cctDependencies": [],
     "candidateCctDependencies": []
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.reduce_dimension"
-  ],
-  "relatedMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.divide",
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.power",
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.multiply",
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.subtract"
-  ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "Generic band math (gdal_calc.py with a Python/numpy expression over up to 26 bands A..Z): openEO expresses it as reduce_dimension over the `bands` dimension with a callback built from math processes. closeMatch at the generic level; each W1 instance is a fixed chain of math processes (see decomposition). The expression is free text in CWL, a process graph in openEO.",
-    "decomposition": [
-      {
-        "stage": "chlorophyll_a = 4.26*((C/A)**3.94), A=B01 60m, C=B03 60m",
-        "openeo": [
-          "ogc.openeo.processes.math.divide",
-          "ogc.openeo.processes.math.power",
-          "ogc.openeo.processes.math.multiply"
-        ],
-        "level": "closeMatch"
-      },
-      {
-        "stage": "cyanobacteria = 115530*(((B*C)/A)**2.38), A=B02, B=B03, C=B04 (10m)",
-        "openeo": [
-          "ogc.openeo.processes.math.multiply",
-          "ogc.openeo.processes.math.divide",
-          "ogc.openeo.processes.math.power"
-        ],
-        "level": "closeMatch",
-        "note": "coefficient is 115530 in the Earth-Search variant, 115530.31 in the Copernicus variant"
-      },
-      {
-        "stage": "turbidity = (8.93*(C/A))-6.39, A=B01 60m, C=B03 60m",
-        "openeo": [
-          "ogc.openeo.processes.math.divide",
-          "ogc.openeo.processes.math.multiply",
-          "ogc.openeo.processes.math.subtract"
-        ],
-        "level": "closeMatch"
-      }
-    ]
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math",
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.reduce_dimension"
+    ],
+    "relatedMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.divide",
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.power",
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.multiply",
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.subtract"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "Generic band math (gdal_calc.py with a Python/numpy expression over up to 26 bands A..Z): openEO expresses it as reduce_dimension over the `bands` dimension with a callback built from math processes. closeMatch at the generic level; each W1 instance is a fixed chain of math processes (see decomposition). The expression is free text in CWL, a process graph in openEO.",
+      "decomposition": [
+        {
+          "stage": "chlorophyll_a = 4.26*((C/A)**3.94), A=B01 60m, C=B03 60m",
+          "openeo": [
+            "ogc.openeo.processes.math.divide",
+            "ogc.openeo.processes.math.power",
+            "ogc.openeo.processes.math.multiply"
+          ],
+          "level": "closeMatch"
+        },
+        {
+          "stage": "cyanobacteria = 115530*(((B*C)/A)**2.38), A=B02, B=B03, C=B04 (10m)",
+          "openeo": [
+            "ogc.openeo.processes.math.multiply",
+            "ogc.openeo.processes.math.divide",
+            "ogc.openeo.processes.math.power"
+          ],
+          "level": "closeMatch",
+          "note": "coefficient is 115530 in the Earth-Search variant, 115530.31 in the Copernicus variant"
+        },
+        {
+          "stage": "turbidity = (8.93*(C/A))-6.39, A=B01 60m, C=B03 60m",
+          "openeo": [
+            "ogc.openeo.processes.math.divide",
+            "ogc.openeo.processes.math.multiply",
+            "ogc.openeo.processes.math.subtract"
+          ],
+          "level": "closeMatch"
+        }
+      ]
+    }
   }
 }

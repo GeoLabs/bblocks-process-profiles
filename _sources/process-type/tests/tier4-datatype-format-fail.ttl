@@ -1,0 +1,11 @@
+# Must fail: the dataType of a tier-4 output is a df:Format of bblocks-data-formats, a format, not a
+# data type concept. Only pp:Tier4DataTypeReferenceShape can reject it (sh:class).
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix in:   <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix out:  <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ex:   <https://geolabs.github.io/bblocks-process-profiles/def/process/> .
+
+ex:fixture-format proc:outputs [ out:Result ex:fixture-format-output ] .
+ex:fixture-format-output dct:title "Output" ;
+    dct:type <https://w3id.org/geolabs/ospd/data-formats/format/geotiff> .

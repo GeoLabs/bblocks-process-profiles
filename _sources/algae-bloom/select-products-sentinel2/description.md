@@ -56,6 +56,22 @@ Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
 Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `w1-earth-search`: earth-search variant of the pinned W1 package, `cwltool --outdir ./results --provenance ./PROV algae-usecase-workflow-earth-search.cwl example/algae-usecase-job-earth-search.yml`, 2026-09-23, cwltool 3.1.20260108082145 on an arm64 macOS host; two products scattered (S2A_29SPC_20190701_1_L2A then S2A_29SPC_20190701_0_L2A). Three local deviations were needed to run the package at all, none touching the CWL (docs/DEVIATIONS.md U-03, U-04)), activity `main/select_products` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
 
+## Implementation Profile (tier 3)
+
+Implements [`Product selection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection) (`generic-profiles.implementation-profile.product-selection`, bblocks-generic-profiles). Signature checked against product-selection: `aoi` (a GeoJSON file) implements `areaOfInterest`; `toi` (start and end dates, optional at tier 4) implements `timeInterval`; `collection` implements `collection`; `urls` (references to the products) implements the output `products`, by reference. `date` + `delta` (the other encoding of the time window, documented as an alternative to `toi`), `catalog`, `product_level` and `cloud_cover` are inputs of the deployment's own.
+
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `aoi` | input `areaOfInterest` | `geometry` |
+| `toi` | input `timeInterval` | `time-interval` |
+| `collection` | input `collection` | `collection-identifier` |
+| `date`, `delta`, `product_level`, `catalog`, `cloud_cover` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `urls` | output `products` | `eo-product` |
+
+**By reference.** `urls` (role `products`) is a URL of the data, not the data: The products are returned as URLs, not as STAC Items: STAC Item URLs for `catalog: earth-search` (served as application/geo+json by the STAC API: read, not observed), S3 URLs of SAFE products for `catalog: copernicus`, a format this Implementation Profile does not name. Declared in `byReference` of `process-type.json` (`docs/FORMAT-CHECK.md`).
+
 ## openEO equivalence
 
 **Level: closeMatch.** Same filter semantics as load_collection's `id` (collection), `spatial_extent` (aoi), `temporal_extent` (date±delta or toi) and `properties` (eo:cloud_cover) parameters. Not an exactMatch: the tool only selects (returns product URLs) and does not load data; the `catalog` switch (copernicus / earth-search) is a back-end choice with no openEO parameter; `date`+`delta` must be turned into an interval; the Earth-Search branch filters `0 < eo:cloud_cover < cloud_cover` (strict, excludes 0) where an openEO `lte` filter would be expected.
@@ -65,4 +81,4 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Process type (Activity 4)
 
-Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2` (`ospd.process-profiles.process-type`), status `submitted`.
+Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

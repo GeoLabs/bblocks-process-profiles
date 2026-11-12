@@ -3,8 +3,8 @@ description: 'Profile of the live OGC API - Processes processDescription of `SAG
   Pins the process id and the input/output names. No execute/results/provenance $defs or examples: static
   processDescription only (no CWLProv-style run record exists for a live deployed service).'
 allOf:
-- $ref: bblocks://ogc.api.processes.v1.schemas.process
-- $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+- $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
+- $ref: bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator
 - type: object
   required:
   - id
@@ -32,8 +32,8 @@ $defs:
     $ref: bblocks://ospd.process-profiles.process-type
   inheritedProcessDescription:
     allOf:
-    - $ref: bblocks://ogc.api.processes.v1.schemas.process
-    - $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+    - $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
+    - $ref: bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator
     - type: object
       required:
       - id
@@ -76,8 +76,6 @@ $defs:
               const: derivative
           - contains:
               const: TRI
-          - contains:
-              const: ta_morphometry
         metadata:
           allOf:
           - contains:
@@ -117,15 +115,16 @@ $defs:
           properties:
             DEM:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model
                 keywords:
                   allOf:
                   - contains:
                       const: elevation
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:
@@ -155,15 +154,16 @@ $defs:
           properties:
             TRI:
               required:
+              - dataType
               - keywords
               - metadata
               properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band
                 keywords:
                   allOf:
                   - contains:
                       const: raster
-                  - contains:
-                      const: GeoTIFF
                 metadata:
                   allOf:
                   - contains:

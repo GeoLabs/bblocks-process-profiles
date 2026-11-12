@@ -1,24 +1,130 @@
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
-  "type": "ProcessType",
-  "prefLabel": "Crop a Sentinel-2 COG band to an area of interest",
-  "definition": "Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest and reprojected to the requested CRS.",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval"
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
   ],
-  "profile": "ospd.process-profiles.water-bodies.crop",
-  "processDescription": {
-    "id": "crop",
-    "version": "1.4.1",
-    "href": "https://ospd.example.org/ogc-api/processes/crop"
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "hasAction": [
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/addition",
+      "type": "RegisterAction",
+      "actionType": "addition",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-09-22T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/d5-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/tier3-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/specialisation-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/definition-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "definition: \"Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest and reprojected to the requested CRS.\" -> \"Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest, whose CRS is given by `epsg`; the output keeps the CRS of the asset.\" The tool does not reproject: epsg is passed to gdal.Translate as projWinSRS, the CRS of aoi (read, app.py), and the four crop_*.tif of the run record water-bodies stay in EPSG:32610 (observed 2026-11-10). Substantive: it changes what the item means.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/inherited-description-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription.inherited.json added with the attachment to the Implementation Profile band-retrieval: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/by-reference-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "byReference added: the input item implements the role product of band-retrieval as the URL of a STAC Item, not the Item itself (decision C1 of 2026-11-10).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/role-decompositions-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "roleDecompositions added: the role areaOfInterest of band-retrieval is taken as the two inputs aoi (four numbers in one string) and epsg (their CRS), neither of which carries its representation.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/plan-2026-11-11",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/crop.cwl). The 72a76ae CWL declares the format of its Files, so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the output cropped, in processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on 2026-11-10 for cropped were removed the same day, when the corrected CWL served these formats; the entry has none.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-11T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+    }
+  ],
+  "prefLabel": "Crop a Sentinel-2 COG band to an area of interest",
+  "definition": "Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest, whose CRS is given by `epsg`; the output keeps the CRS of the asset.",
+  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval",
+  "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
+  "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
+  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.water-bodies.crop",
+    "processDescription": {
+      "id": "crop",
+      "version": "1.4.1",
+      "href": "https://ospd.example.org/ogc-api/processes/crop"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/crop/package",
     "type": "Plan",
     "executionUnit": {
-      "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/crop.cwl",
+      "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/crop.cwl",
       "type": "application/cwl+yaml",
       "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
     },
@@ -32,13 +138,34 @@
       "eoap.cct.string-format"
     ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection",
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.filter_bands"
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval",
+  "byReference": [
+    {
+      "name": "item",
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/product",
+      "note": "The product is given as the URL of its STAC Item, a string, not as the STAC Item itself."
+    }
   ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "load_collection with a spatial_extent (aoi) and a single band selected (filter_bands); the STAC item is given by URL rather than resolved by collection/date/bbox search, and the windowed COG read (no full download) is an implementation detail openEO back-ends make transparently."
+  "roleDecompositions": [
+    {
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/areaOfInterest",
+      "parts": [
+        "aoi",
+        "epsg"
+      ],
+      "note": "The area of interest is taken as one string of four comma-separated numbers (`aoi`) and the identifier of their CRS (`epsg`, passed to gdal.Translate as `projWinSRS`), not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served."
+    }
+  ],
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection",
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.filter_bands"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "load_collection with a spatial_extent (aoi) and a single band selected (filter_bands); the STAC item is given by URL rather than resolved by collection/date/bbox search, and the windowed COG read (no full download) is an implementation detail openEO back-ends make transparently."
+    }
   }
 }

@@ -173,6 +173,13 @@ they occur.
   `--show-platform-params` and `-v`, captures stdout/stderr, and greps all of them plus the `--scan` paths. It fails
   (exit code 1) on any match, and only ever prints sha256 prefixes of the secrets.
 
+## Portable SVG output
+
+The SVG uses neither `<marker>` nor the SVG 2 `paint-order` attribute: arrowheads are drawn as
+explicit triangles and the white halo behind edge labels is a second `<text>` underneath. Metanorma
+(`svg_conform`, SVG 1.2 Tiny profile) reports `marker-end` on `<path>` and `paint-order` on `<text>`
+as errors it cannot fix and drops the image from the PDF; the output now passes without them.
+
 ## Process profiles (`--profiles`)
 
 ```yaml

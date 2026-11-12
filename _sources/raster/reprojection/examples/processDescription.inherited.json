@@ -24,9 +24,7 @@
   "keywords": [
     "raster",
     "coverage",
-    "reprojection",
-    "GDAL",
-    "gdalwarp"
+    "reprojection"
   ],
   "metadata": [
     {
@@ -59,9 +57,9 @@
     "InputDSN": {
       "title": "The input data source name",
       "description": "The input data source name to use as source for convertion.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {
@@ -98,6 +96,7 @@
     "t_srs": {
       "title": "The target Spatial reference Set",
       "description": "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/coordinate-reference-system",
       "keywords": [
         "CRS"
       ],
@@ -179,9 +178,9 @@
     "Result": {
       "title": "The resulting converted file",
       "description": "The file name resulting of the convertion",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

@@ -6,15 +6,24 @@ identifier-prefix: ospd.process-profiles.
 name: OSPD Process Profiles
 
 abstract: |
-  OGC API - Processes profiles for the deployable CWL processes of the OSPD 2026 reference
-  workflows (W1 Algae Bloom, W2 KindGrove mangrove biomass, W3 Water Bodies detection, W2b a
-  step-decomposed reimplementation of KindGrove), each linked to its CWL source, the generic
-  provenance profile, the EOAP CWL custom types and the openEO Building Blocks.
+  OGC API - Processes profiles for two populations of deployed processes: the 27 deployable CWL
+  processes of the OSPD 2026 reference workflows (W1 Algae Bloom, W2 KindGrove mangrove biomass,
+  W3 Water Bodies detection, W2b a step-decomposed reimplementation of KindGrove), each linked to
+  its CWL source, the generic provenance profile, the EOAP CWL custom types and the openEO Building
+  Blocks; and the 31 live processes of the Geonovum testbed (ZOO-Project: SQL/MM, GDAL/OTB, SAGA
+  GIS), each implementing an Implementation Profile of bblocks-generic-profiles.
 
 description: |
   This register is produced by GeoLabs under OSPD 2026 (D100 Workflow Profiler, D120 OGC API
-  Processes Profiler). It holds one Building Block per deployable CWL process (`CommandLineTool`
-  or `Workflow`) identified in the workflow observability investigation.
+  Processes Profiler). It holds one Building Block per deployed process, in two populations:
+
+  - 27 CWL processes of the OSPD reference workflows (`CommandLineTool` or `Workflow`, identified
+    in the workflow observability investigation): `algae-bloom.*` (10), `kindgrove.*` (3),
+    `water-bodies.*` (6), `kindgrove-steps.*` (8). 12 of them implement an Implementation Profile
+    of bblocks-generic-profiles; the others are listed with the reason in docs/ATTACHMENTS.md;
+  - 31 live processes of the Geonovum testbed (`host1.tb.geonovum.geolabs.fr`, ZOO-Project), each
+    the Implementation of one Implementation Profile: `sqlmm.*` (16), `raster.*` (7), `vector.*`
+    (1), `terrain.*` (4), `pointcloud.*` (3).
 
   Each process profile combines:
 
@@ -23,8 +32,8 @@ description: |
     `eoap.cct.cwl-to-ogcprocess` mapping (deviations are documented, not hidden);
   - a provenance view expressed as an instance of the generic provenance profile
     (`ogc.bbr.provenance.*`);
-  - a candidate process-type entry (`ospd.process-profiles.process-type`) for the OSPD
-    process-type register (Activity 4);
+  - a registered ActivityType entry (`ospd.process-profiles.process-type`) for each deployed
+    process, typed as the RDF class carried by its PROV activity (Activity 4);
   - proposed openEO equivalences (`ogc.openeo.*`) with an explicit level
     (exactMatch / closeMatch / none) and rationale;
   - a representative execution example.
@@ -59,6 +68,9 @@ imports:
   - https://geolabs.github.io/bblocks-eoap-cct/build/register.json
   # openEO processes and types
   - https://geolabs.github.io/bblocks-openeo/build/register.json
+  # Registered Item Model and its Activity Type profile, for the OSPD process-type entries
+  - https://ogcincubator.github.io/registered-item-model/build/register.json
+  - https://ogcincubator.github.io/activity-type-register/build/register.json
   # OGC API - Processes: Part 1 schemas, Part 2 (DRU) schemas, standard-as-BBs (Part 1 Core requirements class)
   - https://geolabs.github.io/bblocks-ogcapi-processes/build/register.json
   - https://geolabs.github.io/bblock-ogcapi-processes-part2/build/register.json
@@ -74,6 +86,10 @@ imports:
   # in ../bblocks-generic-profiles and mapped by bblocks-config-local.yaml / .volumes -- see that
   # register's own README before publishing this one
   - https://geolabs.github.io/bblocks-generic-profiles/build/register.json
+  # Data types (concept plane), for the dataType of tier-4 inputs and outputs (A4.2): the shapes of
+  # ospd.process-profiles.process-type need the dt:DataType concepts, through data-types.vocabulary.
+  # Not yet published either: mapped to a local build like generic-profiles (docs/LOCAL-BUILD.md)
+  - https://geolabs.github.io/bblocks-data-types/build/register.json
 
 schema-oas30-downcompile: False
 

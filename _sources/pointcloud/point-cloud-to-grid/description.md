@@ -17,18 +17,20 @@ On this deployment:
 
 ## Implementation Profile
 
-Implements [`Point cloud to grid`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-grid) (`generic-profiles.implementation-profile.point-cloud-to-grid`, bblocks-generic-profiles). Live inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`):
+Implements [`Point cloud to grid`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-grid) (`generic-profiles.implementation-profile.point-cloud-to-grid`, bblocks-generic-profiles).
 
-| Live | Implementation Profile |
-|---|---|
-| `POINTS` | input `points` |
-| `CELLSIZE` | input `cellSize` |
-| `OUTPUT`, `AGGREGATION` | -- (live-only inputs, Table 21 footnote b) |
-| `GRID` | output `result` |
-| `COUNT`, `GRIDS` | -- (live-only outputs, Table 21 footnote b) |
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `POINTS` | input `points` | `point-cloud` |
+| `CELLSIZE` | input `cellSize` | `number` |
+| `OUTPUT`, `AGGREGATION` | -- (the deployment's own inputs, Table 21 footnote b) | -- |
+| `GRID` | output `result` | `raster-single-band` |
+| `COUNT`, `GRIDS` | -- (the deployment's own outputs, Table 21 footnote b) | -- |
 
 ## Examples
 
 - `processDescription.json`: the processDescription as served, ZOO-Project-internal fields removed.
-- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles.
+- `processDescription.inherited.json`: the same with what OGC 14-065r1 Table 21 has it inherit at the Implementation (instance level): keywords and metadata references to its profiles, and the data type of each bound input/output.
 - `process-type.json`: its candidate process-type entry.

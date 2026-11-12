@@ -1,24 +1,120 @@
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "hasAction": [
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff/actions/addition",
+      "type": "RegisterAction",
+      "actionType": "addition",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-09-22T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff/actions/d5-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff/actions/tier3-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff/actions/specialisation-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff/actions/inherited-description-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription.inherited.json added with the attachment to the Implementation Profile radiometric-index-single-band: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff/actions/fixed-role-values-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "fixedRoleValues added: the optional role index of radiometric-index-single-band is fixed to \"normalized difference\", the (A-B)/(A+B) the tool always computes (decision C3 of 2026-11-10).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff/actions/unbound-roles-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "unboundRoles added: the role index of radiometric-index-single-band (minOccurs 0) is left unbound, no input selecting the index (decision C2 of 2026-11-10).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff/actions/plan-2026-11-11",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/norm_diff.cwl). The 72a76ae CWL declares the format of its Files, so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input rasters and the output ndwi, in processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on 2026-11-10 for rasters and ndwi were removed the same day, when the corrected CWL served these formats; the entry has none.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-11T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff"
+    }
+  ],
   "prefLabel": "Normalized difference between two rasters",
   "definition": "Computes the normalized difference index ((A-B)/(A+B)) of two co-registered rasters.",
+  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index",
+  "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
+  "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
-  ],
-  "profile": "ospd.process-profiles.water-bodies.norm-diff",
-  "processDescription": {
-    "id": "norm_diff",
-    "version": "1.4.1",
-    "href": "https://ospd.example.org/ogc-api/processes/norm_diff"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.water-bodies.norm-diff",
+    "processDescription": {
+      "id": "norm_diff",
+      "version": "1.4.1",
+      "href": "https://ospd.example.org/ogc-api/processes/norm_diff"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/norm_diff/package",
     "type": "Plan",
     "executionUnit": {
-      "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/norm_diff.cwl",
+      "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/norm_diff.cwl",
       "type": "application/cwl+yaml",
       "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
     },
@@ -28,12 +124,31 @@
     "cctDependencies": [],
     "candidateCctDependencies": []
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.indices.normalized_difference"
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band",
+  "unboundRoles": [
+    {
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/inputs/index",
+      "reason": "no input selects the index: the tool computes the normalized difference (A-B)/(A+B) of the two rasters"
+    }
   ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "Exact index formula, generic over which two bands are passed: NDWI (green, nir) in this workflow, same as `ogc.openeo.processes.math.indices.normalized_difference` used for NDVI elsewhere in this register (`kindgrove.mangrove`) -- it is the caller's band choice, not the tool, that names the index."
+  "fixedRoleValues": [
+    {
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/inputs/index",
+      "values": [
+        "normalized difference"
+      ],
+      "reason": "the tool computes (A-B)/(A+B) of rasters[0] and rasters[1] (app.py); which index it is depends on the bands passed (NDWI for green and NIR in W3)"
+    }
+  ],
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.indices.normalized_difference"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "Exact index formula, generic over which two bands are passed: NDWI (green, nir) in this workflow, same as `ogc.openeo.processes.math.indices.normalized_difference` used for NDVI elsewhere in this register (`kindgrove.mangrove`) -- it is the caller's band choice, not the tool, that names the index."
+    }
   }
 }

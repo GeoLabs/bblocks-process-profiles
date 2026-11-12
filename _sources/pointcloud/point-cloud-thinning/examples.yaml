@@ -16,17 +16,19 @@
     Implementation Profile counterpart''s reference to the Generic Profile input/output (`generic-input`/`-output`)
     and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`,
     `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only
-    names whole profiles. Which live input/output is which Implementation Profile one is `bindings` in
-    scripts/profiles.yaml; inputs/outputs bound to none are the live service''s own additions (footnote
-    b). Not what the live service serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).'
+    names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept
+    of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings`
+    in scripts/profiles.yaml; inputs/outputs bound to none are the deployment''s own additions (footnote
+    b). Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).'
   snippets:
   - language: json
     ref: examples/processDescription.inherited.json
     schema-ref: '#/$defs/inheritedProcessDescription'
 - title: process-type entry
   base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
-  content: Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/pointcloud/point-cloud-thinning`
-    (`ospd.process-profiles.process-type`), status `submitted`, linking to its Implementation Profile.
+  content: Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/pointcloud/point-cloud-thinning`
+    (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision, linking
+    to its Implementation Profile.
   snippets:
   - language: json
     ref: examples/process-type.json

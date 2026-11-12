@@ -1,24 +1,120 @@
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "hasAction": [
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/addition",
+      "type": "RegisterAction",
+      "actionType": "addition",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-09-22T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/d5-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/tier3-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/specialisation-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/inherited-description-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription.inherited.json added with the attachment to the Implementation Profile radiometric-index-single-band: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/fixed-role-values-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "fixedRoleValues added: the optional role index of radiometric-index-single-band is fixed to NDVI, NDWI and SAVI, the three indices the notebook always computes (decision C3 of 2026-11-10).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/unbound-roles-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "unboundRoles added: the role index of radiometric-index-single-band (minOccurs 0) is left unbound, no input selecting the indices (decision C2 of 2026-11-10).",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices/actions/plan-2026-11-11",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#calculate_indices). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_files and the outputs ndvi_file, ndwi_file and savi_file, in processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on 2026-11-10 for band_files, ndvi_file, ndwi_file and savi_file were removed the same day, when the corrected CWL served these formats; the entry has none.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-11T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices"
+    }
+  ],
   "prefLabel": "Compute NDVI, NDWI and SAVI",
   "definition": "Computes NDVI, NDWI and SAVI from Sentinel-2 red, green and NIR bands.",
+  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index",
+  "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
+  "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
-  ],
-  "profile": "ospd.process-profiles.kindgrove-steps.calculate-indices",
-  "processDescription": {
-    "id": "calculate_indices",
-    "version": "0.1.0",
-    "href": "https://ospd.example.org/ogc-api/processes/calculate_indices"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.kindgrove-steps.calculate-indices",
+    "processDescription": {
+      "id": "calculate_indices",
+      "version": "0.1.0",
+      "href": "https://ospd.example.org/ogc-api/processes/calculate_indices"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/calculate_indices/package",
     "type": "Plan",
     "executionUnit": {
-      "href": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#calculate_indices",
+      "href": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#calculate_indices",
       "type": "application/cwl+yaml",
       "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
     },
@@ -28,31 +124,52 @@
     "cctDependencies": [],
     "candidateCctDependencies": []
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "Composite, one tool computing three indices from the same three-band input at once. NDVI alone would be closeMatch `ogc.openeo.processes.cubes.ndvi`; NDWI alone closeMatch `ogc.openeo.processes.math.indices.normalized_difference` (as in `water-bodies.norm-diff` and `kindgrove.mangrove`); SAVI (soil-adjusted, not a plain normalized difference) has no openEO process in this register. Kept `none` for the tool as a whole since no single openEO process covers the composite.",
-    "decomposition": [
-      {
-        "stage": "ndvi",
-        "openeo": [
-          "ogc.openeo.processes.cubes.ndvi"
-        ],
-        "level": "closeMatch"
-      },
-      {
-        "stage": "ndwi",
-        "openeo": [
-          "ogc.openeo.processes.math.indices.normalized_difference"
-        ],
-        "level": "closeMatch"
-      },
-      {
-        "stage": "savi",
-        "openeo": [],
-        "level": "none",
-        "note": "soil-adjusted vegetation index, no openEO process in this register"
-      }
-    ]
+  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band",
+  "unboundRoles": [
+    {
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/inputs/index",
+      "reason": "no input selects the indices: the tool always computes NDVI, NDWI and SAVI"
+    }
+  ],
+  "fixedRoleValues": [
+    {
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/inputs/index",
+      "values": [
+        "NDVI",
+        "NDWI",
+        "SAVI"
+      ],
+      "reason": "computed by the notebook steps/04_calculate_indices.ipynb, one output each, in this order"
+    }
+  ],
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "Composite, one tool computing three indices from the same three-band input at once. NDVI alone would be closeMatch `ogc.openeo.processes.cubes.ndvi`; NDWI alone closeMatch `ogc.openeo.processes.math.indices.normalized_difference` (as in `water-bodies.norm-diff` and `kindgrove.mangrove`); SAVI (soil-adjusted, not a plain normalized difference) has no openEO process in this register. Kept `none` for the tool as a whole since no single openEO process covers the composite.",
+      "decomposition": [
+        {
+          "stage": "ndvi",
+          "openeo": [
+            "ogc.openeo.processes.cubes.ndvi"
+          ],
+          "level": "closeMatch"
+        },
+        {
+          "stage": "ndwi",
+          "openeo": [
+            "ogc.openeo.processes.math.indices.normalized_difference"
+          ],
+          "level": "closeMatch"
+        },
+        {
+          "stage": "savi",
+          "openeo": [],
+          "level": "none",
+          "note": "soil-adjusted vegetation index, no openEO process in this register"
+        }
+      ]
+    }
   }
 }

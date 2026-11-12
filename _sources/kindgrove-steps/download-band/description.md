@@ -4,7 +4,7 @@ Process profile of **`download_band`** (CommandLineTool, W2b KindGrove (step not
 
 ## Source
 
-- CWL: [mangrove-workflow-steps.cwl#download_band](https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#download_band) (GitHub Release `v0.0.2-rc2`, sha256 `361cb6a75d54`, license <https://spdx.org/licenses/CC-BY-NC-SA-4.0>). Referenced, not copied.
+- CWL: [mangrove-workflow-steps.cwl#download_band](https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#download_band) (GitHub Release `v0.0.2-rc3`, sha256 `886e1b011995`, license <https://spdx.org/licenses/CC-BY-NC-SA-4.0>). Referenced, not copied.
 - Six-phase position: Data retrieval
 - EOAP CWL custom types used: none; candidates: `eoap.cct.bbox`, `eoap.cct.stac`
 - Used by: `ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps`
@@ -20,7 +20,7 @@ Process profile of **`download_band`** (CommandLineTool, W2b KindGrove (step not
 
 ## Analysis
 
-**Behaviour.** `/app/cwl/bin/steps/02_download_band`, `ghcr.io/geolabs/kindgrove/download-band:v0.0.2-rc2`.
+**Behaviour.** `/app/cwl/bin/steps/02_download_band`, `ghcr.io/geolabs/kindgrove/download-band:v0.0.2-rc3`.
 Reads the given `band` asset of `stac_item`, windowed to the bounding box, writes one COG.
 
 **Provenance.** One file input (`stac_item`), literal `band`/bbox inputs, one file output; a
@@ -39,7 +39,22 @@ The run is also given as a `wfprov:ProcessRun` (`ogc.bbr.wf4ever.wfprov.ProcessR
 
 Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
-Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `kindgrove-steps`: the pinned W2b source itself (GeoLabs/KindGrove v0.0.2-rc2 `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by `days_back` on that day, three bands scattered (red, green, nir) through download_band and reproject_band), activity `main/download_band` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
+Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `kindgrove-steps`: the W2b source as pinned then (GeoLabs/KindGrove v0.0.2-rc2, whose CWL differs from the rc3 pinned now only by the `format` lines, the namespaces and the image tags; `mangrove-workflow-steps.cwl#mangrove-workflow-steps`), the same execute inputs as `w2-pinned` for comparability, `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-24, cwltool 3.1.20260108082145 on an arm64 macOS host, ~5 min; scene selected by `days_back` on that day, three bands scattered (red, green, nir) through download_band and reproject_band), activity `main/download_band` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
+
+## Implementation Profile (tier 3)
+
+Implements [`Band retrieval`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval) (`generic-profiles.implementation-profile.band-retrieval`, bblocks-generic-profiles). Signature checked against band-retrieval: `stac_item` (a STAC Item file) implements `product`; `band` (a STAC asset key) implements `band`; `west`, `south`, `east`, `north` implement `areaOfInterest` as a role decomposition (EPSG:4326, hard-coded); `band_file` implements the output `raster`.
+
+Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
+
+| Deployed | Implementation Profile | Data type |
+|---|---|---|
+| `stac_item` | input `product` | `eo-product` |
+| `band` | input `band` | `band-identifier` |
+| `west`, `south`, `east`, `north` (role decomposition) | input `areaOfInterest` | `bounding-box` |
+| `band_file` | output `raster` | `raster` |
+
+**Role decomposition.** The input `areaOfInterest` is taken as `west`, `south`, `east`, `north`: The area of interest is taken as the four bounds of a bounding box, in EPSG:4326 (hard-coded in the notebook, read), not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served. Declared in `roleDecompositions` of `process-type.json`; its representation is not served (`docs/FORMAT-CHECK.md`).
 
 ## openEO equivalence
 
@@ -49,4 +64,4 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Process type (Activity 4)
 
-Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band` (`ospd.process-profiles.process-type`), status `submitted`.
+Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

@@ -33,6 +33,12 @@ Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
 Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `w2-pinned`: the register's pinned W2 source itself (bblocks-eoap-cct c27c60d `mangrove-workflow.cwl#mangrove-workflow`) run with the profile's execute inputs, `cwltool --no-match-user --provenance ro --outdir out`, 2026-09-23, cwltool 3.1.20260108082145 on an arm64 macOS host, 126 s; scene selected by `days_back` on that day: S2C_46PGC_20260913_0_L2A), activity `main` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
 
+## Implementation Profile (tier 3)
+
+Not attached to an Implementation Profile of bblocks-generic-profiles: A composite Workflow: catalogue search, data retrieval and processing chained into one application. No Generic Profile describes a whole application, and none should: its steps are compared with the tiers one by one.
+
+The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+
 ## openEO equivalence
 
 **Level: none.** Composite of a BBox-unpacking helper and one opaque tool; the openEO equivalent is a process graph (see the `mangrove` profile for the stage-by-stage decomposition). `stac.yaml` is imported in `SchemaDefRequirement` but unused.
@@ -45,4 +51,4 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Process type (Activity 4)
 
-Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove-workflow` (`ospd.process-profiles.process-type`), status `submitted`.
+Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove-workflow` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

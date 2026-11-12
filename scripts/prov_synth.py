@@ -30,6 +30,7 @@ import fnmatch
 import hashlib
 import io
 import json
+import math
 import re
 import shutil
 import subprocess
@@ -2502,7 +2503,57 @@ def render_svg(model: Model, title: str | None = None, dataflow: bool = True, pa
                    f'fill="{C_BAND}" stroke="{C_BANDS}"/>')
     out += S.out
     out.append("</svg>")
-    return "\n".join(out)
+    return portable_svg("\n".join(out))
+
+
+# ---------- portable SVG (SVG 1.1 / 1.2 Tiny) ----------
+# Some toolchains (Metanorma's svg_conform, PDF renderers) reject `marker-end` on <path> and the
+# SVG 2 `paint-order` attribute, and then drop the whole image. portable_svg() rewrites the output
+# without them: arrowheads become explicit triangles, halo labels become two stacked <text>.
+
+_MARKERS = {"ah": (7.0, C_LINE), "dh": (6.0, C_DATA)}   # marker id -> (markerWidth, fill)
+_NUM = re.compile(r"-?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?")
+
+
+def _arrowhead(d: str, size: float, fill: str) -> str:
+    """Triangle equivalent to the <marker> (viewBox 0 0 10 10, refX=9, refY=5) at the end of path d."""
+    v = [float(n) for n in _NUM.findall(d)]
+    pts = list(zip(v[0::2], v[1::2]))
+    if len(pts) < 2:
+        return ""
+    px, py = pts[-1]
+    qx, qy = next(((x, y) for x, y in reversed(pts[:-1]) if (x, y) != (px, py)), (px - 1, py))
+    a = math.atan2(py - qy, px - qx)
+    ca, sa, k = math.cos(a), math.sin(a), size / 10.0
+
+    def tr(mx: float, my: float) -> str:
+        ux, uy = (mx - 9) * k, (my - 5) * k
+        return f"{px + ux * ca - uy * sa:.1f},{py + ux * sa + uy * ca:.1f}"
+    return f'<path d="M{tr(0, 0)} L{tr(10, 5)} L{tr(0, 10)} Z" fill="{fill}"/>'
+
+
+def portable_svg(svg: str) -> str:
+    def path_sub(m: "re.Match[str]") -> str:
+        tag, mid = m.group(0), m.group(2)
+        width, fill = _MARKERS.get(mid, (7.0, C_LINE))
+        sw = re.search(r'stroke-width="([\d.]+)"', tag)
+        d = re.search(r' d="([^"]*)"', tag)
+        tag = tag.replace(m.group(1), "")
+        head = _arrowhead(d.group(1), width * (float(sw.group(1)) if sw else 1.0), fill) if d else ""
+        return tag + head
+
+    svg = re.sub(r'<path\b[^>]*?( marker-end="url\(#(\w+)\)")[^>]*/>', path_sub, svg)
+
+    def text_sub(m: "re.Match[str]") -> str:
+        attrs, body = m.group(1), m.group(2)
+        halo = attrs.replace(' paint-order="stroke"', "")
+        plain = re.sub(r' stroke="[^"]*"| stroke-width="[^"]*"', "", halo)
+        return f"<text{halo}>{body}</text><text{plain}>{body}</text>"
+
+    svg = re.sub(r'<text\b([^>]*\bpaint-order="stroke"[^>]*)>(.*?)</text>', text_sub, svg, flags=re.S)
+    if "url(#" not in svg:
+        svg = re.sub(r"<defs>(?:<marker\b.*?</marker>)+</defs>\n?", "", svg, flags=re.S)
+    return svg
 
 
 def ellipsize_doc(name: str) -> str:

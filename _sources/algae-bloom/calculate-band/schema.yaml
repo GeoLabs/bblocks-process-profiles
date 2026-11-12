@@ -3,8 +3,8 @@ description: Profile of the OGC API - Processes processDescription of `calculate
   Pins the process id and the input/output names; the input/output schemas are those derived from the
   CWL.
 allOf:
-- $ref: bblocks://ogc.api.processes.v1.schemas.process
-- $ref: bblocks://ogc.api.processes.v2.schemas.staticIndicator
+- $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
+- $ref: bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator
 - type: object
   required:
   - id
@@ -84,9 +84,9 @@ allOf:
         - result
 $defs:
   rawProcessDescription:
-    $ref: bblocks://ogc.api.processes.v1.schemas.process
+    $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
   applicationPackage:
-    $ref: bblocks://ogc.api.processes.v2.schemas.ogcapppkg
+    $ref: bblocks://ogc.api.processes.part2.v1.schemas.ogcapppkg
   provenance:
     $ref: bblocks://ogc.bbr.provenance.provenance
   processTypeEntry:
@@ -95,7 +95,7 @@ $defs:
     $ref: bblocks://ogc.ogc-utils.prov.w3c-prov-jsonld
   execute:
     description: Execute request for this process. Built on the processDescription input schemas and on
-      ogc.api.processes.v1.schemas.link / qualifiedInputValue, because ogc.api.processes.v1.schemas.execute
+      ogc.api.processes.part1.v1.schemas.link / qualifiedInputValue, because ogc.api.processes.part1.v1.schemas.execute
       rejects plain strings and numbers (upstream issue U-01).
     type: object
     required:
@@ -138,8 +138,8 @@ $defs:
           - band_z
         additionalProperties:
           anyOf:
-          - $ref: bblocks://ogc.api.processes.v1.schemas.link
-          - $ref: bblocks://ogc.api.processes.v1.schemas.qualifiedInputValue
+          - $ref: bblocks://ogc.api.processes.part1.v1.schemas.link
+          - $ref: bblocks://ogc.api.processes.part1.v1.schemas.qualifiedInputValue
           - type:
             - string
             - number
@@ -164,10 +164,10 @@ $defs:
       - result
     additionalProperties:
       anyOf:
-      - $ref: bblocks://ogc.api.processes.v1.schemas.link
+      - $ref: bblocks://ogc.api.processes.part1.v1.schemas.link
       - type: array
         items:
-          $ref: bblocks://ogc.api.processes.v1.schemas.link
+          $ref: bblocks://ogc.api.processes.part1.v1.schemas.link
       - type:
         - string
         - number
@@ -177,3 +177,1228 @@ $defs:
         - object
   processRun:
     $ref: bblocks://ogc.bbr.wf4ever.wfprov.ProcessRun
+  inheritedProcessDescription:
+    allOf:
+    - $ref: bblocks://ogc.api.processes.part1.v1.schemas.process
+    - $ref: bblocks://ogc.api.processes.part2.v1.schemas.staticIndicator
+    - type: object
+      required:
+      - id
+      - version
+      - inputs
+      - outputs
+      properties:
+        id:
+          const: calculate-band
+        inputs:
+          type: object
+          required:
+          - name
+          - calc
+          - band_a
+          - band_b
+          - band_c
+          - band_d
+          - band_e
+          - band_f
+          - band_g
+          - band_h
+          - band_i
+          - band_j
+          - band_k
+          - band_l
+          - band_m
+          - band_n
+          - band_o
+          - band_p
+          - band_q
+          - band_r
+          - band_s
+          - band_t
+          - band_u
+          - band_v
+          - band_w
+          - band_x
+          - band_y
+          - band_z
+          propertyNames:
+            enum:
+            - name
+            - calc
+            - band_a
+            - band_b
+            - band_c
+            - band_d
+            - band_e
+            - band_f
+            - band_g
+            - band_h
+            - band_i
+            - band_j
+            - band_k
+            - band_l
+            - band_m
+            - band_n
+            - band_o
+            - band_p
+            - band_q
+            - band_r
+            - band_s
+            - band_t
+            - band_u
+            - band_v
+            - band_w
+            - band_x
+            - band_y
+            - band_z
+        outputs:
+          type: object
+          required:
+          - result
+          propertyNames:
+            enum:
+            - result
+    - description: '`calculate-band` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math`:
+        Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) inherited from its Implementation
+        Profile.'
+      type: object
+      required:
+      - keywords
+      - metadata
+      properties:
+        keywords:
+          allOf:
+          - contains:
+              const: raster
+          - contains:
+              const: coverage
+          - contains:
+              const: band math
+        metadata:
+          allOf:
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math
+          - contains:
+              type: object
+              required:
+              - role
+              - href
+              properties:
+                role:
+                  const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
+                href:
+                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math
+        inputs:
+          type: object
+          required:
+          - band_a
+          - band_b
+          - band_c
+          - band_d
+          - band_e
+          - band_f
+          - band_g
+          - band_h
+          - band_i
+          - band_j
+          - band_k
+          - band_l
+          - band_m
+          - band_n
+          - band_o
+          - band_p
+          - band_q
+          - band_r
+          - band_s
+          - band_t
+          - band_u
+          - band_v
+          - band_w
+          - band_x
+          - band_y
+          - band_z
+          - calc
+          properties:
+            calc:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/expression
+                keywords:
+                  allOf:
+                  - contains:
+                      const: expression
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/expression
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/expression
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_a:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_b:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_c:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_d:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_e:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_f:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_g:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_h:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_i:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_j:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_k:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_l:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_m:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_n:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_o:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_p:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_q:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_r:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_s:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_t:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_u:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_v:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_w:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_x:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_y:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+            band_z:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters
+                minOccurs:
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+        outputs:
+          type: object
+          required:
+          - result
+          properties:
+            result:
+              required:
+              - dataType
+              - keywords
+              - metadata
+              properties:
+                dataType:
+                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band
+                keywords:
+                  allOf:
+                  - contains:
+                      const: raster
+                metadata:
+                  allOf:
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/outputs/raster
+                  - contains:
+                      type: object
+                      required:
+                      - role
+                      - href
+                      properties:
+                        role:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                        href:
+                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/outputs/raster

@@ -1,27 +1,46 @@
 {
   "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
   "name": "Process type register entry",
-  "abstract": "Candidate entry for the OSPD process-type register (Activity 4), linking a process profile, its six-phase position, its provenance class and its proposed openEO equivalences.",
+  "abstract": "Candidate ActivityType register entry for each deployed OSPD process (decision D5: one per deployed process), its meaning kept apart from its six-phase classification, its deployment, its plan and its openEO correspondences, and linked to the Implementation Profile it implements, whose operation's activity type it then specialises. Its shapes check the data type of tier-4 inputs and outputs.",
   "status": "under-development",
   "dateTimeAddition": "2026-09-22T00:00:00Z",
-  "dateOfLastChange": "2026-09-22",
+  "dateOfLastChange": "2026-11-10",
   "version": "0.1",
   "itemClass": "schema",
   "register": "process-profiles",
-  "dependsOn": [],
+  "dependsOn": [
+    "ogc.register.schemas.activity-types-schema",
+    "ogc.register.geoprocessing-activity-types",
+    "data-types.vocabulary"
+  ],
   "seeAlso": [
     "ogc.bbr.provenance.activity",
     "ogc.bbr.wf4ever.wfprov.ProcessRun",
     "ogc.bbr.wf4ever.wfprov.WorkflowRun"
   ],
   "scope": "dev",
-  "tags": ["process type", "register", "SKOS", "openEO", "OSPD", "Activity 4"],
+  "tags": [
+    "process type",
+    "register",
+    "SKOS",
+    "openEO",
+    "OSPD",
+    "Activity 4"
+  ],
   "sourceSchema": "schema.yaml",
   "ldContext": "context.jsonld",
   "sources": [
     {
-      "title": "ISO 19135-1 Geographic information - Procedures for item registration",
-      "link": "https://www.iso.org/standard/54721.html"
+      "title": "Registered Item Model",
+      "link": "https://ogcincubator.github.io/registered-item-model/"
+    },
+    {
+      "title": "Activity Type Register",
+      "link": "https://ogcincubator.github.io/activity-type-register/"
+    },
+    {
+      "title": "W3C PROV-O: The PROV Ontology",
+      "link": "https://www.w3.org/TR/prov-o/"
     },
     {
       "title": "SKOS Simple Knowledge Organization System Reference",
@@ -30,5 +49,19 @@
   ],
   "maturity": "development",
   "highlighted": true,
-  "group": "OSPD"
+  "group": "OSPD",
+  "isProfileOf": [
+    "ogc.register.schemas.activity-types-schema"
+  ],
+  "shaclShapes": [
+    "shapes.shacl"
+  ],
+  "resources": [
+    {
+      "role": "data",
+      "ref": "activity-type-parents.ttl",
+      "format": "text/turtle",
+      "title": "Parent class and entity types of each activity type of bblocks-generic-profiles (generated), for the shapes of this block"
+    }
+  ]
 }
