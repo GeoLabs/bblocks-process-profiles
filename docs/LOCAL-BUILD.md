@@ -15,34 +15,8 @@ The default `--base-url http://localhost:9090/register/` of `build.sh` writes lo
 `build-local/` (a data-types build made that way holds hundreds of them), which only resolve if
 that build is served on port 9090 while the downstream register builds.
 
-**The Registered Item Model mapping (temporary).** The Activity Type Register `register.json`
-served on `ogcincubator.github.io/activity-type-register` (last modified 2026-11-04) still imports
-the Registered Item Model from `geonovum-labs.github.io`, while the ATR sources (commit `0c52c0e`:
-`bblocks-config.yaml` and `build/register.json`) import it from `ogcincubator.github.io`. The
-postprocessor loads that transitive import last, and it replaces the `ogcincubator` model for every
-`ogc.rim.*` block. The example maps
-`https://geonovum-labs.github.io/registered-item-model/build/` to a local copy of the
-`ogcincubator` model's `build/` directory. To fetch it:
-
-```bash
-mkdir -p rim-ogc/build && cd rim-ogc
-curl -sSfL -o build/register.json https://ogcincubator.github.io/registered-item-model/build/register.json
-python3 - <<'PY'
-import json, os, subprocess
-base = "https://ogcincubator.github.io/registered-item-model/build/"
-urls = set()
-def walk(x):
-    if isinstance(x, dict): [walk(v) for v in x.values()]
-    elif isinstance(x, list): [walk(v) for v in x]
-    elif isinstance(x, str) and x.startswith(base) and not x.endswith("/"): urls.add(x)
-walk(json.load(open("build/register.json")))
-for u in sorted(urls):
-    p = "build/" + u[len(base):]
-    os.makedirs(os.path.dirname(p), exist_ok=True)
-    subprocess.run(["curl", "-sSfL", "-o", p, u])
-PY
-```
-
-Remove this mapping once the ATR republishes its `register.json` from current sources; check it at
-the end of the building-block production, before any push (decision D, 2026-11-09). Check: the build
-reports name no `geonovum-labs` shape URL and the annotated `$ref`s none.
+**The Registered Item Model mapping (removed 2026-11-12).** Until 2026-11-12 the Activity Type Register
+`register.json` served on `ogcincubator.github.io/activity-type-register` imported the Registered Item Model
+from `geonovum-labs.github.io`, and a local url-mapping replaced it with the `ogcincubator` model. The ATR
+republished on 2026-11-12 (commit `4805673`) and now imports `ogcincubator.github.io/registered-item-model`,
+so the mapping is gone. Check after any build: the reports name no `geonovum-labs` URL.

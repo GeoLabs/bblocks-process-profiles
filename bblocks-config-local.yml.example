@@ -10,7 +10,3 @@ url-mappings:
   # generic-profiles, built with --base-url https://geolabs.github.io/bblocks-generic-profiles/
   https://geolabs.github.io/bblocks-generic-profiles/build/: /ext/generic/build-local/
   https://geolabs.github.io/bblocks-generic-profiles/: /ext/generic/
-  # Temporary: the ATR register.json served on ogcincubator imports the RIM from geonovum-labs.
-  # Map it to a local copy of the ogcincubator RIM build/ (docs/LOCAL-BUILD.md). Remove once the
-  # ATR republishes.
-  https://geonovum-labs.github.io/registered-item-model/build/: /ext/rim-ogc/build/
