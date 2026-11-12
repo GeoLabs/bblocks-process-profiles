@@ -18,6 +18,7 @@ Generated files under _sources/<workflow>/<process>/ are overwritten.
 """
 import argparse
 import copy
+import hashlib
 import json
 import re
 import subprocess
@@ -542,6 +543,18 @@ def _files_in(art):
 def load_process(proc, sources, roots):
     src = sources[proc["source"]["repo"]]
     path = roots[proc["source"]["repo"]] / src["base_path"] / proc["source"]["file"]
+    if "release" in src:
+        # Decision R4 (2026-11-12): a release asset is pinned by its checksum, not by a commit, so the
+        # local file is read only if it is the asset sources.yaml pins (its `sha256`); any other file
+        # stops the generation, whatever directory it comes from (--kindgrove-steps,
+        # sources-local.yaml or --sources-root).
+        if proc["source"]["file"] not in (src.get("assets") or []) or not src.get("sha256"):
+            sys.exit(f"{proc['key']}: {proc['source']['file']} is not an asset of {proc['source']['repo']} "
+                     "with a `sha256` in scripts/sources.yaml")
+        got = hashlib.sha256(path.read_bytes()).hexdigest()
+        if got != src["sha256"]:
+            sys.exit(f"{path}: sha256 {got} differs from the {src['sha256']} that scripts/sources.yaml pins "
+                     f"for {proc['source']['repo']} {src['release']}")
     doc = yaml.safe_load(path.read_text())
     element = proc["source"].get("element")
     if "release" in src:

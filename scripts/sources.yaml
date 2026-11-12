@@ -5,7 +5,7 @@
 # when the CWL is published only as a release artifact and never committed to the repo tree, so
 # there is no commit to pin against. A release asset is not immutable the way a commit is: the
 # checksum is what actually pins it, and a mismatch on a later fetch is a loud failure, not a
-# silent re-download).
+# silent re-download; generate.py also stops when the local asset is not that sha256, decision R4).
 w1:
   title: W1 Algae Bloom (Se2WaQ water quality, CRIM)
   repo: https://github.com/crim-ca/ogc-ospd-phase1
