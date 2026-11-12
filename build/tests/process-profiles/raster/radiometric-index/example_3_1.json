@@ -24,9 +24,7 @@
   "keywords": [
     "raster",
     "coverage",
-    "radiometric index",
-    "OTB",
-    "RadiometricIndices"
+    "radiometric index"
   ],
   "metadata": [
     {
@@ -49,9 +47,9 @@
     "in": {
       "title": "Input image",
       "description": "Input image",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {
@@ -157,9 +155,9 @@
     "out": {
       "title": "Radiometric indices output image",
       "description": "Radiometric indices output image",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

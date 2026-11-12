@@ -1,14 +1,1200 @@
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/algae-bloom/calculate-band/context.jsonld",
-  "processDescription": {
-    "process": {
-      "id": "calculate-band",
-      "version": "1.1.0"
+  "id": "calculate-band",
+  "version": "1.1.0",
+  "title": "Performs a calculation with bands.",
+  "description": "Performs a calculation over JPEG bands and returns the resulting GeoTiff.",
+  "mutable": true,
+  "keywords": [
+    "raster",
+    "coverage",
+    "band math",
+    "Sentinel-2",
+    "OSPD",
+    "demo",
+    "calculation"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Raster Coverage Processing",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing"
+    },
+    {
+      "title": "Generic Profile: Raster band math",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math"
+    },
+    {
+      "title": "Implementation Profile: Raster band math",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math"
+    },
+    {
+      "role": "https://schema.org/name",
+      "value": "Performs a calculation with bands."
+    },
+    {
+      "role": "https://schema.org/description",
+      "value": "Performs a calculation over JPEG bands and returns the resulting GeoTiff."
+    },
+    {
+      "role": "https://schema.org/softwareVersion",
+      "value": "1.1.0"
+    },
+    {
+      "role": "https://schema.org/author",
+      "value": {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "identifier": "http://orcid.org/0000-0003-4862-3349",
+        "email": "francis.charette-migneault@crim.ca",
+        "name": "Francis Charette-Migneault"
+      }
+    },
+    {
+      "role": "https://schema.org/codeRepository",
+      "value": "https://gitlab.ogc.org/ogc/ogc-ospd"
+    },
+    {
+      "role": "https://schema.org/license",
+      "value": "https://spdx.org/licenses/CC-BY-NC-SA-4.0"
+    }
+  ],
+  "jobControlOptions": [
+    "async-execute"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "inputs": {
+    "name": {
+      "title": "Output file name",
+      "description": "Name to apply for the output GeoTiff file.",
+      "schema": {
+        "type": "string"
+      },
+      "minOccurs": 1,
+      "maxOccurs": 1
+    },
+    "calc": {
+      "title": "Calculation",
+      "description": "Calculation to perform with band references.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/expression",
+      "keywords": [
+        "expression"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `expression`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/expression"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `expression`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/expression"
+        }
+      ],
+      "schema": {
+        "type": "string"
+      },
+      "minOccurs": 1,
+      "maxOccurs": 1
+    },
+    "band_a": {
+      "title": "band_a",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_b": {
+      "title": "band_b",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_c": {
+      "title": "band_c",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_d": {
+      "title": "band_d",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_e": {
+      "title": "band_e",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_f": {
+      "title": "band_f",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_g": {
+      "title": "band_g",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_h": {
+      "title": "band_h",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_i": {
+      "title": "band_i",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_j": {
+      "title": "band_j",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_k": {
+      "title": "band_k",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_l": {
+      "title": "band_l",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_m": {
+      "title": "band_m",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_n": {
+      "title": "band_n",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_o": {
+      "title": "band_o",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_p": {
+      "title": "band_p",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_q": {
+      "title": "band_q",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_r": {
+      "title": "band_r",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_s": {
+      "title": "band_s",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_t": {
+      "title": "band_t",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_u": {
+      "title": "band_u",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_v": {
+      "title": "band_v",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_w": {
+      "title": "band_w",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_x": {
+      "title": "band_x",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_y": {
+      "title": "band_y",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
+    },
+    "band_z": {
+      "title": "band_z",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- input `rasters`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff; application=geotiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/tiff",
+            "contentEncoding": "binary"
+          },
+          {
+            "type": "string",
+            "contentMediaType": "image/jp2",
+            "contentEncoding": "binary"
+          }
+        ]
+      },
+      "minOccurs": 0,
+      "maxOccurs": 1
     }
   },
-  "executionUnit": {
-    "href": "https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/calculate-band.cwl",
-    "type": "application/cwl+yaml",
-    "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+  "outputs": {
+    "result": {
+      "title": "result",
+      "description": "",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Raster band math -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/outputs/raster"
+        },
+        {
+          "title": "Implementation Profile: Raster band math -- output `raster`",
+          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
+          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/outputs/raster"
+        }
+      ],
+      "schema": {
+        "type": "string",
+        "contentMediaType": "image/tiff; application=geotiff",
+        "contentEncoding": "binary"
+      }
+    }
   }
 }

@@ -1,27 +1,91 @@
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/raster/radiometric-index/context.jsonld",
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "hasAction": [
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/addition",
+      "type": "RegisterAction",
+      "actionType": "addition",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-09-22T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/d5-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/specialisation-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/unbound-roles-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "unboundRoles added: the role index of radiometric-index (minOccurs 1) is left unbound, the live service not exposing OTB RadiometricIndices' list parameter (the testbed exception of docs/ATTACHMENTS.md). The binding was already incomplete; the entry now declares it.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index"
+    }
+  ],
   "prefLabel": "Compute radiometric indices.",
   "definition": "This application computes radiometric indices using the relevant channels of the input image. The output is a multi band image into which each channel is one of the selected indices.",
+  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index",
+  "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
+  "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
-  ],
-  "profile": "ospd.process-profiles.raster.radiometric-index",
-  "processDescription": {
-    "id": "OTB.RadiometricIndices",
-    "version": "1.0.0",
-    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+    ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "deployment": {
+    "profile": "ospd.process-profiles.raster.radiometric-index",
+    "processDescription": {
+      "id": "OTB.RadiometricIndices",
+      "version": "1.0.0",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
+  },
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.ndvi"
+  "unboundRoles": [
+    {
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index/inputs/index",
+      "reason": "no input of the live service selects the index: OTB RadiometricIndices' `list` parameter is not exposed"
+    }
   ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "OTB.RadiometricIndices computes a *selectable set* of named indices (NDVI, NDWI, and many others via `channels` / `list`) from user-mapped spectral channels (`channels.red`, `channels.nir`, ...), only one of which (NDVI) has a dedicated openEO process (`ndvi`, which also expects band-role mapping via `nir`/`red` parameters). closeMatch, not exactMatch: openEO has no equivalent for the other indices this application can compute."
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.ndvi"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "OTB.RadiometricIndices computes a *selectable set* of named indices (NDVI, NDWI, and many others via `channels` / `list`) from user-mapped spectral channels (`channels.red`, `channels.nir`, ...), only one of which (NDVI) has a dedicated openEO process (`ndvi`, which also expects band-role mapping via `nir`/`red` parameters). closeMatch, not exactMatch: openEO has no equivalent for the other indices this application can compute."
+    }
   }
 }

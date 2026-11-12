@@ -1,43 +1,29 @@
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band",
-  "type": "ProcessType",
-  "prefLabel": "Download one Sentinel-2 band over a bounding box",
-  "definition": "Downloads one Sentinel-2 band over a bounding box from a STAC Item.",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval"
-  ],
-  "profile": "ospd.process-profiles.kindgrove-steps.download-band",
-  "processDescription": {
-    "id": "download_band",
-    "version": "0.1.0",
-    "href": "https://ospd.example.org/ogc-api/processes/download_band"
-  },
-  "plan": {
-    "id": "https://ospd.example.org/ogc-api/processes/download_band/package",
-    "type": "Plan",
-    "executionUnit": {
-      "href": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#download_band",
-      "type": "application/cwl+yaml",
-      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+  "id": "urn:example:run:kindgrove-steps:download-band",
+  "type": "ProcessRun",
+  "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band",
+  "describedByProcess": "https://ospd.example.org/ogc-api/processes/download_band/package",
+  "usedInput": [
+    {
+      "id": "urn:example:entity:download-band:in:stac_item"
     },
-    "cwlClass": "CommandLineTool",
-    "cwlId": "download_band",
-    "license": "https://spdx.org/licenses/CC-BY-NC-SA-4.0",
-    "cctDependencies": [],
-    "candidateCctDependencies": [
-      "eoap.cct.bbox",
-      "eoap.cct.stac"
-    ]
-  },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection",
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.filter_bands"
+    {
+      "id": "urn:example:entity:download-band:in:band"
+    },
+    {
+      "id": "urn:example:entity:download-band:in:west"
+    },
+    {
+      "id": "urn:example:entity:download-band:in:south"
+    },
+    {
+      "id": "urn:example:entity:download-band:in:east"
+    },
+    {
+      "id": "urn:example:entity:download-band:in:north"
+    }
   ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "load_collection with a spatial_extent and a single band selected (filter_bands); the STAC item is a resolved File (the output of `select-scene`) rather than resolved in-process, same pattern as `algae-bloom.download-band-sentinel2-stac-item`."
-  }
+  "startedAtTime": "2026-09-24T10:58:01Z",
+  "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
+  "wasPartOfWorkflowRun": "urn:example:run:kindgrove-steps:mangrove-workflow-steps"
 }

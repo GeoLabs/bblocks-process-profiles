@@ -3,7 +3,7 @@
 
 `ospd.process-profiles.water-bodies.water-bodies` *v0.1*
 
-OGC API - Processes profile of the CWL Workflow `water-bodies` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL Workflow `water-bodies` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
@@ -15,7 +15,7 @@ Process profile of **`water-bodies`** (Workflow, W3 Water Bodies).
 
 ## Source
 
-- CWL: [water-bodies.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/water-bodies.cwl) (pinned commit `f472585`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
+- CWL: [water-bodies.cwl](https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/water-bodies.cwl) (pinned commit `72a76ae`, license <https://spdx.org/licenses/CC-BY-SA-4.0>). Referenced, not copied.
 - Six-phase position: Data retrieval → Scientific computation → Export / aggregation
 - EOAP CWL custom types used: none; candidates: `eoap.cct.bbox`, `eoap.cct.string-format`
 - Steps (profiles): `ospd.process-profiles.water-bodies.detect-water-body`, `ospd.process-profiles.water-bodies.stac`
@@ -45,6 +45,12 @@ Gaps met here are listed in `docs/PROVENANCE-GAPS.md`.
 
 Execution and provenance examples are built from a real `cwltool --provenance` run (CWLProv research object `water-bodies`: the pinned W3 source itself (ogc-eo-application-package-hands-on f472585 `water-bodies/app-pkg-multiple/water-bodies.cwl`, one CWL file per step), inputs from that source's own `water-bodies/params.yml`, run with `cwltool --enable-ext --provenance ro --outdir out`, 2026-09-23, cwltool 3.1.20260108082145 on an arm64 macOS host, ~9 min; two STAC items scattered (S2B_10TFK_20210713_0_L2A then S2A_10TFK_20220524_0_L2A), each over 2 bands (green, nir)), activity `main` (engine cwltool 3.1.20260108082145). Timestamps are UTC: cwltool records naive local times, the offset is taken from its engine log. Hosts under `ospd.example.org` are illustrative: job and result URLs are not those of a deployment.
 
+## Implementation Profile (tier 3)
+
+Not attached to an Implementation Profile of bblocks-generic-profiles: A composite Workflow: catalogue search, data retrieval and processing chained into one application. No Generic Profile describes a whole application, and none should: its steps are compared with the tiers one by one.
+
+The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
+
 ## openEO equivalence
 
 **Level: none.** Composite: a CWL Workflow scattering a per-item sub-workflow over the STAC item list, then aggregating the results into one STAC catalog. The openEO equivalent would be a user-defined process graph, which has no Building Block of its own; the correspondence is carried by the steps.
@@ -57,12 +63,12 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Process type (Activity 4)
 
-Candidate entry `https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies` (`ospd.process-profiles.process-type`), status `submitted`.
+Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
 
 ## Examples
 
 ### Source CWL (referenced)
-The CWL Workflow is referenced, not copied: <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/water-bodies.cwl>.
+The CWL Workflow is referenced, not copied: <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/blob/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/water-bodies.cwl>.
 
 ### processDescription
 OGC API - Processes processDescription derived from the CWL (manually corrected, see description).
@@ -313,9 +319,9 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://w3id.org/ogc/api/schema/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -337,7 +343,7 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "[\"green\",\"nir\"]"^^rdf:JSON ;
                             proc:type "array" ;
-                            ns1:items [ proc:type "string" ] ] ] ;
+                            ns3:items [ proc:type "string" ] ] ] ;
             ns2:epsg [ dcterms:description "EPSG code" ;
                     dcterms:title "EPSG code" ;
                     proc:maxOccurs 1 ;
@@ -349,28 +355,28 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ] ] ] ] ;
+                            ns3:items [ proc:type "string" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "1.4.1" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
+    proc:metadata [ rdf:value "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
             proc:role schema:description ],
         [ rdf:value "Water bodies detection based on NDWI and otsu threshold" ;
-            proc:role schema:name ] ;
+            proc:role schema:name ],
+        [ rdf:value "1.4.1" ;
+            proc:role schema:softwareVersion ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:stac [ dcterms:description "" ;
+    proc:outputs [ ns1:stac [ dcterms:description "" ;
                     dcterms:title "stac" ;
                     proc:schema [ proc:type "object" ;
-                            ns1:format "stac-catalog" ;
-                            ns1:properties [ dcterms:description [ proc:type "string" ] ;
+                            ns3:format "stac-catalog" ;
+                            ns3:properties [ dcterms:description [ proc:type "string" ] ;
                                     dcterms:title [ proc:type "string" ] ;
                                     rdfs:seeAlso [ dcterms:type "array" ] ;
                                     proc:type [ proc:enum "Catalog" ;
                                             proc:type "string" ] ;
-                                    ns1:stac_version [ proc:type "string" ] ] ;
-                            ns1:required "description",
+                                    ns3:stac_version [ proc:type "string" ] ] ;
+                            ns3:required "description",
                                 "id",
                                 "links",
                                 "stac_version",
@@ -689,10 +695,10 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "1.4.1" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value "Water bodies detection based on NDWI and otsu threshold" ;
+    proc:metadata [ rdf:value "Water bodies detection based on NDWI and otsu threshold" ;
             proc:role schema:name ],
+        [ rdf:value "1.4.1" ;
+            proc:role schema:softwareVersion ],
         [ rdf:value "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
             proc:role schema:description ] ;
     proc:mutable true ;
@@ -735,7 +741,7 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
     }
   },
   "executionUnit": {
-    "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/water-bodies.cwl",
+    "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/water-bodies.cwl",
     "type": "application/cwl+yaml",
     "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
   }
@@ -754,7 +760,7 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
     }
   },
   "executionUnit": {
-    "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/water-bodies.cwl",
+    "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/water-bodies.cwl",
     "type": "application/cwl+yaml",
     "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
   }
@@ -774,7 +780,7 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 [] pp:processDescription [ pp:process <https://geolabs.github.io/bblocks-process-profiles/def/process/water-bodies> ] ;
     proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
             ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
-            oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/water-bodies.cwl> ] .
+            oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/water-bodies.cwl> ] .
 
 
 ```
@@ -1346,27 +1352,71 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 ```json
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "hasAction": [
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/addition",
+      "type": "RegisterAction",
+      "actionType": "addition",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-09-22T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/d5-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/plan-2026-11-11",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/water-bodies.cwl). The processDescription is unchanged.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-11T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies"
+    }
+  ],
   "prefLabel": "Water bodies detection based on NDWI and otsu threshold",
   "definition": "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
-  ],
-  "profile": "ospd.process-profiles.water-bodies.water-bodies",
-  "processDescription": {
-    "id": "water-bodies",
-    "version": "1.4.1",
-    "href": "https://ospd.example.org/ogc-api/processes/water-bodies"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.water-bodies.water-bodies",
+    "processDescription": {
+      "id": "water-bodies",
+      "version": "1.4.1",
+      "href": "https://ospd.example.org/ogc-api/processes/water-bodies"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/water-bodies/package",
     "type": "Plan",
     "executionUnit": {
-      "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/water-bodies.cwl",
+      "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/water-bodies.cwl",
       "type": "application/cwl+yaml",
       "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
     },
@@ -1379,29 +1429,30 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "eoap.cct.string-format"
     ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/stac"
   ],
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "Composite: a CWL Workflow scattering a per-item sub-workflow over the STAC item list, then aggregating the results into one STAC catalog. The openEO equivalent would be a user-defined process graph, which has no Building Block of its own; the correspondence is carried by the steps.",
-    "decomposition": [
-      {
-        "stage": "node_water_bodies (detect_water_body, scatter over stac_items)",
-        "openeo": [],
-        "level": "none",
-        "note": "see osc.process-profiles.water-bodies.detect-water-body"
-      },
-      {
-        "stage": "node_stac",
-        "openeo": [
-          "ogc.openeo.processes.cubes.save_result"
-        ],
-        "level": "closeMatch"
-      }
-    ]
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "Composite: a CWL Workflow scattering a per-item sub-workflow over the STAC item list, then aggregating the results into one STAC catalog. The openEO equivalent would be a user-defined process graph, which has no Building Block of its own; the correspondence is carried by the steps.",
+      "decomposition": [
+        {
+          "stage": "node_water_bodies (detect_water_body, scatter over stac_items)",
+          "openeo": [],
+          "level": "none",
+          "note": "see osc.process-profiles.water-bodies.detect-water-body"
+        },
+        {
+          "stage": "node_stac",
+          "openeo": [
+            "ogc.openeo.processes.cubes.save_result"
+          ],
+          "level": "closeMatch"
+        }
+      ]
+    }
   }
 }
 
@@ -1412,27 +1463,71 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/water-bodies/water-bodies/context.jsonld",
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "hasAction": [
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/addition",
+      "type": "RegisterAction",
+      "actionType": "addition",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-09-22T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/d5-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/plan-2026-11-11",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/water-bodies.cwl). The processDescription is unchanged.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-11T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies"
+    }
+  ],
   "prefLabel": "Water bodies detection based on NDWI and otsu threshold",
   "definition": "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
-  ],
-  "profile": "ospd.process-profiles.water-bodies.water-bodies",
-  "processDescription": {
-    "id": "water-bodies",
-    "version": "1.4.1",
-    "href": "https://ospd.example.org/ogc-api/processes/water-bodies"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.water-bodies.water-bodies",
+    "processDescription": {
+      "id": "water-bodies",
+      "version": "1.4.1",
+      "href": "https://ospd.example.org/ogc-api/processes/water-bodies"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/water-bodies/package",
     "type": "Plan",
     "executionUnit": {
-      "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/water-bodies.cwl",
+      "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/water-bodies.cwl",
       "type": "application/cwl+yaml",
       "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
     },
@@ -1445,67 +1540,72 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "eoap.cct.string-format"
     ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/stac"
   ],
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "Composite: a CWL Workflow scattering a per-item sub-workflow over the STAC item list, then aggregating the results into one STAC catalog. The openEO equivalent would be a user-defined process graph, which has no Building Block of its own; the correspondence is carried by the steps.",
-    "decomposition": [
-      {
-        "stage": "node_water_bodies (detect_water_body, scatter over stac_items)",
-        "openeo": [],
-        "level": "none",
-        "note": "see osc.process-profiles.water-bodies.detect-water-body"
-      },
-      {
-        "stage": "node_stac",
-        "openeo": [
-          "ogc.openeo.processes.cubes.save_result"
-        ],
-        "level": "closeMatch"
-      }
-    ]
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "Composite: a CWL Workflow scattering a per-item sub-workflow over the STAC item list, then aggregating the results into one STAC catalog. The openEO equivalent would be a user-defined process graph, which has no Building Block of its own; the correspondence is carried by the steps.",
+      "decomposition": [
+        {
+          "stage": "node_water_bodies (detect_water_body, scatter over stac_items)",
+          "openeo": [],
+          "level": "none",
+          "note": "see osc.process-profiles.water-bodies.detect-water-body"
+        },
+        {
+          "stage": "node_stac",
+          "openeo": [
+            "ogc.openeo.processes.cubes.save_result"
+          ],
+          "level": "closeMatch"
+        }
+      ]
+    }
   }
 }
 ```
 
 #### ttl
 ```ttl
+@prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rim: <https://w3id.org/ogc/rim/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies> a skos:Concept ;
-    skos:broader <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
-    skos:definition "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
-    skos:inScheme pp:process-type ;
-    skos:prefLabel "Water bodies detection based on NDWI and otsu threshold" ;
-    pp:hasStep <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/stac> ;
-    pp:openeoEquivalence [ pp:decomposition ( [ skos:note "see osc.process-profiles.water-bodies.detect-water-body" ;
-                        pp:equivalenceLevel "none" ;
-                        pp:stage "node_water_bodies (detect_water_body, scatter over stac_items)" ] [ pp:equivalenceLevel "closeMatch" ;
-                        pp:openeo "ogc.openeo.processes.cubes.save_result" ;
-                        pp:stage "node_stac" ] ) ;
-            pp:equivalenceLevel "none" ;
-            pp:rationale "Composite: a CWL Workflow scattering a per-item sub-workflow over the STAC item list, then aggregating the results into one STAC catalog. The openEO equivalent would be a user-defined process graph, which has no Building Block of its own; the correspondence is carried by the steps." ] ;
-    pp:plan <https://ospd.example.org/ogc-api/processes/water-bodies/package> ;
-    pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/water-bodies> ;
-    pp:profile "ospd.process-profiles.water-bodies.water-bodies" ;
-    pp:provenanceClass wfprov:WorkflowRun ;
-    pp:status "submitted" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/addition> a rim:RegisterAction ;
+    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType rim:additionAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies> ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/d5-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/plan-2026-11-11> a rim:RegisterAction ;
+    dcterms:description "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/water-bodies.cwl). The processDescription is unchanged." ;
+    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/water-bodies> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/water-bodies> ;
     pp:version "1.4.1" .
@@ -1518,7 +1618,39 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     pp:cwlId "water-bodies" ;
     proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
             ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
-            oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/water-bodies.cwl> ] .
+            oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/water-bodies.cwl> ] .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies> a owl:Class,
+        pp:ProcessType,
+        acttype:ActivityType ;
+    rdfs:subClassOf acttype:ActivityType ;
+    skos:definition "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
+    skos:inScheme pp:process-type ;
+    skos:prefLabel "Water bodies detection based on NDWI and otsu threshold" ;
+    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/water-bodies> ;
+            pp:profile "ospd.process-profiles.water-bodies.water-bodies" ;
+            pp:provenanceClass wfprov:WorkflowRun ] ;
+    pp:hasStep <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/stac> ;
+    pp:openeoEquivalence [ pp:decomposition ( [ skos:note "see osc.process-profiles.water-bodies.detect-water-body" ;
+                        pp:equivalenceLevel "none" ;
+                        pp:stage "node_water_bodies (detect_water_body, scatter over stac_items)" ] [ pp:equivalenceLevel "closeMatch" ;
+                        pp:openeo "ogc.openeo.processes.cubes.save_result" ;
+                        pp:stage "node_stac" ] ) ;
+            pp:equivalenceLevel "none" ;
+            pp:rationale "Composite: a CWL Workflow scattering a per-item sub-workflow over the STAC item list, then aggregating the results into one STAC catalog. The openEO equivalent would be a user-defined process graph, which has no Building Block of its own; the correspondence is carried by the steps." ] ;
+    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/water-bodies/package> ;
+    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/addition>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/d5-2026-11-09>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/plan-2026-11-11> ;
+    rim:inRegister pp:register ;
+    rim:itemClass acttype:activityTypeItemClass ;
+    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies"^^xsd:anyURI ;
+    rim:publicationStatus rim:published ;
+    rim:validityStatus rim:invalid .
 
 
 ```
@@ -3102,10 +3234,10 @@ id:006f10ba-bce7-4602-bc25-46f0ca2c5724 a wfprov:ProcessRun,
             prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
             prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/water-bodies/node_water_bodies> ] ;
     prov:qualifiedStart [ a prov:Start ;
-            prov:atTime "2026-09-23T22:09:37.996102"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T22:14:43.790754"^^xsd:dateTime ;
             prov:hadActivity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ],
         [ a prov:Start ;
-            prov:atTime "2026-09-23T22:14:43.790754"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T22:09:37.996102"^^xsd:dateTime ;
             prov:hadActivity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ] .
 
 id:0c932b2b-21cb-4d36-8eda-c9d07f86bf53 a prov:Entity,
@@ -3229,9 +3361,9 @@ id:25ff238f-e08b-4dee-a1f9-485e90a02a52 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ],
+            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ],
         [ a provext:Membership ;
-            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ] .
+            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ] .
 
 id:3d637621-61a3-4c53-8aaf-70daadac3593 a wfprov:Artifact,
         prov:Collection,
@@ -3252,9 +3384,9 @@ id:511850b1-b1bc-44cd-8316-bdd367fefd98 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ],
+            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ],
         [ a provext:Membership ;
-            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ] .
+            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ] .
 
 id:5fa19808-d14c-4c01-8bd1-05a7a8845019 a wf4ever:File,
         wfprov:Artifact,
@@ -3290,30 +3422,30 @@ id:afa01c29-85ed-418e-b3a4-99ff6f4b06cf a ro:Folder,
         "id:7d9076f9-073d-4667-84e9-131fd7fda68c"^^xsd:QName,
         "id:a9451218-986b-4920-9d23-62638b8aea56"^^xsd:QName ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ;
-            prov:atTime "2026-09-23T22:17:45.465410"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/primary/stac> ],
-        [ a prov:Generation ;
             prov:activity id:fbfd9735-117b-4cdd-9707-61f171585925 ;
             prov:atTime "2026-09-23T22:17:45.432581"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/stac_catalog> ] ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/stac_catalog> ],
+        [ a prov:Generation ;
+            prov:activity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ;
+            prov:atTime "2026-09-23T22:17:45.465410"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/primary/stac> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
             provext:member id:1d5bc5ed-98ce-4f75-8ca8-c19f497b03c0 ],
         [ a provext:Membership ;
             provext:member id:a782f6a0-89d7-46ac-9c76-c6569903f8e1 ],
         [ a provext:Membership ;
-            provext:member id:0d06dfcd-e7b7-4fad-a2a5-66cddd416313 ],
+            provext:member id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 ],
         [ a provext:Membership ;
-            provext:member id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 ] ;
+            provext:member id:0d06dfcd-e7b7-4fad-a2a5-66cddd416313 ] ;
     cwlprov:basename "docker_tmpwngcerl4" .
 
 id:b6924a3c-a25c-4107-bdd7-2b5b2bff912e a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ],
+            provext:member data:ba936cb0e062bea4078e8b56371ca8fe054093dd ],
         [ a provext:Membership ;
-            provext:member data:ba936cb0e062bea4078e8b56371ca8fe054093dd ] .
+            provext:member data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ] .
 
 id:d8353ab3-7279-484e-a461-b04ae4b52890 a prov:Agent,
         prov:SoftwareAgent ;
@@ -3333,10 +3465,10 @@ id:fbfd9735-117b-4cdd-9707-61f171585925 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_stac" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:d8353ab3-7279-484e-a461-b04ae4b52890 ],
-        [ a prov:Association ;
             prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac> ] ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac> ],
+        [ a prov:Association ;
+            prov:agent id:d8353ab3-7279-484e-a461-b04ae4b52890 ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:17:45.432570"^^xsd:dateTime ;
             prov:hadActivity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ] ;
@@ -3344,13 +3476,13 @@ id:fbfd9735-117b-4cdd-9707-61f171585925 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:17:40.502305"^^xsd:dateTime ;
             prov:hadActivity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:17:40.582084"^^xsd:dateTime ;
-            prov:entity id:3d637621-61a3-4c53-8aaf-70daadac3593 ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/rasters> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:17:40.581639"^^xsd:dateTime ;
             prov:entity id:25ff238f-e08b-4dee-a1f9-485e90a02a52 ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/item> ] .
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/item> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:17:40.582084"^^xsd:dateTime ;
+            prov:entity id:3d637621-61a3-4c53-8aaf-70daadac3593 ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/rasters> ] .
 
 data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd a wfprov:Artifact,
         prov:Entity ;
@@ -3410,9 +3542,9 @@ id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 a ro:Folder,
     prov:hadDictionaryMember "id:0c932b2b-21cb-4d36-8eda-c9d07f86bf53"^^xsd:QName,
         "id:4c5ac9a5-8f70-4cc6-bb2f-89864afd51b9"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:ac975c99-5d6d-476f-b3ab-750fd0ac460d ],
+            provext:member id:471cf7c7-1a60-4c28-b3d0-904c5aa74707 ],
         [ a provext:Membership ;
-            provext:member id:471cf7c7-1a60-4c28-b3d0-904c5aa74707 ] ;
+            provext:member id:ac975c99-5d6d-476f-b3ab-750fd0ac460d ] ;
     cwlprov:basename "S2A_10TFK_20220524_0_L2A" .
 
 id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 a wfprov:WorkflowRun,
@@ -3428,10 +3560,6 @@ id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 a wfprov:WorkflowRun,
             prov:atTime "2026-09-23T22:09:35.483879"^^xsd:dateTime ;
             prov:hadActivity id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:37.995200"^^xsd:dateTime ;
-            prov:entity id:511850b1-b1bc-44cd-8316-bdd367fefd98 ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/stac_items> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:37.991132"^^xsd:dateTime ;
             prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/aoi> ],
@@ -3439,6 +3567,10 @@ id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 a wfprov:WorkflowRun,
             prov:atTime "2026-09-23T22:09:37.992978"^^xsd:dateTime ;
             prov:entity id:b6924a3c-a25c-4107-bdd7-2b5b2bff912e ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/bands> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:09:37.995200"^^xsd:dateTime ;
+            prov:entity id:511850b1-b1bc-44cd-8316-bdd367fefd98 ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/stac_items> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:37.993781"^^xsd:dateTime ;
             prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
@@ -3464,8 +3596,8 @@ description: Profile of the OGC API - Processes processDescription of `water-bod
   (CWL Workflow). Pins the process id and the input/output names; the input/output
   schemas are those derived from the CWL.
 allOf:
-- $ref: https://ogcincubator.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/v1/schemas/process/schema.yaml
-- $ref: https://geolabs.github.io/bblock-ogcapi-processes-part2/build/annotated/api/processes/v2/schemas/staticIndicator/schema.yaml
+- $ref: https://geolabs.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/part1/v1/schemas/process/schema.yaml
+- $ref: https://geolabs.github.io/bblock-ogcapi-processes-part2/build/annotated/api/processes/part2/v1/schemas/staticIndicator/schema.yaml
 - type: object
   required:
   - id
@@ -3502,9 +3634,9 @@ allOf:
       x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
 $defs:
   rawProcessDescription:
-    $ref: https://ogcincubator.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/v1/schemas/process/schema.yaml
+    $ref: https://geolabs.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/part1/v1/schemas/process/schema.yaml
   applicationPackage:
-    $ref: https://geolabs.github.io/bblock-ogcapi-processes-part2/build/annotated/api/processes/v2/schemas/ogcapppkg/schema.yaml
+    $ref: https://geolabs.github.io/bblock-ogcapi-processes-part2/build/annotated/api/processes/part2/v1/schemas/ogcapppkg/schema.yaml
   provenance:
     $ref: https://geolabs.github.io/bblocks-generic-provenance-profile/build/annotated/bbr/provenance/provenance/schema.yaml
   processTypeEntry:
@@ -3513,9 +3645,9 @@ $defs:
     $ref: https://ogcincubator.github.io/bblocks-prov-jsonld-alt/build/annotated/ogc-utils/prov/w3c-prov-jsonld/schema.yaml
   execute:
     description: Execute request for this process. Built on the processDescription
-      input schemas and on ogc.api.processes.v1.schemas.link / qualifiedInputValue,
-      because ogc.api.processes.v1.schemas.execute rejects plain strings and numbers
-      (upstream issue U-01).
+      input schemas and on ogc.api.processes.part1.v1.schemas.link / qualifiedInputValue,
+      because ogc.api.processes.part1.v1.schemas.execute rejects plain strings and
+      numbers (upstream issue U-01).
     type: object
     required:
     - inputs
@@ -3533,8 +3665,8 @@ $defs:
           - bands
         additionalProperties:
           anyOf:
-          - $ref: https://ogcincubator.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/v1/schemas/link/schema.yaml
-          - $ref: https://ogcincubator.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/v1/schemas/qualifiedInputValue/schema.yaml
+          - $ref: https://geolabs.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/part1/v1/schemas/link/schema.yaml
+          - $ref: https://geolabs.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/part1/v1/schemas/qualifiedInputValue/schema.yaml
           - type:
             - string
             - number
@@ -3564,10 +3696,10 @@ $defs:
       - stac
     additionalProperties:
       anyOf:
-      - $ref: https://ogcincubator.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/v1/schemas/link/schema.yaml
+      - $ref: https://geolabs.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/part1/v1/schemas/link/schema.yaml
       - type: array
         items:
-          $ref: https://ogcincubator.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/v1/schemas/link/schema.yaml
+          $ref: https://geolabs.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/part1/v1/schemas/link/schema.yaml
       - type:
         - string
         - number
@@ -3583,7 +3715,12 @@ x-jsonld-extra-terms:
   WorkflowRun: http://purl.org/wf4ever/wfprov#WorkflowRun
   WorkflowEngine: http://purl.org/wf4ever/wfprov#WorkflowEngine
   Artifact: http://purl.org/wf4ever/wfprov#Artifact
-  ProcessType: http://www.w3.org/2004/02/skos/core#Concept
+  ProcessType: https://geolabs.github.io/bblocks-process-profiles/def/ProcessType
+  ActivityType: https://w3id.org/ogc/rim/activity-type/ActivityType
+  owlClass: http://www.w3.org/2002/07/owl#Class
+  subClassOf:
+    x-jsonld-id: http://www.w3.org/2000/01/rdf-schema#subClassOf
+    x-jsonld-type: '@id'
   title: http://purl.org/dc/terms/title
   description: http://purl.org/dc/terms/description
   keywords: http://purl.org/dc/terms/subject
@@ -3602,6 +3739,20 @@ x-jsonld-extra-terms:
   role:
     x-jsonld-id: https://w3id.org/ogc/api/processes/role
     x-jsonld-type: '@id'
+  dataType:
+    x-jsonld-id: http://purl.org/dc/terms/type
+    x-jsonld-type: '@id'
+  usedEntityType:
+    x-jsonld-id: https://w3id.org/ogc/rim/activity-type/usedEntityType
+    x-jsonld-type: '@id'
+  generatedEntityType:
+    x-jsonld-id: https://w3id.org/ogc/rim/activity-type/generatedEntityType
+    x-jsonld-type: '@id'
+  changeClassification:
+    x-jsonld-id: https://w3id.org/ogc/rim/changeClassification
+    x-jsonld-type: '@vocab'
+  substantive: https://w3id.org/ogc/rim/substantiveChange
+  clarifying: https://w3id.org/ogc/rim/clarifyingChange
   links:
     x-jsonld-id: http://www.w3.org/2000/01/rdf-schema#seeAlso
     x-jsonld-context:
@@ -3703,15 +3854,49 @@ x-jsonld-extra-terms:
   wasOutputFrom:
     x-jsonld-id: http://www.w3.org/ns/prov#generated
     x-jsonld-type: '@id'
+  objectIdentifier:
+    x-jsonld-id: https://w3id.org/ogc/rim/objectIdentifier
+    x-jsonld-type: http://www.w3.org/2001/XMLSchema#anyURI
+  itemClass:
+    x-jsonld-id: https://w3id.org/ogc/rim/itemClass
+    x-jsonld-type: '@id'
+  inRegister:
+    x-jsonld-id: https://w3id.org/ogc/rim/inRegister
+    x-jsonld-type: '@id'
+  validityStatus:
+    x-jsonld-id: https://w3id.org/ogc/rim/validityStatus
+    x-jsonld-type: '@vocab'
+  publicationStatus:
+    x-jsonld-id: https://w3id.org/ogc/rim/publicationStatus
+    x-jsonld-type: '@vocab'
+  invalid: https://w3id.org/ogc/rim/invalid
+  published: https://w3id.org/ogc/rim/published
+  hasAction:
+    x-jsonld-id: https://w3id.org/ogc/rim/hasAction
+    x-jsonld-type: '@id'
+  RegisterAction: https://w3id.org/ogc/rim/RegisterAction
+  actionType:
+    x-jsonld-id: https://w3id.org/ogc/rim/actionType
+    x-jsonld-type: '@vocab'
+  addition: https://w3id.org/ogc/rim/additionAction
+  proposer:
+    x-jsonld-id: https://w3id.org/ogc/rim/proposer
+    x-jsonld-type: '@id'
+  appliesTo:
+    x-jsonld-id: https://w3id.org/ogc/rim/appliesTo
+    x-jsonld-type: '@id'
   prefLabel: http://www.w3.org/2004/02/skos/core#prefLabel
   definition: http://www.w3.org/2004/02/skos/core#definition
   inScheme:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#inScheme
     x-jsonld-type: '@id'
   status: https://geolabs.github.io/bblocks-process-profiles/def/status
+  classification: '@nest'
+  correspondences: '@nest'
   phase:
-    x-jsonld-id: http://www.w3.org/2004/02/skos/core#broader
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/phase
     x-jsonld-type: '@id'
+  deployment: https://geolabs.github.io/bblocks-process-profiles/def/deployment
   profile: https://geolabs.github.io/bblocks-process-profiles/def/profile
   plan:
     x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
@@ -3751,23 +3936,95 @@ x-jsonld-extra-terms:
   stage: https://geolabs.github.io/bblocks-process-profiles/def/stage
   openeo: https://geolabs.github.io/bblocks-process-profiles/def/openeo
   note: http://www.w3.org/2004/02/skos/core#note
+  serverSideFiles:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/serverSideFile
+    x-jsonld-context:
+      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      implements:
+        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@type': '@id'
+      location: https://geolabs.github.io/bblocks-process-profiles/def/location
+  roleDecompositions:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/roleDecomposition
+    x-jsonld-context:
+      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      implements:
+        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@type': '@id'
+      parts:
+        '@id': https://geolabs.github.io/bblocks-process-profiles/def/part
+        '@container': '@list'
+      selectors:
+        '@id': https://geolabs.github.io/bblocks-process-profiles/def/selector
+        '@context':
+          name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+          values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
+      reproducible:
+        '@id': https://geolabs.github.io/bblocks-process-profiles/def/reproducible
+        '@type': http://www.w3.org/2001/XMLSchema#boolean
+      note: http://www.w3.org/2004/02/skos/core#note
+  unboundRoles:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/unboundRole
+    x-jsonld-context:
+      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      implements:
+        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@type': '@id'
+      reason: http://www.w3.org/2004/02/skos/core#note
+  fixedRoleValues:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/fixedRoleValue
+    x-jsonld-context:
+      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      implements:
+        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@type': '@id'
+      values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
+      reason: http://www.w3.org/2004/02/skos/core#note
+  byReference:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/byReference
+    x-jsonld-context:
+      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      implements:
+        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@type': '@id'
+      note: http://www.w3.org/2004/02/skos/core#note
+  notAttached:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/notAttached
+    x-jsonld-context:
+      reason: http://www.w3.org/2004/02/skos/core#note
+  assumedFormatGaps:
+    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/assumedFormatGap
+    x-jsonld-context:
+      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      implements:
+        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@type': '@id'
+      served: https://geolabs.github.io/bblocks-process-profiles/def/servedMediaType
+      reason: http://www.w3.org/2004/02/skos/core#note
+      evidence: https://geolabs.github.io/bblocks-process-profiles/def/evidence
 x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/
 x-jsonld-prefixes:
   wfprov: http://purl.org/wf4ever/wfprov#
-  skos: http://www.w3.org/2004/02/skos/core#
-  dct: http://purl.org/dc/terms/
   pp: https://geolabs.github.io/bblocks-process-profiles/def/
-  proc: https://w3id.org/ogc/api/processes/
+  acttype: https://w3id.org/ogc/rim/activity-type/
+  owl: http://www.w3.org/2002/07/owl#
   rdfs: http://www.w3.org/2000/01/rdf-schema#
+  dct: http://purl.org/dc/terms/
+  proc: https://w3id.org/ogc/api/processes/
+  rim: https://w3id.org/ogc/rim/
   oa: http://www.w3.org/ns/oa#
   prov: http://www.w3.org/ns/prov#
   xsd: http://www.w3.org/2001/XMLSchema#
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  skos: http://www.w3.org/2004/02/skos/core#
 x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.water-bodies.water-bodies
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-10-21'
+  dateOfLastChange: '2026-11-12'
 
 ```
 
@@ -3817,7 +4074,13 @@ Links to the schema:
     "WorkflowRun": "wfprov:WorkflowRun",
     "WorkflowEngine": "wfprov:WorkflowEngine",
     "Artifact": "wfprov:Artifact",
-    "ProcessType": "skos:Concept",
+    "ProcessType": "pp:ProcessType",
+    "ActivityType": "acttype:ActivityType",
+    "owlClass": "owl:Class",
+    "subClassOf": {
+      "@id": "rdfs:subClassOf",
+      "@type": "@id"
+    },
     "title": "dct:title",
     "description": "dct:description",
     "keywords": "dct:subject",
@@ -3840,6 +4103,24 @@ Links to the schema:
       "@id": "proc:role",
       "@type": "@id"
     },
+    "dataType": {
+      "@id": "dct:type",
+      "@type": "@id"
+    },
+    "usedEntityType": {
+      "@id": "acttype:usedEntityType",
+      "@type": "@id"
+    },
+    "generatedEntityType": {
+      "@id": "acttype:generatedEntityType",
+      "@type": "@id"
+    },
+    "changeClassification": {
+      "@id": "rim:changeClassification",
+      "@type": "@vocab"
+    },
+    "substantive": "rim:substantiveChange",
+    "clarifying": "rim:clarifyingChange",
     "links": {
       "@id": "rdfs:seeAlso",
       "@context": {
@@ -3975,6 +4256,46 @@ Links to the schema:
       "@id": "prov:generated",
       "@type": "@id"
     },
+    "objectIdentifier": {
+      "@id": "rim:objectIdentifier",
+      "@type": "xsd:anyURI"
+    },
+    "itemClass": {
+      "@id": "rim:itemClass",
+      "@type": "@id"
+    },
+    "inRegister": {
+      "@id": "rim:inRegister",
+      "@type": "@id"
+    },
+    "validityStatus": {
+      "@id": "rim:validityStatus",
+      "@type": "@vocab"
+    },
+    "publicationStatus": {
+      "@id": "rim:publicationStatus",
+      "@type": "@vocab"
+    },
+    "invalid": "rim:invalid",
+    "published": "rim:published",
+    "hasAction": {
+      "@id": "rim:hasAction",
+      "@type": "@id"
+    },
+    "RegisterAction": "rim:RegisterAction",
+    "actionType": {
+      "@id": "rim:actionType",
+      "@type": "@vocab"
+    },
+    "addition": "rim:additionAction",
+    "proposer": {
+      "@id": "rim:proposer",
+      "@type": "@id"
+    },
+    "appliesTo": {
+      "@id": "rim:appliesTo",
+      "@type": "@id"
+    },
     "prefLabel": "skos:prefLabel",
     "definition": "skos:definition",
     "inScheme": {
@@ -3982,10 +4303,13 @@ Links to the schema:
       "@type": "@id"
     },
     "status": "pp:status",
+    "classification": "@nest",
+    "correspondences": "@nest",
     "phase": {
-      "@id": "skos:broader",
+      "@id": "pp:phase",
       "@type": "@id"
     },
+    "deployment": "pp:deployment",
     "profile": "pp:profile",
     "plan": {
       "@id": "pp:plan",
@@ -4035,6 +4359,97 @@ Links to the schema:
     "stage": "pp:stage",
     "openeo": "pp:openeo",
     "note": "skos:note",
+    "serverSideFiles": {
+      "@id": "pp:serverSideFile",
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "location": "pp:location"
+      }
+    },
+    "roleDecompositions": {
+      "@id": "pp:roleDecomposition",
+      "@context": {
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "parts": {
+          "@id": "pp:part",
+          "@container": "@list"
+        },
+        "selectors": {
+          "@id": "pp:selector",
+          "@context": {
+            "name": "pp:liveName",
+            "values": "rdf:value"
+          }
+        },
+        "reproducible": {
+          "@id": "pp:reproducible",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+    "unboundRoles": {
+      "@id": "pp:unboundRole",
+      "@context": {
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "reason": "skos:note"
+      }
+    },
+    "fixedRoleValues": {
+      "@id": "pp:fixedRoleValue",
+      "@context": {
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "values": "rdf:value",
+        "reason": "skos:note"
+      }
+    },
+    "byReference": {
+      "@id": "pp:byReference",
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        }
+      }
+    },
+    "notAttached": {
+      "@id": "pp:notAttached",
+      "@context": {
+        "reason": "skos:note"
+      }
+    },
+    "assumedFormatGaps": {
+      "@id": "pp:assumedFormatGap",
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "served": "pp:servedMediaType",
+        "reason": "skos:note",
+        "evidence": "pp:evidence"
+      }
+    },
     "nullable": "proc:nullable",
     "$ref": {
       "@id": "proc:ref",
@@ -4051,13 +4466,16 @@ Links to the schema:
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",
-    "skos": "http://www.w3.org/2004/02/skos/core#",
     "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "acttype": "rim:activity-type/",
+    "owl": "http://www.w3.org/2002/07/owl#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "rim": "https://w3id.org/ogc/rim/",
     "oa": "http://www.w3.org/ns/oa#",
     "prov": "http://www.w3.org/ns/prov#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
     "@version": 1.1
   }
 }

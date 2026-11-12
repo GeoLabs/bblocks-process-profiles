@@ -26,8 +26,6 @@
     "raster",
     "coverage",
     "band math",
-    "OTB",
-    "BandMathX",
     "multi-band"
   ],
   "metadata": [
@@ -51,9 +49,9 @@
     "il": {
       "title": "Image list to perform computation on.",
       "description": "Image list to perform computation on.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {
@@ -108,6 +106,7 @@
     "exp": {
       "title": "Mathematical expression to apply.",
       "description": "Mathematical expression to apply.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/expression",
       "keywords": [
         "expression"
       ],
@@ -166,9 +165,9 @@
     "out": {
       "title": "Output image.",
       "description": "Output image.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

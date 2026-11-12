@@ -1,25 +1,54 @@
+@prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://www.iana.org/assignments/> .
-@prefix ns2: <https://w3id.org/ogc/api/processes/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix ns1: <https://w3id.org/ogc/api/processes/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rim: <https://w3id.org/ogc/rim/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> a skos:Concept ;
-    skos:broader <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing> ;
-    skos:closeMatch <https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial> ;
-    skos:definition "Performs a reprojection over image bands and returns the resulting GeoTiff." ;
-    skos:inScheme pp:process-type ;
-    skos:prefLabel "Performs image reprojection." ;
-    pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
-            pp:rationale "As used in W1 the tool only changes the pixel size (gdalwarp `-tr 60 60`, nearest neighbour by default, no `-t_srs`): resample_spatial with `resolution: 60`, `projection: null`, `method: near`. Not an exactMatch: `output_dimensions` (`-ts`) has no openEO parameter, the output type is forced to Float32 (`-ot Float32`), and the tool works on a file rather than a data cube. Despite its name, no CRS transformation takes place." ] ;
-    pp:plan <https://ospd.example.org/ogc-api/processes/reproject-image/package> ;
-    pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/reproject-image> ;
-    pp:profile "ospd.process-profiles.algae-bloom.reproject-image" ;
-    pp:provenanceClass <http://purl.org/wf4ever/wfprov#ProcessRun> ;
-    pp:status "submitted" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/addition> a rim:RegisterAction ;
+    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType rim:additionAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/d5-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/inherited-description-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "processDescription.inherited.json added with the attachment to the Implementation Profile raster-resampling: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/specialisation-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/tier3-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/reproject-image> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/reproject-image> ;
     pp:version "1.0.0" .
@@ -28,7 +57,36 @@
     dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
     pp:cwlClass "CommandLineTool" ;
     pp:cwlId "reproject-image" ;
-    ns2:executionUnit [ dcterms:format "application/cwl+yaml" ;
-            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+    ns1:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/reproject-image.cwl> ] .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> a owl:Class,
+        pp:ProcessType,
+        acttype:ActivityType ;
+    rdfs:subClassOf <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling> ;
+    skos:closeMatch <https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial> ;
+    skos:definition "Performs a reprojection over image bands and returns the resulting GeoTiff." ;
+    skos:inScheme pp:process-type ;
+    skos:prefLabel "Performs image reprojection." ;
+    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/reproject-image> ;
+            pp:profile "ospd.process-profiles.algae-bloom.reproject-image" ;
+            pp:provenanceClass <http://purl.org/wf4ever/wfprov#ProcessRun> ] ;
+    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling> ;
+    pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
+            pp:rationale "As used in W1 the tool only changes the pixel size (gdalwarp `-tr 60 60`, nearest neighbour by default, no `-t_srs`): resample_spatial with `resolution: 60`, `projection: null`, `method: near`. Not an exactMatch: `output_dimensions` (`-ts`) has no openEO parameter, the output type is forced to Float32 (`-ot Float32`), and the tool works on a file rather than a data cube. Despite its name, no CRS transformation takes place." ] ;
+    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing> ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/reproject-image/package> ;
+    acttype:generatedEntityType geo:Feature ;
+    acttype:usedEntityType geo:Feature ;
+    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/addition>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/d5-2026-11-09>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/inherited-description-2026-11-10>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/specialisation-2026-11-10>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/tier3-2026-11-10> ;
+    rim:inRegister pp:register ;
+    rim:itemClass acttype:activityTypeItemClass ;
+    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"^^xsd:anyURI ;
+    rim:publicationStatus rim:published ;
+    rim:validityStatus rim:invalid .
 

@@ -1,30 +1,74 @@
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/kindgrove-steps/mangrove-workflow-steps/context.jsonld",
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "hasAction": [
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps/actions/addition",
+      "type": "RegisterAction",
+      "actionType": "addition",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-09-22T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps/actions/d5-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps/actions/plan-2026-11-11",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#mangrove-workflow-steps). The processDescription is unchanged.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-11T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps"
+    }
+  ],
   "prefLabel": "Mangrove Biomass Workflow (step notebooks)",
   "definition": "Mangrove above-ground biomass and carbon stock estimation from Sentinel-2 L2A, split into one CommandLineTool per processing step, aligned on the steps of the OSPD W1 Algae Bloom workflow: parse_aoi -> select_scene -> download_band (x3) -> reproject_band (x3) -> calculate_indices -> estimate_biomass -> export_stac.",
+  "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
-  ],
-  "profile": "ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps",
-  "processDescription": {
-    "id": "mangrove-workflow-steps",
-    "version": "0.1.0",
-    "href": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+    ]
+  },
+  "deployment": {
+    "profile": "ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps",
+    "processDescription": {
+      "id": "mangrove-workflow-steps",
+      "version": "0.1.0",
+      "href": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun"
   },
   "plan": {
     "id": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps/package",
     "type": "Plan",
     "executionUnit": {
-      "href": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#mangrove-workflow-steps",
+      "href": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#mangrove-workflow-steps",
       "type": "application/cwl+yaml",
       "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
     },
@@ -36,7 +80,6 @@
     ],
     "candidateCctDependencies": []
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#WorkflowRun",
   "hasStep": [
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/select-scene",
@@ -46,54 +89,56 @@
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/estimate-biomass",
     "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/export-stac"
   ],
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "Composite: a CWL Workflow decomposed into one CommandLineTool per notebook, aligned on the same granularity as W1 Algae Bloom (parse AOI, select scene, download/reproject bands, compute indices, estimate biomass, export STAC) -- the workflow's own `doc:` says so explicitly. A ground-up reimplementation of `kindgrove.mangrove-workflow`'s computation, not a repackaging of it; the openEO equivalent would be a user-defined process graph.",
-    "decomposition": [
-      {
-        "stage": "select_scene",
-        "openeo": [
-          "ogc.openeo.processes.cubes.load_collection"
-        ],
-        "level": "closeMatch"
-      },
-      {
-        "stage": "download_band (x3, scatter over bands)",
-        "openeo": [
-          "ogc.openeo.processes.cubes.load_collection",
-          "ogc.openeo.processes.cubes.filter_bands"
-        ],
-        "level": "closeMatch"
-      },
-      {
-        "stage": "reproject_band (x3)",
-        "openeo": [
-          "ogc.openeo.processes.cubes.resample_spatial"
-        ],
-        "level": "closeMatch"
-      },
-      {
-        "stage": "calculate_indices",
-        "openeo": [
-          "ogc.openeo.processes.cubes.ndvi",
-          "ogc.openeo.processes.math.indices.normalized_difference"
-        ],
-        "level": "closeMatch",
-        "note": "NDVI and NDWI; SAVI has no openEO process in this register"
-      },
-      {
-        "stage": "estimate_biomass",
-        "openeo": [],
-        "level": "none",
-        "note": "opaque allometric regression + IPCC carbon fraction"
-      },
-      {
-        "stage": "export_stac",
-        "openeo": [
-          "ogc.openeo.processes.cubes.save_result"
-        ],
-        "level": "closeMatch"
-      }
-    ]
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "Composite: a CWL Workflow decomposed into one CommandLineTool per notebook, aligned on the same granularity as W1 Algae Bloom (parse AOI, select scene, download/reproject bands, compute indices, estimate biomass, export STAC) -- the workflow's own `doc:` says so explicitly. A ground-up reimplementation of `kindgrove.mangrove-workflow`'s computation, not a repackaging of it; the openEO equivalent would be a user-defined process graph.",
+      "decomposition": [
+        {
+          "stage": "select_scene",
+          "openeo": [
+            "ogc.openeo.processes.cubes.load_collection"
+          ],
+          "level": "closeMatch"
+        },
+        {
+          "stage": "download_band (x3, scatter over bands)",
+          "openeo": [
+            "ogc.openeo.processes.cubes.load_collection",
+            "ogc.openeo.processes.cubes.filter_bands"
+          ],
+          "level": "closeMatch"
+        },
+        {
+          "stage": "reproject_band (x3)",
+          "openeo": [
+            "ogc.openeo.processes.cubes.resample_spatial"
+          ],
+          "level": "closeMatch"
+        },
+        {
+          "stage": "calculate_indices",
+          "openeo": [
+            "ogc.openeo.processes.cubes.ndvi",
+            "ogc.openeo.processes.math.indices.normalized_difference"
+          ],
+          "level": "closeMatch",
+          "note": "NDVI and NDWI; SAVI has no openEO process in this register"
+        },
+        {
+          "stage": "estimate_biomass",
+          "openeo": [],
+          "level": "none",
+          "note": "opaque allometric regression + IPCC carbon fraction"
+        },
+        {
+          "stage": "export_stac",
+          "openeo": [
+            "ogc.openeo.processes.cubes.save_result"
+          ],
+          "level": "closeMatch"
+        }
+      ]
+    }
   }
 }

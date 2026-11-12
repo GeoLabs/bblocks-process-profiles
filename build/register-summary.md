@@ -1,14 +1,23 @@
 # OSPD Process Profiles
 
-OGC API - Processes profiles for the deployable CWL processes of the OSPD 2026 reference
-workflows (W1 Algae Bloom, W2 KindGrove mangrove biomass, W3 Water Bodies detection, W2b a
-step-decomposed reimplementation of KindGrove), each linked to its CWL source, the generic
-provenance profile, the EOAP CWL custom types and the openEO Building Blocks.
+OGC API - Processes profiles for two populations of deployed processes: the 27 deployable CWL
+processes of the OSPD 2026 reference workflows (W1 Algae Bloom, W2 KindGrove mangrove biomass,
+W3 Water Bodies detection, W2b a step-decomposed reimplementation of KindGrove), each linked to
+its CWL source, the generic provenance profile, the EOAP CWL custom types and the openEO Building
+Blocks; and the 31 live processes of the Geonovum testbed (ZOO-Project: SQL/MM, GDAL/OTB, SAGA
+GIS), each implementing an Implementation Profile of bblocks-generic-profiles.
 
 
 This register is produced by GeoLabs under OSPD 2026 (D100 Workflow Profiler, D120 OGC API
-Processes Profiler). It holds one Building Block per deployable CWL process (`CommandLineTool`
-or `Workflow`) identified in the workflow observability investigation.
+Processes Profiler). It holds one Building Block per deployed process, in two populations:
+
+- 27 CWL processes of the OSPD reference workflows (`CommandLineTool` or `Workflow`, identified
+  in the workflow observability investigation): `algae-bloom.*` (10), `kindgrove.*` (3),
+  `water-bodies.*` (6), `kindgrove-steps.*` (8). 12 of them implement an Implementation Profile
+  of bblocks-generic-profiles; the others are listed with the reason in docs/ATTACHMENTS.md;
+- 31 live processes of the Geonovum testbed (`host1.tb.geonovum.geolabs.fr`, ZOO-Project), each
+  the Implementation of one Implementation Profile: `sqlmm.*` (16), `raster.*` (7), `vector.*`
+  (1), `terrain.*` (4), `pointcloud.*` (3).
 
 Each process profile combines:
 
@@ -17,8 +26,8 @@ Each process profile combines:
   `eoap.cct.cwl-to-ogcprocess` mapping (deviations are documented, not hidden);
 - a provenance view expressed as an instance of the generic provenance profile
   (`ogc.bbr.provenance.*`);
-- a candidate process-type entry (`ospd.process-profiles.process-type`) for the OSPD
-  process-type register (Activity 4);
+- a registered ActivityType entry (`ospd.process-profiles.process-type`) for each deployed
+  process, typed as the RDF class carried by its PROV activity (Activity 4);
 - proposed openEO equivalences (`ogc.openeo.*`) with an explicit level
   (exactMatch / closeMatch / none) and rationale;
 - a representative execution example.
@@ -32,67 +41,13 @@ All mappings are proposed correspondences offered for review, not settled equiva
 
 **Type:** schema
 
-Candidate entry for the OSPD process-type register (Activity 4), linking a process profile, its six-phase position, its provenance class and its proposed openEO equivalences.
+Candidate ActivityType register entry for each deployed OSPD process (decision D5: one per deployed process), its meaning kept apart from its six-phase classification, its deployment, its plan and its openEO correspondences, and linked to the Implementation Profile it implements, whose operation's activity type it then specialises. Its shapes check the data type of tier-4 inputs and outputs.
 
-### `ospd.process-profiles.pointcloud.point-cloud-thinning` — Process profile: SAGA.pointcloud_tools.9
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `SAGA.pointcloud_tools.9` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.pointcloud.point-cloud-to-grid` — Process profile: SAGA.pointcloud_tools.4
+### `ospd.process-profiles.terrain.hillshading` — Process profile: SAGA.ta_lighting.0
 
 **Type:** schema
 
-Process profile of the live OGC API - Processes process `SAGA.pointcloud_tools.4` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.pointcloud.point-cloud-to-shapes` — Process profile: SAGA.pointcloud_tools.5
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `SAGA.pointcloud_tools.5` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.raster.band-math` — Process profile: OTB.BandMath
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `OTB.BandMath` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.raster.band-math-multiband` — Process profile: OTB.BandMathX
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `OTB.BandMathX` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.raster.extent` — Process profile: OTB.ImageEnvelope
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `OTB.ImageEnvelope` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.raster.extract-roi` — Process profile: OTB.ExtractROI
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `OTB.ExtractROI` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.raster.format-conversion` — Process profile: Gdal_Translate
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `Gdal_Translate` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.raster.radiometric-index` — Process profile: OTB.RadiometricIndices
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `OTB.RadiometricIndices` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.raster.reprojection` — Process profile: Gdal_Warp
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `Gdal_Warp` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+Process profile of the live OGC API - Processes process `SAGA.ta_lighting.0` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
 
 ### `ospd.process-profiles.sqlmm.area` — Process profile: GetArea
 
@@ -148,6 +103,12 @@ Process profile of the live OGC API - Processes process `Disjoint` (ZOO-Project,
 
 Process profile of the live OGC API - Processes process `Equals` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
 
+### `ospd.process-profiles.vector.geometry-extent` — Process profile: SAGA.shapes_tools.19
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.shapes_tools.19` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
 ### `ospd.process-profiles.sqlmm.intersection` — Process profile: Intersection
 
 **Type:** schema
@@ -166,11 +127,89 @@ Process profile of the live OGC API - Processes process `Intersects` (ZOO-Projec
 
 Process profile of the live OGC API - Processes process `IsSimple` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
 
+### `ospd.process-profiles.pointcloud.point-cloud-thinning` — Process profile: SAGA.pointcloud_tools.9
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.pointcloud_tools.9` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.pointcloud.point-cloud-to-grid` — Process profile: SAGA.pointcloud_tools.4
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.pointcloud_tools.4` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.pointcloud.point-cloud-to-shapes` — Process profile: SAGA.pointcloud_tools.5
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.pointcloud_tools.5` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.raster.radiometric-index` — Process profile: OTB.RadiometricIndices
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `OTB.RadiometricIndices` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.raster.band-math` — Process profile: OTB.BandMath
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `OTB.BandMath` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.raster.band-math-multiband` — Process profile: OTB.BandMathX
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `OTB.BandMathX` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.raster.extract-roi` — Process profile: OTB.ExtractROI
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `OTB.ExtractROI` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.raster.extent` — Process profile: OTB.ImageEnvelope
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `OTB.ImageEnvelope` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.raster.format-conversion` — Process profile: Gdal_Translate
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Gdal_Translate` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.raster.reprojection` — Process profile: Gdal_Warp
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `Gdal_Warp` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.terrain.slope` — Process profile: SAGA.ta_morphometry.0
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.ta_morphometry.0` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
 ### `ospd.process-profiles.sqlmm.symdifference` — Process profile: SymDifference
 
 **Type:** schema
 
 Process profile of the live OGC API - Processes process `SymDifference` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.terrain.terrain-ruggedness-index` — Process profile: SAGA.ta_morphometry.16
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.ta_morphometry.16` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
+
+### `ospd.process-profiles.terrain.topographic-position-index` — Process profile: SAGA.ta_morphometry.18
+
+**Type:** schema
+
+Process profile of the live OGC API - Processes process `SAGA.ta_morphometry.18` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
 
 ### `ospd.process-profiles.sqlmm.touches` — Process profile: Touches
 
@@ -189,36 +228,6 @@ Process profile of the live OGC API - Processes process `Union` (ZOO-Project, Ge
 **Type:** schema
 
 Process profile of the live OGC API - Processes process `Within` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.terrain.hillshading` — Process profile: SAGA.ta_lighting.0
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `SAGA.ta_lighting.0` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.terrain.slope` — Process profile: SAGA.ta_morphometry.0
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `SAGA.ta_morphometry.0` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.terrain.terrain-ruggedness-index` — Process profile: SAGA.ta_morphometry.16
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `SAGA.ta_morphometry.16` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.terrain.topographic-position-index` — Process profile: SAGA.ta_morphometry.18
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `SAGA.ta_morphometry.18` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
-
-### `ospd.process-profiles.vector.geometry-extent` — Process profile: SAGA.shapes_tools.19
-
-**Type:** schema
-
-Process profile of the live OGC API - Processes process `SAGA.shapes_tools.19` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.
 
 ### `ospd.process-profiles.algae-bloom.calculate-band` — Process profile: calculate-band
 
@@ -302,83 +311,83 @@ OGC API - Processes profile of the CWL CommandLineTool `parse_aoi` (W2 KindGrove
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL CommandLineTool `calculate_indices` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL CommandLineTool `calculate_indices` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.
 
 ### `ospd.process-profiles.kindgrove-steps.download-band` — Process profile: download_band
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL CommandLineTool `download_band` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL CommandLineTool `download_band` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.
 
 ### `ospd.process-profiles.kindgrove-steps.estimate-biomass` — Process profile: estimate_biomass
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL CommandLineTool `estimate_biomass` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL CommandLineTool `estimate_biomass` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.
 
 ### `ospd.process-profiles.kindgrove-steps.export-stac` — Process profile: export_stac
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL CommandLineTool `export_stac` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL CommandLineTool `export_stac` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.
 
 ### `ospd.process-profiles.kindgrove-steps.mangrove-workflow-steps` — Process profile: mangrove-workflow-steps
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL Workflow `mangrove-workflow-steps` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL Workflow `mangrove-workflow-steps` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.
 
 ### `ospd.process-profiles.kindgrove-steps.parse-aoi-steps` — Process profile: parse_aoi
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL CommandLineTool `parse_aoi` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL CommandLineTool `parse_aoi` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.
 
 ### `ospd.process-profiles.kindgrove-steps.reproject-band` — Process profile: reproject_band
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL CommandLineTool `reproject_band` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL CommandLineTool `reproject_band` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.
 
 ### `ospd.process-profiles.kindgrove-steps.select-scene` — Process profile: select_scene
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL CommandLineTool `select_scene` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL CommandLineTool `select_scene` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.
 
 ### `ospd.process-profiles.water-bodies.crop` — Process profile: crop
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL CommandLineTool `crop` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL CommandLineTool `crop` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.
 
 ### `ospd.process-profiles.water-bodies.detect-water-body` — Process profile: detect_water_body
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL Workflow `detect_water_body` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL Workflow `detect_water_body` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.
 
 ### `ospd.process-profiles.water-bodies.norm-diff` — Process profile: norm_diff
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL CommandLineTool `norm_diff` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL CommandLineTool `norm_diff` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.
 
 ### `ospd.process-profiles.water-bodies.otsu` — Process profile: otsu
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL CommandLineTool `otsu` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL CommandLineTool `otsu` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.
 
 ### `ospd.process-profiles.water-bodies.stac` — Process profile: stac
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL CommandLineTool `stac` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL CommandLineTool `stac` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.
 
 ### `ospd.process-profiles.water-bodies.water-bodies` — Process profile: water-bodies
 
 **Type:** schema
 
-OGC API - Processes profile of the CWL Workflow `water-bodies` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.
+OGC API - Processes profile of the CWL Workflow `water-bodies` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.
 

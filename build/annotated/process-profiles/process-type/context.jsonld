@@ -1,34 +1,220 @@
 {
   "@context": {
-    "ProcessType": "skos:Concept",
-    "Plan": "prov:Plan",
-    "id": "@id",
-    "type": "@type",
+    "Register": "rim:Register",
+    "RegisterSystem": "rim:RegisterSystem",
+    "RegisterSpecification": "rim:RegisterSpecification",
+    "RegisterItemClass": "rim:RegisterItemClass",
+    "RegisterItem": "rim:RegisterItem",
+    "RegisterAction": "rim:RegisterAction",
+    "Concept": "rim:Concept",
+    "ConceptVersion": "rim:ConceptVersion",
+    "ConceptSystem": "rim:ConceptSystem",
+    "Commitment": "rim:Commitment",
+    "Agent": "prov:Agent",
+    "Organization": "prov:Organization",
+    "Person": "prov:Person",
+    "label": "rdfs:label",
     "prefLabel": "skos:prefLabel",
     "definition": "skos:definition",
     "inScheme": {
       "@id": "skos:inScheme",
       "@type": "@id"
     },
-    "status": "pp:status",
-    "phase": {
-      "@id": "skos:broader",
+    "runsOn": {
+      "@id": "rim:runsOn",
       "@type": "@id"
     },
-    "profile": "pp:profile",
-    "processDescription": {
+    "hasSpecification": {
+      "@id": "rim:hasSpecification",
+      "@type": "@id"
+    },
+    "definesSubstantiveChange": "rim:definesSubstantiveChange",
+    "registerOwner": {
+      "@id": "rim:registerOwner",
+      "@type": "@id"
+    },
+    "registerManager": {
+      "@id": "rim:registerManager",
+      "@type": "@id"
+    },
+    "controlBody": {
+      "@id": "rim:controlBody",
+      "@type": "@id"
+    },
+    "registerSystemManager": {
+      "@id": "rim:registerSystemManager",
+      "@type": "@id"
+    },
+    "registerUser": {
+      "@id": "rim:registerUser",
+      "@type": "@id"
+    },
+    "hasCommitment": {
+      "@id": "rim:hasCommitment",
+      "@type": "@id"
+    },
+    "commitmentCategory": {
+      "@id": "rim:commitmentCategory",
+      "@type": "@vocab"
+    },
+    "access": "rim:accessCommitment",
+    "persistence": "rim:persistenceCommitment",
+    "transparency": "rim:transparencyCommitment",
+    "definedIn": {
+      "@id": "rim:definedIn",
+      "@type": "@id"
+    },
+    "validatedBy": {
+      "@id": "rim:validatedBy",
+      "@type": "@id"
+    },
+    "versionOf": {
+      "@id": "rim:versionOf",
+      "@type": "@id"
+    },
+    "version": "rim:version",
+    "valid": "rim:valid",
+    "invalid": "rim:invalid",
+    "published": "rim:published",
+    "unpublished": "rim:unpublished",
+    "appliesTo": {
+      "@id": "rim:appliesTo",
+      "@type": "@id"
+    },
+    "proposer": {
+      "@id": "rim:proposer",
+      "@type": "@id"
+    },
+    "actionType": {
+      "@id": "rim:actionType",
+      "@type": "@vocab"
+    },
+    "addition": "rim:additionAction",
+    "publish": "rim:publishAction",
+    "unpublish": "rim:unpublishAction",
+    "invalidation": "rim:invalidationAction",
+    "supersession": "rim:supersessionAction",
+    "redaction": "rim:redactionAction",
+    "deletion": "rim:deletionAction",
+    "changeClassification": {
+      "@id": "rim:changeClassification",
+      "@type": "@vocab"
+    },
+    "substantive": "rim:substantiveChange",
+    "clarifying": "rim:clarifyingChange",
+    "correctional": "rim:correctionalChange",
+    "startedAtTime": {
+      "@id": "prov:startedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "endedAtTime": {
+      "@id": "prov:endedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "wasAssociatedWith": {
+      "@id": "prov:wasAssociatedWith",
+      "@type": "@id"
+    },
+    "id": "@id",
+    "type": "@type",
+    "objectIdentifier": {
+      "@id": "rim:objectIdentifier",
+      "@type": "xsd:anyURI"
+    },
+    "functionalIdentifier": {
+      "@id": "rim:functionalIdentifier",
+      "@type": "xsd:anyURI"
+    },
+    "itemClass": {
+      "@id": "rim:itemClass",
+      "@type": "@id"
+    },
+    "inRegister": {
+      "@id": "rim:inRegister",
+      "@type": "@id"
+    },
+    "realizes": {
+      "@id": "rim:realizes",
+      "@type": "@id"
+    },
+    "validityStatus": {
+      "@id": "rim:validityStatus",
+      "@type": "@vocab"
+    },
+    "publicationStatus": {
+      "@id": "rim:publicationStatus",
+      "@type": "@vocab"
+    },
+    "isRedacted": {
+      "@id": "rim:isRedacted",
+      "@type": "xsd:boolean"
+    },
+    "isDeleted": {
+      "@id": "rim:isDeleted",
+      "@type": "xsd:boolean"
+    },
+    "title": "dct:title",
+    "description": "dct:description",
+    "relatedItem": {
+      "@id": "rim:relatedItem",
+      "@type": "@id"
+    },
+    "supersededBy": {
+      "@id": "rim:supersededBy",
+      "@type": "@id"
+    },
+    "supersedes": {
+      "@id": "rim:supersedes",
+      "@type": "@id"
+    },
+    "hasAction": {
+      "@id": "rim:hasAction",
+      "@type": "@id"
+    },
+    "usedEntityType": {
+      "@id": "rim:activity-type/usedEntityType",
+      "@type": "@id"
+    },
+    "generatedEntityType": {
+      "@id": "rim:activity-type/generatedEntityType",
+      "@type": "@id"
+    },
+    "associatedAgentType": {
+      "@id": "rim:activity-type/associatedAgentType",
+      "@type": "@id"
+    },
+    "informedByActivityType": {
+      "@id": "rim:activity-type/informedByActivityType",
+      "@type": "@id"
+    },
+    "phase": {
+      "@id": "pp:phase",
+      "@type": "@id"
+    },
+    "classification": "@nest",
+    "deployment": {
       "@context": {
-        "version": "pp:version",
-        "href": {
-          "@id": "rdfs:seeAlso",
-          "@type": "@id"
+        "profile": "pp:profile",
+        "processDescription": {
+          "@context": {
+            "version": "pp:version",
+            "href": {
+              "@id": "rdfs:seeAlso",
+              "@type": "@id"
+            },
+            "license": {
+              "@id": "dct:license",
+              "@type": "@id"
+            }
+          },
+          "@id": "pp:processDescription"
         },
-        "license": {
-          "@id": "dct:license",
+        "provenanceClass": {
+          "@id": "pp:provenanceClass",
           "@type": "@id"
         }
       },
-      "@id": "pp:processDescription"
+      "@id": "pp:deployment"
     },
     "plan": {
       "@context": {
@@ -60,9 +246,98 @@
       },
       "@id": "pp:plan"
     },
-    "provenanceClass": {
-      "@id": "pp:provenanceClass",
-      "@type": "@id"
+    "serverSideFiles": {
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "location": "pp:location"
+      },
+      "@id": "pp:serverSideFile"
+    },
+    "byReference": {
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "note": "skos:note"
+      },
+      "@id": "pp:byReference"
+    },
+    "unboundRoles": {
+      "@context": {
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "reason": "skos:note"
+      },
+      "@id": "pp:unboundRole"
+    },
+    "fixedRoleValues": {
+      "@context": {
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "values": "rdf:value",
+        "reason": "skos:note"
+      },
+      "@id": "pp:fixedRoleValue"
+    },
+    "roleDecompositions": {
+      "@context": {
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "parts": {
+          "@id": "pp:part",
+          "@container": "@list"
+        },
+        "note": "skos:note",
+        "selectors": {
+          "@context": {
+            "name": "pp:liveName",
+            "values": "rdf:value"
+          },
+          "@id": "pp:selector"
+        },
+        "reproducible": {
+          "@id": "pp:reproducible",
+          "@type": "xsd:boolean"
+        }
+      },
+      "@id": "pp:roleDecomposition"
+    },
+    "assumedFormatGaps": {
+      "@context": {
+        "name": "pp:liveName",
+        "side": "pp:side",
+        "implements": {
+          "@id": "pp:implements",
+          "@type": "@id"
+        },
+        "served": "pp:servedMediaType",
+        "reason": "skos:note",
+        "evidence": "pp:evidence"
+      },
+      "@id": "pp:assumedFormatGap"
+    },
+    "notAttached": {
+      "@context": {
+        "reason": "skos:note"
+      },
+      "@id": "pp:notAttached"
     },
     "implementsProfile": {
       "@id": "pp:implementsProfile",
@@ -100,12 +375,26 @@
       },
       "@id": "pp:openeoEquivalence"
     },
-    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "correspondences": "@nest",
+    "subClassOf": {
+      "@id": "rdfs:subClassOf",
+      "@type": "@id"
+    },
+    "ProcessType": "pp:ProcessType",
+    "ActivityType": "rim:activity-type/ActivityType",
+    "owlClass": "owl:Class",
+    "Plan": "prov:Plan",
+    "rim": "https://w3id.org/ogc/rim/",
     "prov": "http://www.w3.org/ns/prov#",
-    "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
-    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "dct": "http://purl.org/dc/terms/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "acttype": "rim:activity-type/",
+    "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
     "oa": "http://www.w3.org/ns/oa#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "@version": 1.1
   }
 }

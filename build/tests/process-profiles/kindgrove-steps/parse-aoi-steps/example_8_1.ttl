@@ -1,26 +1,46 @@
+@prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rim: <https://w3id.org/ogc/rim/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps> a skos:Concept ;
-    skos:broader <https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration> ;
-    skos:definition "Splits an OGC bounding box into its west, south, east and north coordinates." ;
-    skos:inScheme pp:process-type ;
-    skos:prefLabel "Parse area of interest" ;
-    skos:relatedMatch <https://www.opengis.net/def/bblocks/ogc.openeo.types.bounding-box> ;
-    pp:openeoEquivalence [ pp:equivalenceLevel "none" ;
-            pp:rationale "Structural helper: unpacks an OGC BBox record into west/south/east/north floats -- no `output_dir` (unlike `kindgrove.parse-aoi`, which this profile parallels but does not replace). No openEO process does this, since openEO passes a bounding box directly." ] ;
-    pp:plan <https://ospd.example.org/ogc-api/processes/parse_aoi/package> ;
-    pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/parse_aoi> ;
-    pp:profile "ospd.process-profiles.kindgrove-steps.parse-aoi-steps" ;
-    pp:provenanceClass wfprov:ProcessRun ;
-    pp:status "submitted" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps/actions/addition> a rim:RegisterAction ;
+    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType rim:additionAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps> ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps/actions/d5-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps/actions/not-attached-2026-11-11> a rim:RegisterAction ;
+    dcterms:description "notAttached added (absent -> {reason}): the entry now states that this CommandLineTool implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md (profiles.yaml tier3.reason). Nothing else changes: the process was not attached before and is not attached now (decision Q1 of 2026-11-11)." ;
+    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps/actions/plan-2026-11-11> a rim:RegisterAction ;
+    dcterms:description "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#parse_aoi). The processDescription is unchanged." ;
+    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/parse_aoi> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/parse_aoi> ;
     pp:version "0.1.0" .
@@ -32,5 +52,31 @@
     pp:cwlId "parse_aoi" ;
     proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
             ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
-            oa:hasTarget <https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#parse_aoi> ] .
+            oa:hasTarget <https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#parse_aoi> ] .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps> a owl:Class,
+        pp:ProcessType,
+        acttype:ActivityType ;
+    rdfs:subClassOf acttype:ActivityType ;
+    skos:definition "Splits an OGC bounding box into its west, south, east and north coordinates." ;
+    skos:inScheme pp:process-type ;
+    skos:prefLabel "Parse area of interest" ;
+    skos:relatedMatch <https://www.opengis.net/def/bblocks/ogc.openeo.types.bounding-box> ;
+    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/parse_aoi> ;
+            pp:profile "ospd.process-profiles.kindgrove-steps.parse-aoi-steps" ;
+            pp:provenanceClass wfprov:ProcessRun ] ;
+    pp:notAttached [ skos:note "Workflow plumbing: splits a bounding box into four numbers for the other steps. Not a geoprocessing operation; no profile is needed." ] ;
+    pp:openeoEquivalence [ pp:equivalenceLevel "none" ;
+            pp:rationale "Structural helper: unpacks an OGC BBox record into west/south/east/north floats -- no `output_dir` (unlike `kindgrove.parse-aoi`, which this profile parallels but does not replace). No openEO process does this, since openEO passes a bounding box directly." ] ;
+    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration> ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/parse_aoi/package> ;
+    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps/actions/addition>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps/actions/d5-2026-11-09>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps/actions/not-attached-2026-11-11>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps/actions/plan-2026-11-11> ;
+    rim:inRegister pp:register ;
+    rim:itemClass acttype:activityTypeItemClass ;
+    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps"^^xsd:anyURI ;
+    rim:publicationStatus rim:published ;
+    rim:validityStatus rim:invalid .
 

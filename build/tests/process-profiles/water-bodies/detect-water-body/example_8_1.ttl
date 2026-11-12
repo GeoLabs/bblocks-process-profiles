@@ -1,20 +1,63 @@
+@prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rim: <https://w3id.org/ogc/rim/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body> a skos:Concept ;
-    skos:broader <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body/actions/addition> a rim:RegisterAction ;
+    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType rim:additionAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body> ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body/actions/d5-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body/actions/plan-2026-11-11> a rim:RegisterAction ;
+    dcterms:description "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/detect_water_body.cwl). The 72a76ae CWL declares the format of its Files, so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the output detected_water_body." ;
+    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process/detect_water_body> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/detect_water_body> ;
+    pp:version "1.4.1" .
+
+<https://ospd.example.org/ogc-api/processes/detect_water_body/package> a prov:Plan ;
+    dcterms:license <https://spdx.org/licenses/CC-BY-SA-4.0> ;
+    pp:candidateCctDependency "eoap.cct.bbox",
+        "eoap.cct.string-format" ;
+    pp:cwlClass "Workflow" ;
+    pp:cwlId "detect_water_body" ;
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/detect_water_body.cwl> ] .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body> a owl:Class,
+        pp:ProcessType,
+        acttype:ActivityType ;
+    rdfs:subClassOf acttype:ActivityType ;
     skos:definition "Water body detection based on NDWI and otsu threshold" ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Water body detection based on NDWI and otsu threshold" ;
+    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/detect_water_body> ;
+            pp:profile "ospd.process-profiles.water-bodies.detect-water-body" ;
+            pp:provenanceClass wfprov:WorkflowRun ] ;
     pp:hasStep <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop>,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff>,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/otsu> ;
@@ -28,22 +71,15 @@
                         pp:stage "node_otsu" ] ) ;
             pp:equivalenceLevel "none" ;
             pp:rationale "Composite (3 steps: band crop scattered over 2 bands, NDWI, Otsu threshold). In openEO this is one load_collection with band selection followed by a short process graph." ] ;
+    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
     pp:plan <https://ospd.example.org/ogc-api/processes/detect_water_body/package> ;
-    pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/detect_water_body> ;
-    pp:profile "ospd.process-profiles.water-bodies.detect-water-body" ;
-    pp:provenanceClass wfprov:WorkflowRun ;
-    pp:status "submitted" .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process/detect_water_body> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/detect_water_body> ;
-    pp:version "1.4.1" .
-
-<https://ospd.example.org/ogc-api/processes/detect_water_body/package> a prov:Plan ;
-    dcterms:license <https://spdx.org/licenses/CC-BY-SA-4.0> ;
-    pp:candidateCctDependency "eoap.cct.bbox",
-        "eoap.cct.string-format" ;
-    pp:cwlClass "Workflow" ;
-    pp:cwlId "detect_water_body" ;
-    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
-            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
-            oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/detect_water_body.cwl> ] .
+    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body/actions/addition>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body/actions/d5-2026-11-09>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body/actions/plan-2026-11-11> ;
+    rim:inRegister pp:register ;
+    rim:itemClass acttype:activityTypeItemClass ;
+    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body"^^xsd:anyURI ;
+    rim:publicationStatus rim:published ;
+    rim:validityStatus rim:invalid .
 

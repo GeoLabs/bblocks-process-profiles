@@ -1,0 +1,147 @@
+@prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rim: <https://w3id.org/ogc/rim/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+pp:ProcessType a owl:Class ;
+    rdfs:label "OSPD process type" ;
+    rdfs:isDefinedBy pp: ;
+    rdfs:subClassOf skos:Concept,
+        acttype:ActivityType .
+
+pp:amendmentAction a skos:Concept,
+        rim:RegisterActionType ;
+    rdfs:isDefinedBy pp: ;
+    skos:definition "An in-place change to a proposal, an item with no control-body decision recorded. Always classified, clarifying or substantive."@en ;
+    skos:prefLabel "amendment"@en .
+
+pp:assumedFormatGap a owl:ObjectProperty ;
+    rdfs:label "assumed format gap" ;
+    rdfs:comment "A bound input or output whose Implementation Profile representation the deployment does not serve, accepted with its reason (skos:note) and evidence (pp:evidence)." ;
+    rdfs:isDefinedBy pp: .
+
+pp:deployment a owl:ObjectProperty ;
+    rdfs:label "deployment" ;
+    rdfs:comment "What is deployed for a process type: its process profile block (pp:profile), the processDescription it is profiled from (pp:processDescription) and the class of its run records (pp:provenanceClass). Not part of the meaning of the type." ;
+    rdfs:isDefinedBy pp: .
+
+pp:implementsProfile a owl:ObjectProperty ;
+    rdfs:label "implements profile" ;
+    rdfs:comment "The Implementation Profile of bblocks-generic-profiles (tier 3) that the deployed process implements: the canonical tier-4 to tier-3 link. Its declaration as a sub-property of rim:relatedItem waits for decision D8." ;
+    rdfs:isDefinedBy pp: .
+
+pp:notAttached a owl:ObjectProperty ;
+    rdfs:label "not attached" ;
+    rdfs:comment "States that a CWL CommandLineTool implements no Implementation Profile of bblocks-generic-profiles, with the reason (skos:note); exclusive of pp:implementsProfile, and absent from a Workflow (decision Q1, 2026-11-11)." ;
+    rdfs:isDefinedBy pp: .
+
+pp:phase a owl:ObjectProperty ;
+    rdfs:label "phase" ;
+    rdfs:comment "Classification of a process type: its position in the six-phase workflow framework. Not a broader concept of the type (until 2026-11-09 it was skos:broader), and not derived from the Process Concepts of bblocks-generic-profiles, which classify operations by kind of data: the two axes are independent." ;
+    rdfs:isDefinedBy pp: ;
+    rdfs:range skos:Concept .
+
+pp:plan a owl:ObjectProperty ;
+    rdfs:label "plan" ;
+    rdfs:comment "The prov:Plan an activity of a CWL-sourced process type executes: its OGC Application Package. Not part of the meaning of the type; acttype:plan, the steps an activity type requires, is a different property (decision D8, pending)." ;
+    rdfs:isDefinedBy pp: ;
+    rdfs:range prov:Plan .
+
+pp:process-type a skos:ConceptScheme,
+        rim:ConceptSystem ;
+    dct:description "Process types that classify the deployable CWL activities recorded in provenance."@en ;
+    dct:title "OSPD process types"@en ;
+    skos:prefLabel "OSPD process types"@en ;
+    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type"^^xsd:anyURI .
+
+pp:register a rim:Register ;
+    dct:description "Register of deployable OSPD process profiles and their process types."@en ;
+    dct:title "OSPD Process Profiles"@en ;
+    rim:controlBody pp:geolabs ;
+    rim:functionalIdentifier "https://geolabs.github.io/bblocks-process-profiles/"^^xsd:anyURI ;
+    rim:hasSpecification pp:specification ;
+    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/register"^^xsd:anyURI ;
+    rim:registerManager pp:geolabs ;
+    rim:registerOwner pp:geolabs ;
+    rim:runsOn pp:registerSystem .
+
+pp:roleDecomposition a owl:ObjectProperty ;
+    rdfs:label "role decomposition" ;
+    rdfs:comment "An Implementation Profile role (pp:implements) that the deployment takes as several inputs or outputs (pp:part, in order), none of which carries the role's representation." ;
+    rdfs:isDefinedBy pp: .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval> a skos:Concept ;
+    skos:inScheme pp:six-phases ;
+    skos:prefLabel "Data retrieval"@en ;
+    skos:topConceptOf pp:six-phases .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation> a skos:Concept ;
+    skos:inScheme pp:six-phases ;
+    skos:prefLabel "Export / aggregation"@en ;
+    skos:topConceptOf pp:six-phases .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration> a skos:Concept ;
+    skos:inScheme pp:six-phases ;
+    skos:prefLabel "Filter configuration"@en ;
+    skos:topConceptOf pp:six-phases .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing> a skos:Concept ;
+    skos:inScheme pp:six-phases ;
+    skos:prefLabel "Pre-processing"@en ;
+    skos:topConceptOf pp:six-phases .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> a skos:Concept ;
+    skos:inScheme pp:six-phases ;
+    skos:prefLabel "Scientific computation"@en ;
+    skos:topConceptOf pp:six-phases .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering> a skos:Concept ;
+    skos:inScheme pp:six-phases ;
+    skos:prefLabel "Selection / filtering"@en ;
+    skos:topConceptOf pp:six-phases .
+
+pp:registerSystem a rim:RegisterSystem ;
+    rdfs:label "OGC Building Blocks register (bblocks-postprocess, GitHub Pages)" ;
+    rdfs:seeAlso <https://github.com/GeoLabs/bblocks-process-profiles/> .
+
+pp:specification a rim:RegisterSpecification ;
+    dct:description "Amendment. pp:amendmentAction is the action type of an in-place change to a proposal, an item with no control-body decision recorded. Such an action is always classified, clarifying or substantive: it is the classified rim:RegisterAction of the rule for proposals. This type is specific to this register and will be replaced if the Registered Item Model defines one."@en,
+        "Commitments. No commitment to register users has been set."@en,
+        "Eligibility. Process type: one deployed process, its meaning (label, definition, parent class: acttype:ActivityType, or the activity type of its operation with the same GeoSPARQL entity types when it implements an Implementation Profile), its six-phase classification, its deployment, its plan for a CWL process, and its proposed openEO correspondences. GeoLabs is the only proposer recorded so far; no criteria for other proposers have been set."@en,
+        "Identifiers. The object identifier of a process type is its IRI, https://geolabs.github.io/bblocks-process-profiles/def/process-type/<group>/<name>. These IRIs are provisional, pending a decision on the namespace of the process-type register. An object identifier never redirects; only a functional identifier may. The identifier of a published item changes only by an explicit decision."@en,
+        "Proposals. While an item is a proposal, with no control-body decision recorded, it is amended in place, with a classified `rim:RegisterAction`. The substantive rule applies once it has been accepted."@en,
+        "Register type. A content register, as the Registered Item Model uses the term: items carry their own name and definition, and there is no concept plane."@en,
+        "Roles. GeoLabs SARL is the register owner, the register manager and, for now, the control body. GeoLabs intends to delegate the control body role to the OGC or to an OSPD working group."@en,
+        "Scope. This register holds the Implementation (instance level) of OGC 14-065 WPS 2.0.2 §7.5: one process profile and one process type per deployed process, in two populations, the CWL processes of the OSPD reference workflows and the live processes of the Geonovum testbed. The process types are its register items (pp:ProcessType, of the item class of the Activity Type Register). The tiers above, Process Concepts, Generic and Implementation Profiles and the activity types of operations, are items of bblocks-generic-profiles, not of this register."@en,
+        "Versions. An addition is an action of type addition, with no classification. A substantive change creates a new item or a new version, linked by rim:supersededBy, with an action classified substantive. A clarifying change keeps the item and its version, with an action classified clarifying. This version rule is specific to the registers of this project and does not come from ISO 19135. The classification correctional is not available. An item is retired by unpublishing it, not by deleting it."@en,
+        "What is substantive here (validated 2026-11-10, extended 2026-11-11). Substantive: the parent class (subClassOf) or an entity type changed; the Implementation Profile implemented (implementsProfile) added, removed or changed; a binding declaration (serverSideFiles, roleDecompositions, assumedFormatGaps, byReference, unboundRoles, fixedRoleValues) added, removed or changed; the processDescription or the plan that is deployed changed; the six-phase classification changed, or the form in which a part of the entry is stated. Clarifying: the label, a reworded definition with the same meaning, the openEO correspondences and their rationale, notes and descriptions; the statement that a process is not attached (notAttached) added, removed or changed."@en ;
+    dct:title "OSPD Process Profiles register specification"@en ;
+    rim:definesSubstantiveChange "A change is substantive when a register user may have to change their data, profiles or processes because of it, or when it changes what an item means. Any other change to an existing item is clarifying." .
+
+pp:geolabs a prov:Organization ;
+    rdfs:label "GeoLabs SARL" ;
+    rdfs:seeAlso <https://www.geolabs.fr/> .
+
+pp: a owl:Ontology ;
+    dct:creator "GeoLabs SARL" ;
+    dct:description "Profiles the Registered Item Model ActivityType for deployable OSPD CWL process types. Each process-type record is a governed ActivityType item and an OWL class used as rdf:type on its PROV activity records." ;
+    dct:title "OSPD process-type register profile" ;
+    owl:imports rim:,
+        acttype: .
+
+pp:six-phases a skos:ConceptScheme ;
+    dct:description "Positions of a process in an Earth observation workflow, from filter configuration to export, used to classify the OSPD process types (pp:phase). Provisional IRIs, as the rest of the pp: vocabulary."@en ;
+    rdfs:isDefinedBy pp: ;
+    skos:hasTopConcept <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering> ;
+    skos:prefLabel "Six-phase workflow framework"@en .
+

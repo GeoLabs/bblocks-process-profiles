@@ -1,39 +1,14 @@
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff",
-  "type": "ProcessType",
-  "prefLabel": "Normalized difference between two rasters",
-  "definition": "Computes the normalized difference index ((A-B)/(A+B)) of two co-registered rasters.",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+  "id": "urn:example:run:water-bodies:norm-diff",
+  "type": "ProcessRun",
+  "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff",
+  "describedByProcess": "https://ospd.example.org/ogc-api/processes/norm_diff/package",
+  "usedInput": [
+    {
+      "id": "urn:example:entity:norm-diff:in:rasters"
+    }
   ],
-  "profile": "ospd.process-profiles.water-bodies.norm-diff",
-  "processDescription": {
-    "id": "norm_diff",
-    "version": "1.4.1",
-    "href": "https://ospd.example.org/ogc-api/processes/norm_diff"
-  },
-  "plan": {
-    "id": "https://ospd.example.org/ogc-api/processes/norm_diff/package",
-    "type": "Plan",
-    "executionUnit": {
-      "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/norm_diff.cwl",
-      "type": "application/cwl+yaml",
-      "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
-    },
-    "cwlClass": "CommandLineTool",
-    "cwlId": "norm_diff",
-    "license": "https://spdx.org/licenses/CC-BY-SA-4.0",
-    "cctDependencies": [],
-    "candidateCctDependencies": []
-  },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.math.indices.normalized_difference"
-  ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "Exact index formula, generic over which two bands are passed: NDWI (green, nir) in this workflow, same as `ogc.openeo.processes.math.indices.normalized_difference` used for NDVI elsewhere in this register (`kindgrove.mangrove`) -- it is the caller's band choice, not the tool, that names the index."
-  }
+  "startedAtTime": "2026-09-23T20:14:14Z",
+  "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
+  "wasPartOfWorkflowRun": "urn:example:run:water-bodies:detect-water-body"
 }

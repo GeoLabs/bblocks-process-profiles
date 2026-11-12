@@ -26,8 +26,7 @@
     "vector",
     "geometry",
     "predicate",
-    "IsSimple",
-    "ST_IsSimple"
+    "IsSimple"
   ],
   "metadata": [
     {
@@ -50,9 +49,9 @@
     "InputPolygon": {
       "title": "the first geometry",
       "description": "the first geometry to compare against.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -88,6 +87,7 @@
     "Result": {
       "title": "IsSimple result",
       "description": "The boolean result",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/boolean",
       "keywords": [
         "boolean"
       ],

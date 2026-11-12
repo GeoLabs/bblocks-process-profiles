@@ -1,16 +1,14 @@
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/water-bodies/norm-diff/context.jsonld",
-  "inputs": {
-    "rasters": [
-      {
-        "href": "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_green.tif",
-        "type": "image/tiff; application=geotiff"
-      },
-      {
-        "href": "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_nir.tif",
-        "type": "image/tiff; application=geotiff"
-      }
-    ]
+  "processDescription": {
+    "process": {
+      "id": "norm_diff",
+      "version": "1.4.1"
+    }
   },
-  "response": "document"
+  "executionUnit": {
+    "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/norm_diff.cwl",
+    "type": "application/cwl+yaml",
+    "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+  }
 }

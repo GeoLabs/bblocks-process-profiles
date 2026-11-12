@@ -47,16 +47,15 @@
     "geometry",
     "spatial analysis",
     "set operation",
-    "Difference",
-    "ST_Difference"
+    "Difference"
   ],
   "inputs": {
     "InputEntity1": {
       "title": "the first geometry",
       "description": "the first geometry to compare against.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -93,9 +92,9 @@
     "InputEntity2": {
       "title": "the other geometry",
       "description": "the other geometry to compare against.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -134,9 +133,9 @@
     "Result": {
       "title": "The difference between two geometries",
       "description": "The difference between the two geometries.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {

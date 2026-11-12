@@ -27,8 +27,7 @@
     "elevation",
     "raster",
     "derivative",
-    "TRI",
-    "ta_morphometry"
+    "TRI"
   ],
   "metadata": [
     {
@@ -51,9 +50,9 @@
     "DEM": {
       "title": "Elevation",
       "description": "Elevation",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model",
       "keywords": [
-        "elevation",
-        "GeoTIFF"
+        "elevation"
       ],
       "metadata": [
         {
@@ -173,9 +172,9 @@
     "TRI": {
       "title": "Terrain Ruggedness Index (TRI)",
       "description": "Terrain Ruggedness Index (TRI)",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

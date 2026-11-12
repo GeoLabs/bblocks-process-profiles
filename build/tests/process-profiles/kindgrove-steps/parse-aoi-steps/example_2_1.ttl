@@ -1,7 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -17,7 +17,7 @@
         "stac" ;
     dcterms:title "Parse area of interest" ;
     pp:version "0.1.0" ;
-    proc:inputs [ ns1:aoi [ dcterms:description "Area of interest defined as a bounding box" ;
+    proc:inputs [ ns3:aoi [ dcterms:description "Area of interest defined as a bounding box" ;
                     dcterms:title "Area of interest" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
@@ -36,29 +36,29 @@
                                             proc:type "string" ] ] ;
                             ns2:required "bbox" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "Parse area of interest" ;
-            proc:role schema:name ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+    proc:metadata [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
             proc:role schema:license ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
+        [ rdf:value "Parse area of interest" ;
+            proc:role schema:name ],
         [ rdf:value "0.1.0" ;
             proc:role schema:softwareVersion ],
         [ rdf:value "Splits an OGC bounding box into its west, south, east and north coordinates." ;
-            proc:role schema:description ] ;
+            proc:role schema:description ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:east [ dcterms:description "" ;
+    proc:outputs [ ns1:east [ dcterms:description "" ;
                     dcterms:title "east" ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns3:north [ dcterms:description "" ;
+            ns1:north [ dcterms:description "" ;
                     dcterms:title "north" ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns3:south [ dcterms:description "" ;
+            ns1:south [ dcterms:description "" ;
                     dcterms:title "south" ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns3:west [ dcterms:description "" ;
+            ns1:west [ dcterms:description "" ;
                     dcterms:title "west" ;
                     proc:schema [ proc:type "number" ] ] ] .
 

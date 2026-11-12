@@ -1,6 +1,11 @@
 {
-  "stac_item": {
-    "href": "https://ospd.example.org/ogc-api/jobs/kindgrove-steps-select-scene-0001/results/scene_item.json",
-    "type": "application/json"
-  }
+  "inputs": {
+    "west": 95.15,
+    "south": 15.9,
+    "east": 95.35,
+    "north": 16.1,
+    "cloud_cover_max": 20,
+    "days_back": 90
+  },
+  "response": "document"
 }

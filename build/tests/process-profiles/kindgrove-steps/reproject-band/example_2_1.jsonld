@@ -55,7 +55,8 @@
       "description": "",
       "schema": {
         "type": "string",
-        "contentMediaType": "application/octet-stream"
+        "contentMediaType": "image/tiff; application=geotiff",
+        "contentEncoding": "binary"
       },
       "minOccurs": 1,
       "maxOccurs": 1
@@ -123,7 +124,8 @@
       "description": "",
       "schema": {
         "type": "string",
-        "contentMediaType": "application/octet-stream"
+        "contentMediaType": "image/tiff; application=geotiff",
+        "contentEncoding": "binary"
       }
     }
   },

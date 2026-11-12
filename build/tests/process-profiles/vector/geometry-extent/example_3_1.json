@@ -25,8 +25,7 @@
     "vector",
     "geometry",
     "derived geometry",
-    "Envelope",
-    "SAGA GIS"
+    "Envelope"
   ],
   "metadata": [
     {
@@ -49,9 +48,9 @@
     "SHAPES": {
       "title": "Shapes",
       "description": "Shapes",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -103,9 +102,9 @@
     "EXTENTS": {
       "title": "Extents",
       "description": "Extents",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/surface",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {

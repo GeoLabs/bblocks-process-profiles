@@ -1,15 +1,73 @@
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/water-bodies/otsu/context.jsonld",
-  "id": "urn:example:run:water-bodies:otsu",
-  "type": "ProcessRun",
-  "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/otsu",
-  "describedByProcess": "https://ospd.example.org/ogc-api/processes/otsu/package",
-  "usedInput": [
+  "@graph": [
     {
-      "id": "urn:example:entity:otsu:in:raster"
+      "id": "urn:example:run:water-bodies:otsu",
+      "provType": "prov:Activity",
+      "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/otsu",
+      "startedAtTime": "2026-09-23T20:14:35Z",
+      "used": [
+        "urn:example:entity:otsu:in:raster"
+      ],
+      "wasAssociatedWith": [
+        "urn:example:engine:cwltool-3.1.20260108082145",
+        "urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0"
+      ],
+      "qualifiedAssociation": [
+        {
+          "agent": "urn:example:engine:cwltool-3.1.20260108082145",
+          "hadPlan": "https://ospd.example.org/ogc-api/processes/otsu/package"
+        }
+      ],
+      "endedAtTime": "2026-09-23T20:14:43Z"
+    },
+    {
+      "id": "urn:example:entity:otsu:in:raster",
+      "provType": "prov:Entity",
+      "entityType": "https://ospd.example.org/ogc-api/processes/otsu#inputs/raster",
+      "links": [
+        {
+          "href": "https://ospd.example.org/ogc-api/jobs/upstream-step/results/norm_diff.tif",
+          "rel": "item",
+          "type": "image/tiff; application=geotiff"
+        }
+      ]
+    },
+    {
+      "id": "urn:example:entity:otsu:out:binary_mask_item",
+      "provType": "prov:Entity",
+      "entityType": "https://ospd.example.org/ogc-api/processes/otsu#outputs/binary_mask_item",
+      "wasGeneratedBy": "urn:example:run:water-bodies:otsu",
+      "wasDerivedFrom": [
+        "urn:example:entity:otsu:in:raster"
+      ],
+      "links": [
+        {
+          "href": "https://ospd.example.org/ogc-api/jobs/water-bodies-otsu-0001/results/otsu.tif",
+          "rel": "item",
+          "type": "image/tiff; application=geotiff"
+        }
+      ],
+      "wasAttributedTo": "urn:example:engine:cwltool-3.1.20260108082145"
+    },
+    {
+      "id": "urn:example:engine:cwltool-3.1.20260108082145",
+      "provType": "prov:SoftwareAgent",
+      "name": "cwltool 3.1.20260108082145"
+    },
+    {
+      "id": "urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0",
+      "provType": "prov:SoftwareAgent",
+      "name": "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0"
+    },
+    {
+      "id": "https://ospd.example.org/ogc-api/processes/otsu/package",
+      "provType": "prov:Plan"
+    },
+    {
+      "id": "arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu",
+      "provType": "prov:Plan",
+      "specializationOf": "https://ospd.example.org/ogc-api/processes/otsu/package"
     }
-  ],
-  "startedAtTime": "2026-09-23T20:14:35Z",
-  "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
-  "wasPartOfWorkflowRun": "urn:example:run:water-bodies:detect-water-body"
+  ]
 }

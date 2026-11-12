@@ -1,14 +1,13 @@
 {
-  "inputs": {
-    "stac_item": {
-      "href": "https://ospd.example.org/ogc-api/jobs/upstream-step/results/scene_item.json",
-      "type": "application/geo+json"
-    },
-    "band": "red",
-    "west": 95.15,
-    "south": 15.9,
-    "east": 95.35,
-    "north": 16.1
+  "processDescription": {
+    "process": {
+      "id": "download_band",
+      "version": "0.1.0"
+    }
   },
-  "response": "document"
+  "executionUnit": {
+    "href": "https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#download_band",
+    "type": "application/cwl+yaml",
+    "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+  }
 }

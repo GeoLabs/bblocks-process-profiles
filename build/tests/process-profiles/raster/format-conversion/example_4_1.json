@@ -1,26 +1,97 @@
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "hasAction": [
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion/actions/addition",
+      "type": "RegisterAction",
+      "actionType": "addition",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-09-22T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion/actions/d5-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion/actions/server-side-files-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "serverSideFiles added: the raster input and output are names of files stored on the server (ZOO-Kernel dataPath), with no media type, each naming the Implementation Profile role it implements.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion/actions/specialisation-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-format-conversion, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion"
+    }
+  ],
   "prefLabel": "Convert raster data from one format to another.",
   "definition": "http://www.gdal.org/gdal_translate.html",
+  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-format-conversion",
+  "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
+  "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
-  ],
-  "profile": "ospd.process-profiles.raster.format-conversion",
-  "processDescription": {
-    "id": "Gdal_Translate",
-    "version": "1.0.0",
-    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+    ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "deployment": {
+    "profile": "ospd.process-profiles.raster.format-conversion",
+    "processDescription": {
+      "id": "Gdal_Translate",
+      "version": "1.0.0",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
+  },
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion",
-  "closeMatch": [
-    "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.save_result"
+  "serverSideFiles": [
+    {
+      "name": "InputDSN",
+      "side": "inputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/inputs/raster",
+      "location": "A file name, relative to the directory set by `dataPath` in the `[main]` section of the ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process reads or writes it there. Its format is the representation of the Implementation Profile role it implements (GeoTIFF for raster)."
+    },
+    {
+      "name": "Result",
+      "side": "outputs",
+      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/outputs/raster",
+      "location": "A file name, relative to the directory set by `dataPath` in the `[main]` section of the ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process reads or writes it there. Its format is the representation of the Implementation Profile role it implements (GeoTIFF for raster)."
+    }
   ],
-  "openeoEquivalence": {
-    "level": "closeMatch",
-    "rationale": "Gdal_Translate re-encodes a raster into another format (`Format`) without changing its content -- the same role save_result's `format` parameter plays when terminating an openEO process graph. Not exactMatch: save_result is a cube-terminal process (no further chaining downstream), while Gdal_Translate is an ordinary mid-pipeline step; `GCP` (ground control point) handling has no openEO equivalent either."
+  "correspondences": {
+    "closeMatch": [
+      "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.save_result"
+    ],
+    "openeoEquivalence": {
+      "level": "closeMatch",
+      "rationale": "Gdal_Translate re-encodes a raster into another format (`Format`) without changing its content -- the same role save_result's `format` parameter plays when terminating an openEO process graph. Not exactMatch: save_result is a cube-terminal process (no further chaining downstream), while Gdal_Translate is an ordinary mid-pipeline step; `GCP` (ground control point) handling has no openEO equivalent either."
+    }
   }
 }

@@ -1,0 +1,374 @@
+{
+  "metaRegistry": "https://w3id.org/ogc/bblocks/meta-register.json",
+  "name": "Registered Item Model",
+  "abstract": "A base RDF and SHACL model for register items, register item classes and register\ngovernance metadata, aligned with ISO 19135:2026 (*Geographic information \u2014 Registration\nand register governance*). Sub-registers profile this model rather than inventing their own.\n",
+  "description": "A register is a catalogue with systematic governance: a content information model\n(what an item looks like) plus management metadata (who governs it, what state it is\nin, how it changes). ISO 19135:2026 defines one such register model \u2014 separating a\n**concept plane** (meaning: concepts and concept versions) from a **content plane**\n(representation: register item classes and register items) and adding a governance\nlayer of roles, statuses, actions and commitments.\n\nThis repository publishes that model as a single base [OGC Building\nBlock](https://ogcincubator.github.io/bblocks-docs/), independent of any one register's\nown content schema. Any register \u2014 a CSV catalogue, the OGC Definitions Server, a\nGitHub-managed vocabulary, or a Building Blocks register itself \u2014 maps its own\nschema's identifiers, statuses and roles onto this base model via a JSON-LD context,\nso that management metadata from otherwise unrelated registers becomes one queryable\ngraph. A sub-register's rules are expressed as a profile of this base block (null,\nadditive, or constrained), always validating against it.\n\nRegister vs. registry: the **register** is the governed information (items,\nidentifiers, statuses, roles, processes); the **register system** \u2014 often loosely\ncalled the \"registry\" \u2014 is merely the information system it happens to run on. This\nmodel describes the former, independent of the latter.\n",
+  "modified": "2026-10-31T04:32:53.906666",
+  "tooling": {
+    "bblocks-postprocess": {
+      "commitId": "\"862052921203373f8136e6f464e0dfdd693e79f5",
+      "shortCommitId": "\"862052",
+      "date": "2026-10-26T21:53:11+00:00\""
+    }
+  },
+  "gitRepository": "https://github.com/ogcincubator/registered-item-model",
+  "gitHubRepository": "https://github.com/ogcincubator/registered-item-model/blob/master/",
+  "baseURL": "https://ogcincubator.github.io/registered-item-model/",
+  "viewerURL": "https://ogcincubator.github.io/registered-item-model/",
+  "validationReport": "https://ogcincubator.github.io/registered-item-model/build/tests/report.html",
+  "validationReportJson": "https://ogcincubator.github.io/registered-item-model/build/tests/report.json",
+  "imports": [
+    "https://opengeospatial.github.io/bblocks/register.json",
+    "https://ogcincubator.github.io/cross-domain-model/build/register.json",
+    "https://ogcincubator.github.io/bblocks-stac/build/register.json"
+  ],
+  "bblocks": [
+    {
+      "itemIdentifier": "ogc.rim.core-ontology",
+      "name": "Registered Item Model",
+      "highlighted": true,
+      "group": "Core Model",
+      "title": "Base RDF/OWL and SHACL model for register items and register governance",
+      "abstract": "A base RDF and SHACL model for register items, register item classes and register governance metadata, based on ISO 19135:2026.",
+      "description": "A register is a catalogue distinguished from a plain dataset by systematic governance: a content information model (register item classes and register items) plus management metadata (identifiers, statuses, actions, roles). ISO 19135:2026 defines one such model, separating a concept plane (meaning) from a content plane (representation) and adding roles, statuses, actions, relations and commitments on top. This block publishes that model as a single base building block so that many registers with different native schemas \u2014 a CSV catalogue, the OGC Definitions Server, a GitHub-managed vocabulary, or a Building Blocks register itself \u2014 can each map their own fields onto it via a JSON-LD context, and be queried as one graph. Sub-registers are expected to profile this block (null, additive or constrained) rather than invent their own register model.",
+      "status": "under-development",
+      "version": "0.1",
+      "itemClass": "model",
+      "shaclShapes": {
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "sources": [
+        {
+          "title": "ISO 19135:2026, Geographic information \u2014 Registration and register governance",
+          "link": "https://www.iso.org/standard/86261.html"
+        },
+        {
+          "title": "Registers and register governance for federated semantic resources (companion analysis)",
+          "link": "https://github.com/ogcincubator/bblocks-docs/blob/master/design/register-governance.md"
+        }
+      ],
+      "tags": [
+        "register",
+        "governance",
+        "ISO 19135",
+        "metadata"
+      ],
+      "dateTimeAddition": "2026-09-17T00:00:00Z",
+      "dateOfLastChange": "2026-10-31",
+      "ontology": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/core-ontology/ontology.ttl",
+      "sourceFiles": "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/ogcincubator/registered-item-model/blob/master/build/tests/rim/core-ontology/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/markdown/rim/core-ontology/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/json-full/rim/core-ontology/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://ogcincubator.github.io/registered-item-model/bblock/ogc.rim.core-ontology"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "ogc.rim.schemas.concept-version",
+      "name": "Concept Version",
+      "abstract": "Modular RDF implementation profile based on ISO/FDIS 19135:2026.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-25T00:00:00Z",
+      "dateOfLastChange": "2026-10-31",
+      "itemClass": "schema",
+      "version": "0.2",
+      "dependsOn": [
+        "bblocks://ogc.rim.core-ontology"
+      ],
+      "shaclShapes": {
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "ldContext": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/concept-version/context.jsonld",
+      "schema": {
+        "application/yaml": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/concept-version/schema.yaml",
+        "application/json": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/concept-version/schema.json"
+      },
+      "sourceSchema": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/concept-version/schema.yaml",
+      "sourceLdContext": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/concept-version/context.jsonld",
+      "resolvedSchemaProperties": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/concept-version/resolvedProperties.json",
+      "sourceFiles": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/concept-version/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/ogcincubator/registered-item-model/blob/master/build/tests/rim/schemas/concept-version/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/markdown/rim/schemas/concept-version/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/json-full/rim/schemas/concept-version/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://ogcincubator.github.io/registered-item-model/bblock/ogc.rim.schemas.concept-version"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "ogc.rim.schemas.register",
+      "name": "Register",
+      "highlighted": false,
+      "group": "Core Model",
+      "abstract": "A REGISTER description model with JSON/LD/RDF implementation as defined by ISO/FDIS 19135:2026. Modular Building Block to support interoperable profiles of register",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-25T00:00:00Z",
+      "dateOfLastChange": "2026-10-31",
+      "itemClass": "schema",
+      "version": "0.2",
+      "dependsOn": [
+        "bblocks://ogc.rim.core-ontology"
+      ],
+      "shaclShapes": {
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "ldContext": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register/context.jsonld",
+      "schema": {
+        "application/yaml": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register/schema.yaml",
+        "application/json": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register/schema.json"
+      },
+      "sourceSchema": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register/schema.yaml",
+      "sourceLdContext": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register/context.jsonld",
+      "resolvedSchemaProperties": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register/resolvedProperties.json",
+      "sourceFiles": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/ogcincubator/registered-item-model/blob/master/build/tests/rim/schemas/register/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/markdown/rim/schemas/register/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/json-full/rim/schemas/register/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://ogcincubator.github.io/registered-item-model/bblock/ogc.rim.schemas.register"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "ogc.rim.schemas.register-item-class",
+      "name": "Register Item Class",
+      "highlighted": true,
+      "group": "Core Model",
+      "abstract": "A REGISTER ITEM CLASS model with JSON/LD/RDF implementation as defined by ISO/FDIS 19135:2026. (describes the type of object in a register) Modular Building Block to support interoperable profiles of register",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-25T00:00:00Z",
+      "dateOfLastChange": "2026-10-31",
+      "itemClass": "schema",
+      "version": "0.2",
+      "dependsOn": [
+        "bblocks://ogc.rim.schemas.concept-version",
+        "bblocks://ogc.rim.schemas.register"
+      ],
+      "shaclShapes": {
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "ldContext": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-item-class/context.jsonld",
+      "schema": {
+        "application/yaml": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-item-class/schema.yaml",
+        "application/json": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-item-class/schema.json"
+      },
+      "sourceSchema": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register-item-class/schema.yaml",
+      "sourceLdContext": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register-item-class/context.jsonld",
+      "resolvedSchemaProperties": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-item-class/resolvedProperties.json",
+      "sourceFiles": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register-item-class/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/ogcincubator/registered-item-model/blob/master/build/tests/rim/schemas/register-item-class/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/markdown/rim/schemas/register-item-class/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/json-full/rim/schemas/register-item-class/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://ogcincubator.github.io/registered-item-model/bblock/ogc.rim.schemas.register-item-class"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "ogc.rim.schemas.register-specification",
+      "name": "Register Specification",
+      "abstract": "Modular RDF implementation profile based on ISO/FDIS 19135:2026.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-25T00:00:00Z",
+      "dateOfLastChange": "2026-10-31",
+      "itemClass": "schema",
+      "version": "0.2",
+      "dependsOn": [
+        "bblocks://ogc.rim.schemas.register"
+      ],
+      "shaclShapes": {
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "ldContext": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-specification/context.jsonld",
+      "schema": {
+        "application/yaml": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-specification/schema.yaml",
+        "application/json": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-specification/schema.json"
+      },
+      "sourceSchema": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register-specification/schema.yaml",
+      "sourceLdContext": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register-specification/context.jsonld",
+      "resolvedSchemaProperties": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-specification/resolvedProperties.json",
+      "sourceFiles": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register-specification/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/ogcincubator/registered-item-model/blob/master/build/tests/rim/schemas/register-specification/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/markdown/rim/schemas/register-specification/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/json-full/rim/schemas/register-specification/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://ogcincubator.github.io/registered-item-model/bblock/ogc.rim.schemas.register-specification"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "ogc.rim.schemas.register-item",
+      "name": "Register Item",
+      "highlighted": true,
+      "group": "Core Model",
+      "abstract": "A REGISTER ITEM model with JSON/LD/RDF implementation as defined by ISO/FDIS 19135:2026. This provides a canonical schema for a register entry, that can be extended according the REGISTER ITEM CLASS defined for the register.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-25T00:00:00Z",
+      "dateOfLastChange": "2026-10-31",
+      "itemClass": "schema",
+      "version": "0.2",
+      "dependsOn": [
+        "bblocks://ogc.rim.schemas.concept-version",
+        "bblocks://ogc.rim.schemas.register",
+        "bblocks://ogc.rim.schemas.register-item-class"
+      ],
+      "shaclShapes": {
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "ldContext": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-item/context.jsonld",
+      "schema": {
+        "application/yaml": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-item/schema.yaml",
+        "application/json": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-item/schema.json"
+      },
+      "sourceSchema": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register-item/schema.yaml",
+      "sourceLdContext": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register-item/context.jsonld",
+      "resolvedSchemaProperties": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-item/resolvedProperties.json",
+      "sourceFiles": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register-item/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/ogcincubator/registered-item-model/blob/master/build/tests/rim/schemas/register-item/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/markdown/rim/schemas/register-item/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/json-full/rim/schemas/register-item/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://ogcincubator.github.io/registered-item-model/bblock/ogc.rim.schemas.register-item"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "ogc.rim.schemas.register-action",
+      "name": "Register Action",
+      "highlighted": false,
+      "group": "Core Model",
+      "abstract": "A REGISTER interaction activity model with JSON/LD/RDF implementation as defined by ISO/FDIS 19135:2026. Modular Building Block to support interoperable profiles of register",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-25T00:00:00Z",
+      "dateOfLastChange": "2026-10-31",
+      "itemClass": "schema",
+      "version": "0.2",
+      "dependsOn": [
+        "bblocks://ogc.model.cross-domain.prov",
+        "bblocks://ogc.rim.schemas.register-item"
+      ],
+      "shaclShapes": {
+        "ogc.model.cross-domain.prov": [
+          "https://ogcincubator.github.io/cross-domain-model/_sources/prov/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "ldContext": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-action/context.jsonld",
+      "schema": {
+        "application/yaml": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-action/schema.yaml",
+        "application/json": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-action/schema.json"
+      },
+      "sourceSchema": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register-action/schema.yaml",
+      "sourceLdContext": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register-action/context.jsonld",
+      "resolvedSchemaProperties": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/schemas/register-action/resolvedProperties.json",
+      "sourceFiles": "https://ogcincubator.github.io/registered-item-model/_sources/schemas/register-action/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/ogcincubator/registered-item-model/blob/master/build/tests/rim/schemas/register-action/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/markdown/rim/schemas/register-action/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/json-full/rim/schemas/register-action/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://ogcincubator.github.io/registered-item-model/bblock/ogc.rim.schemas.register-action"
+        }
+      }
+    }
+  ],
+  "remoteCacheDir": "https://ogcincubator.github.io/registered-item-model/build/annotated/_cache",
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://ogcincubator.github.io/registered-item-model/build/register.json",
+      "type": "application/json",
+      "title": "This Building Blocks Register in JSON format"
+    },
+    {
+      "rel": "self",
+      "href": "https://ogcincubator.github.io/registered-item-model/build/bblocks.ttl",
+      "type": "text/turtle",
+      "title": "This Building Blocks Register in RDF Turtle format"
+    },
+    {
+      "rel": "self",
+      "href": "https://ogcincubator.github.io/registered-item-model/build/bblocks.jsonld",
+      "type": "application/ld+json",
+      "title": "This Building Blocks Register in JSON-LD format"
+    }
+  ]
+}

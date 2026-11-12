@@ -27,8 +27,7 @@
     "geometry",
     "spatial relation",
     "predicate",
-    "Disjoint",
-    "ST_Disjoint"
+    "Disjoint"
   ],
   "metadata": [
     {
@@ -51,9 +50,9 @@
     "InputEntity1": {
       "title": "the first geometry",
       "description": "the first geometry.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -87,9 +86,9 @@
     "InputEntity2": {
       "title": "the other geometry",
       "description": "the other geometry.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -125,6 +124,7 @@
     "Result": {
       "title": "Disjoint result",
       "description": "true if disjoint.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/boolean",
       "keywords": [
         "boolean"
       ],

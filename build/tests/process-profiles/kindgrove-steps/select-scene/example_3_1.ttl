@@ -1,13 +1,115 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://www.iana.org/assignments/> .
-@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns2: <http://schema.org/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns4: <https://w3id.org/ogc/api/schema/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/select_scene> pp:version "0.1.0" .
-
-[] pp:processDescription [ pp:process <https://geolabs.github.io/bblocks-process-profiles/def/process/select_scene> ] ;
-    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
-            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
-            oa:hasTarget <https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc2/mangrove-workflow-steps.cwl#select_scene> ] .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/select_scene> dcterms:description "Process converted from CWL" ;
+    dcterms:subject "catalogue",
+        "mangrove",
+        "ospd",
+        "product",
+        "selection",
+        "sentinel-2",
+        "stac" ;
+    dcterms:title "select_scene" ;
+    pp:version "0.1.0" ;
+    proc:inputs [ ns1:cloud_cover_max [ dcterms:description "" ;
+                    dcterms:title "cloud_cover_max" ;
+                    proc:maxOccurs 1 ;
+                    proc:minOccurs 1 ;
+                    proc:schema [ proc:type "number" ] ] ;
+            ns1:collection [ dcterms:description "" ;
+                    dcterms:title "collection" ;
+                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/collection-identifier> ;
+                    proc:keywords "collection" ;
+                    proc:maxOccurs 1 ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Product selection -- input `collection`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection/inputs/collection> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Product selection -- input `collection`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/product-selection/inputs/collection> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "\"sentinel-2-l2a\""^^rdf:JSON ;
+                            proc:type "string" ] ] ;
+            ns1:days_back [ dcterms:description "" ;
+                    dcterms:title "days_back" ;
+                    proc:maxOccurs 1 ;
+                    proc:minOccurs 1 ;
+                    proc:schema [ proc:type "integer" ] ] ;
+            ns1:east [ dcterms:description "" ;
+                    dcterms:title "east" ;
+                    proc:maxOccurs 1 ;
+                    proc:minOccurs 1 ;
+                    proc:schema [ proc:type "number" ] ] ;
+            ns1:north [ dcterms:description "" ;
+                    dcterms:title "north" ;
+                    proc:maxOccurs 1 ;
+                    proc:minOccurs 1 ;
+                    proc:schema [ proc:type "number" ] ] ;
+            ns1:south [ dcterms:description "" ;
+                    dcterms:title "south" ;
+                    proc:maxOccurs 1 ;
+                    proc:minOccurs 1 ;
+                    proc:schema [ proc:type "number" ] ] ;
+            ns1:stac_api [ dcterms:description "" ;
+                    dcterms:title "stac_api" ;
+                    proc:maxOccurs 1 ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "\"https://earth-search.aws.element84.com/v1\""^^rdf:JSON ;
+                            proc:type "string" ] ] ;
+            ns1:west [ dcterms:description "" ;
+                    dcterms:title "west" ;
+                    proc:maxOccurs 1 ;
+                    proc:minOccurs 1 ;
+                    proc:schema [ proc:type "number" ] ] ] ;
+    proc:jobControlOptions "async-execute" ;
+    proc:metadata [ rdf:value "0.1.0" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value [ a ns2:Person ;
+                    ns2:name "Cameron Sajedi" ] ;
+            proc:role schema:author ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
+        [ rdf:value "select_scene" ;
+            proc:role schema:name ],
+        [ dcterms:title "Generic Profile: Product selection" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/product-selection> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ rdf:value [ a ns2:Person ;
+                    ns2:affiliation "GeoLabs" ;
+                    ns2:name "Gérald Fenoy" ] ;
+            proc:role schema:contributor ],
+        [ rdf:value "Select the least cloudy Sentinel-2 L2A scene over a bounding box" ;
+            proc:role schema:description ],
+        [ dcterms:title "Process Concept: Data Discovery and Access" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/data-discovery-and-access> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Implementation Profile: Product selection" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+    proc:mutable true ;
+    proc:outputTransmission "reference",
+        "value" ;
+    proc:outputs [ ns3:stac_item [ dcterms:description "" ;
+                    dcterms:title "stac_item" ;
+                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/eo-product> ;
+                    proc:keywords "product" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Product selection -- output `products`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/product-selection/outputs/products> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Product selection -- output `products`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection/outputs/products> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
+                    proc:schema [ proc:type "string" ;
+                            ns4:contentEncoding "binary" ;
+                            ns4:contentMediaType "application/geo+json" ] ] ] .
 

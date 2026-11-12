@@ -17,19 +17,21 @@
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
-                                    ns1:contentMediaType "application/octet-stream" ] ] ] ] ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "1.4.1" ;
+    proc:metadata [ rdf:value "norm_diff" ;
+            proc:role schema:name ],
+        [ rdf:value "1.4.1" ;
             proc:role schema:softwareVersion ],
         [ rdf:value "Process converted from CWL" ;
-            proc:role schema:description ],
-        [ rdf:value "norm_diff" ;
-            proc:role schema:name ] ;
+            proc:role schema:description ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ ns2:ndwi [ dcterms:description "" ;
                     dcterms:title "ndwi" ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentMediaType "application/octet-stream" ] ] ] .
+                            ns1:contentEncoding "binary" ;
+                            ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] .
 

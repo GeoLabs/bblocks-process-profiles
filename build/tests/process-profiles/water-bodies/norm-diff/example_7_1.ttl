@@ -1,12 +1,43 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<urn:example:run:water-bodies:norm-diff> a wfprov:ProcessRun,
+<arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference> a prov:Plan ;
+    prov:specializationOf <https://ospd.example.org/ogc-api/processes/norm_diff/package> .
+
+<urn:example:entity:norm-diff:out:ndwi> a prov:Entity,
+        <https://ospd.example.org/ogc-api/processes/norm_diff#outputs/ndwi> ;
+    rdfs:seeAlso [ dcterms:type "image/tiff; application=geotiff" ;
+            ns1:relation <http://www.iana.org/assignments/relation/item> ;
+            oa:hasTarget <https://ospd.example.org/ogc-api/jobs/water-bodies-norm-diff-0001/results/norm_diff.tif> ] ;
+    prov:wasAttributedTo <urn:example:engine:cwltool-3.1.20260108082145> ;
+    prov:wasGeneratedBy <urn:example:run:water-bodies:norm-diff> .
+
+<urn:example:entity:norm-diff:in:rasters> a prov:Entity,
+        <https://ospd.example.org/ogc-api/processes/norm_diff#inputs/rasters> ;
+    rdf:value [ pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_green.tif" ],
+        [ pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_nir.tif" ] .
+
+<urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0> a prov:SoftwareAgent ;
+    pp:name "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0" .
+
+<urn:example:run:water-bodies:norm-diff> a prov:Activity,
         <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff> ;
-    wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/norm_diff/package> ;
-    wfprov:usedInput <urn:example:entity:norm-diff:in:rasters> ;
-    wfprov:wasPartOfWorkflowRun <urn:example:run:water-bodies:detect-water-body> ;
+    prov:endedAtTime "2026-09-23T20:14:35+00:00"^^xsd:dateTime ;
+    prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
+            prov:hadPlan <https://ospd.example.org/ogc-api/processes/norm_diff/package> ] ;
     prov:startedAtTime "2026-09-23T20:14:14+00:00"^^xsd:dateTime ;
-    prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145> .
+    prov:used <urn:example:entity:norm-diff:in:rasters> ;
+    prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
+        <urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0> .
+
+<https://ospd.example.org/ogc-api/processes/norm_diff/package> a prov:Plan .
+
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+    pp:name "cwltool 3.1.20260108082145" .
 

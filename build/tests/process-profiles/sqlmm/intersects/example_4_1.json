@@ -1,23 +1,69 @@
 {
   "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersects",
-  "type": "ProcessType",
+  "type": [
+    "ProcessType",
+    "owlClass",
+    "ActivityType"
+  ],
+  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersects",
+  "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
+  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "validityStatus": "invalid",
+  "publicationStatus": "published",
+  "hasAction": [
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersects/actions/addition",
+      "type": "RegisterAction",
+      "actionType": "addition",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-09-22T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersects"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersects/actions/d5-2026-11-09",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-09T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersects"
+    },
+    {
+      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersects/actions/specialisation-2026-11-10",
+      "type": "RegisterAction",
+      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersects, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry.",
+      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "startedAtTime": "2026-11-10T00:00:00Z",
+      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersects"
+    }
+  ],
   "prefLabel": "Intersects test",
   "definition": "This service shall return a true value if and only if the geometries g1 and g2 have at least one boundary point in common, but no interior points.",
+  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersects",
+  "usedEntityType": "http://www.opengis.net/ont/geosparql#Geometry",
   "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
-  "status": "submitted",
-  "phase": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
-  ],
-  "profile": "ospd.process-profiles.sqlmm.intersects",
-  "processDescription": {
-    "id": "Intersects",
-    "version": "2.0.0",
-    "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Intersects"
+  "classification": {
+    "phase": [
+      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+    ]
   },
-  "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun",
+  "deployment": {
+    "profile": "ospd.process-profiles.sqlmm.intersects",
+    "processDescription": {
+      "id": "Intersects",
+      "version": "2.0.0",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Intersects"
+    },
+    "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
+  },
   "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/intersects",
-  "openeoEquivalence": {
-    "level": "none",
-    "rationale": "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."
+  "correspondences": {
+    "openeoEquivalence": {
+      "level": "none",
+      "rationale": "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."
+    }
   }
 }

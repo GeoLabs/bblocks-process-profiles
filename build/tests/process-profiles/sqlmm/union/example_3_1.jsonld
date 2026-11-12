@@ -47,16 +47,15 @@
     "geometry",
     "spatial analysis",
     "set operation",
-    "Union",
-    "ST_Union"
+    "Union"
   ],
   "inputs": {
     "InputEntity1": {
       "title": "the first geometry",
       "description": "the first geometry to compare against.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -93,9 +92,9 @@
     "InputEntity2": {
       "title": "the other geometry",
       "description": "the other geometry to compare against.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -134,9 +133,9 @@
     "Result": {
       "title": "The union of two geometries",
       "description": "The geometry representing the union of the two geometries.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {

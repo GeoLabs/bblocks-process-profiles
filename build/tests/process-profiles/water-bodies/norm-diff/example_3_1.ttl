@@ -1,13 +1,65 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://www.iana.org/assignments/> .
-@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/norm_diff> pp:version "1.4.1" .
-
-[] pp:processDescription [ pp:process <https://geolabs.github.io/bblocks-process-profiles/def/process/norm_diff> ] ;
-    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
-            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
-            oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/norm_diff.cwl> ] .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/norm_diff> dcterms:description "Process converted from CWL" ;
+    dcterms:subject "coverage",
+        "radiometric index",
+        "raster" ;
+    dcterms:title "norm_diff" ;
+    pp:version "1.4.1" ;
+    proc:inputs [ ns2:rasters [ dcterms:description "" ;
+                    dcterms:title "rasters" ;
+                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band> ;
+                    proc:keywords "raster" ;
+                    proc:maxOccurs 1 ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters) -- input `rasters`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/inputs/rasters> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Radiometric index -- input `rasters`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/inputs/rasters> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                    proc:minOccurs 1 ;
+                    proc:schema [ proc:type "array" ;
+                            ns1:items [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ] ;
+    proc:jobControlOptions "async-execute" ;
+    proc:metadata [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters)" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ rdf:value "Process converted from CWL" ;
+            proc:role schema:description ],
+        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ rdf:value "1.4.1" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value "norm_diff" ;
+            proc:role schema:name ],
+        [ dcterms:title "Generic Profile: Radiometric index" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+    proc:mutable true ;
+    proc:outputTransmission "reference",
+        "value" ;
+    proc:outputs [ ns3:ndwi [ dcterms:description "" ;
+                    dcterms:title "ndwi" ;
+                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band> ;
+                    proc:keywords "raster" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters) -- output `raster`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/outputs/raster> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Radiometric index -- output `raster`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/outputs/raster> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
+                    proc:schema [ proc:type "string" ;
+                            ns1:contentEncoding "binary" ;
+                            ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] .
 

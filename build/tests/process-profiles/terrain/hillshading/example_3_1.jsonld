@@ -28,8 +28,7 @@
     "raster",
     "illumination",
     "hillshade",
-    "Hillshade",
-    "ta_lighting"
+    "Hillshade"
   ],
   "metadata": [
     {
@@ -52,9 +51,9 @@
     "ELEVATION": {
       "title": "Elevation",
       "description": "Elevation",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model",
       "keywords": [
-        "elevation",
-        "GeoTIFF"
+        "elevation"
       ],
       "metadata": [
         {
@@ -128,6 +127,7 @@
     "AZIMUTH": {
       "title": "Azimuth",
       "description": "Direction of the light source, measured in degree clockwise from the North direction.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
       "keywords": [
         "azimuth"
       ],
@@ -156,6 +156,7 @@
     "DECLINATION": {
       "title": "Height",
       "description": "Height of the light source, measured in degree above the horizon.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
       "keywords": [
         "altitude"
       ],
@@ -269,9 +270,9 @@
     "SHADE": {
       "title": "Analytical Hillshading",
       "description": "The angle between the surface and the incoming light beams, measured in radians.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

@@ -26,8 +26,7 @@
     "elevation",
     "raster",
     "derivative",
-    "Slope",
-    "ta_morphometry"
+    "Slope"
   ],
   "metadata": [
     {
@@ -50,9 +49,9 @@
     "ELEVATION": {
       "title": "Elevation",
       "description": "Elevation",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model",
       "keywords": [
-        "elevation",
-        "GeoTIFF"
+        "elevation"
       ],
       "metadata": [
         {
@@ -148,9 +147,9 @@
     "SLOPE": {
       "title": "Slope",
       "description": "Slope",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

@@ -1,11 +1,13 @@
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
-[] proc:inputs [ ns1:band_files [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/red_4326.tif" ;
-                    proc:type "geotiff" ],
-                [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/nir_4326.tif" ;
-                    proc:type "geotiff" ],
-                [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/green_4326.tif" ;
-                    proc:type "geotiff" ] ] ;
-    proc:response "document" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process/calculate_indices> pp:version "0.1.0" .
+
+[] pp:processDescription [ pp:process <https://geolabs.github.io/bblocks-process-profiles/def/process/calculate_indices> ] ;
+    proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+            oa:hasTarget <https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#calculate_indices> ] .
 

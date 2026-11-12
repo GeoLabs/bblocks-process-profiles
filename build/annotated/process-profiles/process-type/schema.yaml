@@ -1,314 +1,865 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-description: 'Candidate entry for the OSPD process-type register (Activity 4). A process
-  type classifies the
-
-  activities recorded in provenance: a provenance Activity of this type carries the
-  entry `id` as
-
-  its `activityType`. The entry is modelled as a SKOS concept; openEO equivalences
-  use the SKOS
-
-  mapping properties.
+title: Registered Process Activity Type
+description: 'A candidate process-type register item which is also a class used as
+  the PROV rdf:type of executions. It profiles the Registered Item Model activity-type
+  schema; each entry is both an acttype:ActivityType register item and an owl:Class
+  specialising acttype:ActivityType, or, when it implements an Implementation Profile,
+  the activity type of its operation in bblocks-generic-profiles, with the same GeoSPARQL
+  entity types.
 
 
-  The entry describes the *type* of activity only. What an activity of this type executes
-  -- its
+  Decision D5: one entry per deployed process, in five parts. Its meaning is `prefLabel`,
+  `definition` and `subClassOf`. Its classification (`classification`: the six-phase
+  position), its deployment (`deployment`: profile block, processDescription, run
+  class), its plan (`plan`) and its correspondences (`correspondences`: openEO) are
+  kept apart from that meaning. `implementsProfile` links it to its Implementation
+  Profile (tier 3), with the declarations that qualify the binding (`serverSideFiles`,
+  `roleDecompositions`, `assumedFormatGaps`, `byReference`, `unboundRoles`, `fixedRoleValues`);
+  a CWL CommandLineTool attached to no Implementation Profile states why in `notAttached`.
 
-  plan, a `prov:Plan` -- is kept apart in `plan`: the OGC Application Package served
-  by OGC API -
 
-  Processes - Part 2 (Deploy, Replace, Undeploy) at `/processes/{processID}/package`,
-  whose
-
-  execution unit is the pinned CWL. A run of this type records the same IRI as its
-
-  `qualifiedAssociation.hadPlan`. A process implemented natively by its server (`mutable:
-  false`)
-
-  has no Application Package (Part 2 serves `/package` only for dynamically deployed
-  processes)
-
-  and so no `plan`; `processDescription` is then the only link to what is executed.
-
-  '
-type: object
-required:
-- id
-- type
-- prefLabel
-- definition
-- inScheme
-- status
-- phase
-- profile
-- processDescription
-- provenanceClass
-- openeoEquivalence
-properties:
-  id:
-    description: IRI of the process type (also used as `activityType` in provenance
-      records).
-    type: string
-    format: uri
-    x-jsonld-id: '@id'
-  type:
-    const: ProcessType
-    x-jsonld-id: '@type'
-  prefLabel:
-    type: string
-    x-jsonld-id: http://www.w3.org/2004/02/skos/core#prefLabel
-  definition:
-    type: string
-    x-jsonld-id: http://www.w3.org/2004/02/skos/core#definition
-  inScheme:
-    description: IRI of the process-type register (concept scheme) this entry is proposed
-      to.
-    type: string
-    format: uri
-    x-jsonld-id: http://www.w3.org/2004/02/skos/core#inScheme
-    x-jsonld-type: '@id'
-  status:
-    description: ISO 19135 item status. Entries produced here are candidates, hence
-      `submitted` at most.
-    type: string
-    enum:
-    - submitted
-    - valid
-    - invalid
-    - superseded
-    - retired
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/status
-  phase:
-    description: Position(s) in the six-phase workflow framework.
-    type: array
-    minItems: 1
-    items:
+  What an activity of this type executes -- its plan, a `prov:Plan` -- is the OGC
+  Application Package served by OGC API - Processes - Part 2 (Deploy, Replace, Undeploy)
+  at `/processes/{processID}/package`, whose execution unit is the pinned CWL. A run
+  of this type records the same IRI as its `qualifiedAssociation.hadPlan`. A process
+  implemented natively by its server (`mutable: false`) has no Application Package
+  (Part 2 serves `/package` only for dynamically deployed processes) and so no `plan`;
+  `deployment.processDescription` is then the only link to what is executed.'
+allOf:
+- $ref: https://ogcincubator.github.io/activity-type-register/build/annotated/register/schemas/activity-types-schema/schema.yaml
+- type: object
+  required:
+  - id
+  - type
+  - prefLabel
+  - definition
+  - inScheme
+  - classification
+  - deployment
+  - correspondences
+  - objectIdentifier
+  - itemClass
+  - inRegister
+  - validityStatus
+  - publicationStatus
+  - subClassOf
+  - hasAction
+  properties:
+    id:
+      description: IRI of the process type (also used as `activityType` in provenance
+        records).
       type: string
-      enum:
-      - https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration
-      - https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering
-      - https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval
-      - https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing
-      - https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation
-      - https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation
-    x-jsonld-id: http://www.w3.org/2004/02/skos/core#broader
-    x-jsonld-type: '@id'
-  profile:
-    description: Identifier of the process-profile Building Block.
-    type: string
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/profile
-  processDescription:
-    description: The OGC API - Processes processDescription this type is profiled
-      from, at `href` (the `/processes/{processID}` resource). For a CWL-sourced process
-      it is the description the Application Package would deploy, under the illustrative
-      host `ospd.example.org`; for a live process (e.g. a ZOO-Project deployment,
-      `ospd.process-profiles.sqlmm.*`) the real one.
-    type: object
-    required:
-    - id
-    - version
-    - href
-    properties:
-      id:
-        type: string
-        x-jsonld-id: '@id'
-      version:
-        type: string
-        x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/version
-      href:
-        type: string
-        format: uri
-        x-jsonld-id: http://www.w3.org/2000/01/rdf-schema#seeAlso
-        x-jsonld-type: '@id'
-      license:
-        description: Of a live process; omitted, not null, when it declares none --
-          do not assume one.
-        type: string
-        format: uri
-        x-jsonld-id: http://purl.org/dc/terms/license
-        x-jsonld-type: '@id'
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
-  plan:
-    description: 'The plan (`prov:Plan`) an activity of this type executes: the OGC
-      Application Package at `/processes/{processID}/package` (OGC API - Processes
-      - Part 2, requirement /req/deploy-replace-undeploy/package-get-op), whose `executionUnit`
-      is the pinned CWL. Present only for a CWL-sourced process.'
-    type: object
-    required:
-    - id
-    - type
-    - executionUnit
-    - cwlClass
-    - cwlId
-    properties:
-      id:
-        type: string
-        format: uri
-        pattern: /processes/[^/]+/package$
-        x-jsonld-id: '@id'
-      type:
-        const: Plan
-        x-jsonld-id: '@type'
-      executionUnit:
-        description: Same link as the Application Package's own `executionUnit` (examples/ogcapppkg.json).
-        type: object
-        required:
-        - href
-        - type
-        properties:
-          href:
-            description: Pinned URL of the CWL document.
+      format: uri
+      x-jsonld-id: '@id'
+    type:
+      const:
+      - ProcessType
+      - owlClass
+      - ActivityType
+      x-jsonld-id: '@type'
+    prefLabel:
+      type: string
+      x-jsonld-id: http://www.w3.org/2004/02/skos/core#prefLabel
+    definition:
+      type: string
+      x-jsonld-id: http://www.w3.org/2004/02/skos/core#definition
+    inScheme:
+      description: IRI of the process-type register (concept scheme) this entry is
+        proposed to.
+      type: string
+      format: uri
+      x-jsonld-id: http://www.w3.org/2004/02/skos/core#inScheme
+      x-jsonld-type: '@id'
+    classification:
+      description: 'Classification of the type, apart from its meaning (decision D5).
+        `phase` (pp:phase, formerly skos:broader) is a separate axis from the Process
+        Concepts of bblocks-generic-profiles: see the block description.'
+      type: object
+      required:
+      - phase
+      additionalProperties: false
+      properties:
+        phase:
+          description: Position(s) in the six-phase workflow framework.
+          type: array
+          minItems: 1
+          items:
             type: string
-            format: uri
-            x-jsonld-id: http://www.w3.org/ns/oa#hasTarget
-            x-jsonld-type: '@id'
-          type:
-            type: string
-            x-jsonld-id: http://purl.org/dc/terms/format
-          rel:
-            type: string
-            x-jsonld-id: http://www.iana.org/assignments/relation
-            x-jsonld-type: '@id'
-            x-jsonld-base: http://www.iana.org/assignments/relation/
-        x-jsonld-id: https://w3id.org/ogc/api/processes/executionUnit
-      cwlClass:
-        enum:
-        - CommandLineTool
-        - Workflow
-        - ExpressionTool
-        x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
-      cwlId:
-        type: string
-        x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
-      license:
-        type: string
-        format: uri
-        x-jsonld-id: http://purl.org/dc/terms/license
-        x-jsonld-type: '@id'
-      cctDependencies:
-        description: EOAP CWL custom types used by the CWL.
-        type: array
-        items:
+            enum:
+            - https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration
+            - https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering
+            - https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval
+            - https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing
+            - https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation
+            - https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation
+          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/phase
+          x-jsonld-type: '@id'
+      x-jsonld-id: '@nest'
+    deployment:
+      description: 'What is deployed (decision D5): the process profile block, the
+        processDescription and the class of its run records.'
+      type: object
+      required:
+      - profile
+      - processDescription
+      - provenanceClass
+      additionalProperties: false
+      properties:
+        profile:
+          description: Identifier of the process-profile Building Block.
           type: string
-          pattern: ^eoap\.cct\.
-        x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
-      candidateCctDependencies:
-        description: EOAP CWL custom types that could replace plain CWL types (not
-          used by the CWL).
-        type: array
-        items:
-          type: string
-          pattern: ^eoap\.cct\.
-        x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
-  provenanceClass:
-    description: Class of the run records produced by executing this process.
-    type: string
-    enum:
-    - http://purl.org/wf4ever/wfprov#ProcessRun
-    - http://purl.org/wf4ever/wfprov#WorkflowRun
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
-    x-jsonld-type: '@id'
-  implementsProfile:
-    description: "IRI of the nearest applicable profile this process specialises,
-      in the generic-profiles register -- normally an Implementation Profile (generic-profiles.implementation-profile.*,
-      OGC 14-065 WPS 2.0.2 \xA77.5.3: standard data formats, still not one specific
-      deployment's own choice), or a Generic Profile directly when no Implementation
-      Profile exists yet. Optional: most processes have no standardised abstract counterpart
-      at all. `processDescription` and `plan` (this entry's own concrete binding)
-      are what further specialise it to one real, deployed process -- Implementation
-      (instance level) in the same standard's terms."
-    type: string
-    format: uri
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
-    x-jsonld-type: '@id'
-  hasStep:
-    description: Process types of the steps of a Workflow.
-    type: array
-    items:
-      type: string
-      format: uri
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/hasStep
-    x-jsonld-type: '@id'
-  exactMatch:
-    type: array
-    items:
-      type: string
-      format: uri
-    x-jsonld-id: http://www.w3.org/2004/02/skos/core#exactMatch
-    x-jsonld-type: '@id'
-  closeMatch:
-    type: array
-    items:
-      type: string
-      format: uri
-    x-jsonld-id: http://www.w3.org/2004/02/skos/core#closeMatch
-    x-jsonld-type: '@id'
-  relatedMatch:
-    type: array
-    items:
-      type: string
-      format: uri
-    x-jsonld-id: http://www.w3.org/2004/02/skos/core#relatedMatch
-    x-jsonld-type: '@id'
-  openeoEquivalence:
-    type: object
-    required:
-    - level
-    - rationale
-    properties:
-      level:
-        enum:
-        - exactMatch
-        - closeMatch
-        - none
-        x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel
-      rationale:
-        type: string
-        x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/rationale
-      decomposition:
-        description: Ordered correspondence of the stages of a composite or opaque
-          process.
-        type: array
-        items:
+          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/profile
+        processDescription:
+          description: The OGC API - Processes processDescription this type is profiled
+            from, at `href` (the `/processes/{processID}` resource). For a CWL-sourced
+            process it is the description the Application Package would deploy, under
+            the illustrative host `ospd.example.org`; for a live process (e.g. a ZOO-Project
+            deployment, `ospd.process-profiles.sqlmm.*`) the real one.
           type: object
           required:
-          - stage
-          - level
+          - id
+          - version
+          - href
           properties:
-            stage:
+            id:
               type: string
-              x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/stage
-            openeo:
-              type: array
-              items:
-                type: string
-                pattern: ^ogc\.openeo\.
-              x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/openeo
+              x-jsonld-id: '@id'
+            version:
+              type: string
+              x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/version
+            href:
+              type: string
+              format: uri
+              x-jsonld-id: http://www.w3.org/2000/01/rdf-schema#seeAlso
+              x-jsonld-type: '@id'
+            license:
+              description: Of a live process; omitted, not null, when it declares
+                none -- do not assume one.
+              type: string
+              format: uri
+              x-jsonld-id: http://purl.org/dc/terms/license
+              x-jsonld-type: '@id'
+          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+        provenanceClass:
+          description: Class of the run records produced by executing this process.
+          type: string
+          enum:
+          - http://purl.org/wf4ever/wfprov#ProcessRun
+          - http://purl.org/wf4ever/wfprov#WorkflowRun
+          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
+          x-jsonld-type: '@id'
+      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/deployment
+    plan:
+      description: 'The plan (`prov:Plan`) an activity of this type executes: the
+        OGC Application Package at `/processes/{processID}/package` (OGC API - Processes
+        - Part 2, requirement /req/deploy-replace-undeploy/package-get-op), whose
+        `executionUnit` is the pinned CWL. Present only for a CWL-sourced process.'
+      type: object
+      required:
+      - id
+      - type
+      - executionUnit
+      - cwlClass
+      - cwlId
+      properties:
+        id:
+          type: string
+          format: uri
+          pattern: /processes/[^/]+/package$
+          x-jsonld-id: '@id'
+        type:
+          const: Plan
+          x-jsonld-id: '@type'
+        executionUnit:
+          description: Same link as the Application Package's own `executionUnit`
+            (examples/ogcapppkg.json).
+          type: object
+          required:
+          - href
+          - type
+          properties:
+            href:
+              description: Pinned URL of the CWL document.
+              type: string
+              format: uri
+              x-jsonld-id: http://www.w3.org/ns/oa#hasTarget
+              x-jsonld-type: '@id'
+            type:
+              type: string
+              x-jsonld-id: http://purl.org/dc/terms/format
+            rel:
+              type: string
+              x-jsonld-id: http://www.iana.org/assignments/relation
+              x-jsonld-type: '@id'
+              x-jsonld-base: http://www.iana.org/assignments/relation/
+          x-jsonld-id: https://w3id.org/ogc/api/processes/executionUnit
+        cwlClass:
+          enum:
+          - CommandLineTool
+          - Workflow
+          - ExpressionTool
+          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
+        cwlId:
+          type: string
+          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
+        license:
+          type: string
+          format: uri
+          x-jsonld-id: http://purl.org/dc/terms/license
+          x-jsonld-type: '@id'
+        cctDependencies:
+          description: EOAP CWL custom types used by the CWL.
+          type: array
+          items:
+            type: string
+            pattern: ^eoap\.cct\.
+          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
+        candidateCctDependencies:
+          description: EOAP CWL custom types that could replace plain CWL types (not
+            used by the CWL).
+          type: array
+          items:
+            type: string
+            pattern: ^eoap\.cct\.
+          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
+      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
+    serverSideFiles:
+      description: Inputs and outputs that this deployment passes as names of files
+        stored on the server (relative to the ZOO-Kernel `dataPath`), not as encoded
+        data, so with no media type. Each names the Implementation Profile role whose
+        format the file has (`implements`).
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+        - name
+        - side
+        - implements
+        - location
+        properties:
+          name:
+            type: string
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+          side:
+            enum:
+            - inputs
+            - outputs
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/side
+          implements:
+            type: string
+            format: uri
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implements
+            x-jsonld-type: '@id'
+          location:
+            type: string
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/location
+      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/serverSideFile
+    byReference:
+      description: 'Bound inputs and outputs, of a role with a representation, that
+        this deployment takes or returns as a URL of the data instead of the data
+        (C1, 2026-11-10): the representation describes what the URL resolves to. Reported
+        apart, like serverSideFiles.'
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+        - name
+        - side
+        - implements
+        - note
+        additionalProperties: false
+        properties:
+          name:
+            type: string
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+          side:
+            enum:
+            - inputs
+            - outputs
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/side
+          implements:
+            type: string
+            format: uri
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implements
+            x-jsonld-type: '@id'
+          note:
+            type: string
+            minLength: 1
+            x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
+      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/byReference
+    unboundRoles:
+      description: 'Implementation Profile roles this deployment leaves unbound, each
+        with its reason: a role of minOccurs 0 at tier 3 (C2, 2026-11-10), or, for
+        a live process of the testbed, an input its deployment does not expose.'
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+        - side
+        - implements
+        - reason
+        additionalProperties: false
+        properties:
+          side:
+            enum:
+            - inputs
+            - outputs
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/side
+          implements:
+            type: string
+            format: uri
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implements
+            x-jsonld-type: '@id'
+          reason:
+            type: string
+            minLength: 1
+            x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
+      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/unboundRole
+    fixedRoleValues:
+      description: 'Optional Implementation Profile roles (minOccurs 0) that this
+        deployment leaves unbound because it fixes their value (C3, 2026-11-10): e.g.
+        the index computed by a normalized-difference tool.'
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+        - side
+        - implements
+        - values
+        - reason
+        additionalProperties: false
+        properties:
+          side:
+            enum:
+            - inputs
+            - outputs
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/side
+          implements:
+            type: string
+            format: uri
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implements
+            x-jsonld-type: '@id'
+          values:
+            type: array
+            minItems: 1
+            items:
+              type: string
+            x-jsonld-id: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
+          reason:
+            type: string
+            minLength: 1
+            x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
+      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/fixedRoleValue
+    roleDecompositions:
+      description: 'Implementation Profile roles that this deployment takes as one
+        or more inputs (or outputs) none of which is the role: a role with a representation
+        none of the parts carries (the bounding box of raster-crop taken by OTB.ExtractROI
+        as four corner numbers), or a literal role (C11, 2026-11-10: a time interval
+        given by `days_back`, or by `date` + `delta`). `reproducible` is false when
+        the parts depend on the time of execution.'
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+        - side
+        - implements
+        - parts
+        - note
+        additionalProperties: false
+        properties:
+          side:
+            enum:
+            - inputs
+            - outputs
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/side
+          implements:
+            type: string
+            format: uri
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implements
+            x-jsonld-type: '@id'
+          parts:
+            type: array
+            minItems: 1
+            items:
+              type: string
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/part
+            x-jsonld-container: '@list'
+          note:
+            type: string
+            x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
+          selectors:
+            description: 'The conditions under which the parts implement the role:
+              each a deployed input and the values it must take.'
+            type: array
+            minItems: 1
+            items:
+              type: object
+              required:
+              - name
+              - values
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+                values:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: string
+                  x-jsonld-id: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/selector
+          reproducible:
+            type: boolean
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/reproducible
+            x-jsonld-type: http://www.w3.org/2001/XMLSchema#boolean
+      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/roleDecomposition
+    assumedFormatGaps:
+      description: Bound inputs and outputs whose Implementation Profile representation
+        this deployment does not serve (no media type exposed), accepted with a reason
+        and its evidence (A4.3, docs/FORMAT-CHECK.md).
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+        - name
+        - side
+        - implements
+        - served
+        - reason
+        - evidence
+        additionalProperties: false
+        properties:
+          name:
+            type: string
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+          side:
+            enum:
+            - inputs
+            - outputs
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/side
+          implements:
+            type: string
+            format: uri
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implements
+            x-jsonld-type: '@id'
+          served:
+            type: array
+            items:
+              type: string
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/servedMediaType
+          reason:
+            type: string
+            x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
+          evidence:
+            type: string
+            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/evidence
+      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/assumedFormatGap
+    notAttached:
+      description: A CWL CommandLineTool (an entry with `plan` and no `hasStep`) that
+        implements no Implementation Profile, with the reason (decision Q1, 2026-11-11).
+        Exclusive of `implementsProfile`; a Workflow carries neither. The reason holds
+        at least one non-blank character (2026-11-11).
+      type: object
+      required:
+      - reason
+      additionalProperties: false
+      properties:
+        reason:
+          type: string
+          minLength: 1
+          pattern: \S
+          x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
+      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/notAttached
+    implementsProfile:
+      description: "IRI of the nearest applicable profile this process specialises,
+        in the generic-profiles register -- normally an Implementation Profile (generic-profiles.implementation-profile.*,
+        OGC 14-065 WPS 2.0.2 \xA77.5.3: standard data formats, still not one specific
+        deployment's own choice), or a Generic Profile directly when no Implementation
+        Profile exists yet. Optional: most processes have no standardised abstract
+        counterpart at all. `processDescription` and `plan` (this entry's own concrete
+        binding) are what further specialise it to one real, deployed process -- Implementation
+        (instance level) in the same standard's terms."
+      type: string
+      format: uri
+      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
+      x-jsonld-type: '@id'
+    hasStep:
+      description: Process types of the steps of a Workflow.
+      type: array
+      items:
+        type: string
+        format: uri
+      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/hasStep
+      x-jsonld-type: '@id'
+    correspondences:
+      description: 'Proposed correspondences with openEO (decision D5: apart from
+        the meaning of the type). The SKOS mapping properties stay on the type; `openeoEquivalence`
+        states the level, including `none`.'
+      type: object
+      required:
+      - openeoEquivalence
+      additionalProperties: false
+      properties:
+        exactMatch:
+          type: array
+          items:
+            type: string
+            format: uri
+          x-jsonld-id: http://www.w3.org/2004/02/skos/core#exactMatch
+          x-jsonld-type: '@id'
+        closeMatch:
+          type: array
+          items:
+            type: string
+            format: uri
+          x-jsonld-id: http://www.w3.org/2004/02/skos/core#closeMatch
+          x-jsonld-type: '@id'
+        relatedMatch:
+          type: array
+          items:
+            type: string
+            format: uri
+          x-jsonld-id: http://www.w3.org/2004/02/skos/core#relatedMatch
+          x-jsonld-type: '@id'
+        openeoEquivalence:
+          type: object
+          required:
+          - level
+          - rationale
+          properties:
             level:
               enum:
               - exactMatch
               - closeMatch
               - none
               x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel
-            note:
+            rationale:
               type: string
-              x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
-        x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/decomposition
-        x-jsonld-container: '@list'
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/openeoEquivalence
+              x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/rationale
+            decomposition:
+              description: Ordered correspondence of the stages of a composite or
+                opaque process.
+              type: array
+              items:
+                type: object
+                required:
+                - stage
+                - level
+                properties:
+                  stage:
+                    type: string
+                    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/stage
+                  openeo:
+                    type: array
+                    items:
+                      type: string
+                      pattern: ^ogc\.openeo\.
+                    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/openeo
+                  level:
+                    enum:
+                    - exactMatch
+                    - closeMatch
+                    - none
+                    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel
+                  note:
+                    type: string
+                    x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
+              x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/decomposition
+              x-jsonld-container: '@list'
+          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/openeoEquivalence
+      x-jsonld-id: '@nest'
+    itemClass:
+      const: https://w3id.org/ogc/rim/activity-type/activityTypeItemClass
+      x-jsonld-id: https://w3id.org/ogc/rim/itemClass
+      x-jsonld-type: '@id'
+    inRegister:
+      const: https://geolabs.github.io/bblocks-process-profiles/def/register
+      x-jsonld-id: https://w3id.org/ogc/rim/inRegister
+      x-jsonld-type: '@id'
+    objectIdentifier:
+      type: string
+      format: uri
+      description: The process-type entry IRI; permanently identifies this register
+        item.
+      x-jsonld-id: https://w3id.org/ogc/rim/objectIdentifier
+      x-jsonld-type: http://www.w3.org/2001/XMLSchema#anyURI
+    validityStatus:
+      enum:
+      - valid
+      - invalid
+      x-jsonld-id: https://w3id.org/ogc/rim/validityStatus
+      x-jsonld-type: '@vocab'
+    publicationStatus:
+      enum:
+      - published
+      - unpublished
+      x-jsonld-id: https://w3id.org/ogc/rim/publicationStatus
+      x-jsonld-type: '@vocab'
+    subClassOf:
+      description: 'The parent class: acttype:ActivityType, or, for a process attached
+        to an Implementation Profile, the activity type of its operation in bblocks-generic-profiles
+        (decision D5, 2026-11-10). The enum is written by scripts/generate.py from
+        the activity types of that register, so that no other value passes.'
+      enum:
+      - https://w3id.org/ogc/rim/activity-type/ActivityType
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/analytical-hillshading
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/area
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/buffer
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/centroid
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/contains
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/convex-hull
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/crosses
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/difference
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/disjoint
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/equals
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/geometry-extent
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersection
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersects
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/is-simple
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/otsu-thresholding
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-thinning
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-to-grid
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-to-shapes
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/product-selection
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math-multiband
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-crop
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-extent
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-format-conversion
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-rendering
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/slope
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/symdifference
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/terrain-ruggedness-index
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/topographic-position-index
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/touches
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/union
+      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/within
+      x-jsonld-id: http://www.w3.org/2000/01/rdf-schema#subClassOf
+      x-jsonld-type: '@id'
+    hasAction:
+      description: 'The register actions of the entry: its addition, then each in-place
+        amendment of the proposal (pp:amendmentAction, pp:specification). The schema
+        requires the addition; it does not constrain the action type or the classification
+        of the other actions (decision Q5, option b, of 2026-11-11: pending a decision
+        common to all registers).'
+      type: array
+      minItems: 1
+      items:
+        anyOf:
+        - type: object
+          required:
+          - id
+          - type
+          - actionType
+          - proposer
+          - startedAtTime
+          - appliesTo
+          properties:
+            id:
+              type: string
+              format: uri
+              x-jsonld-id: '@id'
+            type:
+              const: RegisterAction
+              x-jsonld-id: '@type'
+            actionType:
+              const: addition
+              x-jsonld-id: https://w3id.org/ogc/rim/actionType
+              x-jsonld-type: '@vocab'
+            proposer:
+              const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
+              x-jsonld-id: https://w3id.org/ogc/rim/proposer
+              x-jsonld-type: '@id'
+            startedAtTime:
+              type: string
+              format: date-time
+              x-jsonld-id: http://www.w3.org/ns/prov#startedAtTime
+              x-jsonld-type: http://www.w3.org/2001/XMLSchema#dateTime
+            appliesTo:
+              type: string
+              format: uri
+              x-jsonld-id: https://w3id.org/ogc/rim/appliesTo
+              x-jsonld-type: '@id'
+        - type: object
+          required:
+          - id
+          - type
+          - actionType
+          - description
+          - proposer
+          - startedAtTime
+          - appliesTo
+          properties:
+            id:
+              type: string
+              format: uri
+              x-jsonld-id: '@id'
+            type:
+              const: RegisterAction
+              x-jsonld-id: '@type'
+            actionType:
+              type: string
+              x-jsonld-id: https://w3id.org/ogc/rim/actionType
+              x-jsonld-type: '@vocab'
+            description:
+              type: string
+              x-jsonld-id: http://purl.org/dc/terms/description
+            proposer:
+              const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
+              x-jsonld-id: https://w3id.org/ogc/rim/proposer
+              x-jsonld-type: '@id'
+            startedAtTime:
+              type: string
+              format: date-time
+              x-jsonld-id: http://www.w3.org/ns/prov#startedAtTime
+              x-jsonld-type: http://www.w3.org/2001/XMLSchema#dateTime
+            appliesTo:
+              type: string
+              format: uri
+              x-jsonld-id: https://w3id.org/ogc/rim/appliesTo
+              x-jsonld-type: '@id'
+      contains:
+        type: object
+        required:
+        - id
+        - type
+        - actionType
+        - proposer
+        - startedAtTime
+        - appliesTo
+        properties:
+          id:
+            type: string
+            format: uri
+            x-jsonld-id: '@id'
+          type:
+            const: RegisterAction
+            x-jsonld-id: '@type'
+          actionType:
+            const: addition
+            x-jsonld-id: https://w3id.org/ogc/rim/actionType
+            x-jsonld-type: '@vocab'
+          proposer:
+            const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
+            x-jsonld-id: https://w3id.org/ogc/rim/proposer
+            x-jsonld-type: '@id'
+          startedAtTime:
+            type: string
+            format: date-time
+            x-jsonld-id: http://www.w3.org/ns/prov#startedAtTime
+            x-jsonld-type: http://www.w3.org/2001/XMLSchema#dateTime
+          appliesTo:
+            type: string
+            format: uri
+            x-jsonld-id: https://w3id.org/ogc/rim/appliesTo
+            x-jsonld-type: '@id'
+      x-jsonld-id: https://w3id.org/ogc/rim/hasAction
+      x-jsonld-type: '@id'
+    usedEntityType:
+      description: 'acttype:usedEntityType: the GeoSPARQL class(es) of the parent
+        activity type, repeated (decision of 2026-11-10).'
+      anyOf:
+      - enum:
+        - http://www.opengis.net/ont/geosparql#SpatialObject
+        - http://www.opengis.net/ont/geosparql#Feature
+        - http://www.opengis.net/ont/geosparql#Geometry
+        - http://www.opengis.net/ont/geosparql#SpatialObjectCollection
+        - http://www.opengis.net/ont/geosparql#FeatureCollection
+        - http://www.opengis.net/ont/geosparql#GeometryCollection
+      - type: array
+        minItems: 1
+        items:
+          enum:
+          - http://www.opengis.net/ont/geosparql#SpatialObject
+          - http://www.opengis.net/ont/geosparql#Feature
+          - http://www.opengis.net/ont/geosparql#Geometry
+          - http://www.opengis.net/ont/geosparql#SpatialObjectCollection
+          - http://www.opengis.net/ont/geosparql#FeatureCollection
+          - http://www.opengis.net/ont/geosparql#GeometryCollection
+      x-jsonld-id: https://w3id.org/ogc/rim/activity-type/usedEntityType
+      x-jsonld-type: '@id'
+    generatedEntityType:
+      description: 'acttype:generatedEntityType: the GeoSPARQL class(es) of the parent
+        activity type, repeated (decision of 2026-11-10).'
+      anyOf:
+      - enum:
+        - http://www.opengis.net/ont/geosparql#SpatialObject
+        - http://www.opengis.net/ont/geosparql#Feature
+        - http://www.opengis.net/ont/geosparql#Geometry
+        - http://www.opengis.net/ont/geosparql#SpatialObjectCollection
+        - http://www.opengis.net/ont/geosparql#FeatureCollection
+        - http://www.opengis.net/ont/geosparql#GeometryCollection
+      - type: array
+        minItems: 1
+        items:
+          enum:
+          - http://www.opengis.net/ont/geosparql#SpatialObject
+          - http://www.opengis.net/ont/geosparql#Feature
+          - http://www.opengis.net/ont/geosparql#Geometry
+          - http://www.opengis.net/ont/geosparql#SpatialObjectCollection
+          - http://www.opengis.net/ont/geosparql#FeatureCollection
+          - http://www.opengis.net/ont/geosparql#GeometryCollection
+      x-jsonld-id: https://w3id.org/ogc/rim/activity-type/generatedEntityType
+      x-jsonld-type: '@id'
+  additionalProperties: true
+  allOf:
+  - not:
+      required:
+      - notAttached
+      - implementsProfile
+  - if:
+      required:
+      - subClassOf
+      properties:
+        subClassOf:
+          not:
+            const: https://w3id.org/ogc/rim/activity-type/ActivityType
+    then:
+      anyOf:
+      - required:
+        - usedEntityType
+      - required:
+        - generatedEntityType
 x-jsonld-extra-terms:
-  ProcessType: http://www.w3.org/2004/02/skos/core#Concept
+  ProcessType: https://geolabs.github.io/bblocks-process-profiles/def/ProcessType
+  ActivityType: https://w3id.org/ogc/rim/activity-type/ActivityType
+  owlClass: http://www.w3.org/2002/07/owl#Class
   Plan: http://www.w3.org/ns/prov#Plan
+  valid: https://w3id.org/ogc/rim/valid
+  invalid: https://w3id.org/ogc/rim/invalid
+  published: https://w3id.org/ogc/rim/published
+  unpublished: https://w3id.org/ogc/rim/unpublished
+  addition: https://w3id.org/ogc/rim/additionAction
+  changeClassification:
+    x-jsonld-id: https://w3id.org/ogc/rim/changeClassification
+    x-jsonld-type: '@vocab'
+  substantive: https://w3id.org/ogc/rim/substantiveChange
+  clarifying: https://w3id.org/ogc/rim/clarifyingChange
 x-jsonld-prefixes:
-  skos: http://www.w3.org/2004/02/skos/core#
-  prov: http://www.w3.org/ns/prov#
   pp: https://geolabs.github.io/bblocks-process-profiles/def/
+  acttype: https://w3id.org/ogc/rim/activity-type/
+  owl: http://www.w3.org/2002/07/owl#
   rdfs: http://www.w3.org/2000/01/rdf-schema#
+  prov: http://www.w3.org/ns/prov#
+  skos: http://www.w3.org/2004/02/skos/core#
+  rim: https://w3id.org/ogc/rim/
+  xsd: http://www.w3.org/2001/XMLSchema#
   dct: http://purl.org/dc/terms/
   oa: http://www.w3.org/ns/oa#
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
 x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.process-type
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-10-21'
+  dateOfLastChange: '2026-11-12'

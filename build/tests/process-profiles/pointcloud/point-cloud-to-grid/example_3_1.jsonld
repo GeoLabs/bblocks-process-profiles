@@ -25,9 +25,7 @@
   "keywords": [
     "point cloud",
     "raster",
-    "rasterization",
-    "Point Cloud to Grid",
-    "pointcloud_tools"
+    "rasterization"
   ],
   "metadata": [
     {
@@ -50,9 +48,9 @@
     "POINTS": {
       "title": "Points",
       "description": "Points",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/point-cloud",
       "keywords": [
-        "point cloud",
-        "LAS"
+        "point cloud"
       ],
       "metadata": [
         {
@@ -110,6 +108,7 @@
     "CELLSIZE": {
       "title": "Cellsize",
       "description": "Cellsize",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
       "keywords": [
         "cell size"
       ],
@@ -138,9 +137,9 @@
     "GRID": {
       "title": "Z Value",
       "description": "Z Value",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
       "keywords": [
-        "raster",
-        "GeoTIFF"
+        "raster"
       ],
       "metadata": [
         {

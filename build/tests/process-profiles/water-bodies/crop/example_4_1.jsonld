@@ -1,10 +1,14 @@
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/water-bodies/crop/context.jsonld",
-  "inputs": {
-    "item": "https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2B_10TFK_20210713_0_L2A",
-    "aoi": "-121.399,39.834,-120.74,40.472",
-    "epsg": "EPSG:4326",
-    "band": "green"
+  "processDescription": {
+    "process": {
+      "id": "crop",
+      "version": "1.4.1"
+    }
   },
-  "response": "document"
+  "executionUnit": {
+    "href": "https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/crop.cwl",
+    "type": "application/cwl+yaml",
+    "rel": "http://www.opengis.net/def/rel/ogc/1.0/executionUnit"
+  }
 }

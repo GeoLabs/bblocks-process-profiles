@@ -1,0 +1,3373 @@
+{
+  "metaRegistry": "https://w3id.org/ogc/bblocks/meta-register.json",
+  "name": "Data Formats",
+  "abstract": "A content register (ISO 19135:2026, via the Registered Item Model) of the formats in which OSPD\nprocess inputs and outputs are encoded, and of the representations that bind a data type of the\ndata-types register to a format.\n",
+  "description": "The content plane of the OSPD data axis. A **format** (`df:Format`) is an encoding: its\nspecification, the media types observed where it is served, and/or a JSON Schema fragment. It\nrealizes no concept. A **representation** (`df:Representation`) realizes one data type version of\n[GeoLabs/bblocks-data-types](https://github.com/GeoLabs/bblocks-data-types), the concept plane, and\npoints to one format.\n\nIdentifiers are minted under `https://w3id.org/geolabs/ospd/data-formats/` (prefix `df:`). This\nnamespace is not resolved yet.\n",
+  "modified": "2026-11-12T14:41:08.574279",
+  "tooling": {
+    "bblocks-postprocess": {
+      "commitId": "\"2deb5c60331691186d997e4f6ae9aab18b548ce5",
+      "shortCommitId": "\"2deb5c",
+      "date": "2026-11-09T12:20:47+00:00\""
+    }
+  },
+  "gitRepository": "https://github.com/GeoLabs/bblocks-data-formats",
+  "gitHubRepository": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/",
+  "baseURL": "https://geolabs.github.io/bblocks-data-formats/",
+  "viewerURL": "https://geolabs.github.io/bblocks-data-formats/",
+  "license": {
+    "name": "Apache-2.0"
+  },
+  "validationReport": "https://geolabs.github.io/bblocks-data-formats/build/tests/report.html",
+  "validationReportJson": "https://geolabs.github.io/bblocks-data-formats/build/tests/report.json",
+  "imports": [
+    "https://opengeospatial.github.io/bblocks/register.json",
+    "https://ogcincubator.github.io/registered-item-model/build/register.json",
+    "https://geolabs.github.io/bblocks-data-types/build/register.json"
+  ],
+  "bblocks": [
+    {
+      "itemIdentifier": "data-formats.register",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Data Formats register",
+      "abstract": "The data-formats register itself, in JSON: a profile of the Registered Item Model register, with its system and the roles that govern it.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "isProfileOf": [
+        "bblocks://ogc.rim.schemas.register"
+      ],
+      "dependsOn": [
+        "bblocks://ogc.rim.schemas.register"
+      ],
+      "group": "Register model",
+      "highlighted": true,
+      "shaclClosures": [
+        "../vocabulary/data.ttl"
+      ],
+      "shaclShapes": {
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/register/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/register/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/register/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/register/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/register/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/register/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/register/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/register/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/register/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.register"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.item-class",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Data Formats item classes",
+      "abstract": "The two item classes of this register, format and representation, in JSON: a profile of the Registered Item Model register item class.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "isProfileOf": [
+        "bblocks://ogc.rim.schemas.register-item-class"
+      ],
+      "dependsOn": [
+        "bblocks://ogc.rim.schemas.register-item-class"
+      ],
+      "group": "Register model",
+      "highlighted": true,
+      "shaclClosures": [
+        "../vocabulary/data.ttl"
+      ],
+      "shaclShapes": {
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/item-class/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/item-class/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/item-class/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/item-class/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/item-class/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/item-class/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/item-class/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/item-class/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/item-class/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.item-class"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.vocabulary",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Data Formats shared model",
+      "abstract": "Shared RIM content-plane model, register metadata and SHACL rules for the format and representation Building Blocks of this register.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "model",
+      "dependsOn": [
+        "bblocks://data-types.vocabulary",
+        "bblocks://ogc.rim.core-ontology"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "resources": [
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/data.ttl",
+          "format": "text/turtle",
+          "title": "Register metadata (register, specification, owner, system and item classes)"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/geotiff/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: GeoTIFF"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/gml/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: Geography Markup Language (GML)"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/las/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: LAS"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/geojson/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: GeoJSON"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-date/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: Date string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-date-time/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: Date-time string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-duration/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: Duration string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-email/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: Email address string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-hostname/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: Hostname string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-idn-email/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: Internationalized email address string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-idn-hostname/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: Internationalized hostname string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-ipv4/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: IPv4 address string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-ipv6/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: IPv6 address string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-iri/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: IRI string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-iri-reference/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: IRI reference string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-password/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: Password string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-json-pointer/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: JSON Pointer string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-relative-json-pointer/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: Relative JSON Pointer string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uuid/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: UUID string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: URI string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri-reference/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: URI reference string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri-template/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: URI template string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-time/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: Time string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-pattern/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: Pattern-constrained string"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/ogcapi-processes-bbox/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: OGC API - Processes bounding box"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/png/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: PNG"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-item/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: STAC Item"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-item-collection/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: STAC Item Collection"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-collection/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: STAC Collection"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-catalog/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Format item: STAC Catalog"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-gml/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Representation item: Geometry as GML"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/surface-gml/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Representation item: Surface as GML"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/point-gml/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Representation item: Point as GML"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/feature-collection-gml/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Representation item: Feature collection as GML"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-geotiff/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Representation item: Raster as GeoTIFF"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-single-band-geotiff/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Representation item: Single-band raster as GeoTIFF"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/elevation-model-geotiff/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Representation item: Elevation model as GeoTIFF"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/point-cloud-las/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Representation item: Point cloud as LAS"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/bounding-box-ogcapi-processes-bbox/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Representation item: Bounding box as OGC API - Processes bbox"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-geojson/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Representation item: Geometry as GeoJSON"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/eo-product-stac-item/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Representation item: Earth observation product as STAC Item"
+        },
+        {
+          "role": "data",
+          "ref": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/rendered-image-png/ontology.ttl",
+          "format": "text/turtle",
+          "title": "Representation item: Rendered image as PNG"
+        }
+      ],
+      "tags": [
+        "format",
+        "media type",
+        "representation",
+        "content plane",
+        "ISO 19135",
+        "register"
+      ],
+      "sources": [
+        {
+          "title": "ISO 19135:2026, Geographic information \u2014 Registration and register governance",
+          "link": "https://www.iso.org/standard/86261.html"
+        },
+        {
+          "title": "Registered Item Model (OGC Building Block)",
+          "link": "https://ogcincubator.github.io/registered-item-model/"
+        }
+      ],
+      "group": "Shared model",
+      "highlighted": false,
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/vocabulary/ontology.ttl",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/vocabulary/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/vocabulary/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/vocabulary/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.vocabulary"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format item",
+      "abstract": "A format of this register, in JSON: a profile of the Registered Item Model register item that realizes no concept version and names its specification, its observed media types and/or a JSON Schema fragment.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "isProfileOf": [
+        "bblocks://ogc.rim.schemas.register-item"
+      ],
+      "dependsOn": [
+        "bblocks://data-formats.vocabulary",
+        "bblocks://ogc.rim.schemas.register-item"
+      ],
+      "group": "Formats",
+      "highlighted": true,
+      "sources": [
+        {
+          "title": "ISO 19135:2026, Geographic information \u2014 Registration and register governance",
+          "link": "https://www.iso.org/standard/86261.html"
+        },
+        {
+          "title": "Registered Item Model (OGC Building Block)",
+          "link": "https://ogcincubator.github.io/registered-item-model/"
+        }
+      ],
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/context.jsonld",
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/schema.yaml",
+      "sourceLdContext": "https://geolabs.github.io/bblocks-data-formats/_sources/format/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.representation",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Representation item",
+      "abstract": "A representation of this register, in JSON: a profile of the Registered Item Model register item that realizes one data type version of the data-types register and points to one format.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "isProfileOf": [
+        "bblocks://ogc.rim.schemas.register-item"
+      ],
+      "dependsOn": [
+        "bblocks://data-formats.vocabulary",
+        "bblocks://ogc.rim.schemas.register-item"
+      ],
+      "group": "Representations",
+      "highlighted": true,
+      "sources": [
+        {
+          "title": "ISO 19135:2026, Geographic information \u2014 Registration and register governance",
+          "link": "https://www.iso.org/standard/86261.html"
+        },
+        {
+          "title": "Registered Item Model (OGC Building Block)",
+          "link": "https://ogcincubator.github.io/registered-item-model/"
+        }
+      ],
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/context.jsonld",
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/schema.yaml",
+      "sourceLdContext": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/representation/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/representation/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/representation/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.representation"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.geojson",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: GeoJSON",
+      "abstract": "A JSON encoding of geographic features and geometries.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "Formats",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "RFC 7946 The GeoJSON Format",
+          "link": "https://www.rfc-editor.org/rfc/rfc7946"
+        }
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geojson/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geojson/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geojson/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/geojson/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geojson/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geojson/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/geojson/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/geojson/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/geojson/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/geojson/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.geojson"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.geotiff",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: GeoTIFF",
+      "abstract": "A TIFF-based encoding of georeferenced raster data.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "Formats",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "OGC GeoTIFF Standard",
+          "link": "https://www.ogc.org/standards/geotiff/"
+        }
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geotiff/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geotiff/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geotiff/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/geotiff/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geotiff/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geotiff/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/geotiff/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/geotiff/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/geotiff/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/geotiff/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.geotiff"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.gml",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: Geography Markup Language (GML)",
+      "abstract": "An XML encoding of geographic features and geometries.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "Formats",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "OGC Geography Markup Language (GML) Encoding Standard",
+          "link": "https://www.ogc.org/standards/gml/"
+        }
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/gml/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/gml/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/gml/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/gml/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/gml/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/gml/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/gml/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/gml/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/gml/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/gml/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.gml"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.las",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: LAS",
+      "abstract": "A binary encoding of point cloud records.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "Formats",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "OGC 17-030r1 LAS Specification 1.4 OGC Community Standard",
+          "link": "https://www.ogc.org/standards/las/"
+        }
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/las/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/las/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/las/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/las/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/las/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/las/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/las/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/las/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/las/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/las/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.las"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.ogcapi-processes-bbox",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: OGC API - Processes bounding box",
+      "abstract": "A bounding box as OGC API - Processes - Part 1: Core encodes it in JSON (ogc.api.processes.part1.v1.schemas.bbox).",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "Formats",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "OGC 18-062r2 OGC API - Processes - Part 1: Core",
+          "link": "https://docs.ogc.org/is/18-062r2/18-062r2.html"
+        },
+        {
+          "title": "OGC 17-069r4 OGC API - Features - Part 1: Core, 7.15.3 Parameter bbox",
+          "link": "https://docs.ogc.org/is/17-069r4/17-069r4.html"
+        },
+        {
+          "title": "ogc.api.processes.part1.v1.schemas.bbox -- bbox schema (OGC API - Processes - Part 1: Core)",
+          "link": "https://geolabs.github.io/bblocks-ogcapi-processes/"
+        }
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/ogcapi-processes-bbox/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/ogcapi-processes-bbox/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/ogcapi-processes-bbox/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/ogcapi-processes-bbox/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/ogcapi-processes-bbox/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/ogcapi-processes-bbox/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/ogcapi-processes-bbox/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/ogcapi-processes-bbox/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/ogcapi-processes-bbox/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/ogcapi-processes-bbox/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.ogcapi-processes-bbox"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.png",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: PNG",
+      "abstract": "A lossless raster image encoding of greyscale, truecolour or indexed-colour pictures, with optional transparency.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-10T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "Formats",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "W3C Portable Network Graphics (PNG) Specification (Third Edition), W3C Recommendation 24 June 2025",
+          "link": "https://www.w3.org/TR/png/"
+        }
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/png/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/png/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/png/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/png/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/png/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/png/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/png/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/png/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/png/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/png/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.png"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.stac-catalog",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: STAC Catalog",
+      "abstract": "A JSON object that links STAC Items, Collections and child Catalogs into a browsable structure through its links.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-11T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "Formats",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "STAC Catalog Specification 1.1.0",
+          "link": "https://github.com/radiantearth/stac-spec/blob/v1.1.0/catalog-spec/catalog-spec.md"
+        }
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-catalog/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-catalog/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-catalog/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-catalog/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-catalog/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-catalog/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-catalog/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/stac-catalog/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/stac-catalog/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/stac-catalog/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.stac-catalog"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.stac-collection",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: STAC Collection",
+      "abstract": "A JSON object describing a set of related STAC Items, with its license, its spatial and temporal extents and its links.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-11T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "Formats",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "STAC Collection Specification 1.1.0",
+          "link": "https://github.com/radiantearth/stac-spec/blob/v1.1.0/collection-spec/collection-spec.md"
+        }
+      ],
+      "seeAlso": [
+        "https://ogcincubator.github.io/bblocks-stac/build/generateddocs/markdown/contrib/stac/collection-v1-1-0/index.md"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-collection/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-collection/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-collection/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-collection/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-collection/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-collection/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-collection/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/stac-collection/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/stac-collection/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/stac-collection/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.stac-collection"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.stac-item",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: STAC Item",
+      "abstract": "A GeoJSON Feature describing one spatiotemporal item, such as an Earth observation product, with its links and its assets.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-10T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "Formats",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "STAC Item Specification 1.1.0",
+          "link": "https://github.com/radiantearth/stac-spec/blob/v1.1.0/item-spec/item-spec.md"
+        }
+      ],
+      "seeAlso": [
+        "https://ogcincubator.github.io/bblocks-stac/build/generateddocs/markdown/contrib/stac/item-v1-1-0/index.md"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-item/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-item/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/stac-item/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/stac-item/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/stac-item/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.stac-item"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.stac-item-collection",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: STAC Item Collection",
+      "abstract": "A GeoJSON FeatureCollection whose features are STAC Items, with optional links and counts, such as the response of a STAC API Item Search.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-11T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "Formats",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "STAC API - ItemCollection Fragment 1.0.0",
+          "link": "https://github.com/radiantearth/stac-api-spec/blob/v1.0.0/fragments/itemcollection/README.md"
+        },
+        {
+          "title": "STAC API - Item Search 1.0.0",
+          "link": "https://github.com/radiantearth/stac-api-spec/blob/v1.0.0/item-search/README.md"
+        }
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item-collection/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item-collection/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item-collection/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-item-collection/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item-collection/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item-collection/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-item-collection/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/stac-item-collection/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/stac-item-collection/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/stac-item-collection/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.stac-item-collection"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-date",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: Date string",
+      "abstract": "A full date, as JSON Schema `date`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.1 Dates, Times, and Duration",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.1"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record Date)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-date/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-date/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-date/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-date/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-date/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-date"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-date-time",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: Date-time string",
+      "abstract": "A date and time with a time zone offset, as JSON Schema `date-time`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.1 Dates, Times, and Duration",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.1"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record DateTime)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date-time/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date-time/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date-time/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-date-time/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date-time/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date-time/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-date-time/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-date-time/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-date-time/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-date-time/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-date-time"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-duration",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: Duration string",
+      "abstract": "A duration, as JSON Schema `duration`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.1 Dates, Times, and Duration",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.1"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record Duration)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-duration/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-duration/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-duration/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-duration/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-duration/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-duration/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-duration/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-duration/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-duration/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-duration/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-duration"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-email",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: Email address string",
+      "abstract": "An email address, as JSON Schema `email`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.2 Email Addresses",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.2"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record Email)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-email/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-email/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-email/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-email/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-email/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-email/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-email/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-email/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-email/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-email/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-email"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-hostname",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: Hostname string",
+      "abstract": "An Internet host name, as JSON Schema `hostname`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.3 Hostnames",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.3"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record Hostname)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-hostname/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-hostname/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-hostname/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-hostname/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-hostname/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-hostname/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-hostname/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-hostname/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-hostname/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-hostname/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-hostname"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-idn-email",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: Internationalized email address string",
+      "abstract": "An internationalized email address, as JSON Schema `idn-email`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.2 Email Addresses",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.2"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record IDNEmail)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-email/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-email/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-email/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-idn-email/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-email/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-email/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-idn-email/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-idn-email/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-idn-email/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-idn-email/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-idn-email"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-idn-hostname",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: Internationalized hostname string",
+      "abstract": "An internationalized Internet host name, as JSON Schema `idn-hostname`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.3 Hostnames",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.3"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record IDNHostname)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-hostname/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-hostname/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-hostname/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-idn-hostname/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-hostname/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-hostname/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-idn-hostname/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-idn-hostname/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-idn-hostname/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-idn-hostname/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-idn-hostname"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-ipv4",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: IPv4 address string",
+      "abstract": "An IPv4 address, as JSON Schema `ipv4`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.4 IP Addresses",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.4"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record IPv4)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv4/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv4/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv4/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-ipv4/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv4/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv4/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-ipv4/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-ipv4/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-ipv4/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-ipv4/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-ipv4"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-ipv6",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: IPv6 address string",
+      "abstract": "An IPv6 address, as JSON Schema `ipv6`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.4 IP Addresses",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.4"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record IPv6)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv6/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv6/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv6/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-ipv6/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv6/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv6/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-ipv6/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-ipv6/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-ipv6/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-ipv6/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-ipv6"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-iri",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: IRI string",
+      "abstract": "An IRI, as JSON Schema `iri`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.5 Resource Identifiers",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.5"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record IRI)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-iri/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-iri/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-iri/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-iri/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-iri/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-iri"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-iri-reference",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: IRI reference string",
+      "abstract": "An IRI reference, as JSON Schema `iri-reference`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.5 Resource Identifiers",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.5"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record IRIReference)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri-reference/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri-reference/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri-reference/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-iri-reference/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri-reference/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri-reference/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-iri-reference/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-iri-reference/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-iri-reference/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-iri-reference/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-iri-reference"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-json-pointer",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: JSON Pointer string",
+      "abstract": "An absolute JSON Pointer, as JSON Schema `json-pointer`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.7 JSON Pointers",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.7"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record JsonPointer)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-json-pointer/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-json-pointer/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-json-pointer/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-json-pointer/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-json-pointer/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-json-pointer/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-json-pointer/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-json-pointer/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-json-pointer/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-json-pointer/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-json-pointer"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-password",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: Password string",
+      "abstract": "A password, as the OpenAPI `password` format: a hint to obscure the value.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "OpenAPI Specification 3.0.3, Data Types",
+          "link": "https://spec.openapis.org/oas/v3.0.3#data-types"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record Password)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-password/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-password/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-password/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-password/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-password/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-password/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-password/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-password/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-password/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-password/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-password"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-pattern",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: Pattern-constrained string",
+      "abstract": "A string that matches a regular expression supplied as a parameter, as the JSON Schema `pattern` keyword.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 6.3.3 pattern",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-6.3.3"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record Pattern)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-pattern/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-pattern/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-pattern/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-pattern/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-pattern/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-pattern/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-pattern/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-pattern/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-pattern/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-pattern/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-pattern"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-relative-json-pointer",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: Relative JSON Pointer string",
+      "abstract": "A relative JSON Pointer, as JSON Schema `relative-json-pointer`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.7 JSON Pointers",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.7"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record RelativeJsonPointer)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-relative-json-pointer/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-relative-json-pointer/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-relative-json-pointer/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-relative-json-pointer/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-relative-json-pointer/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-relative-json-pointer/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-relative-json-pointer/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-relative-json-pointer/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-relative-json-pointer/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-relative-json-pointer/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-relative-json-pointer"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-time",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: Time string",
+      "abstract": "A time of day with a time zone offset, as JSON Schema `time`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.1 Dates, Times, and Duration",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.1"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record Time)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-time/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-time/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-time/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-time/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-time/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-time/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-time/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-time/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-time/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-time/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-time"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-uri",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: URI string",
+      "abstract": "A URI, as JSON Schema `uri`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.5 Resource Identifiers",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.5"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record URI)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-uri/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-uri/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-uri/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-uri"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-uri-reference",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: URI reference string",
+      "abstract": "A URI reference, as JSON Schema `uri-reference`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.5 Resource Identifiers",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.5"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record URIReference)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-reference/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-reference/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-reference/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri-reference/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-reference/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-reference/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri-reference/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-uri-reference/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-uri-reference/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-uri-reference/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-uri-reference"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-uri-template",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: URI template string",
+      "abstract": "A URI template, as JSON Schema `uri-template`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.6 uri-template",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.6"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record URITemplate)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-template/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-template/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-template/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri-template/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-template/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-template/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri-template/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-uri-template/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-uri-template/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-uri-template/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-uri-template"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.format.string-uuid",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Format: UUID string",
+      "abstract": "A UUID, as JSON Schema `uuid`.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.format"
+      ],
+      "group": "JSON Schema string formats (EOAP)",
+      "highlighted": false,
+      "sources": [
+        {
+          "title": "JSON Schema Validation: A Vocabulary for Structural Validation of JSON (draft 2020-12), 7.3.5 Resource Identifiers",
+          "link": "https://json-schema.org/draft/2020-12/json-schema-validation#section-7.3.5"
+        },
+        {
+          "title": "EOAP schemas: string_format.yaml (record UUID)",
+          "link": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml"
+        }
+      ],
+      "seeAlso": [
+        "https://geolabs.github.io/bblocks-eoap-cct/bblock/eoap.cct.string-format"
+      ],
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uuid/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uuid/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uuid/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uuid/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uuid/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uuid/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uuid/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/format/string-uuid/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/format/string-uuid/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/format/string-uuid/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.format.string-uuid"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.representation.bounding-box-ogcapi-processes-bbox",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Representation: Bounding box as OGC API - Processes bbox",
+      "abstract": "The bounding-box data type of the data-types register, represented as an OGC API - Processes bbox object.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.representation",
+        "bblocks://data-types.data-type.bounding-box"
+      ],
+      "isDescribedBy": [
+        "bblocks://data-types.data-type.bounding-box"
+      ],
+      "group": "Representations",
+      "highlighted": false,
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/bounding-box-ogcapi-processes-bbox/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/bounding-box-ogcapi-processes-bbox/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/bounding-box-ogcapi-processes-bbox/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/bounding-box-ogcapi-processes-bbox/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/bounding-box-ogcapi-processes-bbox/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/bounding-box-ogcapi-processes-bbox/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/bounding-box-ogcapi-processes-bbox/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/representation/bounding-box-ogcapi-processes-bbox/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/representation/bounding-box-ogcapi-processes-bbox/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/representation/bounding-box-ogcapi-processes-bbox/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.representation.bounding-box-ogcapi-processes-bbox"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.representation.eo-product-stac-item",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Representation: Earth observation product as STAC Item",
+      "abstract": "The eo-product data type of the data-types register, represented in STAC Item.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-10T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.representation",
+        "bblocks://data-types.data-type.eo-product"
+      ],
+      "isDescribedBy": [
+        "bblocks://data-types.data-type.eo-product"
+      ],
+      "group": "Representations",
+      "highlighted": false,
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/eo-product-stac-item/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/eo-product-stac-item/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/eo-product-stac-item/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/eo-product-stac-item/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/eo-product-stac-item/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/eo-product-stac-item/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/eo-product-stac-item/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/representation/eo-product-stac-item/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/representation/eo-product-stac-item/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/representation/eo-product-stac-item/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.representation.eo-product-stac-item"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.representation.feature-collection-gml",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Representation: Feature collection as GML",
+      "abstract": "The feature-collection data type of the data-types register, represented in GML.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.representation",
+        "bblocks://data-types.data-type.feature-collection"
+      ],
+      "isDescribedBy": [
+        "bblocks://data-types.data-type.feature-collection"
+      ],
+      "group": "Representations",
+      "highlighted": false,
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/feature-collection-gml/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/feature-collection-gml/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/feature-collection-gml/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/feature-collection-gml/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/feature-collection-gml/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/feature-collection-gml/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/feature-collection-gml/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/representation/feature-collection-gml/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/representation/feature-collection-gml/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/representation/feature-collection-gml/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.representation.feature-collection-gml"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.representation.geometry-geojson",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Representation: Geometry as GeoJSON",
+      "abstract": "The geometry data type of the data-types register, represented in GeoJSON.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-10T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.representation",
+        "bblocks://data-types.data-type.geometry"
+      ],
+      "isDescribedBy": [
+        "bblocks://data-types.data-type.geometry"
+      ],
+      "hasFormat": [
+        "data-formats.representation.geometry-gml"
+      ],
+      "group": "Representations",
+      "highlighted": false,
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-geojson/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-geojson/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-geojson/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-geojson/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-geojson/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-geojson/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-geojson/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/representation/geometry-geojson/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/representation/geometry-geojson/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/representation/geometry-geojson/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.representation.geometry-geojson"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.representation.geometry-gml",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Representation: Geometry as GML",
+      "abstract": "The geometry data type of the data-types register, represented in GML.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.representation",
+        "bblocks://data-types.data-type.geometry"
+      ],
+      "isDescribedBy": [
+        "bblocks://data-types.data-type.geometry"
+      ],
+      "hasFormat": [
+        "data-formats.representation.geometry-geojson"
+      ],
+      "group": "Representations",
+      "highlighted": false,
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-gml/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-gml/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-gml/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-gml/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-gml/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-gml/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-gml/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/representation/geometry-gml/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/representation/geometry-gml/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/representation/geometry-gml/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.representation.geometry-gml"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.representation.point-cloud-las",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Representation: Point cloud as LAS",
+      "abstract": "The point-cloud data type of the data-types register, represented in LAS.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.representation",
+        "bblocks://data-types.data-type.point-cloud"
+      ],
+      "isDescribedBy": [
+        "bblocks://data-types.data-type.point-cloud"
+      ],
+      "group": "Representations",
+      "highlighted": false,
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-cloud-las/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-cloud-las/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-cloud-las/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/point-cloud-las/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-cloud-las/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-cloud-las/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/point-cloud-las/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/representation/point-cloud-las/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/representation/point-cloud-las/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/representation/point-cloud-las/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.representation.point-cloud-las"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.representation.point-gml",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Representation: Point as GML",
+      "abstract": "The point data type of the data-types register, represented in GML.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.representation",
+        "bblocks://data-types.data-type.point"
+      ],
+      "isDescribedBy": [
+        "bblocks://data-types.data-type.point"
+      ],
+      "group": "Representations",
+      "highlighted": false,
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-gml/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-gml/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-gml/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/point-gml/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-gml/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-gml/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/point-gml/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/representation/point-gml/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/representation/point-gml/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/representation/point-gml/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.representation.point-gml"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.representation.raster-geotiff",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Representation: Raster as GeoTIFF",
+      "abstract": "The raster data type of the data-types register, represented in GeoTIFF.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.representation",
+        "bblocks://data-types.data-type.raster"
+      ],
+      "isDescribedBy": [
+        "bblocks://data-types.data-type.raster"
+      ],
+      "group": "Representations",
+      "highlighted": false,
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-geotiff/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-geotiff/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-geotiff/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-geotiff/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-geotiff/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-geotiff/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-geotiff/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/representation/raster-geotiff/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/representation/raster-geotiff/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/representation/raster-geotiff/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.representation.raster-geotiff"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.representation.raster-single-band-geotiff",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Representation: Single-band raster as GeoTIFF",
+      "abstract": "The raster-single-band data type of the data-types register, represented in GeoTIFF.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.representation",
+        "bblocks://data-types.data-type.raster-single-band"
+      ],
+      "isDescribedBy": [
+        "bblocks://data-types.data-type.raster-single-band"
+      ],
+      "group": "Representations",
+      "highlighted": false,
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-single-band-geotiff/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-single-band-geotiff/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-single-band-geotiff/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-single-band-geotiff/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-single-band-geotiff/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-single-band-geotiff/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-single-band-geotiff/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/representation/raster-single-band-geotiff/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/representation/raster-single-band-geotiff/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/representation/raster-single-band-geotiff/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.representation.raster-single-band-geotiff"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.representation.rendered-image-png",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Representation: Rendered image as PNG",
+      "abstract": "The rendered-image data type of the data-types register, represented in PNG.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-10T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.representation",
+        "bblocks://data-types.data-type.rendered-image"
+      ],
+      "isDescribedBy": [
+        "bblocks://data-types.data-type.rendered-image"
+      ],
+      "group": "Representations",
+      "highlighted": false,
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/rendered-image-png/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/rendered-image-png/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/rendered-image-png/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/rendered-image-png/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/rendered-image-png/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/rendered-image-png/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/rendered-image-png/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/representation/rendered-image-png/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/representation/rendered-image-png/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/representation/rendered-image-png/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.representation.rendered-image-png"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.representation.surface-gml",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Representation: Surface as GML",
+      "abstract": "The surface data type of the data-types register, represented in GML.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.representation",
+        "bblocks://data-types.data-type.surface"
+      ],
+      "isDescribedBy": [
+        "bblocks://data-types.data-type.surface"
+      ],
+      "group": "Representations",
+      "highlighted": false,
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/surface-gml/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/surface-gml/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/surface-gml/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/surface-gml/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/surface-gml/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/surface-gml/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/surface-gml/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/representation/surface-gml/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/representation/surface-gml/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/representation/surface-gml/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.representation.surface-gml"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "data-formats.representation.elevation-model-geotiff",
+      "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/master/ogc/bblocks/metadata-schema.yaml",
+      "name": "Representation: Elevation model as GeoTIFF",
+      "abstract": "The elevation-model data type of the data-types register, represented in GeoTIFF.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-11-09T00:00:00Z",
+      "version": "0.1",
+      "register": "data-formats",
+      "itemClass": "schema",
+      "dependsOn": [
+        "bblocks://data-formats.representation",
+        "bblocks://data-types.data-type.elevation-model"
+      ],
+      "isDescribedBy": [
+        "bblocks://data-types.data-type.elevation-model"
+      ],
+      "group": "Representations",
+      "highlighted": false,
+      "shaclShapes": {
+        "data-formats.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+        ],
+        "data-types.vocabulary": [
+          "https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl"
+        ],
+        "ogc.rim.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ]
+      },
+      "license": {
+        "name": "Apache-2.0"
+      },
+      "dateOfLastChange": "2026-11-12",
+      "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/elevation-model-geotiff/ontology.ttl",
+      "schema": {
+        "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/elevation-model-geotiff/schema.yaml",
+        "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/elevation-model-geotiff/schema.json"
+      },
+      "sourceSchema": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/elevation-model-geotiff/schema.yaml",
+      "ldContext": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/elevation-model-geotiff/context.jsonld",
+      "resolvedSchemaProperties": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/elevation-model-geotiff/resolvedProperties.json",
+      "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/representation/elevation-model-geotiff/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/GeoLabs/bblocks-data-formats/blob/master/build/tests/representation/elevation-model-geotiff/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/json-full/representation/elevation-model-geotiff/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://geolabs.github.io/bblocks-data-formats/build/generateddocs/markdown/representation/elevation-model-geotiff/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://geolabs.github.io/bblocks-data-formats/bblock/data-formats.representation.elevation-model-geotiff"
+        }
+      }
+    }
+  ],
+  "remoteCacheDir": "https://geolabs.github.io/bblocks-data-formats/build/annotated/_cache",
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://geolabs.github.io/bblocks-data-formats/build/register.json",
+      "type": "application/json",
+      "title": "This Building Blocks Register in JSON format"
+    },
+    {
+      "rel": "self",
+      "href": "https://geolabs.github.io/bblocks-data-formats/build/bblocks.ttl",
+      "type": "text/turtle",
+      "title": "This Building Blocks Register in RDF Turtle format"
+    },
+    {
+      "rel": "self",
+      "href": "https://geolabs.github.io/bblocks-data-formats/build/bblocks.jsonld",
+      "type": "application/ld+json",
+      "title": "This Building Blocks Register in JSON-LD format"
+    }
+  ]
+}

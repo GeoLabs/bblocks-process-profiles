@@ -46,16 +46,15 @@
     "vector",
     "geometry",
     "measure",
-    "Area",
-    "ST_Area"
+    "Area"
   ],
   "inputs": {
     "InputPolygon": {
       "title": "Polygon to compute are",
       "description": "URI to a set of GML that describes the polygon.",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/surface",
       "keywords": [
-        "geometry",
-        "GML"
+        "geometry"
       ],
       "metadata": [
         {
@@ -94,6 +93,7 @@
     "Area": {
       "title": "Computed Area",
       "description": "The Computed Area Value",
+      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
       "keywords": [
         "number"
       ],

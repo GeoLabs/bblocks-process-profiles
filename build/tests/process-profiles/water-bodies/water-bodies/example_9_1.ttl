@@ -1,35 +1,39 @@
+@prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rim: <https://w3id.org/ogc/rim/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies> a skos:Concept ;
-    skos:broader <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
-    skos:definition "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
-    skos:inScheme pp:process-type ;
-    skos:prefLabel "Water bodies detection based on NDWI and otsu threshold" ;
-    pp:hasStep <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/stac> ;
-    pp:openeoEquivalence [ pp:decomposition ( [ skos:note "see osc.process-profiles.water-bodies.detect-water-body" ;
-                        pp:equivalenceLevel "none" ;
-                        pp:stage "node_water_bodies (detect_water_body, scatter over stac_items)" ] [ pp:equivalenceLevel "closeMatch" ;
-                        pp:openeo "ogc.openeo.processes.cubes.save_result" ;
-                        pp:stage "node_stac" ] ) ;
-            pp:equivalenceLevel "none" ;
-            pp:rationale "Composite: a CWL Workflow scattering a per-item sub-workflow over the STAC item list, then aggregating the results into one STAC catalog. The openEO equivalent would be a user-defined process graph, which has no Building Block of its own; the correspondence is carried by the steps." ] ;
-    pp:plan <https://ospd.example.org/ogc-api/processes/water-bodies/package> ;
-    pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/water-bodies> ;
-    pp:profile "ospd.process-profiles.water-bodies.water-bodies" ;
-    pp:provenanceClass wfprov:WorkflowRun ;
-    pp:status "submitted" .
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/addition> a rim:RegisterAction ;
+    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType rim:additionAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies> ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/d5-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/plan-2026-11-11> a rim:RegisterAction ;
+    dcterms:description "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/water-bodies.cwl). The processDescription is unchanged." ;
+    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process/water-bodies> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/water-bodies> ;
     pp:version "1.4.1" .
@@ -42,5 +46,37 @@
     pp:cwlId "water-bodies" ;
     proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
             ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
-            oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/f47258567ddf8efbc7c33fd1ec277e4f1b454883/water-bodies/app-pkg-multiple/water-bodies.cwl> ] .
+            oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/water-bodies.cwl> ] .
+
+<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies> a owl:Class,
+        pp:ProcessType,
+        acttype:ActivityType ;
+    rdfs:subClassOf acttype:ActivityType ;
+    skos:definition "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
+    skos:inScheme pp:process-type ;
+    skos:prefLabel "Water bodies detection based on NDWI and otsu threshold" ;
+    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/water-bodies> ;
+            pp:profile "ospd.process-profiles.water-bodies.water-bodies" ;
+            pp:provenanceClass wfprov:WorkflowRun ] ;
+    pp:hasStep <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/detect-water-body>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/stac> ;
+    pp:openeoEquivalence [ pp:decomposition ( [ skos:note "see osc.process-profiles.water-bodies.detect-water-body" ;
+                        pp:equivalenceLevel "none" ;
+                        pp:stage "node_water_bodies (detect_water_body, scatter over stac_items)" ] [ pp:equivalenceLevel "closeMatch" ;
+                        pp:openeo "ogc.openeo.processes.cubes.save_result" ;
+                        pp:stage "node_stac" ] ) ;
+            pp:equivalenceLevel "none" ;
+            pp:rationale "Composite: a CWL Workflow scattering a per-item sub-workflow over the STAC item list, then aggregating the results into one STAC catalog. The openEO equivalent would be a user-defined process graph, which has no Building Block of its own; the correspondence is carried by the steps." ] ;
+    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    pp:plan <https://ospd.example.org/ogc-api/processes/water-bodies/package> ;
+    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/addition>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/d5-2026-11-09>,
+        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies/actions/plan-2026-11-11> ;
+    rim:inRegister pp:register ;
+    rim:itemClass acttype:activityTypeItemClass ;
+    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies"^^xsd:anyURI ;
+    rim:publicationStatus rim:published ;
+    rim:validityStatus rim:invalid .
 

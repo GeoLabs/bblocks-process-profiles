@@ -1,4 +1,7 @@
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
 
-[] pp:binary_mask_item [ pp:href "https://ospd.example.org/ogc-api/jobs/water-bodies-otsu-0001/results/otsu.tif" ] .
+[] proc:inputs [ ns1:raster [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/norm_diff.tif" ;
+                    proc:type "image/tiff; application=geotiff" ] ] ;
+    proc:response "document" .
 
