@@ -51,7 +51,7 @@ TODAY = "2026-09-22"
 PART1_CORE = "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
 GENERIC_PROFILES_BASE = "https://geolabs.github.io/bblocks-generic-profiles/def/"
 DATA_TYPES_BASE = "https://geolabs.github.io/bblocks-data-types/def/data-type/"
-DATA_FORMATS_BASE = "https://w3id.org/geolabs-ospd/data-formats/"
+DATA_FORMATS_BASE = "https://w3id.org/geolabs/ospd/data-formats/"
 
 # The two populations of this register (A4.5): the deployable CWL processes of the OSPD reference
 # workflows (`processes` in profiles.yaml) and the live processes of the Geonovum testbed

@@ -8,4 +8,4 @@
 
 ex:fixture-format proc:outputs [ out:Result ex:fixture-format-output ] .
 ex:fixture-format-output dct:title "Output" ;
-    dct:type <https://w3id.org/geolabs-ospd/data-formats/format/geotiff> .
+    dct:type <https://w3id.org/geolabs/ospd/data-formats/format/geotiff> .
