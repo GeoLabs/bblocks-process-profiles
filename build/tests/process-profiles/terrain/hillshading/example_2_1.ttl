@@ -1,8 +1,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -14,7 +14,7 @@
     dcterms:title "Analytical Hillshading" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns2:AZIMUTH [ dcterms:description "Direction of the light source, measured in degree clockwise from the North direction." ;
@@ -51,10 +51,10 @@
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
             ns2:EXAGGERATION [ dcterms:description "The terrain exaggeration factor allows one to increase the shading contrasts in flat areas." ;
                     dcterms:title "Exaggeration" ;
                     proc:minOccurs 0 ;
@@ -126,18 +126,18 @@
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns4:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
+    proc:outputs [ ns3:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
                     dcterms:title "Analytical Hillshading" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ] .
+                                    ns1:contentMediaType "image/png" ] ] ] ] .
 

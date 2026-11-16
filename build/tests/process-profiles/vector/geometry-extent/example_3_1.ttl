@@ -53,12 +53,12 @@
     proc:metadata [ dcterms:title "Implementation Profile: Geometry extent" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ dcterms:title "Generic Profile: Unary geometry operation" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Process Concept: Vector Geometry Processing" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Generic Profile: Unary geometry operation" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
@@ -66,17 +66,17 @@
                     dcterms:title "Extents" ;
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/surface> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Geometry extent -- output `result`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
-                        [ dcterms:title "Generic Profile: Unary geometry operation -- output `result`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-geometry-operation/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
-                                [ proc:type "object" ],
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Geometry extent -- output `result`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent/outputs/result> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "object" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/xml" ] ] ] ] .
+                                    ns1:contentMediaType "text/xml" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ] ] ] ] .
 

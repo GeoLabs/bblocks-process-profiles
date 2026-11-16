@@ -22,12 +22,12 @@
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection -- input `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Raster reprojection -- input `raster`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster reprojection -- input `raster`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Raster reprojection -- input `raster`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/raster> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
                             ns3:contentEncoding "binary" ;
@@ -42,12 +42,12 @@
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/coordinate-reference-system> ;
                     proc:keywords "CRS" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection -- input `targetCRS`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/targetCRS> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Raster reprojection -- input `targetCRS`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster reprojection -- input `targetCRS`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/targetCRS> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Raster reprojection -- input `targetCRS`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/targetCRS> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "4326"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
@@ -73,32 +73,32 @@
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "Reproject a raster onto a regular grid covering a bounding box" ;
-            proc:role schema:description ],
-        [ dcterms:title "Implementation Profile: Raster reprojection" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ rdf:value [ a ns2:Person ;
-                    ns2:name "Cameron Sajedi" ] ;
-            proc:role schema:author ],
-        [ rdf:value "reproject_band" ;
-            proc:role schema:name ],
-        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Generic Profile: Raster reprojection" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ rdf:value "0.1.0" ;
-            proc:role schema:softwareVersion ],
         [ rdf:value [ a ns2:Person ;
                     ns2:affiliation "GeoLabs" ;
                     ns2:name "Gérald Fenoy" ] ;
             proc:role schema:contributor ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
+        [ rdf:value "reproject_band" ;
+            proc:role schema:name ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ] ;
+            proc:role schema:license ],
+        [ rdf:value "0.1.0" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value [ a ns2:Person ;
+                    ns2:name "Cameron Sajedi" ] ;
+            proc:role schema:author ],
+        [ dcterms:title "Generic Profile: Raster reprojection" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Implementation Profile: Raster reprojection" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ rdf:value "Reproject a raster onto a regular grid covering a bounding box" ;
+            proc:role schema:description ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
@@ -106,12 +106,12 @@
                     dcterms:title "reprojected_file" ;
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection -- output `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Raster reprojection -- output `raster`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster reprojection -- output `raster`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Raster reprojection -- output `raster`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/outputs/raster> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
                     proc:schema [ proc:type "string" ;
                             ns3:contentEncoding "binary" ;
                             ns3:contentMediaType "image/tiff; application=geotiff" ] ] ] .

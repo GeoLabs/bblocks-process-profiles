@@ -517,8 +517,8 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -530,7 +530,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     dcterms:title "Analytical Hillshading" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns2:AZIMUTH [ dcterms:description "Direction of the light source, measured in degree clockwise from the North direction." ;
@@ -567,10 +567,10 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
             ns2:EXAGGERATION [ dcterms:description "The terrain exaggeration factor allows one to increase the shading contrasts in flat areas." ;
                     dcterms:title "Exaggeration" ;
                     proc:minOccurs 0 ;
@@ -642,20 +642,20 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns4:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
+    proc:outputs [ ns3:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
                     dcterms:title "Analytical Hillshading" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ] .
+                                    ns1:contentMediaType "image/png" ] ] ] ] .
 
 
 ```
@@ -1306,8 +1306,8 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -1325,7 +1325,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "Analytical Hillshading" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns1:AZIMUTH [ dcterms:description "Direction of the light source, measured in degree clockwise from the North direction." ;
@@ -1355,12 +1355,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:title "Height" ;
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/number> ;
                     proc:keywords "altitude" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading -- input `altitude`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/altitude> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Analytical hillshading -- input `altitude`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Analytical hillshading -- input `altitude`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/altitude> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Analytical hillshading -- input `altitude`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/altitude> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "45"^^rdf:JSON ;
                             proc:nullable true ;
@@ -1372,21 +1372,21 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:title "Elevation" ;
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model> ;
                     proc:keywords "elevation" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading -- input `elevation`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/elevation> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Analytical hillshading -- input `elevation`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Analytical hillshading -- input `elevation`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/elevation> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Analytical hillshading -- input `elevation`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/elevation> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
                     proc:schema [ ns2:oneOf [ proc:type "string" ;
                                     ns2:contentEncoding "base64" ;
                                     ns2:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/tiff" ],
+                                    ns2:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/png" ],
+                                    ns2:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns2:contentEncoding "base64" ;
                                     ns2:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
@@ -1458,19 +1458,19 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Process Concept: Terrain Analysis" ;
+    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Process Concept: Terrain Analysis" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ dcterms:title "Implementation Profile: Analytical hillshading" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ dcterms:title "Generic Profile: Analytical hillshading" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
+    proc:outputs [ ns4:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
                     dcterms:title "Analytical Hillshading" ;
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band> ;
                     proc:keywords "raster" ;
@@ -1482,13 +1482,13 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
                     proc:schema [ ns2:oneOf [ proc:type "string" ;
                                     ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/x-ogc-envi" ],
+                                    ns2:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns2:contentEncoding "base64" ;
                                     ns2:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/png" ],
+                                    ns2:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns2:contentEncoding "base64" ;
                                     ns2:contentMediaType "application/x-ogc-aaigrid" ] ] ] ] .
@@ -2348,7 +2348,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.terrain.hillshading
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-12'
+  dateOfLastChange: '2026-11-16'
 
 ```
 

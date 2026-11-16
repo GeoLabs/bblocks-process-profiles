@@ -122,6 +122,8 @@ parse_aoi -> select_scene -> download_band (x3) -> reproject_band (x3)
             proc:role schema:codeRepository ],
         [ rdf:value "Mangrove Biomass Workflow (step notebooks)" ;
             proc:role schema:name ],
+        [ rdf:value "0.1.0" ;
+            proc:role schema:softwareVersion ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
             proc:role schema:license ],
         [ rdf:value """Mangrove above-ground biomass and carbon stock estimation from Sentinel-2 L2A,
@@ -130,9 +132,7 @@ OSPD W1 Algae Bloom workflow:
 parse_aoi -> select_scene -> download_band (x3) -> reproject_band (x3)
 -> calculate_indices -> estimate_biomass -> export_stac.
 """ ;
-            proc:role schema:description ],
-        [ rdf:value "0.1.0" ;
-            proc:role schema:softwareVersion ] ;
+            proc:role schema:description ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;

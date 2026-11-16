@@ -213,9 +213,9 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://www.iana.org/assignments/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://w3id.org/ogc/api/schema/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
@@ -227,29 +227,29 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     dcterms:title "Disjoint " ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Disjoint/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns2:InputEntity1 [ dcterms:description "the first geometry." ;
+    proc:inputs [ ns3:InputEntity1 [ dcterms:description "the first geometry." ;
                     dcterms:title "the first geometry" ;
-                    proc:schema [ ns3:oneOf [ proc:type "string" ;
-                                    ns3:contentEncoding "UTF-8" ;
-                                    ns3:contentMediaType "text/xml" ;
-                                    ns3:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns3:contentEncoding "base64" ;
-                                    ns3:contentMediaType "text/xml" ;
-                                    ns3:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
-            ns2:InputEntity2 [ dcterms:description "the other geometry." ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
+            ns3:InputEntity2 [ dcterms:description "the other geometry." ;
                     dcterms:title "the other geometry" ;
-                    proc:schema [ ns3:oneOf [ proc:type "string" ;
-                                    ns3:contentEncoding "base64" ;
-                                    ns3:contentMediaType "text/xml" ;
-                                    ns3:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns3:contentEncoding "UTF-8" ;
-                                    ns3:contentMediaType "text/xml" ;
-                                    ns3:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
@@ -660,10 +660,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     proc:metadata [ dcterms:title "Implementation Profile: Disjoint -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/disjoint/outputs/result> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
-                        [ dcterms:title "Mon test  " ],
                         [ dcterms:title "Generic Profile: Binary spatial predicate -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
+                        [ dcterms:title "Mon test  " ] ;
                     proc:schema [ proc:type "boolean" ] ] ] .
 
 
@@ -1446,7 +1446,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.sqlmm.disjoint
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-12'
+  dateOfLastChange: '2026-11-16'
 
 ```
 

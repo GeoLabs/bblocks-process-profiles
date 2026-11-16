@@ -19,12 +19,12 @@
                             ns2:contentEncoding "binary" ;
                             ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "otsu" ;
-            proc:role schema:name ],
+    proc:metadata [ rdf:value "1.4.1" ;
+            proc:role schema:softwareVersion ],
         [ rdf:value "Process converted from CWL" ;
             proc:role schema:description ],
-        [ rdf:value "1.4.1" ;
-            proc:role schema:softwareVersion ] ;
+        [ rdf:value "otsu" ;
+            proc:role schema:name ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;

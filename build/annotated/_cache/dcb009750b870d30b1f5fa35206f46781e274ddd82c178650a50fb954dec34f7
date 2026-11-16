@@ -2,8 +2,8 @@
   "metaRegistry": "https://w3id.org/ogc/bblocks/meta-register.json",
   "name": "Data Formats",
   "abstract": "A content register (ISO 19135:2026, via the Registered Item Model) of the formats in which OSPD\nprocess inputs and outputs are encoded, and of the representations that bind a data type of the\ndata-types register to a format.\n",
-  "description": "The content plane of the OSPD data axis. A **format** (`df:Format`) is an encoding: its\nspecification, the media types observed where it is served, and/or a JSON Schema fragment. It\nrealizes no concept. A **representation** (`df:Representation`) realizes one data type version of\n[GeoLabs/bblocks-data-types](https://github.com/GeoLabs/bblocks-data-types), the concept plane, and\npoints to one format.\n\nIdentifiers are minted under `https://w3id.org/geolabs/ospd/data-formats/` (prefix `df:`). This\nnamespace is not resolved yet.\n",
-  "modified": "2026-11-12T14:41:08.574279",
+  "description": "The content plane of the OSPD data axis. A **format** (`df:Format`) is an encoding: its\nspecification, the media types observed where it is served, and/or a JSON Schema fragment. It\nrealizes no concept. A **representation** (`df:Representation`) realizes one data type version of\n[GeoLabs/bblocks-data-types](https://github.com/GeoLabs/bblocks-data-types), the concept plane, and\npoints to one format.\n\nIdentifiers are minted under `https://w3id.org/geolabs/ospd/data-formats/` (prefix `df:`). This\nnamespace resolves through w3id.org (since 2026-11-13).\n",
+  "modified": "2026-11-16T22:21:43.122755",
   "tooling": {
     "bblocks-postprocess": {
       "commitId": "\"2deb5c60331691186d997e4f6ae9aab18b548ce5",
@@ -55,7 +55,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/register/schema.yaml",
         "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/register/schema.json"
@@ -110,7 +110,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/item-class/schema.yaml",
         "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/item-class/schema.json"
@@ -444,7 +444,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/vocabulary/ontology.ttl",
       "sourceFiles": "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/",
       "validationPassed": true,
@@ -508,7 +508,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/schema.yaml",
         "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/schema.json"
@@ -578,7 +578,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/schema.yaml",
         "application/json": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/schema.json"
@@ -639,7 +639,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geojson/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geojson/schema.yaml",
@@ -701,7 +701,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geotiff/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/geotiff/schema.yaml",
@@ -763,7 +763,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/gml/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/gml/schema.yaml",
@@ -825,7 +825,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/las/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/las/schema.yaml",
@@ -895,7 +895,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/ogcapi-processes-bbox/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/ogcapi-processes-bbox/schema.yaml",
@@ -957,7 +957,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/png/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/png/schema.yaml",
@@ -990,6 +990,7 @@
       "name": "Format: STAC Catalog",
       "abstract": "A JSON object that links STAC Items, Collections and child Catalogs into a browsable structure through its links.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.stac-catalog",
       "dateTimeAddition": "2026-11-11T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1019,7 +1020,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-catalog/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-catalog/schema.yaml",
@@ -1052,6 +1053,7 @@
       "name": "Format: STAC Collection",
       "abstract": "A JSON object describing a set of related STAC Items, with its license, its spatial and temporal extents and its links.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.stac-collection",
       "dateTimeAddition": "2026-11-11T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1084,7 +1086,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-collection/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-collection/schema.yaml",
@@ -1117,6 +1119,7 @@
       "name": "Format: STAC Item",
       "abstract": "A GeoJSON Feature describing one spatiotemporal item, such as an Earth observation product, with its links and its assets.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.stac-item",
       "dateTimeAddition": "2026-11-10T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1149,7 +1152,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item/schema.yaml",
@@ -1182,6 +1185,7 @@
       "name": "Format: STAC Item Collection",
       "abstract": "A GeoJSON FeatureCollection whose features are STAC Items, with optional links and counts, such as the response of a STAC API Item Search.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.stac-item-collection",
       "dateTimeAddition": "2026-11-11T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1215,7 +1219,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item-collection/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/stac-item-collection/schema.yaml",
@@ -1248,6 +1252,7 @@
       "name": "Format: Date string",
       "abstract": "A full date, as JSON Schema `date`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-date",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1284,7 +1289,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date/schema.yaml",
@@ -1317,6 +1322,7 @@
       "name": "Format: Date-time string",
       "abstract": "A date and time with a time zone offset, as JSON Schema `date-time`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-date-time",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1353,7 +1359,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date-time/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-date-time/schema.yaml",
@@ -1386,6 +1392,7 @@
       "name": "Format: Duration string",
       "abstract": "A duration, as JSON Schema `duration`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-duration",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1422,7 +1429,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-duration/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-duration/schema.yaml",
@@ -1455,6 +1462,7 @@
       "name": "Format: Email address string",
       "abstract": "An email address, as JSON Schema `email`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-email",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1491,7 +1499,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-email/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-email/schema.yaml",
@@ -1524,6 +1532,7 @@
       "name": "Format: Hostname string",
       "abstract": "An Internet host name, as JSON Schema `hostname`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-hostname",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1560,7 +1569,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-hostname/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-hostname/schema.yaml",
@@ -1593,6 +1602,7 @@
       "name": "Format: Internationalized email address string",
       "abstract": "An internationalized email address, as JSON Schema `idn-email`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-idn-email",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1629,7 +1639,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-email/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-email/schema.yaml",
@@ -1662,6 +1672,7 @@
       "name": "Format: Internationalized hostname string",
       "abstract": "An internationalized Internet host name, as JSON Schema `idn-hostname`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-idn-hostname",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1698,7 +1709,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-hostname/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-idn-hostname/schema.yaml",
@@ -1731,6 +1742,7 @@
       "name": "Format: IPv4 address string",
       "abstract": "An IPv4 address, as JSON Schema `ipv4`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-ipv4",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1767,7 +1779,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv4/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv4/schema.yaml",
@@ -1800,6 +1812,7 @@
       "name": "Format: IPv6 address string",
       "abstract": "An IPv6 address, as JSON Schema `ipv6`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-ipv6",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1836,7 +1849,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv6/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-ipv6/schema.yaml",
@@ -1869,6 +1882,7 @@
       "name": "Format: IRI string",
       "abstract": "An IRI, as JSON Schema `iri`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-iri",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1905,7 +1919,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri/schema.yaml",
@@ -1938,6 +1952,7 @@
       "name": "Format: IRI reference string",
       "abstract": "An IRI reference, as JSON Schema `iri-reference`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-iri-reference",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -1974,7 +1989,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri-reference/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-iri-reference/schema.yaml",
@@ -2007,6 +2022,7 @@
       "name": "Format: JSON Pointer string",
       "abstract": "An absolute JSON Pointer, as JSON Schema `json-pointer`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-json-pointer",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -2043,7 +2059,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-json-pointer/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-json-pointer/schema.yaml",
@@ -2076,6 +2092,7 @@
       "name": "Format: Password string",
       "abstract": "A password, as the OpenAPI `password` format: a hint to obscure the value.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-password",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -2112,7 +2129,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-password/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-password/schema.yaml",
@@ -2181,7 +2198,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-pattern/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-pattern/schema.yaml",
@@ -2214,6 +2231,7 @@
       "name": "Format: Relative JSON Pointer string",
       "abstract": "A relative JSON Pointer, as JSON Schema `relative-json-pointer`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-relative-json-pointer",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -2250,7 +2268,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-relative-json-pointer/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-relative-json-pointer/schema.yaml",
@@ -2283,6 +2301,7 @@
       "name": "Format: Time string",
       "abstract": "A time of day with a time zone offset, as JSON Schema `time`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-time",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -2319,7 +2338,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-time/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-time/schema.yaml",
@@ -2352,6 +2371,7 @@
       "name": "Format: URI string",
       "abstract": "A URI, as JSON Schema `uri`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-uri",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -2388,7 +2408,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri/schema.yaml",
@@ -2421,6 +2441,7 @@
       "name": "Format: URI reference string",
       "abstract": "A URI reference, as JSON Schema `uri-reference`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-uri-reference",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -2457,7 +2478,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-reference/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-reference/schema.yaml",
@@ -2490,6 +2511,7 @@
       "name": "Format: URI template string",
       "abstract": "A URI template, as JSON Schema `uri-template`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-uri-template",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -2526,7 +2548,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-template/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uri-template/schema.yaml",
@@ -2559,6 +2581,7 @@
       "name": "Format: UUID string",
       "abstract": "A UUID, as JSON Schema `uuid`.",
       "status": "under-development",
+      "predecessor": "data-types.data-type.string-uuid",
       "dateTimeAddition": "2026-11-09T00:00:00Z",
       "version": "0.1",
       "register": "data-formats",
@@ -2595,7 +2618,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uuid/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/format/string-uuid/schema.yaml",
@@ -2655,7 +2678,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/bounding-box-ogcapi-processes-bbox/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/bounding-box-ogcapi-processes-bbox/schema.yaml",
@@ -2715,7 +2738,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/eo-product-stac-item/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/eo-product-stac-item/schema.yaml",
@@ -2775,7 +2798,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/feature-collection-gml/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/feature-collection-gml/schema.yaml",
@@ -2838,7 +2861,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-geojson/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-geojson/schema.yaml",
@@ -2901,7 +2924,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-gml/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/geometry-gml/schema.yaml",
@@ -2961,7 +2984,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-cloud-las/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-cloud-las/schema.yaml",
@@ -3021,7 +3044,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-gml/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/point-gml/schema.yaml",
@@ -3081,7 +3104,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-geotiff/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-geotiff/schema.yaml",
@@ -3141,7 +3164,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-single-band-geotiff/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/raster-single-band-geotiff/schema.yaml",
@@ -3201,7 +3224,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/rendered-image-png/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/rendered-image-png/schema.yaml",
@@ -3261,7 +3284,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/surface-gml/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/surface-gml/schema.yaml",
@@ -3321,7 +3344,7 @@
       "license": {
         "name": "Apache-2.0"
       },
-      "dateOfLastChange": "2026-11-12",
+      "dateOfLastChange": "2026-11-16",
       "ontology": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/elevation-model-geotiff/ontology.ttl",
       "schema": {
         "application/yaml": "https://geolabs.github.io/bblocks-data-formats/build/annotated/representation/elevation-model-geotiff/schema.yaml",

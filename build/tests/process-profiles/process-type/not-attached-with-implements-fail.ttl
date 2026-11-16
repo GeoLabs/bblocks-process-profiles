@@ -1,8 +1,8 @@
 @prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
-@prefix ns1: <http://www.iana.org/assignments/> .
-@prefix ns2: <https://w3id.org/ogc/api/processes/> .
+@prefix ns1: <https://w3id.org/ogc/api/processes/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
@@ -58,8 +58,8 @@
     pp:candidateCctDependency "eoap.cct.bbox" ;
     pp:cwlClass "CommandLineTool" ;
     pp:cwlId "reproject_band" ;
-    ns2:executionUnit [ dct:format "application/cwl+yaml" ;
-            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+    ns1:executionUnit [ dct:format "application/cwl+yaml" ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#reproject_band> ] .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> a owl:Class,

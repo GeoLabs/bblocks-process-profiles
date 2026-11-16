@@ -40,12 +40,12 @@
                     dcterms:title "Input image filename." ;
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster extent -- input `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent/inputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster extent -- input `raster`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster extent -- input `raster`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent/inputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster extent -- input `raster`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent/inputs/raster> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
@@ -69,15 +69,15 @@
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+    proc:metadata [ dcterms:title "Generic Profile: Raster extent" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Implementation Profile: Raster extent" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ dcterms:title "Generic Profile: Raster extent" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-extent> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
@@ -93,12 +93,12 @@
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/xml" ],
+                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/zip" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
+                                    ns1:contentMediaType "text/xml" ],
                                 [ proc:type "object" ] ] ] ] .
 

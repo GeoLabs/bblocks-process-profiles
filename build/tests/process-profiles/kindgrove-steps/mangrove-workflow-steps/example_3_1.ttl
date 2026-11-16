@@ -30,12 +30,12 @@ parse_aoi -> select_scene -> download_band (x3) -> reproject_band (x3)
                     proc:schema [ proc:type "object" ;
                             ns1:properties [ ns1:bbox [ proc:type "array" ;
                                             ns1:items [ proc:type "number" ] ;
-                                            ns1:oneOf [ dcterms:description "3D bbox" ;
-                                                    ns1:maxItems 6 ;
-                                                    ns1:minItems 6 ],
-                                                [ dcterms:description "2D bbox" ;
+                                            ns1:oneOf [ dcterms:description "2D bbox" ;
                                                     ns1:maxItems 4 ;
-                                                    ns1:minItems 4 ] ] ;
+                                                    ns1:minItems 4 ],
+                                                [ dcterms:description "3D bbox" ;
+                                                    ns1:maxItems 6 ;
+                                                    ns1:minItems 6 ] ] ;
                                     ns1:crs [ proc:default "\"CRS84\""^^rdf:JSON ;
                                             proc:enum "CRS84",
                                                 "CRS84h" ;
@@ -118,21 +118,21 @@ parse_aoi -> select_scene -> download_band (x3) -> reproject_band (x3)
                     proc:schema [ proc:default "\"https://earth-search.aws.element84.com/v1\""^^rdf:JSON ;
                             proc:type "string" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
-        [ rdf:value """Mangrove above-ground biomass and carbon stock estimation from Sentinel-2 L2A,
+    proc:metadata [ rdf:value """Mangrove above-ground biomass and carbon stock estimation from Sentinel-2 L2A,
 split into one CommandLineTool per processing step, aligned on the steps of the
 OSPD W1 Algae Bloom workflow:
 parse_aoi -> select_scene -> download_band (x3) -> reproject_band (x3)
 -> calculate_indices -> estimate_biomass -> export_stac.
 """ ;
             proc:role schema:description ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
         [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
             proc:role schema:codeRepository ],
-        [ rdf:value "0.1.0" ;
-            proc:role schema:softwareVersion ],
         [ rdf:value "Mangrove Biomass Workflow (step notebooks)" ;
-            proc:role schema:name ] ;
+            proc:role schema:name ],
+        [ rdf:value "0.1.0" ;
+            proc:role schema:softwareVersion ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;

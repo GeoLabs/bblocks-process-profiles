@@ -529,4 +529,4 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.terrain.topographic-position-index
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-12'
+  dateOfLastChange: '2026-11-16'

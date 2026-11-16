@@ -211,12 +211,12 @@ OGC API - Processes processDescription derived from the CWL.
                             ns2:contentEncoding "binary" ;
                             ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "otsu" ;
-            proc:role schema:name ],
+    proc:metadata [ rdf:value "1.4.1" ;
+            proc:role schema:softwareVersion ],
         [ rdf:value "Process converted from CWL" ;
             proc:role schema:description ],
-        [ rdf:value "1.4.1" ;
-            proc:role schema:softwareVersion ] ;
+        [ rdf:value "otsu" ;
+            proc:role schema:name ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
@@ -454,8 +454,8 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -468,7 +468,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         "thresholding" ;
     dcterms:title "otsu" ;
     pp:version "1.4.1" ;
-    proc:inputs [ ns2:raster [ dcterms:description "" ;
+    proc:inputs [ ns3:raster [ dcterms:description "" ;
                     dcterms:title "raster" ;
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band> ;
                     proc:keywords "raster" ;
@@ -484,34 +484,34 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "1.4.1" ;
+    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ rdf:value "otsu" ;
+            proc:role schema:name ],
+        [ rdf:value "1.4.1" ;
             proc:role schema:softwareVersion ],
+        [ dcterms:title "Implementation Profile: Otsu thresholding" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ dcterms:title "Generic Profile: Raster thresholding" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-thresholding> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ rdf:value "Process converted from CWL" ;
-            proc:role schema:description ],
-        [ dcterms:title "Implementation Profile: Otsu thresholding" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ rdf:value "otsu" ;
-            proc:role schema:name ],
-        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+            proc:role schema:description ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:binary_mask_item [ dcterms:description "" ;
+    proc:outputs [ ns2:binary_mask_item [ dcterms:description "" ;
                     dcterms:title "binary_mask_item" ;
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/binary-mask> ;
                     proc:keywords "mask" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster thresholding -- output `mask`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-thresholding/outputs/mask> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Otsu thresholding -- output `mask`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Otsu thresholding -- output `mask`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding/outputs/mask> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Raster thresholding -- output `mask`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-thresholding/outputs/mask> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] .
@@ -2133,13 +2133,13 @@ id:5fa19808-d14c-4c01-8bd1-05a7a8845019 a wf4ever:File,
         wfprov:Artifact,
         prov:Entity ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ;
-            prov:atTime "2026-09-23T22:14:43.709003"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/workflow%20node_water_bodies/detected_water_body> ],
-        [ a prov:Generation ;
             prov:activity id:6d7920a6-ee35-4701-88be-68838b9ba10b ;
             prov:atTime "2026-09-23T22:14:43.705762"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu/binary_mask_item> ] ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu/binary_mask_item> ],
+        [ a prov:Generation ;
+            prov:activity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ;
+            prov:atTime "2026-09-23T22:14:43.709003"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/workflow%20node_water_bodies/detected_water_body> ] ;
     provext:qualifiedSpecialization [ a provext:Specialization ;
             provext:generalEntity data:8cb131413518c30be6ba485ea61764491444cde5 ] ;
     cwlprov:basename "otsu.tif" ;
@@ -2205,10 +2205,10 @@ id:6d7920a6-ee35-4701-88be-68838b9ba10b a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_otsu" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:887634a3-fcfa-4422-aaa1-8949fd8db10b ],
-        [ a prov:Association ;
             prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu> ] ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu> ],
+        [ a prov:Association ;
+            prov:agent id:887634a3-fcfa-4422-aaa1-8949fd8db10b ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:14:43.705752"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
@@ -2263,13 +2263,13 @@ id:8d6db404-8e9b-4740-bc17-6a2fab7c0c32 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:09:38.001367"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:38.074291"^^xsd:dateTime ;
-            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/aoi> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:38.075873"^^xsd:dateTime ;
             prov:entity data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/item> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:09:38.074291"^^xsd:dateTime ;
+            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/aoi> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:38.075291"^^xsd:dateTime ;
             prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
@@ -2301,9 +2301,9 @@ id:eb53f504-eecb-4585-8e33-f7afdbbf816a a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:b3b5dbf6-efbd-48f2-ba85-a9937bb49c7e ],
+            provext:member id:42580139-e758-4dbe-8ca8-7a114f7abf7f ],
         [ a provext:Membership ;
-            provext:member id:42580139-e758-4dbe-8ca8-7a114f7abf7f ] .
+            provext:member id:b3b5dbf6-efbd-48f2-ba85-a9937bb49c7e ] .
 
 id:f47bdfb0-199b-4f9a-93c9-1bc6e9427cc5 a wfprov:ProcessRun,
         prov:Activity ;
@@ -2320,30 +2320,30 @@ id:f47bdfb0-199b-4f9a-93c9-1bc6e9427cc5 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:11:25.771051"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:11:25.786582"^^xsd:dateTime ;
+            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/aoi> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:11:25.787927"^^xsd:dateTime ;
+            prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/epsg> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:11:25.787372"^^xsd:dateTime ;
             prov:entity data:ba936cb0e062bea4078e8b56371ca8fe054093dd ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/band> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:11:25.788461"^^xsd:dateTime ;
             prov:entity data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/item> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:11:25.787927"^^xsd:dateTime ;
-            prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/epsg> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:11:25.786582"^^xsd:dateTime ;
-            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/aoi> ] .
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/item> ] .
 
 id:f960d24b-dcbf-4c16-88ce-ad7029487e59 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_normalized_difference" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:87ca5fb7-8991-4f4e-b107-8b30f9be5eea ],
-        [ a prov:Association ;
             prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference> ] ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference> ],
+        [ a prov:Association ;
+            prov:agent id:87ca5fb7-8991-4f4e-b107-8b30f9be5eea ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:14:35.757176"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
@@ -3015,7 +3015,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.water-bodies.otsu
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-12'
+  dateOfLastChange: '2026-11-16'
 
 ```
 

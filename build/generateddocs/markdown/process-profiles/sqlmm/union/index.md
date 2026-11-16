@@ -677,8 +677,8 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -694,38 +694,19 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "Compute union. " ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Union/execution> ] ;
     pp:version "2.0.0" ;
     proc:inputs [ ns2:InputEntity1 [ dcterms:description "the first geometry to compare against." ;
                     dcterms:title "the first geometry" ;
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/geometry> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Union -- input `geometry1`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/union/inputs/geometry1> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Mon test  " ],
-                        [ dcterms:title "Generic Profile: Binary spatial set operation -- input `geometry1`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Binary spatial set operation -- input `geometry1`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-operation/inputs/geometry1> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
-                                    ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
-            ns2:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
-                    dcterms:title "the other geometry" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/geometry> ;
-                    proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Binary spatial set operation -- input `geometry2`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-operation/inputs/geometry2> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
                         [ dcterms:title "Mon test  " ],
-                        [ dcterms:title "Implementation Profile: Union -- input `geometry2`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/union/inputs/geometry2> ;
+                        [ dcterms:title "Implementation Profile: Union -- input `geometry1`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/union/inputs/geometry1> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
@@ -734,39 +715,58 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
+            ns2:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
+                    dcterms:title "the other geometry" ;
+                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/geometry> ;
+                    proc:keywords "geometry" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Union -- input `geometry2`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/union/inputs/geometry2> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Binary spatial set operation -- input `geometry2`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-operation/inputs/geometry2> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Mon test  " ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Demo" ],
-        [ dcterms:title "Generic Profile: Binary spatial set operation" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-operation> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Implementation Profile: Union" ;
+    proc:metadata [ dcterms:title "Implementation Profile: Union" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/union> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Demo" ],
         [ dcterms:title "Process Concept: Vector Geometry Processing" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Generic Profile: Binary spatial set operation" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-operation> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:Result [ dcterms:description "The geometry representing the union of the two geometries." ;
+    proc:outputs [ ns4:Result [ dcterms:description "The geometry representing the union of the two geometries." ;
                     dcterms:title "The union of two geometries" ;
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/geometry> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Mon test  " ],
-                        [ dcterms:title "Generic Profile: Binary spatial set operation -- output `result`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Binary spatial set operation -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-operation/outputs/result> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
+                        [ dcterms:title "Mon test  " ],
                         [ dcterms:title "Implementation Profile: Union -- output `result`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/union/outputs/result> ;
                             proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                    proc:schema [ ns1:oneOf [ proc:type "object" ],
+                                [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
-                                [ proc:type "object" ] ] ] ] .
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] .
 
 
 ```
@@ -1551,7 +1551,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.sqlmm.union
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-12'
+  dateOfLastChange: '2026-11-16'
 
 ```
 

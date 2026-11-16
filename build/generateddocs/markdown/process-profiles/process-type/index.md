@@ -411,8 +411,8 @@ are provisional, pending a decision on the process-type register namespace.
 @prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
-@prefix ns1: <https://w3id.org/ogc/api/processes/> .
-@prefix ns2: <http://www.iana.org/assignments/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/ogc/api/processes/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
@@ -467,8 +467,8 @@ are provisional, pending a decision on the process-type register namespace.
     dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
     pp:cwlClass "CommandLineTool" ;
     pp:cwlId "reproject-image" ;
-    ns1:executionUnit [ dcterms:format "application/cwl+yaml" ;
-            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+    ns2:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/reproject-image.cwl> ] .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> a owl:Class,
@@ -833,8 +833,8 @@ are provisional, pending a decision on the process-type register namespace.
 ```ttl
 @prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/processes/> .
-@prefix ns2: <http://www.iana.org/assignments/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/ogc/api/processes/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
@@ -875,8 +875,8 @@ are provisional, pending a decision on the process-type register namespace.
     pp:candidateCctDependency "eoap.cct.bbox" ;
     pp:cwlClass "CommandLineTool" ;
     pp:cwlId "mangrove_cli" ;
-    ns1:executionUnit [ dcterms:format "application/cwl+yaml" ;
-            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+    ns2:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove_cli> ] .
 
 <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove> a owl:Class,
@@ -2631,7 +2631,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.process-type
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-12'
+  dateOfLastChange: '2026-11-16'
 
 ```
 

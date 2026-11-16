@@ -319,9 +319,9 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://w3id.org/ogc/api/schema/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -332,30 +332,30 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
 <https://geolabs.github.io/bblocks-process-profiles/def/process/water-bodies> dcterms:description "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
     dcterms:title "Water bodies detection based on NDWI and otsu threshold" ;
     pp:version "1.4.1" ;
-    proc:inputs [ ns2:aoi [ dcterms:description "area of interest as a bounding box" ;
+    proc:inputs [ ns3:aoi [ dcterms:description "area of interest as a bounding box" ;
                     dcterms:title "area of interest" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns2:bands [ dcterms:description "bands used for the NDWI" ;
+            ns3:bands [ dcterms:description "bands used for the NDWI" ;
                     dcterms:title "bands used for the NDWI" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "[\"green\",\"nir\"]"^^rdf:JSON ;
                             proc:type "array" ;
-                            ns3:items [ proc:type "string" ] ] ] ;
-            ns2:epsg [ dcterms:description "EPSG code" ;
+                            ns1:items [ proc:type "string" ] ] ] ;
+            ns3:epsg [ dcterms:description "EPSG code" ;
                     dcterms:title "EPSG code" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"EPSG:4326\""^^rdf:JSON ;
                             proc:type "string" ] ] ;
-            ns2:stac_items [ dcterms:description "list of Sentinel-2 COG STAC items" ;
+            ns3:stac_items [ dcterms:description "list of Sentinel-2 COG STAC items" ;
                     dcterms:title "Sentinel-2 STAC items" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "array" ;
-                            ns3:items [ proc:type "string" ] ] ] ] ;
+                            ns1:items [ proc:type "string" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
     proc:metadata [ rdf:value "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
             proc:role schema:description ],
@@ -366,17 +366,17 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns1:stac [ dcterms:description "" ;
+    proc:outputs [ ns2:stac [ dcterms:description "" ;
                     dcterms:title "stac" ;
                     proc:schema [ proc:type "object" ;
-                            ns3:format "stac-catalog" ;
-                            ns3:properties [ dcterms:description [ proc:type "string" ] ;
+                            ns1:format "stac-catalog" ;
+                            ns1:properties [ dcterms:description [ proc:type "string" ] ;
                                     dcterms:title [ proc:type "string" ] ;
                                     rdfs:seeAlso [ dcterms:type "array" ] ;
                                     proc:type [ proc:enum "Catalog" ;
                                             proc:type "string" ] ;
-                                    ns3:stac_version [ proc:type "string" ] ] ;
-                            ns3:required "description",
+                                    ns1:stac_version [ proc:type "string" ] ] ;
+                            ns1:required "description",
                                 "id",
                                 "links",
                                 "stac_version",
@@ -695,12 +695,12 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "Water bodies detection based on NDWI and otsu threshold" ;
+    proc:metadata [ rdf:value "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
+            proc:role schema:description ],
+        [ rdf:value "Water bodies detection based on NDWI and otsu threshold" ;
             proc:role schema:name ],
         [ rdf:value "1.4.1" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
-            proc:role schema:description ] ;
+            proc:role schema:softwareVersion ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
@@ -3369,9 +3369,9 @@ id:3d637621-61a3-4c53-8aaf-70daadac3593 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:5fa19808-d14c-4c01-8bd1-05a7a8845019 ],
+            provext:member id:e06b906c-ef24-4174-830c-4a184274216f ],
         [ a provext:Membership ;
-            provext:member id:e06b906c-ef24-4174-830c-4a184274216f ] .
+            provext:member id:5fa19808-d14c-4c01-8bd1-05a7a8845019 ] .
 
 id:471cf7c7-1a60-4c28-b3d0-904c5aa74707 a wf4ever:File,
         wfprov:Artifact,
@@ -3422,30 +3422,30 @@ id:afa01c29-85ed-418e-b3a4-99ff6f4b06cf a ro:Folder,
         "id:7d9076f9-073d-4667-84e9-131fd7fda68c"^^xsd:QName,
         "id:a9451218-986b-4920-9d23-62638b8aea56"^^xsd:QName ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:fbfd9735-117b-4cdd-9707-61f171585925 ;
-            prov:atTime "2026-09-23T22:17:45.432581"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/stac_catalog> ],
-        [ a prov:Generation ;
             prov:activity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ;
             prov:atTime "2026-09-23T22:17:45.465410"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/primary/stac> ] ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/primary/stac> ],
+        [ a prov:Generation ;
+            prov:activity id:fbfd9735-117b-4cdd-9707-61f171585925 ;
+            prov:atTime "2026-09-23T22:17:45.432581"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/stac_catalog> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
+            provext:member id:0d06dfcd-e7b7-4fad-a2a5-66cddd416313 ],
+        [ a provext:Membership ;
             provext:member id:1d5bc5ed-98ce-4f75-8ca8-c19f497b03c0 ],
         [ a provext:Membership ;
             provext:member id:a782f6a0-89d7-46ac-9c76-c6569903f8e1 ],
         [ a provext:Membership ;
-            provext:member id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 ],
-        [ a provext:Membership ;
-            provext:member id:0d06dfcd-e7b7-4fad-a2a5-66cddd416313 ] ;
+            provext:member id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 ] ;
     cwlprov:basename "docker_tmpwngcerl4" .
 
 id:b6924a3c-a25c-4107-bdd7-2b5b2bff912e a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:ba936cb0e062bea4078e8b56371ca8fe054093dd ],
+            provext:member data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ],
         [ a provext:Membership ;
-            provext:member data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ] .
+            provext:member data:ba936cb0e062bea4078e8b56371ca8fe054093dd ] .
 
 id:d8353ab3-7279-484e-a461-b04ae4b52890 a prov:Agent,
         prov:SoftwareAgent ;
@@ -3507,9 +3507,9 @@ id:1d5bc5ed-98ce-4f75-8ca8-c19f497b03c0 a ro:Folder,
     prov:hadDictionaryMember "id:1aa0c641-ea02-485d-a14b-c5a0aa40154b"^^xsd:QName,
         "id:bbd82449-f35c-4d0e-a771-32af085fe0db"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:0825c9ab-8336-4546-bdb6-27a7ec74c6b5 ],
+            provext:member id:8a52cbfa-2822-476c-baed-680f3a070398 ],
         [ a provext:Membership ;
-            provext:member id:8a52cbfa-2822-476c-baed-680f3a070398 ] ;
+            provext:member id:0825c9ab-8336-4546-bdb6-27a7ec74c6b5 ] ;
     cwlprov:basename "S2B_10TFK_20210713_0_L2A" .
 
 id:76afd8f9-b8f8-4b00-88b9-5bbf50509248 a ro:Folder,
@@ -3560,10 +3560,6 @@ id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 a wfprov:WorkflowRun,
             prov:atTime "2026-09-23T22:09:35.483879"^^xsd:dateTime ;
             prov:hadActivity id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:37.991132"^^xsd:dateTime ;
-            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/aoi> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:37.992978"^^xsd:dateTime ;
             prov:entity id:b6924a3c-a25c-4107-bdd7-2b5b2bff912e ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/bands> ],
@@ -3574,7 +3570,11 @@ id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 a wfprov:WorkflowRun,
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:37.993781"^^xsd:dateTime ;
             prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/epsg> ] ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/epsg> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:09:37.991132"^^xsd:dateTime ;
+            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/aoi> ] ;
     prov:startedAtTime "2026-09-23T22:09:35.483832"^^xsd:dateTime .
 
 id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c a wfprov:WorkflowEngine,
@@ -4024,7 +4024,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.water-bodies.water-bodies
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-12'
+  dateOfLastChange: '2026-11-16'
 
 ```
 

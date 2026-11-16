@@ -205,8 +205,8 @@ OGC API - Processes processDescription derived from the CWL.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
 @prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -222,9 +222,9 @@ OGC API - Processes processDescription derived from the CWL.
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ] ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
     proc:metadata [ rdf:value "norm_diff" ;
             proc:role schema:name ],
@@ -235,11 +235,11 @@ OGC API - Processes processDescription derived from the CWL.
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:ndwi [ dcterms:description "" ;
+    proc:outputs [ ns1:ndwi [ dcterms:description "" ;
                     dcterms:title "ndwi" ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentEncoding "binary" ;
-                            ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] .
+                            ns2:contentEncoding "binary" ;
+                            ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] .
 
 
 ```
@@ -494,33 +494,33 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters) -- input `rasters`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/inputs/rasters> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Radiometric index -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Radiometric index -- input `rasters`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/inputs/rasters> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters) -- input `rasters`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/inputs/rasters> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters)" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+    proc:metadata [ rdf:value "norm_diff" ;
+            proc:role schema:name ],
         [ rdf:value "Process converted from CWL" ;
             proc:role schema:description ],
+        [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters)" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Generic Profile: Radiometric index" ;
+            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Process Concept: Raster Coverage Processing" ;
             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ rdf:value "1.4.1" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value "norm_diff" ;
-            proc:role schema:name ],
-        [ dcterms:title "Generic Profile: Radiometric index" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+            proc:role schema:softwareVersion ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
@@ -528,12 +528,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:title "ndwi" ;
                     dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters) -- output `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
-                        [ dcterms:title "Generic Profile: Radiometric index -- output `raster`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Radiometric index -- output `raster`" ;
                             proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/radiometric-index/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters) -- output `raster`" ;
+                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band/outputs/raster> ;
+                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] .
@@ -645,9 +645,9 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 @prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
-[] proc:inputs [ ns1:rasters [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_nir.tif" ;
+[] proc:inputs [ ns1:rasters [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_green.tif" ;
                     proc:type "image/tiff; application=geotiff" ],
-                [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_green.tif" ;
+                [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_nir.tif" ;
                     proc:type "image/tiff; application=geotiff" ] ] ;
     proc:response "document" .
 
@@ -866,8 +866,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 
 <urn:example:entity:norm-diff:in:rasters> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/norm_diff#inputs/rasters> ;
-    rdf:value [ pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_green.tif" ],
-        [ pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_nir.tif" ] .
+    rdf:value [ pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_nir.tif" ],
+        [ pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_green.tif" ] .
 
 <urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0> a prov:SoftwareAgent ;
     pp:name "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0" .
@@ -2326,9 +2326,9 @@ id:1f7549f8-4403-44f2-a435-f95a32edb9de a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ],
+            provext:member data:ba936cb0e062bea4078e8b56371ca8fe054093dd ],
         [ a provext:Membership ;
-            provext:member data:ba936cb0e062bea4078e8b56371ca8fe054093dd ] .
+            provext:member data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ] .
 
 id:42580139-e758-4dbe-8ca8-7a114f7abf7f a wf4ever:File,
         wfprov:Artifact,
@@ -2394,10 +2394,10 @@ id:8d6db404-8e9b-4740-bc17-6a2fab7c0c32 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_crop" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop> ],
+            prov:agent id:8bbef2fa-3721-4f50-b27c-1d641100a89f ],
         [ a prov:Association ;
-            prov:agent id:8bbef2fa-3721-4f50-b27c-1d641100a89f ] ;
+            prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:11:25.695175"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
@@ -2405,10 +2405,6 @@ id:8d6db404-8e9b-4740-bc17-6a2fab7c0c32 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:09:38.001367"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:38.075291"^^xsd:dateTime ;
-            prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/epsg> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:38.074835"^^xsd:dateTime ;
             prov:entity data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/band> ],
@@ -2416,6 +2412,10 @@ id:8d6db404-8e9b-4740-bc17-6a2fab7c0c32 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:09:38.075873"^^xsd:dateTime ;
             prov:entity data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/item> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:09:38.075291"^^xsd:dateTime ;
+            prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/epsg> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:38.074291"^^xsd:dateTime ;
             prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
@@ -2451,10 +2451,10 @@ id:f47bdfb0-199b-4f9a-93c9-1bc6e9427cc5 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_crop_2" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:c2b78598-db7e-4ab3-89eb-621c7b5c9bd6 ],
-        [ a prov:Association ;
             prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2> ] ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2> ],
+        [ a prov:Association ;
+            prov:agent id:c2b78598-db7e-4ab3-89eb-621c7b5c9bd6 ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:14:14.382774"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
@@ -2462,30 +2462,30 @@ id:f47bdfb0-199b-4f9a-93c9-1bc6e9427cc5 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:11:25.771051"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:11:25.786582"^^xsd:dateTime ;
-            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/aoi> ],
+            prov:atTime "2026-09-23T22:11:25.788461"^^xsd:dateTime ;
+            prov:entity data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/item> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:11:25.787927"^^xsd:dateTime ;
             prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/epsg> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:11:25.788461"^^xsd:dateTime ;
-            prov:entity data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/item> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:11:25.787372"^^xsd:dateTime ;
             prov:entity data:ba936cb0e062bea4078e8b56371ca8fe054093dd ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/band> ] .
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/band> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:11:25.786582"^^xsd:dateTime ;
+            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/aoi> ] .
 
 id:f960d24b-dcbf-4c16-88ce-ad7029487e59 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_normalized_difference" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:87ca5fb7-8991-4f4e-b107-8b30f9be5eea ],
-        [ a prov:Association ;
             prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference> ] ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference> ],
+        [ a prov:Association ;
+            prov:agent id:87ca5fb7-8991-4f4e-b107-8b30f9be5eea ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:14:35.757176"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
@@ -2542,13 +2542,13 @@ id:006f10ba-bce7-4602-bc25-46f0ca2c5724 a wfprov:WorkflowRun,
             prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/epsg> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:37.998964"^^xsd:dateTime ;
-            prov:entity id:1f7549f8-4403-44f2-a435-f95a32edb9de ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/bands> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:37.997833"^^xsd:dateTime ;
             prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/aoi> ] ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/aoi> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:09:37.998964"^^xsd:dateTime ;
+            prov:entity id:1f7549f8-4403-44f2-a435-f95a32edb9de ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/bands> ] ;
     prov:startedAtTime "2026-09-23T22:09:36.483701"^^xsd:dateTime .
 
 
@@ -3157,7 +3157,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.water-bodies.norm-diff
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-12'
+  dateOfLastChange: '2026-11-16'
 
 ```
 
