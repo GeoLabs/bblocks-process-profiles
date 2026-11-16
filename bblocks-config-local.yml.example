@@ -1,5 +1,6 @@
-# Local-only url-mappings, see docs/LOCAL-BUILD.md. Copy to bblocks-config-local.yml (git-ignored)
-# and mount each target directory at the path given.
+# Optional, local only: url-mappings to test a change not yet published upstream, see
+# docs/LOCAL-BUILD.md. Copy to bblocks-config-local.yml (git-ignored), keep only the changed
+# registers and mount each target directory at the path given.
 url-mappings:
   # data-types, built with --base-url https://geolabs.github.io/bblocks-data-types/
   https://geolabs.github.io/bblocks-data-types/build/: /ext/dt/build-local/
