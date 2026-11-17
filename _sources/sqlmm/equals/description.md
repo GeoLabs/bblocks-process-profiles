@@ -6,7 +6,7 @@ Process profile of the live OGC API - Processes process `Equals` (ZOO-Project, G
 
 ## Implementation Profile
 
-Implements [`Equals`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/equals) (`generic-profiles.implementation-profile.equals`, bblocks-generic-profiles).
+Implements [`Equals`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/equals) (`generic-profiles.implementation-profile.equals`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

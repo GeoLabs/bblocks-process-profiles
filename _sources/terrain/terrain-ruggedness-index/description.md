@@ -12,7 +12,7 @@ Tool 16 of SAGA's Terrain Analysis - Morphometry library (author O. Conrad, 2010
 
 ## Implementation Profile
 
-Implements [`Terrain ruggedness index`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index) (`generic-profiles.implementation-profile.terrain-ruggedness-index`, bblocks-generic-profiles).
+Implements [`Terrain ruggedness index`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/terrain-ruggedness-index) (`generic-profiles.implementation-profile.terrain-ruggedness-index`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

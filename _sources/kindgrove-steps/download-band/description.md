@@ -43,7 +43,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Implements [`Band retrieval`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval) (`generic-profiles.implementation-profile.band-retrieval`, bblocks-generic-profiles). Signature checked against band-retrieval: `stac_item` (a STAC Item file) implements `product`; `band` (a STAC asset key) implements `band`; `west`, `south`, `east`, `north` implement `areaOfInterest` as a role decomposition (EPSG:4326, hard-coded); `band_file` implements the output `raster`.
+Implements [`Band retrieval`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval) (`generic-profiles.implementation-profile.band-retrieval`, bblocks-generic-profiles). Signature checked against band-retrieval: `stac_item` (a STAC Item file) implements `product`; `band` (a STAC asset key) implements `band`; `west`, `south`, `east`, `north` implement `areaOfInterest` as a role decomposition (EPSG:4326, hard-coded); `band_file` implements the output `raster`.
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -64,4 +64,4 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

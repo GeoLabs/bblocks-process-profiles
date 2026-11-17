@@ -57,7 +57,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Implements [`Raster rendering`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering) (`generic-profiles.implementation-profile.raster-rendering`, bblocks-generic-profiles). Signature checked against raster-rendering: `input_image` (GeoTIFF, TIFF or JPEG 2000) implements `raster`; `color_scale` (a JSON array of value bins and colours, in a string) implements `colourMap`; `output_plot` (PNG) implements the output `image`. `output_file`, the coloured RGBA TIFF on the input grid (declared GeoTIFF but not georeferenced, Q-PLOT-GEOTIFF), is an output of the deployment's own, as are `output_name`, `plot_name`, `plot_title`, `clip_min` and `clip_max`.
+Implements [`Raster rendering`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering) (`generic-profiles.implementation-profile.raster-rendering`, bblocks-generic-profiles). Signature checked against raster-rendering: `input_image` (GeoTIFF, TIFF or JPEG 2000) implements `raster`; `color_scale` (a JSON array of value bins and colours, in a string) implements `colourMap`; `output_plot` (PNG) implements the output `image`. `output_file`, the coloured RGBA TIFF on the input grid (declared GeoTIFF but not georeferenced, Q-PLOT-GEOTIFF), is an output of the deployment's own, as are `output_name`, `plot_name`, `plot_title`, `clip_min` and `clip_max`.
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -78,4 +78,4 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/plot-image` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/plot-image` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

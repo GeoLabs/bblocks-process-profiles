@@ -17,7 +17,7 @@ On this deployment:
 
 ## Implementation Profile
 
-Implements [`Point cloud to grid`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-grid) (`generic-profiles.implementation-profile.point-cloud-to-grid`, bblocks-generic-profiles).
+Implements [`Point cloud to grid`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid) (`generic-profiles.implementation-profile.point-cloud-to-grid`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

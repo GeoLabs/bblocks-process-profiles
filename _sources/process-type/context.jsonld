@@ -2,7 +2,7 @@
   "@context": {
     "@version": 1.1,
     "skos": "http://www.w3.org/2004/02/skos/core#",
-    "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "pp": "https://w3id.org/geolabs/ospd/process-profiles/",
     "prov": "http://www.w3.org/ns/prov#",
     "dct": "http://purl.org/dc/terms/",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
@@ -268,6 +268,14 @@
       "@context": {
         "reason": "skos:note"
       }
+    },
+    "affectedProperty": {
+      "@id": "rim:affectedProperty",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "http://www.w3.org/2002/07/owl#sameAs",
+      "@type": "@id"
     }
   }
 }

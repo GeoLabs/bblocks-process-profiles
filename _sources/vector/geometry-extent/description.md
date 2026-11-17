@@ -17,7 +17,7 @@ On this deployment:
 
 ## Implementation Profile
 
-Implements [`Geometry extent`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent) (`generic-profiles.implementation-profile.geometry-extent`, bblocks-generic-profiles).
+Implements [`Geometry extent`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/geometry-extent) (`generic-profiles.implementation-profile.geometry-extent`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

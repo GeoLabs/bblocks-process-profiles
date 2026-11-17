@@ -48,7 +48,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Implements [`Raster resampling`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling) (`generic-profiles.implementation-profile.raster-resampling`, bblocks-generic-profiles). Signature checked against raster-resampling: `input_image` (GeoTIFF, TIFF or JPEG 2000) implements `raster`; `output_resolution` (`-tr`, an integer pair, optional at tier 4) implements `resolution`; `result` (GeoTIFF) implements the output `raster`. `output_dimensions` (`-ts`, the other way to define the target grid) and `output_name` are inputs of the deployment's own. Not raster-reprojection: no target CRS (`-t_srs` is never passed). Not exposed: the interpolation method (gdalwarp's default) and the forced Float32 type.
+Implements [`Raster resampling`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-resampling) (`generic-profiles.implementation-profile.raster-resampling`, bblocks-generic-profiles). Signature checked against raster-resampling: `input_image` (GeoTIFF, TIFF or JPEG 2000) implements `raster`; `output_resolution` (`-tr`, an integer pair, optional at tier 4) implements `resolution`; `result` (GeoTIFF) implements the output `raster`. `output_dimensions` (`-ts`, the other way to define the target grid) and `output_name` are inputs of the deployment's own. Not raster-reprojection: no target CRS (`-t_srs` is never passed). Not exposed: the interpolation method (gdalwarp's default) and the forced Float32 type.
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -67,4 +67,4 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

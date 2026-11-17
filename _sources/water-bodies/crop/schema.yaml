@@ -139,7 +139,7 @@ $defs:
           propertyNames:
             enum:
             - cropped
-    - description: '`crop` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval`:
+    - description: '`crop` as the Implementation (instance level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval`:
         Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) inherited from its Implementation
         Profile.'
       type: object
@@ -166,7 +166,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/data-discovery-and-access
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/concept/data-discovery-and-access
           - contains:
               type: object
               required:
@@ -176,7 +176,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval
           - contains:
               type: object
               required:
@@ -186,7 +186,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval
         inputs:
           type: object
           required:
@@ -200,7 +200,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/eo-product
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/eo-product
                 keywords:
                   allOf:
                   - contains:
@@ -214,9 +214,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/inputs/product
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/inputs/product
                   - contains:
                       type: object
                       required:
@@ -224,9 +224,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/product
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/product
                 minOccurs:
                   type: integer
                   minimum: 0
@@ -238,7 +238,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/band-identifier
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/band-identifier
                 keywords:
                   allOf:
                   - contains:
@@ -252,9 +252,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/inputs/band
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/inputs/band
                   - contains:
                       type: object
                       required:
@@ -262,9 +262,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/band
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/band
                 minOccurs:
                   type: integer
                   minimum: 0
@@ -281,7 +281,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
                 keywords:
                   allOf:
                   - contains:
@@ -295,9 +295,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/outputs/raster
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/outputs/raster
                   - contains:
                       type: object
                       required:
@@ -305,6 +305,6 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/outputs/raster
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/outputs/raster

@@ -16,7 +16,7 @@ Quoted from the OTB CookBook, CC BY-SA 4.0 (https://creativecommons.org/licenses
 
 ## Implementation Profile
 
-Implements [`Raster extent`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent) (`generic-profiles.implementation-profile.raster-extent`, bblocks-generic-profiles).
+Implements [`Raster extent`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-extent) (`generic-profiles.implementation-profile.raster-extent`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

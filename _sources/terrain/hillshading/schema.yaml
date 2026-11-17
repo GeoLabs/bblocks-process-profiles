@@ -66,7 +66,7 @@ $defs:
           type: object
           required:
           - SHADE
-    - description: '`SAGA.ta_lighting.0` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading`:
+    - description: '`SAGA.ta_lighting.0` as the Implementation (instance level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading`:
         Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) inherited from its Implementation
         Profile.'
       type: object
@@ -99,7 +99,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis
           - contains:
               type: object
               required:
@@ -109,7 +109,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading
           - contains:
               type: object
               required:
@@ -119,7 +119,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading
         inputs:
           type: object
           required:
@@ -134,7 +134,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model
                 keywords:
                   allOf:
                   - contains:
@@ -148,9 +148,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/elevation
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/elevation
                   - contains:
                       type: object
                       required:
@@ -158,9 +158,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/elevation
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/elevation
             AZIMUTH:
               required:
               - dataType
@@ -168,7 +168,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/number
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/number
                 keywords:
                   allOf:
                   - contains:
@@ -182,9 +182,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/azimuth
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/azimuth
                   - contains:
                       type: object
                       required:
@@ -192,9 +192,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/azimuth
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/azimuth
                 minOccurs:
                   type: integer
                   minimum: 0
@@ -206,7 +206,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/number
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/number
                 keywords:
                   allOf:
                   - contains:
@@ -220,9 +220,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/altitude
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/altitude
                   - contains:
                       type: object
                       required:
@@ -230,9 +230,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/altitude
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/altitude
                 minOccurs:
                   type: integer
                   minimum: 0
@@ -249,7 +249,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
                 keywords:
                   allOf:
                   - contains:
@@ -263,9 +263,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/outputs/result
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/outputs/result
                   - contains:
                       type: object
                       required:
@@ -273,6 +273,6 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/outputs/result
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/outputs/result

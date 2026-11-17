@@ -6,7 +6,7 @@ Process profile of the live OGC API - Processes process `Centroid` (ZOO-Project,
 
 ## Implementation Profile
 
-Implements [`Centroid`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/centroid) (`generic-profiles.implementation-profile.centroid`, bblocks-generic-profiles).
+Implements [`Centroid`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/centroid) (`generic-profiles.implementation-profile.centroid`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

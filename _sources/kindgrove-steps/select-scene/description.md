@@ -53,7 +53,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Implements [`Product selection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection) (`generic-profiles.implementation-profile.product-selection`, bblocks-generic-profiles). Signature checked against product-selection: `west`, `south`, `east`, `north` implement `areaOfInterest` as a role decomposition (a bounding box in EPSG:4326, implicit); `days_back` implements `timeInterval` as a literal role decomposition, not reproducible; `collection` implements `collection`; `stac_item` (one STAC Item file) implements the output `products`. `cloud_cover_max` and `stac_api` are inputs of the deployment's own.
+Implements [`Product selection`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection) (`generic-profiles.implementation-profile.product-selection`, bblocks-generic-profiles). Signature checked against product-selection: `west`, `south`, `east`, `north` implement `areaOfInterest` as a role decomposition (a bounding box in EPSG:4326, implicit); `days_back` implements `timeInterval` as a literal role decomposition, not reproducible; `collection` implements `collection`; `stac_item` (one STAC Item file) implements the output `products`. `cloud_cover_max` and `stac_api` are inputs of the deployment's own.
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -77,4 +77,4 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/select-scene` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

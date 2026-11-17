@@ -6,7 +6,7 @@ Process profile of the live OGC API - Processes process `SymDifference` (ZOO-Pro
 
 ## Implementation Profile
 
-Implements [`Symmetric difference`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference) (`generic-profiles.implementation-profile.symdifference`, bblocks-generic-profiles).
+Implements [`Symmetric difference`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference) (`generic-profiles.implementation-profile.symdifference`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

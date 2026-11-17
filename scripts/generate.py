@@ -30,7 +30,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "scripts"
-BASE = "https://geolabs.github.io/bblocks-process-profiles/def/"
+BASE = "https://w3id.org/geolabs/ospd/process-profiles/"
 PTYPE_SCHEME = BASE + "process-type"
 PROCESS_TYPE_REGISTER = BASE + "register"
 GEOLABS_AGENT = BASE + "geolabs"
@@ -49,8 +49,8 @@ BBLOCK_IRI = "https://www.opengis.net/def/bblocks/"
 PREFIX = "ospd.process-profiles."
 TODAY = "2026-09-22"
 PART1_CORE = "http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core"
-GENERIC_PROFILES_BASE = "https://geolabs.github.io/bblocks-generic-profiles/def/"
-DATA_TYPES_BASE = "https://geolabs.github.io/bblocks-data-types/def/data-type/"
+GENERIC_PROFILES_BASE = "https://w3id.org/geolabs/ospd/generic-profiles/"
+DATA_TYPES_BASE = "https://w3id.org/geolabs/ospd/data-types/data-type/"
 DATA_FORMATS_BASE = "https://w3id.org/geolabs/ospd/data-formats/"
 
 # The two populations of this register (A4.5): the deployable CWL processes of the OSPD reference
@@ -80,6 +80,16 @@ FORMAT_MEDIA = {
 
 
 PROCESS_BASE = BASE + "process/"
+# Namespace of the entries published before the move to w3id.org on IDENTIFIER_MOVED (decision of
+# 2026-11-17): each keeps its old IRI as owl:sameAs and records the move as a clarifying amendment.
+LEGACY_BASE = "https://geolabs.github.io/bblocks-process-profiles/def/"
+IDENTIFIER_MOVED = "2026-11-17"
+
+
+def process_base(workflow):
+    """Base URI of the snippets of a process: its relative ids land in process/<workflow>/, which
+    w3id.org resolves to the building block of the process, as it does for process-type/<workflow>/."""
+    return f"{PROCESS_BASE}{workflow}/"
 
 # JSON-LD context written next to every profile Building Block (context.jsonld).
 #
@@ -219,6 +229,8 @@ PROFILE_CONTEXT = {
         "addition": "rim:additionAction",
         "proposer": {"@id": "rim:proposer", "@type": "@id"},
         "appliesTo": {"@id": "rim:appliesTo", "@type": "@id"},
+        "affectedProperty": {"@id": "rim:affectedProperty", "@type": "@id"},
+        "sameAs": {"@id": "http://www.w3.org/2002/07/owl#sameAs", "@type": "@id"},
         "prefLabel": "skos:prefLabel",
         "definition": "skos:definition",
         "inScheme": {"@id": "skos:inScheme", "@type": "@id"},
@@ -849,6 +861,14 @@ def amendments(proc, parent):
                     "and is not attached now (decision Q1 of 2026-11-11)."))
     for a in proc.get("amendments") or []:
         out.append((a["id"], a["date"], a["classification"], " ".join(a["description"].split())))
+    entry_id = ptype_iri(proc)
+    old = LEGACY_BASE + entry_id[len(BASE):]
+    out.append((f"identifier-{IDENTIFIER_MOVED}", IDENTIFIER_MOVED, "clarifying",
+                f"The object identifier of this item moves from {old} to {entry_id}, which resolves through "
+                f"w3id.org (decision of {IDENTIFIER_MOVED}); the register actions of the item move with it, under "
+                f"{entry_id}/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. "
+                f"Classified clarifying: the item is the same, only its identifier changes.",
+                "https://w3id.org/ogc/rim/objectIdentifier"))
     return sorted(out, key=lambda a: a[1])
 
 
@@ -866,12 +886,13 @@ def register_item_fields(entry_id, proc=None, parent=None):
         "startedAtTime": TODAY + "T00:00:00Z",
         "appliesTo": entry_id,
     }]
-    for name, date, classification, description in (amendments(proc, parent) if proc else []):
+    for name, date, classification, description, *affected in (amendments(proc, parent) if proc else []):
         actions.append({
             "id": f"{entry_id}/actions/{name}",
             "type": "RegisterAction",
             "actionType": AMENDMENT_ACTION,
             "changeClassification": classification,
+            **({"affectedProperty": affected[0]} if affected else {}),
             "description": description,
             "proposer": GEOLABS_AGENT,
             "startedAtTime": date + "T00:00:00Z",
@@ -880,6 +901,7 @@ def register_item_fields(entry_id, proc=None, parent=None):
     return {
         "type": ["ProcessType", "owlClass", "ActivityType"],
         "objectIdentifier": entry_id,
+        **({"sameAs": LEGACY_BASE + entry_id[len(BASE):]} if proc else {}),
         "itemClass": ATR_ITEM_CLASS,
         "inRegister": PROCESS_TYPE_REGISTER,
         "validityStatus": "invalid",
@@ -1247,7 +1269,7 @@ def examples_yaml(proc, cwl_el, url, corrected, has_exec):
     # processDescription itself). Without a base URI they uplift to file:// IRIs rooted at the
     # uplift working directory; with one they land in the register's process namespace.
     return [e if not e.get("snippets")
-            else {"title": e["title"], "base-uri": PROCESS_BASE,
+            else {"title": e["title"], "base-uri": process_base(proc["workflow"]),
                   **{k: v for k, v in e.items() if k != "title"}}
             for e in ex]
 
@@ -1857,7 +1879,7 @@ def ogcapi_examples_yaml(proc, url):
          "snippets": [{"language": "json", "ref": "examples/process-type.json", "schema-ref": "#/$defs/processTypeEntry"}]},
     ]
     return [e if not e.get("snippets")
-            else {"title": e["title"], "base-uri": PROCESS_BASE, **{k: v for k, v in e.items() if k != "title"}}
+            else {"title": e["title"], "base-uri": process_base(proc["workflow"]), **{k: v for k, v in e.items() if k != "title"}}
             for e in ex]
 
 
@@ -2274,14 +2296,14 @@ def main():
     dump_json(pt / "examples" / "raster-extract-roi.json",
               json.loads((ROOT / "_sources/raster/extract-roi/examples/process-type.json").read_text()))
     dump_yaml(pt / "examples.yaml", [
-        {"title": "reproject-image (closeMatch, not attached to tier 3)", "base-uri": PROCESS_BASE,
+        {"title": "reproject-image (closeMatch, not attached to tier 3)", "base-uri": process_base("algae-bloom"),
          "snippets": [{"language": "json", "ref": "examples/reproject-image.json"}]},
-        {"title": "KindGrove mangrove (none, with decomposition)", "base-uri": PROCESS_BASE,
+        {"title": "KindGrove mangrove (none, with decomposition)", "base-uri": process_base("kindgrove"),
          "snippets": [{"language": "json", "ref": "examples/kindgrove-mangrove.json"}]},
         {"title": "KindGrove steps reproject-band (CWL, attached to raster-reprojection, specialising its activity type)",
-         "base-uri": PROCESS_BASE,
+         "base-uri": process_base("kindgrove-steps"),
          "snippets": [{"language": "json", "ref": "examples/kindgrove-steps-reproject-band.json"}]},
-        {"title": "OTB.ExtractROI (live, attached to raster-crop, role decomposition)", "base-uri": PROCESS_BASE,
+        {"title": "OTB.ExtractROI (live, attached to raster-crop, role decomposition)", "base-uri": process_base("raster"),
          "snippets": [{"language": "json", "ref": "examples/raster-extract-roi.json"}]},
         {"title": "The register, its specification and its amendment action type",
          "content": "The ontology of this block, validated as data: this checks `pp:register` and `pp:specification` "

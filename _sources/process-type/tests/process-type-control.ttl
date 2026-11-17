@@ -1,5 +1,5 @@
 # Must pass: the control of the three process-type fixtures, with a phase and a deployment.
-@prefix pp:      <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp:      <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix rim:     <https://w3id.org/ogc/rim/> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
@@ -7,15 +7,15 @@
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix prov:    <http://www.w3.org/ns/prov#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
-@prefix phase:   <https://geolabs.github.io/bblocks-process-profiles/def/phase/> .
+@prefix phase:   <https://w3id.org/geolabs/ospd/process-profiles/phase/> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/fixture/control> a pp:ProcessType , acttype:ActivityType , owl:Class ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/fixture/control"^^xsd:anyURI ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/fixture/control> a pp:ProcessType , acttype:ActivityType , owl:Class ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/fixture/control"^^xsd:anyURI ;
     rim:itemClass acttype:activityTypeItemClass ;
     rim:inRegister pp:register ;
     rim:validityStatus rim:invalid ;
     rim:publicationStatus rim:published ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/fixture/control/actions/addition> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/fixture/control/actions/addition> ;
     skos:prefLabel "Fixture" ;
     skos:definition "A fixture process type." ;
     rdfs:subClassOf acttype:ActivityType ;
@@ -23,8 +23,8 @@
     pp:phase phase:pre-processing ;
     pp:deployment [ pp:profile "ospd.process-profiles.fixture" ; pp:provenanceClass <http://purl.org/wf4ever/wfprov#ProcessRun> ] .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/fixture/control/actions/addition> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/fixture/control/actions/addition> a rim:RegisterAction ;
     rim:actionType rim:additionAction ;
     rim:proposer pp:geolabs ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/fixture/control> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/fixture/control> ;
     prov:startedAtTime "2026-11-09T00:00:00Z"^^xsd:dateTime .

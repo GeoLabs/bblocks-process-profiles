@@ -6,7 +6,7 @@ Process profile of the live OGC API - Processes process `Disjoint` (ZOO-Project,
 
 ## Implementation Profile
 
-Implements [`Disjoint`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/disjoint) (`generic-profiles.implementation-profile.disjoint`, bblocks-generic-profiles).
+Implements [`Disjoint`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/disjoint) (`generic-profiles.implementation-profile.disjoint`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

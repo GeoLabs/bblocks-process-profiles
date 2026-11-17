@@ -6,7 +6,7 @@ Process profile of the live OGC API - Processes process `IsSimple` (ZOO-Project,
 
 ## Implementation Profile
 
-Implements [`Is simple`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/is-simple) (`generic-profiles.implementation-profile.is-simple`, bblocks-generic-profiles).
+Implements [`Is simple`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/is-simple) (`generic-profiles.implementation-profile.is-simple`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

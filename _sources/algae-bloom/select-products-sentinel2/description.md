@@ -58,7 +58,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Implements [`Product selection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection) (`generic-profiles.implementation-profile.product-selection`, bblocks-generic-profiles). Signature checked against product-selection: `aoi` (a GeoJSON file) implements `areaOfInterest`; `toi` (start and end dates, optional at tier 4) implements `timeInterval`; `collection` implements `collection`; `urls` (references to the products) implements the output `products`, by reference. `date` + `delta` (the other encoding of the time window, documented as an alternative to `toi`), `catalog`, `product_level` and `cloud_cover` are inputs of the deployment's own.
+Implements [`Product selection`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection) (`generic-profiles.implementation-profile.product-selection`, bblocks-generic-profiles). Signature checked against product-selection: `aoi` (a GeoJSON file) implements `areaOfInterest`; `toi` (start and end dates, optional at tier 4) implements `timeInterval`; `collection` implements `collection`; `urls` (references to the products) implements the output `products`, by reference. `date` + `delta` (the other encoding of the time window, documented as an alternative to `toi`), `catalog`, `product_level` and `cloud_cover` are inputs of the deployment's own.
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -81,4 +81,4 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

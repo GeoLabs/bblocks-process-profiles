@@ -21,7 +21,7 @@ On this deployment:
 
 ## Implementation Profile
 
-Implements [`Raster band math`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math) (`generic-profiles.implementation-profile.raster-band-math`, bblocks-generic-profiles).
+Implements [`Raster band math`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math) (`generic-profiles.implementation-profile.raster-band-math`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

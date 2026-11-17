@@ -1,21 +1,21 @@
 - title: reproject-image (closeMatch, not attached to tier 3)
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/
   snippets:
   - language: json
     ref: examples/reproject-image.json
 - title: KindGrove mangrove (none, with decomposition)
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove/
   snippets:
   - language: json
     ref: examples/kindgrove-mangrove.json
 - title: KindGrove steps reproject-band (CWL, attached to raster-reprojection, specialising its activity
     type)
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/
   snippets:
   - language: json
     ref: examples/kindgrove-steps-reproject-band.json
 - title: OTB.ExtractROI (live, attached to raster-crop, role decomposition)
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/raster/
   snippets:
   - language: json
     ref: examples/raster-extract-roi.json

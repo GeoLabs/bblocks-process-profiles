@@ -52,7 +52,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Implements [`Band retrieval`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval) (`generic-profiles.implementation-profile.band-retrieval`, bblocks-generic-profiles). Signature checked against band-retrieval: `item` (a STAC Item URL) implements `product`, by reference; `band` (a band common name) implements `band`; `aoi` and `epsg` (four numbers in one string, and their CRS) implement `areaOfInterest` as a role decomposition; `cropped` implements the output `raster`. It does not reproject: the output keeps the CRS of the asset.
+Implements [`Band retrieval`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval) (`generic-profiles.implementation-profile.band-retrieval`, bblocks-generic-profiles). Signature checked against band-retrieval: `item` (a STAC Item URL) implements `product`, by reference; `band` (a band common name) implements `band`; `aoi` and `epsg` (four numbers in one string, and their CRS) implement `areaOfInterest` as a role decomposition; `cropped` implements the output `raster`. It does not reproject: the output keeps the CRS of the asset.
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -75,4 +75,4 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

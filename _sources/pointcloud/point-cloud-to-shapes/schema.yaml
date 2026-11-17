@@ -44,7 +44,7 @@ $defs:
           type: object
           required:
           - SHAPES
-    - description: '`SAGA.pointcloud_tools.5` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-shapes`:
+    - description: '`SAGA.pointcloud_tools.5` as the Implementation (instance level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes`:
         Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) inherited from its Implementation
         Profile.'
       type: object
@@ -71,7 +71,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/point-cloud-processing
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/concept/point-cloud-processing
           - contains:
               type: object
               required:
@@ -81,7 +81,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-to-features
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features
           - contains:
               type: object
               required:
@@ -91,7 +91,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-shapes
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes
         inputs:
           type: object
           required:
@@ -104,7 +104,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/point-cloud
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud
                 keywords:
                   allOf:
                   - contains:
@@ -118,9 +118,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-to-features/inputs/points
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features/inputs/points
                   - contains:
                       type: object
                       required:
@@ -128,9 +128,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-shapes/inputs/points
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes/inputs/points
         outputs:
           type: object
           required:
@@ -143,7 +143,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/feature-collection
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/feature-collection
                 keywords:
                   allOf:
                   - contains:
@@ -157,9 +157,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-to-features/outputs/result
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features/outputs/result
                   - contains:
                       type: object
                       required:
@@ -167,6 +167,6 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-shapes/outputs/result
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes/outputs/result

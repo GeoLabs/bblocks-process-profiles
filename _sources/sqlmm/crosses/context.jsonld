@@ -1,8 +1,8 @@
 {
   "@context": {
     "@version": 1.1,
-    "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/",
-    "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/",
+    "pp": "https://w3id.org/geolabs/ospd/process-profiles/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "prov": "http://www.w3.org/ns/prov#",
     "dct": "http://purl.org/dc/terms/",
@@ -71,13 +71,13 @@
     "inputs": {
       "@id": "proc:inputs",
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/input/"
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/input/"
       }
     },
     "outputs": {
       "@id": "proc:outputs",
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/output/"
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/output/"
       }
     },
     "links": {
@@ -255,6 +255,14 @@
     },
     "appliesTo": {
       "@id": "rim:appliesTo",
+      "@type": "@id"
+    },
+    "affectedProperty": {
+      "@id": "rim:affectedProperty",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "http://www.w3.org/2002/07/owl#sameAs",
       "@type": "@id"
     },
     "prefLabel": "skos:prefLabel",

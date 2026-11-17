@@ -16,14 +16,14 @@ A file name, relative to the directory set by `dataPath` in the `[main]` section
 
 | Live | Side | Implementation Profile role, whose format the file has |
 |---|---|---|
-| `InputDSN` | input | [`raster`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster) |
-| `Result` | output | [`raster`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/outputs/raster) |
+| `InputDSN` | input | [`raster`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/raster) |
+| `Result` | output | [`raster`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/outputs/raster) |
 
 This deployment serves no media type for them: not a format gap. The entry declares them in `serverSideFiles` of `process-type.json`.
 
 ## Implementation Profile
 
-Implements [`Raster reprojection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection) (`generic-profiles.implementation-profile.raster-reprojection`, bblocks-generic-profiles).
+Implements [`Raster reprojection`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection) (`generic-profiles.implementation-profile.raster-reprojection`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
