@@ -38,7 +38,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Implements [`Otsu thresholding`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding) (`generic-profiles.implementation-profile.otsu-thresholding`, bblocks-generic-profiles). Signature checked against otsu-thresholding: `raster` (a single-band file) implements `raster`; `binary_mask_item` (a uint8 GeoTIFF, 1 above the threshold, 0 declared NoData) implements the output `mask`.
+Implements [`Otsu thresholding`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/otsu-thresholding) (`generic-profiles.implementation-profile.otsu-thresholding`, bblocks-generic-profiles). Signature checked against otsu-thresholding: `raster` (a single-band file) implements `raster`; `binary_mask_item` (a uint8 GeoTIFF, 1 above the threshold, 0 declared NoData) implements the output `mask`.
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -54,4 +54,4 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/otsu` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

@@ -1,4 +1,4 @@
-@prefix pp:      <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp:      <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix rim:     <https://w3id.org/ogc/rim/> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
@@ -21,7 +21,7 @@ pp:ProcessType a owl:Class ;
     rdfs:label "OSPD process type" .
 
 pp:register a rim:Register ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/register"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/register"^^xsd:anyURI ;
     rim:functionalIdentifier "https://geolabs.github.io/bblocks-process-profiles/"^^xsd:anyURI ;
     dct:title "OSPD Process Profiles"@en ;
     dct:description "Register of deployable OSPD process profiles and their process types."@en ;
@@ -46,7 +46,7 @@ pp:specification a rim:RegisterSpecification ;
         "Scope. This register holds the Implementation (instance level) of OGC 14-065 WPS 2.0.2 §7.5: one process profile and one process type per deployed process, in two populations, the CWL processes of the OSPD reference workflows and the live processes of the Geonovum testbed. The process types are its register items (pp:ProcessType, of the item class of the Activity Type Register). The tiers above, Process Concepts, Generic and Implementation Profiles and the activity types of operations, are items of bblocks-generic-profiles, not of this register."@en ,
         "Register type. A content register, as the Registered Item Model uses the term: items carry their own name and definition, and there is no concept plane."@en ,
         "Roles. GeoLabs SARL is the register owner, the register manager and, for now, the control body. GeoLabs intends to delegate the control body role to the OGC or to an OSPD working group."@en ,
-        "Identifiers. The object identifier of a process type is its IRI, https://geolabs.github.io/bblocks-process-profiles/def/process-type/<group>/<name>. These IRIs are provisional, pending a decision on the namespace of the process-type register. An object identifier never redirects; only a functional identifier may. The identifier of a published item changes only by an explicit decision."@en ,
+        "Identifiers. The object identifier of a process type is its IRI, https://w3id.org/geolabs/ospd/process-profiles/process-type/<group>/<name>. The namespace resolves through w3id.org: an object identifier answers 303 with a document about the item (Markdown, JSON Schema or HTML), never with another item; only a functional identifier may point to another item. The processes a process type describes are named https://w3id.org/geolabs/ospd/process-profiles/process/<group>/<name> and resolve to the same documents. The identifier of a published item changes only by an explicit decision. The items published before 2026-11-17 had the IRI https://geolabs.github.io/bblocks-process-profiles/def/process-type/<group>/<name>; each keeps it as owl:sameAs, and the move is recorded by a clarifying amendment of the item (decision of 2026-11-17)."@en ,
         "Versions. An addition is an action of type addition, with no classification. A substantive change creates a new item or a new version, linked by rim:supersededBy, with an action classified substantive. A clarifying change keeps the item and its version, with an action classified clarifying. This version rule is specific to the registers of this project and does not come from ISO 19135. The classification correctional is not available. An item is retired by unpublishing it, not by deleting it."@en ,
         "What is substantive here (validated 2026-11-10, extended 2026-11-11). Substantive: the parent class (subClassOf) or an entity type changed; the Implementation Profile implemented (implementsProfile) added, removed or changed; a binding declaration (serverSideFiles, roleDecompositions, assumedFormatGaps, byReference, unboundRoles, fixedRoleValues) added, removed or changed; the processDescription or the plan that is deployed changed; the six-phase classification changed, or the form in which a part of the entry is stated. Clarifying: the label, a reworded definition with the same meaning, the openEO correspondences and their rationale, notes and descriptions; the statement that a process is not attached (notAttached) added, removed or changed."@en ,
         "Proposals. While an item is a proposal, with no control-body decision recorded, it is amended in place, with a classified `rim:RegisterAction`. The substantive rule applies once it has been accepted."@en ,
@@ -72,7 +72,7 @@ pp:registerSystem a rim:RegisterSystem ;
     rdfs:seeAlso <https://github.com/GeoLabs/bblocks-process-profiles/> .
 
 pp:process-type a rim:ConceptSystem, skos:ConceptScheme ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type"^^xsd:anyURI ;
     dct:title "OSPD process types"@en ;
     skos:prefLabel "OSPD process types"@en ;
     dct:description "Process types that classify the deployable CWL activities recorded in provenance."@en .
@@ -121,22 +121,22 @@ pp:six-phases a skos:ConceptScheme ;
     rdfs:isDefinedBy pp: ;
     skos:prefLabel "Six-phase workflow framework"@en ;
     dct:description "Positions of a process in an Earth observation workflow, from filter configuration to export, used to classify the OSPD process types (pp:phase). Provisional IRIs, as the rest of the pp: vocabulary."@en ;
-    skos:hasTopConcept <https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration> ,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering> ,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval> ,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing> ,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation> .
+    skos:hasTopConcept <https://w3id.org/geolabs/ospd/process-profiles/phase/filter-configuration> ,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering> ,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval> ,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing> ,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation> ,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration> a skos:Concept ;
+<https://w3id.org/geolabs/ospd/process-profiles/phase/filter-configuration> a skos:Concept ;
     skos:prefLabel "Filter configuration"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
-<https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering> a skos:Concept ;
+<https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering> a skos:Concept ;
     skos:prefLabel "Selection / filtering"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
-<https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval> a skos:Concept ;
+<https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval> a skos:Concept ;
     skos:prefLabel "Data retrieval"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
-<https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing> a skos:Concept ;
+<https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing> a skos:Concept ;
     skos:prefLabel "Pre-processing"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
-<https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> a skos:Concept ;
+<https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation> a skos:Concept ;
     skos:prefLabel "Scientific computation"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
-<https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation> a skos:Concept ;
+<https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation> a skos:Concept ;
     skos:prefLabel "Export / aggregation"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .

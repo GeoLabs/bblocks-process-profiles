@@ -17,17 +17,17 @@
     {
       "title": "Process Concept: Raster Coverage Processing",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing"
     },
     {
       "title": "Generic Profile: Raster format conversion",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-format-conversion"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-format-conversion"
     },
     {
       "title": "Implementation Profile: Raster format conversion",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-format-conversion"
     },
     {
       "title": "My Demo"
@@ -50,20 +50,20 @@
     "Format": {
       "title": "Format of the output data",
       "description": "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform).",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/format-identifier",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/format-identifier",
       "keywords": [
         "format"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster format conversion -- input `targetFormat`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-format-conversion/inputs/targetFormat"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-format-conversion/inputs/targetFormat"
         },
         {
           "title": "Implementation Profile: Raster format conversion -- input `targetFormat`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/inputs/targetFormat"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-format-conversion/inputs/targetFormat"
         }
       ],
       "minOccurs": 0,
@@ -86,20 +86,20 @@
     "InputDSN": {
       "title": "The input data source name",
       "description": "The input data source name to use as source for convertion.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster format conversion -- input `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-format-conversion/inputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-format-conversion/inputs/raster"
         },
         {
           "title": "Implementation Profile: Raster format conversion -- input `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/inputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-format-conversion/inputs/raster"
         }
       ],
       "schema": {
@@ -118,20 +118,20 @@
     "Result": {
       "title": "The resulting converted file",
       "description": "The file name resulting of the convertion",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster format conversion -- output `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-format-conversion/outputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-format-conversion/outputs/raster"
         },
         {
           "title": "Implementation Profile: Raster format conversion -- output `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion/outputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-format-conversion/outputs/raster"
         }
       ],
       "schema": {

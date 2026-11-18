@@ -46,7 +46,7 @@ $defs:
           type: object
           required:
           - Result
-    - description: '`SymDifference` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference`:
+    - description: '`SymDifference` as the Implementation (instance level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference`:
         Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) inherited from its Implementation
         Profile.'
       type: object
@@ -77,7 +77,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing
           - contains:
               type: object
               required:
@@ -87,7 +87,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-operation
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation
           - contains:
               type: object
               required:
@@ -97,7 +97,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference
         inputs:
           type: object
           required:
@@ -111,7 +111,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/geometry
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
                 keywords:
                   allOf:
                   - contains:
@@ -125,9 +125,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-operation/inputs/geometry1
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/inputs/geometry1
                   - contains:
                       type: object
                       required:
@@ -135,9 +135,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference/inputs/geometry1
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference/inputs/geometry1
             InputEntity2:
               required:
               - dataType
@@ -145,7 +145,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/geometry
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
                 keywords:
                   allOf:
                   - contains:
@@ -159,9 +159,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-operation/inputs/geometry2
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/inputs/geometry2
                   - contains:
                       type: object
                       required:
@@ -169,9 +169,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference/inputs/geometry2
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference/inputs/geometry2
         outputs:
           type: object
           required:
@@ -184,7 +184,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/geometry
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
                 keywords:
                   allOf:
                   - contains:
@@ -198,9 +198,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-operation/outputs/result
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/outputs/result
                   - contains:
                       type: object
                       required:
@@ -208,6 +208,6 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference/outputs/result
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference/outputs/result

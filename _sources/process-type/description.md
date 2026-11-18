@@ -165,5 +165,5 @@ These entries describe **deployed process types** (tier 4), not the provider-ind
 Implementation Profiles (tier 3) of `bblocks-generic-profiles`. They are therefore the appropriate
 place to profile `acttype:ActivityType`.
 
-The `pp:` vocabulary (`https://geolabs.github.io/bblocks-process-profiles/def/`) and the phase IRIs
+The `pp:` vocabulary (`https://w3id.org/geolabs/ospd/process-profiles/`) and the phase IRIs
 are provisional, pending a decision on the process-type register namespace.

@@ -166,7 +166,7 @@ processes:
         `products`, by reference. `date` + `delta` (the other encoding of the time window, documented as
         an alternative to `toi`), `catalog`, `product_level` and `cloud_cover` are inputs of the
         deployment's own.
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection
     bindings: {inputs: {aoi: areaOfInterest, toi: timeInterval, collection: collection}, outputs: {urls: products}}
     by_reference:
       outputs: {urls: products}
@@ -256,7 +256,7 @@ processes:
         `product`, by reference; `band` implements `band`; `product` (GeoTIFF) implements the output
         `raster`. The optional `areaOfInterest` (minOccurs 0) is left unbound: the whole band is
         retrieved.
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval
     bindings: {inputs: {product_url: product, band: band}, outputs: {product: raster}}
     unbound: {areaOfInterest: "no input restricts the area: the whole band of the product is retrieved"}
     by_reference:
@@ -372,7 +372,7 @@ processes:
         other way to define the target grid) and `output_name` are inputs of the deployment's own. Not
         raster-reprojection: no target CRS (`-t_srs` is never passed). Not exposed: the interpolation
         method (gdalwarp's default) and the forced Float32 type.
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-resampling
     bindings: {inputs: {input_image: raster, output_resolution: resolution}, outputs: {result: raster}}
     cct: []
     cct_candidates: []
@@ -420,7 +420,7 @@ processes:
         implement the list role `rasters`; `result` (one Float32 GeoTIFF band written by gdal_calc.py)
         implements the output `raster` (raster-single-band). `name`, the output file name, is an input
         of the deployment's own.
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math
     bindings:
       inputs: {calc: expression, band_a: rasters, band_b: rasters, band_c: rasters, band_d: rasters, band_e: rasters,
                band_f: rasters, band_g: rasters, band_h: rasters, band_i: rasters, band_j: rasters, band_k: rasters,
@@ -498,7 +498,7 @@ processes:
         coloured RGBA TIFF on the input grid (declared GeoTIFF but not georeferenced, Q-PLOT-GEOTIFF), is
         an output of the deployment's own, as are `output_name`, `plot_name`, `plot_title`, `clip_min`
         and `clip_max`.
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering
     bindings: {inputs: {input_image: raster, color_scale: colourMap}, outputs: {output_plot: image}}
     cct: []
     cct_candidates: []
@@ -846,7 +846,7 @@ processes:
         reference; `band` (a band common name) implements `band`; `aoi` and `epsg` (four numbers in one
         string, and their CRS) implement `areaOfInterest` as a role decomposition; `cropped` implements
         the output `raster`. It does not reproject: the output keeps the CRS of the asset.
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval
     bindings: {inputs: {item: product, band: band}, outputs: {cropped: raster}}
     by_reference:
       inputs: {item: product}
@@ -949,7 +949,7 @@ processes:
         single-band Float32 GeoTIFF) implements the output `raster`. The optional `index` (minOccurs 0) is
         not an input: the tool always computes the normalized difference of the two rasters, the index
         it is (NDWI in W3) depending on the bands the caller passes.
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index-single-band
     bindings: {inputs: {rasters: rasters}, outputs: {ndwi: raster}}
     unbound: {index: "no input selects the index: the tool computes the normalized difference (A-B)/(A+B) of the two rasters"}
     fixed_roles:
@@ -1023,7 +1023,7 @@ processes:
         Signature checked against otsu-thresholding: `raster` (a single-band file) implements `raster`;
         `binary_mask_item` (a uint8 GeoTIFF, 1 above the threshold, 0 declared NoData) implements the
         output `mask`.
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/otsu-thresholding
     bindings: {inputs: {raster: raster}, outputs: {binary_mask_item: mask}}
     cct: []
     cct_candidates: []
@@ -1227,7 +1227,7 @@ processes:
         implements `timeInterval` as a literal role decomposition, not reproducible; `collection`
         implements `collection`; `stac_item` (one STAC Item file) implements the output `products`.
         `cloud_cover_max` and `stac_api` are inputs of the deployment's own.
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection
     bindings: {inputs: {collection: collection}, outputs: {stac_item: products}}
     role_decompositions:
       inputs:
@@ -1322,7 +1322,7 @@ processes:
         `product`; `band` (a STAC asset key) implements `band`; `west`, `south`, `east`, `north`
         implement `areaOfInterest` as a role decomposition (EPSG:4326, hard-coded); `band_file`
         implements the output `raster`.
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval
     bindings: {inputs: {stac_item: product, band: band}, outputs: {band_file: raster}}
     role_decompositions:
       inputs:
@@ -1387,7 +1387,7 @@ processes:
         `raster`; `west`, `south`, `east`, `north` (extent of the target grid) and `resolution` are
         inputs of the deployment's own. Both rasters are served as GeoTIFF: the CWL of the GeoLabs/KindGrove
         release v0.0.2-rc3 declares `format: ogc:geotiff`.
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection
     bindings: {inputs: {band_file: raster, epsg: targetCRS}, outputs: {reprojected_file: raster}}
     cct: []
     cct_candidates: [eoap.cct.bbox]
@@ -1461,7 +1461,7 @@ processes:
         `ndwi_file` and `savi_file` (single-band Float32 GeoTIFFs, one per index) implement the output
         `raster`. The optional `index` (minOccurs 0) is not an input: the tool always computes NDVI,
         NDWI and SAVI.
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index-single-band
     bindings: {inputs: {band_files: rasters}, outputs: {ndvi_file: raster, ndwi_file: raster, savi_file: raster}}
     unbound: {index: "no input selects the indices: the tool always computes NDVI, NDWI and SAVI"}
     fixed_roles:
@@ -1644,7 +1644,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: Intersects.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/intersects
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/intersects
     bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
 
@@ -1652,7 +1652,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: Disjoint.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/disjoint
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/disjoint
     bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
 
@@ -1660,7 +1660,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: Contains.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/contains
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/contains
     bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
 
@@ -1668,7 +1668,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: Within.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/within
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/within
     bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
 
@@ -1676,7 +1676,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: Touches.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches
     bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
 
@@ -1684,7 +1684,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: Crosses.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/crosses
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/crosses
     bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
 
@@ -1692,7 +1692,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: Equals.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/equals
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/equals
     bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process for this SQL/MM predicate in the published bblocks-openeo register."}
 
@@ -1700,7 +1700,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: Intersection.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/intersection
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/intersection
     bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."}
 
@@ -1708,7 +1708,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: Union.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/union
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/union
     bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."}
 
@@ -1716,7 +1716,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: Difference.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/difference
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/difference
     bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."}
 
@@ -1724,7 +1724,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: SymDifference.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/symdifference
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference
     bindings: {inputs: {InputEntity1: geometry1, InputEntity2: geometry2}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process for this SQL/MM set operation in the published bblocks-openeo register."}
 
@@ -1732,7 +1732,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: Buffer.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/buffer
     bindings: {inputs: {InputPolygon: geometry, BufferDistance: distance}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process for this SQL/MM operation in the published bblocks-openeo register."}
 
@@ -1740,7 +1740,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: Centroid.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/centroid
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/centroid
     bindings: {inputs: {InputPolygon: geometry}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process computes the centroid of a vector geometry in the published bblocks-openeo register."}
 
@@ -1748,7 +1748,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: ConvexHull.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/convex-hull
     bindings: {inputs: {InputPolygon: geometry}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process computes the convex hull of a vector geometry in the published bblocks-openeo register."}
 
@@ -1756,7 +1756,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: IsSimple.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/is-simple
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/is-simple
     bindings: {inputs: {InputPolygon: geometry}, outputs: {Result: result}}
     openeo: {level: none, rationale: "No openEO process tests a vector geometry for self-intersection/self-tangency in the published bblocks-openeo register."}
 
@@ -1764,7 +1764,7 @@ ogcapi_processes:
     workflow: sqlmm
     source: {repo: sqlmm_geonovum, file: GetArea.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/area
     bindings: {inputs: {InputPolygon: geometry}, outputs: {Area: result}}
     openeo: {level: none, rationale: "No openEO process computes the area of a vector geometry in the published bblocks-openeo register."}
 
@@ -1776,7 +1776,7 @@ ogcapi_processes:
     workflow: raster
     source: {repo: raster_geonovum, file: Gdal_Warp.json}
     phases: [pre-processing]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection
     bindings: {inputs: {InputDSN: raster, t_srs: targetCRS}, outputs: {Result: raster}}
     server_side_files:
       inputs: {InputDSN: raster}
@@ -1817,7 +1817,7 @@ ogcapi_processes:
     workflow: raster
     source: {repo: raster_geonovum, file: OTB.BandMath.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math
     bindings: {inputs: {il: rasters, exp: expression}, outputs: {out: raster}}
     tool:
       name: OTB BandMath
@@ -1856,7 +1856,7 @@ ogcapi_processes:
           unboundRoles added: the role index of radiometric-index (minOccurs 1) is left unbound, the live
           service not exposing OTB RadiometricIndices' list parameter (the testbed exception of
           docs/ATTACHMENTS.md). The binding was already incomplete; the entry now declares it.
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index
     bindings: {inputs: {in: rasters}, outputs: {out: raster}}
     unbound: {index: "no input of the live service selects the index: OTB RadiometricIndices' `list` parameter is not exposed"}
     tool:
@@ -1885,7 +1885,7 @@ ogcapi_processes:
     workflow: raster
     source: {repo: raster_geonovum, file: OTB.ExtractROI.json}
     phases: [pre-processing]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop
     bindings: {inputs: {in: raster}, outputs: {out: raster}}
     # Decision of 2026-11-09: the bounding box of raster-crop is taken as four corner numbers and their
     # unit, none of which carries the bbox representation. Declared, not left unbound.
@@ -1945,7 +1945,7 @@ ogcapi_processes:
     workflow: raster
     source: {repo: raster_geonovum, file: Gdal_Translate.json}
     phases: [export-aggregation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-format-conversion
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-format-conversion
     bindings: {inputs: {InputDSN: raster, Format: targetFormat}, outputs: {Result: raster}}
     server_side_files:
       inputs: {InputDSN: raster}
@@ -1985,7 +1985,7 @@ ogcapi_processes:
     workflow: raster
     source: {repo: raster_geonovum, file: OTB.BandMathX.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math-multiband
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math-multiband
     bindings: {inputs: {il: rasters, exp: expression}, outputs: {out: raster}}
     tool:
       name: OTB BandMathX
@@ -2005,7 +2005,7 @@ ogcapi_processes:
     workflow: raster
     source: {repo: raster_geonovum, file: OTB.ImageEnvelope.json}
     phases: [export-aggregation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-extent
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-extent
     bindings: {inputs: {in: raster}, outputs: {out: result}}
     tool:
       name: OTB ImageEnvelope
@@ -2027,7 +2027,7 @@ ogcapi_processes:
     workflow: vector
     source: {repo: vector_geonovum, file: SAGA.shapes_tools.19.json}
     phases: [export-aggregation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/geometry-extent
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/geometry-extent
     bindings: {inputs: {SHAPES: geometry}, outputs: {EXTENTS: result}}
     tool:
       name: SAGA shapes_tools 19 (Get Shapes Extents)
@@ -2051,7 +2051,7 @@ ogcapi_processes:
     workflow: terrain
     source: {repo: terrain_geonovum, file: SAGA.ta_morphometry.0.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope
     bindings: {inputs: {ELEVATION: elevation}, outputs: {SLOPE: result}}
     tool:
       name: SAGA ta_morphometry 0 (Slope, Aspect, Curvature)
@@ -2071,7 +2071,7 @@ ogcapi_processes:
     workflow: terrain
     source: {repo: terrain_geonovum, file: SAGA.ta_morphometry.16.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/terrain-ruggedness-index
     bindings: {inputs: {DEM: elevation}, outputs: {TRI: result}}
     tool:
       name: SAGA ta_morphometry 16 (Terrain Ruggedness Index)
@@ -2088,7 +2088,7 @@ ogcapi_processes:
     workflow: terrain
     source: {repo: terrain_geonovum, file: SAGA.ta_morphometry.18.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/topographic-position-index
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/topographic-position-index
     bindings: {inputs: {DEM: elevation}, outputs: {TPI: result}}
     tool:
       name: SAGA ta_morphometry 18 (Topographic Position Index)
@@ -2105,7 +2105,7 @@ ogcapi_processes:
     workflow: terrain
     source: {repo: terrain_geonovum, file: SAGA.ta_lighting.0.json}
     phases: [scientific-computation]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading
     bindings: {inputs: {ELEVATION: elevation, AZIMUTH: azimuth, DECLINATION: altitude}, outputs: {SHADE: result}}
     tool:
       name: SAGA ta_lighting 0 (Analytical Hillshading)
@@ -2127,7 +2127,7 @@ ogcapi_processes:
     workflow: pointcloud
     source: {repo: pointcloud_geonovum, file: SAGA.pointcloud_tools.4.json}
     phases: [pre-processing]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-grid
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid
     bindings: {inputs: {POINTS: points, CELLSIZE: cellSize}, outputs: {GRID: result}}
     tool:
       name: SAGA pointcloud_tools 4 (Point Cloud to Grid)
@@ -2147,7 +2147,7 @@ ogcapi_processes:
     workflow: pointcloud
     source: {repo: pointcloud_geonovum, file: SAGA.pointcloud_tools.9.json}
     phases: [pre-processing]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-thinning
     bindings: {inputs: {INPUT: points, PERCENT: percentage}, outputs: {RESULT: result}}
     tool:
       name: SAGA pointcloud_tools 9 (Point Cloud Thinning, Simple)
@@ -2166,7 +2166,7 @@ ogcapi_processes:
     workflow: pointcloud
     source: {repo: pointcloud_geonovum, file: SAGA.pointcloud_tools.5.json}
     phases: [pre-processing]
-    implementsProfile: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-shapes
+    implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes
     bindings: {inputs: {POINTS: points}, outputs: {SHAPES: result}}
     tool:
       name: SAGA pointcloud_tools 5 (Point Cloud to Shapes)

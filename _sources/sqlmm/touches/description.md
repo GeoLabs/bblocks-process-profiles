@@ -6,7 +6,7 @@ Process profile of the live OGC API - Processes process `Touches` (ZOO-Project, 
 
 ## Implementation Profile
 
-Implements [`Touches`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches) (`generic-profiles.implementation-profile.touches`, bblocks-generic-profiles).
+Implements [`Touches`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches) (`generic-profiles.implementation-profile.touches`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

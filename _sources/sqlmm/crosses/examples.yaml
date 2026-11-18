@@ -1,20 +1,20 @@
 - title: Source (referenced)
   content: 'The processDescription is fetched from the live service, not copied: <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Crosses>.'
 - title: processDescription
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/sqlmm/
   content: Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fields dropped).
   snippets:
   - language: json
     ref: examples/processDescription.json
 - title: processDescription with its inheritance (Implementation, instance level)
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/sqlmm/
   content: 'The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance
-    level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/crosses`:
-    the Implementation Profile''s keywords (E) on the process and on each bound input/output, and, per
-    footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation`
-    reference to the Implementation Profile -- on the process only. Each bound input/output keeps its
-    Implementation Profile counterpart''s reference to the Generic Profile input/output (`generic-input`/`-output`)
-    and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`,
+    level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/crosses`: the Implementation
+    Profile''s keywords (E) on the process and on each bound input/output, and, per footnote a, its list
+    of metadata references to superior profiles extended with a Table 22 `implementation` reference to
+    the Implementation Profile -- on the process only. Each bound input/output keeps its Implementation
+    Profile counterpart''s reference to the Generic Profile input/output (`generic-input`/`-output`) and
+    adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`,
     `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only
     names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept
     of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings`
@@ -25,8 +25,8 @@
     ref: examples/processDescription.inherited.json
     schema-ref: '#/$defs/inheritedProcessDescription'
 - title: process-type entry
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
-  content: Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/crosses`
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/sqlmm/
+  content: Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/crosses`
     (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision, linking
     to its Implementation Profile.
   snippets:

@@ -6,7 +6,7 @@ Process profile of the live OGC API - Processes process `ConvexHull` (ZOO-Projec
 
 ## Implementation Profile
 
-Implements [`Convex hull`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/convex-hull) (`generic-profiles.implementation-profile.convex-hull`, bblocks-generic-profiles).
+Implements [`Convex hull`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/convex-hull) (`generic-profiles.implementation-profile.convex-hull`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

@@ -29,37 +29,37 @@
     {
       "title": "Process Concept: Point Cloud Processing",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/point-cloud-processing"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/point-cloud-processing"
     },
     {
       "title": "Generic Profile: Point cloud thinning",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-thinning"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-thinning"
     },
     {
       "title": "Implementation Profile: Point cloud thinning (simple)",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-thinning"
     }
   ],
   "inputs": {
     "INPUT": {
       "title": "Points",
       "description": "Points",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/point-cloud",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud",
       "keywords": [
         "point cloud"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Point cloud thinning -- input `points`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-thinning/inputs/points"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-thinning/inputs/points"
         },
         {
           "title": "Implementation Profile: Point cloud thinning (simple) -- input `points`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning/inputs/points"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-thinning/inputs/points"
         }
       ],
       "schema": {
@@ -75,20 +75,20 @@
     "PERCENT": {
       "title": "Percent",
       "description": "Reduce the number of points to this percentage.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/number",
       "keywords": [
         "percentage"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Point cloud thinning -- input `percentage`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-thinning/inputs/percentage"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-thinning/inputs/percentage"
         },
         {
           "title": "Implementation Profile: Point cloud thinning (simple) -- input `percentage`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning/inputs/percentage"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-thinning/inputs/percentage"
         }
       ],
       "minOccurs": 0,
@@ -116,20 +116,20 @@
     "RESULT": {
       "title": "Thinned Points",
       "description": "Thinned Points",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/point-cloud",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud",
       "keywords": [
         "point cloud"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Point cloud thinning -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-thinning/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-thinning/outputs/result"
         },
         {
           "title": "Implementation Profile: Point cloud thinning (simple) -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-thinning/outputs/result"
         }
       ],
       "schema": {

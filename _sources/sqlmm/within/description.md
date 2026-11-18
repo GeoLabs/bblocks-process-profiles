@@ -6,7 +6,7 @@ Process profile of the live OGC API - Processes process `Within` (ZOO-Project, G
 
 ## Implementation Profile
 
-Implements [`Within`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/within) (`generic-profiles.implementation-profile.within`, bblocks-generic-profiles).
+Implements [`Within`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/within) (`generic-profiles.implementation-profile.within`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

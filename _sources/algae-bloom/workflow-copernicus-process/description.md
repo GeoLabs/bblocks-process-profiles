@@ -59,4 +59,4 @@ The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

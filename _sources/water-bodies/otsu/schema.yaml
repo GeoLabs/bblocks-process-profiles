@@ -121,7 +121,7 @@ $defs:
           propertyNames:
             enum:
             - binary_mask_item
-    - description: '`otsu` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding`:
+    - description: '`otsu` as the Implementation (instance level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/otsu-thresholding`:
         Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) inherited from its Implementation
         Profile.'
       type: object
@@ -148,7 +148,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing
           - contains:
               type: object
               required:
@@ -158,7 +158,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-thresholding
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-thresholding
           - contains:
               type: object
               required:
@@ -168,7 +168,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/otsu-thresholding
         inputs:
           type: object
           required:
@@ -181,7 +181,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
                 keywords:
                   allOf:
                   - contains:
@@ -195,9 +195,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-thresholding/inputs/raster
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-thresholding/inputs/raster
                   - contains:
                       type: object
                       required:
@@ -205,9 +205,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding/inputs/raster
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/otsu-thresholding/inputs/raster
                 minOccurs:
                   type: integer
                   minimum: 0
@@ -224,7 +224,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/binary-mask
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/binary-mask
                 keywords:
                   allOf:
                   - contains:
@@ -238,9 +238,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-thresholding/outputs/mask
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-thresholding/outputs/mask
                   - contains:
                       type: object
                       required:
@@ -248,6 +248,6 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/otsu-thresholding/outputs/mask
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/otsu-thresholding/outputs/mask

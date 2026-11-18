@@ -47,7 +47,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Implements [`Band retrieval`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval) (`generic-profiles.implementation-profile.band-retrieval`, bblocks-generic-profiles). Signature checked against band-retrieval: `product_url` (a STAC Item URL) implements `product`, by reference; `band` implements `band`; `product` (GeoTIFF) implements the output `raster`. The optional `areaOfInterest` (minOccurs 0) is left unbound: the whole band is retrieved.
+Implements [`Band retrieval`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval) (`generic-profiles.implementation-profile.band-retrieval`, bblocks-generic-profiles). Signature checked against band-retrieval: `product_url` (a STAC Item URL) implements `product`, by reference; `band` implements `band`; `product` (GeoTIFF) implements the output `raster`. The optional `areaOfInterest` (minOccurs 0) is left unbound: the whole band is retrieved.
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -69,4 +69,4 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

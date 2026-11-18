@@ -30,37 +30,37 @@
     {
       "title": "Process Concept: Point Cloud Processing",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/point-cloud-processing"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/point-cloud-processing"
     },
     {
       "title": "Generic Profile: Point cloud to features",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-to-features"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features"
     },
     {
       "title": "Implementation Profile: Point cloud to shapes",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-shapes"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes"
     }
   ],
   "inputs": {
     "POINTS": {
       "title": "Points",
       "description": "Points",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/point-cloud",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud",
       "keywords": [
         "point cloud"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Point cloud to features -- input `points`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-to-features/inputs/points"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features/inputs/points"
         },
         {
           "title": "Implementation Profile: Point cloud to shapes -- input `points`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-shapes/inputs/points"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes/inputs/points"
         }
       ],
       "schema": {
@@ -78,20 +78,20 @@
     "SHAPES": {
       "title": "Shapes",
       "description": "Shapes",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/feature-collection",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/feature-collection",
       "keywords": [
         "feature collection"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Point cloud to features -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-to-features/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features/outputs/result"
         },
         {
           "title": "Implementation Profile: Point cloud to shapes -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-shapes/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes/outputs/result"
         }
       ],
       "schema": {

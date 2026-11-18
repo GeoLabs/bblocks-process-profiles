@@ -1,15 +1,15 @@
 - title: Source CWL (referenced)
   content: 'The CWL CommandLineTool is referenced, not copied: <https://github.com/crim-ca/ogc-ospd-phase1/blob/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/select-products-sentinel2.cwl>.'
 - title: processDescription
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/
   content: OGC API - Processes processDescription derived from the CWL.
   snippets:
   - language: json
     ref: examples/processDescription.json
 - title: processDescription with its inheritance (Implementation, instance level)
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/
   content: 'The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance
-    level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection`:
+    level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection`:
     the Implementation Profile''s keywords (E) on the process and on each bound input/output, and, per
     footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation`
     reference to the Implementation Profile -- on the process only. Each bound input/output keeps its
@@ -25,45 +25,45 @@
     ref: examples/processDescription.inherited.json
     schema-ref: '#/$defs/inheritedProcessDescription'
 - title: OGC Application Package (deploy)
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/
   content: 'Part 2 deploy body: the execution unit is a link to the pinned CWL.'
   snippets:
   - language: json
     ref: examples/ogcapppkg.json
     schema-ref: '#/$defs/applicationPackage'
 - title: Execute request
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/
   snippets:
   - language: json
     ref: examples/execute.json
     schema-ref: '#/$defs/execute'
 - title: Results
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/
   snippets:
   - language: json
     ref: examples/results.json
     schema-ref: '#/$defs/results'
 - title: Provenance view (generic provenance profile)
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/
   content: W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   snippets:
   - language: json
     ref: examples/provenance.json
     schema-ref: '#/$defs/provenance'
 - title: Process run (wfprov:ProcessRun, gap GP-1)
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/
   snippets:
   - language: json
     ref: examples/process-run.json
     schema-ref: '#/$defs/processRun'
 - title: Process-type register entry (Activity 4)
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/
   snippets:
   - language: json
     ref: examples/process-type.json
     schema-ref: '#/$defs/processTypeEntry'
 - title: Run record, W3C PROV-JSONLD (cwltool CWLProv bundle)
-  base-uri: https://geolabs.github.io/bblocks-process-profiles/def/process/
+  base-uri: https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/
   content: 'The CWLProv bundle of the run record that holds this profile''s activity, re-serialised as
     PROV-JSONLD by the `prov` library (mentions of nested bundles rewritten as `specializationOf` + `prov:asInBundle`,
     see that block''s notes), validated against `ogc.ogc-utils.prov.w3c-prov-jsonld` and read as RDF through

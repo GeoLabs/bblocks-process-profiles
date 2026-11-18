@@ -17,7 +17,7 @@ On this deployment:
 
 ## Implementation Profile
 
-Implements [`Point cloud thinning (simple)`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-thinning) (`generic-profiles.implementation-profile.point-cloud-thinning`, bblocks-generic-profiles).
+Implements [`Point cloud thinning (simple)`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-thinning) (`generic-profiles.implementation-profile.point-cloud-thinning`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

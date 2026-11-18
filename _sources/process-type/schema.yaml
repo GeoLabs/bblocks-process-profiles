@@ -75,12 +75,12 @@ allOf:
           items:
             type: string
             enum:
-            - https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration
-            - https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering
-            - https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval
-            - https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing
-            - https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation
-            - https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation
+            - https://w3id.org/geolabs/ospd/process-profiles/phase/filter-configuration
+            - https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering
+            - https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval
+            - https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing
+            - https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation
+            - https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation
     deployment:
       description: 'What is deployed (decision D5): the process profile block, the processDescription
         and the class of its run records.'
@@ -461,7 +461,7 @@ allOf:
     itemClass:
       const: https://w3id.org/ogc/rim/activity-type/activityTypeItemClass
     inRegister:
-      const: https://geolabs.github.io/bblocks-process-profiles/def/register
+      const: https://w3id.org/geolabs/ospd/process-profiles/register
     objectIdentifier:
       type: string
       format: uri
@@ -481,42 +481,42 @@ allOf:
         other value passes.'
       enum:
       - https://w3id.org/ogc/rim/activity-type/ActivityType
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/analytical-hillshading
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/area
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/buffer
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/centroid
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/contains
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/convex-hull
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/crosses
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/difference
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/disjoint
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/equals
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/geometry-extent
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersection
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersects
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/is-simple
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/otsu-thresholding
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-thinning
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-to-grid
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-to-shapes
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/product-selection
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math-multiband
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-crop
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-extent
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-format-conversion
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-rendering
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/slope
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/symdifference
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/terrain-ruggedness-index
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/topographic-position-index
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/touches
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/union
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/within
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/analytical-hillshading
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/area
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/buffer
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/centroid
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/contains
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/convex-hull
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/crosses
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/difference
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/disjoint
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/equals
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-extent
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/intersection
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/intersects
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/is-simple
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/otsu-thresholding
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-thinning
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-grid
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-shapes
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/product-selection
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/radiometric-index
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-crop
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-extent
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-format-conversion
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-rendering
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-resampling
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/slope
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/symdifference
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/terrain-ruggedness-index
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/topographic-position-index
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/touches
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/union
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/within
     hasAction:
       description: 'The register actions of the entry: its addition, then each in-place amendment of the
         proposal (pp:amendmentAction, pp:specification). The schema requires the addition; it does not
@@ -543,7 +543,7 @@ allOf:
             actionType:
               const: addition
             proposer:
-              const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
+              const: https://w3id.org/geolabs/ospd/process-profiles/geolabs
             startedAtTime:
               type: string
               format: date-time
@@ -570,7 +570,7 @@ allOf:
             description:
               type: string
             proposer:
-              const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
+              const: https://w3id.org/geolabs/ospd/process-profiles/geolabs
             startedAtTime:
               type: string
               format: date-time
@@ -595,7 +595,7 @@ allOf:
           actionType:
             const: addition
           proposer:
-            const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
+            const: https://w3id.org/geolabs/ospd/process-profiles/geolabs
           startedAtTime:
             type: string
             format: date-time

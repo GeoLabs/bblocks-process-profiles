@@ -46,7 +46,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PATTERN = re.compile(r"^_sources/[^/]+/[^/]+/examples/(process-type\.json|processDescription(\.raw|\.inherited)?\.json)$")
-AMENDMENT = "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction"
+AMENDMENT = "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction"
 ALIASES = {"usedEntityType": ["entity type"], "generatedEntityType": ["entity type"]}
 WORKTREE = "WORKTREE"
 STRICT_FROM = "2026-11-12"   # decision R2: changes from this day on need an action of their own day

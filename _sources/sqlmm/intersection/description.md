@@ -6,7 +6,7 @@ Process profile of the live OGC API - Processes process `Intersection` (ZOO-Proj
 
 ## Implementation Profile
 
-Implements [`Intersection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/intersection) (`generic-profiles.implementation-profile.intersection`, bblocks-generic-profiles).
+Implements [`Intersection`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/intersection) (`generic-profiles.implementation-profile.intersection`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 

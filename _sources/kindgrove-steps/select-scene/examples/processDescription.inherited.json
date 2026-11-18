@@ -17,17 +17,17 @@
     {
       "title": "Process Concept: Data Discovery and Access",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/data-discovery-and-access"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/data-discovery-and-access"
     },
     {
       "title": "Generic Profile: Product selection",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/product-selection"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/product-selection"
     },
     {
       "title": "Implementation Profile: Product selection",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection"
     },
     {
       "role": "https://schema.org/name",
@@ -142,20 +142,20 @@
     "collection": {
       "title": "collection",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/collection-identifier",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/collection-identifier",
       "keywords": [
         "collection"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Product selection -- input `collection`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/product-selection/inputs/collection"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/product-selection/inputs/collection"
         },
         {
           "title": "Implementation Profile: Product selection -- input `collection`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection/inputs/collection"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection/inputs/collection"
         }
       ],
       "schema": {
@@ -170,20 +170,20 @@
     "stac_item": {
       "title": "stac_item",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/eo-product",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/eo-product",
       "keywords": [
         "product"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Product selection -- output `products`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/product-selection/outputs/products"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/product-selection/outputs/products"
         },
         {
           "title": "Implementation Profile: Product selection -- output `products`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection/outputs/products"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection/outputs/products"
         }
       ],
       "schema": {

@@ -78,7 +78,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Implements [`Raster band math`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math) (`generic-profiles.implementation-profile.raster-band-math`, bblocks-generic-profiles). Signature checked against raster-band-math: `calc` (a gdal_calc.py expression) implements `expression`; `band_a`..`band_z` (26 optional files, GeoTIFF, TIFF or JPEG 2000) together implement the list role `rasters`; `result` (one Float32 GeoTIFF band written by gdal_calc.py) implements the output `raster` (raster-single-band). `name`, the output file name, is an input of the deployment's own.
+Implements [`Raster band math`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math) (`generic-profiles.implementation-profile.raster-band-math`, bblocks-generic-profiles). Signature checked against raster-band-math: `calc` (a gdal_calc.py expression) implements `expression`; `band_a`..`band_z` (26 optional files, GeoTIFF, TIFF or JPEG 2000) together implement the list role `rasters`; `result` (one Float32 GeoTIFF band written by gdal_calc.py) implements the output `raster` (raster-single-band). `name`, the output file name, is an input of the deployment's own.
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -104,4 +104,4 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/calculate-band` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.

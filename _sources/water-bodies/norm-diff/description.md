@@ -44,7 +44,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Implements [`Radiometric index (single-band rasters)`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index-single-band) (`generic-profiles.implementation-profile.radiometric-index-single-band`, bblocks-generic-profiles). Signature checked against radiometric-index-single-band: `rasters` (two single-band files, `nargs=2`, positional: `rasters[0]` minus `rasters[1]`) implements `rasters`; `ndwi` (one single-band Float32 GeoTIFF) implements the output `raster`. The optional `index` (minOccurs 0) is not an input: the tool always computes the normalized difference of the two rasters, the index it is (NDWI in W3) depending on the bands the caller passes.
+Implements [`Radiometric index (single-band rasters)`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index-single-band) (`generic-profiles.implementation-profile.radiometric-index-single-band`, bblocks-generic-profiles). Signature checked against radiometric-index-single-band: `rasters` (two single-band files, `nargs=2`, positional: `rasters[0]` minus `rasters[1]`) implements `rasters`; `ndwi` (one single-band Float32 GeoTIFF) implements the output `raster`. The optional `index` (minOccurs 0) is not an input: the tool always computes the normalized difference of the two rasters, the index it is (NDWI in W3) depending on the bands the caller passes.
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -62,4 +62,4 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/norm-diff` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
