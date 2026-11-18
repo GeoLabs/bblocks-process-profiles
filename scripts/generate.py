@@ -156,6 +156,10 @@ PROFILE_CONTEXT = {
         # bblocks-data-types, inherited from the Implementation Profile role it is bound to. Same
         # term and property (dct:type) as tiers 2 and 3 in bblocks-generic-profiles.
         "dataType": {"@id": "dct:type", "@type": "@id"},
+        # The representations of a tier-4 input or output (decision of 2026-11-18): the
+        # df:Representation items of bblocks-data-formats that realize its dataType in a format it
+        # declares. Same term and property as tier 3 in bblocks-generic-profiles.
+        "representation": {"@id": "https://w3id.org/geolabs/ospd/generic-profiles/representation", "@type": "@id"},
         # Entity types of a process type that specialises a geoprocessing activity type (the same
         # GeoSPARQL classes as that activity type), and the classification of an amendment.
         "usedEntityType": {"@id": "acttype:usedEntityType", "@type": "@id"},
@@ -859,6 +863,16 @@ def amendments(proc, parent):
                     "implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md "
                     "(profiles.yaml tier3.reason). Nothing else changes: the process was not attached before "
                     "and is not attached now (decision Q1 of 2026-11-11)."))
+    if proc.get("_tier4_representations"):
+        own = proc.get("_tier4_own_data_types") or []
+        out.append((f"representation-{TIER4_REPRESENTATIONS}", TIER4_REPRESENTATIONS, "substantive",
+                    "processDescription: in processDescription.inherited.json, each input and output that has a "
+                    "data type now names its representations (representation), the df:Representation items of "
+                    "bblocks-data-formats that realize that data type in a format the deployment declares "
+                    f"(decision of {TIER4_REPRESENTATIONS})"
+                    + (f"; the inputs/outputs of the deployment's own {', '.join(own)} get a dataType "
+                       "(profiles.yaml data_types)" if own else "")
+                    + ". Classified substantive: the form in which a part of the entry is stated changes."))
     for a in proc.get("amendments") or []:
         out.append((a["id"], a["date"], a["classification"], " ".join(a["description"].split())))
     entry_id = ptype_iri(proc)
@@ -1356,7 +1370,82 @@ def _contains_refs(refs):
         "role": {"const": m["role"]}, "href": {"const": m["href"]}}}} for m in refs]}
 
 
-def inherited_process_description(proc, pd, gp_root):
+TIER4_REPRESENTATIONS = "2026-11-18"
+# Media types a deployed process declares that are no data format: a container or an unknown
+# content. They name no format of bblocks-data-formats and no representation (decision of
+# 2026-11-18).
+UNQUALIFIED_MEDIA_TYPES = {"application/zip", "application/octet-stream", "text/plain"}
+
+
+def data_formats_index(df_root):
+    """The representations of bblocks-data-formats, read from its sources: for each, the data type
+    it realizes (the concept of its rim:realizes version), the media types of its format (observed
+    and inferred) and the JSON Schema `format` keyword of the format's fragment, if any."""
+    fmts = {}
+    for f in sorted((df_root / "_sources" / "format").glob("*/ontology.ttl")):
+        t = f.read_text()
+        kw = None
+        m = re.search(r'df:jsonSchemaFragment\s+"((?:[^"\\]|\\.)*)"', t)
+        if m:
+            kw = json.loads(json.loads(f'"{m.group(1)}"')).get("format")
+        fmts[f.parent.name] = (set(re.findall(r'df:mediaType\s+"([^"]+)"', t)), kw)
+    reps = {}
+    for f in sorted((df_root / "_sources" / "representation").glob("*/ontology.ttl")):
+        t = f.read_text()
+        real = re.search(r"rim:realizes\s+<([^>]+)>", t).group(1)
+        fmt = re.search(r"df:format\s+<([^>]+)>", t).group(1).rsplit("/", 1)[-1]
+        reps[DATA_FORMATS_BASE + "representation/" + f.parent.name] = (
+            real.rsplit("/", 1)[0], fmt, *fmts[fmt])
+    return reps
+
+
+def _string_formats(schema):
+    found = set()
+
+    def walk(node):
+        if isinstance(node, dict):
+            t = node.get("type")
+            if isinstance(node.get("format"), str) and (t == "string" or (isinstance(t, list) and "string" in t)):
+                found.add(node["format"])
+            for v in node.values():
+                walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v)
+    walk(schema)
+    return found
+
+
+def tier4_representations(proc, side, live, e, dtype, df_index):
+    """Decision of 2026-11-18: the representations of a tier-4 input or output with a data type are
+    those of bblocks-data-formats that realize exactly that data type in a format it declares (a
+    media type of the format, or the JSON Schema `format` of its fragment). A declared format with
+    no such representation stops the generator: add the representation to data-formats, or fix the
+    data type. Media types in UNQUALIFIED_MEDIA_TYPES are skipped."""
+    schema = e.get("schema", {})
+    declared = [("media type", m) for m in sorted(_media_types(schema) - UNQUALIFIED_MEDIA_TYPES)]
+    declared += [("format", f) for f in sorted(_string_formats(schema))]
+    out = set()
+    for kind, value in declared:
+        hit = {r for r, (dt, fmt, media, kw) in df_index.items()
+               if dt == dtype and (value in media if kind == "media type" else value == kw)}
+        if not hit:
+            sys.exit(f"{proc['key']}: {side} {live} declares the {kind} {value} for the data type "
+                     f"{dtype.rsplit('/', 1)[-1]}, and no representation of bblocks-data-formats realizes that "
+                     "data type in a format with it: add one to data-formats, or fix the data type")
+        out |= hit
+    return sorted(out)
+
+
+def declared_formats(e):
+    schema = e.get("schema", {})
+    return sorted(_media_types(schema) - UNQUALIFIED_MEDIA_TYPES) + sorted(_string_formats(schema))
+
+
+_DF_INDEX = {}
+
+
+def inherited_process_description(proc, pd, gp_root, df_root):
     """The processDescription of a deployed process (live, or derived from its CWL) with what OGC
     14-065r1 Table 21 says the Implementation (instance level) inherits from its Implementation
     Profile: keywords Extended (E), and, per footnote a, the list of metadata references to superior
@@ -1368,6 +1457,9 @@ def inherited_process_description(proc, pd, gp_root):
     data type on the parts: the process-type entry declares it. Returns the document and the JSON
     Schema checking exactly that inheritance."""
     ip_iri = proc["implementsProfile"]
+    if df_root not in _DF_INDEX:
+        _DF_INDEX[df_root] = data_formats_index(df_root)
+    df_index = _DF_INDEX[df_root]
     ip_key = ip_iri.rstrip("/").rsplit("/", 1)[-1]
     load = lambda tier, k: json.loads((gp_root / "_sources" / tier / k / "examples" / f"{k}.json").read_text())
     ip = load("implementation-profile", ip_key)
@@ -1422,10 +1514,44 @@ def inherited_process_description(proc, pd, gp_root):
                 sys.exit(f"{proc['key']}: {side} role `{name}` of {ip_key} is left unbound but its minOccurs at tier 3 "
                          f"is {floor}: only a role of minOccurs 0 may be (testbed exception: live processes only)")
         out, side_rules = {}, {}
+        own_types = (proc.get("data_types") or {}).get(side) or {}
+        no_type = (proc.get("no_data_type") or {}).get(side) or {}
+        for live in list(own_types) + list(no_type):
+            if live not in pd[side] or live in bound:
+                sys.exit(f"{proc['key']}: data_types / no_data_type {side} {live}: not an input/output of the "
+                         "deployment's own (unknown, or bound to a role, which gives it its data type)")
+            if live in own_types and live in no_type:
+                sys.exit(f"{proc['key']}: {side} {live} is in both data_types and no_data_type")
+            if live in no_type and not str(no_type[live]).strip():
+                sys.exit(f"{proc['key']}: no_data_type {side} {live} needs a reason")
+        ssf_side = (proc.get("server_side_files") or {}).get(side) or {}
+        ref_side = (proc.get("by_reference") or {}).get(side) or {}
+        gap_side = (proc.get("format_gaps") or {}).get(side) or {}
         for live, e in pd[side].items():
             name = bound.get(live)
             if not name:
-                out[live] = e
+                if live in own_types:
+                    # Decision of 2026-11-18: the data type of an input/output the deployment adds
+                    # (Table 21 footnote b), declared in profiles.yaml `data_types`.
+                    dtype = DATA_TYPES_BASE + own_types[live]
+                    reps = tier4_representations(proc, side, live, e, dtype, df_index)
+                    proc.setdefault("_tier4_own_data_types", []).append(f"{side[:-1]} {live}")
+                    out[live] = {**{k: e[k] for k in ("title", "description") if k in e}, "dataType": dtype,
+                                 **({"representation": reps} if reps else {}),
+                                 **{k: v for k, v in e.items() if k not in ("title", "description")}}
+                    side_rules[live] = {"required": ["dataType"], "properties": {"dataType": {"const": dtype}}}
+                    if reps:
+                        side_rules[live]["required"].append("representation")
+                        side_rules[live]["properties"]["representation"] = {"const": reps}
+                else:
+                    fmts = declared_formats(e)
+                    if fmts and live not in no_type:
+                        sys.exit(f"{proc['key']}: {side} {live} declares {fmts} but has no data type: give it one "
+                                 "(profiles.yaml data_types) or state why it has none (no_data_type)")
+                    if not fmts and live in no_type:
+                        sys.exit(f"{proc['key']}: no_data_type {side} {live}: it declares no data format, the "
+                                 "declaration is unnecessary")
+                    out[live] = e
                 continue
             ipe = ip[side][name]
             # Input/output level: the Implementation Profile input/output's own references (to
@@ -1436,14 +1562,27 @@ def inherited_process_description(proc, pd, gp_root):
             # A4.2: the data type of the Implementation Profile role, a dt:DataType concept. Only on
             # bound inputs and outputs: an addition of the deployment (footnote b) has no tier-3
             # counterpart to derive one from.
+            reps = tier4_representations(proc, side, live, e, ipe["dataType"], df_index)
+            # The tier-3 representations of the role are among those of the bound input/output,
+            # unless the deployment declares why it serves none (format_check: server-side file,
+            # by reference, assumed gap).
+            excused = live in ssf_side or live in ref_side or live in gap_side
+            missing = sorted(set(ipe.get("representation") or []) - set(reps))
+            if missing and not excused:
+                sys.exit(f"{proc['key']}: {side} {live}: the representations {missing} of role `{name}` are not "
+                         f"among those of the deployment ({reps or 'none'})")
             out[live] = {**{k: e[k] for k in ("title", "description") if k in e},
                          "dataType": ipe["dataType"],
+                         **({"representation": reps} if reps else {}),
                          "keywords": _merge(ipe["keywords"], e.get("keywords", [])),
                          "metadata": meta + list(e.get("metadata", [])),
                          **{k: v for k, v in e.items() if k not in ("title", "description", "keywords", "metadata")}}
             side_rules[live] = {"required": ["dataType", "keywords", "metadata"], "properties": {
                 "dataType": {"const": ipe["dataType"]},
                 "keywords": _contains_all(ipe["keywords"]), "metadata": _contains_refs(meta)}}
+            if reps:
+                side_rules[live]["required"].append("representation")
+                side_rules[live]["properties"]["representation"] = {"const": reps}
             if side == "inputs" and "minOccurs" in e:
                 # Only where the live input declares a cardinality. It may restrict the inherited
                 # minimum, down to 0 (optional input), never above it -- the rule
@@ -1452,6 +1591,8 @@ def inherited_process_description(proc, pd, gp_root):
                 floor = ipe.get("minOccurs", gp["inputs"][name].get("minOccurs", 1))
                 side_rules[live]["properties"]["minOccurs"] = {"type": "integer", "minimum": 0, "maximum": floor}
         doc[side] = out
+        if any("representation" in v for v in out.values()):
+            proc["_tier4_representations"] = True
         rules[side] = {"type": "object", "required": sorted(side_rules), "properties": side_rules}
     schema = {"description": (f"`{pd['id']}` as the Implementation (instance level) of `{ip_iri}`: "
                               "Table 21 keywords (E) and footnote-a metadata references (Table 22 roles) "
@@ -1990,7 +2131,7 @@ def generate_ogcapi_profiles(sources, roots, by_key, ogcapi_procs, gp_root, df_r
         for f in exd.glob("*.json"):
             f.unlink()
         dump_json(exd / "processDescription.json", pd)
-        inherited, inherited_schema = inherited_process_description(proc, pd, gp_root)
+        inherited, inherited_schema = inherited_process_description(proc, pd, gp_root, df_root)
         dump_json(exd / "processDescription.inherited.json", inherited)
         rows, assumed = format_check(proc, pd, gp_root, df_root)
         checks.append((proc, rows, assumed))
@@ -2250,7 +2391,7 @@ def main():
             dump_json(exd / "process-run.json", process_run(proc, pd, run_id, info, parent_run))
         inherited_schema, assumed = None, []
         if proc.get("implementsProfile"):
-            inherited, inherited_schema = inherited_process_description(proc, pd, a.generic_profiles)
+            inherited, inherited_schema = inherited_process_description(proc, pd, a.generic_profiles, a.data_formats)
             dump_json(exd / "processDescription.inherited.json", inherited)
             rows, assumed = format_check(proc, pd, a.generic_profiles, a.data_formats)
             checks.append((proc, rows, assumed))

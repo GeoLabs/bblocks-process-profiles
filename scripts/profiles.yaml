@@ -500,6 +500,7 @@ processes:
         and `clip_max`.
     implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering
     bindings: {inputs: {input_image: raster, color_scale: colourMap}, outputs: {output_plot: image}}
+    data_types: {outputs: {output_file: raster}}
     cct: []
     cct_candidates: []
     parents: [workflow-earth-search-process, workflow-copernicus-process]
@@ -1887,6 +1888,7 @@ ogcapi_processes:
     phases: [pre-processing]
     implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop
     bindings: {inputs: {in: raster}, outputs: {out: raster}}
+    data_types: {inputs: {mode.fit.im: raster, mode.fit.vect: geometry}}
     # Decision of 2026-11-09: the bounding box of raster-crop is taken as four corner numbers and their
     # unit, none of which carries the bbox representation. Declared, not left unbound.
     role_decompositions:
@@ -1987,6 +1989,9 @@ ogcapi_processes:
     phases: [scientific-computation]
     implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math-multiband
     bindings: {inputs: {il: rasters, exp: expression}, outputs: {out: raster}}
+    no_data_type:
+      inputs: {incontext: "a text file of constants and expressions (its title), whose description declares image media types only (image/jpeg, image/png, image/tiff): the description is inconsistent"}
+      outputs: {outcontext: "a context file of the OTB application, declared text/plain or text/xml"}
     tool:
       name: OTB BandMathX
       doc: https://www.orfeo-toolbox.org/CookBook/Applications/app_BandMathX.html
@@ -2053,6 +2058,8 @@ ogcapi_processes:
     phases: [scientific-computation]
     implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope
     bindings: {inputs: {ELEVATION: elevation}, outputs: {SLOPE: result}}
+    data_types:
+      outputs: {ASPECT: raster-single-band, C_GENE: raster-single-band, C_PROF: raster-single-band, C_PLAN: raster-single-band, C_TANG: raster-single-band, C_LONG: raster-single-band, C_CROS: raster-single-band, C_MINI: raster-single-band, C_MAXI: raster-single-band, C_TOTA: raster-single-band, C_ROTO: raster-single-band}
     tool:
       name: SAGA ta_morphometry 0 (Slope, Aspect, Curvature)
       doc: https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/ta_morphometry_0.html
@@ -2107,6 +2114,7 @@ ogcapi_processes:
     phases: [scientific-computation]
     implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading
     bindings: {inputs: {ELEVATION: elevation, AZIMUTH: azimuth, DECLINATION: altitude}, outputs: {SHADE: result}}
+    data_types: {inputs: {DATE_MIN: date}}
     tool:
       name: SAGA ta_lighting 0 (Analytical Hillshading)
       doc: https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/ta_lighting_0.html
@@ -2129,6 +2137,7 @@ ogcapi_processes:
     phases: [pre-processing]
     implementsProfile: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid
     bindings: {inputs: {POINTS: points, CELLSIZE: cellSize}, outputs: {GRID: result}}
+    data_types: {outputs: {COUNT: raster-single-band, GRIDS: raster-single-band}}
     tool:
       name: SAGA pointcloud_tools 4 (Point Cloud to Grid)
       doc: https://saga-gis.sourceforge.io/saga_tool_doc/7.3.0/pointcloud_tools_4.html

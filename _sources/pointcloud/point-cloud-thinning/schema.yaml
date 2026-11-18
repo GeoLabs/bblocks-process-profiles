@@ -105,6 +105,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud
@@ -134,6 +135,9 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-thinning/inputs/points
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las
             PERCENT:
               required:
               - dataType
@@ -182,6 +186,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud
@@ -211,3 +216,6 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-thinning/outputs/result
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las

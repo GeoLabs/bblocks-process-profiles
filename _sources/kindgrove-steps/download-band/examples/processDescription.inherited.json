@@ -79,6 +79,10 @@
       "title": "stac_item",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/eo-product",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/eo-product-eo-geojson",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/eo-product-stac-item"
+      ],
       "keywords": [
         "product"
       ],
@@ -169,6 +173,9 @@
       "title": "band_file",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff"
+      ],
       "keywords": [
         "raster"
       ],

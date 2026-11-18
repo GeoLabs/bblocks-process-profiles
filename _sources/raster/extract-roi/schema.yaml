@@ -140,12 +140,15 @@ $defs:
           type: object
           required:
           - in
+          - mode.fit.im
+          - mode.fit.vect
           properties:
             in:
               required:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
@@ -175,6 +178,34 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop/inputs/raster
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-png
+            mode.fit.im:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-png
+            mode.fit.vect:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/geometry-kml
         outputs:
           type: object
           required:
@@ -185,6 +216,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
@@ -214,3 +246,8 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop/outputs/raster
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-png

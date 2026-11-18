@@ -139,6 +139,19 @@ They select the inputs and outputs under `proc:inputs` / `proc:outputs`, which
 `gp:DataTypeReferenceShape` does not reach. `tests/` holds a failing fixture per constraint and a
 control.
 
+Since 2026-11-18, an input or output the deployment adds (Table 21 footnote b) also has a `dataType`
+when `scripts/profiles.yaml` gives it one (`data_types`), and every input or output that has a data
+type names its **representations** (`representation`, the term and property of tier 3,
+`gp:representation`): the `df:Representation` items of bblocks-data-formats that realize exactly that
+data type in a format it declares (a `contentMediaType`, or the JSON Schema `format` of a string).
+The generator stops on a declared format with no such representation, on an input or output that
+declares a format with no data type unless `no_data_type` gives the reason, and on a bound input or
+output that loses a representation of its role. `application/zip`, `application/octet-stream` and
+`text/plain` are no data formats and are skipped. `pp:Tier4RepresentationShape` checks the result:
+each representation is a `df:Representation` and realizes a version of the input or output's
+`dataType` (`tests/tier4-representation-other-datatype-fail.ttl`,
+`tests/tier4-representation-not-a-representation-fail.ttl`, and the control).
+
 ## Type, plan and process description are three things
 
 The entry describes the **type** of activity. What an activity of that type executes is its

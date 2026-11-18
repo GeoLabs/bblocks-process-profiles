@@ -50,6 +50,12 @@
       "title": "Elevation",
       "description": "Elevation",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-png"
+      ],
       "keywords": [
         "elevation"
       ],
@@ -148,6 +154,12 @@
       "title": "Slope",
       "description": "Slope",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -191,6 +203,13 @@
     "ASPECT": {
       "title": "Aspect",
       "description": "Aspect",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -219,6 +238,13 @@
     "C_GENE": {
       "title": "General Curvature",
       "description": "General Curvature",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -247,6 +273,13 @@
     "C_PROF": {
       "title": "Profile Curvature",
       "description": "Profile Curvature",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -275,6 +308,13 @@
     "C_PLAN": {
       "title": "Plan Curvature",
       "description": "Plan Curvature",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -303,6 +343,13 @@
     "C_TANG": {
       "title": "Tangential Curvature",
       "description": "Tangential Curvature",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -331,6 +378,13 @@
     "C_LONG": {
       "title": "Longitudinal Curvature",
       "description": "Zevenbergen & Thorne (1987) refer to this as profile curvature",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -359,6 +413,13 @@
     "C_CROS": {
       "title": "Cross-Sectional Curvature",
       "description": "Zevenbergen & Thorne (1987) refer to this as plan curvature",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -387,6 +448,13 @@
     "C_MINI": {
       "title": "Minimal Curvature",
       "description": "Minimal Curvature",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -415,6 +483,13 @@
     "C_MAXI": {
       "title": "Maximal Curvature",
       "description": "Maximal Curvature",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -443,6 +518,13 @@
     "C_TOTA": {
       "title": "Total Curvature",
       "description": "Total Curvature",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -471,6 +553,13 @@
     "C_ROTO": {
       "title": "Flow Line Curvature",
       "description": "Flow Line Curvature",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {

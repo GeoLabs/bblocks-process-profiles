@@ -120,6 +120,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model
@@ -149,6 +150,12 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/topographic-position-index/inputs/elevation
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-png
         outputs:
           type: object
           required:
@@ -159,6 +166,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
@@ -188,3 +196,9 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/topographic-position-index/outputs/result
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png

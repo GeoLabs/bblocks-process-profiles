@@ -47,6 +47,9 @@
       "title": "Points",
       "description": "Points",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las"
+      ],
       "keywords": [
         "point cloud"
       ],
@@ -117,6 +120,9 @@
       "title": "Thinned Points",
       "description": "Thinned Points",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las"
+      ],
       "keywords": [
         "point cloud"
       ],

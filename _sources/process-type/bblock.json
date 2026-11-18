@@ -11,7 +11,8 @@
   "dependsOn": [
     "ogc.register.schemas.activity-types-schema",
     "ogc.register.geoprocessing-activity-types",
-    "data-types.vocabulary"
+    "data-types.vocabulary",
+    "data-formats.vocabulary"
   ],
   "seeAlso": [
     "ogc.bbr.provenance.activity",

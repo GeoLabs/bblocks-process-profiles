@@ -102,6 +102,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud
@@ -131,6 +132,9 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes/inputs/points
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las
         outputs:
           type: object
           required:
@@ -141,6 +145,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/feature-collection
@@ -170,3 +175,7 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes/outputs/result
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/feature-collection-gml
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/feature-collection-kml
