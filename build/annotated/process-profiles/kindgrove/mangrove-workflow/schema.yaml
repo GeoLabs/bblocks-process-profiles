@@ -27,7 +27,7 @@ allOf:
         - days_back
         - aoi
       x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
     outputs:
       type: object
       required:
@@ -36,7 +36,7 @@ allOf:
         enum:
         - stac
       x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 $defs:
   rawProcessDescription:
     $ref: https://geolabs.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/part1/v1/schemas/process/schema.yaml
@@ -80,14 +80,14 @@ $defs:
             - array
             - object
         x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-        x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+        x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
       outputs:
         type: object
         propertyNames:
           enum:
           - stac
         x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-        x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+        x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
       response:
         enum:
         - raw
@@ -120,7 +120,7 @@ x-jsonld-extra-terms:
   WorkflowRun: http://purl.org/wf4ever/wfprov#WorkflowRun
   WorkflowEngine: http://purl.org/wf4ever/wfprov#WorkflowEngine
   Artifact: http://purl.org/wf4ever/wfprov#Artifact
-  ProcessType: https://geolabs.github.io/bblocks-process-profiles/def/ProcessType
+  ProcessType: https://w3id.org/geolabs/ospd/process-profiles/ProcessType
   ActivityType: https://w3id.org/ogc/rim/activity-type/ActivityType
   owlClass: http://www.w3.org/2002/07/owl#Class
   subClassOf:
@@ -129,7 +129,7 @@ x-jsonld-extra-terms:
   title: http://purl.org/dc/terms/title
   description: http://purl.org/dc/terms/description
   keywords: http://purl.org/dc/terms/subject
-  version: https://geolabs.github.io/bblocks-process-profiles/def/version
+  version: https://w3id.org/geolabs/ospd/process-profiles/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
   minOccurs: https://w3id.org/ogc/api/processes/minOccurs
@@ -185,7 +185,7 @@ x-jsonld-extra-terms:
           '@base': http://www.iana.org/assignments/relation/
       type: http://purl.org/dc/terms/format
   processDescription:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/processDescription
     x-jsonld-context:
       href:
         '@id': http://www.w3.org/2000/01/rdf-schema#seeAlso
@@ -193,9 +193,9 @@ x-jsonld-extra-terms:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
-  result: https://geolabs.github.io/bblocks-process-profiles/def/result
-  engine: https://geolabs.github.io/bblocks-process-profiles/def/engine
-  run: https://geolabs.github.io/bblocks-process-profiles/def/run
+  result: https://w3id.org/geolabs/ospd/process-profiles/result
+  engine: https://w3id.org/geolabs/ospd/process-profiles/engine
+  run: https://w3id.org/geolabs/ospd/process-profiles/run
   provType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@vocab'
@@ -290,38 +290,44 @@ x-jsonld-extra-terms:
   appliesTo:
     x-jsonld-id: https://w3id.org/ogc/rim/appliesTo
     x-jsonld-type: '@id'
+  affectedProperty:
+    x-jsonld-id: https://w3id.org/ogc/rim/affectedProperty
+    x-jsonld-type: '@id'
+  sameAs:
+    x-jsonld-id: http://www.w3.org/2002/07/owl#sameAs
+    x-jsonld-type: '@id'
   prefLabel: http://www.w3.org/2004/02/skos/core#prefLabel
   definition: http://www.w3.org/2004/02/skos/core#definition
   inScheme:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#inScheme
     x-jsonld-type: '@id'
-  status: https://geolabs.github.io/bblocks-process-profiles/def/status
+  status: https://w3id.org/geolabs/ospd/process-profiles/status
   classification: '@nest'
   correspondences: '@nest'
   phase:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/phase
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/phase
     x-jsonld-type: '@id'
-  deployment: https://geolabs.github.io/bblocks-process-profiles/def/deployment
-  profile: https://geolabs.github.io/bblocks-process-profiles/def/profile
+  deployment: https://w3id.org/geolabs/ospd/process-profiles/deployment
+  profile: https://w3id.org/geolabs/ospd/process-profiles/profile
   plan:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/plan
     x-jsonld-context:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
   Plan: http://www.w3.org/ns/prov#Plan
-  cwlClass: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
-  cwlId: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
+  cwlClass: https://w3id.org/geolabs/ospd/process-profiles/cwlClass
+  cwlId: https://w3id.org/geolabs/ospd/process-profiles/cwlId
   provenanceClass:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/provenanceClass
     x-jsonld-type: '@id'
   implementsProfile:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implementsProfile
     x-jsonld-type: '@id'
-  cctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
-  candidateCctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
+  cctDependencies: https://w3id.org/geolabs/ospd/process-profiles/cctDependency
+  candidateCctDependencies: https://w3id.org/geolabs/ospd/process-profiles/candidateCctDependency
   hasStep:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/hasStep
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/hasStep
     x-jsonld-type: '@id'
   exactMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#exactMatch
@@ -332,88 +338,88 @@ x-jsonld-extra-terms:
   relatedMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#relatedMatch
     x-jsonld-type: '@id'
-  openeoEquivalence: https://geolabs.github.io/bblocks-process-profiles/def/openeoEquivalence
-  level: https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel
-  rationale: https://geolabs.github.io/bblocks-process-profiles/def/rationale
+  openeoEquivalence: https://w3id.org/geolabs/ospd/process-profiles/openeoEquivalence
+  level: https://w3id.org/geolabs/ospd/process-profiles/equivalenceLevel
+  rationale: https://w3id.org/geolabs/ospd/process-profiles/rationale
   decomposition:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/decomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/decomposition
     x-jsonld-container: '@list'
-  stage: https://geolabs.github.io/bblocks-process-profiles/def/stage
-  openeo: https://geolabs.github.io/bblocks-process-profiles/def/openeo
+  stage: https://w3id.org/geolabs/ospd/process-profiles/stage
+  openeo: https://w3id.org/geolabs/ospd/process-profiles/openeo
   note: http://www.w3.org/2004/02/skos/core#note
   serverSideFiles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/serverSideFile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/serverSideFile
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      location: https://geolabs.github.io/bblocks-process-profiles/def/location
+      location: https://w3id.org/geolabs/ospd/process-profiles/location
   roleDecompositions:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/roleDecomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/roleDecomposition
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       parts:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/part
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/part
         '@container': '@list'
       selectors:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/selector
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/selector
         '@context':
-          name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+          name: https://w3id.org/geolabs/ospd/process-profiles/liveName
           values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reproducible:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/reproducible
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/reproducible
         '@type': http://www.w3.org/2001/XMLSchema#boolean
       note: http://www.w3.org/2004/02/skos/core#note
   unboundRoles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/unboundRole
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/unboundRole
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       reason: http://www.w3.org/2004/02/skos/core#note
   fixedRoleValues:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/fixedRoleValue
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/fixedRoleValue
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reason: http://www.w3.org/2004/02/skos/core#note
   byReference:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/byReference
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/byReference
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       note: http://www.w3.org/2004/02/skos/core#note
   notAttached:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/notAttached
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/notAttached
     x-jsonld-context:
       reason: http://www.w3.org/2004/02/skos/core#note
   assumedFormatGaps:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/assumedFormatGap
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/assumedFormatGap
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      served: https://geolabs.github.io/bblocks-process-profiles/def/servedMediaType
+      served: https://w3id.org/geolabs/ospd/process-profiles/servedMediaType
       reason: http://www.w3.org/2004/02/skos/core#note
-      evidence: https://geolabs.github.io/bblocks-process-profiles/def/evidence
-x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/
+      evidence: https://w3id.org/geolabs/ospd/process-profiles/evidence
+x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/
 x-jsonld-prefixes:
   wfprov: http://purl.org/wf4ever/wfprov#
-  pp: https://geolabs.github.io/bblocks-process-profiles/def/
+  pp: https://w3id.org/geolabs/ospd/process-profiles/
   acttype: https://w3id.org/ogc/rim/activity-type/
   owl: http://www.w3.org/2002/07/owl#
   rdfs: http://www.w3.org/2000/01/rdf-schema#
@@ -429,4 +435,4 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.kindgrove.mangrove-workflow
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-16'
+  dateOfLastChange: '2026-11-18'

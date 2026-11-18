@@ -1,54 +1,66 @@
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/difference",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/difference",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/difference/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/difference"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/difference/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/difference"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/difference/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/difference, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/difference, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/difference"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/difference/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/difference to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/difference, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/difference/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/difference"
     }
   ],
   "prefLabel": "Compute difference.",
   "definition": "This function shall return a bag of geometry values representing the closure of the set difference between the two geometries InputEntity1 and InputEntity2. The difference is the set of all points which lie on InputEntity1 but not on InputEntity2.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/difference",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/difference",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Geometry",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Geometry",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation"
     ]
   },
   "deployment": {
@@ -60,7 +72,7 @@
     },
     "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/difference",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/difference",
   "correspondences": {
     "openeoEquivalence": {
       "level": "none",

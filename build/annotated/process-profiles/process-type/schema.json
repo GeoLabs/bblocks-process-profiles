@@ -70,15 +70,15 @@
               "items": {
                 "type": "string",
                 "enum": [
-                  "https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration",
-                  "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering",
-                  "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
-                  "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing",
-                  "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
-                  "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+                  "https://w3id.org/geolabs/ospd/process-profiles/phase/filter-configuration",
+                  "https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering",
+                  "https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval",
+                  "https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing",
+                  "https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation",
+                  "https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation"
                 ]
               },
-              "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/phase",
+              "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/phase",
               "x-jsonld-type": "@id"
             }
           },
@@ -97,7 +97,7 @@
             "profile": {
               "description": "Identifier of the process-profile Building Block.",
               "type": "string",
-              "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/profile"
+              "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/profile"
             },
             "processDescription": {
               "description": "The OGC API - Processes processDescription this type is profiled from, at `href` (the `/processes/{processID}` resource). For a CWL-sourced process it is the description the Application Package would deploy, under the illustrative host `ospd.example.org`; for a live process (e.g. a ZOO-Project deployment, `ospd.process-profiles.sqlmm.*`) the real one.",
@@ -114,7 +114,7 @@
                 },
                 "version": {
                   "type": "string",
-                  "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/version"
+                  "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/version"
                 },
                 "href": {
                   "type": "string",
@@ -130,7 +130,7 @@
                   "x-jsonld-type": "@id"
                 }
               },
-              "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/processDescription"
+              "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/processDescription"
             },
             "provenanceClass": {
               "description": "Class of the run records produced by executing this process.",
@@ -139,11 +139,11 @@
                 "http://purl.org/wf4ever/wfprov#ProcessRun",
                 "http://purl.org/wf4ever/wfprov#WorkflowRun"
               ],
-              "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass",
+              "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/provenanceClass",
               "x-jsonld-type": "@id"
             }
           },
-          "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/deployment"
+          "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/deployment"
         },
         "plan": {
           "description": "The plan (`prov:Plan`) an activity of this type executes: the OGC Application Package at `/processes/{processID}/package` (OGC API - Processes - Part 2, requirement /req/deploy-replace-undeploy/package-get-op), whose `executionUnit` is the pinned CWL. Present only for a CWL-sourced process.",
@@ -200,11 +200,11 @@
                 "Workflow",
                 "ExpressionTool"
               ],
-              "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/cwlClass"
+              "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/cwlClass"
             },
             "cwlId": {
               "type": "string",
-              "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/cwlId"
+              "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/cwlId"
             },
             "license": {
               "type": "string",
@@ -219,7 +219,7 @@
                 "type": "string",
                 "pattern": "^eoap\\.cct\\."
               },
-              "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/cctDependency"
+              "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/cctDependency"
             },
             "candidateCctDependencies": {
               "description": "EOAP CWL custom types that could replace plain CWL types (not used by the CWL).",
@@ -228,10 +228,10 @@
                 "type": "string",
                 "pattern": "^eoap\\.cct\\."
               },
-              "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency"
+              "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/candidateCctDependency"
             }
           },
-          "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/plan"
+          "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/plan"
         },
         "serverSideFiles": {
           "description": "Inputs and outputs that this deployment passes as names of files stored on the server (relative to the ZOO-Kernel `dataPath`), not as encoded data, so with no media type. Each names the Implementation Profile role whose format the file has (`implements`).",
@@ -248,28 +248,28 @@
             "properties": {
               "name": {
                 "type": "string",
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/liveName"
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/liveName"
               },
               "side": {
                 "enum": [
                   "inputs",
                   "outputs"
                 ],
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/side"
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/side"
               },
               "implements": {
                 "type": "string",
                 "format": "uri",
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/implements",
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/implements",
                 "x-jsonld-type": "@id"
               },
               "location": {
                 "type": "string",
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/location"
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/location"
               }
             }
           },
-          "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/serverSideFile"
+          "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/serverSideFile"
         },
         "byReference": {
           "description": "Bound inputs and outputs, of a role with a representation, that this deployment takes or returns as a URL of the data instead of the data (C1, 2026-11-10): the representation describes what the URL resolves to. Reported apart, like serverSideFiles.",
@@ -287,19 +287,19 @@
             "properties": {
               "name": {
                 "type": "string",
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/liveName"
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/liveName"
               },
               "side": {
                 "enum": [
                   "inputs",
                   "outputs"
                 ],
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/side"
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/side"
               },
               "implements": {
                 "type": "string",
                 "format": "uri",
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/implements",
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/implements",
                 "x-jsonld-type": "@id"
               },
               "note": {
@@ -309,7 +309,7 @@
               }
             }
           },
-          "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/byReference"
+          "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/byReference"
         },
         "unboundRoles": {
           "description": "Implementation Profile roles this deployment leaves unbound, each with its reason: a role of minOccurs 0 at tier 3 (C2, 2026-11-10), or, for a live process of the testbed, an input its deployment does not expose.",
@@ -329,12 +329,12 @@
                   "inputs",
                   "outputs"
                 ],
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/side"
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/side"
               },
               "implements": {
                 "type": "string",
                 "format": "uri",
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/implements",
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/implements",
                 "x-jsonld-type": "@id"
               },
               "reason": {
@@ -344,7 +344,7 @@
               }
             }
           },
-          "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/unboundRole"
+          "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/unboundRole"
         },
         "fixedRoleValues": {
           "description": "Optional Implementation Profile roles (minOccurs 0) that this deployment leaves unbound because it fixes their value (C3, 2026-11-10): e.g. the index computed by a normalized-difference tool.",
@@ -365,12 +365,12 @@
                   "inputs",
                   "outputs"
                 ],
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/side"
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/side"
               },
               "implements": {
                 "type": "string",
                 "format": "uri",
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/implements",
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/implements",
                 "x-jsonld-type": "@id"
               },
               "values": {
@@ -388,7 +388,7 @@
               }
             }
           },
-          "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/fixedRoleValue"
+          "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/fixedRoleValue"
         },
         "roleDecompositions": {
           "description": "Implementation Profile roles that this deployment takes as one or more inputs (or outputs) none of which is the role: a role with a representation none of the parts carries (the bounding box of raster-crop taken by OTB.ExtractROI as four corner numbers), or a literal role (C11, 2026-11-10: a time interval given by `days_back`, or by `date` + `delta`). `reproducible` is false when the parts depend on the time of execution.",
@@ -409,12 +409,12 @@
                   "inputs",
                   "outputs"
                 ],
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/side"
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/side"
               },
               "implements": {
                 "type": "string",
                 "format": "uri",
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/implements",
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/implements",
                 "x-jsonld-type": "@id"
               },
               "parts": {
@@ -423,7 +423,7 @@
                 "items": {
                   "type": "string"
                 },
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/part",
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/part",
                 "x-jsonld-container": "@list"
               },
               "note": {
@@ -444,7 +444,7 @@
                   "properties": {
                     "name": {
                       "type": "string",
-                      "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/liveName"
+                      "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/liveName"
                     },
                     "values": {
                       "type": "array",
@@ -456,16 +456,16 @@
                     }
                   }
                 },
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/selector"
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/selector"
               },
               "reproducible": {
                 "type": "boolean",
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/reproducible",
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/reproducible",
                 "x-jsonld-type": "http://www.w3.org/2001/XMLSchema#boolean"
               }
             }
           },
-          "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/roleDecomposition"
+          "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/roleDecomposition"
         },
         "assumedFormatGaps": {
           "description": "Bound inputs and outputs whose Implementation Profile representation this deployment does not serve (no media type exposed), accepted with a reason and its evidence (A4.3, docs/FORMAT-CHECK.md).",
@@ -485,19 +485,19 @@
             "properties": {
               "name": {
                 "type": "string",
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/liveName"
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/liveName"
               },
               "side": {
                 "enum": [
                   "inputs",
                   "outputs"
                 ],
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/side"
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/side"
               },
               "implements": {
                 "type": "string",
                 "format": "uri",
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/implements",
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/implements",
                 "x-jsonld-type": "@id"
               },
               "served": {
@@ -505,7 +505,7 @@
                 "items": {
                   "type": "string"
                 },
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/servedMediaType"
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/servedMediaType"
               },
               "reason": {
                 "type": "string",
@@ -513,11 +513,11 @@
               },
               "evidence": {
                 "type": "string",
-                "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/evidence"
+                "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/evidence"
               }
             }
           },
-          "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/assumedFormatGap"
+          "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/assumedFormatGap"
         },
         "notAttached": {
           "description": "A CWL CommandLineTool (an entry with `plan` and no `hasStep`) that implements no Implementation Profile, with the reason (decision Q1, 2026-11-11). Exclusive of `implementsProfile`; a Workflow carries neither. The reason holds at least one non-blank character (2026-11-11).",
@@ -534,13 +534,13 @@
               "x-jsonld-id": "http://www.w3.org/2004/02/skos/core#note"
             }
           },
-          "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/notAttached"
+          "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/notAttached"
         },
         "implementsProfile": {
           "description": "IRI of the nearest applicable profile this process specialises, in the generic-profiles register -- normally an Implementation Profile (generic-profiles.implementation-profile.*, OGC 14-065 WPS 2.0.2 \u00a77.5.3: standard data formats, still not one specific deployment's own choice), or a Generic Profile directly when no Implementation Profile exists yet. Optional: most processes have no standardised abstract counterpart at all. `processDescription` and `plan` (this entry's own concrete binding) are what further specialise it to one real, deployed process -- Implementation (instance level) in the same standard's terms.",
           "type": "string",
           "format": "uri",
-          "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile",
+          "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/implementsProfile",
           "x-jsonld-type": "@id"
         },
         "hasStep": {
@@ -550,7 +550,7 @@
             "type": "string",
             "format": "uri"
           },
-          "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/hasStep",
+          "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/hasStep",
           "x-jsonld-type": "@id"
         },
         "correspondences": {
@@ -601,11 +601,11 @@
                     "closeMatch",
                     "none"
                   ],
-                  "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel"
+                  "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/equivalenceLevel"
                 },
                 "rationale": {
                   "type": "string",
-                  "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/rationale"
+                  "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/rationale"
                 },
                 "decomposition": {
                   "description": "Ordered correspondence of the stages of a composite or opaque process.",
@@ -619,7 +619,7 @@
                     "properties": {
                       "stage": {
                         "type": "string",
-                        "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/stage"
+                        "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/stage"
                       },
                       "openeo": {
                         "type": "array",
@@ -627,7 +627,7 @@
                           "type": "string",
                           "pattern": "^ogc\\.openeo\\."
                         },
-                        "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/openeo"
+                        "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/openeo"
                       },
                       "level": {
                         "enum": [
@@ -635,7 +635,7 @@
                           "closeMatch",
                           "none"
                         ],
-                        "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel"
+                        "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/equivalenceLevel"
                       },
                       "note": {
                         "type": "string",
@@ -643,11 +643,11 @@
                       }
                     }
                   },
-                  "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/decomposition",
+                  "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/decomposition",
                   "x-jsonld-container": "@list"
                 }
               },
-              "x-jsonld-id": "https://geolabs.github.io/bblocks-process-profiles/def/openeoEquivalence"
+              "x-jsonld-id": "https://w3id.org/geolabs/ospd/process-profiles/openeoEquivalence"
             }
           },
           "x-jsonld-id": "@nest"
@@ -658,7 +658,7 @@
           "x-jsonld-type": "@id"
         },
         "inRegister": {
-          "const": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+          "const": "https://w3id.org/geolabs/ospd/process-profiles/register",
           "x-jsonld-id": "https://w3id.org/ogc/rim/inRegister",
           "x-jsonld-type": "@id"
         },
@@ -689,42 +689,42 @@
           "description": "The parent class: acttype:ActivityType, or, for a process attached to an Implementation Profile, the activity type of its operation in bblocks-generic-profiles (decision D5, 2026-11-10). The enum is written by scripts/generate.py from the activity types of that register, so that no other value passes.",
           "enum": [
             "https://w3id.org/ogc/rim/activity-type/ActivityType",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/analytical-hillshading",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/area",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/buffer",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/centroid",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/contains",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/convex-hull",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/crosses",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/difference",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/disjoint",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/equals",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/geometry-extent",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersection",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersects",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/is-simple",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/otsu-thresholding",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-thinning",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-to-grid",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-to-shapes",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/product-selection",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math-multiband",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-crop",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-extent",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-format-conversion",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-rendering",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/slope",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/symdifference",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/terrain-ruggedness-index",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/topographic-position-index",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/touches",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/union",
-            "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/within"
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/analytical-hillshading",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/area",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/buffer",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/centroid",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/contains",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/convex-hull",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/crosses",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/difference",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/disjoint",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/equals",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-extent",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/intersection",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/intersects",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/is-simple",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/otsu-thresholding",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-thinning",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-grid",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-shapes",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/product-selection",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/radiometric-index",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-crop",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-extent",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-format-conversion",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-rendering",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-resampling",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/slope",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/symdifference",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/terrain-ruggedness-index",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/topographic-position-index",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/touches",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/union",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/within"
           ],
           "x-jsonld-id": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
           "x-jsonld-type": "@id"
@@ -761,7 +761,7 @@
                     "x-jsonld-type": "@vocab"
                   },
                   "proposer": {
-                    "const": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+                    "const": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
                     "x-jsonld-id": "https://w3id.org/ogc/rim/proposer",
                     "x-jsonld-type": "@id"
                   },
@@ -810,7 +810,7 @@
                     "x-jsonld-id": "http://purl.org/dc/terms/description"
                   },
                   "proposer": {
-                    "const": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+                    "const": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
                     "x-jsonld-id": "https://w3id.org/ogc/rim/proposer",
                     "x-jsonld-type": "@id"
                   },
@@ -856,7 +856,7 @@
                 "x-jsonld-type": "@vocab"
               },
               "proposer": {
-                "const": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+                "const": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
                 "x-jsonld-id": "https://w3id.org/ogc/rim/proposer",
                 "x-jsonld-type": "@id"
               },
@@ -982,7 +982,7 @@
     }
   ],
   "x-jsonld-extra-terms": {
-    "ProcessType": "https://geolabs.github.io/bblocks-process-profiles/def/ProcessType",
+    "ProcessType": "https://w3id.org/geolabs/ospd/process-profiles/ProcessType",
     "ActivityType": "https://w3id.org/ogc/rim/activity-type/ActivityType",
     "owlClass": "http://www.w3.org/2002/07/owl#Class",
     "Plan": "http://www.w3.org/ns/prov#Plan",
@@ -996,10 +996,18 @@
       "x-jsonld-type": "@vocab"
     },
     "substantive": "https://w3id.org/ogc/rim/substantiveChange",
-    "clarifying": "https://w3id.org/ogc/rim/clarifyingChange"
+    "clarifying": "https://w3id.org/ogc/rim/clarifyingChange",
+    "affectedProperty": {
+      "x-jsonld-id": "https://w3id.org/ogc/rim/affectedProperty",
+      "x-jsonld-type": "@id"
+    },
+    "sameAs": {
+      "x-jsonld-id": "http://www.w3.org/2002/07/owl#sameAs",
+      "x-jsonld-type": "@id"
+    }
   },
   "x-jsonld-prefixes": {
-    "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "pp": "https://w3id.org/geolabs/ospd/process-profiles/",
     "acttype": "https://w3id.org/ogc/rim/activity-type/",
     "owl": "http://www.w3.org/2002/07/owl#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
@@ -1015,6 +1023,6 @@
     "itemIdentifier": "ospd.process-profiles.process-type",
     "register": "https://geolabs.github.io/bblocks-process-profiles/build/register.json",
     "version": "0.1",
-    "dateOfLastChange": "2026-11-16"
+    "dateOfLastChange": "2026-11-18"
   }
 }

@@ -1,94 +1,106 @@
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band/actions/tier3-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band/actions/tier3-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band/actions/inherited-description-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band/actions/inherited-description-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription.inherited.json added with the attachment to the Implementation Profile band-retrieval: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band/actions/role-decompositions-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band/actions/role-decompositions-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "roleDecompositions added: the role areaOfInterest of band-retrieval is taken as the four inputs west, south, east and north, none of which carries its representation.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band/actions/plan-2026-11-11",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band/actions/plan-2026-11-11",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#download_band). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the output band_file and application/octet-stream -> application/geo+json (with contentEncoding binary) for the input stac_item, in processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on 2026-11-10 for stac_item and band_file were removed the same day, when the corrected CWL served these formats; the entry has none.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band"
     }
   ],
   "prefLabel": "Download one Sentinel-2 band over a bounding box",
   "definition": "Downloads one Sentinel-2 band over a bounding box from a STAC Item.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval"
     ]
   },
   "deployment": {
@@ -117,11 +129,11 @@
       "eoap.cct.stac"
     ]
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval",
   "roleDecompositions": [
     {
       "side": "inputs",
-      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/areaOfInterest",
+      "implements": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/areaOfInterest",
       "parts": [
         "west",
         "south",

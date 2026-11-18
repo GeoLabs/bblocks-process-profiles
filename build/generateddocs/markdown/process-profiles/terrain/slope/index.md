@@ -27,7 +27,7 @@ On this deployment:
 
 ## Implementation Profile
 
-Implements [`Slope`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope) (`generic-profiles.implementation-profile.slope`, bblocks-generic-profiles).
+Implements [`Slope`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope) (`generic-profiles.implementation-profile.slope`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -953,38 +953,38 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/SAGA.ta_morphometry.0> dcterms:description "Calculates the local morphometric terrain parameters slope, aspect and if supported by the chosen method also the curvature. Besides tangential curvature also its horizontal and vertical components (i.e. plan and profile curvature) can be calculated." ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/terrain/SAGA.ta_morphometry.0> dcterms:description "Calculates the local morphometric terrain parameters slope, aspect and if supported by the chosen method also the curvature. Besides tangential curvature also its horizontal and vertical components (i.e. plan and profile curvature) can be calculated." ;
     dcterms:title "Slope, Aspect, Curvature" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_morphometry.0/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns4:ELEVATION [ dcterms:description "Elevation" ;
+    proc:inputs [ ns3:ELEVATION [ dcterms:description "Elevation" ;
                     dcterms:title "Elevation" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns4:METHOD [ dcterms:description "Method" ;
+            ns3:METHOD [ dcterms:description "Method" ;
                     dcterms:title "Method" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"9 parameter 2nd order polynom (Zevenbergen & Thorne 1987)\""^^rdf:JSON ;
@@ -1001,7 +1001,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                 "maximum triangle slope (Tarboton 1997)" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns4:UNIT_ASPECT [ dcterms:description "Aspect Units" ;
+            ns3:UNIT_ASPECT [ dcterms:description "Aspect Units" ;
                     dcterms:title "Aspect Units" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"radians\""^^rdf:JSON ;
@@ -1009,7 +1009,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                 "radians" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns4:UNIT_SLOPE [ dcterms:description "Slope Units" ;
+            ns3:UNIT_SLOPE [ dcterms:description "Slope Units" ;
                     dcterms:title "Slope Units" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"radians\""^^rdf:JSON ;
@@ -1042,13 +1042,13 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                     dcterms:title "Cross-Sectional Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ] ] ] ;
@@ -1056,16 +1056,16 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                     dcterms:title "General Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
             ns2:C_LONG [ dcterms:description "Zevenbergen & Thorne (1987) refer to this as profile curvature" ;
                     dcterms:title "Longitudinal Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
@@ -1076,24 +1076,24 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
             ns2:C_MAXI [ dcterms:description "Maximal Curvature" ;
                     dcterms:title "Maximal Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
             ns2:C_MINI [ dcterms:description "Minimal Curvature" ;
                     dcterms:title "Minimal Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
@@ -1101,10 +1101,10 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
@@ -1112,16 +1112,16 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                     dcterms:title "Plan Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
             ns2:C_PROF [ dcterms:description "Profile Curvature" ;
                     dcterms:title "Profile Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
@@ -1129,24 +1129,24 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
             ns2:C_ROTO [ dcterms:description "Flow Line Curvature" ;
                     dcterms:title "Flow Line Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ] ] ] ;
@@ -1157,13 +1157,13 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
             ns2:C_TOTA [ dcterms:description "Total Curvature" ;
                     dcterms:title "Total Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
@@ -1171,24 +1171,24 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
             ns2:SLOPE [ dcterms:description "Slope" ;
                     dcterms:title "Slope" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ] ] ] ] .
@@ -1198,7 +1198,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 
 
 ### processDescription with its inheritance (Implementation, instance level)
-The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope`: the Implementation Profile's keywords (E) on the process and on each bound input/output, and, per footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation` reference to the Implementation Profile -- on the process only. Each bound input/output keeps its Implementation Profile counterpart's reference to the Generic Profile input/output (`generic-input`/`-output`) and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`, `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings` in scripts/profiles.yaml; inputs/outputs bound to none are the deployment's own additions (footnote b). Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).
+The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope`: the Implementation Profile's keywords (E) on the process and on each bound input/output, and, per footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation` reference to the Implementation Profile -- on the process only. Each bound input/output keeps its Implementation Profile counterpart's reference to the Generic Profile input/output (`generic-input`/`-output`) and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`, `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings` in scripts/profiles.yaml; inputs/outputs bound to none are the deployment's own additions (footnote b). Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).
 #### json
 ```json
 {
@@ -1235,37 +1235,37 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     {
       "title": "Process Concept: Terrain Analysis",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis"
     },
     {
       "title": "Generic Profile: Terrain derivative",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative"
     },
     {
       "title": "Implementation Profile: Slope",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope"
     }
   ],
   "inputs": {
     "ELEVATION": {
       "title": "Elevation",
       "description": "Elevation",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model",
       "keywords": [
         "elevation"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Terrain derivative -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/inputs/elevation"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/inputs/elevation"
         },
         {
           "title": "Implementation Profile: Slope -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope/inputs/elevation"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope/inputs/elevation"
         }
       ],
       "schema": {
@@ -1350,20 +1350,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "SLOPE": {
       "title": "Slope",
       "description": "Slope",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Terrain derivative -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/outputs/result"
         },
         {
           "title": "Implementation Profile: Slope -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope/outputs/result"
         }
       ],
       "schema": {
@@ -1741,37 +1741,37 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     {
       "title": "Process Concept: Terrain Analysis",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis"
     },
     {
       "title": "Generic Profile: Terrain derivative",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative"
     },
     {
       "title": "Implementation Profile: Slope",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope"
     }
   ],
   "inputs": {
     "ELEVATION": {
       "title": "Elevation",
       "description": "Elevation",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model",
       "keywords": [
         "elevation"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Terrain derivative -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/inputs/elevation"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/inputs/elevation"
         },
         {
           "title": "Implementation Profile: Slope -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope/inputs/elevation"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope/inputs/elevation"
         }
       ],
       "schema": {
@@ -1856,20 +1856,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "SLOPE": {
       "title": "Slope",
       "description": "Slope",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Terrain derivative -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/outputs/result"
         },
         {
           "title": "Implementation Profile: Slope -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope/outputs/result"
         }
       ],
       "schema": {
@@ -2213,17 +2213,17 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/SAGA.ta_morphometry.0> dcterms:description "Calculates the local morphometric terrain parameters slope, aspect and if supported by the chosen method also the curvature. Besides tangential curvature also its horizontal and vertical components (i.e. plan and profile curvature) can be calculated." ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/terrain/SAGA.ta_morphometry.0> dcterms:description "Calculates the local morphometric terrain parameters slope, aspect and if supported by the chosen method also the curvature. Besides tangential curvature also its horizontal and vertical components (i.e. plan and profile curvature) can be calculated." ;
     dcterms:subject "Slope",
         "derivative",
         "elevation",
@@ -2232,32 +2232,32 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "Slope, Aspect, Curvature" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_morphometry.0/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns3:ELEVATION [ dcterms:description "Elevation" ;
+    proc:inputs [ ns4:ELEVATION [ dcterms:description "Elevation" ;
                     dcterms:title "Elevation" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model> ;
                     proc:keywords "elevation" ;
                     proc:metadata [ dcterms:title "Implementation Profile: Slope -- input `elevation`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope/inputs/elevation> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope/inputs/elevation> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
                         [ dcterms:title "Generic Profile: Terrain derivative -- input `elevation`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/inputs/elevation> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/inputs/elevation> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
-            ns3:METHOD [ dcterms:description "Method" ;
+            ns4:METHOD [ dcterms:description "Method" ;
                     dcterms:title "Method" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"9 parameter 2nd order polynom (Zevenbergen & Thorne 1987)\""^^rdf:JSON ;
@@ -2274,7 +2274,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 "maximum triangle slope (Tarboton 1997)" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns3:UNIT_ASPECT [ dcterms:description "Aspect Units" ;
+            ns4:UNIT_ASPECT [ dcterms:description "Aspect Units" ;
                     dcterms:title "Aspect Units" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"radians\""^^rdf:JSON ;
@@ -2282,7 +2282,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 "radians" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns3:UNIT_SLOPE [ dcterms:description "Slope Units" ;
+            ns4:UNIT_SLOPE [ dcterms:description "Slope Units" ;
                     dcterms:title "Slope Units" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"radians\""^^rdf:JSON ;
@@ -2295,14 +2295,14 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         "dismiss",
         "sync-execute" ;
     proc:metadata [ dcterms:title "Generic Profile: Terrain derivative" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative> ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Implementation Profile: Slope" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ dcterms:title "Process Concept: Terrain Analysis" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Implementation Profile: Slope" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
@@ -2310,10 +2310,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:title "Aspect" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
@@ -2327,30 +2327,19 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
             ns2:C_GENE [ dcterms:description "General Curvature" ;
                     dcterms:title "General Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ;
-            ns2:C_LONG [ dcterms:description "Zevenbergen & Thorne (1987) refer to this as profile curvature" ;
-                    dcterms:title "Longitudinal Curvature" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
@@ -2358,24 +2347,35 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns2:C_MAXI [ dcterms:description "Maximal Curvature" ;
-                    dcterms:title "Maximal Curvature" ;
+            ns2:C_LONG [ dcterms:description "Zevenbergen & Thorne (1987) refer to this as profile curvature" ;
+                    dcterms:title "Longitudinal Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ] ] ] ;
+            ns2:C_MAXI [ dcterms:description "Maximal Curvature" ;
+                    dcterms:title "Maximal Curvature" ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
             ns2:C_MINI [ dcterms:description "Minimal Curvature" ;
                     dcterms:title "Minimal Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
@@ -2383,27 +2383,27 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
-            ns2:C_PLAN [ dcterms:description "Plan Curvature" ;
-                    dcterms:title "Plan Curvature" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
+            ns2:C_PLAN [ dcterms:description "Plan Curvature" ;
+                    dcterms:title "Plan Curvature" ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
             ns2:C_PROF [ dcterms:description "Profile Curvature" ;
                     dcterms:title "Profile Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
@@ -2425,27 +2425,27 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
             ns2:C_TANG [ dcterms:description "Tangential Curvature" ;
                     dcterms:title "Tangential Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
             ns2:C_TOTA [ dcterms:description "Total Curvature" ;
                     dcterms:title "Total Curvature" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
@@ -2456,92 +2456,104 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
             ns2:SLOPE [ dcterms:description "Slope" ;
                     dcterms:title "Slope" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Slope -- output `result`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
-                        [ dcterms:title "Generic Profile: Terrain derivative -- output `result`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
+                    proc:metadata [ dcterms:title "Generic Profile: Terrain derivative -- output `result`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Slope -- output `result`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ] .
+                                    ns1:contentMediaType "image/tiff" ] ] ] ] .
 
 
 ```
 
 
 ### process-type entry
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision, linking to its Implementation Profile.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision, linking to its Implementation Profile.
 #### json
 ```json
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/slope, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/slope, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope to https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope"
     }
   ],
   "prefLabel": "Slope, Aspect, Curvature",
   "definition": "Calculates the local morphometric terrain parameters slope, aspect and if supported by the chosen method also the curvature. Besides tangential curvature also its horizontal and vertical components (i.e. plan and profile curvature) can be calculated.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/slope",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/slope",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation"
     ]
   },
   "deployment": {
@@ -2553,7 +2565,7 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
     },
     "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope",
   "correspondences": {
     "openeoEquivalence": {
       "level": "none",
@@ -2568,56 +2580,68 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
 ```jsonld
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/terrain/slope/context.jsonld",
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/slope, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/slope, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope to https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope"
     }
   ],
   "prefLabel": "Slope, Aspect, Curvature",
   "definition": "Calculates the local morphometric terrain parameters slope, aspect and if supported by the chosen method also the curvature. Besides tangential curvature also its horizontal and vertical components (i.e. plan and profile curvature) can be calculated.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/slope",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/slope",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation"
     ]
   },
   "deployment": {
@@ -2629,7 +2653,7 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
     },
     "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope",
   "correspondences": {
     "openeoEquivalence": {
       "level": "none",
@@ -2645,7 +2669,7 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rim: <https://w3id.org/ogc/rim/> .
@@ -2653,53 +2677,64 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope/actions/addition> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/addition> a rim:RegisterAction ;
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope> ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope/actions/d5-2026-11-09> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
     prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope> ;
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope/actions/specialisation-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/slope, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/identifier-2026-11-17> a rim:RegisterAction ;
+    dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope to https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
+    prov:startedAtTime "2026-11-17T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rim:objectIdentifier ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/specialisation-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/slope, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope> ;
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/SAGA.ta_morphometry.0> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_morphometry.0> ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/terrain/SAGA.ta_morphometry.0> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_morphometry.0> ;
     pp:version "1.0.0" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope> a owl:Class,
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
-    rdfs:subClassOf <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/slope> ;
+    rdfs:subClassOf <https://w3id.org/geolabs/ospd/generic-profiles/activity-type/slope> ;
+    owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope> ;
     skos:definition "Calculates the local morphometric terrain parameters slope, aspect and if supported by the chosen method also the curvature. Besides tangential curvature also its horizontal and vertical components (i.e. plan and profile curvature) can be calculated." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Slope, Aspect, Curvature" ;
-    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/SAGA.ta_morphometry.0> ;
+    pp:deployment [ pp:processDescription <https://w3id.org/geolabs/ospd/process-profiles/process/terrain/SAGA.ta_morphometry.0> ;
             pp:profile "ospd.process-profiles.terrain.slope" ;
             pp:provenanceClass wfprov:ProcessRun ] ;
-    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope> ;
+    pp:implementsProfile <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope> ;
     pp:openeoEquivalence [ pp:equivalenceLevel "none" ;
             pp:rationale "No openEO process computes terrain slope in the published bblocks-openeo register." ] ;
-    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation> ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope/actions/addition>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope/actions/d5-2026-11-09>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope/actions/specialisation-2026-11-10> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/addition>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/d5-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/specialisation-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/slope"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope"^^xsd:anyURI ;
     rim:publicationStatus rim:published ;
     rim:validityStatus rim:invalid .
 
@@ -2734,7 +2769,7 @@ allOf:
       - UNIT_SLOPE
       - UNIT_ASPECT
       x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
     outputs:
       type: object
       required:
@@ -2751,7 +2786,7 @@ allOf:
       - C_TOTA
       - C_ROTO
       x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 $defs:
   processTypeEntry:
     $ref: https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/process-type/schema.yaml
@@ -2776,7 +2811,7 @@ $defs:
           - UNIT_SLOPE
           - UNIT_ASPECT
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
           type: object
           required:
@@ -2793,9 +2828,9 @@ $defs:
           - C_TOTA
           - C_ROTO
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
     - description: '`SAGA.ta_morphometry.0` as the Implementation (instance level)
-        of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope`:
+        of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope`:
         Table 21 keywords (E) and footnote-a metadata references (Table 22 roles)
         inherited from its Implementation Profile.'
       type: object
@@ -2827,7 +2862,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis
           - contains:
               type: object
               required:
@@ -2837,7 +2872,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative
           - contains:
               type: object
               required:
@@ -2847,7 +2882,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope
           x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
         inputs:
           type: object
@@ -2861,7 +2896,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -2878,9 +2913,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/inputs/elevation
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/inputs/elevation
                   - contains:
                       type: object
                       required:
@@ -2888,12 +2923,12 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope/inputs/elevation
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope/inputs/elevation
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
           type: object
           required:
@@ -2906,7 +2941,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -2923,9 +2958,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/outputs/result
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/outputs/result
                   - contains:
                       type: object
                       required:
@@ -2933,19 +2968,19 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/slope/outputs/result
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope/outputs/result
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 x-jsonld-extra-terms:
   type: '@type'
   ProcessRun: http://purl.org/wf4ever/wfprov#ProcessRun
   WorkflowRun: http://purl.org/wf4ever/wfprov#WorkflowRun
   WorkflowEngine: http://purl.org/wf4ever/wfprov#WorkflowEngine
   Artifact: http://purl.org/wf4ever/wfprov#Artifact
-  ProcessType: https://geolabs.github.io/bblocks-process-profiles/def/ProcessType
+  ProcessType: https://w3id.org/geolabs/ospd/process-profiles/ProcessType
   ActivityType: https://w3id.org/ogc/rim/activity-type/ActivityType
   owlClass: http://www.w3.org/2002/07/owl#Class
   subClassOf:
@@ -2954,7 +2989,7 @@ x-jsonld-extra-terms:
   title: http://purl.org/dc/terms/title
   description: http://purl.org/dc/terms/description
   keywords: http://purl.org/dc/terms/subject
-  version: https://geolabs.github.io/bblocks-process-profiles/def/version
+  version: https://w3id.org/geolabs/ospd/process-profiles/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
   minOccurs: https://w3id.org/ogc/api/processes/minOccurs
@@ -3010,7 +3045,7 @@ x-jsonld-extra-terms:
           '@base': http://www.iana.org/assignments/relation/
       type: http://purl.org/dc/terms/format
   processDescription:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/processDescription
     x-jsonld-context:
       href:
         '@id': http://www.w3.org/2000/01/rdf-schema#seeAlso
@@ -3018,9 +3053,9 @@ x-jsonld-extra-terms:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
-  result: https://geolabs.github.io/bblocks-process-profiles/def/result
-  engine: https://geolabs.github.io/bblocks-process-profiles/def/engine
-  run: https://geolabs.github.io/bblocks-process-profiles/def/run
+  result: https://w3id.org/geolabs/ospd/process-profiles/result
+  engine: https://w3id.org/geolabs/ospd/process-profiles/engine
+  run: https://w3id.org/geolabs/ospd/process-profiles/run
   provType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@vocab'
@@ -3115,38 +3150,44 @@ x-jsonld-extra-terms:
   appliesTo:
     x-jsonld-id: https://w3id.org/ogc/rim/appliesTo
     x-jsonld-type: '@id'
+  affectedProperty:
+    x-jsonld-id: https://w3id.org/ogc/rim/affectedProperty
+    x-jsonld-type: '@id'
+  sameAs:
+    x-jsonld-id: http://www.w3.org/2002/07/owl#sameAs
+    x-jsonld-type: '@id'
   prefLabel: http://www.w3.org/2004/02/skos/core#prefLabel
   definition: http://www.w3.org/2004/02/skos/core#definition
   inScheme:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#inScheme
     x-jsonld-type: '@id'
-  status: https://geolabs.github.io/bblocks-process-profiles/def/status
+  status: https://w3id.org/geolabs/ospd/process-profiles/status
   classification: '@nest'
   correspondences: '@nest'
   phase:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/phase
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/phase
     x-jsonld-type: '@id'
-  deployment: https://geolabs.github.io/bblocks-process-profiles/def/deployment
-  profile: https://geolabs.github.io/bblocks-process-profiles/def/profile
+  deployment: https://w3id.org/geolabs/ospd/process-profiles/deployment
+  profile: https://w3id.org/geolabs/ospd/process-profiles/profile
   plan:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/plan
     x-jsonld-context:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
   Plan: http://www.w3.org/ns/prov#Plan
-  cwlClass: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
-  cwlId: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
+  cwlClass: https://w3id.org/geolabs/ospd/process-profiles/cwlClass
+  cwlId: https://w3id.org/geolabs/ospd/process-profiles/cwlId
   provenanceClass:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/provenanceClass
     x-jsonld-type: '@id'
   implementsProfile:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implementsProfile
     x-jsonld-type: '@id'
-  cctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
-  candidateCctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
+  cctDependencies: https://w3id.org/geolabs/ospd/process-profiles/cctDependency
+  candidateCctDependencies: https://w3id.org/geolabs/ospd/process-profiles/candidateCctDependency
   hasStep:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/hasStep
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/hasStep
     x-jsonld-type: '@id'
   exactMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#exactMatch
@@ -3157,88 +3198,88 @@ x-jsonld-extra-terms:
   relatedMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#relatedMatch
     x-jsonld-type: '@id'
-  openeoEquivalence: https://geolabs.github.io/bblocks-process-profiles/def/openeoEquivalence
-  level: https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel
-  rationale: https://geolabs.github.io/bblocks-process-profiles/def/rationale
+  openeoEquivalence: https://w3id.org/geolabs/ospd/process-profiles/openeoEquivalence
+  level: https://w3id.org/geolabs/ospd/process-profiles/equivalenceLevel
+  rationale: https://w3id.org/geolabs/ospd/process-profiles/rationale
   decomposition:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/decomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/decomposition
     x-jsonld-container: '@list'
-  stage: https://geolabs.github.io/bblocks-process-profiles/def/stage
-  openeo: https://geolabs.github.io/bblocks-process-profiles/def/openeo
+  stage: https://w3id.org/geolabs/ospd/process-profiles/stage
+  openeo: https://w3id.org/geolabs/ospd/process-profiles/openeo
   note: http://www.w3.org/2004/02/skos/core#note
   serverSideFiles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/serverSideFile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/serverSideFile
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      location: https://geolabs.github.io/bblocks-process-profiles/def/location
+      location: https://w3id.org/geolabs/ospd/process-profiles/location
   roleDecompositions:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/roleDecomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/roleDecomposition
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       parts:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/part
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/part
         '@container': '@list'
       selectors:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/selector
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/selector
         '@context':
-          name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+          name: https://w3id.org/geolabs/ospd/process-profiles/liveName
           values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reproducible:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/reproducible
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/reproducible
         '@type': http://www.w3.org/2001/XMLSchema#boolean
       note: http://www.w3.org/2004/02/skos/core#note
   unboundRoles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/unboundRole
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/unboundRole
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       reason: http://www.w3.org/2004/02/skos/core#note
   fixedRoleValues:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/fixedRoleValue
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/fixedRoleValue
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reason: http://www.w3.org/2004/02/skos/core#note
   byReference:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/byReference
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/byReference
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       note: http://www.w3.org/2004/02/skos/core#note
   notAttached:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/notAttached
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/notAttached
     x-jsonld-context:
       reason: http://www.w3.org/2004/02/skos/core#note
   assumedFormatGaps:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/assumedFormatGap
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/assumedFormatGap
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      served: https://geolabs.github.io/bblocks-process-profiles/def/servedMediaType
+      served: https://w3id.org/geolabs/ospd/process-profiles/servedMediaType
       reason: http://www.w3.org/2004/02/skos/core#note
-      evidence: https://geolabs.github.io/bblocks-process-profiles/def/evidence
-x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/
+      evidence: https://w3id.org/geolabs/ospd/process-profiles/evidence
+x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/
 x-jsonld-prefixes:
   wfprov: http://purl.org/wf4ever/wfprov#
-  pp: https://geolabs.github.io/bblocks-process-profiles/def/
+  pp: https://w3id.org/geolabs/ospd/process-profiles/
   acttype: https://w3id.org/ogc/rim/activity-type/
   owl: http://www.w3.org/2002/07/owl#
   rdfs: http://www.w3.org/2000/01/rdf-schema#
@@ -3254,7 +3295,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.terrain.slope
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-16'
+  dateOfLastChange: '2026-11-18'
 
 ```
 
@@ -3269,10 +3310,10 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/",
     "inputs": {
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/input/",
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/input/",
         "schema": {
           "@context": {
             "@vocab": "https://w3id.org/ogc/api/schema/"
@@ -3286,7 +3327,7 @@ Links to the schema:
     },
     "outputs": {
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/output/",
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/output/",
         "schema": {
           "@context": {
             "@vocab": "https://w3id.org/ogc/api/schema/"
@@ -3526,6 +3567,14 @@ Links to the schema:
       "@id": "rim:appliesTo",
       "@type": "@id"
     },
+    "affectedProperty": {
+      "@id": "rim:affectedProperty",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "owl:sameAs",
+      "@type": "@id"
+    },
     "prefLabel": "skos:prefLabel",
     "definition": "skos:definition",
     "inScheme": {
@@ -3696,7 +3745,7 @@ Links to the schema:
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",
-    "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "pp": "https://w3id.org/geolabs/ospd/process-profiles/",
     "acttype": "rim:activity-type/",
     "owl": "http://www.w3.org/2002/07/owl#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",

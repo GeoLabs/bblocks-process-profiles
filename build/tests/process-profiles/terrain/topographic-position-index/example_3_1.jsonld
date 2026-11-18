@@ -33,37 +33,37 @@
     {
       "title": "Process Concept: Terrain Analysis",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis"
     },
     {
       "title": "Generic Profile: Terrain derivative",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative"
     },
     {
       "title": "Implementation Profile: Topographic position index",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/topographic-position-index"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/topographic-position-index"
     }
   ],
   "inputs": {
     "DEM": {
       "title": "Elevation",
       "description": "Elevation",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model",
       "keywords": [
         "elevation"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Terrain derivative -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/inputs/elevation"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/inputs/elevation"
         },
         {
           "title": "Implementation Profile: Topographic position index -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/topographic-position-index/inputs/elevation"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/topographic-position-index/inputs/elevation"
         }
       ],
       "schema": {
@@ -182,20 +182,20 @@
     "TPI": {
       "title": "Topographic Position Index",
       "description": "Topographic Position Index",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Terrain derivative -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/outputs/result"
         },
         {
           "title": "Implementation Profile: Topographic position index -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/topographic-position-index/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/topographic-position-index/outputs/result"
         }
       ],
       "schema": {

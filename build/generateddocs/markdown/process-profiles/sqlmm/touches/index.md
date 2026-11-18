@@ -17,7 +17,7 @@ Process profile of the live OGC API - Processes process `Touches` (ZOO-Project, 
 
 ## Implementation Profile
 
-Implements [`Touches`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches) (`generic-profiles.implementation-profile.touches`, bblocks-generic-profiles).
+Implements [`Touches`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches) (`generic-profiles.implementation-profile.touches`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -214,23 +214,23 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/Touches> dcterms:description "Generates a new geometry which is the region of intersection of the two geometries operated on." ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/sqlmm/Touches> dcterms:description "Generates a new geometry which is the region of intersection of the two geometries operated on." ;
     dcterms:title "Compute intersection. " ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Touches/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns2:InputEntity1 [ dcterms:description "the first geometry to compare against." ;
+    proc:inputs [ ns3:InputEntity1 [ dcterms:description "the first geometry to compare against." ;
                     dcterms:title "the first geometry" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
@@ -240,7 +240,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
-            ns2:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
+            ns3:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
                     dcterms:title "the other geometry" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
@@ -256,7 +256,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:Result [ dcterms:description "A value true or false if the geometry1 and geometry2 touches." ;
+    proc:outputs [ ns4:Result [ dcterms:description "A value true or false if the geometry1 and geometry2 touches." ;
                     dcterms:title "Intersects result" ;
                     proc:metadata [ dcterms:title "Mon test  " ] ;
                     proc:schema [ proc:type "boolean" ] ] ] .
@@ -266,7 +266,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 
 
 ### processDescription with its inheritance (Implementation, instance level)
-The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches`: the Implementation Profile's keywords (E) on the process and on each bound input/output, and, per footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation` reference to the Implementation Profile -- on the process only. Each bound input/output keeps its Implementation Profile counterpart's reference to the Generic Profile input/output (`generic-input`/`-output`) and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`, `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings` in scripts/profiles.yaml; inputs/outputs bound to none are the deployment's own additions (footnote b). Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).
+The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches`: the Implementation Profile's keywords (E) on the process and on each bound input/output, and, per footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation` reference to the Implementation Profile -- on the process only. Each bound input/output keeps its Implementation Profile counterpart's reference to the Generic Profile input/output (`generic-input`/`-output`) and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`, `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings` in scripts/profiles.yaml; inputs/outputs bound to none are the deployment's own additions (footnote b). Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).
 #### json
 ```json
 {
@@ -303,37 +303,37 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     {
       "title": "Process Concept: Vector Geometry Processing",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing"
     },
     {
       "title": "Generic Profile: Binary spatial predicate",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate"
     },
     {
       "title": "Implementation Profile: Touches",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches"
     }
   ],
   "inputs": {
     "InputEntity1": {
       "title": "the first geometry",
       "description": "the first geometry to compare against.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
       "keywords": [
         "geometry"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Binary spatial predicate -- input `geometry1`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry1"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate/inputs/geometry1"
         },
         {
           "title": "Implementation Profile: Touches -- input `geometry1`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/inputs/geometry1"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches/inputs/geometry1"
         }
       ],
       "schema": {
@@ -356,20 +356,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "InputEntity2": {
       "title": "the other geometry",
       "description": "the other geometry to compare against.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
       "keywords": [
         "geometry"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Binary spatial predicate -- input `geometry2`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry2"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate/inputs/geometry2"
         },
         {
           "title": "Implementation Profile: Touches -- input `geometry2`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/inputs/geometry2"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches/inputs/geometry2"
         }
       ],
       "schema": {
@@ -394,20 +394,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "Result": {
       "title": "Intersects result",
       "description": "A value true or false if the geometry1 and geometry2 touches.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/boolean",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/boolean",
       "keywords": [
         "boolean"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Binary spatial predicate -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate/outputs/result"
         },
         {
           "title": "Implementation Profile: Touches -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches/outputs/result"
         },
         {
           "title": "Mon test  "
@@ -459,37 +459,37 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     {
       "title": "Process Concept: Vector Geometry Processing",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing"
     },
     {
       "title": "Generic Profile: Binary spatial predicate",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate"
     },
     {
       "title": "Implementation Profile: Touches",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches"
     }
   ],
   "inputs": {
     "InputEntity1": {
       "title": "the first geometry",
       "description": "the first geometry to compare against.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
       "keywords": [
         "geometry"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Binary spatial predicate -- input `geometry1`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry1"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate/inputs/geometry1"
         },
         {
           "title": "Implementation Profile: Touches -- input `geometry1`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/inputs/geometry1"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches/inputs/geometry1"
         }
       ],
       "schema": {
@@ -512,20 +512,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "InputEntity2": {
       "title": "the other geometry",
       "description": "the other geometry to compare against.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
       "keywords": [
         "geometry"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Binary spatial predicate -- input `geometry2`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry2"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate/inputs/geometry2"
         },
         {
           "title": "Implementation Profile: Touches -- input `geometry2`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/inputs/geometry2"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches/inputs/geometry2"
         }
       ],
       "schema": {
@@ -550,20 +550,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "Result": {
       "title": "Intersects result",
       "description": "A value true or false if the geometry1 and geometry2 touches.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/boolean",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/boolean",
       "keywords": [
         "boolean"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Binary spatial predicate -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate/outputs/result"
         },
         {
           "title": "Implementation Profile: Touches -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches/outputs/result"
         },
         {
           "title": "Mon test  "
@@ -580,17 +580,17 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix ns4: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/Touches> dcterms:description "Generates a new geometry which is the region of intersection of the two geometries operated on." ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/sqlmm/Touches> dcterms:description "Generates a new geometry which is the region of intersection of the two geometries operated on." ;
     dcterms:subject "Touches",
         "geometry",
         "predicate",
@@ -602,68 +602,68 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
             ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Touches/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns1:InputEntity1 [ dcterms:description "the first geometry to compare against." ;
+    proc:inputs [ ns2:InputEntity1 [ dcterms:description "the first geometry to compare against." ;
                     dcterms:title "the first geometry" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/geometry> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Binary spatial predicate -- input `geometry1`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry1> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Touches -- input `geometry1`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/inputs/geometry1> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "UTF-8" ;
-                                    ns2:contentMediaType "text/xml" ;
-                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                    proc:metadata [ dcterms:title "Implementation Profile: Touches -- input `geometry1`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches/inputs/geometry1> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Binary spatial predicate -- input `geometry1`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate/inputs/geometry1> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "text/xml" ;
-                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
-            ns1:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
+            ns2:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
                     dcterms:title "the other geometry" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/geometry> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Binary spatial predicate -- input `geometry2`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry2> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Touches -- input `geometry2`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/inputs/geometry2> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "text/xml" ;
-                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                    proc:metadata [ dcterms:title "Implementation Profile: Touches -- input `geometry2`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches/inputs/geometry2> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Binary spatial predicate -- input `geometry2`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate/inputs/geometry2> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "UTF-8" ;
-                                    ns2:contentMediaType "text/xml" ;
-                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Binary spatial predicate" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Implementation Profile: Touches" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches> ;
+    proc:metadata [ dcterms:title "Implementation Profile: Touches" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ dcterms:title "Process Concept: Vector Geometry Processing" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Generic Profile: Binary spatial predicate" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ ns3:Result [ dcterms:description "A value true or false if the geometry1 and geometry2 touches." ;
                     dcterms:title "Intersects result" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/boolean> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/boolean> ;
                     proc:keywords "boolean" ;
-                    proc:metadata [ dcterms:title "Mon test  " ],
+                    proc:metadata [ dcterms:title "Implementation Profile: Touches -- output `result`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
+                        [ dcterms:title "Mon test  " ],
                         [ dcterms:title "Generic Profile: Binary spatial predicate -- output `result`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Touches -- output `result`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
                     proc:schema [ proc:type "boolean" ] ] ] .
 
 
@@ -671,59 +671,71 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 
 
 ### process-type entry
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision, linking to its Implementation Profile.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision, linking to its Implementation Profile.
 #### json
 ```json
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/touches, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/touches, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches"
     }
   ],
   "prefLabel": "Compute intersection.",
   "definition": "Generates a new geometry which is the region of intersection of the two geometries operated on.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/touches",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/touches",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Geometry",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation"
     ]
   },
   "deployment": {
@@ -735,7 +747,7 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
     },
     "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches",
   "correspondences": {
     "openeoEquivalence": {
       "level": "none",
@@ -750,55 +762,67 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
 ```jsonld
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/sqlmm/touches/context.jsonld",
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/touches, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/touches, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches"
     }
   ],
   "prefLabel": "Compute intersection.",
   "definition": "Generates a new geometry which is the region of intersection of the two geometries operated on.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/touches",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/touches",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Geometry",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation"
     ]
   },
   "deployment": {
@@ -810,7 +834,7 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
     },
     "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches",
   "correspondences": {
     "openeoEquivalence": {
       "level": "none",
@@ -826,7 +850,7 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rim: <https://w3id.org/ogc/rim/> .
@@ -834,52 +858,63 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches/actions/addition> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/addition> a rim:RegisterAction ;
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches> ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches/actions/d5-2026-11-09> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
     prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches> ;
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches/actions/specialisation-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/touches, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry." ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/identifier-2026-11-17> a rim:RegisterAction ;
+    dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
+    prov:startedAtTime "2026-11-17T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rim:objectIdentifier ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/specialisation-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/touches, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches> ;
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/Touches> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Touches> ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/sqlmm/Touches> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Touches> ;
     pp:version "2.0.0" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches> a owl:Class,
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
-    rdfs:subClassOf <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/touches> ;
+    rdfs:subClassOf <https://w3id.org/geolabs/ospd/generic-profiles/activity-type/touches> ;
+    owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches> ;
     skos:definition "Generates a new geometry which is the region of intersection of the two geometries operated on." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Compute intersection." ;
-    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/Touches> ;
+    pp:deployment [ pp:processDescription <https://w3id.org/geolabs/ospd/process-profiles/process/sqlmm/Touches> ;
             pp:profile "ospd.process-profiles.sqlmm.touches" ;
             pp:provenanceClass wfprov:ProcessRun ] ;
-    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches> ;
+    pp:implementsProfile <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches> ;
     pp:openeoEquivalence [ pp:equivalenceLevel "none" ;
             pp:rationale "No openEO process for this SQL/MM predicate in the published bblocks-openeo register." ] ;
-    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation> ;
     acttype:usedEntityType geo:Geometry ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches/actions/addition>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches/actions/d5-2026-11-09>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches/actions/specialisation-2026-11-10> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/addition>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/d5-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches/actions/specialisation-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/touches"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/touches"^^xsd:anyURI ;
     rim:publicationStatus rim:published ;
     rim:validityStatus rim:invalid .
 
@@ -912,13 +947,13 @@ allOf:
       - InputEntity1
       - InputEntity2
       x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
     outputs:
       type: object
       required:
       - Result
       x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 $defs:
   processTypeEntry:
     $ref: https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/process-type/schema.yaml
@@ -941,14 +976,14 @@ $defs:
           - InputEntity1
           - InputEntity2
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
           type: object
           required:
           - Result
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
-    - description: '`Touches` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches`:
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
+    - description: '`Touches` as the Implementation (instance level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches`:
         Table 21 keywords (E) and footnote-a metadata references (Table 22 roles)
         inherited from its Implementation Profile.'
       type: object
@@ -980,7 +1015,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing
           - contains:
               type: object
               required:
@@ -990,7 +1025,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate
           - contains:
               type: object
               required:
@@ -1000,7 +1035,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches
           x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
         inputs:
           type: object
@@ -1015,7 +1050,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/geometry
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -1032,9 +1067,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry1
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate/inputs/geometry1
                   - contains:
                       type: object
                       required:
@@ -1042,9 +1077,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/inputs/geometry1
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches/inputs/geometry1
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
             InputEntity2:
               required:
@@ -1053,7 +1088,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/geometry
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -1070,9 +1105,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/inputs/geometry2
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate/inputs/geometry2
                   - contains:
                       type: object
                       required:
@@ -1080,12 +1115,12 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/inputs/geometry2
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches/inputs/geometry2
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
           type: object
           required:
@@ -1098,7 +1133,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/boolean
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/boolean
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -1115,9 +1150,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/binary-spatial-predicate/outputs/result
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-predicate/outputs/result
                   - contains:
                       type: object
                       required:
@@ -1125,19 +1160,19 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/touches/outputs/result
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/touches/outputs/result
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 x-jsonld-extra-terms:
   type: '@type'
   ProcessRun: http://purl.org/wf4ever/wfprov#ProcessRun
   WorkflowRun: http://purl.org/wf4ever/wfprov#WorkflowRun
   WorkflowEngine: http://purl.org/wf4ever/wfprov#WorkflowEngine
   Artifact: http://purl.org/wf4ever/wfprov#Artifact
-  ProcessType: https://geolabs.github.io/bblocks-process-profiles/def/ProcessType
+  ProcessType: https://w3id.org/geolabs/ospd/process-profiles/ProcessType
   ActivityType: https://w3id.org/ogc/rim/activity-type/ActivityType
   owlClass: http://www.w3.org/2002/07/owl#Class
   subClassOf:
@@ -1146,7 +1181,7 @@ x-jsonld-extra-terms:
   title: http://purl.org/dc/terms/title
   description: http://purl.org/dc/terms/description
   keywords: http://purl.org/dc/terms/subject
-  version: https://geolabs.github.io/bblocks-process-profiles/def/version
+  version: https://w3id.org/geolabs/ospd/process-profiles/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
   minOccurs: https://w3id.org/ogc/api/processes/minOccurs
@@ -1202,7 +1237,7 @@ x-jsonld-extra-terms:
           '@base': http://www.iana.org/assignments/relation/
       type: http://purl.org/dc/terms/format
   processDescription:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/processDescription
     x-jsonld-context:
       href:
         '@id': http://www.w3.org/2000/01/rdf-schema#seeAlso
@@ -1210,9 +1245,9 @@ x-jsonld-extra-terms:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
-  result: https://geolabs.github.io/bblocks-process-profiles/def/result
-  engine: https://geolabs.github.io/bblocks-process-profiles/def/engine
-  run: https://geolabs.github.io/bblocks-process-profiles/def/run
+  result: https://w3id.org/geolabs/ospd/process-profiles/result
+  engine: https://w3id.org/geolabs/ospd/process-profiles/engine
+  run: https://w3id.org/geolabs/ospd/process-profiles/run
   provType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@vocab'
@@ -1307,38 +1342,44 @@ x-jsonld-extra-terms:
   appliesTo:
     x-jsonld-id: https://w3id.org/ogc/rim/appliesTo
     x-jsonld-type: '@id'
+  affectedProperty:
+    x-jsonld-id: https://w3id.org/ogc/rim/affectedProperty
+    x-jsonld-type: '@id'
+  sameAs:
+    x-jsonld-id: http://www.w3.org/2002/07/owl#sameAs
+    x-jsonld-type: '@id'
   prefLabel: http://www.w3.org/2004/02/skos/core#prefLabel
   definition: http://www.w3.org/2004/02/skos/core#definition
   inScheme:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#inScheme
     x-jsonld-type: '@id'
-  status: https://geolabs.github.io/bblocks-process-profiles/def/status
+  status: https://w3id.org/geolabs/ospd/process-profiles/status
   classification: '@nest'
   correspondences: '@nest'
   phase:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/phase
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/phase
     x-jsonld-type: '@id'
-  deployment: https://geolabs.github.io/bblocks-process-profiles/def/deployment
-  profile: https://geolabs.github.io/bblocks-process-profiles/def/profile
+  deployment: https://w3id.org/geolabs/ospd/process-profiles/deployment
+  profile: https://w3id.org/geolabs/ospd/process-profiles/profile
   plan:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/plan
     x-jsonld-context:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
   Plan: http://www.w3.org/ns/prov#Plan
-  cwlClass: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
-  cwlId: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
+  cwlClass: https://w3id.org/geolabs/ospd/process-profiles/cwlClass
+  cwlId: https://w3id.org/geolabs/ospd/process-profiles/cwlId
   provenanceClass:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/provenanceClass
     x-jsonld-type: '@id'
   implementsProfile:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implementsProfile
     x-jsonld-type: '@id'
-  cctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
-  candidateCctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
+  cctDependencies: https://w3id.org/geolabs/ospd/process-profiles/cctDependency
+  candidateCctDependencies: https://w3id.org/geolabs/ospd/process-profiles/candidateCctDependency
   hasStep:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/hasStep
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/hasStep
     x-jsonld-type: '@id'
   exactMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#exactMatch
@@ -1349,88 +1390,88 @@ x-jsonld-extra-terms:
   relatedMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#relatedMatch
     x-jsonld-type: '@id'
-  openeoEquivalence: https://geolabs.github.io/bblocks-process-profiles/def/openeoEquivalence
-  level: https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel
-  rationale: https://geolabs.github.io/bblocks-process-profiles/def/rationale
+  openeoEquivalence: https://w3id.org/geolabs/ospd/process-profiles/openeoEquivalence
+  level: https://w3id.org/geolabs/ospd/process-profiles/equivalenceLevel
+  rationale: https://w3id.org/geolabs/ospd/process-profiles/rationale
   decomposition:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/decomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/decomposition
     x-jsonld-container: '@list'
-  stage: https://geolabs.github.io/bblocks-process-profiles/def/stage
-  openeo: https://geolabs.github.io/bblocks-process-profiles/def/openeo
+  stage: https://w3id.org/geolabs/ospd/process-profiles/stage
+  openeo: https://w3id.org/geolabs/ospd/process-profiles/openeo
   note: http://www.w3.org/2004/02/skos/core#note
   serverSideFiles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/serverSideFile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/serverSideFile
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      location: https://geolabs.github.io/bblocks-process-profiles/def/location
+      location: https://w3id.org/geolabs/ospd/process-profiles/location
   roleDecompositions:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/roleDecomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/roleDecomposition
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       parts:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/part
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/part
         '@container': '@list'
       selectors:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/selector
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/selector
         '@context':
-          name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+          name: https://w3id.org/geolabs/ospd/process-profiles/liveName
           values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reproducible:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/reproducible
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/reproducible
         '@type': http://www.w3.org/2001/XMLSchema#boolean
       note: http://www.w3.org/2004/02/skos/core#note
   unboundRoles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/unboundRole
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/unboundRole
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       reason: http://www.w3.org/2004/02/skos/core#note
   fixedRoleValues:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/fixedRoleValue
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/fixedRoleValue
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reason: http://www.w3.org/2004/02/skos/core#note
   byReference:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/byReference
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/byReference
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       note: http://www.w3.org/2004/02/skos/core#note
   notAttached:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/notAttached
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/notAttached
     x-jsonld-context:
       reason: http://www.w3.org/2004/02/skos/core#note
   assumedFormatGaps:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/assumedFormatGap
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/assumedFormatGap
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      served: https://geolabs.github.io/bblocks-process-profiles/def/servedMediaType
+      served: https://w3id.org/geolabs/ospd/process-profiles/servedMediaType
       reason: http://www.w3.org/2004/02/skos/core#note
-      evidence: https://geolabs.github.io/bblocks-process-profiles/def/evidence
-x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/
+      evidence: https://w3id.org/geolabs/ospd/process-profiles/evidence
+x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/
 x-jsonld-prefixes:
   wfprov: http://purl.org/wf4ever/wfprov#
-  pp: https://geolabs.github.io/bblocks-process-profiles/def/
+  pp: https://w3id.org/geolabs/ospd/process-profiles/
   acttype: https://w3id.org/ogc/rim/activity-type/
   owl: http://www.w3.org/2002/07/owl#
   rdfs: http://www.w3.org/2000/01/rdf-schema#
@@ -1446,7 +1487,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.sqlmm.touches
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-16'
+  dateOfLastChange: '2026-11-18'
 
 ```
 
@@ -1461,10 +1502,10 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/",
     "inputs": {
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/input/",
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/input/",
         "schema": {
           "@context": {
             "@vocab": "https://w3id.org/ogc/api/schema/"
@@ -1478,7 +1519,7 @@ Links to the schema:
     },
     "outputs": {
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/output/",
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/output/",
         "schema": {
           "@context": {
             "@vocab": "https://w3id.org/ogc/api/schema/"
@@ -1718,6 +1759,14 @@ Links to the schema:
       "@id": "rim:appliesTo",
       "@type": "@id"
     },
+    "affectedProperty": {
+      "@id": "rim:affectedProperty",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "owl:sameAs",
+      "@type": "@id"
+    },
     "prefLabel": "skos:prefLabel",
     "definition": "skos:definition",
     "inScheme": {
@@ -1888,7 +1937,7 @@ Links to the schema:
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",
-    "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "pp": "https://w3id.org/geolabs/ospd/process-profiles/",
     "acttype": "rim:activity-type/",
     "owl": "http://www.w3.org/2002/07/owl#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",

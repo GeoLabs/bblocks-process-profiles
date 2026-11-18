@@ -1,5 +1,5 @@
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -11,7 +11,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/chlorophyll_a" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_chlorophyll_a_color.tif> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -19,7 +19,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/chlorophyll_a_color" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_chlorophyll_a_plot.png> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -27,7 +27,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/chlorophyll_a_plot" ;
     ns1:mediaType "image/png" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_cyanobacteria.tiff> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -35,7 +35,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/cyanobacteria" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_cyanobacteria_color.tif> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -43,7 +43,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/cyanobacteria_color" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_cyanobacteria_plot.png> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -51,7 +51,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/cyanobacteria_plot" ;
     ns1:mediaType "image/png" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_turbidity.tiff> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -59,7 +59,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/turbidity" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_turbidity_color.tif> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -67,7 +67,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/turbidity_color" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_0_L2A_turbidity_plot.png> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -75,7 +75,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/turbidity_plot" ;
     ns1:mediaType "image/png" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_chlorophyll_a.tiff> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -83,7 +83,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/chlorophyll_a" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_chlorophyll_a_color.tif> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -91,7 +91,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/chlorophyll_a_color" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_chlorophyll_a_plot.png> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -99,7 +99,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/chlorophyll_a_plot" ;
     ns1:mediaType "image/png" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_cyanobacteria.tiff> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -107,7 +107,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/cyanobacteria" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_cyanobacteria_color.tif> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -115,7 +115,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/cyanobacteria_color" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_cyanobacteria_plot.png> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -123,7 +123,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/cyanobacteria_plot" ;
     ns1:mediaType "image/png" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_turbidity.tiff> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -131,7 +131,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/turbidity" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_turbidity_color.tif> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -139,7 +139,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/turbidity_color" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-0001/results/S2A_29SPC_20190701_1_L2A_turbidity_plot.png> prov:generated <urn:example:run:algae-bloom:workflow-earth-search> ;
@@ -147,7 +147,7 @@
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/turbidity_plot" ;
     ns1:mediaType "image/png" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <urn:example:engine:cwltool-3.1.20260108082145> a wfprov:WorkflowEngine ;
@@ -155,7 +155,7 @@
     pp:version "3.1.20260108082145" .
 
 <urn:example:run:algae-bloom:workflow-earth-search> a wfprov:WorkflowRun,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-earth-search> ;
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-earth-search> ;
     wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package> ;
     wfprov:hadSubProcessRun <urn:example:run:algae-bloom:select-products-sentinel2>,
         <urn:example:run:algae-bloom:workflow-earth-search-process> ;

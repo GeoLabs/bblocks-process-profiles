@@ -1,4 +1,4 @@
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 
 [] pp:ndvi_file [ pp:href "https://ospd.example.org/ogc-api/jobs/kindgrove-steps-calculate-indices-0001/results/ndvi.tif" ] ;
     pp:ndwi_file [ pp:href "https://ospd.example.org/ogc-api/jobs/kindgrove-steps-calculate-indices-0001/results/ndwi.tif" ] ;

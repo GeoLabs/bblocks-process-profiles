@@ -2,7 +2,7 @@
   {
     "id": "urn:example:run:algae-bloom:download-band-sentinel2-product-safe",
     "provType": "prov:Activity",
-    "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-product-safe",
+    "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-product-safe",
     "startedAtTime": "2026-09-23T07:31:29Z",
     "used": [
       "urn:example:entity:download-band-sentinel2-product-safe:in:product_url",

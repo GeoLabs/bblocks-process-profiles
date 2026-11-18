@@ -32,37 +32,37 @@
     {
       "title": "Process Concept: Vector Geometry Processing",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing"
     },
     {
       "title": "Generic Profile: Unary spatial predicate",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-spatial-predicate"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-spatial-predicate"
     },
     {
       "title": "Implementation Profile: Is simple",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/is-simple"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/is-simple"
     }
   ],
   "inputs": {
     "InputPolygon": {
       "title": "the first geometry",
       "description": "the first geometry to compare against.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
       "keywords": [
         "geometry"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Unary spatial predicate -- input `geometry`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-spatial-predicate/inputs/geometry"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-spatial-predicate/inputs/geometry"
         },
         {
           "title": "Implementation Profile: Is simple -- input `geometry`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/is-simple/inputs/geometry"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/is-simple/inputs/geometry"
         }
       ],
       "schema": {
@@ -87,20 +87,20 @@
     "Result": {
       "title": "IsSimple result",
       "description": "The boolean result",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/boolean",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/boolean",
       "keywords": [
         "boolean"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Unary spatial predicate -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/unary-spatial-predicate/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-spatial-predicate/outputs/result"
         },
         {
           "title": "Implementation Profile: Is simple -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/is-simple/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/is-simple/outputs/result"
         }
       ],
       "schema": {

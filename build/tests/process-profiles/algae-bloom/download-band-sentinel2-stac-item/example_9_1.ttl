@@ -4,7 +4,7 @@
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -12,63 +12,6 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/addition> a rim:RegisterAction ;
-    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType rim:additionAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/by-reference-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "byReference added: the input product_url implements the role product of band-retrieval as the URL of a STAC Item, not the Item itself (decision C1 of 2026-11-10)." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/d5-2026-11-09> a rim:RegisterAction ;
-    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
-    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/inherited-description-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "processDescription.inherited.json added with the attachment to the Implementation Profile band-retrieval: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/specialisation-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/tier3-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/unbound-roles-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "unboundRoles added: the role areaOfInterest of band-retrieval (minOccurs 0) is left unbound, no input restricting the area (decision C2 of 2026-11-10)." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process/download-band-sentinel2-stac-item> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item> ;
-    pp:version "1.1.0" .
 
 <https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item/package> a prov:Plan ;
     dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
@@ -80,10 +23,77 @@
             ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/download-band-sentinel2-stac-item.cwl> ] .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item> a owl:Class,
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/addition> a rim:RegisterAction ;
+    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType rim:additionAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/by-reference-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "byReference added: the input product_url implements the role product of band-retrieval as the URL of a STAC Item, not the Item itself (decision C1 of 2026-11-10)." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/d5-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/identifier-2026-11-17> a rim:RegisterAction ;
+    dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
+    prov:startedAtTime "2026-11-17T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rim:objectIdentifier ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/inherited-description-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "processDescription.inherited.json added with the attachment to the Implementation Profile band-retrieval: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/specialisation-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/tier3-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/unbound-roles-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "unboundRoles added: the role areaOfInterest of band-retrieval (minOccurs 0) is left unbound, no input restricting the area (decision C2 of 2026-11-10)." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/download-band-sentinel2-stac-item> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item> ;
+    pp:version "1.1.0" .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
-    rdfs:subClassOf <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval> ;
+    rdfs:subClassOf <https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval> ;
+    owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item> ;
     skos:closeMatch <https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.filter_bands>,
         <https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection> ;
     skos:definition "Downloads the GeoTiff band from the Sentinel-2 product STAC Item using the requested band selection criteria. It is assumed that the referenced STAC Item contains the desired GeoTiff Asset with the 'common band name' associated to the band (see https://github.com/stac-extensions/eo#common-band-names)." ;
@@ -92,32 +102,33 @@
     skos:relatedMatch <https://www.opengis.net/def/bblocks/ogc.openeo.types.band-name>,
         <https://www.opengis.net/def/bblocks/ogc.openeo.types.stac> ;
     pp:byReference [ skos:note "The product is given as the URL of its STAC Item, a string, not as the STAC Item itself." ;
-            pp:implements <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/product> ;
+            pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/product> ;
             pp:liveName "product_url" ;
             pp:side "inputs" ] ;
-    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/download-band-sentinel2-stac-item> ;
+    pp:deployment [ pp:processDescription <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/download-band-sentinel2-stac-item> ;
             pp:profile "ospd.process-profiles.algae-bloom.download-band-sentinel2-stac-item" ;
             pp:provenanceClass wfprov:ProcessRun ] ;
-    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval> ;
+    pp:implementsProfile <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval> ;
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "Retrieves one band of one product: load_collection with `bands` (or filter_bands) over a single-item extent. The closest openEO process, `load_stac`, is only an openEO proposal and out of the register's scope. The band is chosen by Sentinel-2 band id (B01..B12), matched to STAC `eo:common_name` assets inside the tool, where openEO uses collection band names directly." ] ;
-    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval> ;
+    pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval> ;
     pp:plan <https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item/package> ;
     pp:unboundRole [ skos:note "no input restricts the area: the whole band of the product is retrieved" ;
-            pp:implements <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/areaOfInterest> ;
+            pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/areaOfInterest> ;
             pp:side "inputs" ] ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/addition>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/by-reference-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/d5-2026-11-09>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/inherited-description-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/specialisation-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/tier3-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/unbound-roles-2026-11-10> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/addition>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/by-reference-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/d5-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/inherited-description-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/specialisation-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/tier3-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item/actions/unbound-roles-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item"^^xsd:anyURI ;
     rim:publicationStatus rim:published ;
     rim:validityStatus rim:invalid .
 

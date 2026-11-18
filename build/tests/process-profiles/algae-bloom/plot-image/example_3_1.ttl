@@ -1,15 +1,15 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns3: <http://schema.org/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix ns1: <http://schema.org/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <https://w3id.org/ogc/api/schema/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <https://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/plot-image> dcterms:description "Applies the specified color mapping with scaled bins to a geospatial image." ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/plot-image> dcterms:description "Applies the specified color mapping with scaled bins to a geospatial image." ;
     dcterms:subject "OSPD",
         "colour map",
         "demo",
@@ -37,38 +37,38 @@ Each RGB value can be either a [0-1] floating point or a [0-255] integer.
 Example: '[ [0, [0,0,0]], [20, [0,0,255]], [50, [255,100,0]] ]'
 """ ;
                     dcterms:title "Color mappings to bin scales to apply to the image." ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/colour-map> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/colour-map> ;
                     proc:keywords "colour map" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster rendering -- input `colourMap`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-rendering/inputs/colourMap> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Raster rendering -- input `colourMap`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering/inputs/colourMap> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster rendering -- input `colourMap`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering/inputs/colourMap> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Raster rendering -- input `colourMap`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-rendering/inputs/colourMap> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
             ns4:input_image [ dcterms:description "Image to map with the colors bins." ;
                     dcterms:title "input_image" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster rendering -- input `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-rendering/inputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Raster rendering -- input `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering/inputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster rendering -- input `raster`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering/inputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Raster rendering -- input `raster`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-rendering/inputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 1 ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ],
+                    proc:schema [ ns3:oneOf [ proc:type "string" ;
+                                    ns3:contentEncoding "binary" ;
+                                    ns3:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns3:contentEncoding "binary" ;
+                                    ns3:contentMediaType "image/tiff; application=geotiff" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+                                    ns3:contentEncoding "binary" ;
+                                    ns3:contentMediaType "image/jp2" ] ] ] ;
             ns4:output_name [ dcterms:description "" ;
                     dcterms:title "output_name" ;
                     proc:maxOccurs 1 ;
@@ -87,49 +87,49 @@ Example: '[ [0, [0,0,0]], [20, [0,0,255]], [50, [255,100,0]] ]'
                     proc:minOccurs 0 ;
                     proc:schema [ proc:type "string" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
-            proc:role schema:codeRepository ],
-        [ rdf:value "1.0.0" ;
-            proc:role schema:softwareVersion ],
+    proc:metadata [ rdf:value "Applies the specified color mapping with scaled bins to a geospatial image." ;
+            proc:role schema:description ],
         [ rdf:value "Plots an image with colors." ;
             proc:role schema:name ],
-        [ rdf:value "Applies the specified color mapping with scaled bins to a geospatial image." ;
-            proc:role schema:description ],
-        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Implementation Profile: Raster rendering" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ dcterms:title "Generic Profile: Raster rendering" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-rendering> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ rdf:value [ a ns3:Person ;
-                    ns3:email "francis.charette-migneault@crim.ca" ;
-                    ns3:identifier "http://orcid.org/0000-0003-4862-3349" ;
-                    ns3:name "Francis Charette-Migneault" ] ;
-            proc:role schema:author ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ] ;
+            proc:role schema:license ],
+        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
+            proc:role schema:codeRepository ],
+        [ dcterms:title "Generic Profile: Raster rendering" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-rendering> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ rdf:value [ a ns1:Person ;
+                    ns1:email "francis.charette-migneault@crim.ca" ;
+                    ns1:identifier "http://orcid.org/0000-0003-4862-3349" ;
+                    ns1:name "Francis Charette-Migneault" ] ;
+            proc:role schema:author ],
+        [ rdf:value "1.0.0" ;
+            proc:role schema:softwareVersion ],
+        [ dcterms:title "Implementation Profile: Raster rendering" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ ns2:output_file [ dcterms:description "" ;
                     dcterms:title "output_file" ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentEncoding "binary" ;
-                            ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
+                            ns3:contentEncoding "binary" ;
+                            ns3:contentMediaType "image/tiff; application=geotiff" ] ] ;
             ns2:output_plot [ dcterms:description "" ;
                     dcterms:title "output_plot" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/rendered-image> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/rendered-image> ;
                     proc:keywords "image" ;
                     proc:metadata [ dcterms:title "Implementation Profile: Raster rendering -- output `image`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering/outputs/image> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering/outputs/image> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
                         [ dcterms:title "Generic Profile: Raster rendering -- output `image`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-rendering/outputs/image> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-rendering/outputs/image> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentEncoding "binary" ;
-                            ns1:contentMediaType "image/png" ] ] ] .
+                            ns3:contentEncoding "binary" ;
+                            ns3:contentMediaType "image/png" ] ] ] .
 

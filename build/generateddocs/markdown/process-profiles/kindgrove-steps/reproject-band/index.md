@@ -47,7 +47,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Implements [`Raster reprojection`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection) (`generic-profiles.implementation-profile.raster-reprojection`, bblocks-generic-profiles). Signature checked against raster-reprojection: `band_file` implements `raster`, `epsg` (an EPSG code, default 4326) implements `targetCRS`, `reprojected_file` implements the output `raster`; `west`, `south`, `east`, `north` (extent of the target grid) and `resolution` are inputs of the deployment's own. Both rasters are served as GeoTIFF: the CWL of the GeoLabs/KindGrove release v0.0.2-rc3 declares `format: ogc:geotiff`.
+Implements [`Raster reprojection`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection) (`generic-profiles.implementation-profile.raster-reprojection`, bblocks-generic-profiles). Signature checked against raster-reprojection: `band_file` implements `raster`, `epsg` (an EPSG code, default 4326) implements `targetCRS`, `reprojected_file` implements the output `raster`; `west`, `south`, `east`, `north` (extent of the target grid) and `resolution` are inputs of the deployment's own. Both rasters are served as GeoTIFF: the CWL of the GeoLabs/KindGrove release v0.0.2-rc3 declares `format: ogc:geotiff`.
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -66,7 +66,7 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
 
 ## Examples
 
@@ -364,17 +364,17 @@ OGC API - Processes processDescription derived from the CWL.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns2: <http://schema.org/> .
-@prefix ns3: <https://w3id.org/ogc/api/schema/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <http://schema.org/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <https://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/reproject_band> dcterms:description "Process converted from CWL" ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/reproject_band> dcterms:description "Process converted from CWL" ;
     dcterms:subject "mangrove",
         "ospd",
         "reprojection" ;
@@ -385,8 +385,8 @@ OGC API - Processes processDescription derived from the CWL.
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
-                            ns3:contentEncoding "binary" ;
-                            ns3:contentMediaType "image/tiff; application=geotiff" ] ] ;
+                            ns2:contentEncoding "binary" ;
+                            ns2:contentMediaType "image/tiff; application=geotiff" ] ] ;
             ns1:east [ dcterms:description "" ;
                     dcterms:title "east" ;
                     proc:maxOccurs 1 ;
@@ -420,38 +420,38 @@ OGC API - Processes processDescription derived from the CWL.
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
-        [ rdf:value "reproject_band" ;
-            proc:role schema:name ],
+    proc:metadata [ rdf:value [ a ns3:Person ;
+                    ns3:affiliation "GeoLabs" ;
+                    ns3:name "Gérald Fenoy" ] ;
+            proc:role schema:contributor ],
         [ rdf:value "Reproject a raster onto a regular grid covering a bounding box" ;
             proc:role schema:description ],
-        [ rdf:value [ a ns2:Person ;
-                    ns2:name "Cameron Sajedi" ] ;
+        [ rdf:value "0.1.0" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value [ a ns3:Person ;
+                    ns3:name "Cameron Sajedi" ] ;
             proc:role schema:author ],
+        [ rdf:value "reproject_band" ;
+            proc:role schema:name ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
             proc:role schema:license ],
-        [ rdf:value [ a ns2:Person ;
-                    ns2:affiliation "GeoLabs" ;
-                    ns2:name "Gérald Fenoy" ] ;
-            proc:role schema:contributor ],
-        [ rdf:value "0.1.0" ;
-            proc:role schema:softwareVersion ] ;
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ ns4:reprojected_file [ dcterms:description "" ;
                     dcterms:title "reprojected_file" ;
                     proc:schema [ proc:type "string" ;
-                            ns3:contentEncoding "binary" ;
-                            ns3:contentMediaType "image/tiff; application=geotiff" ] ] ] .
+                            ns2:contentEncoding "binary" ;
+                            ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] .
 
 
 ```
 
 
 ### processDescription with its inheritance (Implementation, instance level)
-The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection`: the Implementation Profile's keywords (E) on the process and on each bound input/output, and, per footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation` reference to the Implementation Profile -- on the process only. Each bound input/output keeps its Implementation Profile counterpart's reference to the Generic Profile input/output (`generic-input`/`-output`) and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`, `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings` in scripts/profiles.yaml; inputs/outputs bound to none are the deployment's own additions (footnote b). Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).
+The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection`: the Implementation Profile's keywords (E) on the process and on each bound input/output, and, per footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation` reference to the Implementation Profile -- on the process only. Each bound input/output keeps its Implementation Profile counterpart's reference to the Generic Profile input/output (`generic-input`/`-output`) and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`, `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings` in scripts/profiles.yaml; inputs/outputs bound to none are the deployment's own additions (footnote b). Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).
 #### json
 ```json
 {
@@ -471,17 +471,17 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     {
       "title": "Process Concept: Raster Coverage Processing",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing"
     },
     {
       "title": "Generic Profile: Raster reprojection",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection"
     },
     {
       "title": "Implementation Profile: Raster reprojection",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection"
     },
     {
       "role": "https://schema.org/name",
@@ -532,20 +532,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "band_file": {
       "title": "band_file",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster reprojection -- input `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/inputs/raster"
         },
         {
           "title": "Implementation Profile: Raster reprojection -- input `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/raster"
         }
       ],
       "schema": {
@@ -595,20 +595,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "epsg": {
       "title": "epsg",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/coordinate-reference-system",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/coordinate-reference-system",
       "keywords": [
         "CRS"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster reprojection -- input `targetCRS`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/targetCRS"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/inputs/targetCRS"
         },
         {
           "title": "Implementation Profile: Raster reprojection -- input `targetCRS`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/targetCRS"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/targetCRS"
         }
       ],
       "schema": {
@@ -633,20 +633,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reprojected_file": {
       "title": "reprojected_file",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster reprojection -- output `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/outputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/outputs/raster"
         },
         {
           "title": "Implementation Profile: Raster reprojection -- output `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/outputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/outputs/raster"
         }
       ],
       "schema": {
@@ -680,17 +680,17 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     {
       "title": "Process Concept: Raster Coverage Processing",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing"
     },
     {
       "title": "Generic Profile: Raster reprojection",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection"
     },
     {
       "title": "Implementation Profile: Raster reprojection",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection"
     },
     {
       "role": "https://schema.org/name",
@@ -741,20 +741,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "band_file": {
       "title": "band_file",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster reprojection -- input `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/inputs/raster"
         },
         {
           "title": "Implementation Profile: Raster reprojection -- input `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/raster"
         }
       ],
       "schema": {
@@ -804,20 +804,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "epsg": {
       "title": "epsg",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/coordinate-reference-system",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/coordinate-reference-system",
       "keywords": [
         "CRS"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster reprojection -- input `targetCRS`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/targetCRS"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/inputs/targetCRS"
         },
         {
           "title": "Implementation Profile: Raster reprojection -- input `targetCRS`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/targetCRS"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/targetCRS"
         }
       ],
       "schema": {
@@ -842,20 +842,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "reprojected_file": {
       "title": "reprojected_file",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster reprojection -- output `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/outputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/outputs/raster"
         },
         {
           "title": "Implementation Profile: Raster reprojection -- output `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/outputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/outputs/raster"
         }
       ],
       "schema": {
@@ -871,17 +871,17 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns2: <http://schema.org/> .
 @prefix ns3: <https://w3id.org/ogc/api/schema/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <https://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/reproject_band> dcterms:description "Process converted from CWL" ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/reproject_band> dcterms:description "Process converted from CWL" ;
     dcterms:subject "coverage",
         "mangrove",
         "ospd",
@@ -891,15 +891,15 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     pp:version "0.1.0" ;
     proc:inputs [ ns1:band_file [ dcterms:description "" ;
                     dcterms:title "band_file" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster reprojection -- input `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster reprojection -- input `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection -- input `raster`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/inputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster reprojection -- input `raster`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
                             ns3:contentEncoding "binary" ;
@@ -911,15 +911,15 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     proc:schema [ proc:type "number" ] ] ;
             ns1:epsg [ dcterms:description "" ;
                     dcterms:title "epsg" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/coordinate-reference-system> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/coordinate-reference-system> ;
                     proc:keywords "CRS" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster reprojection -- input `targetCRS`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/targetCRS> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster reprojection -- input `targetCRS`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/targetCRS> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection -- input `targetCRS`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/inputs/targetCRS> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster reprojection -- input `targetCRS`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/targetCRS> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "4326"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
@@ -945,45 +945,45 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ rdf:value [ a ns2:Person ;
-                    ns2:affiliation "GeoLabs" ;
-                    ns2:name "Gérald Fenoy" ] ;
-            proc:role schema:contributor ],
-        [ rdf:value "reproject_band" ;
-            proc:role schema:name ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
-        [ rdf:value "0.1.0" ;
+    proc:metadata [ rdf:value "0.1.0" ;
             proc:role schema:softwareVersion ],
         [ rdf:value [ a ns2:Person ;
                     ns2:name "Cameron Sajedi" ] ;
             proc:role schema:author ],
-        [ dcterms:title "Generic Profile: Raster reprojection" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Implementation Profile: Raster reprojection" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection> ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ rdf:value "Reproject a raster onto a regular grid covering a bounding box" ;
             proc:role schema:description ],
         [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ] ;
+            proc:role schema:codeRepository ],
+        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
+        [ rdf:value "reproject_band" ;
+            proc:role schema:name ],
+        [ dcterms:title "Generic Profile: Raster reprojection" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ rdf:value [ a ns2:Person ;
+                    ns2:affiliation "GeoLabs" ;
+                    ns2:name "Gérald Fenoy" ] ;
+            proc:role schema:contributor ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ ns4:reprojected_file [ dcterms:description "" ;
                     dcterms:title "reprojected_file" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster reprojection -- output `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ],
-                        [ dcterms:title "Generic Profile: Raster reprojection -- output `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ] ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection -- output `raster`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/outputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Raster reprojection -- output `raster`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/outputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
                     proc:schema [ proc:type "string" ;
                             ns3:contentEncoding "binary" ;
                             ns3:contentMediaType "image/tiff; application=geotiff" ] ] ] .
@@ -1035,12 +1035,12 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/reproject_band> pp:version "0.1.0" .
+<https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/reproject_band> pp:version "0.1.0" .
 
-[] pp:processDescription [ pp:process <https://geolabs.github.io/bblocks-process-profiles/def/process/reproject_band> ] ;
+[] pp:processDescription [ pp:process <https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/reproject_band> ] ;
     proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
             ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#reproject_band> ] .
@@ -1092,7 +1092,7 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 
 #### ttl
 ```ttl
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -1135,7 +1135,7 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 
 #### ttl
 ```ttl
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 
 [] pp:reprojected_file [ pp:href "https://ospd.example.org/ogc-api/jobs/kindgrove-steps-reproject-band-0001/results/red_4326.tif" ] .
 
@@ -1151,7 +1151,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   {
     "id": "urn:example:run:kindgrove-steps:reproject-band",
     "provType": "prov:Activity",
-    "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
+    "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
     "startedAtTime": "2026-09-24T10:59:12Z",
     "used": [
       "urn:example:entity:reproject-band:in:band_file",
@@ -1270,7 +1270,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "urn:example:run:kindgrove-steps:reproject-band",
       "provType": "prov:Activity",
-      "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
+      "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
       "startedAtTime": "2026-09-24T10:59:12Z",
       "used": [
         "urn:example:entity:reproject-band:in:band_file",
@@ -1386,7 +1386,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -1432,7 +1432,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     pp:name "container image ghcr.io/geolabs/kindgrove/reproject-band:v0.0.2-rc2" .
 
 <urn:example:run:kindgrove-steps:reproject-band> a prov:Activity,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
     prov:endedAtTime "2026-09-24T10:59:18+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
             prov:hadPlan <https://ospd.example.org/ogc-api/processes/reproject_band/package> ] ;
@@ -1468,7 +1468,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 {
   "id": "urn:example:run:kindgrove-steps:reproject-band",
   "type": "ProcessRun",
-  "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
+  "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/reproject_band/package",
   "usedInput": [
     {
@@ -1506,7 +1506,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/kindgrove-steps/reproject-band/context.jsonld",
   "id": "urn:example:run:kindgrove-steps:reproject-band",
   "type": "ProcessRun",
-  "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
+  "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/reproject_band/package",
   "usedInput": [
     {
@@ -1544,7 +1544,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:kindgrove-steps:reproject-band> a wfprov:ProcessRun,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/reproject_band/package> ;
     wfprov:usedInput <urn:example:entity:reproject-band:in:band_file>,
         <urn:example:entity:reproject-band:in:east>,
@@ -1565,76 +1565,88 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 #### json
 ```json
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#reproject_band). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_file and the output reprojected_file, in processDescription.json and processDescription.inherited.json. assumedFormatGaps removed: its two gaps, band_file and reprojected_file served as application/octet-stream, are closed by the format the CWL now declares, as their reason anticipated (removed on 2026-11-10 with the corrected CWL, pinned on 2026-11-11).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     }
   ],
   "prefLabel": "Reproject a raster onto a regular grid",
   "definition": "Reprojects a raster onto a regular grid covering a bounding box.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing"
     ]
   },
   "deployment": {
@@ -1662,7 +1674,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "eoap.cct.bbox"
     ]
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection",
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
@@ -1680,76 +1692,88 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 ```jsonld
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/kindgrove-steps/reproject-band/context.jsonld",
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#reproject_band). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_file and the output reprojected_file, in processDescription.json and processDescription.inherited.json. assumedFormatGaps removed: its two gaps, band_file and reprojected_file served as application/octet-stream, are closed by the format the CWL now declares, as their reason anticipated (removed on 2026-11-10 with the corrected CWL, pinned on 2026-11-11).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     }
   ],
   "prefLabel": "Reproject a raster onto a regular grid",
   "definition": "Reprojects a raster onto a regular grid covering a bounding box.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing"
     ]
   },
   "deployment": {
@@ -1777,7 +1801,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "eoap.cct.bbox"
     ]
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection",
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
@@ -1798,7 +1822,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -1806,47 +1830,6 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/addition> a rim:RegisterAction ;
-    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType rim:additionAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09> a rim:RegisterAction ;
-    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
-    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11> a rim:RegisterAction ;
-    dcterms:description "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#reproject_band). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_file and the output reprojected_file, in processDescription.json and processDescription.inherited.json. assumedFormatGaps removed: its two gaps, band_file and reprojected_file served as application/octet-stream, are closed by the format the CWL now declares, as their reason anticipated (removed on 2026-11-10 with the corrected CWL, pinned on 2026-11-11)." ;
-    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09> a rim:RegisterAction ;
-    dcterms:description "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
-    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process/reproject_band> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/reproject_band> ;
-    pp:version "0.1.0" .
 
 <https://ospd.example.org/ogc-api/processes/reproject_band/package> a prov:Plan ;
     dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
@@ -1857,32 +1840,84 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#reproject_band> ] .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> a owl:Class,
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/addition> a rim:RegisterAction ;
+    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType rim:additionAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/identifier-2026-11-17> a rim:RegisterAction ;
+    dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
+    prov:startedAtTime "2026-11-17T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rim:objectIdentifier ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11> a rim:RegisterAction ;
+    dcterms:description "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#reproject_band). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_file and the output reprojected_file, in processDescription.json and processDescription.inherited.json. assumedFormatGaps removed: its two gaps, band_file and reprojected_file served as application/octet-stream, are closed by the format the CWL now declares, as their reason anticipated (removed on 2026-11-10 with the corrected CWL, pinned on 2026-11-11)." ;
+    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/reproject_band> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/reproject_band> ;
+    pp:version "0.1.0" .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
-    rdfs:subClassOf <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection> ;
+    rdfs:subClassOf <https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection> ;
+    owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
     skos:closeMatch <https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial> ;
     skos:definition "Reprojects a raster onto a regular grid covering a bounding box." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Reproject a raster onto a regular grid" ;
-    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/reproject_band> ;
+    pp:deployment [ pp:processDescription <https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/reproject_band> ;
             pp:profile "ospd.process-profiles.kindgrove-steps.reproject-band" ;
             pp:provenanceClass wfprov:ProcessRun ] ;
-    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection> ;
+    pp:implementsProfile <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection> ;
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "resample_spatial with a target `resolution` and `projection` (epsg); no explicit resampling-method parameter in the CWL (implementation default), same partial match as `algae-bloom.reproject-image`." ] ;
-    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing> ;
+    pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing> ;
     pp:plan <https://ospd.example.org/ogc-api/processes/reproject_band/package> ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/addition>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/addition>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"^^xsd:anyURI ;
     rim:publicationStatus rim:published ;
     rim:validityStatus rim:invalid .
 
@@ -6216,13 +6251,13 @@ id:2363b376-af39-4421-ac82-298f9b5bf5d6 a ro:Folder,
     prov:hadDictionaryMember "id:758a05e3-6c7f-41d7-af5a-b4798d4b882f"^^xsd:QName,
         "id:dcb23f91-1dbc-4929-9021-d23ee962fc04"^^xsd:QName ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:c16504e6-ec23-43da-92c9-c00151a037f2 ;
-            prov:atTime "2026-09-24T12:59:58.100038"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/stac_catalog> ],
-        [ a prov:Generation ;
             prov:activity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ;
             prov:atTime "2026-09-24T12:59:58.171647"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/primary/stac> ] ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/primary/stac> ],
+        [ a prov:Generation ;
+            prov:activity id:c16504e6-ec23-43da-92c9-c00151a037f2 ;
+            prov:atTime "2026-09-24T12:59:58.100038"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/stac_catalog> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
             provext:member id:f70266c8-9af3-4228-89f4-230a39e31c83 ],
         [ a provext:Membership ;
@@ -6297,13 +6332,13 @@ id:4c4659c5-50da-43e0-8077-7def82bdd204 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:2f66b1e4-39fc-4551-8aa8-49831c3211bb ],
-        [ a provext:Membership ;
             provext:member id:dd4db319-ab09-4589-93be-c0ab5a21b781 ],
         [ a provext:Membership ;
-            provext:member id:c0bace95-d5f7-47c8-85c2-88006db5ab2d ],
+            provext:member id:a60dd30c-c4c6-4254-be37-68b96605a358 ],
         [ a provext:Membership ;
-            provext:member id:a60dd30c-c4c6-4254-be37-68b96605a358 ] .
+            provext:member id:2f66b1e4-39fc-4551-8aa8-49831c3211bb ],
+        [ a provext:Membership ;
+            provext:member id:c0bace95-d5f7-47c8-85c2-88006db5ab2d ] .
 
 id:4d33da78-bc2b-4f11-927c-55071695661b a prov:Agent,
         prov:SoftwareAgent ;
@@ -6358,9 +6393,21 @@ id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57 a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:58:01.354035"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:58:01.588559"^^xsd:dateTime ;
+            prov:entity id:183be3aa-ca39-47b3-9cb9-9972ab5b4b04 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/north> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:58:01.588501"^^xsd:dateTime ;
             prov:entity id:d1fc5582-5435-437c-afc6-7bf715e11ac9 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/east> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:58:01.588654"^^xsd:dateTime ;
+            prov:entity id:db33c88c-4dd2-4ea1-b06b-577175d50413 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/stac_item> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:58:01.588601"^^xsd:dateTime ;
+            prov:entity id:d81429c0-f7f3-4b1c-b7bb-0dd72a874aff ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/south> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:58:01.588345"^^xsd:dateTime ;
             prov:entity data:78988010b890ce6f4d2136481f392787ec6d6106 ;
@@ -6368,19 +6415,7 @@ id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57 a wfprov:ProcessRun,
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:58:01.588695"^^xsd:dateTime ;
             prov:entity id:8f1f4d19-7ab7-48f7-a279-0cd0f11d5bb3 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/west> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:58:01.588601"^^xsd:dateTime ;
-            prov:entity id:d81429c0-f7f3-4b1c-b7bb-0dd72a874aff ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/south> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:58:01.588559"^^xsd:dateTime ;
-            prov:entity id:183be3aa-ca39-47b3-9cb9-9972ab5b4b04 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/north> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:58:01.588654"^^xsd:dateTime ;
-            prov:entity id:db33c88c-4dd2-4ea1-b06b-577175d50413 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/stac_item> ] .
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/west> ] .
 
 id:6ee43ae1-f7f0-44e8-9521-f520ee73f8d5 a wf4ever:File,
         wfprov:Artifact,
@@ -6402,13 +6437,13 @@ id:728b8a7c-ecb1-4cd6-b49e-3f7537dd514b a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:105cc922-459c-4a99-a431-5d4b3b38aea9 ],
+            provext:member id:ab8af93b-6ae4-4bf6-86ac-989a33e53741 ],
         [ a provext:Membership ;
             provext:member id:0117a745-b852-44ba-a7a0-08e529a7067d ],
         [ a provext:Membership ;
             provext:member id:3a6146e3-99f8-4cdc-aa09-aa71cf40578e ],
         [ a provext:Membership ;
-            provext:member id:ab8af93b-6ae4-4bf6-86ac-989a33e53741 ] .
+            provext:member id:105cc922-459c-4a99-a431-5d4b3b38aea9 ] .
 
 id:72b6e1b9-31a6-41a5-9509-2fb54eb7a854 a prov:Entity ;
     prov:value 1.61e+01 .
@@ -6463,9 +6498,9 @@ id:81daad74-dad7-41e0-bc70-26432d1dfb21 a wfprov:Artifact,
     prov:hadDictionaryMember "id:5356eeb5-2499-42be-bc4e-e8528bde1ff8"^^xsd:QName,
         "id:d8f4f618-3e0f-4024-a17f-b5c9d24b67b9"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:4c4659c5-50da-43e0-8077-7def82bdd204 ],
+            provext:member data:09b42388eb37be1a4b972127a78f691ec6eb3795 ],
         [ a provext:Membership ;
-            provext:member data:09b42388eb37be1a4b972127a78f691ec6eb3795 ] .
+            provext:member id:4c4659c5-50da-43e0-8077-7def82bdd204 ] .
 
 id:82a589e5-da3e-471d-959a-5f0ada295abf a prov:Agent .
 
@@ -6499,9 +6534,9 @@ id:8ea13029-7217-48c6-83b2-5168cf85a135 a wfprov:Artifact,
     prov:hadDictionaryMember "id:57d70ea4-3ea9-4fa6-80e3-6504a20bafdc"^^xsd:QName,
         "id:5ac41596-c778-4a85-89d7-230b7e014d7d"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:728b8a7c-ecb1-4cd6-b49e-3f7537dd514b ],
+            provext:member data:09b42388eb37be1a4b972127a78f691ec6eb3795 ],
         [ a provext:Membership ;
-            provext:member data:09b42388eb37be1a4b972127a78f691ec6eb3795 ] .
+            provext:member id:728b8a7c-ecb1-4cd6-b49e-3f7537dd514b ] .
 
 id:8f1f4d19-7ab7-48f7-a279-0cd0f11d5bb3 a prov:Entity ;
     prov:value 9.515e+01 .
@@ -6531,10 +6566,10 @@ id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/download_band_2" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:112f1253-d984-432e-8b9c-f6b600dc0867 ],
-        [ a prov:Association ;
             prov:agent id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ;
-            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2> ] ;
+            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2> ],
+        [ a prov:Association ;
+            prov:agent id:112f1253-d984-432e-8b9c-f6b600dc0867 ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-24T12:58:36.167066"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
@@ -6542,29 +6577,29 @@ id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5 a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:58:16.254478"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:58:16.268706"^^xsd:dateTime ;
-            prov:entity id:e10c43d5-f616-4774-8ff7-be84cdf977aa ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/south> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:58:16.268833"^^xsd:dateTime ;
-            prov:entity id:50e7a067-7cf5-48cc-a7a9-995f535a42a5 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/west> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:58:16.268610"^^xsd:dateTime ;
-            prov:entity id:547c8cdb-eb07-4b2e-bd53-a0e43e839323 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/east> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:58:16.268376"^^xsd:dateTime ;
             prov:entity data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/band> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:58:16.268706"^^xsd:dateTime ;
+            prov:entity id:e10c43d5-f616-4774-8ff7-be84cdf977aa ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/south> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:58:16.268667"^^xsd:dateTime ;
             prov:entity id:d7eaf21e-997d-440a-9c59-f5def6552d98 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/north> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:58:16.268833"^^xsd:dateTime ;
+            prov:entity id:50e7a067-7cf5-48cc-a7a9-995f535a42a5 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/west> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:58:16.268791"^^xsd:dateTime ;
             prov:entity id:db33c88c-4dd2-4ea1-b06b-577175d50413 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/stac_item> ] .
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/stac_item> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:58:16.268610"^^xsd:dateTime ;
+            prov:entity id:547c8cdb-eb07-4b2e-bd53-a0e43e839323 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/east> ] .
 
 id:9c4478e2-935b-41d5-857b-c2641d1c917d a wf4ever:File,
         wfprov:Artifact,
@@ -6671,25 +6706,25 @@ id:af446720-3625-4794-9126-810a0620808f a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:59:25.490304"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:25.509728"^^xsd:dateTime ;
-            prov:entity id:d2cddbd6-1979-4e51-b267-7fec4bab3dc8 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/south> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:25.509686"^^xsd:dateTime ;
             prov:entity id:e2de3352-f3cb-41aa-976e-7d0fa8018bcc ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/resolution> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:25.509555"^^xsd:dateTime ;
-            prov:entity id:e6cc9d7e-080c-437c-a66b-4f386982b118 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/east> ],
+            prov:atTime "2026-09-24T12:59:25.509728"^^xsd:dateTime ;
+            prov:entity id:d2cddbd6-1979-4e51-b267-7fec4bab3dc8 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/south> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:25.509369"^^xsd:dateTime ;
+            prov:entity id:a1526e7f-b483-4350-9c60-e56f786bfff3 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/band_file> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:25.509771"^^xsd:dateTime ;
             prov:entity id:5f1b745b-1648-40c5-8fbe-a8197ea712d1 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/west> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:25.509369"^^xsd:dateTime ;
-            prov:entity id:a1526e7f-b483-4350-9c60-e56f786bfff3 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/band_file> ],
+            prov:atTime "2026-09-24T12:59:25.509555"^^xsd:dateTime ;
+            prov:entity id:e6cc9d7e-080c-437c-a66b-4f386982b118 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/east> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:25.509646"^^xsd:dateTime ;
             prov:entity id:72b6e1b9-31a6-41a5-9509-2fb54eb7a854 ;
@@ -6740,45 +6775,45 @@ id:c16504e6-ec23-43da-92c9-c00151a037f2 a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:59:47.598635"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:47.692412"^^xsd:dateTime ;
-            prov:entity id:c5451c9d-b6ce-42de-b9a3-9512e9784e73 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/south> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:47.692318"^^xsd:dateTime ;
             prov:entity id:d9517d0d-9e97-4d22-afa7-a402d0537cf6 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/mangrove_mask_file> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:47.692122"^^xsd:dateTime ;
-            prov:entity id:3659eb06-f1ed-4ec3-8ccd-74774fdae9ac ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/biomass_summary_file> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:47.692360"^^xsd:dateTime ;
-            prov:entity id:6818485a-eeb1-4ded-8202-995389ee3c9e ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/north> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:47.692292"^^xsd:dateTime ;
-            prov:entity id:dc91669b-4a2f-4bd1-92c9-382337d78dba ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/east> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:47.691973"^^xsd:dateTime ;
-            prov:entity id:924dc3e6-e45e-4ae0-940f-d538dce7a6e4 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/analysis_summary_file> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:47.692088"^^xsd:dateTime ;
-            prov:entity id:bc49aa46-3931-4344-8b1e-7788b5f50e0f ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/biomass_file> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:47.692513"^^xsd:dateTime ;
-            prov:entity id:37378d08-0575-4061-9f35-0bd44e06d360 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/west> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:47.692457"^^xsd:dateTime ;
             prov:entity id:db33c88c-4dd2-4ea1-b06b-577175d50413 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/stac_item> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:47.692088"^^xsd:dateTime ;
+            prov:entity id:bc49aa46-3931-4344-8b1e-7788b5f50e0f ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/biomass_file> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:47.692292"^^xsd:dateTime ;
+            prov:entity id:dc91669b-4a2f-4bd1-92c9-382337d78dba ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/east> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:47.692148"^^xsd:dateTime ;
             prov:entity id:9c4478e2-935b-41d5-857b-c2641d1c917d ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/carbon_summary_file> ] .
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/carbon_summary_file> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:47.692412"^^xsd:dateTime ;
+            prov:entity id:c5451c9d-b6ce-42de-b9a3-9512e9784e73 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/south> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:47.692513"^^xsd:dateTime ;
+            prov:entity id:37378d08-0575-4061-9f35-0bd44e06d360 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/west> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:47.692360"^^xsd:dateTime ;
+            prov:entity id:6818485a-eeb1-4ded-8202-995389ee3c9e ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/north> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:47.692122"^^xsd:dateTime ;
+            prov:entity id:3659eb06-f1ed-4ec3-8ccd-74774fdae9ac ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/biomass_summary_file> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:47.691973"^^xsd:dateTime ;
+            prov:entity id:924dc3e6-e45e-4ae0-940f-d538dce7a6e4 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/analysis_summary_file> ] .
 
 id:c3c368d8-6ec0-4064-bcfe-a0c6ebea821c a prov:Entity ;
     prov:value "20"^^xsd:int .
@@ -6927,25 +6962,21 @@ id:effb40f4-0a75-4498-80d7-d04365cf463b a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:57:48.481355"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:48.578840"^^xsd:dateTime ;
-            prov:entity id:df87d5ba-da6e-432b-b924-80ec05cd6e0b ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/east> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:48.577808"^^xsd:dateTime ;
-            prov:entity id:5d3a2cf8-ee6d-4729-9049-1b13ac82b9c8 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/cloud_cover_max> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:48.578791"^^xsd:dateTime ;
             prov:entity id:e2d4aa64-8b79-4922-beaa-658f42437197 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/days_back> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:48.579889"^^xsd:dateTime ;
-            prov:entity data:5052a0c49b2beb0515446c40d4eee08c7fcad904 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/stac_api> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:48.579935"^^xsd:dateTime ;
             prov:entity id:d124ea7e-589c-4dd3-9515-031b20191cf3 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/west> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:48.578840"^^xsd:dateTime ;
+            prov:entity id:df87d5ba-da6e-432b-b924-80ec05cd6e0b ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/east> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:48.579301"^^xsd:dateTime ;
+            prov:entity id:e279fef3-8bfb-464b-9df4-3497a11b9735 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/north> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:48.578733"^^xsd:dateTime ;
             prov:entity data:4c89b83017b6bf2fdefdc95f52a039255235ba37 ;
@@ -6955,9 +6986,13 @@ id:effb40f4-0a75-4498-80d7-d04365cf463b a wfprov:ProcessRun,
             prov:entity id:d092277a-8801-406a-94ec-078bb314ec37 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/south> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:48.579301"^^xsd:dateTime ;
-            prov:entity id:e279fef3-8bfb-464b-9df4-3497a11b9735 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/north> ] .
+            prov:atTime "2026-09-24T12:57:48.577808"^^xsd:dateTime ;
+            prov:entity id:5d3a2cf8-ee6d-4729-9049-1b13ac82b9c8 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/cloud_cover_max> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:48.579889"^^xsd:dateTime ;
+            prov:entity data:5052a0c49b2beb0515446c40d4eee08c7fcad904 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/stac_api> ] .
 
 id:f3cf79d9-5592-4f15-a94b-728004a97650 a prov:Agent,
         prov:SoftwareAgent ;
@@ -6979,21 +7014,9 @@ id:f4cf1f0f-6d62-483b-ba92-38d6e1040135 a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:59:18.360040"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:18.369015"^^xsd:dateTime ;
-            prov:entity id:87d73316-63b5-4c3d-ba48-d2812d5dd71a ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/epsg> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:18.369145"^^xsd:dateTime ;
-            prov:entity id:6b4a4879-8c4b-4f74-9957-2902ed5cce8e ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/west> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:18.369051"^^xsd:dateTime ;
-            prov:entity id:c521c30a-5aa8-4fc8-9d25-b8d9de55c870 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/north> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:18.368809"^^xsd:dateTime ;
-            prov:entity id:cb4e16e3-e34d-4252-820f-27055b12f9f0 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/band_file> ],
+            prov:atTime "2026-09-24T12:59:18.368961"^^xsd:dateTime ;
+            prov:entity id:faffe676-addb-4b7c-ac15-34a991f69f69 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/east> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:18.369114"^^xsd:dateTime ;
             prov:entity id:61f78ec9-45f1-4537-9ed6-4f4e8616efbf ;
@@ -7003,9 +7026,21 @@ id:f4cf1f0f-6d62-483b-ba92-38d6e1040135 a wfprov:ProcessRun,
             prov:entity id:6811beb8-4d7f-45b8-9707-e34238fed895 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/resolution> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:18.368961"^^xsd:dateTime ;
-            prov:entity id:faffe676-addb-4b7c-ac15-34a991f69f69 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/east> ] .
+            prov:atTime "2026-09-24T12:59:18.369051"^^xsd:dateTime ;
+            prov:entity id:c521c30a-5aa8-4fc8-9d25-b8d9de55c870 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/north> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:18.368809"^^xsd:dateTime ;
+            prov:entity id:cb4e16e3-e34d-4252-820f-27055b12f9f0 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/band_file> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:18.369015"^^xsd:dateTime ;
+            prov:entity id:87d73316-63b5-4c3d-ba48-d2812d5dd71a ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/epsg> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:18.369145"^^xsd:dateTime ;
+            prov:entity id:6b4a4879-8c4b-4f74-9957-2902ed5cce8e ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/west> ] .
 
 id:f5beff83-d577-48b1-b086-b1a35ed1b44b a prov:Entity ;
     prov:value 2e-01 .
@@ -7019,10 +7054,10 @@ id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/reproject_band" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ;
-            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band> ],
+            prov:agent id:7dcbf0c1-1cea-4c69-a6a5-252d188398ca ],
         [ a prov:Association ;
-            prov:agent id:7dcbf0c1-1cea-4c69-a6a5-252d188398ca ] ;
+            prov:agent id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ;
+            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-24T12:59:18.344891"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
@@ -7030,22 +7065,6 @@ id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:59:12.204580"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:12.290700"^^xsd:dateTime ;
-            prov:entity id:aa6dbd65-080e-408b-8c01-0acfe33cc871 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/epsg> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:12.290654"^^xsd:dateTime ;
-            prov:entity id:e70e9f12-3e5c-4948-9ca6-449d0d53c077 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/east> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:12.290800"^^xsd:dateTime ;
-            prov:entity id:e56a0493-0204-4306-b246-d6f0a0ed8e0b ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/south> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:12.290487"^^xsd:dateTime ;
-            prov:entity id:7f3077b0-d507-4f90-b1ce-76c822fefb1e ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/band_file> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:12.290735"^^xsd:dateTime ;
             prov:entity id:e8ec687a-b9d1-4afa-83c6-6c3bf9266d3e ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/north> ],
@@ -7054,9 +7073,25 @@ id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b a wfprov:ProcessRun,
             prov:entity id:eff8560e-cd59-4a84-8dac-2f766310d52a ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/resolution> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:12.290700"^^xsd:dateTime ;
+            prov:entity id:aa6dbd65-080e-408b-8c01-0acfe33cc871 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/epsg> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:12.290832"^^xsd:dateTime ;
             prov:entity id:74367791-176c-4eaf-9ca3-e10883dc4521 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/west> ] .
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/west> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:12.290654"^^xsd:dateTime ;
+            prov:entity id:e70e9f12-3e5c-4948-9ca6-449d0d53c077 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/east> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:12.290487"^^xsd:dateTime ;
+            prov:entity id:7f3077b0-d507-4f90-b1ce-76c822fefb1e ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/band_file> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:12.290800"^^xsd:dateTime ;
+            prov:entity id:e56a0493-0204-4306-b246-d6f0a0ed8e0b ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/south> ] .
 
 id:f70266c8-9af3-4228-89f4-230a39e31c83 a wf4ever:File,
         wfprov:Artifact,
@@ -7108,27 +7143,27 @@ id:03305ae1-bded-486a-bfd3-b2f244261014 a ro:Folder,
         "id:827caa38-b109-46f9-be8f-4bc99371b11f"^^xsd:QName,
         "id:eeb1bf4b-58a7-41c1-b269-d3320e3156e8"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:b3b5ccdd-6d2b-4e1c-b9d3-f904fd999149 ],
-        [ a provext:Membership ;
-            provext:member id:8982a81b-193e-4e8f-bacf-43df0bb2e832 ],
-        [ a provext:Membership ;
             provext:member id:3a808b83-4512-4301-9193-fe5620d0ece5 ],
-        [ a provext:Membership ;
-            provext:member id:73d52f8a-86fe-46bd-a3e3-ed71eaa8b8d0 ],
         [ a provext:Membership ;
             provext:member id:2125c168-2391-4a9c-924c-8d5d7330ffd5 ],
         [ a provext:Membership ;
-            provext:member id:740ff7b1-6fac-4641-92f3-b9a9b32a0eec ] ;
+            provext:member id:740ff7b1-6fac-4641-92f3-b9a9b32a0eec ],
+        [ a provext:Membership ;
+            provext:member id:b3b5ccdd-6d2b-4e1c-b9d3-f904fd999149 ],
+        [ a provext:Membership ;
+            provext:member id:73d52f8a-86fe-46bd-a3e3-ed71eaa8b8d0 ],
+        [ a provext:Membership ;
+            provext:member id:8982a81b-193e-4e8f-bacf-43df0bb2e832 ] ;
     cwlprov:basename "mangrove-analysis-20260924-105955" .
 
 id:b05b7747-ddf9-4e6a-9b4a-2426b0e4b930 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/calculate_indices" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ;
-            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/calculate_indices> ],
+            prov:agent id:0628dd54-097a-4857-a725-9ce3cd63fc2c ],
         [ a prov:Association ;
-            prov:agent id:0628dd54-097a-4857-a725-9ce3cd63fc2c ] ;
+            prov:agent id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ;
+            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/calculate_indices> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-24T12:59:40.382878"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
@@ -7144,10 +7179,10 @@ id:931b869b-928e-447a-bf72-bc6914cb5e33 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/parse_aoi" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ;
-            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/parse_aoi> ],
+            prov:agent id:f6c152ab-0593-4080-aa4f-1eeb02a954b6 ],
         [ a prov:Association ;
-            prov:agent id:f6c152ab-0593-4080-aa4f-1eeb02a954b6 ] ;
+            prov:agent id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ;
+            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/parse_aoi> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-24T12:57:48.476728"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
@@ -7174,9 +7209,37 @@ id:376997e3-8d83-426b-b84f-e985b2af4046 a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:59:40.439020"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:40.534311"^^xsd:dateTime ;
+            prov:entity id:4a3cec45-e5c9-449f-b623-e71818c12362 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndwi_file> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:40.534343"^^xsd:dateTime ;
             prov:entity id:10db2d8a-f421-4312-aef9-6c5efbad211d ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndwi_min> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:40.534079"^^xsd:dateTime ;
+            prov:entity id:54cd6275-9321-44c8-856b-5978bcb26eae ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/biomass_intercept> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:40.534219"^^xsd:dateTime ;
+            prov:entity id:da18af81-c62b-42a2-8596-4e773968588d ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndvi_file> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:40.534286"^^xsd:dateTime ;
+            prov:entity id:32255a12-525c-491e-bf2f-f579c17fdf39 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndvi_min> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:40.534147"^^xsd:dateTime ;
+            prov:entity id:d9c2f532-47b2-45e7-9825-ed5413dea033 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/biomass_slope> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:40.534404"^^xsd:dateTime ;
+            prov:entity id:f5beff83-d577-48b1-b086-b1a35ed1b44b ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/savi_min> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:40.534371"^^xsd:dateTime ;
+            prov:entity id:87573e08-1a69-4a83-a551-f2a1c560cc7c ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/savi_file> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:40.534185"^^xsd:dateTime ;
             prov:entity id:14e98d45-e476-4164-bcdd-e4822839bf51 ;
@@ -7186,37 +7249,9 @@ id:376997e3-8d83-426b-b84f-e985b2af4046 a wfprov:ProcessRun,
             prov:entity id:3ba979c6-c4b1-4d94-bd53-556aca41e518 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndvi_max> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534311"^^xsd:dateTime ;
-            prov:entity id:4a3cec45-e5c9-449f-b623-e71818c12362 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndwi_file> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534371"^^xsd:dateTime ;
-            prov:entity id:87573e08-1a69-4a83-a551-f2a1c560cc7c ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/savi_file> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534404"^^xsd:dateTime ;
-            prov:entity id:f5beff83-d577-48b1-b086-b1a35ed1b44b ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/savi_min> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:40.534428"^^xsd:dateTime ;
             prov:entity id:db33c88c-4dd2-4ea1-b06b-577175d50413 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/stac_item> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534079"^^xsd:dateTime ;
-            prov:entity id:54cd6275-9321-44c8-856b-5978bcb26eae ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/biomass_intercept> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534147"^^xsd:dateTime ;
-            prov:entity id:d9c2f532-47b2-45e7-9825-ed5413dea033 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/biomass_slope> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534286"^^xsd:dateTime ;
-            prov:entity id:32255a12-525c-491e-bf2f-f579c17fdf39 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndvi_min> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534219"^^xsd:dateTime ;
-            prov:entity id:da18af81-c62b-42a2-8596-4e773968588d ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndvi_file> ] .
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/stac_item> ] .
 
 id:db33c88c-4dd2-4ea1-b06b-577175d50413 a wf4ever:File,
         wfprov:Artifact,
@@ -7252,61 +7287,61 @@ id:e96466cd-dd6c-469a-af95-6bbc439a3156 a wfprov:WorkflowRun,
             prov:atTime "2026-09-24T12:57:44.628464"^^xsd:dateTime ;
             prov:hadActivity id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.247187"^^xsd:dateTime ;
-            prov:entity data:5052a0c49b2beb0515446c40d4eee08c7fcad904 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/stac_api> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.244986"^^xsd:dateTime ;
-            prov:entity id:c3c368d8-6ec0-4064-bcfe-a0c6ebea821c ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/cloud_cover_max> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.246104"^^xsd:dateTime ;
-            prov:entity id:6dc7f217-6174-4e64-be16-a87833936301 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/ndvi_max> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.245944"^^xsd:dateTime ;
-            prov:entity data:4c89b83017b6bf2fdefdc95f52a039255235ba37 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/collection> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.244872"^^xsd:dateTime ;
-            prov:entity id:3f96db66-4f0b-4af4-9034-8d14f35016b5 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/biomass_intercept> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:45.246141"^^xsd:dateTime ;
             prov:entity id:c66a4eb4-76b6-4a3d-b5ee-aa35009027e1 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/ndvi_min> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.244914"^^xsd:dateTime ;
-            prov:entity id:aabf8f10-1849-4b0c-891f-dd7a04a822a7 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/biomass_slope> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:45.244950"^^xsd:dateTime ;
             prov:entity id:1d5c6165-738d-4f3e-815b-21b08a3876bc ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/carbon_fraction> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.246177"^^xsd:dateTime ;
-            prov:entity id:5fc90b70-355b-4773-ab64-068be1b36cdc ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/ndwi_min> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.246066"^^xsd:dateTime ;
-            prov:entity id:c8ba466f-bf4e-4bf3-a2cb-e7013b6146cf ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/epsg> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.244804"^^xsd:dateTime ;
-            prov:entity id:8ea13029-7217-48c6-83b2-5168cf85a135 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/aoi> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.246218"^^xsd:dateTime ;
-            prov:entity id:6f5fd862-1f4d-4a1b-9c03-5f531e769ee6 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/resolution> ],
+            prov:atTime "2026-09-24T12:57:45.244914"^^xsd:dateTime ;
+            prov:entity id:aabf8f10-1849-4b0c-891f-dd7a04a822a7 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/biomass_slope> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:45.246255"^^xsd:dateTime ;
             prov:entity id:068eb4ce-9e22-4f53-8d00-6a22656436bb ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/savi_min> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:45.244804"^^xsd:dateTime ;
+            prov:entity id:8ea13029-7217-48c6-83b2-5168cf85a135 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/aoi> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:45.245944"^^xsd:dateTime ;
+            prov:entity data:4c89b83017b6bf2fdefdc95f52a039255235ba37 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/collection> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:45.246218"^^xsd:dateTime ;
+            prov:entity id:6f5fd862-1f4d-4a1b-9c03-5f531e769ee6 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/resolution> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:45.246177"^^xsd:dateTime ;
+            prov:entity id:5fc90b70-355b-4773-ab64-068be1b36cdc ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/ndwi_min> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:45.247187"^^xsd:dateTime ;
+            prov:entity data:5052a0c49b2beb0515446c40d4eee08c7fcad904 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/stac_api> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:45.246023"^^xsd:dateTime ;
             prov:entity id:95ff8885-0a15-43aa-82fa-7cd8b1e37f8d ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/days_back> ] ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/days_back> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:45.244986"^^xsd:dateTime ;
+            prov:entity id:c3c368d8-6ec0-4064-bcfe-a0c6ebea821c ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/cloud_cover_max> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:45.244872"^^xsd:dateTime ;
+            prov:entity id:3f96db66-4f0b-4af4-9034-8d14f35016b5 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/biomass_intercept> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:45.246104"^^xsd:dateTime ;
+            prov:entity id:6dc7f217-6174-4e64-be16-a87833936301 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/ndvi_max> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:45.246066"^^xsd:dateTime ;
+            prov:entity id:c8ba466f-bf4e-4bf3-a2cb-e7013b6146cf ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/epsg> ] ;
     prov:startedAtTime "2026-09-24T12:57:44.628413"^^xsd:dateTime .
 
 
@@ -7352,7 +7387,7 @@ allOf:
         - epsg
         - resolution
       x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
     outputs:
       type: object
       required:
@@ -7361,7 +7396,7 @@ allOf:
         enum:
         - reprojected_file
       x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 $defs:
   rawProcessDescription:
     $ref: https://geolabs.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/part1/v1/schemas/process/schema.yaml
@@ -7411,14 +7446,14 @@ $defs:
             - array
             - object
         x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-        x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+        x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
       outputs:
         type: object
         propertyNames:
           enum:
           - reprojected_file
         x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-        x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+        x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
       response:
         enum:
         - raw
@@ -7479,7 +7514,7 @@ $defs:
             - epsg
             - resolution
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
           type: object
           required:
@@ -7488,8 +7523,8 @@ $defs:
             enum:
             - reprojected_file
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
-    - description: '`reproject_band` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection`:
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
+    - description: '`reproject_band` as the Implementation (instance level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection`:
         Table 21 keywords (E) and footnote-a metadata references (Table 22 roles)
         inherited from its Implementation Profile.'
       type: object
@@ -7517,7 +7552,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing
           - contains:
               type: object
               required:
@@ -7527,7 +7562,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection
           - contains:
               type: object
               required:
@@ -7537,7 +7572,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection
           x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
         inputs:
           type: object
@@ -7552,7 +7587,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -7569,9 +7604,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/raster
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/inputs/raster
                   - contains:
                       type: object
                       required:
@@ -7579,9 +7614,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/raster
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/raster
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
                 minOccurs:
                   type: integer
@@ -7595,7 +7630,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/coordinate-reference-system
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/coordinate-reference-system
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -7612,9 +7647,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/inputs/targetCRS
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/inputs/targetCRS
                   - contains:
                       type: object
                       required:
@@ -7622,9 +7657,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/inputs/targetCRS
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/targetCRS
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
                 minOccurs:
                   type: integer
@@ -7632,7 +7667,7 @@ $defs:
                   maximum: 1
                   x-jsonld-id: https://w3id.org/ogc/api/processes/minOccurs
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
           type: object
           required:
@@ -7645,7 +7680,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -7662,9 +7697,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-reprojection/outputs/raster
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/outputs/raster
                   - contains:
                       type: object
                       required:
@@ -7672,19 +7707,19 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection/outputs/raster
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/outputs/raster
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 x-jsonld-extra-terms:
   type: '@type'
   ProcessRun: http://purl.org/wf4ever/wfprov#ProcessRun
   WorkflowRun: http://purl.org/wf4ever/wfprov#WorkflowRun
   WorkflowEngine: http://purl.org/wf4ever/wfprov#WorkflowEngine
   Artifact: http://purl.org/wf4ever/wfprov#Artifact
-  ProcessType: https://geolabs.github.io/bblocks-process-profiles/def/ProcessType
+  ProcessType: https://w3id.org/geolabs/ospd/process-profiles/ProcessType
   ActivityType: https://w3id.org/ogc/rim/activity-type/ActivityType
   owlClass: http://www.w3.org/2002/07/owl#Class
   subClassOf:
@@ -7693,7 +7728,7 @@ x-jsonld-extra-terms:
   title: http://purl.org/dc/terms/title
   description: http://purl.org/dc/terms/description
   keywords: http://purl.org/dc/terms/subject
-  version: https://geolabs.github.io/bblocks-process-profiles/def/version
+  version: https://w3id.org/geolabs/ospd/process-profiles/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
   minOccurs: https://w3id.org/ogc/api/processes/minOccurs
@@ -7749,7 +7784,7 @@ x-jsonld-extra-terms:
           '@base': http://www.iana.org/assignments/relation/
       type: http://purl.org/dc/terms/format
   processDescription:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/processDescription
     x-jsonld-context:
       href:
         '@id': http://www.w3.org/2000/01/rdf-schema#seeAlso
@@ -7757,9 +7792,9 @@ x-jsonld-extra-terms:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
-  result: https://geolabs.github.io/bblocks-process-profiles/def/result
-  engine: https://geolabs.github.io/bblocks-process-profiles/def/engine
-  run: https://geolabs.github.io/bblocks-process-profiles/def/run
+  result: https://w3id.org/geolabs/ospd/process-profiles/result
+  engine: https://w3id.org/geolabs/ospd/process-profiles/engine
+  run: https://w3id.org/geolabs/ospd/process-profiles/run
   provType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@vocab'
@@ -7854,38 +7889,44 @@ x-jsonld-extra-terms:
   appliesTo:
     x-jsonld-id: https://w3id.org/ogc/rim/appliesTo
     x-jsonld-type: '@id'
+  affectedProperty:
+    x-jsonld-id: https://w3id.org/ogc/rim/affectedProperty
+    x-jsonld-type: '@id'
+  sameAs:
+    x-jsonld-id: http://www.w3.org/2002/07/owl#sameAs
+    x-jsonld-type: '@id'
   prefLabel: http://www.w3.org/2004/02/skos/core#prefLabel
   definition: http://www.w3.org/2004/02/skos/core#definition
   inScheme:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#inScheme
     x-jsonld-type: '@id'
-  status: https://geolabs.github.io/bblocks-process-profiles/def/status
+  status: https://w3id.org/geolabs/ospd/process-profiles/status
   classification: '@nest'
   correspondences: '@nest'
   phase:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/phase
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/phase
     x-jsonld-type: '@id'
-  deployment: https://geolabs.github.io/bblocks-process-profiles/def/deployment
-  profile: https://geolabs.github.io/bblocks-process-profiles/def/profile
+  deployment: https://w3id.org/geolabs/ospd/process-profiles/deployment
+  profile: https://w3id.org/geolabs/ospd/process-profiles/profile
   plan:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/plan
     x-jsonld-context:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
   Plan: http://www.w3.org/ns/prov#Plan
-  cwlClass: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
-  cwlId: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
+  cwlClass: https://w3id.org/geolabs/ospd/process-profiles/cwlClass
+  cwlId: https://w3id.org/geolabs/ospd/process-profiles/cwlId
   provenanceClass:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/provenanceClass
     x-jsonld-type: '@id'
   implementsProfile:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implementsProfile
     x-jsonld-type: '@id'
-  cctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
-  candidateCctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
+  cctDependencies: https://w3id.org/geolabs/ospd/process-profiles/cctDependency
+  candidateCctDependencies: https://w3id.org/geolabs/ospd/process-profiles/candidateCctDependency
   hasStep:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/hasStep
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/hasStep
     x-jsonld-type: '@id'
   exactMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#exactMatch
@@ -7896,88 +7937,88 @@ x-jsonld-extra-terms:
   relatedMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#relatedMatch
     x-jsonld-type: '@id'
-  openeoEquivalence: https://geolabs.github.io/bblocks-process-profiles/def/openeoEquivalence
-  level: https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel
-  rationale: https://geolabs.github.io/bblocks-process-profiles/def/rationale
+  openeoEquivalence: https://w3id.org/geolabs/ospd/process-profiles/openeoEquivalence
+  level: https://w3id.org/geolabs/ospd/process-profiles/equivalenceLevel
+  rationale: https://w3id.org/geolabs/ospd/process-profiles/rationale
   decomposition:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/decomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/decomposition
     x-jsonld-container: '@list'
-  stage: https://geolabs.github.io/bblocks-process-profiles/def/stage
-  openeo: https://geolabs.github.io/bblocks-process-profiles/def/openeo
+  stage: https://w3id.org/geolabs/ospd/process-profiles/stage
+  openeo: https://w3id.org/geolabs/ospd/process-profiles/openeo
   note: http://www.w3.org/2004/02/skos/core#note
   serverSideFiles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/serverSideFile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/serverSideFile
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      location: https://geolabs.github.io/bblocks-process-profiles/def/location
+      location: https://w3id.org/geolabs/ospd/process-profiles/location
   roleDecompositions:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/roleDecomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/roleDecomposition
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       parts:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/part
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/part
         '@container': '@list'
       selectors:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/selector
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/selector
         '@context':
-          name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+          name: https://w3id.org/geolabs/ospd/process-profiles/liveName
           values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reproducible:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/reproducible
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/reproducible
         '@type': http://www.w3.org/2001/XMLSchema#boolean
       note: http://www.w3.org/2004/02/skos/core#note
   unboundRoles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/unboundRole
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/unboundRole
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       reason: http://www.w3.org/2004/02/skos/core#note
   fixedRoleValues:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/fixedRoleValue
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/fixedRoleValue
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reason: http://www.w3.org/2004/02/skos/core#note
   byReference:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/byReference
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/byReference
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       note: http://www.w3.org/2004/02/skos/core#note
   notAttached:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/notAttached
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/notAttached
     x-jsonld-context:
       reason: http://www.w3.org/2004/02/skos/core#note
   assumedFormatGaps:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/assumedFormatGap
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/assumedFormatGap
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      served: https://geolabs.github.io/bblocks-process-profiles/def/servedMediaType
+      served: https://w3id.org/geolabs/ospd/process-profiles/servedMediaType
       reason: http://www.w3.org/2004/02/skos/core#note
-      evidence: https://geolabs.github.io/bblocks-process-profiles/def/evidence
-x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/
+      evidence: https://w3id.org/geolabs/ospd/process-profiles/evidence
+x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/
 x-jsonld-prefixes:
   wfprov: http://purl.org/wf4ever/wfprov#
-  pp: https://geolabs.github.io/bblocks-process-profiles/def/
+  pp: https://w3id.org/geolabs/ospd/process-profiles/
   acttype: https://w3id.org/ogc/rim/activity-type/
   owl: http://www.w3.org/2002/07/owl#
   rdfs: http://www.w3.org/2000/01/rdf-schema#
@@ -7993,7 +8034,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.kindgrove-steps.reproject-band
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-16'
+  dateOfLastChange: '2026-11-18'
 
 ```
 
@@ -8008,10 +8049,10 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/",
     "inputs": {
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/input/",
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/input/",
         "schema": {
           "@context": {
             "@vocab": "https://w3id.org/ogc/api/schema/"
@@ -8025,7 +8066,7 @@ Links to the schema:
     },
     "outputs": {
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/output/",
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/output/",
         "schema": {
           "@context": {
             "@vocab": "https://w3id.org/ogc/api/schema/"
@@ -8265,6 +8306,14 @@ Links to the schema:
       "@id": "rim:appliesTo",
       "@type": "@id"
     },
+    "affectedProperty": {
+      "@id": "rim:affectedProperty",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "owl:sameAs",
+      "@type": "@id"
+    },
     "prefLabel": "skos:prefLabel",
     "definition": "skos:definition",
     "inScheme": {
@@ -8435,7 +8484,7 @@ Links to the schema:
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",
-    "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "pp": "https://w3id.org/geolabs/ospd/process-profiles/",
     "acttype": "rim:activity-type/",
     "owl": "http://www.w3.org/2002/07/owl#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",

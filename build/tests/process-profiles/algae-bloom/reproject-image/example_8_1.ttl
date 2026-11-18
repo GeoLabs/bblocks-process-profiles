@@ -3,7 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:algae-bloom:reproject-image> a wfprov:ProcessRun,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> ;
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/reproject-image/package> ;
     wfprov:usedInput <urn:example:entity:reproject-image:in:input_image>,
         <urn:example:entity:reproject-image:in:output_name>,

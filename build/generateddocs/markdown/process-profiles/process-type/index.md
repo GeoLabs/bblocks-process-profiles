@@ -176,7 +176,7 @@ These entries describe **deployed process types** (tier 4), not the provider-ind
 Implementation Profiles (tier 3) of `bblocks-generic-profiles`. They are therefore the appropriate
 place to profile `acttype:ActivityType`.
 
-The `pp:` vocabulary (`https://geolabs.github.io/bblocks-process-profiles/def/`) and the phase IRIs
+The `pp:` vocabulary (`https://w3id.org/geolabs/ospd/process-profiles/`) and the phase IRIs
 are provisional, pending a decision on the process-type register namespace.
 
 ## Examples
@@ -185,76 +185,88 @@ are provisional, pending a decision on the process-type register namespace.
 #### json
 ```json
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/tier3-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/tier3-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-resampling (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-resampling, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/inherited-description-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/inherited-description-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription.inherited.json added with the attachment to the Implementation Profile raster-resampling: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image"
     }
   ],
   "prefLabel": "Performs image reprojection.",
   "definition": "Performs a reprojection over image bands and returns the resulting GeoTiff.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-resampling",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing"
     ]
   },
   "deployment": {
@@ -280,7 +292,7 @@ are provisional, pending a decision on the process-type register namespace.
     "cctDependencies": [],
     "candidateCctDependencies": []
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-resampling",
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
@@ -298,76 +310,88 @@ are provisional, pending a decision on the process-type register namespace.
 ```jsonld
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/process-type/context.jsonld",
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/tier3-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/tier3-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-resampling (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-resampling, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/inherited-description-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/inherited-description-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription.inherited.json added with the attachment to the Implementation Profile raster-resampling: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image"
     }
   ],
   "prefLabel": "Performs image reprojection.",
   "definition": "Performs a reprojection over image bands and returns the resulting GeoTiff.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-resampling",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing"
     ]
   },
   "deployment": {
@@ -393,7 +417,7 @@ are provisional, pending a decision on the process-type register namespace.
     "cctDependencies": [],
     "candidateCctDependencies": []
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-resampling",
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
@@ -411,92 +435,103 @@ are provisional, pending a decision on the process-type register namespace.
 @prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
-@prefix ns1: <http://www.iana.org/assignments/> .
-@prefix ns2: <https://w3id.org/ogc/api/processes/> .
+@prefix ns1: <https://w3id.org/ogc/api/processes/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rim: <https://w3id.org/ogc/rim/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/addition> a rim:RegisterAction ;
-    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType rim:additionAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/d5-2026-11-09> a rim:RegisterAction ;
-    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
-    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/inherited-description-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "processDescription.inherited.json added with the attachment to the Implementation Profile raster-resampling: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/specialisation-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/tier3-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process/reproject-image> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/reproject-image> ;
-    pp:version "1.0.0" .
-
 <https://ospd.example.org/ogc-api/processes/reproject-image/package> a prov:Plan ;
     dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
     pp:cwlClass "CommandLineTool" ;
     pp:cwlId "reproject-image" ;
-    ns2:executionUnit [ dcterms:format "application/cwl+yaml" ;
-            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+    ns1:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/reproject-image.cwl> ] .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> a owl:Class,
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/addition> a rim:RegisterAction ;
+    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType rim:additionAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image> ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/d5-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/identifier-2026-11-17> a rim:RegisterAction ;
+    dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
+    prov:startedAtTime "2026-11-17T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rim:objectIdentifier ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/inherited-description-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "processDescription.inherited.json added with the attachment to the Implementation Profile raster-resampling: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/specialisation-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-resampling, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/tier3-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-resampling (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/reproject-image> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/reproject-image> ;
+    pp:version "1.0.0" .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
-    rdfs:subClassOf <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling> ;
+    rdfs:subClassOf <https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-resampling> ;
+    owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image> ;
     skos:closeMatch <https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial> ;
     skos:definition "Performs a reprojection over image bands and returns the resulting GeoTiff." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Performs image reprojection." ;
-    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/reproject-image> ;
+    pp:deployment [ pp:processDescription <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/reproject-image> ;
             pp:profile "ospd.process-profiles.algae-bloom.reproject-image" ;
             pp:provenanceClass <http://purl.org/wf4ever/wfprov#ProcessRun> ] ;
-    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-resampling> ;
+    pp:implementsProfile <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-resampling> ;
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "As used in W1 the tool only changes the pixel size (gdalwarp `-tr 60 60`, nearest neighbour by default, no `-t_srs`): resample_spatial with `resolution: 60`, `projection: null`, `method: near`. Not an exactMatch: `output_dimensions` (`-ts`) has no openEO parameter, the output type is forced to Float32 (`-ot Float32`), and the tool works on a file rather than a data cube. Despite its name, no CRS transformation takes place." ] ;
-    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing> ;
+    pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing> ;
     pp:plan <https://ospd.example.org/ogc-api/processes/reproject-image/package> ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/addition>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/d5-2026-11-09>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/inherited-description-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/specialisation-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image/actions/tier3-2026-11-10> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/addition>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/d5-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/inherited-description-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/specialisation-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image/actions/tier3-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/reproject-image"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image"^^xsd:anyURI ;
     rim:publicationStatus rim:published ;
     rim:validityStatus rim:invalid .
 
@@ -508,58 +543,70 @@ are provisional, pending a decision on the process-type register namespace.
 #### json
 ```json
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/not-attached-2026-11-11",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/not-attached-2026-11-11",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "clarifying",
       "description": "notAttached added (absent -> {reason}): the entry now states that this CommandLineTool implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md (profiles.yaml tier3.reason). Nothing else changes: the process was not attached before and is not attached now (decision Q1 of 2026-11-11).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove"
     }
   ],
   "prefLabel": "Mangrove biomass and carbon estimation",
   "definition": "Detects mangroves from Sentinel-2 L2A vegetation indices within a bounding box and estimates above-ground biomass and carbon stock (ipython2cwl binary of the KindGrove notebook).",
   "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation"
     ]
   },
   "deployment": {
@@ -671,58 +718,70 @@ are provisional, pending a decision on the process-type register namespace.
 ```jsonld
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/process-type/context.jsonld",
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/not-attached-2026-11-11",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/not-attached-2026-11-11",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "clarifying",
       "description": "notAttached added (absent -> {reason}): the entry now states that this CommandLineTool implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md (profiles.yaml tier3.reason). Nothing else changes: the process was not attached before and is not attached now (decision Q1 of 2026-11-11).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove"
     }
   ],
   "prefLabel": "Mangrove biomass and carbon estimation",
   "definition": "Detects mangroves from Sentinel-2 L2A vegetation indices within a bounding box and estimates above-ground biomass and carbon stock (ipython2cwl binary of the KindGrove notebook).",
   "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation"
     ]
   },
   "deployment": {
@@ -833,11 +892,11 @@ are provisional, pending a decision on the process-type register namespace.
 ```ttl
 @prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://www.iana.org/assignments/> .
-@prefix ns2: <https://w3id.org/ogc/api/processes/> .
+@prefix ns1: <https://w3id.org/ogc/api/processes/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -845,48 +904,58 @@ are provisional, pending a decision on the process-type register namespace.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/addition> a rim:RegisterAction ;
-    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType rim:additionAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove> ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/d5-2026-11-09> a rim:RegisterAction ;
-    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
-    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/not-attached-2026-11-11> a rim:RegisterAction ;
-    dcterms:description "notAttached added (absent -> {reason}): the entry now states that this CommandLineTool implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md (profiles.yaml tier3.reason). Nothing else changes: the process was not attached before and is not attached now (decision Q1 of 2026-11-11)." ;
-    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove> ;
-    rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process/mangrove_cli> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/mangrove_cli> ;
-    pp:version "0.0.1" .
-
 <https://ospd.example.org/ogc-api/processes/mangrove_cli/package> a prov:Plan ;
     dcterms:license <https://spdx.org/licenses/Apache-2.0> ;
     pp:candidateCctDependency "eoap.cct.bbox" ;
     pp:cwlClass "CommandLineTool" ;
     pp:cwlId "mangrove_cli" ;
-    ns2:executionUnit [ dcterms:format "application/cwl+yaml" ;
-            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+    ns1:executionUnit [ dcterms:format "application/cwl+yaml" ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove_cli> ] .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove> a owl:Class,
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/addition> a rim:RegisterAction ;
+    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType rim:additionAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove> ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/d5-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/identifier-2026-11-17> a rim:RegisterAction ;
+    dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
+    prov:startedAtTime "2026-11-17T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rim:objectIdentifier ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/not-attached-2026-11-11> a rim:RegisterAction ;
+    dcterms:description "notAttached added (absent -> {reason}): the entry now states that this CommandLineTool implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md (profiles.yaml tier3.reason). Nothing else changes: the process was not attached before and is not attached now (decision Q1 of 2026-11-11)." ;
+    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove/mangrove_cli> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/mangrove_cli> ;
+    pp:version "0.0.1" .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
     rdfs:subClassOf acttype:ActivityType ;
+    owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove> ;
     skos:definition "Detects mangroves from Sentinel-2 L2A vegetation indices within a bounding box and estimates above-ground biomass and carbon stock (ipython2cwl binary of the KindGrove notebook)." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Mangrove biomass and carbon estimation" ;
-    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/mangrove_cli> ;
+    pp:deployment [ pp:processDescription <https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove/mangrove_cli> ;
             pp:profile "ospd.process-profiles.kindgrove.mangrove" ;
             pp:provenanceClass <http://purl.org/wf4ever/wfprov#ProcessRun> ] ;
     pp:notAttached [ skos:note "One opaque tool runs scene selection, band retrieval, indices, biomass and carbon estimation and STAC export. No single profile describes it; kindgrove-steps splits it into steps." ] ;
@@ -919,18 +988,19 @@ are provisional, pending a decision on the process-type register namespace.
                         pp:stage "export CSV + GeoTIFF" ] ) ;
             pp:equivalenceLevel "none" ;
             pp:rationale "Opaque: one ipython2cwl binary running the whole notebook. No single openEO process; each notebook stage has a closeMatch (decomposition). run_udf could wrap the binary but expects a data cube in and out, which this tool does not follow (it searches and downloads its own data)." ] ;
-    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering> ;
+    pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval>,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation>,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing>,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation>,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering> ;
     pp:plan <https://ospd.example.org/ogc-api/processes/mangrove_cli/package> ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/addition>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/d5-2026-11-09>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/not-attached-2026-11-11> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/addition>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/d5-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/not-attached-2026-11-11> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove"^^xsd:anyURI ;
     rim:publicationStatus rim:published ;
     rim:validityStatus rim:invalid .
 
@@ -942,76 +1012,88 @@ are provisional, pending a decision on the process-type register namespace.
 #### json
 ```json
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#reproject_band). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_file and the output reprojected_file, in processDescription.json and processDescription.inherited.json. assumedFormatGaps removed: its two gaps, band_file and reprojected_file served as application/octet-stream, are closed by the format the CWL now declares, as their reason anticipated (removed on 2026-11-10 with the corrected CWL, pinned on 2026-11-11).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     }
   ],
   "prefLabel": "Reproject a raster onto a regular grid",
   "definition": "Reprojects a raster onto a regular grid covering a bounding box.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing"
     ]
   },
   "deployment": {
@@ -1039,7 +1121,7 @@ are provisional, pending a decision on the process-type register namespace.
       "eoap.cct.bbox"
     ]
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection",
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
@@ -1057,76 +1139,88 @@ are provisional, pending a decision on the process-type register namespace.
 ```jsonld
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/process-type/context.jsonld",
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#reproject_band). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_file and the output reprojected_file, in processDescription.json and processDescription.inherited.json. assumedFormatGaps removed: its two gaps, band_file and reprojected_file served as application/octet-stream, are closed by the format the CWL now declares, as their reason anticipated (removed on 2026-11-10 with the corrected CWL, pinned on 2026-11-11).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     }
   ],
   "prefLabel": "Reproject a raster onto a regular grid",
   "definition": "Reprojects a raster onto a regular grid covering a bounding box.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing"
     ]
   },
   "deployment": {
@@ -1154,7 +1248,7 @@ are provisional, pending a decision on the process-type register namespace.
       "eoap.cct.bbox"
     ]
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection",
   "correspondences": {
     "closeMatch": [
       "https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial"
@@ -1176,53 +1270,12 @@ are provisional, pending a decision on the process-type register namespace.
 @prefix ns2: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rim: <https://w3id.org/ogc/rim/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/addition> a rim:RegisterAction ;
-    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType rim:additionAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09> a rim:RegisterAction ;
-    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
-    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11> a rim:RegisterAction ;
-    dcterms:description "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#reproject_band). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_file and the output reprojected_file, in processDescription.json and processDescription.inherited.json. assumedFormatGaps removed: its two gaps, band_file and reprojected_file served as application/octet-stream, are closed by the format the CWL now declares, as their reason anticipated (removed on 2026-11-10 with the corrected CWL, pinned on 2026-11-11)." ;
-    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09> a rim:RegisterAction ;
-    dcterms:description "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
-    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process/reproject_band> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/reproject_band> ;
-    pp:version "0.1.0" .
 
 <https://ospd.example.org/ogc-api/processes/reproject_band/package> a prov:Plan ;
     dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
@@ -1233,32 +1286,84 @@ are provisional, pending a decision on the process-type register namespace.
             ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#reproject_band> ] .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> a owl:Class,
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/addition> a rim:RegisterAction ;
+    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType rim:additionAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/identifier-2026-11-17> a rim:RegisterAction ;
+    dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
+    prov:startedAtTime "2026-11-17T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rim:objectIdentifier ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11> a rim:RegisterAction ;
+    dcterms:description "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#reproject_band). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_file and the output reprojected_file, in processDescription.json and processDescription.inherited.json. assumedFormatGaps removed: its two gaps, band_file and reprojected_file served as application/octet-stream, are closed by the format the CWL now declares, as their reason anticipated (removed on 2026-11-10 with the corrected CWL, pinned on 2026-11-11)." ;
+    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/reproject_band> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/reproject_band> ;
+    pp:version "0.1.0" .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
-    rdfs:subClassOf <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection> ;
+    rdfs:subClassOf <https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection> ;
+    owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band> ;
     skos:closeMatch <https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.resample_spatial> ;
     skos:definition "Reprojects a raster onto a regular grid covering a bounding box." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Reproject a raster onto a regular grid" ;
-    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/reproject_band> ;
+    pp:deployment [ pp:processDescription <https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/reproject_band> ;
             pp:profile "ospd.process-profiles.kindgrove-steps.reproject-band" ;
             pp:provenanceClass <http://purl.org/wf4ever/wfprov#ProcessRun> ] ;
-    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-reprojection> ;
+    pp:implementsProfile <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection> ;
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "resample_spatial with a target `resolution` and `projection` (epsg); no explicit resampling-method parameter in the CWL (implementation default), same partial match as `algae-bloom.reproject-image`." ] ;
-    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing> ;
+    pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing> ;
     pp:plan <https://ospd.example.org/ogc-api/processes/reproject_band/package> ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/addition>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/addition>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"^^xsd:anyURI ;
     rim:publicationStatus rim:published ;
     rim:validityStatus rim:invalid .
 
@@ -1270,76 +1375,88 @@ are provisional, pending a decision on the process-type register namespace.
 #### json
 ```json
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/role-decomposition-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "roleDecompositions added: the role areaOfInterest of raster-crop is taken as mode.extent.ulx, uly, lrx, lry and mode.extent.unit, with mode = extent (decision of 2026-11-09); before, the role was left unbound.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-crop, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-crop, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/role-decomposition-unit-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-unit-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "The role decomposition is restricted to mode.extent.unit in phy or lonlat, a selector instead of a part: with the default unit pxl the four numbers are pixel indices, not a bounding box.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
     }
   ],
   "prefLabel": "Extract a ROI defined by the user.",
   "definition": "This application extracts a Region Of Interest with user parameters. There are four mode of extraction. The standard mode allows the user to enter one point (upper left corner of the region to extract) and a size. The extent mode needs two points (upper left corner and lower right) and the radius mode need the center of the region and the radius: it will extract the rectangle containing the circle defined and limited by the image dimension. The fit mode needs a reference image or vector and the dimension of the extracted region will be the same as the extent of the reference. Different units are available such as pixel, image physical space or longitude and latitude.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-crop",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-crop",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing"
     ]
   },
   "deployment": {
@@ -1351,11 +1468,11 @@ are provisional, pending a decision on the process-type register namespace.
     },
     "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop",
   "roleDecompositions": [
     {
       "side": "inputs",
-      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop/inputs/areaOfInterest",
+      "implements": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop/inputs/areaOfInterest",
       "parts": [
         "mode.extent.ulx",
         "mode.extent.uly",
@@ -1397,76 +1514,88 @@ are provisional, pending a decision on the process-type register namespace.
 ```jsonld
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/process-type/context.jsonld",
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/role-decomposition-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "roleDecompositions added: the role areaOfInterest of raster-crop is taken as mode.extent.ulx, uly, lrx, lry and mode.extent.unit, with mode = extent (decision of 2026-11-09); before, the role was left unbound.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-crop, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-crop, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/role-decomposition-unit-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-unit-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "The role decomposition is restricted to mode.extent.unit in phy or lonlat, a selector instead of a part: with the default unit pxl the four numbers are pixel indices, not a bounding box.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
     }
   ],
   "prefLabel": "Extract a ROI defined by the user.",
   "definition": "This application extracts a Region Of Interest with user parameters. There are four mode of extraction. The standard mode allows the user to enter one point (upper left corner of the region to extract) and a size. The extent mode needs two points (upper left corner and lower right) and the radius mode need the center of the region and the radius: it will extract the rectangle containing the circle defined and limited by the image dimension. The fit mode needs a reference image or vector and the dimension of the extracted region will be the same as the extent of the reference. Different units are available such as pixel, image physical space or longitude and latitude.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-crop",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-crop",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing"
     ]
   },
   "deployment": {
@@ -1478,11 +1607,11 @@ are provisional, pending a decision on the process-type register namespace.
     },
     "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop",
   "roleDecompositions": [
     {
       "side": "inputs",
-      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop/inputs/areaOfInterest",
+      "implements": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop/inputs/areaOfInterest",
       "parts": [
         "mode.extent.ulx",
         "mode.extent.uly",
@@ -1525,7 +1654,7 @@ are provisional, pending a decision on the process-type register namespace.
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -1533,64 +1662,74 @@ are provisional, pending a decision on the process-type register namespace.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/addition> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/addition> a rim:RegisterAction ;
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi> ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/d5-2026-11-09> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
     prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi> ;
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/role-decomposition-2026-11-09> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/identifier-2026-11-17> a rim:RegisterAction ;
+    dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
+    prov:startedAtTime "2026-11-17T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rim:objectIdentifier ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-2026-11-09> a rim:RegisterAction ;
     dcterms:description "roleDecompositions added: the role areaOfInterest of raster-crop is taken as mode.extent.ulx, uly, lrx, lry and mode.extent.unit, with mode = extent (decision of 2026-11-09); before, the role was left unbound." ;
     prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi> ;
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/role-decomposition-unit-2026-11-10> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-unit-2026-11-10> a rim:RegisterAction ;
     dcterms:description "The role decomposition is restricted to mode.extent.unit in phy or lonlat, a selector instead of a part: with the default unit pxl the four numbers are pixel indices, not a bounding box." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi> ;
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/specialisation-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-crop, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/specialisation-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-crop, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi> ;
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.ExtractROI> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ExtractROI> ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/raster/OTB.ExtractROI> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ExtractROI> ;
     pp:version "1.0.0" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi> a owl:Class,
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
-    rdfs:subClassOf <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-crop> ;
+    rdfs:subClassOf <https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-crop> ;
+    owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi> ;
     skos:closeMatch <https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.filter_bbox> ;
     skos:definition "This application extracts a Region Of Interest with user parameters. There are four mode of extraction. The standard mode allows the user to enter one point (upper left corner of the region to extract) and a size. The extent mode needs two points (upper left corner and lower right) and the radius mode need the center of the region and the radius: it will extract the rectangle containing the circle defined and limited by the image dimension. The fit mode needs a reference image or vector and the dimension of the extracted region will be the same as the extent of the reference. Different units are available such as pixel, image physical space or longitude and latitude." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Extract a ROI defined by the user." ;
-    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.ExtractROI> ;
+    pp:deployment [ pp:processDescription <https://w3id.org/geolabs/ospd/process-profiles/process/raster/OTB.ExtractROI> ;
             pp:profile "ospd.process-profiles.raster.extract-roi" ;
             pp:provenanceClass <http://purl.org/wf4ever/wfprov#ProcessRun> ] ;
-    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop> ;
+    pp:implementsProfile <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop> ;
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "OTB.ExtractROI's \"extent\" mode (`mode.extent.ulx/uly/lrx/lry`, two corner points) matches filter_bbox's role (spatially limit a data cube to a bounding box). Not exactMatch: three other modes have no openEO equivalent -- pixel-offset/size (\"standard\": `startx`/`starty`/ `sizex`/`sizey`), circular (\"radius\": `mode.radius.r`/`cx`/`cy`), and reference-geometry (\"fit\": `mode.fit.im`/`vect`) extraction." ] ;
-    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing> ;
+    pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing> ;
     pp:roleDecomposition [ skos:note "With `mode` set to `extent` and `mode.extent.unit` set to `phy` (coordinates in the image's physical space, its CRS) or `lonlat` (longitude and latitude), OTB ExtractROI takes the area of interest as the upper-left (`mode.extent.ulx`, `mode.extent.uly`) and lower-right (`mode.extent.lrx`, `mode.extent.lry`) corners, plain numbers, not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served. With the default unit `pxl` the four numbers are pixel indices, not a bounding box, and the role is not implemented." ;
-            pp:implements <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-crop/inputs/areaOfInterest> ;
+            pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop/inputs/areaOfInterest> ;
             pp:part ( "mode.extent.ulx" "mode.extent.uly" "mode.extent.lrx" "mode.extent.lry" ) ;
             pp:selector [ rdf:value "lonlat",
                         "phy" ;
@@ -1600,14 +1739,15 @@ are provisional, pending a decision on the process-type register namespace.
             pp:side "inputs" ] ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/addition>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/d5-2026-11-09>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/role-decomposition-2026-11-09>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/role-decomposition-unit-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi/actions/specialisation-2026-11-10> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/addition>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/d5-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-unit-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/specialisation-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"^^xsd:anyURI ;
     rim:publicationStatus rim:published ;
     rim:validityStatus rim:invalid .
 
@@ -1619,7 +1759,7 @@ are provisional, pending a decision on the process-type register namespace.
 The ontology of this block, validated as data: this checks `pp:register` and `pp:specification` against the shapes of the Registered Item Model.
 #### turtle
 ```turtle
-@prefix pp:      <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp:      <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix rim:     <https://w3id.org/ogc/rim/> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
@@ -1642,7 +1782,7 @@ pp:ProcessType a owl:Class ;
     rdfs:label "OSPD process type" .
 
 pp:register a rim:Register ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/register"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/register"^^xsd:anyURI ;
     rim:functionalIdentifier "https://geolabs.github.io/bblocks-process-profiles/"^^xsd:anyURI ;
     dct:title "OSPD Process Profiles"@en ;
     dct:description "Register of deployable OSPD process profiles and their process types."@en ;
@@ -1667,7 +1807,7 @@ pp:specification a rim:RegisterSpecification ;
         "Scope. This register holds the Implementation (instance level) of OGC 14-065 WPS 2.0.2 §7.5: one process profile and one process type per deployed process, in two populations, the CWL processes of the OSPD reference workflows and the live processes of the Geonovum testbed. The process types are its register items (pp:ProcessType, of the item class of the Activity Type Register). The tiers above, Process Concepts, Generic and Implementation Profiles and the activity types of operations, are items of bblocks-generic-profiles, not of this register."@en ,
         "Register type. A content register, as the Registered Item Model uses the term: items carry their own name and definition, and there is no concept plane."@en ,
         "Roles. GeoLabs SARL is the register owner, the register manager and, for now, the control body. GeoLabs intends to delegate the control body role to the OGC or to an OSPD working group."@en ,
-        "Identifiers. The object identifier of a process type is its IRI, https://geolabs.github.io/bblocks-process-profiles/def/process-type/<group>/<name>. These IRIs are provisional, pending a decision on the namespace of the process-type register. An object identifier never redirects; only a functional identifier may. The identifier of a published item changes only by an explicit decision."@en ,
+        "Identifiers. The object identifier of a process type is its IRI, https://w3id.org/geolabs/ospd/process-profiles/process-type/<group>/<name>. The namespace resolves through w3id.org: an object identifier answers 303 with a document about the item (Markdown, JSON Schema or HTML), never with another item; only a functional identifier may point to another item. The processes a process type describes are named https://w3id.org/geolabs/ospd/process-profiles/process/<group>/<name> and resolve to the same documents. The identifier of a published item changes only by an explicit decision. The items published before 2026-11-17 had the IRI https://geolabs.github.io/bblocks-process-profiles/def/process-type/<group>/<name>; each keeps it as owl:sameAs, and the move is recorded by a clarifying amendment of the item (decision of 2026-11-17)."@en ,
         "Versions. An addition is an action of type addition, with no classification. A substantive change creates a new item or a new version, linked by rim:supersededBy, with an action classified substantive. A clarifying change keeps the item and its version, with an action classified clarifying. This version rule is specific to the registers of this project and does not come from ISO 19135. The classification correctional is not available. An item is retired by unpublishing it, not by deleting it."@en ,
         "What is substantive here (validated 2026-11-10, extended 2026-11-11). Substantive: the parent class (subClassOf) or an entity type changed; the Implementation Profile implemented (implementsProfile) added, removed or changed; a binding declaration (serverSideFiles, roleDecompositions, assumedFormatGaps, byReference, unboundRoles, fixedRoleValues) added, removed or changed; the processDescription or the plan that is deployed changed; the six-phase classification changed, or the form in which a part of the entry is stated. Clarifying: the label, a reworded definition with the same meaning, the openEO correspondences and their rationale, notes and descriptions; the statement that a process is not attached (notAttached) added, removed or changed."@en ,
         "Proposals. While an item is a proposal, with no control-body decision recorded, it is amended in place, with a classified `rim:RegisterAction`. The substantive rule applies once it has been accepted."@en ,
@@ -1693,7 +1833,7 @@ pp:registerSystem a rim:RegisterSystem ;
     rdfs:seeAlso <https://github.com/GeoLabs/bblocks-process-profiles/> .
 
 pp:process-type a rim:ConceptSystem, skos:ConceptScheme ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type"^^xsd:anyURI ;
     dct:title "OSPD process types"@en ;
     skos:prefLabel "OSPD process types"@en ;
     dct:description "Process types that classify the deployable CWL activities recorded in provenance."@en .
@@ -1742,24 +1882,24 @@ pp:six-phases a skos:ConceptScheme ;
     rdfs:isDefinedBy pp: ;
     skos:prefLabel "Six-phase workflow framework"@en ;
     dct:description "Positions of a process in an Earth observation workflow, from filter configuration to export, used to classify the OSPD process types (pp:phase). Provisional IRIs, as the rest of the pp: vocabulary."@en ;
-    skos:hasTopConcept <https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration> ,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering> ,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval> ,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing> ,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation> .
+    skos:hasTopConcept <https://w3id.org/geolabs/ospd/process-profiles/phase/filter-configuration> ,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering> ,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval> ,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing> ,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation> ,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration> a skos:Concept ;
+<https://w3id.org/geolabs/ospd/process-profiles/phase/filter-configuration> a skos:Concept ;
     skos:prefLabel "Filter configuration"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
-<https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering> a skos:Concept ;
+<https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering> a skos:Concept ;
     skos:prefLabel "Selection / filtering"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
-<https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval> a skos:Concept ;
+<https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval> a skos:Concept ;
     skos:prefLabel "Data retrieval"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
-<https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing> a skos:Concept ;
+<https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing> a skos:Concept ;
     skos:prefLabel "Pre-processing"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
-<https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> a skos:Concept ;
+<https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation> a skos:Concept ;
     skos:prefLabel "Scientific computation"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
-<https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation> a skos:Concept ;
+<https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation> a skos:Concept ;
     skos:prefLabel "Export / aggregation"@en ; skos:inScheme pp:six-phases ; skos:topConceptOf pp:six-phases .
 
 ```
@@ -1855,13 +1995,13 @@ allOf:
           items:
             type: string
             enum:
-            - https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration
-            - https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering
-            - https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval
-            - https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing
-            - https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation
-            - https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation
-          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/phase
+            - https://w3id.org/geolabs/ospd/process-profiles/phase/filter-configuration
+            - https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering
+            - https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval
+            - https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing
+            - https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation
+            - https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation
+          x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/phase
           x-jsonld-type: '@id'
       x-jsonld-id: '@nest'
     deployment:
@@ -1877,7 +2017,7 @@ allOf:
         profile:
           description: Identifier of the process-profile Building Block.
           type: string
-          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/profile
+          x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/profile
         processDescription:
           description: The OGC API - Processes processDescription this type is profiled
             from, at `href` (the `/processes/{processID}` resource). For a CWL-sourced
@@ -1895,7 +2035,7 @@ allOf:
               x-jsonld-id: '@id'
             version:
               type: string
-              x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/version
+              x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/version
             href:
               type: string
               format: uri
@@ -1908,16 +2048,16 @@ allOf:
               format: uri
               x-jsonld-id: http://purl.org/dc/terms/license
               x-jsonld-type: '@id'
-          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+          x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/processDescription
         provenanceClass:
           description: Class of the run records produced by executing this process.
           type: string
           enum:
           - http://purl.org/wf4ever/wfprov#ProcessRun
           - http://purl.org/wf4ever/wfprov#WorkflowRun
-          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
+          x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/provenanceClass
           x-jsonld-type: '@id'
-      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/deployment
+      x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/deployment
     plan:
       description: 'The plan (`prov:Plan`) an activity of this type executes: the
         OGC Application Package at `/processes/{processID}/package` (OGC API - Processes
@@ -1967,10 +2107,10 @@ allOf:
           - CommandLineTool
           - Workflow
           - ExpressionTool
-          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
+          x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/cwlClass
         cwlId:
           type: string
-          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
+          x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/cwlId
         license:
           type: string
           format: uri
@@ -1982,7 +2122,7 @@ allOf:
           items:
             type: string
             pattern: ^eoap\.cct\.
-          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
+          x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/cctDependency
         candidateCctDependencies:
           description: EOAP CWL custom types that could replace plain CWL types (not
             used by the CWL).
@@ -1990,8 +2130,8 @@ allOf:
           items:
             type: string
             pattern: ^eoap\.cct\.
-          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
-      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
+          x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/candidateCctDependency
+      x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/plan
     serverSideFiles:
       description: Inputs and outputs that this deployment passes as names of files
         stored on the server (relative to the ZOO-Kernel `dataPath`), not as encoded
@@ -2009,21 +2149,21 @@ allOf:
         properties:
           name:
             type: string
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/liveName
           side:
             enum:
             - inputs
             - outputs
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/side
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/side
           implements:
             type: string
             format: uri
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implements
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implements
             x-jsonld-type: '@id'
           location:
             type: string
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/location
-      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/serverSideFile
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/location
+      x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/serverSideFile
     byReference:
       description: 'Bound inputs and outputs, of a role with a representation, that
         this deployment takes or returns as a URL of the data instead of the data
@@ -2042,22 +2182,22 @@ allOf:
         properties:
           name:
             type: string
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/liveName
           side:
             enum:
             - inputs
             - outputs
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/side
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/side
           implements:
             type: string
             format: uri
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implements
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implements
             x-jsonld-type: '@id'
           note:
             type: string
             minLength: 1
             x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
-      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/byReference
+      x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/byReference
     unboundRoles:
       description: 'Implementation Profile roles this deployment leaves unbound, each
         with its reason: a role of minOccurs 0 at tier 3 (C2, 2026-11-10), or, for
@@ -2076,17 +2216,17 @@ allOf:
             enum:
             - inputs
             - outputs
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/side
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/side
           implements:
             type: string
             format: uri
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implements
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implements
             x-jsonld-type: '@id'
           reason:
             type: string
             minLength: 1
             x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
-      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/unboundRole
+      x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/unboundRole
     fixedRoleValues:
       description: 'Optional Implementation Profile roles (minOccurs 0) that this
         deployment leaves unbound because it fixes their value (C3, 2026-11-10): e.g.
@@ -2106,11 +2246,11 @@ allOf:
             enum:
             - inputs
             - outputs
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/side
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/side
           implements:
             type: string
             format: uri
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implements
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implements
             x-jsonld-type: '@id'
           values:
             type: array
@@ -2122,7 +2262,7 @@ allOf:
             type: string
             minLength: 1
             x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
-      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/fixedRoleValue
+      x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/fixedRoleValue
     roleDecompositions:
       description: 'Implementation Profile roles that this deployment takes as one
         or more inputs (or outputs) none of which is the role: a role with a representation
@@ -2145,18 +2285,18 @@ allOf:
             enum:
             - inputs
             - outputs
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/side
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/side
           implements:
             type: string
             format: uri
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implements
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implements
             x-jsonld-type: '@id'
           parts:
             type: array
             minItems: 1
             items:
               type: string
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/part
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/part
             x-jsonld-container: '@list'
           note:
             type: string
@@ -2175,19 +2315,19 @@ allOf:
               properties:
                 name:
                   type: string
-                  x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/liveName
                 values:
                   type: array
                   minItems: 1
                   items:
                     type: string
                   x-jsonld-id: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/selector
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/selector
           reproducible:
             type: boolean
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/reproducible
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/reproducible
             x-jsonld-type: http://www.w3.org/2001/XMLSchema#boolean
-      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/roleDecomposition
+      x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/roleDecomposition
     assumedFormatGaps:
       description: Bound inputs and outputs whose Implementation Profile representation
         this deployment does not serve (no media type exposed), accepted with a reason
@@ -2207,29 +2347,29 @@ allOf:
         properties:
           name:
             type: string
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/liveName
           side:
             enum:
             - inputs
             - outputs
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/side
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/side
           implements:
             type: string
             format: uri
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implements
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implements
             x-jsonld-type: '@id'
           served:
             type: array
             items:
               type: string
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/servedMediaType
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/servedMediaType
           reason:
             type: string
             x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
           evidence:
             type: string
-            x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/evidence
-      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/assumedFormatGap
+            x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/evidence
+      x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/assumedFormatGap
     notAttached:
       description: A CWL CommandLineTool (an entry with `plan` and no `hasStep`) that
         implements no Implementation Profile, with the reason (decision Q1, 2026-11-11).
@@ -2245,7 +2385,7 @@ allOf:
           minLength: 1
           pattern: \S
           x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
-      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/notAttached
+      x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/notAttached
     implementsProfile:
       description: "IRI of the nearest applicable profile this process specialises,
         in the generic-profiles register -- normally an Implementation Profile (generic-profiles.implementation-profile.*,
@@ -2257,7 +2397,7 @@ allOf:
         (instance level) in the same standard's terms."
       type: string
       format: uri
-      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
+      x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implementsProfile
       x-jsonld-type: '@id'
     hasStep:
       description: Process types of the steps of a Workflow.
@@ -2265,7 +2405,7 @@ allOf:
       items:
         type: string
         format: uri
-      x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/hasStep
+      x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/hasStep
       x-jsonld-type: '@id'
     correspondences:
       description: 'Proposed correspondences with openEO (decision D5: apart from
@@ -2308,10 +2448,10 @@ allOf:
               - exactMatch
               - closeMatch
               - none
-              x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel
+              x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/equivalenceLevel
             rationale:
               type: string
-              x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/rationale
+              x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/rationale
             decomposition:
               description: Ordered correspondence of the stages of a composite or
                 opaque process.
@@ -2324,32 +2464,32 @@ allOf:
                 properties:
                   stage:
                     type: string
-                    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/stage
+                    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/stage
                   openeo:
                     type: array
                     items:
                       type: string
                       pattern: ^ogc\.openeo\.
-                    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/openeo
+                    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/openeo
                   level:
                     enum:
                     - exactMatch
                     - closeMatch
                     - none
-                    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel
+                    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/equivalenceLevel
                   note:
                     type: string
                     x-jsonld-id: http://www.w3.org/2004/02/skos/core#note
-              x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/decomposition
+              x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/decomposition
               x-jsonld-container: '@list'
-          x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/openeoEquivalence
+          x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/openeoEquivalence
       x-jsonld-id: '@nest'
     itemClass:
       const: https://w3id.org/ogc/rim/activity-type/activityTypeItemClass
       x-jsonld-id: https://w3id.org/ogc/rim/itemClass
       x-jsonld-type: '@id'
     inRegister:
-      const: https://geolabs.github.io/bblocks-process-profiles/def/register
+      const: https://w3id.org/geolabs/ospd/process-profiles/register
       x-jsonld-id: https://w3id.org/ogc/rim/inRegister
       x-jsonld-type: '@id'
     objectIdentifier:
@@ -2378,42 +2518,42 @@ allOf:
         the activity types of that register, so that no other value passes.'
       enum:
       - https://w3id.org/ogc/rim/activity-type/ActivityType
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/analytical-hillshading
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/area
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/buffer
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/centroid
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/contains
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/convex-hull
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/crosses
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/difference
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/disjoint
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/equals
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/geometry-extent
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersection
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/intersects
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/is-simple
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/otsu-thresholding
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-thinning
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-to-grid
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/point-cloud-to-shapes
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/product-selection
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-band-math-multiband
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-crop
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-extent
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-format-conversion
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-rendering
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-reprojection
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/raster-resampling
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/slope
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/symdifference
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/terrain-ruggedness-index
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/topographic-position-index
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/touches
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/union
-      - https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/within
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/analytical-hillshading
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/area
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/buffer
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/centroid
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/contains
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/convex-hull
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/crosses
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/difference
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/disjoint
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/equals
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-extent
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/intersection
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/intersects
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/is-simple
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/otsu-thresholding
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-thinning
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-grid
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-shapes
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/product-selection
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/radiometric-index
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-crop
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-extent
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-format-conversion
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-rendering
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-resampling
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/slope
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/symdifference
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/terrain-ruggedness-index
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/topographic-position-index
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/touches
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/union
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/within
       x-jsonld-id: http://www.w3.org/2000/01/rdf-schema#subClassOf
       x-jsonld-type: '@id'
     hasAction:
@@ -2447,7 +2587,7 @@ allOf:
               x-jsonld-id: https://w3id.org/ogc/rim/actionType
               x-jsonld-type: '@vocab'
             proposer:
-              const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
+              const: https://w3id.org/geolabs/ospd/process-profiles/geolabs
               x-jsonld-id: https://w3id.org/ogc/rim/proposer
               x-jsonld-type: '@id'
             startedAtTime:
@@ -2485,7 +2625,7 @@ allOf:
               type: string
               x-jsonld-id: http://purl.org/dc/terms/description
             proposer:
-              const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
+              const: https://w3id.org/geolabs/ospd/process-profiles/geolabs
               x-jsonld-id: https://w3id.org/ogc/rim/proposer
               x-jsonld-type: '@id'
             startedAtTime:
@@ -2520,7 +2660,7 @@ allOf:
             x-jsonld-id: https://w3id.org/ogc/rim/actionType
             x-jsonld-type: '@vocab'
           proposer:
-            const: https://geolabs.github.io/bblocks-process-profiles/def/geolabs
+            const: https://w3id.org/geolabs/ospd/process-profiles/geolabs
             x-jsonld-id: https://w3id.org/ogc/rim/proposer
             x-jsonld-type: '@id'
           startedAtTime:
@@ -2601,7 +2741,7 @@ allOf:
       - required:
         - generatedEntityType
 x-jsonld-extra-terms:
-  ProcessType: https://geolabs.github.io/bblocks-process-profiles/def/ProcessType
+  ProcessType: https://w3id.org/geolabs/ospd/process-profiles/ProcessType
   ActivityType: https://w3id.org/ogc/rim/activity-type/ActivityType
   owlClass: http://www.w3.org/2002/07/owl#Class
   Plan: http://www.w3.org/ns/prov#Plan
@@ -2615,8 +2755,14 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@vocab'
   substantive: https://w3id.org/ogc/rim/substantiveChange
   clarifying: https://w3id.org/ogc/rim/clarifyingChange
+  affectedProperty:
+    x-jsonld-id: https://w3id.org/ogc/rim/affectedProperty
+    x-jsonld-type: '@id'
+  sameAs:
+    x-jsonld-id: http://www.w3.org/2002/07/owl#sameAs
+    x-jsonld-type: '@id'
 x-jsonld-prefixes:
-  pp: https://geolabs.github.io/bblocks-process-profiles/def/
+  pp: https://w3id.org/geolabs/ospd/process-profiles/
   acttype: https://w3id.org/ogc/rim/activity-type/
   owl: http://www.w3.org/2002/07/owl#
   rdfs: http://www.w3.org/2000/01/rdf-schema#
@@ -2631,7 +2777,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.process-type
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-16'
+  dateOfLastChange: '2026-11-18'
 
 ```
 
@@ -3030,6 +3176,14 @@ Links to the schema:
     "ActivityType": "rim:activity-type/ActivityType",
     "owlClass": "owl:Class",
     "Plan": "prov:Plan",
+    "affectedProperty": {
+      "@id": "rim:affectedProperty",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "owl:sameAs",
+      "@type": "@id"
+    },
     "rim": "https://w3id.org/ogc/rim/",
     "prov": "http://www.w3.org/ns/prov#",
     "dct": "http://purl.org/dc/terms/",
@@ -3038,7 +3192,7 @@ Links to the schema:
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "owl": "http://www.w3.org/2002/07/owl#",
     "acttype": "rim:activity-type/",
-    "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "pp": "https://w3id.org/geolabs/ospd/process-profiles/",
     "oa": "http://www.w3.org/ns/oa#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "@version": 1.1

@@ -3,7 +3,7 @@
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -12,31 +12,6 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/addition> a rim:RegisterAction ;
-    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType rim:additionAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove> ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/d5-2026-11-09> a rim:RegisterAction ;
-    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
-    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/not-attached-2026-11-11> a rim:RegisterAction ;
-    dcterms:description "notAttached added (absent -> {reason}): the entry now states that this CommandLineTool implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md (profiles.yaml tier3.reason). Nothing else changes: the process was not attached before and is not attached now (decision Q1 of 2026-11-11)." ;
-    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove> ;
-    rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process/mangrove_cli> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/mangrove_cli> ;
-    pp:version "0.0.1" .
 
 <https://ospd.example.org/ogc-api/processes/mangrove_cli/package> a prov:Plan ;
     dcterms:license <https://spdx.org/licenses/Apache-2.0> ;
@@ -47,14 +22,49 @@
             ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/GeoLabs/bblocks-eoap-cct/raw/291a741c3f2b61da7607f1dbb7a777134374227d/_sources/cwl-to-ogcprocess/examples/mangrove-workflow.cwl#mangrove_cli> ] .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove> a owl:Class,
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/addition> a rim:RegisterAction ;
+    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType rim:additionAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove> ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/d5-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/identifier-2026-11-17> a rim:RegisterAction ;
+    dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
+    prov:startedAtTime "2026-11-17T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rim:objectIdentifier ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/not-attached-2026-11-11> a rim:RegisterAction ;
+    dcterms:description "notAttached added (absent -> {reason}): the entry now states that this CommandLineTool implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md (profiles.yaml tier3.reason). Nothing else changes: the process was not attached before and is not attached now (decision Q1 of 2026-11-11)." ;
+    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove/mangrove_cli> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/mangrove_cli> ;
+    pp:version "0.0.1" .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
     rdfs:subClassOf acttype:ActivityType ;
+    owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove> ;
     skos:definition "Detects mangroves from Sentinel-2 L2A vegetation indices within a bounding box and estimates above-ground biomass and carbon stock (ipython2cwl binary of the KindGrove notebook)." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Mangrove biomass and carbon estimation" ;
-    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/mangrove_cli> ;
+    pp:deployment [ pp:processDescription <https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove/mangrove_cli> ;
             pp:profile "ospd.process-profiles.kindgrove.mangrove" ;
             pp:provenanceClass wfprov:ProcessRun ] ;
     pp:notAttached [ skos:note "One opaque tool runs scene selection, band retrieval, indices, biomass and carbon estimation and STAC export. No single profile describes it; kindgrove-steps splits it into steps." ] ;
@@ -87,18 +97,19 @@
                         pp:stage "export CSV + GeoTIFF" ] ) ;
             pp:equivalenceLevel "none" ;
             pp:rationale "Opaque: one ipython2cwl binary running the whole notebook. No single openEO process; each notebook stage has a closeMatch (decomposition). run_udf could wrap the binary but expects a data cube in and out, which this tool does not follow (it searches and downloads its own data)." ] ;
-    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering> ;
+    pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval>,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation>,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing>,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation>,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering> ;
     pp:plan <https://ospd.example.org/ogc-api/processes/mangrove_cli/package> ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/addition>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/d5-2026-11-09>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove/actions/not-attached-2026-11-11> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/addition>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/d5-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove/actions/not-attached-2026-11-11> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/mangrove"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove"^^xsd:anyURI ;
     rim:publicationStatus rim:published ;
     rim:validityStatus rim:invalid .
 

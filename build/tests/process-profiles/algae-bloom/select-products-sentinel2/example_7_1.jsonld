@@ -4,7 +4,7 @@
     {
       "id": "urn:example:run:algae-bloom:select-products-sentinel2",
       "provType": "prov:Activity",
-      "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2",
+      "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2",
       "startedAtTime": "2026-09-23T06:26:24Z",
       "used": [
         "urn:example:entity:select-products-sentinel2:in:aoi",

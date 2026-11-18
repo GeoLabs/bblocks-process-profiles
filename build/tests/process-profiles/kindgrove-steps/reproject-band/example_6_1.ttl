@@ -1,4 +1,4 @@
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 
 [] pp:reprojected_file [ pp:href "https://ospd.example.org/ogc-api/jobs/kindgrove-steps-reproject-band-0001/results/red_4326.tif" ] .
 

@@ -4,7 +4,7 @@
     {
       "id": "urn:example:run:algae-bloom:download-band-sentinel2-stac-item",
       "provType": "prov:Activity",
-      "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-stac-item",
+      "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item",
       "startedAtTime": "2026-09-23T06:36:40Z",
       "used": [
         "urn:example:entity:download-band-sentinel2-stac-item:in:product_url",

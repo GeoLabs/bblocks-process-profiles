@@ -70,7 +70,7 @@ The attachment of each CWL process is listed in `docs/ATTACHMENTS.md`.
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
 
 ## Examples
 
@@ -435,16 +435,16 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix ns4: <http://schema.org/> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <https://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-copernicus-process> dcterms:description """Performs band calculation on Sentinel-2 product bands
+<https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/algae-usecase-workflow-copernicus-process> dcterms:description """Performs band calculation on Sentinel-2 product bands
 to evaluate algae bloom for water quality assessment.
 """ ;
     dcterms:subject "Copernicus",
@@ -455,27 +455,25 @@ to evaluate algae bloom for water quality assessment.
     dcterms:title """Processing on Sentinel-2 bands to evaluate algae bloom.
 """ ;
     pp:version "2.1.0" ;
-    proc:inputs [ ns3:product_url [ dcterms:description "" ;
+    proc:inputs [ ns2:product_url [ dcterms:description "" ;
                     dcterms:title "Sentinel-2 SAFE product S3 reference" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:s3_access_key [ dcterms:description "" ;
+            ns2:s3_access_key [ dcterms:description "" ;
                     dcterms:title "S3 access key required if found products are hosted on a protected S3 location." ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
                             ns1:writeOnly true ] ] ;
-            ns3:s3_secret_key [ dcterms:description "" ;
+            ns2:s3_secret_key [ dcterms:description "" ;
                     dcterms:title "S3 secret key required if found products are hosted on a protected S3 location." ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
                             ns1:writeOnly true ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "2.1.0" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value [ a ns4:Person ;
+    proc:metadata [ rdf:value [ a ns4:Person ;
                     ns4:email "francis.charette-migneault@crim.ca" ;
                     ns4:identifier "http://orcid.org/0000-0003-4862-3349" ;
                     ns4:name "Francis Charette-Migneault" ] ;
@@ -484,59 +482,61 @@ to evaluate algae bloom for water quality assessment.
 to evaluate algae bloom for water quality assessment.
 """ ;
             proc:role schema:description ],
-        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
-            proc:role schema:codeRepository ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
+        [ rdf:value "2.1.0" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/se2waq/" ;
+            proc:role schema:isBasedOn ],
         [ rdf:value """Processing on Sentinel-2 bands to evaluate algae bloom.
 """ ;
             proc:role schema:name ],
-        [ rdf:value "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/se2waq/" ;
-            proc:role schema:isBasedOn ] ;
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
+        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
+            proc:role schema:codeRepository ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:chlorophyll_a [ dcterms:description "" ;
+    proc:outputs [ ns3:chlorophyll_a [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns2:chlorophyll_a_color [ dcterms:description "Pseudo-color representation of chlorophyll-a." ;
+            ns3:chlorophyll_a_color [ dcterms:description "Pseudo-color representation of chlorophyll-a." ;
                     dcterms:title "chlorophyll_a_color" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns2:chlorophyll_a_plot [ dcterms:description "Plot representation of chlorophyll-a." ;
+            ns3:chlorophyll_a_plot [ dcterms:description "Plot representation of chlorophyll-a." ;
                     dcterms:title "chlorophyll_a_plot" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/png" ] ] ;
-            ns2:cyanobacteria [ dcterms:description "" ;
+            ns3:cyanobacteria [ dcterms:description "" ;
                     dcterms:title "cyanobacteria" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns2:cyanobacteria_color [ dcterms:description "Pseudo-color representation of cyanobacteria." ;
+            ns3:cyanobacteria_color [ dcterms:description "Pseudo-color representation of cyanobacteria." ;
                     dcterms:title "cyanobacteria_color" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns2:cyanobacteria_plot [ dcterms:description "Plot representation of cyanobacteria." ;
+            ns3:cyanobacteria_plot [ dcterms:description "Plot representation of cyanobacteria." ;
                     dcterms:title "cyanobacteria_plot" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/png" ] ] ;
-            ns2:turbidity [ dcterms:description "" ;
+            ns3:turbidity [ dcterms:description "" ;
                     dcterms:title "turbidity" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns2:turbidity_color [ dcterms:description "Pseudo-color representation of turbidity." ;
+            ns3:turbidity_color [ dcterms:description "Pseudo-color representation of turbidity." ;
                     dcterms:title "turbidity_color" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns2:turbidity_plot [ dcterms:description "Plot representation of turbidity." ;
+            ns3:turbidity_plot [ dcterms:description "Plot representation of turbidity." ;
                     dcterms:title "turbidity_plot" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
@@ -900,16 +900,16 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <http://schema.org/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns4: <http://schema.org/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <https://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-copernicus-process> dcterms:description """Performs band calculation on Sentinel-2 product bands
+<https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/algae-usecase-workflow-copernicus-process> dcterms:description """Performs band calculation on Sentinel-2 product bands
 to evaluate algae bloom for water quality assessment.
 """ ;
     dcterms:subject "Copernicus",
@@ -936,70 +936,70 @@ to evaluate algae bloom for water quality assessment.
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value [ a ns2:Person ;
-                    ns2:email "francis.charette-migneault@crim.ca" ;
-                    ns2:identifier "http://orcid.org/0000-0003-4862-3349" ;
-                    ns2:name "Francis Charette-Migneault" ] ;
-            proc:role schema:author ],
+    proc:metadata [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
         [ rdf:value "2.1.0" ;
             proc:role schema:softwareVersion ],
+        [ rdf:value [ a ns4:Person ;
+                    ns4:email "francis.charette-migneault@crim.ca" ;
+                    ns4:identifier "http://orcid.org/0000-0003-4862-3349" ;
+                    ns4:name "Francis Charette-Migneault" ] ;
+            proc:role schema:author ],
+        [ rdf:value """Processing on Sentinel-2 bands to evaluate algae bloom.
+""" ;
+            proc:role schema:name ],
+        [ rdf:value "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/se2waq/" ;
+            proc:role schema:isBasedOn ],
         [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
             proc:role schema:codeRepository ],
         [ rdf:value """Performs band calculation on Sentinel-2 product bands
 to evaluate algae bloom for water quality assessment.
 """ ;
-            proc:role schema:description ],
-        [ rdf:value "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/se2waq/" ;
-            proc:role schema:isBasedOn ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
-        [ rdf:value """Processing on Sentinel-2 bands to evaluate algae bloom.
-""" ;
-            proc:role schema:name ] ;
+            proc:role schema:description ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns4:chlorophyll_a [ dcterms:description "" ;
+    proc:outputs [ ns2:chlorophyll_a [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns4:chlorophyll_a_color [ dcterms:description "Pseudo-color representation of chlorophyll-a." ;
+            ns2:chlorophyll_a_color [ dcterms:description "Pseudo-color representation of chlorophyll-a." ;
                     dcterms:title "chlorophyll_a_color" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns4:chlorophyll_a_plot [ dcterms:description "Plot representation of chlorophyll-a." ;
+            ns2:chlorophyll_a_plot [ dcterms:description "Plot representation of chlorophyll-a." ;
                     dcterms:title "chlorophyll_a_plot" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/png" ] ] ;
-            ns4:cyanobacteria [ dcterms:description "" ;
+            ns2:cyanobacteria [ dcterms:description "" ;
                     dcterms:title "cyanobacteria" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns4:cyanobacteria_color [ dcterms:description "Pseudo-color representation of cyanobacteria." ;
+            ns2:cyanobacteria_color [ dcterms:description "Pseudo-color representation of cyanobacteria." ;
                     dcterms:title "cyanobacteria_color" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns4:cyanobacteria_plot [ dcterms:description "Plot representation of cyanobacteria." ;
+            ns2:cyanobacteria_plot [ dcterms:description "Plot representation of cyanobacteria." ;
                     dcterms:title "cyanobacteria_plot" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/png" ] ] ;
-            ns4:turbidity [ dcterms:description "" ;
+            ns2:turbidity [ dcterms:description "" ;
                     dcterms:title "turbidity" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns4:turbidity_color [ dcterms:description "Pseudo-color representation of turbidity." ;
+            ns2:turbidity_color [ dcterms:description "Pseudo-color representation of turbidity." ;
                     dcterms:title "turbidity_color" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns4:turbidity_plot [ dcterms:description "Plot representation of turbidity." ;
+            ns2:turbidity_plot [ dcterms:description "Plot representation of turbidity." ;
                     dcterms:title "turbidity_plot" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
@@ -1052,12 +1052,12 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-copernicus-process> pp:version "2.1.0" .
+<https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/algae-usecase-workflow-copernicus-process> pp:version "2.1.0" .
 
-[] pp:processDescription [ pp:process <https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-copernicus-process> ] ;
+[] pp:processDescription [ pp:process <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/algae-usecase-workflow-copernicus-process> ] ;
     proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
             ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-copernicus-process.cwl> ] .
@@ -1095,7 +1095,7 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 
 #### ttl
 ```ttl
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
 [] proc:inputs [ ns1:product_url "s3:///eodata/Sentinel-2/MSI/L2A/2019/07/01/S2A_MSIL2A_20190701T110621_N0212_R137_T29SPC_20190701T120906.SAFE" ;
@@ -1196,19 +1196,19 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 
 #### ttl
 ```ttl
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 
 [] pp:chlorophyll_a [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a.tiff" ] ;
     pp:chlorophyll_a_color [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a_color.tif" ] ;
-    pp:chlorophyll_a_plot [ a <https://geolabs.github.io/bblocks-process-profiles/def/image/png> ;
+    pp:chlorophyll_a_plot [ a <https://w3id.org/geolabs/ospd/process-profiles/image/png> ;
             pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a_plot.png" ] ;
     pp:cyanobacteria [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria.tiff" ] ;
     pp:cyanobacteria_color [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_color.tif" ] ;
-    pp:cyanobacteria_plot [ a <https://geolabs.github.io/bblocks-process-profiles/def/image/png> ;
+    pp:cyanobacteria_plot [ a <https://w3id.org/geolabs/ospd/process-profiles/image/png> ;
             pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_plot.png" ] ;
     pp:turbidity [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity.tiff" ] ;
     pp:turbidity_color [ pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity_color.tif" ] ;
-    pp:turbidity_plot [ a <https://geolabs.github.io/bblocks-process-profiles/def/image/png> ;
+    pp:turbidity_plot [ a <https://w3id.org/geolabs/ospd/process-profiles/image/png> ;
             pp:href "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity_plot.png" ] .
 
 
@@ -1223,7 +1223,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   {
     "id": "urn:example:run:algae-bloom:workflow-copernicus-process",
     "provType": "prov:Activity",
-    "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process",
+    "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process",
     "startedAtTime": "2026-09-23T07:31:01Z",
     "used": [
       "urn:example:entity:workflow-copernicus-process:in:product_url",
@@ -1409,7 +1409,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "urn:example:run:algae-bloom:workflow-copernicus-process",
       "provType": "prov:Activity",
-      "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process",
+      "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process",
       "startedAtTime": "2026-09-23T07:31:01Z",
       "used": [
         "urn:example:entity:workflow-copernicus-process:in:product_url",
@@ -1592,7 +1592,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -1686,7 +1686,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process/package> a prov:Plan .
 
 <urn:example:run:algae-bloom:workflow-copernicus-process> a prov:Activity,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process> ;
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process> ;
     prov:endedAtTime "2026-09-23T07:33:59+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
             prov:hadPlan <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process/package> ] ;
@@ -1710,7 +1710,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "run": {
     "id": "urn:example:run:algae-bloom:workflow-copernicus-process",
     "type": "WorkflowRun",
-    "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process",
+    "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process",
     "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
     "status": "successful",
@@ -1856,7 +1856,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "run": {
     "id": "urn:example:run:algae-bloom:workflow-copernicus-process",
     "type": "WorkflowRun",
-    "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process",
+    "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process",
     "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
     "status": "successful",
@@ -1996,8 +1996,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 
 #### ttl
 ```ttl
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -2009,7 +2009,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process#outputs/chlorophyll_a" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a_color.tif> prov:generated <urn:example:run:algae-bloom:workflow-copernicus-process> ;
@@ -2017,7 +2017,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process#outputs/chlorophyll_a_color" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a_plot.png> prov:generated <urn:example:run:algae-bloom:workflow-copernicus-process> ;
@@ -2025,7 +2025,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process#outputs/chlorophyll_a_plot" ;
     ns1:mediaType "image/png" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria.tiff> prov:generated <urn:example:run:algae-bloom:workflow-copernicus-process> ;
@@ -2033,7 +2033,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process#outputs/cyanobacteria" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_color.tif> prov:generated <urn:example:run:algae-bloom:workflow-copernicus-process> ;
@@ -2041,7 +2041,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process#outputs/cyanobacteria_color" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_plot.png> prov:generated <urn:example:run:algae-bloom:workflow-copernicus-process> ;
@@ -2049,7 +2049,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process#outputs/cyanobacteria_plot" ;
     ns1:mediaType "image/png" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity.tiff> prov:generated <urn:example:run:algae-bloom:workflow-copernicus-process> ;
@@ -2057,7 +2057,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process#outputs/turbidity" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity_color.tif> prov:generated <urn:example:run:algae-bloom:workflow-copernicus-process> ;
@@ -2065,7 +2065,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process#outputs/turbidity_color" ;
     ns1:mediaType "image/tiff; application=geotiff" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-process-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity_plot.png> prov:generated <urn:example:run:algae-bloom:workflow-copernicus-process> ;
@@ -2073,7 +2073,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process#outputs/turbidity_plot" ;
     ns1:mediaType "image/png" ;
-    proc:role <https://geolabs.github.io/bblocks-process-profiles/def/process/output> ;
+    proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
 <urn:example:engine:cwltool-3.1.20260108082145> a wfprov:WorkflowEngine ;
@@ -2081,7 +2081,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     pp:version "3.1.20260108082145" .
 
 <urn:example:run:algae-bloom:workflow-copernicus-process> a wfprov:WorkflowRun,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process> ;
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process> ;
     wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process/package> ;
     wfprov:hadSubProcessRun <urn:example:run:algae-bloom:calculate-band>,
         <urn:example:run:algae-bloom:download-band-sentinel2-product-safe>,
@@ -2112,46 +2112,58 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 #### json
 ```json
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process"
     }
   ],
   "prefLabel": "Processing on Sentinel-2 bands to evaluate algae bloom.",
   "definition": "Performs band calculation on Sentinel-2 product bands to evaluate algae bloom for water quality assessment.",
   "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation"
     ]
   },
   "deployment": {
@@ -2180,9 +2192,9 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     ]
   },
   "hasStep": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-product-safe",
-    "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band",
-    "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/plot-image"
+    "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-product-safe",
+    "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/calculate-band",
+    "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/plot-image"
   ],
   "correspondences": {
     "openeoEquivalence": {
@@ -2223,46 +2235,58 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 ```jsonld
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/algae-bloom/workflow-copernicus-process/context.jsonld",
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process"
     }
   ],
   "prefLabel": "Processing on Sentinel-2 bands to evaluate algae bloom.",
   "definition": "Performs band calculation on Sentinel-2 product bands to evaluate algae bloom for water quality assessment.",
   "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation"
     ]
   },
   "deployment": {
@@ -2291,9 +2315,9 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     ]
   },
   "hasStep": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-product-safe",
-    "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band",
-    "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/plot-image"
+    "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-product-safe",
+    "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/calculate-band",
+    "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/plot-image"
   ],
   "correspondences": {
     "openeoEquivalence": {
@@ -2336,7 +2360,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -2345,23 +2369,6 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process/actions/addition> a rim:RegisterAction ;
-    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType rim:additionAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process> ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process/actions/d5-2026-11-09> a rim:RegisterAction ;
-    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
-    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-copernicus-process> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process> ;
-    pp:version "2.1.0" .
 
 <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process/package> a prov:Plan ;
     dcterms:license <https://spdx.org/licenses/CC-BY-NC-SA-4.0> ;
@@ -2372,19 +2379,46 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/algae-usecase-workflow-copernicus-process.cwl> ] .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process> a owl:Class,
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/addition> a rim:RegisterAction ;
+    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType rim:additionAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process> ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/d5-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/identifier-2026-11-17> a rim:RegisterAction ;
+    dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
+    prov:startedAtTime "2026-11-17T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rim:objectIdentifier ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/algae-usecase-workflow-copernicus-process> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process> ;
+    pp:version "2.1.0" .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
     rdfs:subClassOf acttype:ActivityType ;
+    owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process> ;
     skos:definition "Performs band calculation on Sentinel-2 product bands to evaluate algae bloom for water quality assessment." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Processing on Sentinel-2 bands to evaluate algae bloom." ;
-    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/algae-usecase-workflow-copernicus-process> ;
+    pp:deployment [ pp:processDescription <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/algae-usecase-workflow-copernicus-process> ;
             pp:profile "ospd.process-profiles.algae-bloom.workflow-copernicus-process" ;
             pp:provenanceClass wfprov:WorkflowRun ] ;
-    pp:hasStep <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/download-band-sentinel2-product-safe>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/plot-image> ;
+    pp:hasStep <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/calculate-band>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-product-safe>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/plot-image> ;
     pp:openeoEquivalence [ pp:decomposition ( [ pp:equivalenceLevel "closeMatch" ;
                         pp:openeo "ogc.openeo.processes.cubes.filter_bands",
                             "ogc.openeo.processes.cubes.load_collection" ;
@@ -2396,15 +2430,16 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
                         pp:stage "plot_* (x3)" ] ) ;
             pp:equivalenceLevel "none" ;
             pp:rationale "Composite (11 steps). No resampling step: the SAFE product already provides 60 m bands, so B03 60 m is downloaded directly instead of being resampled." ] ;
-    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval>,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation>,
+        <https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation> ;
     pp:plan <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process/package> ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process/actions/addition>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process/actions/d5-2026-11-09> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/addition>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/d5-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process/actions/identifier-2026-11-17> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus-process"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process"^^xsd:anyURI ;
     rim:publicationStatus rim:published ;
     rim:validityStatus rim:invalid .
 
@@ -6567,13 +6602,13 @@ id:29f23348-9547-4fef-b002-ceefd5b2471b a wf4ever:File,
         wfprov:Artifact,
         prov:Entity ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:f5c0b341-97fb-484c-9f8c-0646f0c63e86 ;
-            prov:atTime "2026-09-23T09:33:51.697961"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/output_file> ],
-        [ a prov:Generation ;
             prov:activity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ;
             prov:atTime "2026-09-23T09:33:59.283154"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/workflow%2525252520process/cyanobacteria_color> ] ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/workflow%2525252520process/cyanobacteria_color> ],
+        [ a prov:Generation ;
+            prov:activity id:f5c0b341-97fb-484c-9f8c-0646f0c63e86 ;
+            prov:atTime "2026-09-23T09:33:51.697961"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/output_file> ] ;
     provext:qualifiedSpecialization [ a provext:Specialization ;
             provext:generalEntity data:b42b9a24d33c0b4d0dd3f9942c1c30b83eef37c1 ] ;
     cwlprov:basename "S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_color.tif" ;
@@ -6601,13 +6636,13 @@ id:7e671680-4e90-4584-89b1-36260f670af1 a wf4ever:File,
         wfprov:Artifact,
         prov:Entity ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ;
-            prov:atTime "2026-09-23T09:33:59.283154"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/workflow%252525252520process/cyanobacteria_plot> ],
-        [ a prov:Generation ;
             prov:activity id:f5c0b341-97fb-484c-9f8c-0646f0c63e86 ;
             prov:atTime "2026-09-23T09:33:51.697961"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/output_plot> ] ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/output_plot> ],
+        [ a prov:Generation ;
+            prov:activity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ;
+            prov:atTime "2026-09-23T09:33:59.283154"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/workflow%252525252520process/cyanobacteria_plot> ] ;
     provext:qualifiedSpecialization [ a provext:Specialization ;
             provext:generalEntity data:1b832fde3fc0d94955508d006d745a0a9e9b9596 ] ;
     cwlprov:basename "S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_plot.png" ;
@@ -6618,13 +6653,13 @@ id:8fe98067-8e97-40b6-a99a-cf787f26fa36 a wf4ever:File,
         wfprov:Artifact,
         prov:Entity ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:6a328b3b-9e05-4b3b-94c1-551257cc1214 ;
-            prov:atTime "2026-09-23T09:33:59.271268"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a/output_file> ],
-        [ a prov:Generation ;
             prov:activity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ;
             prov:atTime "2026-09-23T09:33:59.283154"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/workflow%2520process/chlorophyll_a_color> ] ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/workflow%2520process/chlorophyll_a_color> ],
+        [ a prov:Generation ;
+            prov:activity id:6a328b3b-9e05-4b3b-94c1-551257cc1214 ;
+            prov:atTime "2026-09-23T09:33:59.271268"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a/output_file> ] ;
     provext:qualifiedSpecialization [ a provext:Specialization ;
             provext:generalEntity data:e6006027bca29c0e9abb13482a5deea81527097b ] ;
     cwlprov:basename "S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a_color.tif" ;
@@ -6635,13 +6670,13 @@ id:a9c95e1a-ef39-4627-8292-d1020e85dfa1 a wf4ever:File,
         wfprov:Artifact,
         prov:Entity ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:5805a5d2-d626-4eee-a0c2-b4167521a820 ;
-            prov:atTime "2026-09-23T09:33:56.221505"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/output_file> ],
-        [ a prov:Generation ;
             prov:activity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ;
             prov:atTime "2026-09-23T09:33:59.283154"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/workflow%2525252525252520process/turbidity_color> ] ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/workflow%2525252525252520process/turbidity_color> ],
+        [ a prov:Generation ;
+            prov:activity id:5805a5d2-d626-4eee-a0c2-b4167521a820 ;
+            prov:atTime "2026-09-23T09:33:56.221505"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/output_file> ] ;
     provext:qualifiedSpecialization [ a provext:Specialization ;
             provext:generalEntity data:823dc9c0e24073601b98c7ac80d545355715c6f5 ] ;
     cwlprov:basename "S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity_color.tif" ;
@@ -6910,117 +6945,117 @@ id:0fbabdc1-ddb9-4c88-99d2-7b53d77c7c07 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T09:31:48.321511"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.327798"^^xsd:dateTime ;
-            prov:entity id:6e735750-bb9c-4417-b20e-f7ddb07df649 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_a> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:48.328781"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_k> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328390"^^xsd:dateTime ;
-            prov:entity data:c6f40f302effca33768fc256bbb5dedaca044174 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/calc> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328852"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_r> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328735"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_g> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328799"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_m> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328790"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_l> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328672"^^xsd:dateTime ;
-            prov:entity data:a67be08b0183aa19f78701cd7fb864462a08af4c ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/name> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328898"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_w> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328889"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_v> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328703"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_d> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328861"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_s> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328691"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_b> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328916"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_y> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:48.328808"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_n> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328907"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:48.328703"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_x> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_d> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:48.328880"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_u> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328713"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:48.328871"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_e> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_t> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328898"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_w> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:48.328925"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_z> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.327842"^^xsd:dateTime ;
-            prov:entity id:fcc8bc22-4c42-45a2-a828-ef8de070904e ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_c> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:48.328828"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_p> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328843"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_q> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328723"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_f> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:48.328819"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_o> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328747"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:48.328723"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_h> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_f> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328871"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:48.327798"^^xsd:dateTime ;
+            prov:entity id:6e735750-bb9c-4417-b20e-f7ddb07df649 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_a> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328772"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_t> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_j> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.327842"^^xsd:dateTime ;
+            prov:entity id:fcc8bc22-4c42-45a2-a828-ef8de070904e ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_c> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328390"^^xsd:dateTime ;
+            prov:entity data:c6f40f302effca33768fc256bbb5dedaca044174 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/calc> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328735"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_g> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328843"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_q> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328672"^^xsd:dateTime ;
+            prov:entity data:a67be08b0183aa19f78701cd7fb864462a08af4c ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/name> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328799"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_m> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328852"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_r> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:48.328761"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_i> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:48.328772"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:48.328907"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_j> ] .
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_x> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328861"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_s> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328790"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_l> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328916"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_y> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328747"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_h> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328713"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_e> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328691"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_b> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:48.328889"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_chlorophyll_a/band_v> ] .
 
 id:136d036c-1194-4d69-b3c7-538ad435fe46 a prov:Agent,
         prov:SoftwareAgent ;
@@ -7031,10 +7066,10 @@ id:15bb5476-8c6a-4c0d-85ac-0ff7f4765451 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/download_b03_10m" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:136d036c-1194-4d69-b3c7-538ad435fe46 ],
-        [ a prov:Association ;
             prov:agent id:63709288-2770-4d4f-97fa-3e8ff70d0b32 ;
-            prov:hadPlan <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_10m> ] ;
+            prov:hadPlan <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_10m> ],
+        [ a prov:Association ;
+            prov:agent id:136d036c-1194-4d69-b3c7-538ad435fe46 ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T09:31:13.060666"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
@@ -7042,41 +7077,41 @@ id:15bb5476-8c6a-4c0d-85ac-0ff7f4765451 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T09:31:06.038809"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:06.087923"^^xsd:dateTime ;
-            prov:entity data:5e7cb55727e375cb72dac733c05c4c81c30ffaae ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_10m/product_url> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:06.088743"^^xsd:dateTime ;
-            prov:entity data:f6cab44ac3c9f733bfece9ad8d3ad1452cbf9570 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_10m/s3_secret_key> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:06.087662"^^xsd:dateTime ;
-            prov:entity data:7c5d11a451cde788be37383d50239d7672a8cb1f ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_10m/band> ],
+            prov:atTime "2026-09-23T09:31:06.088207"^^xsd:dateTime ;
+            prov:entity data:6e0ff3f48a8e5ea3d6694c8c7ad596728e98090b ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_10m/resolution> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:06.088513"^^xsd:dateTime ;
             prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_10m/s3_access_key> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:06.088207"^^xsd:dateTime ;
-            prov:entity data:6e0ff3f48a8e5ea3d6694c8c7ad596728e98090b ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_10m/resolution> ],
+            prov:atTime "2026-09-23T09:31:06.088743"^^xsd:dateTime ;
+            prov:entity data:f6cab44ac3c9f733bfece9ad8d3ad1452cbf9570 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_10m/s3_secret_key> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:06.088793"^^xsd:dateTime ;
             prov:entity id:e882c92a-6411-4b82-aae7-70be694c29d7 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_10m/debug> ] .
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_10m/debug> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:06.087923"^^xsd:dateTime ;
+            prov:entity data:5e7cb55727e375cb72dac733c05c4c81c30ffaae ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_10m/product_url> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:06.087662"^^xsd:dateTime ;
+            prov:entity data:7c5d11a451cde788be37383d50239d7672a8cb1f ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_10m/band> ] .
 
 id:1855b873-514a-46e8-85f9-7e6fdd5c1c12 a wf4ever:File,
         wfprov:Artifact,
         prov:Entity ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:f0b22113-c4b4-451a-894f-30fc14eafc60 ;
-            prov:atTime "2026-09-23T09:31:48.067700"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/result> ],
-        [ a prov:Generation ;
             prov:activity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ;
             prov:atTime "2026-09-23T09:33:59.283154"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/workflow%25252520process/cyanobacteria> ] ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/workflow%25252520process/cyanobacteria> ],
+        [ a prov:Generation ;
+            prov:activity id:f0b22113-c4b4-451a-894f-30fc14eafc60 ;
+            prov:atTime "2026-09-23T09:31:48.067700"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/result> ] ;
     provext:qualifiedSpecialization [ a provext:Specialization ;
             provext:generalEntity data:b90b2dee65d0b638143e2788b825e245dbe9c4bb ] ;
     cwlprov:basename "S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria.tiff" ;
@@ -7092,10 +7127,10 @@ id:1f7c9599-10e3-4a9f-a64b-c333d730ff68 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/download_b04_10m" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:271d494f-4cd0-47bc-86d6-bcd7da4a7ff9 ],
-        [ a prov:Association ;
             prov:agent id:63709288-2770-4d4f-97fa-3e8ff70d0b32 ;
-            prov:hadPlan <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b04_10m> ] ;
+            prov:hadPlan <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b04_10m> ],
+        [ a prov:Association ;
+            prov:agent id:271d494f-4cd0-47bc-86d6-bcd7da4a7ff9 ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T09:31:20.357689"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
@@ -7103,29 +7138,29 @@ id:1f7c9599-10e3-4a9f-a64b-c333d730ff68 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T09:31:13.105700"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:13.112573"^^xsd:dateTime ;
-            prov:entity id:a16a5d61-1192-43b9-8be3-6f546af4ccdd ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b04_10m/debug> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:13.112207"^^xsd:dateTime ;
-            prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b04_10m/s3_access_key> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:13.111934"^^xsd:dateTime ;
-            prov:entity data:6e0ff3f48a8e5ea3d6694c8c7ad596728e98090b ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b04_10m/resolution> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:13.112514"^^xsd:dateTime ;
             prov:entity data:f6cab44ac3c9f733bfece9ad8d3ad1452cbf9570 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b04_10m/s3_secret_key> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:13.112573"^^xsd:dateTime ;
+            prov:entity id:a16a5d61-1192-43b9-8be3-6f546af4ccdd ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b04_10m/debug> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:13.111723"^^xsd:dateTime ;
             prov:entity data:5e7cb55727e375cb72dac733c05c4c81c30ffaae ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b04_10m/product_url> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:13.112207"^^xsd:dateTime ;
+            prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b04_10m/s3_access_key> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:13.111444"^^xsd:dateTime ;
             prov:entity data:ee59b16f9fd43ef6b27fa343095d5284d49bddd0 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b04_10m/band> ] .
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b04_10m/band> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:13.111934"^^xsd:dateTime ;
+            prov:entity data:6e0ff3f48a8e5ea3d6694c8c7ad596728e98090b ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b04_10m/resolution> ] .
 
 id:271d494f-4cd0-47bc-86d6-bcd7da4a7ff9 a prov:Agent,
         prov:SoftwareAgent ;
@@ -7152,29 +7187,29 @@ id:489bffb3-47ea-4505-8a69-fb23eacf14a1 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T09:31:20.403484"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:20.410192"^^xsd:dateTime ;
-            prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b01_60m/s3_access_key> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:20.410426"^^xsd:dateTime ;
-            prov:entity id:fbda755c-26d7-4213-8ac3-437112f3f27a ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b01_60m/debug> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:20.409969"^^xsd:dateTime ;
-            prov:entity data:ccd4d27929279b55bfa676ddddbe7b67aa8d9ce5 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b01_60m/resolution> ],
+            prov:atTime "2026-09-23T09:31:20.409442"^^xsd:dateTime ;
+            prov:entity data:0e25362cc531cdfa5fe7478737037da2ab1c4b2f ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b01_60m/band> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:20.410382"^^xsd:dateTime ;
             prov:entity data:f6cab44ac3c9f733bfece9ad8d3ad1452cbf9570 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b01_60m/s3_secret_key> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:20.409969"^^xsd:dateTime ;
+            prov:entity data:ccd4d27929279b55bfa676ddddbe7b67aa8d9ce5 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b01_60m/resolution> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:20.410426"^^xsd:dateTime ;
+            prov:entity id:fbda755c-26d7-4213-8ac3-437112f3f27a ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b01_60m/debug> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:20.409713"^^xsd:dateTime ;
             prov:entity data:5e7cb55727e375cb72dac733c05c4c81c30ffaae ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b01_60m/product_url> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:20.409442"^^xsd:dateTime ;
-            prov:entity data:0e25362cc531cdfa5fe7478737037da2ab1c4b2f ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b01_60m/band> ] .
+            prov:atTime "2026-09-23T09:31:20.410192"^^xsd:dateTime ;
+            prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b01_60m/s3_access_key> ] .
 
 id:5001cc2f-8b7b-4b93-9043-8ce09886304f a prov:Agent .
 
@@ -7206,57 +7241,73 @@ id:63513262-cbe0-42d8-a5b8-843eba63ae68 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T09:31:32.238304"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279722"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:32.279826"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_e> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.278743"^^xsd:dateTime ;
-            prov:entity id:fcc8bc22-4c42-45a2-a828-ef8de070904e ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_c> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279742"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_g> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_o> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:32.279852"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_r> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279835"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:32.279760"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_p> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_i> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279679"^^xsd:dateTime ;
-            prov:entity data:cf72a11e7365073ae3c966029d357f3e9b82af8a ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/name> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279861"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:32.279699"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_s> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279899"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_w> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279891"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_v> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_b> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:32.279388"^^xsd:dateTime ;
             prov:entity data:81e487db73b1725c362decd3aac3a2c13f86d595 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/calc> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279769"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_j> ],
+            prov:atTime "2026-09-23T09:31:32.279679"^^xsd:dateTime ;
+            prov:entity data:cf72a11e7365073ae3c966029d357f3e9b82af8a ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/name> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279733"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:32.279882"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_f> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_u> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.278743"^^xsd:dateTime ;
+            prov:entity id:fcc8bc22-4c42-45a2-a828-ef8de070904e ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_c> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.279908"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_x> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.279921"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_y> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.279835"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_p> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.279861"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_s> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.279872"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_t> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.279891"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_v> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:32.279781"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_k> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.278687"^^xsd:dateTime ;
+            prov:entity id:6e735750-bb9c-4417-b20e-f7ddb07df649 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_a> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.279751"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_h> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:32.279816"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
@@ -7266,57 +7317,41 @@ id:63513262-cbe0-42d8-a5b8-843eba63ae68 a wfprov:ProcessRun,
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_d> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279921"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:32.279769"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_y> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279934"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_z> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279826"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_o> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279908"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_x> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.278687"^^xsd:dateTime ;
-            prov:entity id:6e735750-bb9c-4417-b20e-f7ddb07df649 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_a> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279843"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_q> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279760"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_i> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279751"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_h> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279882"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_u> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279699"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_b> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_j> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:32.279795"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_l> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:32.279872"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:32.279899"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_t> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_w> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.279742"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_g> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:32.279806"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_m> ] .
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_m> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.279733"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_f> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.279843"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_q> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.279722"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_e> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:32.279934"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_turbidity/band_z> ] .
 
 id:697c2f54-7c7d-4e14-8900-d1e42db3a142 a prov:Agent,
         prov:SoftwareAgent ;
@@ -7350,13 +7385,17 @@ id:74e5b6d2-7e78-4e78-9028-bec1988305d6 a wfprov:ProcessRun,
             prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_60m/s3_access_key> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:29.724936"^^xsd:dateTime ;
+            prov:entity data:f6cab44ac3c9f733bfece9ad8d3ad1452cbf9570 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_60m/s3_secret_key> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:29.724989"^^xsd:dateTime ;
             prov:entity id:ee76b2e7-fa78-416c-982a-0034be8e3618 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_60m/debug> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:29.724936"^^xsd:dateTime ;
-            prov:entity data:f6cab44ac3c9f733bfece9ad8d3ad1452cbf9570 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_60m/s3_secret_key> ],
+            prov:atTime "2026-09-23T09:31:29.724260"^^xsd:dateTime ;
+            prov:entity data:5e7cb55727e375cb72dac733c05c4c81c30ffaae ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_60m/product_url> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:29.724514"^^xsd:dateTime ;
             prov:entity data:ccd4d27929279b55bfa676ddddbe7b67aa8d9ce5 ;
@@ -7364,11 +7403,7 @@ id:74e5b6d2-7e78-4e78-9028-bec1988305d6 a wfprov:ProcessRun,
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:29.723838"^^xsd:dateTime ;
             prov:entity data:7c5d11a451cde788be37383d50239d7672a8cb1f ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_60m/band> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:29.724260"^^xsd:dateTime ;
-            prov:entity data:5e7cb55727e375cb72dac733c05c4c81c30ffaae ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_60m/product_url> ] .
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_60m/band> ] .
 
 id:7fb56c04-4cb6-45f5-923c-390c6520ae3a a wf4ever:File,
         wfprov:Artifact,
@@ -7444,10 +7479,10 @@ id:f0b22113-c4b4-451a-894f-30fc14eafc60 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/calculate_cyanobacteria" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:e268cc0e-1073-422f-af40-acfe6b7db163 ],
-        [ a prov:Association ;
             prov:agent id:63709288-2770-4d4f-97fa-3e8ff70d0b32 ;
-            prov:hadPlan <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria> ] ;
+            prov:hadPlan <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria> ],
+        [ a prov:Association ;
+            prov:agent id:e268cc0e-1073-422f-af40-acfe6b7db163 ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T09:31:48.067683"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
@@ -7455,45 +7490,49 @@ id:f0b22113-c4b4-451a-894f-30fc14eafc60 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T09:31:34.582528"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596397"^^xsd:dateTime ;
-            prov:entity data:915294efd60b642abdf0ab2947e15fbb5d702a7e ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/name> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596463"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:34.596558"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_g> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596606"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_t> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596483"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_i> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596667"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_z> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596530"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_l> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596540"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_m> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_o> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:34.596567"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_p> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596658"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:34.596540"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_y> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_m> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596549"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:34.596473"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_n> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_h> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.596492"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_j> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.596626"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_v> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.596606"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_t> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.594422"^^xsd:dateTime ;
+            prov:entity id:f1093031-b0f1-4f09-bf38-f001b51a13e5 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_c> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.594405"^^xsd:dateTime ;
+            prov:entity id:b379cd45-e93d-43eb-902f-df573b67ccf0 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_b> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.596483"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_i> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.596452"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_f> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:34.596585"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
@@ -7503,41 +7542,37 @@ id:f0b22113-c4b4-451a-894f-30fc14eafc60 a wfprov:ProcessRun,
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_k> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596648"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:34.596667"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_x> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596626"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_v> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596473"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_h> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596452"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_f> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596558"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_o> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.594359"^^xsd:dateTime ;
-            prov:entity id:55c5cc1e-5f73-4878-8a63-f5d1ab235cb6 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_a> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596492"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_j> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_z> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:34.596025"^^xsd:dateTime ;
             prov:entity data:a87dac8429196320690ec2c17ae2c00532d9e957 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/calc> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.596658"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_y> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.596463"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_g> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.596549"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_n> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:34.596617"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_u> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.596594"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_s> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.594359"^^xsd:dateTime ;
+            prov:entity id:55c5cc1e-5f73-4878-8a63-f5d1ab235cb6 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_a> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:34.596576"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
@@ -7547,25 +7582,25 @@ id:f0b22113-c4b4-451a-894f-30fc14eafc60 a wfprov:ProcessRun,
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_e> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.596594"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:31:34.596530"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_s> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.594405"^^xsd:dateTime ;
-            prov:entity id:b379cd45-e93d-43eb-902f-df573b67ccf0 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_b> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:34.594422"^^xsd:dateTime ;
-            prov:entity id:f1093031-b0f1-4f09-bf38-f001b51a13e5 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_c> ],
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_l> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:34.596418"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_d> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.596397"^^xsd:dateTime ;
+            prov:entity data:915294efd60b642abdf0ab2947e15fbb5d702a7e ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/name> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:34.596635"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_w> ] .
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_w> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:34.596648"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/calculate_cyanobacteria/band_x> ] .
 
 id:f1093031-b0f1-4f09-bf38-f001b51a13e5 a wf4ever:File,
         wfprov:Artifact,
@@ -7584,10 +7619,10 @@ id:fabfd56f-08a1-4eb4-b698-a069c9e9edb8 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/download_b02_10m" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:63709288-2770-4d4f-97fa-3e8ff70d0b32 ;
-            prov:hadPlan <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b02_10m> ],
+            prov:agent id:1a71a853-4269-4af2-9e7e-0b8b9dd37a24 ],
         [ a prov:Association ;
-            prov:agent id:1a71a853-4269-4af2-9e7e-0b8b9dd37a24 ] ;
+            prov:agent id:63709288-2770-4d4f-97fa-3e8ff70d0b32 ;
+            prov:hadPlan <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b02_10m> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T09:31:29.673327"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
@@ -7599,25 +7634,25 @@ id:fabfd56f-08a1-4eb4-b698-a069c9e9edb8 a wfprov:ProcessRun,
             prov:entity id:b509d8cc-cc7b-4fdf-88aa-f13c8d9b47c5 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b02_10m/debug> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:23.052690"^^xsd:dateTime ;
+            prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b02_10m/s3_access_key> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:23.050787"^^xsd:dateTime ;
+            prov:entity data:5e7cb55727e375cb72dac733c05c4c81c30ffaae ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b02_10m/product_url> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:23.052004"^^xsd:dateTime ;
+            prov:entity data:6e0ff3f48a8e5ea3d6694c8c7ad596728e98090b ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b02_10m/resolution> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:23.053637"^^xsd:dateTime ;
             prov:entity data:f6cab44ac3c9f733bfece9ad8d3ad1452cbf9570 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b02_10m/s3_secret_key> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:23.049716"^^xsd:dateTime ;
             prov:entity data:36dea452bfe795afb42cf14b59c82a3127598281 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b02_10m/band> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:23.052690"^^xsd:dateTime ;
-            prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b02_10m/s3_access_key> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:23.052004"^^xsd:dateTime ;
-            prov:entity data:6e0ff3f48a8e5ea3d6694c8c7ad596728e98090b ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b02_10m/resolution> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:23.050787"^^xsd:dateTime ;
-            prov:entity data:5e7cb55727e375cb72dac733c05c4c81c30ffaae ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b02_10m/product_url> ] .
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b02_10m/band> ] .
 
 id:fbda755c-26d7-4213-8ac3-437112f3f27a a prov:Entity ;
     prov:value false .
@@ -7645,42 +7680,42 @@ id:5805a5d2-d626-4eee-a0c2-b4167521a820 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T09:33:51.980880"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:33:51.989423"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/clip_max> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:33:51.989395"^^xsd:dateTime ;
-            prov:entity data:6a9b80ab0cf720811aa23e47d7915bf82f03f56c ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/plot_title> ],
+            prov:atTime "2026-09-23T09:33:51.987923"^^xsd:dateTime ;
+            prov:entity id:0a64bae7-5f25-441b-b114-51f6437fb00f ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/input_image> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:33:51.988984"^^xsd:dateTime ;
             prov:entity data:1edf82bd141d9e642e6ec01d71e53d8107df885c ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/plot_name> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:33:51.987879"^^xsd:dateTime ;
-            prov:entity data:2b0824b4ba24b098adc7ce01881499891c48d2ea ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/color_scale> ],
+            prov:atTime "2026-09-23T09:33:51.989395"^^xsd:dateTime ;
+            prov:entity data:6a9b80ab0cf720811aa23e47d7915bf82f03f56c ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/plot_title> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:33:51.987923"^^xsd:dateTime ;
-            prov:entity id:0a64bae7-5f25-441b-b114-51f6437fb00f ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/input_image> ],
+            prov:atTime "2026-09-23T09:33:51.989440"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/clip_min> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:33:51.988466"^^xsd:dateTime ;
             prov:entity data:34bd4f200813f30333e40ecb55d1a316cf2da8af ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/output_name> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:33:51.989440"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T09:33:51.987879"^^xsd:dateTime ;
+            prov:entity data:2b0824b4ba24b098adc7ce01881499891c48d2ea ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/color_scale> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:33:51.989423"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/clip_min> ] .
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_turbidity/clip_max> ] .
 
 id:6a328b3b-9e05-4b3b-94c1-551257cc1214 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/plot_chlorophyll_a" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:697c2f54-7c7d-4e14-8900-d1e42db3a142 ],
-        [ a prov:Association ;
             prov:agent id:63709288-2770-4d4f-97fa-3e8ff70d0b32 ;
-            prov:hadPlan <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a> ] ;
+            prov:hadPlan <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a> ],
+        [ a prov:Association ;
+            prov:agent id:697c2f54-7c7d-4e14-8900-d1e42db3a142 ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T09:33:59.271251"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
@@ -7688,33 +7723,33 @@ id:6a328b3b-9e05-4b3b-94c1-551257cc1214 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T09:33:56.238639"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:33:56.249844"^^xsd:dateTime ;
-            prov:entity data:e059662a461e5d1b245f555149febc699f42b537 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a/plot_title> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:33:56.248008"^^xsd:dateTime ;
             prov:entity id:7fb56c04-4cb6-45f5-923c-390c6520ae3a ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a/input_image> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:33:56.249875"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a/clip_max> ],
+            prov:atTime "2026-09-23T09:33:56.249844"^^xsd:dateTime ;
+            prov:entity data:e059662a461e5d1b245f555149febc699f42b537 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a/plot_title> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:33:56.248701"^^xsd:dateTime ;
             prov:entity data:6f7a2e56416e7ae7128bf930d39e5c26ca53c5d7 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a/output_name> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:33:56.247945"^^xsd:dateTime ;
-            prov:entity data:53dc86e3cbc21ff9ef3ae5a5a8cc9f7d1a9942c8 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a/color_scale> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:33:56.249375"^^xsd:dateTime ;
             prov:entity data:f1a11aea9cfbd38e6dbda7e14c05bf9addcd2248 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a/plot_name> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:33:56.249875"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a/clip_max> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:33:56.249891"^^xsd:dateTime ;
             prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a/clip_min> ] .
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a/clip_min> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:33:56.247945"^^xsd:dateTime ;
+            prov:entity data:53dc86e3cbc21ff9ef3ae5a5a8cc9f7d1a9942c8 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_chlorophyll_a/color_scale> ] .
 
 id:6e735750-bb9c-4417-b20e-f7ddb07df649 a wf4ever:File,
         wfprov:Artifact,
@@ -7744,9 +7779,17 @@ id:f5c0b341-97fb-484c-9f8c-0646f0c63e86 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T09:31:50.769647"^^xsd:dateTime ;
             prov:hadActivity id:0470b6f9-f5c0-484c-bb2e-534806f95d65 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:50.804535"^^xsd:dateTime ;
-            prov:entity data:8655751d19f645dec4f65b6bb306877a7180a3b2 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/output_name> ],
+            prov:atTime "2026-09-23T09:31:50.805055"^^xsd:dateTime ;
+            prov:entity data:4ad2eab867b3280cabc93a14c615ab97b6b6575e ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/plot_title> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:50.804251"^^xsd:dateTime ;
+            prov:entity data:1370052da0755d73768c0c75500107d3759bcc2d ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/color_scale> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:50.803703"^^xsd:dateTime ;
+            prov:entity id:73af567d-64fb-4113-9d5d-24a98b4a23d5 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/clip_max> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:50.804800"^^xsd:dateTime ;
             prov:entity data:a15e03a530b917f396df0bd7bf919d2f342d7ecf ;
@@ -7756,21 +7799,13 @@ id:f5c0b341-97fb-484c-9f8c-0646f0c63e86 a wfprov:ProcessRun,
             prov:entity id:8fc8d4c9-0d3d-43d8-8e04-1fb53d64f191 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/clip_min> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:50.803703"^^xsd:dateTime ;
-            prov:entity id:73af567d-64fb-4113-9d5d-24a98b4a23d5 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/clip_max> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:50.804275"^^xsd:dateTime ;
             prov:entity id:1855b873-514a-46e8-85f9-7e6fdd5c1c12 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/input_image> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:50.805055"^^xsd:dateTime ;
-            prov:entity data:4ad2eab867b3280cabc93a14c615ab97b6b6575e ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/plot_title> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:50.804251"^^xsd:dateTime ;
-            prov:entity data:1370052da0755d73768c0c75500107d3759bcc2d ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/color_scale> ] .
+            prov:atTime "2026-09-23T09:31:50.804535"^^xsd:dateTime ;
+            prov:entity data:8655751d19f645dec4f65b6bb306877a7180a3b2 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/plot_cyanobacteria/output_name> ] .
 
 id:fcc8bc22-4c42-45a2-a828-ef8de070904e a wf4ever:File,
         wfprov:Artifact,
@@ -7822,13 +7857,13 @@ id:0470b6f9-f5c0-484c-bb2e-534806f95d65 a wfprov:WorkflowRun,
             prov:atTime "2026-09-23T09:31:01.456549"^^xsd:dateTime ;
             prov:hadActivity id:63709288-2770-4d4f-97fa-3e8ff70d0b32 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:06.037596"^^xsd:dateTime ;
-            prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/s3_access_key> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:06.037821"^^xsd:dateTime ;
             prov:entity data:f6cab44ac3c9f733bfece9ad8d3ad1452cbf9570 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/s3_secret_key> ] ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/s3_secret_key> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:06.037596"^^xsd:dateTime ;
+            prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/s3_access_key> ] ;
     prov:startedAtTime "2026-09-23T09:31:01.456528"^^xsd:dateTime .
 
 cwlprov:None a prov:Entity ;
@@ -7869,7 +7904,7 @@ allOf:
         - s3_access_key
         - s3_secret_key
       x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
     outputs:
       type: object
       required:
@@ -7894,7 +7929,7 @@ allOf:
         - turbidity_color
         - turbidity_plot
       x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 $defs:
   rawProcessDescription:
     $ref: https://geolabs.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/part1/v1/schemas/process/schema.yaml
@@ -7938,7 +7973,7 @@ $defs:
             - array
             - object
         x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-        x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+        x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
       outputs:
         type: object
         propertyNames:
@@ -7953,7 +7988,7 @@ $defs:
           - turbidity_color
           - turbidity_plot
         x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-        x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+        x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
       response:
         enum:
         - raw
@@ -7994,7 +8029,7 @@ x-jsonld-extra-terms:
   WorkflowRun: http://purl.org/wf4ever/wfprov#WorkflowRun
   WorkflowEngine: http://purl.org/wf4ever/wfprov#WorkflowEngine
   Artifact: http://purl.org/wf4ever/wfprov#Artifact
-  ProcessType: https://geolabs.github.io/bblocks-process-profiles/def/ProcessType
+  ProcessType: https://w3id.org/geolabs/ospd/process-profiles/ProcessType
   ActivityType: https://w3id.org/ogc/rim/activity-type/ActivityType
   owlClass: http://www.w3.org/2002/07/owl#Class
   subClassOf:
@@ -8003,7 +8038,7 @@ x-jsonld-extra-terms:
   title: http://purl.org/dc/terms/title
   description: http://purl.org/dc/terms/description
   keywords: http://purl.org/dc/terms/subject
-  version: https://geolabs.github.io/bblocks-process-profiles/def/version
+  version: https://w3id.org/geolabs/ospd/process-profiles/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
   minOccurs: https://w3id.org/ogc/api/processes/minOccurs
@@ -8059,7 +8094,7 @@ x-jsonld-extra-terms:
           '@base': http://www.iana.org/assignments/relation/
       type: http://purl.org/dc/terms/format
   processDescription:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/processDescription
     x-jsonld-context:
       href:
         '@id': http://www.w3.org/2000/01/rdf-schema#seeAlso
@@ -8067,9 +8102,9 @@ x-jsonld-extra-terms:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
-  result: https://geolabs.github.io/bblocks-process-profiles/def/result
-  engine: https://geolabs.github.io/bblocks-process-profiles/def/engine
-  run: https://geolabs.github.io/bblocks-process-profiles/def/run
+  result: https://w3id.org/geolabs/ospd/process-profiles/result
+  engine: https://w3id.org/geolabs/ospd/process-profiles/engine
+  run: https://w3id.org/geolabs/ospd/process-profiles/run
   provType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@vocab'
@@ -8164,38 +8199,44 @@ x-jsonld-extra-terms:
   appliesTo:
     x-jsonld-id: https://w3id.org/ogc/rim/appliesTo
     x-jsonld-type: '@id'
+  affectedProperty:
+    x-jsonld-id: https://w3id.org/ogc/rim/affectedProperty
+    x-jsonld-type: '@id'
+  sameAs:
+    x-jsonld-id: http://www.w3.org/2002/07/owl#sameAs
+    x-jsonld-type: '@id'
   prefLabel: http://www.w3.org/2004/02/skos/core#prefLabel
   definition: http://www.w3.org/2004/02/skos/core#definition
   inScheme:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#inScheme
     x-jsonld-type: '@id'
-  status: https://geolabs.github.io/bblocks-process-profiles/def/status
+  status: https://w3id.org/geolabs/ospd/process-profiles/status
   classification: '@nest'
   correspondences: '@nest'
   phase:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/phase
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/phase
     x-jsonld-type: '@id'
-  deployment: https://geolabs.github.io/bblocks-process-profiles/def/deployment
-  profile: https://geolabs.github.io/bblocks-process-profiles/def/profile
+  deployment: https://w3id.org/geolabs/ospd/process-profiles/deployment
+  profile: https://w3id.org/geolabs/ospd/process-profiles/profile
   plan:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/plan
     x-jsonld-context:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
   Plan: http://www.w3.org/ns/prov#Plan
-  cwlClass: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
-  cwlId: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
+  cwlClass: https://w3id.org/geolabs/ospd/process-profiles/cwlClass
+  cwlId: https://w3id.org/geolabs/ospd/process-profiles/cwlId
   provenanceClass:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/provenanceClass
     x-jsonld-type: '@id'
   implementsProfile:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implementsProfile
     x-jsonld-type: '@id'
-  cctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
-  candidateCctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
+  cctDependencies: https://w3id.org/geolabs/ospd/process-profiles/cctDependency
+  candidateCctDependencies: https://w3id.org/geolabs/ospd/process-profiles/candidateCctDependency
   hasStep:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/hasStep
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/hasStep
     x-jsonld-type: '@id'
   exactMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#exactMatch
@@ -8206,88 +8247,88 @@ x-jsonld-extra-terms:
   relatedMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#relatedMatch
     x-jsonld-type: '@id'
-  openeoEquivalence: https://geolabs.github.io/bblocks-process-profiles/def/openeoEquivalence
-  level: https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel
-  rationale: https://geolabs.github.io/bblocks-process-profiles/def/rationale
+  openeoEquivalence: https://w3id.org/geolabs/ospd/process-profiles/openeoEquivalence
+  level: https://w3id.org/geolabs/ospd/process-profiles/equivalenceLevel
+  rationale: https://w3id.org/geolabs/ospd/process-profiles/rationale
   decomposition:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/decomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/decomposition
     x-jsonld-container: '@list'
-  stage: https://geolabs.github.io/bblocks-process-profiles/def/stage
-  openeo: https://geolabs.github.io/bblocks-process-profiles/def/openeo
+  stage: https://w3id.org/geolabs/ospd/process-profiles/stage
+  openeo: https://w3id.org/geolabs/ospd/process-profiles/openeo
   note: http://www.w3.org/2004/02/skos/core#note
   serverSideFiles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/serverSideFile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/serverSideFile
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      location: https://geolabs.github.io/bblocks-process-profiles/def/location
+      location: https://w3id.org/geolabs/ospd/process-profiles/location
   roleDecompositions:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/roleDecomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/roleDecomposition
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       parts:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/part
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/part
         '@container': '@list'
       selectors:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/selector
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/selector
         '@context':
-          name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+          name: https://w3id.org/geolabs/ospd/process-profiles/liveName
           values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reproducible:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/reproducible
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/reproducible
         '@type': http://www.w3.org/2001/XMLSchema#boolean
       note: http://www.w3.org/2004/02/skos/core#note
   unboundRoles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/unboundRole
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/unboundRole
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       reason: http://www.w3.org/2004/02/skos/core#note
   fixedRoleValues:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/fixedRoleValue
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/fixedRoleValue
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reason: http://www.w3.org/2004/02/skos/core#note
   byReference:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/byReference
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/byReference
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       note: http://www.w3.org/2004/02/skos/core#note
   notAttached:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/notAttached
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/notAttached
     x-jsonld-context:
       reason: http://www.w3.org/2004/02/skos/core#note
   assumedFormatGaps:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/assumedFormatGap
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/assumedFormatGap
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      served: https://geolabs.github.io/bblocks-process-profiles/def/servedMediaType
+      served: https://w3id.org/geolabs/ospd/process-profiles/servedMediaType
       reason: http://www.w3.org/2004/02/skos/core#note
-      evidence: https://geolabs.github.io/bblocks-process-profiles/def/evidence
-x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/
+      evidence: https://w3id.org/geolabs/ospd/process-profiles/evidence
+x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/
 x-jsonld-prefixes:
   wfprov: http://purl.org/wf4ever/wfprov#
-  pp: https://geolabs.github.io/bblocks-process-profiles/def/
+  pp: https://w3id.org/geolabs/ospd/process-profiles/
   acttype: https://w3id.org/ogc/rim/activity-type/
   owl: http://www.w3.org/2002/07/owl#
   rdfs: http://www.w3.org/2000/01/rdf-schema#
@@ -8303,7 +8344,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.algae-bloom.workflow-copernicus-process
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-16'
+  dateOfLastChange: '2026-11-18'
 
 ```
 
@@ -8318,10 +8359,10 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/",
     "inputs": {
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/input/",
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/input/",
         "schema": {
           "@context": {
             "@vocab": "https://w3id.org/ogc/api/schema/"
@@ -8335,7 +8376,7 @@ Links to the schema:
     },
     "outputs": {
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/output/",
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/output/",
         "schema": {
           "@context": {
             "@vocab": "https://w3id.org/ogc/api/schema/"
@@ -8575,6 +8616,14 @@ Links to the schema:
       "@id": "rim:appliesTo",
       "@type": "@id"
     },
+    "affectedProperty": {
+      "@id": "rim:affectedProperty",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "owl:sameAs",
+      "@type": "@id"
+    },
     "prefLabel": "skos:prefLabel",
     "definition": "skos:definition",
     "inScheme": {
@@ -8745,7 +8794,7 @@ Links to the schema:
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",
-    "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "pp": "https://w3id.org/geolabs/ospd/process-profiles/",
     "acttype": "rim:activity-type/",
     "owl": "http://www.w3.org/2002/07/owl#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",

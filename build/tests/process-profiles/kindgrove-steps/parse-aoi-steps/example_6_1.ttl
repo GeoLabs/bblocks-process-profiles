@@ -1,4 +1,4 @@
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -44,7 +44,7 @@
 <https://ospd.example.org/ogc-api/processes/parse_aoi/package> a prov:Plan .
 
 <urn:example:run:kindgrove-steps:parse-aoi-steps> a prov:Activity,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps> ;
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/parse-aoi-steps> ;
     prov:endedAtTime "2026-09-24T10:57:48+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
             prov:hadPlan <https://ospd.example.org/ogc-api/processes/parse_aoi/package> ] ;

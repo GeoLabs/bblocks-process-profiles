@@ -2,7 +2,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rim: <https://w3id.org/ogc/rim/> .
@@ -10,66 +10,77 @@
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/addition> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index/actions/addition> a rim:RegisterAction ;
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index> ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/d5-2026-11-09> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
     prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index> ;
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/specialisation-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index/actions/identifier-2026-11-17> a rim:RegisterAction ;
+    dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
+    prov:startedAtTime "2026-11-17T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rim:objectIdentifier ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index/actions/specialisation-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/radiometric-index, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index> ;
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/unbound-roles-2026-11-10> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index/actions/unbound-roles-2026-11-10> a rim:RegisterAction ;
     dcterms:description "unboundRoles added: the role index of radiometric-index (minOccurs 1) is left unbound, the live service not exposing OTB RadiometricIndices' list parameter (the testbed exception of docs/ATTACHMENTS.md). The binding was already incomplete; the entry now declares it." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index> ;
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.RadiometricIndices> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices> ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/raster/OTB.RadiometricIndices> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices> ;
     pp:version "1.0.0" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index> a owl:Class,
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
-    rdfs:subClassOf <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/radiometric-index> ;
+    rdfs:subClassOf <https://w3id.org/geolabs/ospd/generic-profiles/activity-type/radiometric-index> ;
+    owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index> ;
     skos:closeMatch <https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.ndvi> ;
     skos:definition "This application computes radiometric indices using the relevant channels of the input image. The output is a multi band image into which each channel is one of the selected indices." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Compute radiometric indices." ;
-    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/OTB.RadiometricIndices> ;
+    pp:deployment [ pp:processDescription <https://w3id.org/geolabs/ospd/process-profiles/process/raster/OTB.RadiometricIndices> ;
             pp:profile "ospd.process-profiles.raster.radiometric-index" ;
             pp:provenanceClass wfprov:ProcessRun ] ;
-    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index> ;
+    pp:implementsProfile <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index> ;
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "OTB.RadiometricIndices computes a *selectable set* of named indices (NDVI, NDWI, and many others via `channels` / `list`) from user-mapped spectral channels (`channels.red`, `channels.nir`, ...), only one of which (NDVI) has a dedicated openEO process (`ndvi`, which also expects band-role mapping via `nir`/`red` parameters). closeMatch, not exactMatch: openEO has no equivalent for the other indices this application can compute." ] ;
-    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation> ;
     pp:unboundRole [ skos:note "no input of the live service selects the index: OTB RadiometricIndices' `list` parameter is not exposed" ;
-            pp:implements <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/radiometric-index/inputs/index> ;
+            pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index/inputs/index> ;
             pp:side "inputs" ] ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/addition>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/d5-2026-11-09>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/specialisation-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index/actions/unbound-roles-2026-11-10> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index/actions/addition>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index/actions/d5-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index/actions/specialisation-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index/actions/unbound-roles-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/radiometric-index"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/radiometric-index"^^xsd:anyURI ;
     rim:publicationStatus rim:published ;
     rim:validityStatus rim:invalid .
 

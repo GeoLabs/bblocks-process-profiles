@@ -1,15 +1,15 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns2: <http://schema.org/> .
-@prefix ns3: <https://w3id.org/ogc/api/schema/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <http://schema.org/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <https://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/reproject_band> dcterms:description "Process converted from CWL" ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/reproject_band> dcterms:description "Process converted from CWL" ;
     dcterms:subject "mangrove",
         "ospd",
         "reprojection" ;
@@ -20,8 +20,8 @@
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
-                            ns3:contentEncoding "binary" ;
-                            ns3:contentMediaType "image/tiff; application=geotiff" ] ] ;
+                            ns2:contentEncoding "binary" ;
+                            ns2:contentMediaType "image/tiff; application=geotiff" ] ] ;
             ns1:east [ dcterms:description "" ;
                     dcterms:title "east" ;
                     proc:maxOccurs 1 ;
@@ -55,29 +55,29 @@
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
-        [ rdf:value "reproject_band" ;
-            proc:role schema:name ],
+    proc:metadata [ rdf:value [ a ns3:Person ;
+                    ns3:affiliation "GeoLabs" ;
+                    ns3:name "Gérald Fenoy" ] ;
+            proc:role schema:contributor ],
         [ rdf:value "Reproject a raster onto a regular grid covering a bounding box" ;
             proc:role schema:description ],
-        [ rdf:value [ a ns2:Person ;
-                    ns2:name "Cameron Sajedi" ] ;
+        [ rdf:value "0.1.0" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value [ a ns3:Person ;
+                    ns3:name "Cameron Sajedi" ] ;
             proc:role schema:author ],
+        [ rdf:value "reproject_band" ;
+            proc:role schema:name ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
             proc:role schema:license ],
-        [ rdf:value [ a ns2:Person ;
-                    ns2:affiliation "GeoLabs" ;
-                    ns2:name "Gérald Fenoy" ] ;
-            proc:role schema:contributor ],
-        [ rdf:value "0.1.0" ;
-            proc:role schema:softwareVersion ] ;
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ ns4:reprojected_file [ dcterms:description "" ;
                     dcterms:title "reprojected_file" ;
                     proc:schema [ proc:type "string" ;
-                            ns3:contentEncoding "binary" ;
-                            ns3:contentMediaType "image/tiff; application=geotiff" ] ] ] .
+                            ns2:contentEncoding "binary" ;
+                            ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] .
 

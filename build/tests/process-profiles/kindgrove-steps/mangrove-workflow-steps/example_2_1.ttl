@@ -1,15 +1,15 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <https://w3id.org/ogc/api/schema/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <https://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/mangrove-workflow-steps> dcterms:description """Mangrove above-ground biomass and carbon stock estimation from Sentinel-2 L2A,
+<https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/mangrove-workflow-steps> dcterms:description """Mangrove above-ground biomass and carbon stock estimation from Sentinel-2 L2A,
 split into one CommandLineTool per processing step, aligned on the steps of the
 OSPD W1 Algae Bloom workflow:
 parse_aoi -> select_scene -> download_band (x3) -> reproject_band (x3)
@@ -28,19 +28,19 @@ parse_aoi -> select_scene -> download_band (x3) -> reproject_band (x3)
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "object" ;
-                            ns1:properties [ ns1:bbox [ proc:type "array" ;
-                                            ns1:items [ proc:type "number" ] ;
-                                            ns1:oneOf [ dcterms:description "3D bbox" ;
-                                                    ns1:maxItems 6 ;
-                                                    ns1:minItems 6 ],
+                            ns3:properties [ ns3:bbox [ proc:type "array" ;
+                                            ns3:items [ proc:type "number" ] ;
+                                            ns3:oneOf [ dcterms:description "3D bbox" ;
+                                                    ns3:maxItems 6 ;
+                                                    ns3:minItems 6 ],
                                                 [ dcterms:description "2D bbox" ;
-                                                    ns1:maxItems 4 ;
-                                                    ns1:minItems 4 ] ] ;
-                                    ns1:crs [ proc:default "\"CRS84\""^^rdf:JSON ;
+                                                    ns3:maxItems 4 ;
+                                                    ns3:minItems 4 ] ] ;
+                                    ns3:crs [ proc:default "\"CRS84\""^^rdf:JSON ;
                                             proc:enum "CRS84",
                                                 "CRS84h" ;
                                             proc:type "string" ] ] ;
-                            ns1:required "bbox" ] ] ;
+                            ns3:required "bbox" ] ] ;
             ns2:biomass_intercept [ dcterms:description "" ;
                     dcterms:title "biomass_intercept" ;
                     proc:maxOccurs 1 ;
@@ -118,11 +118,7 @@ parse_aoi -> select_scene -> download_band (x3) -> reproject_band (x3)
                     proc:schema [ proc:default "\"https://earth-search.aws.element84.com/v1\""^^rdf:JSON ;
                             proc:type "string" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
-        [ rdf:value "Mangrove Biomass Workflow (step notebooks)" ;
-            proc:role schema:name ],
-        [ rdf:value "0.1.0" ;
+    proc:metadata [ rdf:value "0.1.0" ;
             proc:role schema:softwareVersion ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
             proc:role schema:license ],
@@ -132,21 +128,25 @@ OSPD W1 Algae Bloom workflow:
 parse_aoi -> select_scene -> download_band (x3) -> reproject_band (x3)
 -> calculate_indices -> estimate_biomass -> export_stac.
 """ ;
-            proc:role schema:description ] ;
+            proc:role schema:description ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value "Mangrove Biomass Workflow (step notebooks)" ;
+            proc:role schema:name ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:stac [ dcterms:description "STAC Catalog with one Item holding the mask, biomass, summaries and quicklook" ;
+    proc:outputs [ ns1:stac [ dcterms:description "STAC Catalog with one Item holding the mask, biomass, summaries and quicklook" ;
                     dcterms:title "STAC Catalog" ;
                     proc:schema [ proc:type "object" ;
-                            ns1:format "stac-catalog" ;
-                            ns1:properties [ dcterms:description [ proc:type "string" ] ;
+                            ns3:format "stac-catalog" ;
+                            ns3:properties [ dcterms:description [ proc:type "string" ] ;
                                     dcterms:title [ proc:type "string" ] ;
                                     rdfs:seeAlso [ dcterms:type "array" ] ;
                                     proc:type [ proc:enum "Catalog" ;
                                             proc:type "string" ] ;
-                                    ns1:stac_version [ proc:type "string" ] ] ;
-                            ns1:required "description",
+                                    ns3:stac_version [ proc:type "string" ] ] ;
+                            ns3:required "description",
                                 "id",
                                 "links",
                                 "stac_version",

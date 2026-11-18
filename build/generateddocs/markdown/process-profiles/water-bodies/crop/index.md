@@ -63,7 +63,7 @@ Execution and provenance examples are built from a real `cwltool --provenance` r
 
 ## Implementation Profile (tier 3)
 
-Implements [`Band retrieval`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval) (`generic-profiles.implementation-profile.band-retrieval`, bblocks-generic-profiles). Signature checked against band-retrieval: `item` (a STAC Item URL) implements `product`, by reference; `band` (a band common name) implements `band`; `aoi` and `epsg` (four numbers in one string, and their CRS) implement `areaOfInterest` as a role decomposition; `cropped` implements the output `raster`. It does not reproject: the output keeps the CRS of the asset.
+Implements [`Band retrieval`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval) (`generic-profiles.implementation-profile.band-retrieval`, bblocks-generic-profiles). Signature checked against band-retrieval: `item` (a STAC Item URL) implements `product`, by reference; `band` (a band common name) implements `band`; `aoi` and `epsg` (four numbers in one string, and their CRS) implement `areaOfInterest` as a role decomposition; `cropped` implements the output `raster`. It does not reproject: the output keeps the CRS of the asset.
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -86,7 +86,7 @@ Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts
 
 ## Process type (Activity 4)
 
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision.
 
 ## Examples
 
@@ -262,16 +262,16 @@ OGC API - Processes processDescription derived from the CWL.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <https://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/crop> dcterms:description "Process converted from CWL" ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/crop> dcterms:description "Process converted from CWL" ;
     dcterms:title "crop" ;
     pp:version "1.4.1" ;
     proc:inputs [ ns1:aoi [ dcterms:description "" ;
@@ -315,7 +315,7 @@ OGC API - Processes processDescription derived from the CWL.
 
 
 ### processDescription with its inheritance (Implementation, instance level)
-The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval`: the Implementation Profile's keywords (E) on the process and on each bound input/output, and, per footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation` reference to the Implementation Profile -- on the process only. Each bound input/output keeps its Implementation Profile counterpart's reference to the Generic Profile input/output (`generic-input`/`-output`) and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`, `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings` in scripts/profiles.yaml; inputs/outputs bound to none are the deployment's own additions (footnote b). `areaOfInterest` is taken as `aoi`, `epsg`, none of which is the role: declared in `roleDecompositions` of the process-type entry. Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).
+The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval`: the Implementation Profile's keywords (E) on the process and on each bound input/output, and, per footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation` reference to the Implementation Profile -- on the process only. Each bound input/output keeps its Implementation Profile counterpart's reference to the Generic Profile input/output (`generic-input`/`-output`) and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`, `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings` in scripts/profiles.yaml; inputs/outputs bound to none are the deployment's own additions (footnote b). `areaOfInterest` is taken as `aoi`, `epsg`, none of which is the role: declared in `roleDecompositions` of the process-type entry. Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).
 #### json
 ```json
 {
@@ -328,17 +328,17 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     {
       "title": "Process Concept: Data Discovery and Access",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/data-discovery-and-access"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/data-discovery-and-access"
     },
     {
       "title": "Generic Profile: Band retrieval",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval"
     },
     {
       "title": "Implementation Profile: Band retrieval",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval"
     },
     {
       "role": "https://schema.org/name",
@@ -369,20 +369,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "item": {
       "title": "item",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/eo-product",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/eo-product",
       "keywords": [
         "product"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Band retrieval -- input `product`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/inputs/product"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/inputs/product"
         },
         {
           "title": "Implementation Profile: Band retrieval -- input `product`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/product"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/product"
         }
       ],
       "schema": {
@@ -412,20 +412,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "band": {
       "title": "band",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/band-identifier",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/band-identifier",
       "keywords": [
         "band"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Band retrieval -- input `band`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/inputs/band"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/inputs/band"
         },
         {
           "title": "Implementation Profile: Band retrieval -- input `band`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/band"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/band"
         }
       ],
       "schema": {
@@ -439,20 +439,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "cropped": {
       "title": "cropped",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Band retrieval -- output `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/outputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/outputs/raster"
         },
         {
           "title": "Implementation Profile: Band retrieval -- output `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/outputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/outputs/raster"
         }
       ],
       "schema": {
@@ -479,17 +479,17 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     {
       "title": "Process Concept: Data Discovery and Access",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/data-discovery-and-access"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/data-discovery-and-access"
     },
     {
       "title": "Generic Profile: Band retrieval",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval"
     },
     {
       "title": "Implementation Profile: Band retrieval",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval"
     },
     {
       "role": "https://schema.org/name",
@@ -520,20 +520,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "item": {
       "title": "item",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/eo-product",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/eo-product",
       "keywords": [
         "product"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Band retrieval -- input `product`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/inputs/product"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/inputs/product"
         },
         {
           "title": "Implementation Profile: Band retrieval -- input `product`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/product"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/product"
         }
       ],
       "schema": {
@@ -563,20 +563,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "band": {
       "title": "band",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/band-identifier",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/band-identifier",
       "keywords": [
         "band"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Band retrieval -- input `band`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/inputs/band"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/inputs/band"
         },
         {
           "title": "Implementation Profile: Band retrieval -- input `band`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/band"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/band"
         }
       ],
       "schema": {
@@ -590,20 +590,20 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "cropped": {
       "title": "cropped",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Band retrieval -- output `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/outputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/outputs/raster"
         },
         {
           "title": "Implementation Profile: Band retrieval -- output `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/outputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/outputs/raster"
         }
       ],
       "schema": {
@@ -619,89 +619,89 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <https://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/crop> dcterms:description "Process converted from CWL" ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/crop> dcterms:description "Process converted from CWL" ;
     dcterms:subject "band",
         "product",
         "retrieval" ;
     dcterms:title "crop" ;
     pp:version "1.4.1" ;
-    proc:inputs [ ns3:aoi [ dcterms:description "" ;
+    proc:inputs [ ns1:aoi [ dcterms:description "" ;
                     dcterms:title "aoi" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:band [ dcterms:description "" ;
+            ns1:band [ dcterms:description "" ;
                     dcterms:title "band" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/band-identifier> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/band-identifier> ;
                     proc:keywords "band" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Band retrieval -- input `band`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/band> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Band retrieval -- input `band`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/inputs/band> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
+                    proc:metadata [ dcterms:title "Generic Profile: Band retrieval -- input `band`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/inputs/band> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Band retrieval -- input `band`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/band> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:epsg [ dcterms:description "" ;
+            ns1:epsg [ dcterms:description "" ;
                     dcterms:title "epsg" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:item [ dcterms:description "" ;
+            ns1:item [ dcterms:description "" ;
                     dcterms:title "item" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/eo-product> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/eo-product> ;
                     proc:keywords "product" ;
                     proc:maxOccurs 1 ;
                     proc:metadata [ dcterms:title "Generic Profile: Band retrieval -- input `product`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/inputs/product> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/inputs/product> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
                         [ dcterms:title "Implementation Profile: Band retrieval -- input `product`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/product> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/product> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "crop" ;
-            proc:role schema:name ],
+    proc:metadata [ dcterms:title "Implementation Profile: Band retrieval" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Generic Profile: Band retrieval" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ rdf:value "1.4.1" ;
             proc:role schema:softwareVersion ],
         [ dcterms:title "Process Concept: Data Discovery and Access" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/data-discovery-and-access> ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/data-discovery-and-access> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Generic Profile: Band retrieval" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Implementation Profile: Band retrieval" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ rdf:value "Process converted from CWL" ;
-            proc:role schema:description ] ;
+            proc:role schema:description ],
+        [ rdf:value "crop" ;
+            proc:role schema:name ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:cropped [ dcterms:description "" ;
+    proc:outputs [ ns3:cropped [ dcterms:description "" ;
                     dcterms:title "cropped" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster> ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
                     proc:keywords "raster" ;
                     proc:metadata [ dcterms:title "Generic Profile: Band retrieval -- output `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/outputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
                         [ dcterms:title "Implementation Profile: Band retrieval -- output `raster`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/outputs/raster> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/outputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentEncoding "binary" ;
-                            ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] .
+                            ns2:contentEncoding "binary" ;
+                            ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] .
 
 
 ```
@@ -750,12 +750,12 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/crop> pp:version "1.4.1" .
+<https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/crop> pp:version "1.4.1" .
 
-[] pp:processDescription [ pp:process <https://geolabs.github.io/bblocks-process-profiles/def/process/crop> ] ;
+[] pp:processDescription [ pp:process <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/crop> ] ;
     proc:executionUnit [ dcterms:format "application/cwl+yaml" ;
             ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/crop.cwl> ] .
@@ -795,7 +795,7 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 
 #### ttl
 ```ttl
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
 [] proc:inputs [ ns1:aoi "-121.399,39.834,-120.74,40.472" ;
@@ -833,7 +833,7 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 
 #### ttl
 ```ttl
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 
 [] pp:cropped [ pp:href "https://ospd.example.org/ogc-api/jobs/water-bodies-crop-0001/results/crop_green.tif" ] .
 
@@ -849,7 +849,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   {
     "id": "urn:example:run:water-bodies:crop",
     "provType": "prov:Activity",
-    "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
+    "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop",
     "startedAtTime": "2026-09-23T20:09:38Z",
     "used": [
       "urn:example:entity:crop:in:item",
@@ -938,7 +938,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "urn:example:run:water-bodies:crop",
       "provType": "prov:Activity",
-      "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
+      "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop",
       "startedAtTime": "2026-09-23T20:09:38Z",
       "used": [
         "urn:example:entity:crop:in:item",
@@ -1024,7 +1024,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -1061,7 +1061,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     pp:name "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/crop:1.5.0" .
 
 <urn:example:run:water-bodies:crop> a prov:Activity,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> ;
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> ;
     prov:endedAtTime "2026-09-23T20:11:25+00:00"^^xsd:dateTime ;
     prov:qualifiedAssociation [ prov:agent <urn:example:engine:cwltool-3.1.20260108082145> ;
             prov:hadPlan <https://ospd.example.org/ogc-api/processes/crop/package> ] ;
@@ -1088,7 +1088,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 {
   "id": "urn:example:run:water-bodies:crop",
   "type": "ProcessRun",
-  "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
+  "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/crop/package",
   "usedInput": [
     {
@@ -1117,7 +1117,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/water-bodies/crop/context.jsonld",
   "id": "urn:example:run:water-bodies:crop",
   "type": "ProcessRun",
-  "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
+  "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/crop/package",
   "usedInput": [
     {
@@ -1146,7 +1146,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:water-bodies:crop> a wfprov:ProcessRun,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> ;
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/crop/package> ;
     wfprov:usedInput <urn:example:entity:crop:in:aoi>,
         <urn:example:entity:crop:in:band>,
@@ -1164,116 +1164,128 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 #### json
 ```json
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/tier3-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/tier3-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/definition-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/definition-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "definition: \"Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest and reprojected to the requested CRS.\" -> \"Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest, whose CRS is given by `epsg`; the output keeps the CRS of the asset.\" The tool does not reproject: epsg is passed to gdal.Translate as projWinSRS, the CRS of aoi (read, app.py), and the four crop_*.tif of the run record water-bodies stay in EPSG:32610 (observed 2026-11-10). Substantive: it changes what the item means.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/inherited-description-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/inherited-description-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription.inherited.json added with the attachment to the Implementation Profile band-retrieval: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/by-reference-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/by-reference-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "byReference added: the input item implements the role product of band-retrieval as the URL of a STAC Item, not the Item itself (decision C1 of 2026-11-10).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/role-decompositions-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/role-decompositions-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "roleDecompositions added: the role areaOfInterest of band-retrieval is taken as the two inputs aoi (four numbers in one string) and epsg (their CRS), neither of which carries its representation.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/plan-2026-11-11",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/plan-2026-11-11",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/crop.cwl). The 72a76ae CWL declares the format of its Files, so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the output cropped, in processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on 2026-11-10 for cropped were removed the same day, when the corrected CWL served these formats; the entry has none.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop to https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     }
   ],
   "prefLabel": "Crop a Sentinel-2 COG band to an area of interest",
   "definition": "Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest, whose CRS is given by `epsg`; the output keeps the CRS of the asset.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval"
     ]
   },
   "deployment": {
@@ -1303,19 +1315,19 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "eoap.cct.string-format"
     ]
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval",
   "byReference": [
     {
       "name": "item",
       "side": "inputs",
-      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/product",
+      "implements": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/product",
       "note": "The product is given as the URL of its STAC Item, a string, not as the STAC Item itself."
     }
   ],
   "roleDecompositions": [
     {
       "side": "inputs",
-      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/areaOfInterest",
+      "implements": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/areaOfInterest",
       "parts": [
         "aoi",
         "epsg"
@@ -1341,116 +1353,128 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 ```jsonld
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/water-bodies/crop/context.jsonld",
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/tier3-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/tier3-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/definition-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/definition-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "definition: \"Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest and reprojected to the requested CRS.\" -> \"Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest, whose CRS is given by `epsg`; the output keeps the CRS of the asset.\" The tool does not reproject: epsg is passed to gdal.Translate as projWinSRS, the CRS of aoi (read, app.py), and the four crop_*.tif of the run record water-bodies stay in EPSG:32610 (observed 2026-11-10). Substantive: it changes what the item means.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/inherited-description-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/inherited-description-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription.inherited.json added with the attachment to the Implementation Profile band-retrieval: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/by-reference-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/by-reference-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "byReference added: the input item implements the role product of band-retrieval as the URL of a STAC Item, not the Item itself (decision C1 of 2026-11-10).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/role-decompositions-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/role-decompositions-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "roleDecompositions added: the role areaOfInterest of band-retrieval is taken as the two inputs aoi (four numbers in one string) and epsg (their CRS), neither of which carries its representation.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/plan-2026-11-11",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/plan-2026-11-11",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/crop.cwl). The 72a76ae CWL declares the format of its Files, so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the output cropped, in processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on 2026-11-10 for cropped were removed the same day, when the corrected CWL served these formats; the entry has none.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop to https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"
     }
   ],
   "prefLabel": "Crop a Sentinel-2 COG band to an area of interest",
   "definition": "Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest, whose CRS is given by `epsg`; the output keeps the CRS of the asset.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval"
     ]
   },
   "deployment": {
@@ -1480,19 +1504,19 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "eoap.cct.string-format"
     ]
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval",
   "byReference": [
     {
       "name": "item",
       "side": "inputs",
-      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/product",
+      "implements": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/product",
       "note": "The product is given as the URL of its STAC Item, a string, not as the STAC Item itself."
     }
   ],
   "roleDecompositions": [
     {
       "side": "inputs",
-      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/areaOfInterest",
+      "implements": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/areaOfInterest",
       "parts": [
         "aoi",
         "epsg"
@@ -1521,7 +1545,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix ns1: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -1530,79 +1554,6 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/addition> a rim:RegisterAction ;
-    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType rim:additionAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/by-reference-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "byReference added: the input item implements the role product of band-retrieval as the URL of a STAC Item, not the Item itself (decision C1 of 2026-11-10)." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/d5-2026-11-09> a rim:RegisterAction ;
-    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
-    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/definition-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "definition: \"Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest and reprojected to the requested CRS.\" -> \"Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest, whose CRS is given by `epsg`; the output keeps the CRS of the asset.\" The tool does not reproject: epsg is passed to gdal.Translate as projWinSRS, the CRS of aoi (read, app.py), and the four crop_*.tif of the run record water-bodies stay in EPSG:32610 (observed 2026-11-10). Substantive: it changes what the item means." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/inherited-description-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "processDescription.inherited.json added with the attachment to the Implementation Profile band-retrieval: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/plan-2026-11-11> a rim:RegisterAction ;
-    dcterms:description "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/crop.cwl). The 72a76ae CWL declares the format of its Files, so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the output cropped, in processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on 2026-11-10 for cropped were removed the same day, when the corrected CWL served these formats; the entry has none." ;
-    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/role-decompositions-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "roleDecompositions added: the role areaOfInterest of band-retrieval is taken as the two inputs aoi (four numbers in one string) and epsg (their CRS), neither of which carries its representation." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/specialisation-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/tier3-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
-    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
-    rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> ;
-    rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process/crop> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/crop> ;
-    pp:version "1.4.1" .
 
 <https://ospd.example.org/ogc-api/processes/crop/package> a prov:Plan ;
     dcterms:license <https://spdx.org/licenses/CC-BY-SA-4.0> ;
@@ -1615,45 +1566,129 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/GeoLabs/ogc-eo-application-package-hands-on/raw/72a76ae1d5ff7e2ea67cf3fd05082893b359afa0/water-bodies/app-pkg-multiple/crop.cwl> ] .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> a owl:Class,
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/addition> a rim:RegisterAction ;
+    prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType rim:additionAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/by-reference-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "byReference added: the input item implements the role product of band-retrieval as the URL of a STAC Item, not the Item itself (decision C1 of 2026-11-10)." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/d5-2026-11-09> a rim:RegisterAction ;
+    dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
+    prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/definition-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "definition: \"Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest and reprojected to the requested CRS.\" -> \"Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest, whose CRS is given by `epsg`; the output keeps the CRS of the asset.\" The tool does not reproject: epsg is passed to gdal.Translate as projWinSRS, the CRS of aoi (read, app.py), and the four crop_*.tif of the run record water-bodies stay in EPSG:32610 (observed 2026-11-10). Substantive: it changes what the item means." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/identifier-2026-11-17> a rim:RegisterAction ;
+    dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop to https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
+    prov:startedAtTime "2026-11-17T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rim:objectIdentifier ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/inherited-description-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "processDescription.inherited.json added with the attachment to the Implementation Profile band-retrieval: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/plan-2026-11-11> a rim:RegisterAction ;
+    dcterms:description "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/crop.cwl). The 72a76ae CWL declares the format of its Files, so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the output cropped, in processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on 2026-11-10 for cropped were removed the same day, when the corrected CWL served these formats; the entry has none." ;
+    prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/role-decompositions-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "roleDecompositions added: the role areaOfInterest of band-retrieval is taken as the two inputs aoi (four numbers in one string) and epsg (their CRS), neither of which carries its representation." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/specialisation-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/tier3-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
+    prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/crop> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/crop> ;
+    pp:version "1.4.1" .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
-    rdfs:subClassOf <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/band-retrieval> ;
+    rdfs:subClassOf <https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval> ;
+    owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop> ;
     skos:closeMatch <https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.filter_bands>,
         <https://www.opengis.net/def/bblocks/ogc.openeo.processes.cubes.load_collection> ;
     skos:definition "Cloud-native windowed read of one Sentinel-2 COG band asset of a STAC item, cropped to the area of interest, whose CRS is given by `epsg`; the output keeps the CRS of the asset." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Crop a Sentinel-2 COG band to an area of interest" ;
     pp:byReference [ skos:note "The product is given as the URL of its STAC Item, a string, not as the STAC Item itself." ;
-            pp:implements <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/product> ;
+            pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/product> ;
             pp:liveName "item" ;
             pp:side "inputs" ] ;
-    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/crop> ;
+    pp:deployment [ pp:processDescription <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/crop> ;
             pp:profile "ospd.process-profiles.water-bodies.crop" ;
             pp:provenanceClass wfprov:ProcessRun ] ;
-    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval> ;
+    pp:implementsProfile <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval> ;
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "load_collection with a spatial_extent (aoi) and a single band selected (filter_bands); the STAC item is given by URL rather than resolved by collection/date/bbox search, and the windowed COG read (no full download) is an implementation detail openEO back-ends make transparently." ] ;
-    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval> ;
+    pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval> ;
     pp:plan <https://ospd.example.org/ogc-api/processes/crop/package> ;
     pp:roleDecomposition [ skos:note "The area of interest is taken as one string of four comma-separated numbers (`aoi`) and the identifier of their CRS (`epsg`, passed to gdal.Translate as `projWinSRS`), not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served." ;
-            pp:implements <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/areaOfInterest> ;
+            pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/areaOfInterest> ;
             pp:part ( "aoi" "epsg" ) ;
             pp:side "inputs" ] ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/addition>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/by-reference-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/d5-2026-11-09>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/definition-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/inherited-description-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/plan-2026-11-11>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/role-decompositions-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/specialisation-2026-11-10>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop/actions/tier3-2026-11-10> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/addition>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/by-reference-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/d5-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/definition-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/inherited-description-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/plan-2026-11-11>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/role-decompositions-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/specialisation-2026-11-10>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/tier3-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/crop"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop"^^xsd:anyURI ;
     rim:publicationStatus rim:published ;
     rim:validityStatus rim:invalid .
 
@@ -2535,13 +2570,13 @@ id:5fa19808-d14c-4c01-8bd1-05a7a8845019 a wf4ever:File,
         wfprov:Artifact,
         prov:Entity ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:6d7920a6-ee35-4701-88be-68838b9ba10b ;
-            prov:atTime "2026-09-23T22:14:43.705762"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu/binary_mask_item> ],
-        [ a prov:Generation ;
             prov:activity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ;
             prov:atTime "2026-09-23T22:14:43.709003"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/workflow%20node_water_bodies/detected_water_body> ] ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/workflow%20node_water_bodies/detected_water_body> ],
+        [ a prov:Generation ;
+            prov:activity id:6d7920a6-ee35-4701-88be-68838b9ba10b ;
+            prov:atTime "2026-09-23T22:14:43.705762"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu/binary_mask_item> ] ;
     provext:qualifiedSpecialization [ a provext:Specialization ;
             provext:generalEntity data:8cb131413518c30be6ba485ea61764491444cde5 ] ;
     cwlprov:basename "otsu.tif" ;
@@ -2654,10 +2689,10 @@ id:8d6db404-8e9b-4740-bc17-6a2fab7c0c32 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_crop" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:8bbef2fa-3721-4f50-b27c-1d641100a89f ],
-        [ a prov:Association ;
             prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop> ] ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop> ],
+        [ a prov:Association ;
+            prov:agent id:8bbef2fa-3721-4f50-b27c-1d641100a89f ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:11:25.695175"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
@@ -2665,9 +2700,9 @@ id:8d6db404-8e9b-4740-bc17-6a2fab7c0c32 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:09:38.001367"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:38.074835"^^xsd:dateTime ;
-            prov:entity data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/band> ],
+            prov:atTime "2026-09-23T22:09:38.075291"^^xsd:dateTime ;
+            prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/epsg> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:38.074291"^^xsd:dateTime ;
             prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
@@ -2677,9 +2712,9 @@ id:8d6db404-8e9b-4740-bc17-6a2fab7c0c32 a wfprov:ProcessRun,
             prov:entity data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/item> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:38.075291"^^xsd:dateTime ;
-            prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/epsg> ] .
+            prov:atTime "2026-09-23T22:09:38.074835"^^xsd:dateTime ;
+            prov:entity data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/band> ] .
 
 id:b3b5dbf6-efbd-48f2-ba85-a9937bb49c7e a wf4ever:File,
         wfprov:Artifact,
@@ -2703,9 +2738,9 @@ id:eb53f504-eecb-4585-8e33-f7afdbbf816a a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:42580139-e758-4dbe-8ca8-7a114f7abf7f ],
+            provext:member id:b3b5dbf6-efbd-48f2-ba85-a9937bb49c7e ],
         [ a provext:Membership ;
-            provext:member id:b3b5dbf6-efbd-48f2-ba85-a9937bb49c7e ] .
+            provext:member id:42580139-e758-4dbe-8ca8-7a114f7abf7f ] .
 
 id:f47bdfb0-199b-4f9a-93c9-1bc6e9427cc5 a wfprov:ProcessRun,
         prov:Activity ;
@@ -2722,6 +2757,10 @@ id:f47bdfb0-199b-4f9a-93c9-1bc6e9427cc5 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:11:25.771051"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:11:25.786582"^^xsd:dateTime ;
+            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/aoi> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:11:25.788461"^^xsd:dateTime ;
             prov:entity data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/item> ],
@@ -2732,11 +2771,7 @@ id:f47bdfb0-199b-4f9a-93c9-1bc6e9427cc5 a wfprov:ProcessRun,
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:11:25.787927"^^xsd:dateTime ;
             prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/epsg> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:11:25.786582"^^xsd:dateTime ;
-            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/aoi> ] .
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/epsg> ] .
 
 id:f960d24b-dcbf-4c16-88ce-ad7029487e59 a wfprov:ProcessRun,
         prov:Activity ;
@@ -2848,7 +2883,7 @@ allOf:
         - epsg
         - band
       x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
     outputs:
       type: object
       required:
@@ -2857,7 +2892,7 @@ allOf:
         enum:
         - cropped
       x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 $defs:
   rawProcessDescription:
     $ref: https://geolabs.github.io/bblocks-ogcapi-processes/build/annotated/api/processes/part1/v1/schemas/process/schema.yaml
@@ -2903,14 +2938,14 @@ $defs:
             - array
             - object
         x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-        x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+        x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
       outputs:
         type: object
         propertyNames:
           enum:
           - cropped
         x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-        x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+        x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
       response:
         enum:
         - raw
@@ -2965,7 +3000,7 @@ $defs:
             - epsg
             - band
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
           type: object
           required:
@@ -2974,8 +3009,8 @@ $defs:
             enum:
             - cropped
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
-    - description: '`crop` as the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval`:
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
+    - description: '`crop` as the Implementation (instance level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval`:
         Table 21 keywords (E) and footnote-a metadata references (Table 22 roles)
         inherited from its Implementation Profile.'
       type: object
@@ -3003,7 +3038,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/data-discovery-and-access
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/concept/data-discovery-and-access
           - contains:
               type: object
               required:
@@ -3013,7 +3048,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval
           - contains:
               type: object
               required:
@@ -3023,7 +3058,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval
           x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
         inputs:
           type: object
@@ -3038,7 +3073,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/eo-product
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/eo-product
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -3055,9 +3090,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/inputs/product
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/inputs/product
                   - contains:
                       type: object
                       required:
@@ -3065,9 +3100,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/product
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/product
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
                 minOccurs:
                   type: integer
@@ -3081,7 +3116,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/band-identifier
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/band-identifier
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -3098,9 +3133,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/inputs/band
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/inputs/band
                   - contains:
                       type: object
                       required:
@@ -3108,9 +3143,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/inputs/band
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/band
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
                 minOccurs:
                   type: integer
@@ -3118,7 +3153,7 @@ $defs:
                   maximum: 1
                   x-jsonld-id: https://w3id.org/ogc/api/processes/minOccurs
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
           type: object
           required:
@@ -3131,7 +3166,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -3148,9 +3183,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/band-retrieval/outputs/raster
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/outputs/raster
                   - contains:
                       type: object
                       required:
@@ -3158,19 +3193,19 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/band-retrieval/outputs/raster
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/outputs/raster
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 x-jsonld-extra-terms:
   type: '@type'
   ProcessRun: http://purl.org/wf4ever/wfprov#ProcessRun
   WorkflowRun: http://purl.org/wf4ever/wfprov#WorkflowRun
   WorkflowEngine: http://purl.org/wf4ever/wfprov#WorkflowEngine
   Artifact: http://purl.org/wf4ever/wfprov#Artifact
-  ProcessType: https://geolabs.github.io/bblocks-process-profiles/def/ProcessType
+  ProcessType: https://w3id.org/geolabs/ospd/process-profiles/ProcessType
   ActivityType: https://w3id.org/ogc/rim/activity-type/ActivityType
   owlClass: http://www.w3.org/2002/07/owl#Class
   subClassOf:
@@ -3179,7 +3214,7 @@ x-jsonld-extra-terms:
   title: http://purl.org/dc/terms/title
   description: http://purl.org/dc/terms/description
   keywords: http://purl.org/dc/terms/subject
-  version: https://geolabs.github.io/bblocks-process-profiles/def/version
+  version: https://w3id.org/geolabs/ospd/process-profiles/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
   minOccurs: https://w3id.org/ogc/api/processes/minOccurs
@@ -3235,7 +3270,7 @@ x-jsonld-extra-terms:
           '@base': http://www.iana.org/assignments/relation/
       type: http://purl.org/dc/terms/format
   processDescription:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/processDescription
     x-jsonld-context:
       href:
         '@id': http://www.w3.org/2000/01/rdf-schema#seeAlso
@@ -3243,9 +3278,9 @@ x-jsonld-extra-terms:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
-  result: https://geolabs.github.io/bblocks-process-profiles/def/result
-  engine: https://geolabs.github.io/bblocks-process-profiles/def/engine
-  run: https://geolabs.github.io/bblocks-process-profiles/def/run
+  result: https://w3id.org/geolabs/ospd/process-profiles/result
+  engine: https://w3id.org/geolabs/ospd/process-profiles/engine
+  run: https://w3id.org/geolabs/ospd/process-profiles/run
   provType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@vocab'
@@ -3340,38 +3375,44 @@ x-jsonld-extra-terms:
   appliesTo:
     x-jsonld-id: https://w3id.org/ogc/rim/appliesTo
     x-jsonld-type: '@id'
+  affectedProperty:
+    x-jsonld-id: https://w3id.org/ogc/rim/affectedProperty
+    x-jsonld-type: '@id'
+  sameAs:
+    x-jsonld-id: http://www.w3.org/2002/07/owl#sameAs
+    x-jsonld-type: '@id'
   prefLabel: http://www.w3.org/2004/02/skos/core#prefLabel
   definition: http://www.w3.org/2004/02/skos/core#definition
   inScheme:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#inScheme
     x-jsonld-type: '@id'
-  status: https://geolabs.github.io/bblocks-process-profiles/def/status
+  status: https://w3id.org/geolabs/ospd/process-profiles/status
   classification: '@nest'
   correspondences: '@nest'
   phase:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/phase
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/phase
     x-jsonld-type: '@id'
-  deployment: https://geolabs.github.io/bblocks-process-profiles/def/deployment
-  profile: https://geolabs.github.io/bblocks-process-profiles/def/profile
+  deployment: https://w3id.org/geolabs/ospd/process-profiles/deployment
+  profile: https://w3id.org/geolabs/ospd/process-profiles/profile
   plan:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/plan
     x-jsonld-context:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
   Plan: http://www.w3.org/ns/prov#Plan
-  cwlClass: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
-  cwlId: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
+  cwlClass: https://w3id.org/geolabs/ospd/process-profiles/cwlClass
+  cwlId: https://w3id.org/geolabs/ospd/process-profiles/cwlId
   provenanceClass:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/provenanceClass
     x-jsonld-type: '@id'
   implementsProfile:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implementsProfile
     x-jsonld-type: '@id'
-  cctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
-  candidateCctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
+  cctDependencies: https://w3id.org/geolabs/ospd/process-profiles/cctDependency
+  candidateCctDependencies: https://w3id.org/geolabs/ospd/process-profiles/candidateCctDependency
   hasStep:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/hasStep
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/hasStep
     x-jsonld-type: '@id'
   exactMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#exactMatch
@@ -3382,88 +3423,88 @@ x-jsonld-extra-terms:
   relatedMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#relatedMatch
     x-jsonld-type: '@id'
-  openeoEquivalence: https://geolabs.github.io/bblocks-process-profiles/def/openeoEquivalence
-  level: https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel
-  rationale: https://geolabs.github.io/bblocks-process-profiles/def/rationale
+  openeoEquivalence: https://w3id.org/geolabs/ospd/process-profiles/openeoEquivalence
+  level: https://w3id.org/geolabs/ospd/process-profiles/equivalenceLevel
+  rationale: https://w3id.org/geolabs/ospd/process-profiles/rationale
   decomposition:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/decomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/decomposition
     x-jsonld-container: '@list'
-  stage: https://geolabs.github.io/bblocks-process-profiles/def/stage
-  openeo: https://geolabs.github.io/bblocks-process-profiles/def/openeo
+  stage: https://w3id.org/geolabs/ospd/process-profiles/stage
+  openeo: https://w3id.org/geolabs/ospd/process-profiles/openeo
   note: http://www.w3.org/2004/02/skos/core#note
   serverSideFiles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/serverSideFile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/serverSideFile
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      location: https://geolabs.github.io/bblocks-process-profiles/def/location
+      location: https://w3id.org/geolabs/ospd/process-profiles/location
   roleDecompositions:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/roleDecomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/roleDecomposition
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       parts:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/part
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/part
         '@container': '@list'
       selectors:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/selector
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/selector
         '@context':
-          name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+          name: https://w3id.org/geolabs/ospd/process-profiles/liveName
           values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reproducible:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/reproducible
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/reproducible
         '@type': http://www.w3.org/2001/XMLSchema#boolean
       note: http://www.w3.org/2004/02/skos/core#note
   unboundRoles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/unboundRole
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/unboundRole
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       reason: http://www.w3.org/2004/02/skos/core#note
   fixedRoleValues:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/fixedRoleValue
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/fixedRoleValue
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reason: http://www.w3.org/2004/02/skos/core#note
   byReference:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/byReference
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/byReference
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       note: http://www.w3.org/2004/02/skos/core#note
   notAttached:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/notAttached
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/notAttached
     x-jsonld-context:
       reason: http://www.w3.org/2004/02/skos/core#note
   assumedFormatGaps:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/assumedFormatGap
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/assumedFormatGap
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      served: https://geolabs.github.io/bblocks-process-profiles/def/servedMediaType
+      served: https://w3id.org/geolabs/ospd/process-profiles/servedMediaType
       reason: http://www.w3.org/2004/02/skos/core#note
-      evidence: https://geolabs.github.io/bblocks-process-profiles/def/evidence
-x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/
+      evidence: https://w3id.org/geolabs/ospd/process-profiles/evidence
+x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/
 x-jsonld-prefixes:
   wfprov: http://purl.org/wf4ever/wfprov#
-  pp: https://geolabs.github.io/bblocks-process-profiles/def/
+  pp: https://w3id.org/geolabs/ospd/process-profiles/
   acttype: https://w3id.org/ogc/rim/activity-type/
   owl: http://www.w3.org/2002/07/owl#
   rdfs: http://www.w3.org/2000/01/rdf-schema#
@@ -3479,7 +3520,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.water-bodies.crop
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-16'
+  dateOfLastChange: '2026-11-18'
 
 ```
 
@@ -3494,10 +3535,10 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/",
     "inputs": {
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/input/",
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/input/",
         "schema": {
           "@context": {
             "@vocab": "https://w3id.org/ogc/api/schema/"
@@ -3511,7 +3552,7 @@ Links to the schema:
     },
     "outputs": {
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/output/",
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/output/",
         "schema": {
           "@context": {
             "@vocab": "https://w3id.org/ogc/api/schema/"
@@ -3751,6 +3792,14 @@ Links to the schema:
       "@id": "rim:appliesTo",
       "@type": "@id"
     },
+    "affectedProperty": {
+      "@id": "rim:affectedProperty",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "owl:sameAs",
+      "@type": "@id"
+    },
     "prefLabel": "skos:prefLabel",
     "definition": "skos:definition",
     "inScheme": {
@@ -3921,7 +3970,7 @@ Links to the schema:
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",
-    "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "pp": "https://w3id.org/geolabs/ospd/process-profiles/",
     "acttype": "rim:activity-type/",
     "owl": "http://www.w3.org/2002/07/owl#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",

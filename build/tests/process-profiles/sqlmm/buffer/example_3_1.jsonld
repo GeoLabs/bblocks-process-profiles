@@ -18,17 +18,17 @@
     {
       "title": "Process Concept: Vector Geometry Processing",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing"
     },
     {
       "title": "Generic Profile: Geometry buffer",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-buffer"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-buffer"
     },
     {
       "title": "Implementation Profile: Buffer",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/buffer"
     },
     {
       "title": "Demo"
@@ -53,20 +53,20 @@
     "InputPolygon": {
       "title": "Polygon to be buffered",
       "description": "URI to a set of GML that describes the polygon.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/geometry",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
       "keywords": [
         "geometry"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Geometry buffer -- input `geometry`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-buffer/inputs/geometry"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-buffer/inputs/geometry"
         },
         {
           "title": "Implementation Profile: Buffer -- input `geometry`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/inputs/geometry"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/buffer/inputs/geometry"
         },
         {
           "title": "Mon test  "
@@ -89,20 +89,20 @@
     "BufferDistance": {
       "title": "Buffer Distance",
       "description": "Distance to be used to calculate buffer.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/number",
       "keywords": [
         "distance"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Geometry buffer -- input `distance`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-buffer/inputs/distance"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-buffer/inputs/distance"
         },
         {
           "title": "Implementation Profile: Buffer -- input `distance`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/inputs/distance"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/buffer/inputs/distance"
         }
       ],
       "minOccurs": 0,
@@ -118,20 +118,20 @@
     "Result": {
       "title": "Buffered Polygon",
       "description": "GML stream describing the buffered polygon feature.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/surface",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/surface",
       "keywords": [
         "geometry"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Geometry buffer -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-buffer/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-buffer/outputs/result"
         },
         {
           "title": "Implementation Profile: Buffer -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/buffer/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/buffer/outputs/result"
         },
         {
           "title": "Mon test  "

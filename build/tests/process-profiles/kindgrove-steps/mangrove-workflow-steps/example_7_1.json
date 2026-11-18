@@ -2,7 +2,7 @@
   {
     "id": "urn:example:run:kindgrove-steps:mangrove-workflow-steps",
     "provType": "prov:Activity",
-    "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps",
+    "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps",
     "startedAtTime": "2026-09-24T10:57:44Z",
     "used": [
       "urn:example:entity:mangrove-workflow-steps:in:aoi",

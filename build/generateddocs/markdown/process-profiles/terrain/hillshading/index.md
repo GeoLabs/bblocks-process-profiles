@@ -27,7 +27,7 @@ On this deployment:
 
 ## Implementation Profile
 
-Implements [`Analytical hillshading`](https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading) (`generic-profiles.implementation-profile.analytical-hillshading`, bblocks-generic-profiles).
+Implements [`Analytical hillshading`](https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading) (`generic-profiles.implementation-profile.analytical-hillshading`, bblocks-generic-profiles).
 
 Deployed inputs/outputs and the Implementation Profile's (`bindings` in `scripts/profiles.yaml`), with the data type each bound input/output inherits (`processDescription.inherited.json`):
 
@@ -516,25 +516,828 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns4: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/SAGA.ta_lighting.0> dcterms:description "This tool performs an analytical hillshade computation for an elevation grid. The 'Standard' method simply calculates the angle at which light coming from the position of the light source would hit the surface. This method can produce angles greater than 90 degree. With the second method all values are kept within the range of 0-90 degree. It can be enhanced with shadowing effects, where shadowed cells will be marked with a value of exactly 90 degree. 'Shadows Only' creates a mask for the shadowed areas and sets all other cells to no-data. 'Combined Shading' takes the values of the standard method and multiplies these with the normalized slope. 'Ambient Occlusion' is based on the concepts of Tarini et al. (2006), but only the northern half-space is considered here. " ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/terrain/SAGA.ta_lighting.0> dcterms:description "This tool performs an analytical hillshade computation for an elevation grid. The 'Standard' method simply calculates the angle at which light coming from the position of the light source would hit the surface. This method can produce angles greater than 90 degree. With the second method all values are kept within the range of 0-90 degree. It can be enhanced with shadowing effects, where shadowed cells will be marked with a value of exactly 90 degree. 'Shadows Only' creates a mask for the shadowed areas and sets all other cells to no-data. 'Combined Shading' takes the values of the standard method and multiplies these with the normalized slope. 'Ambient Occlusion' is based on the concepts of Tarini et al. (2006), but only the northern half-space is considered here. " ;
     dcterms:title "Analytical Hillshading" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
             ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0/execution> ] ;
     pp:version "1.0.0" ;
+    proc:inputs [ ns3:AZIMUTH [ dcterms:description "Direction of the light source, measured in degree clockwise from the North direction." ;
+                    dcterms:title "Azimuth" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "315"^^rdf:JSON ;
+                            proc:nullable true ;
+                            proc:type "number" ;
+                            ns1:format "float" ;
+                            ns1:maximum 360 ;
+                            ns1:minimum 0 ] ] ;
+            ns3:DATE_MIN [ dcterms:description "Day" ;
+                    dcterms:title "Day (min value)" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:nullable true ;
+                            proc:type "string" ;
+                            ns1:format "date" ] ] ;
+            ns3:DECLINATION [ dcterms:description "Height of the light source, measured in degree above the horizon." ;
+                    dcterms:title "Height" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "45"^^rdf:JSON ;
+                            proc:nullable true ;
+                            proc:type "number" ;
+                            ns1:format "float" ;
+                            ns1:maximum 90 ;
+                            ns1:minimum 0 ] ] ;
+            ns3:ELEVATION [ dcterms:description "Elevation" ;
+                    dcterms:title "Elevation" ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
+            ns3:EXAGGERATION [ dcterms:description "The terrain exaggeration factor allows one to increase the shading contrasts in flat areas." ;
+                    dcterms:title "Exaggeration" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "1"^^rdf:JSON ;
+                            proc:nullable true ;
+                            proc:type "number" ;
+                            ns1:format "float" ] ] ;
+            ns3:METHOD [ dcterms:description "Shading Method" ;
+                    dcterms:title "Shading Method" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "\"Standard\""^^rdf:JSON ;
+                            proc:enum "Ambient Occlusion",
+                                "Combined Shading",
+                                "Limited Maximum",
+                                "Shadows Only",
+                                "Standard",
+                                "With Shadows" ;
+                            proc:nullable true ;
+                            proc:type "string" ] ] ;
+            ns3:NDIRS [ dcterms:description "Number of sample directions for ambient occlusion. Divides azimuth range (270 to 0 to 90 degree) into sectors. Declination (0 to 90 degree) is divided in (Number of Directions / 4) sectors." ;
+                    dcterms:title "Number of Directions" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "8"^^rdf:JSON ;
+                            proc:nullable true ;
+                            proc:type "integer" ] ] ;
+            ns3:POSITION [ dcterms:description "Sun's Position" ;
+                    dcterms:title "Sun's Position" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "\"azimuth and height\""^^rdf:JSON ;
+                            proc:enum "azimuth and height",
+                                "date and time" ;
+                            proc:nullable true ;
+                            proc:type "string" ] ] ;
+            ns3:RADIUS [ dcterms:description "Radius used to trace for shadows (ambient occlusion) [map units]." ;
+                    dcterms:title "Search Radius" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "10"^^rdf:JSON ;
+                            proc:nullable true ;
+                            proc:type "number" ;
+                            ns1:format "float" ] ] ;
+            ns3:SHADOW [ dcterms:description "Choose 'slim' to trace grid node's shadow, 'fat' to trace the whole cell's shadow. The first is slightly faster but might show some artifacts." ;
+                    dcterms:title "Shadow" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "\"slim\""^^rdf:JSON ;
+                            proc:enum "fat",
+                                "slim" ;
+                            proc:nullable true ;
+                            proc:type "string" ] ] ;
+            ns3:TIME [ dcterms:description "Hour" ;
+                    dcterms:title "Hour" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "12"^^rdf:JSON ;
+                            proc:nullable true ;
+                            proc:type "number" ;
+                            ns1:format "float" ;
+                            ns1:maximum 24 ;
+                            ns1:minimum 0 ] ] ;
+            ns3:UNIT [ dcterms:description "Unit" ;
+                    dcterms:title "Unit" ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ proc:default "\"radians\""^^rdf:JSON ;
+                            proc:enum "degree",
+                                "radians" ;
+                            proc:nullable true ;
+                            proc:type "string" ] ] ] ;
+    proc:jobControlOptions "async-execute",
+        "dismiss",
+        "sync-execute" ;
+    proc:mutable false ;
+    proc:outputTransmission "reference",
+        "value" ;
+    proc:outputs [ ns2:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
+                    dcterms:title "Analytical Hillshading" ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ] ] ] ] .
+
+
+```
+
+
+### processDescription with its inheritance (Implementation, instance level)
+The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance level) of `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading`: the Implementation Profile's keywords (E) on the process and on each bound input/output, and, per footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation` reference to the Implementation Profile -- on the process only. Each bound input/output keeps its Implementation Profile counterpart's reference to the Generic Profile input/output (`generic-input`/`-output`) and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`, `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings` in scripts/profiles.yaml; inputs/outputs bound to none are the deployment's own additions (footnote b). Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).
+#### json
+```json
+{
+  "id": "SAGA.ta_lighting.0",
+  "title": "Analytical Hillshading",
+  "description": "This tool performs an analytical hillshade computation for an elevation grid. The 'Standard' method simply calculates the angle at which light coming from the position of the light source would hit the surface. This method can produce angles greater than 90 degree. With the second method all values are kept within the range of 0-90 degree. It can be enhanced with shadowing effects, where shadowed cells will be marked with a value of exactly 90 degree. 'Shadows Only' creates a mask for the shadowed areas and sets all other cells to no-data. 'Combined Shading' takes the values of the standard method and multiplies these with the normalized slope. 'Ambient Occlusion' is based on the concepts of Tarini et al. (2006), but only the northern half-space is considered here. ",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0/execution"
+    }
+  ],
+  "keywords": [
+    "terrain",
+    "elevation",
+    "raster",
+    "illumination",
+    "hillshade",
+    "Hillshade"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Terrain Analysis",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis"
+    },
+    {
+      "title": "Generic Profile: Analytical hillshading",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading"
+    },
+    {
+      "title": "Implementation Profile: Analytical hillshading",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading"
+    }
+  ],
+  "inputs": {
+    "ELEVATION": {
+      "title": "Elevation",
+      "description": "Elevation",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model",
+      "keywords": [
+        "elevation"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Analytical hillshading -- input `elevation`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/elevation"
+        },
+        {
+          "title": "Implementation Profile: Analytical hillshading -- input `elevation`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/elevation"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "METHOD": {
+      "title": "Shading Method",
+      "description": "Shading Method",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "Standard",
+        "enum": [
+          "Standard",
+          "Limited Maximum",
+          "With Shadows",
+          "Shadows Only",
+          "Ambient Occlusion",
+          "Combined Shading"
+        ],
+        "nullable": true
+      }
+    },
+    "POSITION": {
+      "title": "Sun's Position",
+      "description": "Sun's Position",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "azimuth and height",
+        "enum": [
+          "azimuth and height",
+          "date and time"
+        ],
+        "nullable": true
+      }
+    },
+    "AZIMUTH": {
+      "title": "Azimuth",
+      "description": "Direction of the light source, measured in degree clockwise from the North direction.",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/number",
+      "keywords": [
+        "azimuth"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Analytical hillshading -- input `azimuth`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/azimuth"
+        },
+        {
+          "title": "Implementation Profile: Analytical hillshading -- input `azimuth`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/azimuth"
+        }
+      ],
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 315,
+        "format": "float",
+        "minimum": 0,
+        "maximum": 360,
+        "nullable": true
+      }
+    },
+    "DECLINATION": {
+      "title": "Height",
+      "description": "Height of the light source, measured in degree above the horizon.",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/number",
+      "keywords": [
+        "altitude"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Analytical hillshading -- input `altitude`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/altitude"
+        },
+        {
+          "title": "Implementation Profile: Analytical hillshading -- input `altitude`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/altitude"
+        }
+      ],
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 45,
+        "format": "float",
+        "minimum": 0,
+        "maximum": 90,
+        "nullable": true
+      }
+    },
+    "DATE_MIN": {
+      "title": "Day (min value)",
+      "description": "Day",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "format": "date",
+        "nullable": true
+      }
+    },
+    "TIME": {
+      "title": "Hour",
+      "description": "Hour",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 12,
+        "format": "float",
+        "minimum": 0,
+        "maximum": 24,
+        "nullable": true
+      }
+    },
+    "EXAGGERATION": {
+      "title": "Exaggeration",
+      "description": "The terrain exaggeration factor allows one to increase the shading contrasts in flat areas.",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 1,
+        "format": "float",
+        "nullable": true
+      }
+    },
+    "UNIT": {
+      "title": "Unit",
+      "description": "Unit",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "radians",
+        "enum": [
+          "radians",
+          "degree"
+        ],
+        "nullable": true
+      }
+    },
+    "SHADOW": {
+      "title": "Shadow",
+      "description": "Choose 'slim' to trace grid node's shadow, 'fat' to trace the whole cell's shadow. The first is slightly faster but might show some artifacts.",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "slim",
+        "enum": [
+          "slim",
+          "fat"
+        ],
+        "nullable": true
+      }
+    },
+    "NDIRS": {
+      "title": "Number of Directions",
+      "description": "Number of sample directions for ambient occlusion. Divides azimuth range (270 to 0 to 90 degree) into sectors. Declination (0 to 90 degree) is divided in (Number of Directions / 4) sectors.",
+      "minOccurs": 0,
+      "schema": {
+        "type": "integer",
+        "default": 8,
+        "nullable": true
+      }
+    },
+    "RADIUS": {
+      "title": "Search Radius",
+      "description": "Radius used to trace for shadows (ambient occlusion) [map units].",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 10,
+        "format": "float",
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "SHADE": {
+      "title": "Analytical Hillshading",
+      "description": "The angle between the surface and the incoming light beams, measured in radians.",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Analytical hillshading -- output `result`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Analytical hillshading -- output `result`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/outputs/result"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    }
+  }
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/terrain/hillshading/context.jsonld",
+  "id": "SAGA.ta_lighting.0",
+  "title": "Analytical Hillshading",
+  "description": "This tool performs an analytical hillshade computation for an elevation grid. The 'Standard' method simply calculates the angle at which light coming from the position of the light source would hit the surface. This method can produce angles greater than 90 degree. With the second method all values are kept within the range of 0-90 degree. It can be enhanced with shadowing effects, where shadowed cells will be marked with a value of exactly 90 degree. 'Shadows Only' creates a mask for the shadowed areas and sets all other cells to no-data. 'Combined Shading' takes the values of the standard method and multiplies these with the normalized slope. 'Ambient Occlusion' is based on the concepts of Tarini et al. (2006), but only the northern half-space is considered here. ",
+  "version": "1.0.0",
+  "jobControlOptions": [
+    "sync-execute",
+    "async-execute",
+    "dismiss"
+  ],
+  "outputTransmission": [
+    "value",
+    "reference"
+  ],
+  "mutable": false,
+  "links": [
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
+      "type": "application/json",
+      "title": "Execute End Point",
+      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0/execution"
+    }
+  ],
+  "keywords": [
+    "terrain",
+    "elevation",
+    "raster",
+    "illumination",
+    "hillshade",
+    "Hillshade"
+  ],
+  "metadata": [
+    {
+      "title": "Process Concept: Terrain Analysis",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis"
+    },
+    {
+      "title": "Generic Profile: Analytical hillshading",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading"
+    },
+    {
+      "title": "Implementation Profile: Analytical hillshading",
+      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading"
+    }
+  ],
+  "inputs": {
+    "ELEVATION": {
+      "title": "Elevation",
+      "description": "Elevation",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model",
+      "keywords": [
+        "elevation"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Analytical hillshading -- input `elevation`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/elevation"
+        },
+        {
+          "title": "Implementation Profile: Analytical hillshading -- input `elevation`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/elevation"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    },
+    "METHOD": {
+      "title": "Shading Method",
+      "description": "Shading Method",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "Standard",
+        "enum": [
+          "Standard",
+          "Limited Maximum",
+          "With Shadows",
+          "Shadows Only",
+          "Ambient Occlusion",
+          "Combined Shading"
+        ],
+        "nullable": true
+      }
+    },
+    "POSITION": {
+      "title": "Sun's Position",
+      "description": "Sun's Position",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "azimuth and height",
+        "enum": [
+          "azimuth and height",
+          "date and time"
+        ],
+        "nullable": true
+      }
+    },
+    "AZIMUTH": {
+      "title": "Azimuth",
+      "description": "Direction of the light source, measured in degree clockwise from the North direction.",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/number",
+      "keywords": [
+        "azimuth"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Analytical hillshading -- input `azimuth`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/azimuth"
+        },
+        {
+          "title": "Implementation Profile: Analytical hillshading -- input `azimuth`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/azimuth"
+        }
+      ],
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 315,
+        "format": "float",
+        "minimum": 0,
+        "maximum": 360,
+        "nullable": true
+      }
+    },
+    "DECLINATION": {
+      "title": "Height",
+      "description": "Height of the light source, measured in degree above the horizon.",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/number",
+      "keywords": [
+        "altitude"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Analytical hillshading -- input `altitude`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/altitude"
+        },
+        {
+          "title": "Implementation Profile: Analytical hillshading -- input `altitude`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/altitude"
+        }
+      ],
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 45,
+        "format": "float",
+        "minimum": 0,
+        "maximum": 90,
+        "nullable": true
+      }
+    },
+    "DATE_MIN": {
+      "title": "Day (min value)",
+      "description": "Day",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "format": "date",
+        "nullable": true
+      }
+    },
+    "TIME": {
+      "title": "Hour",
+      "description": "Hour",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 12,
+        "format": "float",
+        "minimum": 0,
+        "maximum": 24,
+        "nullable": true
+      }
+    },
+    "EXAGGERATION": {
+      "title": "Exaggeration",
+      "description": "The terrain exaggeration factor allows one to increase the shading contrasts in flat areas.",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 1,
+        "format": "float",
+        "nullable": true
+      }
+    },
+    "UNIT": {
+      "title": "Unit",
+      "description": "Unit",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "radians",
+        "enum": [
+          "radians",
+          "degree"
+        ],
+        "nullable": true
+      }
+    },
+    "SHADOW": {
+      "title": "Shadow",
+      "description": "Choose 'slim' to trace grid node's shadow, 'fat' to trace the whole cell's shadow. The first is slightly faster but might show some artifacts.",
+      "minOccurs": 0,
+      "schema": {
+        "type": "string",
+        "default": "slim",
+        "enum": [
+          "slim",
+          "fat"
+        ],
+        "nullable": true
+      }
+    },
+    "NDIRS": {
+      "title": "Number of Directions",
+      "description": "Number of sample directions for ambient occlusion. Divides azimuth range (270 to 0 to 90 degree) into sectors. Declination (0 to 90 degree) is divided in (Number of Directions / 4) sectors.",
+      "minOccurs": 0,
+      "schema": {
+        "type": "integer",
+        "default": 8,
+        "nullable": true
+      }
+    },
+    "RADIUS": {
+      "title": "Search Radius",
+      "description": "Radius used to trace for shadows (ambient occlusion) [map units].",
+      "minOccurs": 0,
+      "schema": {
+        "type": "number",
+        "default": 10,
+        "format": "float",
+        "nullable": true
+      }
+    }
+  },
+  "outputs": {
+    "SHADE": {
+      "title": "Analytical Hillshading",
+      "description": "The angle between the surface and the incoming light beams, measured in radians.",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "keywords": [
+        "raster"
+      ],
+      "metadata": [
+        {
+          "title": "Generic Profile: Analytical hillshading -- output `result`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/outputs/result"
+        },
+        {
+          "title": "Implementation Profile: Analytical hillshading -- output `result`",
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/outputs/result"
+        }
+      ],
+      "schema": {
+        "oneOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/tiff"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-envi"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "application/x-ogc-aaigrid"
+          },
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+#### ttl
+```ttl
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
+@prefix proc: <https://w3id.org/ogc/api/processes/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process/terrain/SAGA.ta_lighting.0> dcterms:description "This tool performs an analytical hillshade computation for an elevation grid. The 'Standard' method simply calculates the angle at which light coming from the position of the light source would hit the surface. This method can produce angles greater than 90 degree. With the second method all values are kept within the range of 0-90 degree. It can be enhanced with shadowing effects, where shadowed cells will be marked with a value of exactly 90 degree. 'Shadows Only' creates a mask for the shadowed areas and sets all other cells to no-data. 'Combined Shading' takes the values of the standard method and multiplies these with the normalized slope. 'Ambient Occlusion' is based on the concepts of Tarini et al. (2006), but only the northern half-space is considered here. " ;
+    dcterms:subject "Hillshade",
+        "elevation",
+        "hillshade",
+        "illumination",
+        "raster",
+        "terrain" ;
+    dcterms:title "Analytical Hillshading" ;
+    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
+            dcterms:type "application/json" ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0/execution> ] ;
+    pp:version "1.0.0" ;
     proc:inputs [ ns2:AZIMUTH [ dcterms:description "Direction of the light source, measured in degree clockwise from the North direction." ;
                     dcterms:title "Azimuth" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/number> ;
+                    proc:keywords "azimuth" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading -- input `azimuth`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/azimuth> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Analytical hillshading -- input `azimuth`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/azimuth> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "315"^^rdf:JSON ;
                             proc:nullable true ;
@@ -550,6 +1353,14 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                             ns1:format "date" ] ] ;
             ns2:DECLINATION [ dcterms:description "Height of the light source, measured in degree above the horizon." ;
                     dcterms:title "Height" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/number> ;
+                    proc:keywords "altitude" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading -- input `altitude`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/altitude> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Analytical hillshading -- input `altitude`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/altitude> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "45"^^rdf:JSON ;
                             proc:nullable true ;
@@ -559,18 +1370,26 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                             ns1:minimum 0 ] ] ;
             ns2:ELEVATION [ dcterms:description "Elevation" ;
                     dcterms:title "Elevation" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model> ;
+                    proc:keywords "elevation" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading -- input `elevation`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/elevation> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Analytical hillshading -- input `elevation`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/elevation> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
-                                [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
             ns2:EXAGGERATION [ dcterms:description "The terrain exaggeration factor allows one to increase the shading contrasts in flat areas." ;
                     dcterms:title "Exaggeration" ;
                     proc:minOccurs 0 ;
@@ -639,20 +1458,37 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
+    proc:metadata [ dcterms:title "Process Concept: Terrain Analysis" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Generic Profile: Analytical hillshading" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Implementation Profile: Analytical hillshading" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
+    proc:outputs [ ns4:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
                     dcterms:title "Analytical Hillshading" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    proc:keywords "raster" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Analytical hillshading -- output `result`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Analytical hillshading -- output `result`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ] ] ] ] .
@@ -661,897 +1497,73 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 ```
 
 
-### processDescription with its inheritance (Implementation, instance level)
-The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementation (instance level) of `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading`: the Implementation Profile's keywords (E) on the process and on each bound input/output, and, per footnote a, its list of metadata references to superior profiles extended with a Table 22 `implementation` reference to the Implementation Profile -- on the process only. Each bound input/output keeps its Implementation Profile counterpart's reference to the Generic Profile input/output (`generic-input`/`-output`) and adds one to that counterpart itself (`<Implementation Profile>/inputs/<name>`, `/outputs/<name>`, `implementation-input`/`-output`): roles defined by bblocks-generic-profiles, since Table 22 only names whole profiles. Each bound input/output also carries the `dataType` of that counterpart, a concept of bblocks-data-types. Which deployed input/output is which Implementation Profile one is `bindings` in scripts/profiles.yaml; inputs/outputs bound to none are the deployment's own additions (footnote b). Not what the deployment serves today (docs/OPEN-QUESTIONS.md Q-TABLE21-INSTANCE).
-#### json
-```json
-{
-  "id": "SAGA.ta_lighting.0",
-  "title": "Analytical Hillshading",
-  "description": "This tool performs an analytical hillshade computation for an elevation grid. The 'Standard' method simply calculates the angle at which light coming from the position of the light source would hit the surface. This method can produce angles greater than 90 degree. With the second method all values are kept within the range of 0-90 degree. It can be enhanced with shadowing effects, where shadowed cells will be marked with a value of exactly 90 degree. 'Shadows Only' creates a mask for the shadowed areas and sets all other cells to no-data. 'Combined Shading' takes the values of the standard method and multiplies these with the normalized slope. 'Ambient Occlusion' is based on the concepts of Tarini et al. (2006), but only the northern half-space is considered here. ",
-  "version": "1.0.0",
-  "jobControlOptions": [
-    "sync-execute",
-    "async-execute",
-    "dismiss"
-  ],
-  "outputTransmission": [
-    "value",
-    "reference"
-  ],
-  "mutable": false,
-  "links": [
-    {
-      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
-      "type": "application/json",
-      "title": "Execute End Point",
-      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0/execution"
-    }
-  ],
-  "keywords": [
-    "terrain",
-    "elevation",
-    "raster",
-    "illumination",
-    "hillshade",
-    "Hillshade"
-  ],
-  "metadata": [
-    {
-      "title": "Process Concept: Terrain Analysis",
-      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis"
-    },
-    {
-      "title": "Generic Profile: Analytical hillshading",
-      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading"
-    },
-    {
-      "title": "Implementation Profile: Analytical hillshading",
-      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading"
-    }
-  ],
-  "inputs": {
-    "ELEVATION": {
-      "title": "Elevation",
-      "description": "Elevation",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model",
-      "keywords": [
-        "elevation"
-      ],
-      "metadata": [
-        {
-          "title": "Generic Profile: Analytical hillshading -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/elevation"
-        },
-        {
-          "title": "Implementation Profile: Analytical hillshading -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/elevation"
-        }
-      ],
-      "schema": {
-        "oneOf": [
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "image/tiff"
-          },
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "application/x-ogc-envi"
-          },
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "application/x-ogc-aaigrid"
-          },
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "image/png"
-          }
-        ]
-      }
-    },
-    "METHOD": {
-      "title": "Shading Method",
-      "description": "Shading Method",
-      "minOccurs": 0,
-      "schema": {
-        "type": "string",
-        "default": "Standard",
-        "enum": [
-          "Standard",
-          "Limited Maximum",
-          "With Shadows",
-          "Shadows Only",
-          "Ambient Occlusion",
-          "Combined Shading"
-        ],
-        "nullable": true
-      }
-    },
-    "POSITION": {
-      "title": "Sun's Position",
-      "description": "Sun's Position",
-      "minOccurs": 0,
-      "schema": {
-        "type": "string",
-        "default": "azimuth and height",
-        "enum": [
-          "azimuth and height",
-          "date and time"
-        ],
-        "nullable": true
-      }
-    },
-    "AZIMUTH": {
-      "title": "Azimuth",
-      "description": "Direction of the light source, measured in degree clockwise from the North direction.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
-      "keywords": [
-        "azimuth"
-      ],
-      "metadata": [
-        {
-          "title": "Generic Profile: Analytical hillshading -- input `azimuth`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/azimuth"
-        },
-        {
-          "title": "Implementation Profile: Analytical hillshading -- input `azimuth`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/azimuth"
-        }
-      ],
-      "minOccurs": 0,
-      "schema": {
-        "type": "number",
-        "default": 315,
-        "format": "float",
-        "minimum": 0,
-        "maximum": 360,
-        "nullable": true
-      }
-    },
-    "DECLINATION": {
-      "title": "Height",
-      "description": "Height of the light source, measured in degree above the horizon.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
-      "keywords": [
-        "altitude"
-      ],
-      "metadata": [
-        {
-          "title": "Generic Profile: Analytical hillshading -- input `altitude`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/altitude"
-        },
-        {
-          "title": "Implementation Profile: Analytical hillshading -- input `altitude`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/altitude"
-        }
-      ],
-      "minOccurs": 0,
-      "schema": {
-        "type": "number",
-        "default": 45,
-        "format": "float",
-        "minimum": 0,
-        "maximum": 90,
-        "nullable": true
-      }
-    },
-    "DATE_MIN": {
-      "title": "Day (min value)",
-      "description": "Day",
-      "minOccurs": 0,
-      "schema": {
-        "type": "string",
-        "format": "date",
-        "nullable": true
-      }
-    },
-    "TIME": {
-      "title": "Hour",
-      "description": "Hour",
-      "minOccurs": 0,
-      "schema": {
-        "type": "number",
-        "default": 12,
-        "format": "float",
-        "minimum": 0,
-        "maximum": 24,
-        "nullable": true
-      }
-    },
-    "EXAGGERATION": {
-      "title": "Exaggeration",
-      "description": "The terrain exaggeration factor allows one to increase the shading contrasts in flat areas.",
-      "minOccurs": 0,
-      "schema": {
-        "type": "number",
-        "default": 1,
-        "format": "float",
-        "nullable": true
-      }
-    },
-    "UNIT": {
-      "title": "Unit",
-      "description": "Unit",
-      "minOccurs": 0,
-      "schema": {
-        "type": "string",
-        "default": "radians",
-        "enum": [
-          "radians",
-          "degree"
-        ],
-        "nullable": true
-      }
-    },
-    "SHADOW": {
-      "title": "Shadow",
-      "description": "Choose 'slim' to trace grid node's shadow, 'fat' to trace the whole cell's shadow. The first is slightly faster but might show some artifacts.",
-      "minOccurs": 0,
-      "schema": {
-        "type": "string",
-        "default": "slim",
-        "enum": [
-          "slim",
-          "fat"
-        ],
-        "nullable": true
-      }
-    },
-    "NDIRS": {
-      "title": "Number of Directions",
-      "description": "Number of sample directions for ambient occlusion. Divides azimuth range (270 to 0 to 90 degree) into sectors. Declination (0 to 90 degree) is divided in (Number of Directions / 4) sectors.",
-      "minOccurs": 0,
-      "schema": {
-        "type": "integer",
-        "default": 8,
-        "nullable": true
-      }
-    },
-    "RADIUS": {
-      "title": "Search Radius",
-      "description": "Radius used to trace for shadows (ambient occlusion) [map units].",
-      "minOccurs": 0,
-      "schema": {
-        "type": "number",
-        "default": 10,
-        "format": "float",
-        "nullable": true
-      }
-    }
-  },
-  "outputs": {
-    "SHADE": {
-      "title": "Analytical Hillshading",
-      "description": "The angle between the surface and the incoming light beams, measured in radians.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
-      "keywords": [
-        "raster"
-      ],
-      "metadata": [
-        {
-          "title": "Generic Profile: Analytical hillshading -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/outputs/result"
-        },
-        {
-          "title": "Implementation Profile: Analytical hillshading -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/outputs/result"
-        }
-      ],
-      "schema": {
-        "oneOf": [
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "image/tiff"
-          },
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "application/x-ogc-envi"
-          },
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "application/x-ogc-aaigrid"
-          },
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "image/png"
-          }
-        ]
-      }
-    }
-  }
-}
-
-```
-
-#### jsonld
-```jsonld
-{
-  "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/terrain/hillshading/context.jsonld",
-  "id": "SAGA.ta_lighting.0",
-  "title": "Analytical Hillshading",
-  "description": "This tool performs an analytical hillshade computation for an elevation grid. The 'Standard' method simply calculates the angle at which light coming from the position of the light source would hit the surface. This method can produce angles greater than 90 degree. With the second method all values are kept within the range of 0-90 degree. It can be enhanced with shadowing effects, where shadowed cells will be marked with a value of exactly 90 degree. 'Shadows Only' creates a mask for the shadowed areas and sets all other cells to no-data. 'Combined Shading' takes the values of the standard method and multiplies these with the normalized slope. 'Ambient Occlusion' is based on the concepts of Tarini et al. (2006), but only the northern half-space is considered here. ",
-  "version": "1.0.0",
-  "jobControlOptions": [
-    "sync-execute",
-    "async-execute",
-    "dismiss"
-  ],
-  "outputTransmission": [
-    "value",
-    "reference"
-  ],
-  "mutable": false,
-  "links": [
-    {
-      "rel": "http://www.opengis.net/def/rel/ogc/1.0/execute",
-      "type": "application/json",
-      "title": "Execute End Point",
-      "href": "https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0/execution"
-    }
-  ],
-  "keywords": [
-    "terrain",
-    "elevation",
-    "raster",
-    "illumination",
-    "hillshade",
-    "Hillshade"
-  ],
-  "metadata": [
-    {
-      "title": "Process Concept: Terrain Analysis",
-      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis"
-    },
-    {
-      "title": "Generic Profile: Analytical hillshading",
-      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading"
-    },
-    {
-      "title": "Implementation Profile: Analytical hillshading",
-      "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading"
-    }
-  ],
-  "inputs": {
-    "ELEVATION": {
-      "title": "Elevation",
-      "description": "Elevation",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model",
-      "keywords": [
-        "elevation"
-      ],
-      "metadata": [
-        {
-          "title": "Generic Profile: Analytical hillshading -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/elevation"
-        },
-        {
-          "title": "Implementation Profile: Analytical hillshading -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/elevation"
-        }
-      ],
-      "schema": {
-        "oneOf": [
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "image/tiff"
-          },
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "application/x-ogc-envi"
-          },
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "application/x-ogc-aaigrid"
-          },
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "image/png"
-          }
-        ]
-      }
-    },
-    "METHOD": {
-      "title": "Shading Method",
-      "description": "Shading Method",
-      "minOccurs": 0,
-      "schema": {
-        "type": "string",
-        "default": "Standard",
-        "enum": [
-          "Standard",
-          "Limited Maximum",
-          "With Shadows",
-          "Shadows Only",
-          "Ambient Occlusion",
-          "Combined Shading"
-        ],
-        "nullable": true
-      }
-    },
-    "POSITION": {
-      "title": "Sun's Position",
-      "description": "Sun's Position",
-      "minOccurs": 0,
-      "schema": {
-        "type": "string",
-        "default": "azimuth and height",
-        "enum": [
-          "azimuth and height",
-          "date and time"
-        ],
-        "nullable": true
-      }
-    },
-    "AZIMUTH": {
-      "title": "Azimuth",
-      "description": "Direction of the light source, measured in degree clockwise from the North direction.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
-      "keywords": [
-        "azimuth"
-      ],
-      "metadata": [
-        {
-          "title": "Generic Profile: Analytical hillshading -- input `azimuth`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/azimuth"
-        },
-        {
-          "title": "Implementation Profile: Analytical hillshading -- input `azimuth`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/azimuth"
-        }
-      ],
-      "minOccurs": 0,
-      "schema": {
-        "type": "number",
-        "default": 315,
-        "format": "float",
-        "minimum": 0,
-        "maximum": 360,
-        "nullable": true
-      }
-    },
-    "DECLINATION": {
-      "title": "Height",
-      "description": "Height of the light source, measured in degree above the horizon.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
-      "keywords": [
-        "altitude"
-      ],
-      "metadata": [
-        {
-          "title": "Generic Profile: Analytical hillshading -- input `altitude`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/altitude"
-        },
-        {
-          "title": "Implementation Profile: Analytical hillshading -- input `altitude`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/altitude"
-        }
-      ],
-      "minOccurs": 0,
-      "schema": {
-        "type": "number",
-        "default": 45,
-        "format": "float",
-        "minimum": 0,
-        "maximum": 90,
-        "nullable": true
-      }
-    },
-    "DATE_MIN": {
-      "title": "Day (min value)",
-      "description": "Day",
-      "minOccurs": 0,
-      "schema": {
-        "type": "string",
-        "format": "date",
-        "nullable": true
-      }
-    },
-    "TIME": {
-      "title": "Hour",
-      "description": "Hour",
-      "minOccurs": 0,
-      "schema": {
-        "type": "number",
-        "default": 12,
-        "format": "float",
-        "minimum": 0,
-        "maximum": 24,
-        "nullable": true
-      }
-    },
-    "EXAGGERATION": {
-      "title": "Exaggeration",
-      "description": "The terrain exaggeration factor allows one to increase the shading contrasts in flat areas.",
-      "minOccurs": 0,
-      "schema": {
-        "type": "number",
-        "default": 1,
-        "format": "float",
-        "nullable": true
-      }
-    },
-    "UNIT": {
-      "title": "Unit",
-      "description": "Unit",
-      "minOccurs": 0,
-      "schema": {
-        "type": "string",
-        "default": "radians",
-        "enum": [
-          "radians",
-          "degree"
-        ],
-        "nullable": true
-      }
-    },
-    "SHADOW": {
-      "title": "Shadow",
-      "description": "Choose 'slim' to trace grid node's shadow, 'fat' to trace the whole cell's shadow. The first is slightly faster but might show some artifacts.",
-      "minOccurs": 0,
-      "schema": {
-        "type": "string",
-        "default": "slim",
-        "enum": [
-          "slim",
-          "fat"
-        ],
-        "nullable": true
-      }
-    },
-    "NDIRS": {
-      "title": "Number of Directions",
-      "description": "Number of sample directions for ambient occlusion. Divides azimuth range (270 to 0 to 90 degree) into sectors. Declination (0 to 90 degree) is divided in (Number of Directions / 4) sectors.",
-      "minOccurs": 0,
-      "schema": {
-        "type": "integer",
-        "default": 8,
-        "nullable": true
-      }
-    },
-    "RADIUS": {
-      "title": "Search Radius",
-      "description": "Radius used to trace for shadows (ambient occlusion) [map units].",
-      "minOccurs": 0,
-      "schema": {
-        "type": "number",
-        "default": 10,
-        "format": "float",
-        "nullable": true
-      }
-    }
-  },
-  "outputs": {
-    "SHADE": {
-      "title": "Analytical Hillshading",
-      "description": "The angle between the surface and the incoming light beams, measured in radians.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
-      "keywords": [
-        "raster"
-      ],
-      "metadata": [
-        {
-          "title": "Generic Profile: Analytical hillshading -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/outputs/result"
-        },
-        {
-          "title": "Implementation Profile: Analytical hillshading -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/outputs/result"
-        }
-      ],
-      "schema": {
-        "oneOf": [
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "image/tiff"
-          },
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "application/x-ogc-envi"
-          },
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "application/x-ogc-aaigrid"
-          },
-          {
-            "type": "string",
-            "contentEncoding": "base64",
-            "contentMediaType": "image/png"
-          }
-        ]
-      }
-    }
-  }
-}
-```
-
-#### ttl
-```ttl
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
-@prefix ns4: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix oa: <http://www.w3.org/ns/oa#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
-@prefix proc: <https://w3id.org/ogc/api/processes/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://geolabs.github.io/bblocks-process-profiles/def/process/SAGA.ta_lighting.0> dcterms:description "This tool performs an analytical hillshade computation for an elevation grid. The 'Standard' method simply calculates the angle at which light coming from the position of the light source would hit the surface. This method can produce angles greater than 90 degree. With the second method all values are kept within the range of 0-90 degree. It can be enhanced with shadowing effects, where shadowed cells will be marked with a value of exactly 90 degree. 'Shadows Only' creates a mask for the shadowed areas and sets all other cells to no-data. 'Combined Shading' takes the values of the standard method and multiplies these with the normalized slope. 'Ambient Occlusion' is based on the concepts of Tarini et al. (2006), but only the northern half-space is considered here. " ;
-    dcterms:subject "Hillshade",
-        "elevation",
-        "hillshade",
-        "illumination",
-        "raster",
-        "terrain" ;
-    dcterms:title "Analytical Hillshading" ;
-    rdfs:seeAlso [ rdfs:label "Execute End Point" ;
-            dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
-            oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0/execution> ] ;
-    pp:version "1.0.0" ;
-    proc:inputs [ ns1:AZIMUTH [ dcterms:description "Direction of the light source, measured in degree clockwise from the North direction." ;
-                    dcterms:title "Azimuth" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/number> ;
-                    proc:keywords "azimuth" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading -- input `azimuth`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/azimuth> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Analytical hillshading -- input `azimuth`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/azimuth> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ] ;
-                    proc:minOccurs 0 ;
-                    proc:schema [ proc:default "315"^^rdf:JSON ;
-                            proc:nullable true ;
-                            proc:type "number" ;
-                            ns2:format "float" ;
-                            ns2:maximum 360 ;
-                            ns2:minimum 0 ] ] ;
-            ns1:DATE_MIN [ dcterms:description "Day" ;
-                    dcterms:title "Day (min value)" ;
-                    proc:minOccurs 0 ;
-                    proc:schema [ proc:nullable true ;
-                            proc:type "string" ;
-                            ns2:format "date" ] ] ;
-            ns1:DECLINATION [ dcterms:description "Height of the light source, measured in degree above the horizon." ;
-                    dcterms:title "Height" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/number> ;
-                    proc:keywords "altitude" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Analytical hillshading -- input `altitude`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/altitude> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Analytical hillshading -- input `altitude`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/altitude> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
-                    proc:minOccurs 0 ;
-                    proc:schema [ proc:default "45"^^rdf:JSON ;
-                            proc:nullable true ;
-                            proc:type "number" ;
-                            ns2:format "float" ;
-                            ns2:maximum 90 ;
-                            ns2:minimum 0 ] ] ;
-            ns1:ELEVATION [ dcterms:description "Elevation" ;
-                    dcterms:title "Elevation" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model> ;
-                    proc:keywords "elevation" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Analytical hillshading -- input `elevation`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/elevation> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Analytical hillshading -- input `elevation`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/elevation> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input> ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/x-ogc-envi" ],
-                                [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/png" ],
-                                [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
-            ns1:EXAGGERATION [ dcterms:description "The terrain exaggeration factor allows one to increase the shading contrasts in flat areas." ;
-                    dcterms:title "Exaggeration" ;
-                    proc:minOccurs 0 ;
-                    proc:schema [ proc:default "1"^^rdf:JSON ;
-                            proc:nullable true ;
-                            proc:type "number" ;
-                            ns2:format "float" ] ] ;
-            ns1:METHOD [ dcterms:description "Shading Method" ;
-                    dcterms:title "Shading Method" ;
-                    proc:minOccurs 0 ;
-                    proc:schema [ proc:default "\"Standard\""^^rdf:JSON ;
-                            proc:enum "Ambient Occlusion",
-                                "Combined Shading",
-                                "Limited Maximum",
-                                "Shadows Only",
-                                "Standard",
-                                "With Shadows" ;
-                            proc:nullable true ;
-                            proc:type "string" ] ] ;
-            ns1:NDIRS [ dcterms:description "Number of sample directions for ambient occlusion. Divides azimuth range (270 to 0 to 90 degree) into sectors. Declination (0 to 90 degree) is divided in (Number of Directions / 4) sectors." ;
-                    dcterms:title "Number of Directions" ;
-                    proc:minOccurs 0 ;
-                    proc:schema [ proc:default "8"^^rdf:JSON ;
-                            proc:nullable true ;
-                            proc:type "integer" ] ] ;
-            ns1:POSITION [ dcterms:description "Sun's Position" ;
-                    dcterms:title "Sun's Position" ;
-                    proc:minOccurs 0 ;
-                    proc:schema [ proc:default "\"azimuth and height\""^^rdf:JSON ;
-                            proc:enum "azimuth and height",
-                                "date and time" ;
-                            proc:nullable true ;
-                            proc:type "string" ] ] ;
-            ns1:RADIUS [ dcterms:description "Radius used to trace for shadows (ambient occlusion) [map units]." ;
-                    dcterms:title "Search Radius" ;
-                    proc:minOccurs 0 ;
-                    proc:schema [ proc:default "10"^^rdf:JSON ;
-                            proc:nullable true ;
-                            proc:type "number" ;
-                            ns2:format "float" ] ] ;
-            ns1:SHADOW [ dcterms:description "Choose 'slim' to trace grid node's shadow, 'fat' to trace the whole cell's shadow. The first is slightly faster but might show some artifacts." ;
-                    dcterms:title "Shadow" ;
-                    proc:minOccurs 0 ;
-                    proc:schema [ proc:default "\"slim\""^^rdf:JSON ;
-                            proc:enum "fat",
-                                "slim" ;
-                            proc:nullable true ;
-                            proc:type "string" ] ] ;
-            ns1:TIME [ dcterms:description "Hour" ;
-                    dcterms:title "Hour" ;
-                    proc:minOccurs 0 ;
-                    proc:schema [ proc:default "12"^^rdf:JSON ;
-                            proc:nullable true ;
-                            proc:type "number" ;
-                            ns2:format "float" ;
-                            ns2:maximum 24 ;
-                            ns2:minimum 0 ] ] ;
-            ns1:UNIT [ dcterms:description "Unit" ;
-                    dcterms:title "Unit" ;
-                    proc:minOccurs 0 ;
-                    proc:schema [ proc:default "\"radians\""^^rdf:JSON ;
-                            proc:enum "degree",
-                                "radians" ;
-                            proc:nullable true ;
-                            proc:type "string" ] ] ] ;
-    proc:jobControlOptions "async-execute",
-        "dismiss",
-        "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Process Concept: Terrain Analysis" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Implementation Profile: Analytical hillshading" ;
-            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
-    proc:mutable false ;
-    proc:outputTransmission "reference",
-        "value" ;
-    proc:outputs [ ns4:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
-                    dcterms:title "Analytical Hillshading" ;
-                    dcterms:type <https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band> ;
-                    proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading -- output `result`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Analytical hillshading -- output `result`" ;
-                            proc:href <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/outputs/result> ;
-                            proc:role <https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output> ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/png" ],
-                                [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/x-ogc-envi" ],
-                                [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/x-ogc-aaigrid" ] ] ] ] .
-
-
-```
-
-
 ### process-type entry
-Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision, linking to its Implementation Profile.
+Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading` (`ospd.process-profiles.process-type`), proposed by GeoLabs and awaiting a register decision, linking to its Implementation Profile.
 #### json
 ```json
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/analytical-hillshading, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/analytical-hillshading, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading to https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading"
     }
   ],
   "prefLabel": "Analytical Hillshading",
   "definition": "This tool performs an analytical hillshade computation for an elevation grid. The 'Standard' method simply calculates the angle at which light coming from the position of the light source would hit the surface. This method can produce angles greater than 90 degree. With the second method all values are kept within the range of 0-90 degree. It can be enhanced with shadowing effects, where shadowed cells will be marked with a value of exactly 90 degree. 'Shadows Only' creates a mask for the shadowed areas and sets all other cells to no-data. 'Combined Shading' takes the values of the standard method and multiplies these with the normalized slope. 'Ambient Occlusion' is based on the concepts of Tarini et al. (2006), but only the northern half-space is considered here.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/analytical-hillshading",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/analytical-hillshading",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation"
     ]
   },
   "deployment": {
@@ -1563,7 +1575,7 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
     },
     "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading",
   "correspondences": {
     "openeoEquivalence": {
       "level": "none",
@@ -1578,56 +1590,68 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
 ```jsonld
 {
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/terrain/hillshading/context.jsonld",
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/analytical-hillshading, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/analytical-hillshading, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading to https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading"
     }
   ],
   "prefLabel": "Analytical Hillshading",
   "definition": "This tool performs an analytical hillshade computation for an elevation grid. The 'Standard' method simply calculates the angle at which light coming from the position of the light source would hit the surface. This method can produce angles greater than 90 degree. With the second method all values are kept within the range of 0-90 degree. It can be enhanced with shadowing effects, where shadowed cells will be marked with a value of exactly 90 degree. 'Shadows Only' creates a mask for the shadowed areas and sets all other cells to no-data. 'Combined Shading' takes the values of the standard method and multiplies these with the normalized slope. 'Ambient Occlusion' is based on the concepts of Tarini et al. (2006), but only the northern half-space is considered here.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/analytical-hillshading",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/analytical-hillshading",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation"
     ]
   },
   "deployment": {
@@ -1639,7 +1663,7 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
     },
     "provenanceClass": "http://purl.org/wf4ever/wfprov#ProcessRun"
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading",
   "correspondences": {
     "openeoEquivalence": {
       "level": "none",
@@ -1655,7 +1679,7 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rim: <https://w3id.org/ogc/rim/> .
@@ -1663,53 +1687,64 @@ Registered ActivityType OWL class `https://geolabs.github.io/bblocks-process-pro
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading/actions/addition> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/addition> a rim:RegisterAction ;
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading> ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading/actions/d5-2026-11-09> a rim:RegisterAction ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
     prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading> ;
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading/actions/specialisation-2026-11-10> a rim:RegisterAction ;
-    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/analytical-hillshading, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/identifier-2026-11-17> a rim:RegisterAction ;
+    dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading to https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
+    prov:startedAtTime "2026-11-17T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rim:objectIdentifier ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading> ;
+    rim:changeClassification rim:clarifyingChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/specialisation-2026-11-10> a rim:RegisterAction ;
+    dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/analytical-hillshading, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
-    rim:appliesTo <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading> ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading> ;
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/SAGA.ta_lighting.0> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0> ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/terrain/SAGA.ta_lighting.0> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0> ;
     pp:version "1.0.0" .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading> a owl:Class,
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
-    rdfs:subClassOf <https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/analytical-hillshading> ;
+    rdfs:subClassOf <https://w3id.org/geolabs/ospd/generic-profiles/activity-type/analytical-hillshading> ;
+    owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading> ;
     skos:definition "This tool performs an analytical hillshade computation for an elevation grid. The 'Standard' method simply calculates the angle at which light coming from the position of the light source would hit the surface. This method can produce angles greater than 90 degree. With the second method all values are kept within the range of 0-90 degree. It can be enhanced with shadowing effects, where shadowed cells will be marked with a value of exactly 90 degree. 'Shadows Only' creates a mask for the shadowed areas and sets all other cells to no-data. 'Combined Shading' takes the values of the standard method and multiplies these with the normalized slope. 'Ambient Occlusion' is based on the concepts of Tarini et al. (2006), but only the northern half-space is considered here." ;
     skos:inScheme pp:process-type ;
     skos:prefLabel "Analytical Hillshading" ;
-    pp:deployment [ pp:processDescription <https://geolabs.github.io/bblocks-process-profiles/def/process/SAGA.ta_lighting.0> ;
+    pp:deployment [ pp:processDescription <https://w3id.org/geolabs/ospd/process-profiles/process/terrain/SAGA.ta_lighting.0> ;
             pp:profile "ospd.process-profiles.terrain.hillshading" ;
             pp:provenanceClass wfprov:ProcessRun ] ;
-    pp:implementsProfile <https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading> ;
+    pp:implementsProfile <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading> ;
     pp:openeoEquivalence [ pp:equivalenceLevel "none" ;
             pp:rationale "No openEO process computes a hillshade in the published bblocks-openeo register." ] ;
-    pp:phase <https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation> ;
+    pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation> ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
-    rim:hasAction <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading/actions/addition>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading/actions/d5-2026-11-09>,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading/actions/specialisation-2026-11-10> ;
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/addition>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/d5-2026-11-09>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/specialisation-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
-    rim:objectIdentifier "https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading"^^xsd:anyURI ;
+    rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading"^^xsd:anyURI ;
     rim:publicationStatus rim:published ;
     rim:validityStatus rim:invalid .
 
@@ -1752,13 +1787,13 @@ allOf:
       - NDIRS
       - RADIUS
       x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
     outputs:
       type: object
       required:
       - SHADE
       x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-      x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+      x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 $defs:
   processTypeEntry:
     $ref: https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/process-type/schema.yaml
@@ -1791,15 +1826,15 @@ $defs:
           - NDIRS
           - RADIUS
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
           type: object
           required:
           - SHADE
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
     - description: '`SAGA.ta_lighting.0` as the Implementation (instance level) of
-        `https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading`:
+        `https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading`:
         Table 21 keywords (E) and footnote-a metadata references (Table 22 roles)
         inherited from its Implementation Profile.'
       type: object
@@ -1833,7 +1868,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/concept
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis
           - contains:
               type: object
               required:
@@ -1843,7 +1878,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/generic
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading
           - contains:
               type: object
               required:
@@ -1853,7 +1888,7 @@ $defs:
                 role:
                   const: http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation
                 href:
-                  const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading
+                  const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading
           x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
         inputs:
           type: object
@@ -1869,7 +1904,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -1886,9 +1921,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/elevation
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/elevation
                   - contains:
                       type: object
                       required:
@@ -1896,9 +1931,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/elevation
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/elevation
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
             AZIMUTH:
               required:
@@ -1907,7 +1942,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/number
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/number
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -1924,9 +1959,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/azimuth
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/azimuth
                   - contains:
                       type: object
                       required:
@@ -1934,9 +1969,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/azimuth
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/azimuth
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
                 minOccurs:
                   type: integer
@@ -1950,7 +1985,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/number
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/number
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -1967,9 +2002,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/altitude
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/altitude
                   - contains:
                       type: object
                       required:
@@ -1977,9 +2012,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/altitude
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/altitude
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
                 minOccurs:
                   type: integer
@@ -1987,7 +2022,7 @@ $defs:
                   maximum: 1
                   x-jsonld-id: https://w3id.org/ogc/api/processes/minOccurs
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/input/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
           type: object
           required:
@@ -2000,7 +2035,7 @@ $defs:
               - metadata
               properties:
                 dataType:
-                  const: https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
                   x-jsonld-id: http://purl.org/dc/terms/type
                   x-jsonld-type: '@id'
                 keywords:
@@ -2017,9 +2052,9 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/outputs/result
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/outputs/result
                   - contains:
                       type: object
                       required:
@@ -2027,19 +2062,19 @@ $defs:
                       - href
                       properties:
                         role:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
-                          const: https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/outputs/result
+                          const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/outputs/result
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
-          x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/output/
+          x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 x-jsonld-extra-terms:
   type: '@type'
   ProcessRun: http://purl.org/wf4ever/wfprov#ProcessRun
   WorkflowRun: http://purl.org/wf4ever/wfprov#WorkflowRun
   WorkflowEngine: http://purl.org/wf4ever/wfprov#WorkflowEngine
   Artifact: http://purl.org/wf4ever/wfprov#Artifact
-  ProcessType: https://geolabs.github.io/bblocks-process-profiles/def/ProcessType
+  ProcessType: https://w3id.org/geolabs/ospd/process-profiles/ProcessType
   ActivityType: https://w3id.org/ogc/rim/activity-type/ActivityType
   owlClass: http://www.w3.org/2002/07/owl#Class
   subClassOf:
@@ -2048,7 +2083,7 @@ x-jsonld-extra-terms:
   title: http://purl.org/dc/terms/title
   description: http://purl.org/dc/terms/description
   keywords: http://purl.org/dc/terms/subject
-  version: https://geolabs.github.io/bblocks-process-profiles/def/version
+  version: https://w3id.org/geolabs/ospd/process-profiles/version
   mutable: https://w3id.org/ogc/api/processes/mutable
   jobControlOptions: https://w3id.org/ogc/api/processes/jobControlOptions
   minOccurs: https://w3id.org/ogc/api/processes/minOccurs
@@ -2104,7 +2139,7 @@ x-jsonld-extra-terms:
           '@base': http://www.iana.org/assignments/relation/
       type: http://purl.org/dc/terms/format
   processDescription:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/processDescription
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/processDescription
     x-jsonld-context:
       href:
         '@id': http://www.w3.org/2000/01/rdf-schema#seeAlso
@@ -2112,9 +2147,9 @@ x-jsonld-extra-terms:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
-  result: https://geolabs.github.io/bblocks-process-profiles/def/result
-  engine: https://geolabs.github.io/bblocks-process-profiles/def/engine
-  run: https://geolabs.github.io/bblocks-process-profiles/def/run
+  result: https://w3id.org/geolabs/ospd/process-profiles/result
+  engine: https://w3id.org/geolabs/ospd/process-profiles/engine
+  run: https://w3id.org/geolabs/ospd/process-profiles/run
   provType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@vocab'
@@ -2209,38 +2244,44 @@ x-jsonld-extra-terms:
   appliesTo:
     x-jsonld-id: https://w3id.org/ogc/rim/appliesTo
     x-jsonld-type: '@id'
+  affectedProperty:
+    x-jsonld-id: https://w3id.org/ogc/rim/affectedProperty
+    x-jsonld-type: '@id'
+  sameAs:
+    x-jsonld-id: http://www.w3.org/2002/07/owl#sameAs
+    x-jsonld-type: '@id'
   prefLabel: http://www.w3.org/2004/02/skos/core#prefLabel
   definition: http://www.w3.org/2004/02/skos/core#definition
   inScheme:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#inScheme
     x-jsonld-type: '@id'
-  status: https://geolabs.github.io/bblocks-process-profiles/def/status
+  status: https://w3id.org/geolabs/ospd/process-profiles/status
   classification: '@nest'
   correspondences: '@nest'
   phase:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/phase
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/phase
     x-jsonld-type: '@id'
-  deployment: https://geolabs.github.io/bblocks-process-profiles/def/deployment
-  profile: https://geolabs.github.io/bblocks-process-profiles/def/profile
+  deployment: https://w3id.org/geolabs/ospd/process-profiles/deployment
+  profile: https://w3id.org/geolabs/ospd/process-profiles/profile
   plan:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/plan
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/plan
     x-jsonld-context:
       license:
         '@id': http://purl.org/dc/terms/license
         '@type': '@id'
   Plan: http://www.w3.org/ns/prov#Plan
-  cwlClass: https://geolabs.github.io/bblocks-process-profiles/def/cwlClass
-  cwlId: https://geolabs.github.io/bblocks-process-profiles/def/cwlId
+  cwlClass: https://w3id.org/geolabs/ospd/process-profiles/cwlClass
+  cwlId: https://w3id.org/geolabs/ospd/process-profiles/cwlId
   provenanceClass:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/provenanceClass
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/provenanceClass
     x-jsonld-type: '@id'
   implementsProfile:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/implementsProfile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/implementsProfile
     x-jsonld-type: '@id'
-  cctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/cctDependency
-  candidateCctDependencies: https://geolabs.github.io/bblocks-process-profiles/def/candidateCctDependency
+  cctDependencies: https://w3id.org/geolabs/ospd/process-profiles/cctDependency
+  candidateCctDependencies: https://w3id.org/geolabs/ospd/process-profiles/candidateCctDependency
   hasStep:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/hasStep
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/hasStep
     x-jsonld-type: '@id'
   exactMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#exactMatch
@@ -2251,88 +2292,88 @@ x-jsonld-extra-terms:
   relatedMatch:
     x-jsonld-id: http://www.w3.org/2004/02/skos/core#relatedMatch
     x-jsonld-type: '@id'
-  openeoEquivalence: https://geolabs.github.io/bblocks-process-profiles/def/openeoEquivalence
-  level: https://geolabs.github.io/bblocks-process-profiles/def/equivalenceLevel
-  rationale: https://geolabs.github.io/bblocks-process-profiles/def/rationale
+  openeoEquivalence: https://w3id.org/geolabs/ospd/process-profiles/openeoEquivalence
+  level: https://w3id.org/geolabs/ospd/process-profiles/equivalenceLevel
+  rationale: https://w3id.org/geolabs/ospd/process-profiles/rationale
   decomposition:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/decomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/decomposition
     x-jsonld-container: '@list'
-  stage: https://geolabs.github.io/bblocks-process-profiles/def/stage
-  openeo: https://geolabs.github.io/bblocks-process-profiles/def/openeo
+  stage: https://w3id.org/geolabs/ospd/process-profiles/stage
+  openeo: https://w3id.org/geolabs/ospd/process-profiles/openeo
   note: http://www.w3.org/2004/02/skos/core#note
   serverSideFiles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/serverSideFile
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/serverSideFile
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      location: https://geolabs.github.io/bblocks-process-profiles/def/location
+      location: https://w3id.org/geolabs/ospd/process-profiles/location
   roleDecompositions:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/roleDecomposition
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/roleDecomposition
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       parts:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/part
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/part
         '@container': '@list'
       selectors:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/selector
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/selector
         '@context':
-          name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
+          name: https://w3id.org/geolabs/ospd/process-profiles/liveName
           values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reproducible:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/reproducible
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/reproducible
         '@type': http://www.w3.org/2001/XMLSchema#boolean
       note: http://www.w3.org/2004/02/skos/core#note
   unboundRoles:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/unboundRole
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/unboundRole
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       reason: http://www.w3.org/2004/02/skos/core#note
   fixedRoleValues:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/fixedRoleValue
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/fixedRoleValue
     x-jsonld-context:
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       values: http://www.w3.org/1999/02/22-rdf-syntax-ns#value
       reason: http://www.w3.org/2004/02/skos/core#note
   byReference:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/byReference
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/byReference
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
       note: http://www.w3.org/2004/02/skos/core#note
   notAttached:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/notAttached
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/notAttached
     x-jsonld-context:
       reason: http://www.w3.org/2004/02/skos/core#note
   assumedFormatGaps:
-    x-jsonld-id: https://geolabs.github.io/bblocks-process-profiles/def/assumedFormatGap
+    x-jsonld-id: https://w3id.org/geolabs/ospd/process-profiles/assumedFormatGap
     x-jsonld-context:
-      name: https://geolabs.github.io/bblocks-process-profiles/def/liveName
-      side: https://geolabs.github.io/bblocks-process-profiles/def/side
+      name: https://w3id.org/geolabs/ospd/process-profiles/liveName
+      side: https://w3id.org/geolabs/ospd/process-profiles/side
       implements:
-        '@id': https://geolabs.github.io/bblocks-process-profiles/def/implements
+        '@id': https://w3id.org/geolabs/ospd/process-profiles/implements
         '@type': '@id'
-      served: https://geolabs.github.io/bblocks-process-profiles/def/servedMediaType
+      served: https://w3id.org/geolabs/ospd/process-profiles/servedMediaType
       reason: http://www.w3.org/2004/02/skos/core#note
-      evidence: https://geolabs.github.io/bblocks-process-profiles/def/evidence
-x-jsonld-vocab: https://geolabs.github.io/bblocks-process-profiles/def/
+      evidence: https://w3id.org/geolabs/ospd/process-profiles/evidence
+x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/
 x-jsonld-prefixes:
   wfprov: http://purl.org/wf4ever/wfprov#
-  pp: https://geolabs.github.io/bblocks-process-profiles/def/
+  pp: https://w3id.org/geolabs/ospd/process-profiles/
   acttype: https://w3id.org/ogc/rim/activity-type/
   owl: http://www.w3.org/2002/07/owl#
   rdfs: http://www.w3.org/2000/01/rdf-schema#
@@ -2348,7 +2389,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.terrain.hillshading
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-16'
+  dateOfLastChange: '2026-11-18'
 
 ```
 
@@ -2363,10 +2404,10 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/",
     "inputs": {
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/input/",
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/input/",
         "schema": {
           "@context": {
             "@vocab": "https://w3id.org/ogc/api/schema/"
@@ -2380,7 +2421,7 @@ Links to the schema:
     },
     "outputs": {
       "@context": {
-        "@vocab": "https://geolabs.github.io/bblocks-process-profiles/def/output/",
+        "@vocab": "https://w3id.org/geolabs/ospd/process-profiles/output/",
         "schema": {
           "@context": {
             "@vocab": "https://w3id.org/ogc/api/schema/"
@@ -2620,6 +2661,14 @@ Links to the schema:
       "@id": "rim:appliesTo",
       "@type": "@id"
     },
+    "affectedProperty": {
+      "@id": "rim:affectedProperty",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "owl:sameAs",
+      "@type": "@id"
+    },
     "prefLabel": "skos:prefLabel",
     "definition": "skos:definition",
     "inScheme": {
@@ -2790,7 +2839,7 @@ Links to the schema:
     "dct": "http://purl.org/dc/terms/",
     "proc": "https://w3id.org/ogc/api/processes/",
     "wfprov": "http://purl.org/wf4ever/wfprov#",
-    "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "pp": "https://w3id.org/geolabs/ospd/process-profiles/",
     "acttype": "rim:activity-type/",
     "owl": "http://www.w3.org/2002/07/owl#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",

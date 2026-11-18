@@ -30,37 +30,37 @@
     {
       "title": "Process Concept: Raster Coverage Processing",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing"
     },
     {
       "title": "Generic Profile: Raster band math",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math"
     },
     {
       "title": "Implementation Profile: Raster band math",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math"
     }
   ],
   "inputs": {
     "il": {
       "title": "Image list of operands to the mathematical expression.",
       "description": "Image list of operands to the mathematical expression.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster band math -- input `rasters`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/rasters"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters"
         },
         {
           "title": "Implementation Profile: Raster band math -- input `rasters`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/rasters"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters"
         }
       ],
       "maxOccurs": 1024,
@@ -104,20 +104,20 @@
     "exp": {
       "title": "The muParser mathematical expression to apply on input images.",
       "description": "The muParser mathematical expression to apply on input images.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/expression",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/expression",
       "keywords": [
         "expression"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster band math -- input `expression`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/inputs/expression"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/expression"
         },
         {
           "title": "Implementation Profile: Raster band math -- input `expression`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/inputs/expression"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/expression"
         }
       ],
       "schema": {
@@ -139,20 +139,20 @@
     "out": {
       "title": "Output image which is the result of the mathematical expressions on input image list operands.",
       "description": "Output image which is the result of the mathematical expressions on input image list operands.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster band math -- output `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-band-math/outputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/outputs/raster"
         },
         {
           "title": "Implementation Profile: Raster band math -- output `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-band-math/outputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/outputs/raster"
         }
       ],
       "schema": {

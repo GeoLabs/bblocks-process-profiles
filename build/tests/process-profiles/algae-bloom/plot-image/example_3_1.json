@@ -18,17 +18,17 @@
     {
       "title": "Process Concept: Raster Coverage Processing",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/raster-coverage-processing"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing"
     },
     {
       "title": "Generic Profile: Raster rendering",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-rendering"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-rendering"
     },
     {
       "title": "Implementation Profile: Raster rendering",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering"
     },
     {
       "role": "https://schema.org/name",
@@ -72,20 +72,20 @@
     "input_image": {
       "title": "input_image",
       "description": "Image to map with the colors bins.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster rendering -- input `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-rendering/inputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-rendering/inputs/raster"
         },
         {
           "title": "Implementation Profile: Raster rendering -- input `raster`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering/inputs/raster"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering/inputs/raster"
         }
       ],
       "schema": {
@@ -113,20 +113,20 @@
     "color_scale": {
       "title": "Color mappings to bin scales to apply to the image.",
       "description": "JSON-like array with each item being an array of 2 elements, \nthe first for the bin scale value and the second for the RGB color.\nEach RGB value can be either a [0-1] floating point or a [0-255] integer.\n\nExample: '[ [0, [0,0,0]], [20, [0,0,255]], [50, [255,100,0]] ]'\n",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/colour-map",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/colour-map",
       "keywords": [
         "colour map"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster rendering -- input `colourMap`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-rendering/inputs/colourMap"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-rendering/inputs/colourMap"
         },
         {
           "title": "Implementation Profile: Raster rendering -- input `colourMap`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering/inputs/colourMap"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering/inputs/colourMap"
         }
       ],
       "schema": {
@@ -196,20 +196,20 @@
     "output_plot": {
       "title": "output_plot",
       "description": "",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/rendered-image",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/rendered-image",
       "keywords": [
         "image"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Raster rendering -- output `image`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/raster-rendering/outputs/image"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-rendering/outputs/image"
         },
         {
           "title": "Implementation Profile: Raster rendering -- output `image`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/raster-rendering/outputs/image"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering/outputs/image"
         }
       ],
       "schema": {

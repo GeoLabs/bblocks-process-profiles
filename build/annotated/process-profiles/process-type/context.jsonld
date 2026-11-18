@@ -384,6 +384,14 @@
     "ActivityType": "rim:activity-type/ActivityType",
     "owlClass": "owl:Class",
     "Plan": "prov:Plan",
+    "affectedProperty": {
+      "@id": "rim:affectedProperty",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "owl:sameAs",
+      "@type": "@id"
+    },
     "rim": "https://w3id.org/ogc/rim/",
     "prov": "http://www.w3.org/ns/prov#",
     "dct": "http://purl.org/dc/terms/",
@@ -392,7 +400,7 @@
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "owl": "http://www.w3.org/2002/07/owl#",
     "acttype": "rim:activity-type/",
-    "pp": "https://geolabs.github.io/bblocks-process-profiles/def/",
+    "pp": "https://w3id.org/geolabs/ospd/process-profiles/",
     "oa": "http://www.w3.org/ns/oa#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "@version": 1.1

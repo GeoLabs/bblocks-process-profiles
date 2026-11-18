@@ -3,7 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:kindgrove-steps:download-band> a wfprov:ProcessRun,
-        <https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band> ;
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/download_band/package> ;
     wfprov:usedInput <urn:example:entity:download-band:in:band>,
         <urn:example:entity:download-band:in:east>,

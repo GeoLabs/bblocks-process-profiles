@@ -4,7 +4,7 @@
     {
       "id": "urn:example:run:algae-bloom:calculate-band",
       "provType": "prov:Activity",
-      "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/calculate-band",
+      "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/calculate-band",
       "startedAtTime": "2026-09-23T06:40:28Z",
       "used": [
         "urn:example:entity:calculate-band:in:name",

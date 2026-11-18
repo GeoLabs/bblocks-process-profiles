@@ -18,17 +18,17 @@
     {
       "title": "Process Concept: Vector Geometry Processing",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/vector-geometry-processing"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing"
     },
     {
       "title": "Generic Profile: Geometry measure",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-measure"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-measure"
     },
     {
       "title": "Implementation Profile: Area",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/area"
     },
     {
       "title": "Demo"
@@ -52,20 +52,20 @@
     "InputPolygon": {
       "title": "Polygon to compute are",
       "description": "URI to a set of GML that describes the polygon.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/surface",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/surface",
       "keywords": [
         "geometry"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Geometry measure -- input `geometry`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-measure/inputs/geometry"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-measure/inputs/geometry"
         },
         {
           "title": "Implementation Profile: Area -- input `geometry`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area/inputs/geometry"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/area/inputs/geometry"
         },
         {
           "title": "Mon test"
@@ -93,20 +93,20 @@
     "Area": {
       "title": "Computed Area",
       "description": "The Computed Area Value",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/number",
       "keywords": [
         "number"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Geometry measure -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/geometry-measure/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-measure/outputs/result"
         },
         {
           "title": "Implementation Profile: Area -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/area/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/area/outputs/result"
         },
         {
           "title": "Mon test  "

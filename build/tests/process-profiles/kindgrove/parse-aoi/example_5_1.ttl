@@ -1,4 +1,4 @@
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 [] pp:east 9.535e+01 ;

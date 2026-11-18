@@ -1,4 +1,4 @@
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
 [] proc:inputs [ ns1:color_scale "[[0,[73,111,242]],[4,[130,211,95]],[8,[254,253,5]],[12,[253,0,4]],[16,[142,32,38]],[20,[217,124,245]]]" ;

@@ -1,14 +1,14 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/output/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <https://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://geolabs.github.io/bblocks-process-profiles/def/process/parse_aoi> dcterms:description "Splits an OGC bounding box into its west, south, east and north coordinates." ;
+<https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/parse_aoi> dcterms:description "Splits an OGC bounding box into its west, south, east and north coordinates." ;
     dcterms:subject "biomass",
         "carbon",
         "mangrove",
@@ -22,43 +22,43 @@
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "object" ;
-                            ns2:properties [ ns2:bbox [ proc:type "array" ;
-                                            ns2:items [ proc:type "number" ] ;
-                                            ns2:oneOf [ dcterms:description "2D bbox" ;
-                                                    ns2:maxItems 4 ;
-                                                    ns2:minItems 4 ],
-                                                [ dcterms:description "3D bbox" ;
-                                                    ns2:maxItems 6 ;
-                                                    ns2:minItems 6 ] ] ;
-                                    ns2:crs [ proc:default "\"CRS84\""^^rdf:JSON ;
+                            ns1:properties [ ns1:bbox [ proc:type "array" ;
+                                            ns1:items [ proc:type "number" ] ;
+                                            ns1:oneOf [ dcterms:description "3D bbox" ;
+                                                    ns1:maxItems 6 ;
+                                                    ns1:minItems 6 ],
+                                                [ dcterms:description "2D bbox" ;
+                                                    ns1:maxItems 4 ;
+                                                    ns1:minItems 4 ] ] ;
+                                    ns1:crs [ proc:default "\"CRS84\""^^rdf:JSON ;
                                             proc:enum "CRS84",
                                                 "CRS84h" ;
                                             proc:type "string" ] ] ;
-                            ns2:required "bbox" ] ] ] ;
+                            ns1:required "bbox" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "0.1.0" ;
+    proc:metadata [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value "0.1.0" ;
             proc:role schema:softwareVersion ],
         [ rdf:value "Parse area of interest" ;
             proc:role schema:name ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
         [ rdf:value "Splits an OGC bounding box into its west, south, east and north coordinates." ;
-            proc:role schema:description ] ;
+            proc:role schema:description ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns1:east [ dcterms:description "" ;
+    proc:outputs [ ns2:east [ dcterms:description "" ;
                     dcterms:title "east" ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns1:north [ dcterms:description "" ;
+            ns2:north [ dcterms:description "" ;
                     dcterms:title "north" ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns1:south [ dcterms:description "" ;
+            ns2:south [ dcterms:description "" ;
                     dcterms:title "south" ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns1:west [ dcterms:description "" ;
+            ns2:west [ dcterms:description "" ;
                     dcterms:title "west" ;
                     proc:schema [ proc:type "number" ] ] ] .
 

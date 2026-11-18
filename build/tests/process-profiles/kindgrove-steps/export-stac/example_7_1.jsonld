@@ -4,7 +4,7 @@
     {
       "id": "urn:example:run:kindgrove-steps:export-stac",
       "provType": "prov:Activity",
-      "activityType": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/export-stac",
+      "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/export-stac",
       "startedAtTime": "2026-09-24T10:59:47Z",
       "used": [
         "urn:example:entity:export-stac:in:mangrove_mask_file",

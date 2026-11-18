@@ -33,37 +33,37 @@
     {
       "title": "Process Concept: Terrain Analysis",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis"
     },
     {
       "title": "Generic Profile: Analytical hillshading",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading"
     },
     {
       "title": "Implementation Profile: Analytical hillshading",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading"
     }
   ],
   "inputs": {
     "ELEVATION": {
       "title": "Elevation",
       "description": "Elevation",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model",
       "keywords": [
         "elevation"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Analytical hillshading -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/elevation"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/elevation"
         },
         {
           "title": "Implementation Profile: Analytical hillshading -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/elevation"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/elevation"
         }
       ],
       "schema": {
@@ -126,20 +126,20 @@
     "AZIMUTH": {
       "title": "Azimuth",
       "description": "Direction of the light source, measured in degree clockwise from the North direction.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/number",
       "keywords": [
         "azimuth"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Analytical hillshading -- input `azimuth`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/azimuth"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/azimuth"
         },
         {
           "title": "Implementation Profile: Analytical hillshading -- input `azimuth`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/azimuth"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/azimuth"
         }
       ],
       "minOccurs": 0,
@@ -155,20 +155,20 @@
     "DECLINATION": {
       "title": "Height",
       "description": "Height of the light source, measured in degree above the horizon.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/number",
       "keywords": [
         "altitude"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Analytical hillshading -- input `altitude`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/inputs/altitude"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/altitude"
         },
         {
           "title": "Implementation Profile: Analytical hillshading -- input `altitude`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/inputs/altitude"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/altitude"
         }
       ],
       "minOccurs": 0,
@@ -269,20 +269,20 @@
     "SHADE": {
       "title": "Analytical Hillshading",
       "description": "The angle between the surface and the incoming light beams, measured in radians.",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Analytical hillshading -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/analytical-hillshading/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/outputs/result"
         },
         {
           "title": "Implementation Profile: Analytical hillshading -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/analytical-hillshading/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/outputs/result"
         }
       ],
       "schema": {

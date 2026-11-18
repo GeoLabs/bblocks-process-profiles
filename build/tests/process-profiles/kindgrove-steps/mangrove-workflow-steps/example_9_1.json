@@ -1,57 +1,69 @@
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps/actions/plan-2026-11-11",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps/actions/plan-2026-11-11",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#mangrove-workflow-steps). The processDescription is unchanged.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/mangrove-workflow-steps to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps"
     }
   ],
   "prefLabel": "Mangrove Biomass Workflow (step notebooks)",
   "definition": "Mangrove above-ground biomass and carbon stock estimation from Sentinel-2 L2A, split into one CommandLineTool per processing step, aligned on the steps of the OSPD W1 Algae Bloom workflow: parse_aoi -> select_scene -> download_band (x3) -> reproject_band (x3) -> calculate_indices -> estimate_biomass -> export_stac.",
   "subClassOf": "https://w3id.org/ogc/rim/activity-type/ActivityType",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/filter-configuration",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/data-retrieval",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/pre-processing",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/scientific-computation",
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/export-aggregation"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/filter-configuration",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/data-retrieval",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation",
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation"
     ]
   },
   "deployment": {
@@ -80,13 +92,13 @@
     "candidateCctDependencies": []
   },
   "hasStep": [
-    "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/parse-aoi-steps",
-    "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/select-scene",
-    "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/download-band",
-    "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band",
-    "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/calculate-indices",
-    "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/estimate-biomass",
-    "https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/export-stac"
+    "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/parse-aoi-steps",
+    "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene",
+    "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/download-band",
+    "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
+    "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/calculate-indices",
+    "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/estimate-biomass",
+    "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/export-stac"
   ],
   "correspondences": {
     "openeoEquivalence": {

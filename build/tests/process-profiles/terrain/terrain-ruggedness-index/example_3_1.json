@@ -32,37 +32,37 @@
     {
       "title": "Process Concept: Terrain Analysis",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/terrain-analysis"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis"
     },
     {
       "title": "Generic Profile: Terrain derivative",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative"
     },
     {
       "title": "Implementation Profile: Terrain ruggedness index",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/terrain-ruggedness-index"
     }
   ],
   "inputs": {
     "DEM": {
       "title": "Elevation",
       "description": "Elevation",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/elevation-model",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model",
       "keywords": [
         "elevation"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Terrain derivative -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/inputs/elevation"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/inputs/elevation"
         },
         {
           "title": "Implementation Profile: Terrain ruggedness index -- input `elevation`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index/inputs/elevation"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/terrain-ruggedness-index/inputs/elevation"
         }
       ],
       "schema": {
@@ -171,20 +171,20 @@
     "TRI": {
       "title": "Terrain Ruggedness Index (TRI)",
       "description": "Terrain Ruggedness Index (TRI)",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Terrain derivative -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/terrain-derivative/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/outputs/result"
         },
         {
           "title": "Implementation Profile: Terrain ruggedness index -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/terrain-ruggedness-index/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/terrain-ruggedness-index/outputs/result"
         }
       ],
       "schema": {

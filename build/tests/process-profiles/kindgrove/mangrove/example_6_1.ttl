@@ -1,5 +1,5 @@
-@prefix pp: <https://geolabs.github.io/bblocks-process-profiles/def/> .
+@prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 
-[] pp:result [ a <https://geolabs.github.io/bblocks-process-profiles/def/application/json> ;
+[] pp:result [ a <https://w3id.org/geolabs/ospd/process-profiles/application/json> ;
             pp:href "https://ospd.example.org/ogc-api/jobs/kindgrove-mangrove-0001/results/catalog.json" ] .
 

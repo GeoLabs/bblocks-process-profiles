@@ -30,37 +30,37 @@
     {
       "title": "Process Concept: Point Cloud Processing",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/concept",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/concept/point-cloud-processing"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/concept/point-cloud-processing"
     },
     {
       "title": "Generic Profile: Point cloud rasterization",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/generic",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-rasterization"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-rasterization"
     },
     {
       "title": "Implementation Profile: Point cloud to grid",
       "role": "http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation",
-      "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-grid"
+      "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid"
     }
   ],
   "inputs": {
     "POINTS": {
       "title": "Points",
       "description": "Points",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/point-cloud",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud",
       "keywords": [
         "point cloud"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Point cloud rasterization -- input `points`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-rasterization/inputs/points"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-rasterization/inputs/points"
         },
         {
           "title": "Implementation Profile: Point cloud to grid -- input `points`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-grid/inputs/points"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid/inputs/points"
         }
       ],
       "schema": {
@@ -107,20 +107,20 @@
     "CELLSIZE": {
       "title": "Cellsize",
       "description": "Cellsize",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/number",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/number",
       "keywords": [
         "cell size"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Point cloud rasterization -- input `cellSize`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-rasterization/inputs/cellSize"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-rasterization/inputs/cellSize"
         },
         {
           "title": "Implementation Profile: Point cloud to grid -- input `cellSize`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-input",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-grid/inputs/cellSize"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid/inputs/cellSize"
         }
       ],
       "minOccurs": 0,
@@ -136,20 +136,20 @@
     "GRID": {
       "title": "Z Value",
       "description": "Z Value",
-      "dataType": "https://geolabs.github.io/bblocks-data-types/def/data-type/raster-single-band",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
       "keywords": [
         "raster"
       ],
       "metadata": [
         {
           "title": "Generic Profile: Point cloud rasterization -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/generic-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/generic-profile/point-cloud-rasterization/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-rasterization/outputs/result"
         },
         {
           "title": "Implementation Profile: Point cloud to grid -- output `result`",
-          "role": "https://geolabs.github.io/bblocks-generic-profiles/def/role/implementation-output",
-          "href": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/point-cloud-to-grid/outputs/result"
+          "role": "https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output",
+          "href": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid/outputs/result"
         }
       ],
       "schema": {

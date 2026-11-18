@@ -1,84 +1,96 @@
 {
-  "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2",
+  "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2",
   "type": [
     "ProcessType",
     "owlClass",
     "ActivityType"
   ],
-  "objectIdentifier": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2",
+  "objectIdentifier": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2",
+  "sameAs": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2",
   "itemClass": "https://w3id.org/ogc/rim/activity-type/activityTypeItemClass",
-  "inRegister": "https://geolabs.github.io/bblocks-process-profiles/def/register",
+  "inRegister": "https://w3id.org/geolabs/ospd/process-profiles/register",
   "validityStatus": "invalid",
   "publicationStatus": "published",
   "hasAction": [
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2/actions/addition",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2/actions/d5-2026-11-09",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/d5-2026-11-09",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2/actions/tier3-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/tier3-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "Attached to the Implementation Profile https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2/actions/specialisation-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/specialisation-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
-      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/product-selection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/product-selection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Feature.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2/actions/inherited-description-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/inherited-description-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription.inherited.json added with the attachment to the Implementation Profile product-selection: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
     {
-      "id": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2/actions/by-reference-2026-11-10",
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/by-reference-2026-11-10",
       "type": "RegisterAction",
-      "actionType": "https://geolabs.github.io/bblocks-process-profiles/def/amendmentAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "byReference added: the output urls implements the role products of product-selection as URLs of the STAC Items, not the Items themselves (decision C1 of 2026-11-10).",
-      "proposer": "https://geolabs.github.io/bblocks-process-profiles/def/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
-      "appliesTo": "https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2"
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/identifier-2026-11-17",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "clarifying",
+      "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
+      "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2 to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     }
   ],
   "prefLabel": "Searches the specified catalog for Sentinel-2 products matching filtering criteria.",
   "definition": "Searches a catalog for Sentinel-2 products using filtering parameters and returns all matched locations. Returned matches will be either S3 or direct HTTPS references depending on the catalog.",
-  "subClassOf": "https://geolabs.github.io/bblocks-generic-profiles/def/activity-type/product-selection",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/product-selection",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Geometry",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
-  "inScheme": "https://geolabs.github.io/bblocks-process-profiles/def/process-type",
+  "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
   "classification": {
     "phase": [
-      "https://geolabs.github.io/bblocks-process-profiles/def/phase/selection-filtering"
+      "https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering"
     ]
   },
   "deployment": {
@@ -107,12 +119,12 @@
       "eoap.cct.string-format"
     ]
   },
-  "implementsProfile": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection",
+  "implementsProfile": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection",
   "byReference": [
     {
       "name": "urls",
       "side": "outputs",
-      "implements": "https://geolabs.github.io/bblocks-generic-profiles/def/implementation-profile/product-selection/outputs/products",
+      "implements": "https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection/outputs/products",
       "note": "The products are returned as URLs, not as STAC Items: STAC Item URLs for `catalog: earth-search` (served as application/geo+json by the STAC API: read, not observed), S3 URLs of SAFE products for `catalog: copernicus`, a format this Implementation Profile does not name."
     }
   ],

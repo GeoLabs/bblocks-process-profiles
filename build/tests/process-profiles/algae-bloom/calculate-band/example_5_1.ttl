@@ -1,4 +1,4 @@
-@prefix ns1: <https://geolabs.github.io/bblocks-process-profiles/def/input/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
 [] proc:inputs [ ns1:band_a [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/B01.tif" ;
