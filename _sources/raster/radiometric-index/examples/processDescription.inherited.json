@@ -48,6 +48,11 @@
       "title": "Input image",
       "description": "Input image",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -156,6 +161,11 @@
       "title": "Radiometric indices output image",
       "description": "Radiometric indices output image",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-png"
+      ],
       "keywords": [
         "raster"
       ],

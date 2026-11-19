@@ -71,6 +71,10 @@
       "title": "input_image",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -163,6 +167,9 @@
       "title": "result",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff"
+      ],
       "keywords": [
         "raster"
       ],

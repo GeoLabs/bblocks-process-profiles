@@ -112,3 +112,38 @@ pp:Tier4BoundRoleDataTypeShape a sh:NodeShape ;
     ] ;
     sh:property [ sh:path dct:type ; sh:minCount 1 ;
                   sh:message "A tier-4 input or output bound to an Implementation Profile role carries that role's dataType." ] .
+
+# Decision of 2026-11-18: the representations of a tier-4 input or output (gp:representation, the
+# term of tier 3) are df:Representation items of bblocks-data-formats, each realizing a version of the
+# input or output's own dataType -- exactly that data type, not a broader one. The generator derives
+# them from the formats the deployment declares; this shape checks what it wrote.
+# tests/tier4-representation-other-datatype-fail.ttl, tests/tier4-representation-not-a-representation-fail.ttl
+# and tests/tier4-datatype-control.ttl show it.
+pp:Tier4RepresentationShape a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT DISTINCT ?this WHERE {
+                ?process <https://w3id.org/ogc/api/processes/inputs> | <https://w3id.org/ogc/api/processes/outputs> ?roles .
+                ?roles ?role ?this .
+                ?this <https://w3id.org/geolabs/ospd/generic-profiles/representation> ?representation .
+            }
+        """
+    ] ;
+    sh:property [ sh:path <https://w3id.org/geolabs/ospd/generic-profiles/representation> ; sh:nodeKind sh:IRI ;
+                  sh:class <https://w3id.org/geolabs/ospd/data-formats/Representation> ;
+                  sh:message "A tier-4 representation is a df:Representation of the bblocks-data-formats register." ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "A tier-4 representation realizes a version of the dataType of its input or output." ;
+        sh:select """
+            SELECT $this ?value WHERE {
+                $this <https://w3id.org/geolabs/ospd/generic-profiles/representation> ?value .
+                FILTER NOT EXISTS {
+                    $this <http://purl.org/dc/terms/type> ?dataType .
+                    ?value <https://w3id.org/ogc/rim/realizes> ?version .
+                    ?version <https://w3id.org/ogc/rim/versionOf> ?dataType .
+                }
+            }
+        """
+    ] .

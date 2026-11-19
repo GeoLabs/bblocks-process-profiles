@@ -89,6 +89,10 @@ imports:
   # ospd.process-profiles.process-type need the dt:DataType concepts, through data-types.vocabulary.
   # Published 2026-11-12, like generic-profiles
   - https://geolabs.github.io/bblocks-data-types/build/register.json
+  # Data formats (content plane), for the representations of tier-4 inputs and outputs (decision of
+  # 2026-11-18): pp:Tier4RepresentationShape needs the df:Representation items and what they
+  # realize, through data-formats.vocabulary
+  - https://geolabs.github.io/bblocks-data-formats/build/register.json
 
 schema-oas30-downcompile: False
 

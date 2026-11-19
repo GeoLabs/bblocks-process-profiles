@@ -211,6 +211,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/eo-product
@@ -240,6 +241,10 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/product
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/eo-product-eo-geojson
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/eo-product-stac-item
                 minOccurs:
                   type: integer
                   minimum: 0
@@ -292,6 +297,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
@@ -321,3 +327,6 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/outputs/raster
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff

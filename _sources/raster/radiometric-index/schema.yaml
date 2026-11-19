@@ -116,6 +116,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
@@ -145,6 +146,11 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index/inputs/rasters
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-png
         outputs:
           type: object
           required:
@@ -155,6 +161,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
@@ -184,3 +191,8 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index/outputs/raster
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-png

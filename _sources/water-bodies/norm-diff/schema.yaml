@@ -180,6 +180,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
@@ -209,6 +210,9 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index-single-band/inputs/rasters
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
                 minOccurs:
                   type: integer
                   minimum: 0
@@ -223,6 +227,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
@@ -252,3 +257,6 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index-single-band/outputs/raster
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff

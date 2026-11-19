@@ -109,6 +109,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
@@ -138,11 +139,15 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/difference/inputs/geometry1
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml
             InputEntity2:
               required:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
@@ -172,6 +177,9 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/difference/inputs/geometry2
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml
         outputs:
           type: object
           required:
@@ -182,6 +190,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
@@ -211,3 +220,6 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/difference/outputs/result
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml

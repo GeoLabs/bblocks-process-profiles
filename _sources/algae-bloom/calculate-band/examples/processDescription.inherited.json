@@ -106,6 +106,10 @@
       "title": "band_a",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -147,6 +151,10 @@
       "title": "band_b",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -188,6 +196,10 @@
       "title": "band_c",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -229,6 +241,10 @@
       "title": "band_d",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -270,6 +286,10 @@
       "title": "band_e",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -311,6 +331,10 @@
       "title": "band_f",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -352,6 +376,10 @@
       "title": "band_g",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -393,6 +421,10 @@
       "title": "band_h",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -434,6 +466,10 @@
       "title": "band_i",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -475,6 +511,10 @@
       "title": "band_j",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -516,6 +556,10 @@
       "title": "band_k",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -557,6 +601,10 @@
       "title": "band_l",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -598,6 +646,10 @@
       "title": "band_m",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -639,6 +691,10 @@
       "title": "band_n",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -680,6 +736,10 @@
       "title": "band_o",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -721,6 +781,10 @@
       "title": "band_p",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -762,6 +826,10 @@
       "title": "band_q",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -803,6 +871,10 @@
       "title": "band_r",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -844,6 +916,10 @@
       "title": "band_s",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -885,6 +961,10 @@
       "title": "band_t",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -926,6 +1006,10 @@
       "title": "band_u",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -967,6 +1051,10 @@
       "title": "band_v",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -1008,6 +1096,10 @@
       "title": "band_w",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -1049,6 +1141,10 @@
       "title": "band_x",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -1090,6 +1186,10 @@
       "title": "band_y",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -1131,6 +1231,10 @@
       "title": "band_z",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -1174,6 +1278,9 @@
       "title": "result",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff"
+      ],
       "keywords": [
         "raster"
       ],

@@ -124,6 +124,7 @@ $defs:
           type: object
           required:
           - AZIMUTH
+          - DATE_MIN
           - DECLINATION
           - ELEVATION
           properties:
@@ -132,6 +133,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model
@@ -161,6 +163,12 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/elevation
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-png
             AZIMUTH:
               required:
               - dataType
@@ -237,6 +245,16 @@ $defs:
                   type: integer
                   minimum: 0
                   maximum: 1
+            DATE_MIN:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/date
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/date-string-date
         outputs:
           type: object
           required:
@@ -247,6 +265,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
@@ -276,3 +295,9 @@ $defs:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/outputs/result
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
