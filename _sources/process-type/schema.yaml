@@ -558,7 +558,7 @@ allOf:
             actionType:
               const: addition
             proposer:
-              const: https://w3id.org/geolabs/ospd/process-profiles/geolabs
+              const: https://w3id.org/geolabs/ospd/org/geolabs
             startedAtTime:
               type: string
               format: date-time
@@ -585,7 +585,7 @@ allOf:
             description:
               type: string
             proposer:
-              const: https://w3id.org/geolabs/ospd/process-profiles/geolabs
+              const: https://w3id.org/geolabs/ospd/org/geolabs
             startedAtTime:
               type: string
               format: date-time
@@ -610,7 +610,7 @@ allOf:
           actionType:
             const: addition
           proposer:
-            const: https://w3id.org/geolabs/ospd/process-profiles/geolabs
+            const: https://w3id.org/geolabs/ospd/org/geolabs
           startedAtTime:
             type: string
             format: date-time

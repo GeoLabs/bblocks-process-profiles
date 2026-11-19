@@ -33,7 +33,9 @@ SCRIPTS = ROOT / "scripts"
 BASE = "https://w3id.org/geolabs/ospd/process-profiles/"
 PTYPE_SCHEME = BASE + "process-type"
 PROCESS_TYPE_REGISTER = BASE + "register"
-GEOLABS_AGENT = BASE + "geolabs"
+# GeoLabs SARL: one agent IRI for the four OSPD registers, defined in the data-types register
+# (decision of 2026-11-19).
+GEOLABS_AGENT = "https://w3id.org/geolabs/ospd/org/geolabs"
 # Activity Type Register (ATR) terms. This is the only place that spells the ATR item class IRI:
 # upstream branch `model-tweaks` renames it to ActivityTypeItemClass. Entries take it from here
 # and sync_process_type_schema() writes it into _sources/process-type/schema.yaml.

@@ -4,7 +4,7 @@
   "abstract": "Candidate ActivityType register entry for each deployed OSPD process (decision D5: one per deployed process), its meaning kept apart from its six-phase classification, its deployment, its plan and its openEO correspondences, and linked to the Implementation Profile it implements, whose operation's activity type it then specialises. Its shapes check the data type of tier-4 inputs and outputs.",
   "status": "under-development",
   "dateTimeAddition": "2026-09-22T00:00:00Z",
-  "dateOfLastChange": "2026-11-10",
+  "dateOfLastChange": "2026-11-19",
   "version": "0.1",
   "itemClass": "schema",
   "register": "process-profiles",
