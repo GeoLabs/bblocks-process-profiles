@@ -68,6 +68,10 @@
       "@id": "dct:type",
       "@type": "@id"
     },
+    "representation": {
+      "@id": "https://w3id.org/geolabs/ospd/generic-profiles/representation",
+      "@type": "@id"
+    },
     "usedEntityType": {
       "@id": "acttype:usedEntityType",
       "@type": "@id"

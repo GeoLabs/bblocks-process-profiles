@@ -50,6 +50,16 @@
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18); the inputs/outputs of the deployment's own output ASPECT, output C_GENE, output C_PROF, output C_PLAN, output C_TANG, output C_LONG, output C_CROS, output C_MINI, output C_MAXI, output C_TOTA, output C_ROTO get a dataType (profiles.yaml data_types). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/slope"
     }
   ],
   "prefLabel": "Slope, Aspect, Curvature",

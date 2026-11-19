@@ -230,9 +230,9 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <http://www.iana.org/assignments/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -244,17 +244,17 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     dcterms:title "Create a buffer around a polygon. " ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Buffer/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns4:BufferDistance [ dcterms:description "Distance to be used to calculate buffer." ;
+    proc:inputs [ ns2:BufferDistance [ dcterms:description "Distance to be used to calculate buffer." ;
                     dcterms:title "Buffer Distance" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "10"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "number" ;
                             ns1:format "float" ] ] ;
-            ns4:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+            ns2:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to be buffered" ;
                     proc:metadata [ dcterms:title "Mon test  " ] ;
                     proc:schema [ ns1:oneOf [ proc:type "object" ],
@@ -269,14 +269,14 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:Result [ dcterms:description "GML stream describing the buffered polygon feature." ;
+    proc:outputs [ ns4:Result [ dcterms:description "GML stream describing the buffered polygon feature." ;
                     dcterms:title "Buffered Polygon" ;
                     proc:metadata [ dcterms:title "Mon test  " ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                    proc:schema [ ns1:oneOf [ proc:type "object" ],
+                                [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
-                                [ proc:type "object" ] ] ] ] .
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] .
 
 
 ```
@@ -341,6 +341,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Polygon to be buffered",
       "description": "URI to a set of GML that describes the polygon.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -406,6 +409,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Buffered Polygon",
       "description": "GML stream describing the buffered polygon feature.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/surface",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -501,6 +507,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Polygon to be buffered",
       "description": "URI to a set of GML that describes the polygon.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -566,6 +575,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Buffered Polygon",
       "description": "GML stream describing the buffered polygon feature.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/surface",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -606,9 +618,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns5: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -625,10 +638,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "Create a buffer around a polygon. " ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns5:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Buffer/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns3:BufferDistance [ dcterms:description "Distance to be used to calculate buffer." ;
+    proc:inputs [ ns2:BufferDistance [ dcterms:description "Distance to be used to calculate buffer." ;
                     dcterms:title "Buffer Distance" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/number> ;
                     proc:keywords "distance" ;
@@ -643,22 +656,23 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:nullable true ;
                             proc:type "number" ;
                             ns1:format "float" ] ] ;
-            ns3:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+            ns2:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to be buffered" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
+                    ns4:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Buffer -- input `geometry`" ;
+                    proc:metadata [ dcterms:title "Mon test  " ],
+                        [ dcterms:title "Implementation Profile: Buffer -- input `geometry`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/buffer/inputs/geometry> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
                         [ dcterms:title "Generic Profile: Geometry buffer -- input `geometry`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-buffer/inputs/geometry> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Mon test  " ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "object" ],
+                                [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
-                                [ proc:type "object" ] ] ] ] ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
@@ -668,29 +682,30 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         [ dcterms:title "Process Concept: Vector Geometry Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Demo" ],
         [ dcterms:title "Implementation Profile: Buffer" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/buffer> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Demo" ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:Result [ dcterms:description "GML stream describing the buffered polygon feature." ;
+    proc:outputs [ ns3:Result [ dcterms:description "GML stream describing the buffered polygon feature." ;
                     dcterms:title "Buffered Polygon" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/surface> ;
+                    ns4:representation <https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml> ;
                     proc:keywords "geometry" ;
                     proc:metadata [ dcterms:title "Implementation Profile: Buffer -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/buffer/outputs/result> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
-                        [ dcterms:title "Mon test  " ],
                         [ dcterms:title "Generic Profile: Geometry buffer -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-buffer/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
+                        [ dcterms:title "Mon test  " ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "object" ],
+                                [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
-                                [ proc:type "object" ] ] ] ] .
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] .
 
 
 ```
@@ -751,6 +766,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/buffer to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer"
     }
   ],
@@ -839,6 +864,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/buffer to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer"
     }
   ],
@@ -909,6 +944,14 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:changeClassification rim:clarifyingChange ;
     rim:proposer pp:geolabs .
 
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer/actions/representation-2026-11-18> a rim:RegisterAction ;
+    dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
+    prov:startedAtTime "2026-11-18T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/buffer, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
@@ -940,6 +983,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer/actions/addition>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer/actions/d5-2026-11-09>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer/actions/representation-2026-11-18>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/buffer/actions/specialisation-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
@@ -1077,6 +1121,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
@@ -1110,6 +1155,11 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/buffer/inputs/geometry
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
             BufferDistance:
               required:
               - dataType
@@ -1165,6 +1215,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/surface
@@ -1198,6 +1249,11 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/buffer/outputs/result
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 x-jsonld-extra-terms:
@@ -1232,6 +1288,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   dataType:
     x-jsonld-id: http://purl.org/dc/terms/type
+    x-jsonld-type: '@id'
+  representation:
+    x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
     x-jsonld-type: '@id'
   usedEntityType:
     x-jsonld-id: https://w3id.org/ogc/rim/activity-type/usedEntityType
@@ -1521,7 +1580,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.sqlmm.buffer
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-18'
+  dateOfLastChange: '2026-11-19'
 
 ```
 
@@ -1602,6 +1661,10 @@ Links to the schema:
     },
     "dataType": {
       "@id": "dct:type",
+      "@type": "@id"
+    },
+    "representation": {
+      "@id": "https://w3id.org/geolabs/ospd/generic-profiles/representation",
       "@type": "@id"
     },
     "usedEntityType": {

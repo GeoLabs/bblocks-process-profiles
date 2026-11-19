@@ -117,6 +117,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
@@ -150,6 +151,11 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/is-simple/inputs/geometry
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
@@ -229,6 +235,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   dataType:
     x-jsonld-id: http://purl.org/dc/terms/type
+    x-jsonld-type: '@id'
+  representation:
+    x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
     x-jsonld-type: '@id'
   usedEntityType:
     x-jsonld-id: https://w3id.org/ogc/rim/activity-type/usedEntityType
@@ -518,4 +527,4 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.sqlmm.is-simple
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-18'
+  dateOfLastChange: '2026-11-19'

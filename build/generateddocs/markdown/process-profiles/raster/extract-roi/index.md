@@ -821,7 +821,8 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                     ns1:contentMediaType "image/tiff" ] ] ] ;
             ns2:mode.fit.vect [ dcterms:description "The extent of the input vector file is computed and then gives a region of interest that will be extracted." ;
                     dcterms:title "The extent of the input vector file is computed and then gives a region of interest that will be extracted." ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                    proc:schema [ ns1:oneOf [ proc:type "object" ],
+                                [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
                                     ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
                                 [ proc:type "string" ;
@@ -829,8 +830,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                     ns1:contentMediaType "text/xml" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/zip" ],
-                                [ proc:type "object" ] ] ] ;
+                                    ns1:contentMediaType "application/zip" ] ] ] ;
             ns2:mode.radius.cx [ dcterms:description "This is the center coordinate of the radius mode, it will be either an ordinate or a latitude." ;
                     dcterms:title "This is the center coordinate of the radius mode, it will be either an ordinate or a latitude." ;
                     proc:schema [ proc:default "0"^^rdf:JSON ;
@@ -901,13 +901,13 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                     dcterms:title "Region of interest from the input image" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ] ] ] ] .
+                                    ns1:contentMediaType "image/png" ] ] ] ] .
 
 
 ```
@@ -967,6 +967,11 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Image to be processed.",
       "description": "Image to be processed.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -1036,6 +1041,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "mode.fit.im": {
       "title": "Reference image to define the ROI",
       "description": "Reference image to define the ROI",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -1059,6 +1070,11 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "mode.fit.vect": {
       "title": "The extent of the input vector file is computed and then gives a region of interest that will be extracted.",
       "description": "The extent of the input vector file is computed and then gives a region of interest that will be extracted.",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-kml"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -1263,6 +1279,11 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Region of interest from the input image",
       "description": "Region of interest from the input image",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -1356,6 +1377,11 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Image to be processed.",
       "description": "Image to be processed.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -1425,6 +1451,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "mode.fit.im": {
       "title": "Reference image to define the ROI",
       "description": "Reference image to define the ROI",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -1448,6 +1480,11 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "mode.fit.vect": {
       "title": "The extent of the input vector file is computed and then gives a region of interest that will be extracted.",
       "description": "The extent of the input vector file is computed and then gives a region of interest that will be extracted.",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-kml"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -1652,6 +1689,11 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Region of interest from the input image",
       "description": "Region of interest from the input image",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -1696,8 +1738,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns5: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -1712,7 +1755,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "Extract a ROI defined by the user." ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ExtractROI/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns2:elev [ dcterms:description "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory." ;
@@ -1734,6 +1777,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
             ns2:in [ dcterms:description "Image to be processed." ;
                     dcterms:title "Image to be processed." ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-png> ;
                     proc:keywords "raster" ;
                     proc:metadata [ dcterms:title "Implementation Profile: Raster crop -- input `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop/inputs/raster> ;
@@ -1743,10 +1789,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/jpeg" ] ] ] ;
@@ -1787,27 +1833,34 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:type "string" ] ] ;
             ns2:mode.fit.im [ dcterms:description "Reference image to define the ROI" ;
                     dcterms:title "Reference image to define the ROI" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-png> ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "image/jpeg" ] ] ] ;
             ns2:mode.fit.vect [ dcterms:description "The extent of the input vector file is computed and then gives a region of interest that will be extracted." ;
                     dcterms:title "The extent of the input vector file is computed and then gives a region of interest that will be extracted." ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-kml> ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/xml" ],
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/zip" ],
                                 [ proc:type "object" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
                                     ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/zip" ] ] ] ;
+                                    ns1:contentEncoding "utf-8" ;
+                                    ns1:contentMediaType "text/xml" ] ] ] ;
             ns2:mode.radius.cx [ dcterms:description "This is the center coordinate of the radius mode, it will be either an ordinate or a latitude." ;
                     dcterms:title "This is the center coordinate of the radius mode, it will be either an ordinate or a latitude." ;
                     proc:schema [ proc:default "0"^^rdf:JSON ;
@@ -1871,21 +1924,24 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Implementation Profile: Raster crop" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+    proc:metadata [ dcterms:title "Generic Profile: Raster crop" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-crop> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Process Concept: Raster Coverage Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Generic Profile: Raster crop" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-crop> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+        [ dcterms:title "Implementation Profile: Raster crop" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns4:out [ dcterms:description "Region of interest from the input image" ;
+    proc:outputs [ ns5:out [ dcterms:description "Region of interest from the input image" ;
                     dcterms:title "Region of interest from the input image" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-png> ;
                     proc:keywords "raster" ;
                     proc:metadata [ dcterms:title "Implementation Profile: Raster crop -- output `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop/outputs/raster> ;
@@ -1982,6 +2038,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18); the inputs/outputs of the deployment's own input mode.fit.im, input mode.fit.vect get a dataType (profiles.yaml data_types). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
     }
   ],
@@ -2121,6 +2187,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/extract-roi to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18); the inputs/outputs of the deployment's own input mode.fit.im, input mode.fit.vect get a dataType (profiles.yaml data_types). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi"
     }
   ],
@@ -2223,6 +2299,14 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:changeClassification rim:clarifyingChange ;
     rim:proposer pp:geolabs .
 
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/representation-2026-11-18> a rim:RegisterAction ;
+    dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18); the inputs/outputs of the deployment's own input mode.fit.im, input mode.fit.vect get a dataType (profiles.yaml data_types). Classified substantive: the form in which a part of the entry is stated changes." ;
+    prov:startedAtTime "2026-11-18T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-2026-11-09> a rim:RegisterAction ;
     dcterms:description "roleDecompositions added: the role areaOfInterest of raster-crop is taken as mode.extent.ulx, uly, lrx, lry and mode.extent.unit, with mode = extent (decision of 2026-11-09); before, the role was left unbound." ;
     prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
@@ -2269,17 +2353,18 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     pp:roleDecomposition [ skos:note "With `mode` set to `extent` and `mode.extent.unit` set to `phy` (coordinates in the image's physical space, its CRS) or `lonlat` (longitude and latitude), OTB ExtractROI takes the area of interest as the upper-left (`mode.extent.ulx`, `mode.extent.uly`) and lower-right (`mode.extent.lrx`, `mode.extent.lry`) corners, plain numbers, not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served. With the default unit `pxl` the four numbers are pixel indices, not a bounding box, and the role is not implemented." ;
             pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop/inputs/areaOfInterest> ;
             pp:part ( "mode.extent.ulx" "mode.extent.uly" "mode.extent.lrx" "mode.extent.lry" ) ;
-            pp:selector [ rdf:value "extent" ;
-                    pp:liveName "mode" ],
-                [ rdf:value "lonlat",
+            pp:selector [ rdf:value "lonlat",
                         "phy" ;
-                    pp:liveName "mode.extent.unit" ] ;
+                    pp:liveName "mode.extent.unit" ],
+                [ rdf:value "extent" ;
+                    pp:liveName "mode" ] ;
             pp:side "inputs" ] ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
     rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/addition>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/d5-2026-11-09>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/representation-2026-11-18>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-2026-11-09>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-unit-2026-11-10>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/specialisation-2026-11-10> ;
@@ -2450,12 +2535,15 @@ $defs:
           type: object
           required:
           - in
+          - mode.fit.im
+          - mode.fit.vect
           properties:
             in:
               required:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
@@ -2489,6 +2577,44 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop/inputs/raster
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            mode.fit.im:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            mode.fit.vect:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/geometry-kml
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
@@ -2501,6 +2627,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
@@ -2534,6 +2661,13 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop/outputs/raster
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 x-jsonld-extra-terms:
@@ -2568,6 +2702,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   dataType:
     x-jsonld-id: http://purl.org/dc/terms/type
+    x-jsonld-type: '@id'
+  representation:
+    x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
     x-jsonld-type: '@id'
   usedEntityType:
     x-jsonld-id: https://w3id.org/ogc/rim/activity-type/usedEntityType
@@ -2857,7 +2994,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.raster.extract-roi
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-18'
+  dateOfLastChange: '2026-11-19'
 
 ```
 
@@ -2938,6 +3075,10 @@ Links to the schema:
     },
     "dataType": {
       "@id": "dct:type",
+      "@type": "@id"
+    },
+    "representation": {
+      "@id": "https://w3id.org/geolabs/ospd/generic-profiles/representation",
       "@type": "@id"
     },
     "usedEntityType": {

@@ -80,6 +80,14 @@
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/representation-2026-11-18> a rim:RegisterAction ;
+    dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
+    prov:startedAtTime "2026-11-18T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/role-decompositions-2026-11-10> a rim:RegisterAction ;
     dcterms:description "roleDecompositions added: the role areaOfInterest of band-retrieval is taken as the two inputs aoi (four numbers in one string) and epsg (their CRS), neither of which carries its representation." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
@@ -142,6 +150,7 @@
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/identifier-2026-11-17>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/inherited-description-2026-11-10>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/plan-2026-11-11>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/representation-2026-11-18>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/role-decompositions-2026-11-10>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/specialisation-2026-11-10>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/crop/actions/tier3-2026-11-10> ;

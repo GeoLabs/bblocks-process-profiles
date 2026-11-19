@@ -1,8 +1,9 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://schema.org/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns3: <https://w3id.org/ogc/api/schema/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <http://schema.org/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns5: <https://w3id.org/geolabs/ospd/generic-profiles/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -40,17 +41,19 @@ Example: '[ [0, [0,0,0]], [20, [0,0,255]], [50, [255,100,0]] ]'
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/colour-map> ;
                     proc:keywords "colour map" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster rendering -- input `colourMap`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering/inputs/colourMap> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster rendering -- input `colourMap`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster rendering -- input `colourMap`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-rendering/inputs/colourMap> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster rendering -- input `colourMap`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering/inputs/colourMap> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
             ns4:input_image [ dcterms:description "Image to map with the colors bins." ;
                     dcterms:title "input_image" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
+                    ns5:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
                     proc:metadata [ dcterms:title "Implementation Profile: Raster rendering -- input `raster`" ;
@@ -60,15 +63,15 @@ Example: '[ [0, [0,0,0]], [20, [0,0,255]], [50, [255,100,0]] ]'
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-rendering/inputs/raster> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 1 ;
-                    proc:schema [ ns3:oneOf [ proc:type "string" ;
-                                    ns3:contentEncoding "binary" ;
-                                    ns3:contentMediaType "image/tiff" ],
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns3:contentEncoding "binary" ;
-                                    ns3:contentMediaType "image/tiff; application=geotiff" ],
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/jp2" ],
                                 [ proc:type "string" ;
-                                    ns3:contentEncoding "binary" ;
-                                    ns3:contentMediaType "image/jp2" ] ] ] ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
             ns4:output_name [ dcterms:description "" ;
                     dcterms:title "output_name" ;
                     proc:maxOccurs 1 ;
@@ -87,49 +90,52 @@ Example: '[ [0, [0,0,0]], [20, [0,0,255]], [50, [255,100,0]] ]'
                     proc:minOccurs 0 ;
                     proc:schema [ proc:type "string" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "Applies the specified color mapping with scaled bins to a geospatial image." ;
-            proc:role schema:description ],
-        [ rdf:value "Plots an image with colors." ;
-            proc:role schema:name ],
+    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
             proc:role schema:license ],
+        [ rdf:value "Plots an image with colors." ;
+            proc:role schema:name ],
         [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
             proc:role schema:codeRepository ],
+        [ rdf:value "Applies the specified color mapping with scaled bins to a geospatial image." ;
+            proc:role schema:description ],
+        [ rdf:value [ a ns2:Person ;
+                    ns2:email "francis.charette-migneault@crim.ca" ;
+                    ns2:identifier "http://orcid.org/0000-0003-4862-3349" ;
+                    ns2:name "Francis Charette-Migneault" ] ;
+            proc:role schema:author ],
         [ dcterms:title "Generic Profile: Raster rendering" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-rendering> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ rdf:value [ a ns1:Person ;
-                    ns1:email "francis.charette-migneault@crim.ca" ;
-                    ns1:identifier "http://orcid.org/0000-0003-4862-3349" ;
-                    ns1:name "Francis Charette-Migneault" ] ;
-            proc:role schema:author ],
-        [ rdf:value "1.0.0" ;
-            proc:role schema:softwareVersion ],
         [ dcterms:title "Implementation Profile: Raster rendering" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ rdf:value "1.0.0" ;
+            proc:role schema:softwareVersion ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:output_file [ dcterms:description "" ;
+    proc:outputs [ ns3:output_file [ dcterms:description "" ;
                     dcterms:title "output_file" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
+                    ns5:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff> ;
                     proc:schema [ proc:type "string" ;
-                            ns3:contentEncoding "binary" ;
-                            ns3:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns2:output_plot [ dcterms:description "" ;
+                            ns1:contentEncoding "binary" ;
+                            ns1:contentMediaType "image/tiff; application=geotiff" ] ] ;
+            ns3:output_plot [ dcterms:description "" ;
                     dcterms:title "output_plot" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/rendered-image> ;
+                    ns5:representation <https://w3id.org/geolabs/ospd/data-formats/representation/rendered-image-png> ;
                     proc:keywords "image" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster rendering -- output `image`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering/outputs/image> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
-                        [ dcterms:title "Generic Profile: Raster rendering -- output `image`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster rendering -- output `image`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-rendering/outputs/image> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Raster rendering -- output `image`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-rendering/outputs/image> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
                     proc:schema [ proc:type "string" ;
-                            ns3:contentEncoding "binary" ;
-                            ns3:contentMediaType "image/png" ] ] ] .
+                            ns1:contentEncoding "binary" ;
+                            ns1:contentMediaType "image/png" ] ] ] .
 

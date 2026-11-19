@@ -50,6 +50,9 @@
       "title": "raster",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff"
+      ],
       "keywords": [
         "raster"
       ],
@@ -79,6 +82,9 @@
       "title": "binary_mask_item",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/binary-mask",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/binary-mask-geotiff"
+      ],
       "keywords": [
         "mask"
       ],

@@ -1,8 +1,9 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <http://schema.org/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns4: <https://w3id.org/ogc/api/schema/> .
+@prefix ns5: <https://w3id.org/geolabs/ospd/generic-profiles/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -57,21 +58,29 @@ the 'common band name' associated to the band
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/eo-product> ;
                     proc:keywords "product" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Generic Profile: Band retrieval -- input `product`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/inputs/product> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Band retrieval -- input `product`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Band retrieval -- input `product`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/inputs/product> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Band retrieval -- input `product`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/inputs/product> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
+    proc:metadata [ dcterms:title "Implementation Profile: Band retrieval" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
             proc:role schema:codeRepository ],
         [ rdf:value "1.1.0" ;
             proc:role schema:softwareVersion ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
             proc:role schema:license ],
+        [ rdf:value "Downloads Sentinel-2 GeoTiff from STAC Item." ;
+            proc:role schema:name ],
+        [ dcterms:title "Process Concept: Data Discovery and Access" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/data-discovery-and-access> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ rdf:value """Downloads the GeoTiff band from the Sentinel-2 product STAC Item
 using the requested band selection criteria. It is assumed that
 the referenced STAC Item contains the desired GeoTiff Asset with
@@ -84,23 +93,16 @@ the 'common band name' associated to the band
                     ns1:identifier "http://orcid.org/0000-0003-4862-3349" ;
                     ns1:name "Francis Charette-Migneault" ] ;
             proc:role schema:author ],
-        [ rdf:value "Downloads Sentinel-2 GeoTiff from STAC Item." ;
-            proc:role schema:name ],
-        [ dcterms:title "Process Concept: Data Discovery and Access" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/data-discovery-and-access> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Implementation Profile: Band retrieval" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ dcterms:title "Generic Profile: Band retrieval" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns4:product [ dcterms:description "" ;
+    proc:outputs [ ns2:product [ dcterms:description "" ;
                     dcterms:title "product" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
+                    ns5:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff> ;
                     proc:keywords "raster" ;
                     proc:metadata [ dcterms:title "Generic Profile: Band retrieval -- output `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/band-retrieval/outputs/raster> ;
@@ -109,6 +111,6 @@ the 'common band name' associated to the band
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/band-retrieval/outputs/raster> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
                     proc:schema [ proc:type "string" ;
-                            ns2:contentEncoding "binary" ;
-                            ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] .
+                            ns4:contentEncoding "binary" ;
+                            ns4:contentMediaType "image/tiff; application=geotiff" ] ] ] .
 

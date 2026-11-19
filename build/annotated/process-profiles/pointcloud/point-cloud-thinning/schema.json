@@ -175,7 +175,8 @@
                   "required": [
                     "dataType",
                     "keywords",
-                    "metadata"
+                    "metadata",
+                    "representation"
                   ],
                   "properties": {
                     "dataType": {
@@ -231,6 +232,13 @@
                         }
                       ],
                       "x-jsonld-id": "https://w3id.org/ogc/api/processes/metadata"
+                    },
+                    "representation": {
+                      "const": [
+                        "https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las"
+                      ],
+                      "x-jsonld-id": "https://w3id.org/geolabs/ospd/generic-profiles/representation",
+                      "x-jsonld-type": "@id"
                     }
                   }
                 },
@@ -317,7 +325,8 @@
                   "required": [
                     "dataType",
                     "keywords",
-                    "metadata"
+                    "metadata",
+                    "representation"
                   ],
                   "properties": {
                     "dataType": {
@@ -373,6 +382,13 @@
                         }
                       ],
                       "x-jsonld-id": "https://w3id.org/ogc/api/processes/metadata"
+                    },
+                    "representation": {
+                      "const": [
+                        "https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las"
+                      ],
+                      "x-jsonld-id": "https://w3id.org/geolabs/ospd/generic-profiles/representation",
+                      "x-jsonld-type": "@id"
                     }
                   }
                 }
@@ -422,6 +438,10 @@
     },
     "dataType": {
       "x-jsonld-id": "http://purl.org/dc/terms/type",
+      "x-jsonld-type": "@id"
+    },
+    "representation": {
+      "x-jsonld-id": "https://w3id.org/geolabs/ospd/generic-profiles/representation",
       "x-jsonld-type": "@id"
     },
     "usedEntityType": {
@@ -798,6 +818,6 @@
     "itemIdentifier": "ospd.process-profiles.pointcloud.point-cloud-thinning",
     "register": "https://geolabs.github.io/bblocks-process-profiles/build/register.json",
     "version": "0.1",
-    "dateOfLastChange": "2026-11-18"
+    "dateOfLastChange": "2026-11-19"
   }
 }

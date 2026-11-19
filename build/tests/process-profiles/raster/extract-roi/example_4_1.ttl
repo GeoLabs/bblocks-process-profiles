@@ -34,6 +34,14 @@
     rim:changeClassification rim:clarifyingChange ;
     rim:proposer pp:geolabs .
 
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/representation-2026-11-18> a rim:RegisterAction ;
+    dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18); the inputs/outputs of the deployment's own input mode.fit.im, input mode.fit.vect get a dataType (profiles.yaml data_types). Classified substantive: the form in which a part of the entry is stated changes." ;
+    prov:startedAtTime "2026-11-18T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-2026-11-09> a rim:RegisterAction ;
     dcterms:description "roleDecompositions added: the role areaOfInterest of raster-crop is taken as mode.extent.ulx, uly, lrx, lry and mode.extent.unit, with mode = extent (decision of 2026-11-09); before, the role was left unbound." ;
     prov:startedAtTime "2026-11-09T00:00:00+00:00"^^xsd:dateTime ;
@@ -80,17 +88,18 @@
     pp:roleDecomposition [ skos:note "With `mode` set to `extent` and `mode.extent.unit` set to `phy` (coordinates in the image's physical space, its CRS) or `lonlat` (longitude and latitude), OTB ExtractROI takes the area of interest as the upper-left (`mode.extent.ulx`, `mode.extent.uly`) and lower-right (`mode.extent.lrx`, `mode.extent.lry`) corners, plain numbers, not as one OGC API - Processes bounding box: the representation bounding-box-ogcapi-processes-bbox of the role is not served. With the default unit `pxl` the four numbers are pixel indices, not a bounding box, and the role is not implemented." ;
             pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-crop/inputs/areaOfInterest> ;
             pp:part ( "mode.extent.ulx" "mode.extent.uly" "mode.extent.lrx" "mode.extent.lry" ) ;
-            pp:selector [ rdf:value "extent" ;
-                    pp:liveName "mode" ],
-                [ rdf:value "lonlat",
+            pp:selector [ rdf:value "lonlat",
                         "phy" ;
-                    pp:liveName "mode.extent.unit" ] ;
+                    pp:liveName "mode.extent.unit" ],
+                [ rdf:value "extent" ;
+                    pp:liveName "mode" ] ;
             pp:side "inputs" ] ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
     rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/addition>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/d5-2026-11-09>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/representation-2026-11-18>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-2026-11-09>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/role-decomposition-unit-2026-11-10>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extract-roi/actions/specialisation-2026-11-10> ;

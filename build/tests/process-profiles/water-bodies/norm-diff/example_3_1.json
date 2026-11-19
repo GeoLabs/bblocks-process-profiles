@@ -50,6 +50,9 @@
       "title": "rasters",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff"
+      ],
       "keywords": [
         "raster"
       ],
@@ -82,6 +85,9 @@
       "title": "ndwi",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff"
+      ],
       "keywords": [
         "raster"
       ],

@@ -1,8 +1,9 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns5: <https://w3id.org/geolabs/ospd/generic-profiles/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -17,20 +18,21 @@
     dcterms:title "Computes the centroid of a polygon. " ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Centroid/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns2:InputPolygon [ dcterms:description "The centroid which is not necessarily within the geometry." ;
+    proc:inputs [ ns4:InputPolygon [ dcterms:description "The centroid which is not necessarily within the geometry." ;
                     dcterms:title "Polygon to get the centroid" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/surface> ;
+                    ns5:representation <https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Mon test  " ],
-                        [ dcterms:title "Implementation Profile: Centroid -- input `geometry`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Centroid -- input `geometry`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/centroid/inputs/geometry> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
                         [ dcterms:title "Generic Profile: Unary geometry operation -- input `geometry`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-geometry-operation/inputs/geometry> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Mon test  " ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
@@ -42,30 +44,31 @@
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation" ;
+    proc:metadata [ dcterms:title "Implementation Profile: Centroid" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/centroid> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Generic Profile: Unary geometry operation" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-geometry-operation> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Demo" ],
         [ dcterms:title "Process Concept: Vector Geometry Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Implementation Profile: Centroid" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/centroid> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:Result [ dcterms:description "JSON String / GML Entity of the centroid" ;
+    proc:outputs [ ns2:Result [ dcterms:description "JSON String / GML Entity of the centroid" ;
                     dcterms:title "The Centroid" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/point> ;
+                    ns5:representation <https://w3id.org/geolabs/ospd/data-formats/representation/point-gml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation -- output `result`" ;
+                    proc:metadata [ dcterms:title "Mon test  " ],
+                        [ dcterms:title "Generic Profile: Unary geometry operation -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-geometry-operation/outputs/result> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
                         [ dcterms:title "Implementation Profile: Centroid -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/centroid/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
-                        [ dcterms:title "Mon test  " ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;

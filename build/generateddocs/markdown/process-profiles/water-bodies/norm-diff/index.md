@@ -205,9 +205,9 @@ OGC API - Processes processDescription derived from the CWL.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -217,29 +217,29 @@ OGC API - Processes processDescription derived from the CWL.
 <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/norm_diff> dcterms:description "Process converted from CWL" ;
     dcterms:title "norm_diff" ;
     pp:version "1.4.1" ;
-    proc:inputs [ ns1:rasters [ dcterms:description "" ;
+    proc:inputs [ ns3:rasters [ dcterms:description "" ;
                     dcterms:title "rasters" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "array" ;
-                            ns2:items [ proc:type "string" ;
-                                    ns2:contentEncoding "binary" ;
-                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ] ;
+                            ns1:items [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "norm_diff" ;
-            proc:role schema:name ],
+    proc:metadata [ rdf:value "Process converted from CWL" ;
+            proc:role schema:description ],
         [ rdf:value "1.4.1" ;
             proc:role schema:softwareVersion ],
-        [ rdf:value "Process converted from CWL" ;
-            proc:role schema:description ] ;
+        [ rdf:value "norm_diff" ;
+            proc:role schema:name ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:ndwi [ dcterms:description "" ;
+    proc:outputs [ ns2:ndwi [ dcterms:description "" ;
                     dcterms:title "ndwi" ;
                     proc:schema [ proc:type "string" ;
-                            ns2:contentEncoding "binary" ;
-                            ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] .
+                            ns1:contentEncoding "binary" ;
+                            ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] .
 
 
 ```
@@ -301,6 +301,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "rasters",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff"
+      ],
       "keywords": [
         "raster"
       ],
@@ -333,6 +336,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "ndwi",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff"
+      ],
       "keywords": [
         "raster"
       ],
@@ -414,6 +420,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "rasters",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff"
+      ],
       "keywords": [
         "raster"
       ],
@@ -446,6 +455,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "ndwi",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff"
+      ],
       "keywords": [
         "raster"
       ],
@@ -475,8 +487,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/generic-profiles/> .
 @prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -492,6 +505,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     proc:inputs [ ns3:rasters [ dcterms:description "" ;
                     dcterms:title "rasters" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
                     proc:metadata [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters) -- input `rasters`" ;
@@ -508,25 +522,26 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     proc:jobControlOptions "async-execute" ;
     proc:metadata [ rdf:value "1.4.1" ;
             proc:role schema:softwareVersion ],
-        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters)" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index-single-band> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ rdf:value "Process converted from CWL" ;
+            proc:role schema:description ],
+        [ rdf:value "norm_diff" ;
+            proc:role schema:name ],
         [ dcterms:title "Generic Profile: Radiometric index" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/radiometric-index> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ rdf:value "norm_diff" ;
-            proc:role schema:name ],
-        [ rdf:value "Process converted from CWL" ;
-            proc:role schema:description ],
-        [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters)" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index-single-band> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:ndwi [ dcterms:description "" ;
+    proc:outputs [ ns4:ndwi [ dcterms:description "" ;
                     dcterms:title "ndwi" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff> ;
                     proc:keywords "raster" ;
                     proc:metadata [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters) -- output `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index-single-band/outputs/raster> ;
@@ -645,9 +660,9 @@ Part 2 deploy body: the execution unit is a link to the pinned CWL.
 @prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 
-[] proc:inputs [ ns1:rasters [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_nir.tif" ;
+[] proc:inputs [ ns1:rasters [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_green.tif" ;
                     proc:type "image/tiff; application=geotiff" ],
-                [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_green.tif" ;
+                [ ns1:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_nir.tif" ;
                     proc:type "image/tiff; application=geotiff" ] ] ;
     proc:response "document" .
 
@@ -1053,6 +1068,16 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff"
     }
   ],
   "prefLabel": "Normalized difference between two rasters",
@@ -1225,6 +1250,16 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff"
     }
   ],
   "prefLabel": "Normalized difference between two rasters",
@@ -1364,6 +1399,14 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:changeClassification rim:substantiveChange ;
     rim:proposer pp:geolabs .
 
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff/actions/representation-2026-11-18> a rim:RegisterAction ;
+    dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
+    prov:startedAtTime "2026-11-18T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/radiometric-index, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
@@ -1423,6 +1466,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff/actions/identifier-2026-11-17>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff/actions/inherited-description-2026-11-10>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff/actions/plan-2026-11-11>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff/actions/representation-2026-11-18>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff/actions/specialisation-2026-11-10>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff/actions/tier3-2026-11-10>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff/actions/unbound-roles-2026-11-10> ;
@@ -2429,10 +2473,10 @@ id:8d6db404-8e9b-4740-bc17-6a2fab7c0c32 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_crop" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:8bbef2fa-3721-4f50-b27c-1d641100a89f ],
-        [ a prov:Association ;
             prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop> ] ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop> ],
+        [ a prov:Association ;
+            prov:agent id:8bbef2fa-3721-4f50-b27c-1d641100a89f ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:11:25.695175"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
@@ -2440,6 +2484,10 @@ id:8d6db404-8e9b-4740-bc17-6a2fab7c0c32 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:09:38.001367"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:09:38.075291"^^xsd:dateTime ;
+            prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/epsg> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:38.074291"^^xsd:dateTime ;
             prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/aoi> ],
@@ -2450,11 +2498,7 @@ id:8d6db404-8e9b-4740-bc17-6a2fab7c0c32 a wfprov:ProcessRun,
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:38.075873"^^xsd:dateTime ;
             prov:entity data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/item> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:38.075291"^^xsd:dateTime ;
-            prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/epsg> ] .
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/item> ] .
 
 id:b3b5dbf6-efbd-48f2-ba85-a9937bb49c7e a wf4ever:File,
         wfprov:Artifact,
@@ -2478,18 +2522,18 @@ id:eb53f504-eecb-4585-8e33-f7afdbbf816a a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:42580139-e758-4dbe-8ca8-7a114f7abf7f ],
+            provext:member id:b3b5dbf6-efbd-48f2-ba85-a9937bb49c7e ],
         [ a provext:Membership ;
-            provext:member id:b3b5dbf6-efbd-48f2-ba85-a9937bb49c7e ] .
+            provext:member id:42580139-e758-4dbe-8ca8-7a114f7abf7f ] .
 
 id:f47bdfb0-199b-4f9a-93c9-1bc6e9427cc5 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_crop_2" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2> ],
+            prov:agent id:c2b78598-db7e-4ab3-89eb-621c7b5c9bd6 ],
         [ a prov:Association ;
-            prov:agent id:c2b78598-db7e-4ab3-89eb-621c7b5c9bd6 ] ;
+            prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:14:14.382774"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
@@ -2517,10 +2561,10 @@ id:f960d24b-dcbf-4c16-88ce-ad7029487e59 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_normalized_difference" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:87ca5fb7-8991-4f4e-b107-8b30f9be5eea ],
-        [ a prov:Association ;
             prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference> ] ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference> ],
+        [ a prov:Association ;
+            prov:agent id:87ca5fb7-8991-4f4e-b107-8b30f9be5eea ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:14:35.757176"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
@@ -2573,17 +2617,17 @@ id:006f10ba-bce7-4602-bc25-46f0ca2c5724 a wfprov:WorkflowRun,
             prov:atTime "2026-09-23T22:09:36.483742"^^xsd:dateTime ;
             prov:hadActivity id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:37.997833"^^xsd:dateTime ;
-            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/aoi> ],
+            prov:atTime "2026-09-23T22:09:37.999442"^^xsd:dateTime ;
+            prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/epsg> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:37.998964"^^xsd:dateTime ;
             prov:entity id:1f7549f8-4403-44f2-a435-f95a32edb9de ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/bands> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:37.999442"^^xsd:dateTime ;
-            prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/epsg> ] ;
+            prov:atTime "2026-09-23T22:09:37.997833"^^xsd:dateTime ;
+            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/aoi> ] ;
     prov:startedAtTime "2026-09-23T22:09:36.483701"^^xsd:dateTime .
 
 
@@ -2792,6 +2836,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
@@ -2825,6 +2870,11 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index-single-band/inputs/rasters
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
                 minOccurs:
                   type: integer
                   minimum: 0
@@ -2842,6 +2892,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
@@ -2875,6 +2926,11 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index-single-band/outputs/raster
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 x-jsonld-extra-terms:
@@ -2909,6 +2965,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   dataType:
     x-jsonld-id: http://purl.org/dc/terms/type
+    x-jsonld-type: '@id'
+  representation:
+    x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
     x-jsonld-type: '@id'
   usedEntityType:
     x-jsonld-id: https://w3id.org/ogc/rim/activity-type/usedEntityType
@@ -3198,7 +3257,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.water-bodies.norm-diff
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-18'
+  dateOfLastChange: '2026-11-19'
 
 ```
 
@@ -3279,6 +3338,10 @@ Links to the schema:
     },
     "dataType": {
       "@id": "dct:type",
+      "@type": "@id"
+    },
+    "representation": {
+      "@id": "https://w3id.org/geolabs/ospd/generic-profiles/representation",
       "@type": "@id"
     },
     "usedEntityType": {

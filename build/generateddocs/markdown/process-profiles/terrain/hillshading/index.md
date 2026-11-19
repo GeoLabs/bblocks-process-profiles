@@ -516,9 +516,9 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -530,10 +530,10 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     dcterms:title "Analytical Hillshading" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns3:AZIMUTH [ dcterms:description "Direction of the light source, measured in degree clockwise from the North direction." ;
+    proc:inputs [ ns2:AZIMUTH [ dcterms:description "Direction of the light source, measured in degree clockwise from the North direction." ;
                     dcterms:title "Azimuth" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "315"^^rdf:JSON ;
@@ -542,13 +542,13 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                             ns1:format "float" ;
                             ns1:maximum 360 ;
                             ns1:minimum 0 ] ] ;
-            ns3:DATE_MIN [ dcterms:description "Day" ;
+            ns2:DATE_MIN [ dcterms:description "Day" ;
                     dcterms:title "Day (min value)" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ;
                             ns1:format "date" ] ] ;
-            ns3:DECLINATION [ dcterms:description "Height of the light source, measured in degree above the horizon." ;
+            ns2:DECLINATION [ dcterms:description "Height of the light source, measured in degree above the horizon." ;
                     dcterms:title "Height" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "45"^^rdf:JSON ;
@@ -557,28 +557,28 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                             ns1:format "float" ;
                             ns1:maximum 90 ;
                             ns1:minimum 0 ] ] ;
-            ns3:ELEVATION [ dcterms:description "Elevation" ;
+            ns2:ELEVATION [ dcterms:description "Elevation" ;
                     dcterms:title "Elevation" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
-            ns3:EXAGGERATION [ dcterms:description "The terrain exaggeration factor allows one to increase the shading contrasts in flat areas." ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+            ns2:EXAGGERATION [ dcterms:description "The terrain exaggeration factor allows one to increase the shading contrasts in flat areas." ;
                     dcterms:title "Exaggeration" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "number" ;
                             ns1:format "float" ] ] ;
-            ns3:METHOD [ dcterms:description "Shading Method" ;
+            ns2:METHOD [ dcterms:description "Shading Method" ;
                     dcterms:title "Shading Method" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"Standard\""^^rdf:JSON ;
@@ -590,13 +590,13 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                 "With Shadows" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns3:NDIRS [ dcterms:description "Number of sample directions for ambient occlusion. Divides azimuth range (270 to 0 to 90 degree) into sectors. Declination (0 to 90 degree) is divided in (Number of Directions / 4) sectors." ;
+            ns2:NDIRS [ dcterms:description "Number of sample directions for ambient occlusion. Divides azimuth range (270 to 0 to 90 degree) into sectors. Declination (0 to 90 degree) is divided in (Number of Directions / 4) sectors." ;
                     dcterms:title "Number of Directions" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "8"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "integer" ] ] ;
-            ns3:POSITION [ dcterms:description "Sun's Position" ;
+            ns2:POSITION [ dcterms:description "Sun's Position" ;
                     dcterms:title "Sun's Position" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"azimuth and height\""^^rdf:JSON ;
@@ -604,14 +604,14 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                 "date and time" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns3:RADIUS [ dcterms:description "Radius used to trace for shadows (ambient occlusion) [map units]." ;
+            ns2:RADIUS [ dcterms:description "Radius used to trace for shadows (ambient occlusion) [map units]." ;
                     dcterms:title "Search Radius" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "10"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "number" ;
                             ns1:format "float" ] ] ;
-            ns3:SHADOW [ dcterms:description "Choose 'slim' to trace grid node's shadow, 'fat' to trace the whole cell's shadow. The first is slightly faster but might show some artifacts." ;
+            ns2:SHADOW [ dcterms:description "Choose 'slim' to trace grid node's shadow, 'fat' to trace the whole cell's shadow. The first is slightly faster but might show some artifacts." ;
                     dcterms:title "Shadow" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"slim\""^^rdf:JSON ;
@@ -619,7 +619,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                 "slim" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns3:TIME [ dcterms:description "Hour" ;
+            ns2:TIME [ dcterms:description "Hour" ;
                     dcterms:title "Hour" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "12"^^rdf:JSON ;
@@ -628,7 +628,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                             ns1:format "float" ;
                             ns1:maximum 24 ;
                             ns1:minimum 0 ] ] ;
-            ns3:UNIT [ dcterms:description "Unit" ;
+            ns2:UNIT [ dcterms:description "Unit" ;
                     dcterms:title "Unit" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"radians\""^^rdf:JSON ;
@@ -642,20 +642,20 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
+    proc:outputs [ ns4:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
                     dcterms:title "Analytical Hillshading" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ] .
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ] .
 
 
 ```
@@ -718,6 +718,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Elevation",
       "description": "Elevation",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-png"
+      ],
       "keywords": [
         "elevation"
       ],
@@ -851,6 +857,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "DATE_MIN": {
       "title": "Day (min value)",
       "description": "Day",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/date",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/date-string-date"
+      ],
       "minOccurs": 0,
       "schema": {
         "type": "string",
@@ -937,6 +947,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Analytical Hillshading",
       "description": "The angle between the surface and the incoming light beams, measured in radians.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -1038,6 +1054,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Elevation",
       "description": "Elevation",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-png"
+      ],
       "keywords": [
         "elevation"
       ],
@@ -1171,6 +1193,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "DATE_MIN": {
       "title": "Day (min value)",
       "description": "Day",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/date",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/date-string-date"
+      ],
       "minOccurs": 0,
       "schema": {
         "type": "string",
@@ -1257,6 +1283,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Analytical Hillshading",
       "description": "The angle between the surface and the incoming light beams, measured in radians.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -1306,8 +1338,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns5: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -1325,7 +1358,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "Analytical Hillshading" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns5:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_lighting.0/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns2:AZIMUTH [ dcterms:description "Direction of the light source, measured in degree clockwise from the North direction." ;
@@ -1347,6 +1380,8 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             ns1:minimum 0 ] ] ;
             ns2:DATE_MIN [ dcterms:description "Day" ;
                     dcterms:title "Day (min value)" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/date> ;
+                    ns4:representation <https://w3id.org/geolabs/ospd/data-formats/representation/date-string-date> ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ;
@@ -1355,12 +1390,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:title "Height" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/number> ;
                     proc:keywords "altitude" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading -- input `altitude`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/altitude> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Analytical hillshading -- input `altitude`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Analytical hillshading -- input `altitude`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/altitude> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Analytical hillshading -- input `altitude`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/altitude> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "45"^^rdf:JSON ;
                             proc:nullable true ;
@@ -1371,6 +1406,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
             ns2:ELEVATION [ dcterms:description "Elevation" ;
                     dcterms:title "Elevation" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model> ;
+                    ns4:representation <https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-png> ;
                     proc:keywords "elevation" ;
                     proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading -- input `elevation`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/elevation> ;
@@ -1458,21 +1497,25 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Process Concept: Terrain Analysis" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+    proc:metadata [ dcterms:title "Implementation Profile: Analytical hillshading" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ dcterms:title "Generic Profile: Analytical hillshading" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Implementation Profile: Analytical hillshading" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+        [ dcterms:title "Process Concept: Terrain Analysis" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns4:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
+    proc:outputs [ ns3:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
                     dcterms:title "Analytical Hillshading" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns4:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
                     proc:keywords "raster" ;
                     proc:metadata [ dcterms:title "Implementation Profile: Analytical hillshading -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/outputs/result> ;
@@ -1482,16 +1525,16 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ] .
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ] .
 
 
 ```
@@ -1552,6 +1595,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/terrain/hillshading to https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18); the inputs/outputs of the deployment's own input DATE_MIN get a dataType (profiles.yaml data_types). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading"
     }
   ],
@@ -1641,6 +1694,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18); the inputs/outputs of the deployment's own input DATE_MIN get a dataType (profiles.yaml data_types). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading"
     }
   ],
   "prefLabel": "Analytical Hillshading",
@@ -1710,6 +1773,14 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:changeClassification rim:clarifyingChange ;
     rim:proposer pp:geolabs .
 
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/representation-2026-11-18> a rim:RegisterAction ;
+    dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18); the inputs/outputs of the deployment's own input DATE_MIN get a dataType (profiles.yaml data_types). Classified substantive: the form in which a part of the entry is stated changes." ;
+    prov:startedAtTime "2026-11-18T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/analytical-hillshading, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
@@ -1741,6 +1812,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/addition>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/d5-2026-11-09>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/representation-2026-11-18>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/terrain/hillshading/actions/specialisation-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
@@ -1894,6 +1966,7 @@ $defs:
           type: object
           required:
           - AZIMUTH
+          - DATE_MIN
           - DECLINATION
           - ELEVATION
           properties:
@@ -1902,6 +1975,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model
@@ -1935,6 +2009,14 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/elevation
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
             AZIMUTH:
               required:
               - dataType
@@ -2021,6 +2103,20 @@ $defs:
                   minimum: 0
                   maximum: 1
                   x-jsonld-id: https://w3id.org/ogc/api/processes/minOccurs
+            DATE_MIN:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/date
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/date-string-date
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
@@ -2033,6 +2129,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
@@ -2066,6 +2163,14 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/outputs/result
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 x-jsonld-extra-terms:
@@ -2100,6 +2205,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   dataType:
     x-jsonld-id: http://purl.org/dc/terms/type
+    x-jsonld-type: '@id'
+  representation:
+    x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
     x-jsonld-type: '@id'
   usedEntityType:
     x-jsonld-id: https://w3id.org/ogc/rim/activity-type/usedEntityType
@@ -2389,7 +2497,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.terrain.hillshading
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-18'
+  dateOfLastChange: '2026-11-19'
 
 ```
 
@@ -2470,6 +2578,10 @@ Links to the schema:
     },
     "dataType": {
       "@id": "dct:type",
+      "@type": "@id"
+    },
+    "representation": {
+      "@id": "https://w3id.org/geolabs/ospd/generic-profiles/representation",
       "@type": "@id"
     },
     "usedEntityType": {

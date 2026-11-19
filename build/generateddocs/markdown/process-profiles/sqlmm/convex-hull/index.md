@@ -212,10 +212,10 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -226,20 +226,20 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     dcterms:title "Compute convex hull." ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/ConvexHull/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns3:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+    proc:inputs [ ns4:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to compute convexhull" ;
                     proc:metadata [ dcterms:title "Mon test" ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
-                                    ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "UTF-8" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
@@ -247,13 +247,13 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:Result [ dcterms:description "The convex hull of the geometry" ;
+    proc:outputs [ ns3:Result [ dcterms:description "The convex hull of the geometry" ;
                     dcterms:title "The convex hull of the geometry" ;
                     proc:metadata [ dcterms:title "Mon test  " ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
-                                    ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "UTF-8" ;
+                                    ns2:contentMediaType "text/xml" ;
+                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "object" ] ] ] ] .
 
 
@@ -318,6 +318,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Polygon to compute convexhull",
       "description": "URI to a set of GML that describes the polygon.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -359,6 +362,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "The convex hull of the geometry",
       "description": "The convex hull of the geometry",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -453,6 +459,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Polygon to compute convexhull",
       "description": "URI to a set of GML that describes the polygon.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -494,6 +503,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "The convex hull of the geometry",
       "description": "The convex hull of the geometry",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -534,9 +546,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns5: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -551,47 +564,49 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "Compute convex hull." ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/ConvexHull/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns2:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+    proc:inputs [ ns3:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to compute convexhull" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Convex hull -- input `geometry`" ;
+                    proc:metadata [ dcterms:title "Mon test" ],
+                        [ dcterms:title "Implementation Profile: Convex hull -- input `geometry`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/convex-hull/inputs/geometry> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Mon test" ],
                         [ dcterms:title "Generic Profile: Unary geometry operation -- input `geometry`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-geometry-operation/inputs/geometry> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Implementation Profile: Convex hull" ;
+    proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-geometry-operation> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Implementation Profile: Convex hull" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/convex-hull> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ dcterms:title "Process Concept: Vector Geometry Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Demo" ],
-        [ dcterms:title "Generic Profile: Unary geometry operation" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-geometry-operation> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+        [ dcterms:title "Demo" ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns4:Result [ dcterms:description "The convex hull of the geometry" ;
+    proc:outputs [ ns5:Result [ dcterms:description "The convex hull of the geometry" ;
                     dcterms:title "The convex hull of the geometry" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
                     proc:keywords "geometry" ;
                     proc:metadata [ dcterms:title "Mon test  " ],
                         [ dcterms:title "Generic Profile: Unary geometry operation -- output `result`" ;
@@ -666,6 +681,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull"
     }
   ],
   "prefLabel": "Compute convex hull.",
@@ -754,6 +779,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull"
     }
   ],
   "prefLabel": "Compute convex hull.",
@@ -823,6 +858,14 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:changeClassification rim:clarifyingChange ;
     rim:proposer pp:geolabs .
 
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull/actions/representation-2026-11-18> a rim:RegisterAction ;
+    dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
+    prov:startedAtTime "2026-11-18T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/convex-hull, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
@@ -854,6 +897,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull/actions/addition>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull/actions/d5-2026-11-09>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull/actions/representation-2026-11-18>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/convex-hull/actions/specialisation-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
@@ -986,6 +1030,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
@@ -1019,6 +1064,11 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/convex-hull/inputs/geometry
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
@@ -1031,6 +1081,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/geometry
@@ -1064,6 +1115,11 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/convex-hull/outputs/result
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 x-jsonld-extra-terms:
@@ -1098,6 +1154,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   dataType:
     x-jsonld-id: http://purl.org/dc/terms/type
+    x-jsonld-type: '@id'
+  representation:
+    x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
     x-jsonld-type: '@id'
   usedEntityType:
     x-jsonld-id: https://w3id.org/ogc/rim/activity-type/usedEntityType
@@ -1387,7 +1446,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.sqlmm.convex-hull
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-18'
+  dateOfLastChange: '2026-11-19'
 
 ```
 
@@ -1468,6 +1527,10 @@ Links to the schema:
     },
     "dataType": {
       "@id": "dct:type",
+      "@type": "@id"
+    },
+    "representation": {
+      "@id": "https://w3id.org/geolabs/ospd/generic-profiles/representation",
       "@type": "@id"
     },
     "usedEntityType": {

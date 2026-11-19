@@ -50,6 +50,12 @@
       "title": "Elevation",
       "description": "Elevation",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-png"
+      ],
       "keywords": [
         "elevation"
       ],
@@ -172,6 +178,12 @@
       "title": "Terrain Ruggedness Index (TRI)",
       "description": "Terrain Ruggedness Index (TRI)",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "keywords": [
         "raster"
       ],

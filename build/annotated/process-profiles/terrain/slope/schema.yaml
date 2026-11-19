@@ -148,6 +148,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model
@@ -181,11 +182,30 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope/inputs/elevation
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
           type: object
           required:
+          - ASPECT
+          - C_CROS
+          - C_GENE
+          - C_LONG
+          - C_MAXI
+          - C_MINI
+          - C_PLAN
+          - C_PROF
+          - C_ROTO
+          - C_TANG
+          - C_TOTA
           - SLOPE
           properties:
             SLOPE:
@@ -193,6 +213,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
@@ -226,6 +247,201 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope/outputs/result
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            ASPECT:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            C_GENE:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            C_PROF:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            C_PLAN:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            C_TANG:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            C_LONG:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            C_CROS:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            C_MINI:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            C_MAXI:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            C_TOTA:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            C_ROTO:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 x-jsonld-extra-terms:
@@ -260,6 +476,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   dataType:
     x-jsonld-id: http://purl.org/dc/terms/type
+    x-jsonld-type: '@id'
+  representation:
+    x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
     x-jsonld-type: '@id'
   usedEntityType:
     x-jsonld-id: https://w3id.org/ogc/rim/activity-type/usedEntityType
@@ -549,4 +768,4 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.terrain.slope
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-18'
+  dateOfLastChange: '2026-11-19'

@@ -217,7 +217,7 @@
   "name": "Building Blocks - OSPD Process Profiles",
   "abstract": "OGC API - Processes profiles for two populations of deployed processes: the 27 deployable CWL\nprocesses of the OSPD 2026 reference workflows (W1 Algae Bloom, W2 KindGrove mangrove biomass,\nW3 Water Bodies detection, W2b a step-decomposed reimplementation of KindGrove), each linked to\nits CWL source, the generic provenance profile, the EOAP CWL custom types and the openEO Building\nBlocks; and the 31 live processes of the Geonovum testbed (ZOO-Project: SQL/MM, GDAL/OTB, SAGA\nGIS), each implementing an Implementation Profile of bblocks-generic-profiles.\n",
   "description": "This register is produced by GeoLabs under OSPD 2026 (D100 Workflow Profiler, D120 OGC API\nProcesses Profiler). It holds one Building Block per deployed process, in two populations:\n\n- 27 CWL processes of the OSPD reference workflows (`CommandLineTool` or `Workflow`, identified\n  in the workflow observability investigation): `algae-bloom.*` (10), `kindgrove.*` (3),\n  `water-bodies.*` (6), `kindgrove-steps.*` (8). 12 of them implement an Implementation Profile\n  of bblocks-generic-profiles; the others are listed with the reason in docs/ATTACHMENTS.md;\n- 31 live processes of the Geonovum testbed (`host1.tb.geonovum.geolabs.fr`, ZOO-Project), each\n  the Implementation of one Implementation Profile: `sqlmm.*` (16), `raster.*` (7), `vector.*`\n  (1), `terrain.*` (4), `pointcloud.*` (3).\n\nEach process profile combines:\n\n- a reference to the source CWL (linked by URL at a pinned commit, never copied);\n- an OGC API - Processes Part 1 `processDescription` derived with the\n  `eoap.cct.cwl-to-ogcprocess` mapping (deviations are documented, not hidden);\n- a provenance view expressed as an instance of the generic provenance profile\n  (`ogc.bbr.provenance.*`);\n- a registered ActivityType entry (`ospd.process-profiles.process-type`) for each deployed\n  process, typed as the RDF class carried by its PROV activity (Activity 4);\n- proposed openEO equivalences (`ogc.openeo.*`) with an explicit level\n  (exactMatch / closeMatch / none) and rationale;\n- a representative execution example.\n\nAll mappings are proposed correspondences offered for review, not settled equivalences.\n",
-  "modified": "2026-11-18T18:07:53.143782",
+  "modified": "2026-11-19T11:20:37.841478",
   "tooling": {
     "bblocks-postprocess": {
       "commitId": "\"2deb5c60331691186d997e4f6ae9aab18b548ce5",
@@ -249,7 +249,8 @@
     "https://ogcincubator.github.io/bblocks-wf4ever/build/register.json",
     "https://ogcincubator.github.io/bblocks-prov-jsonld-alt/build/register.json",
     "https://geolabs.github.io/bblocks-generic-profiles/build/register.json",
-    "https://geolabs.github.io/bblocks-data-types/build/register.json"
+    "https://geolabs.github.io/bblocks-data-types/build/register.json",
+    "https://geolabs.github.io/bblocks-data-formats/build/register.json"
   ],
   "remoteCacheDir": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/_cache",
   "links": [
@@ -286,11 +287,12 @@
       "abstract": "Candidate ActivityType register entry for each deployed OSPD process (decision D5: one per deployed process), its meaning kept apart from its six-phase classification, its deployment, its plan and its openEO correspondences, and linked to the Implementation Profile it implements, whose operation's activity type it then specialises. Its shapes check the data type of tier-4 inputs and outputs.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
       "dependsOn": [
+        "bblocks://data-formats.vocabulary",
         "bblocks://data-types.vocabulary",
         "bblocks://ogc.register.geoprocessing-activity-types",
         "bblocks://ogc.register.schemas.activity-types-schema"
@@ -346,6 +348,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -469,7 +480,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `SAGA.ta_lighting.0` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -639,7 +650,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `GetArea` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -809,7 +820,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Buffer` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -979,7 +990,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Centroid` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -1149,7 +1160,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Contains` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -1319,7 +1330,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `ConvexHull` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -1489,7 +1500,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Crosses` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -1659,7 +1670,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Difference` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -1829,7 +1840,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Disjoint` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -1999,7 +2010,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Equals` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -2169,7 +2180,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `SAGA.shapes_tools.19` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -2339,7 +2350,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Intersection` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -2509,7 +2520,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Intersects` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -2679,7 +2690,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `IsSimple` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -2849,7 +2860,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `SAGA.pointcloud_tools.9` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -3019,7 +3030,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `SAGA.pointcloud_tools.4` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -3189,7 +3200,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `SAGA.pointcloud_tools.5` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -3359,7 +3370,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `OTB.RadiometricIndices` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -3529,7 +3540,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `OTB.BandMath` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -3699,7 +3710,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `OTB.BandMathX` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -3869,7 +3880,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `OTB.ExtractROI` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -4039,7 +4050,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `OTB.ImageEnvelope` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -4209,7 +4220,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Gdal_Translate` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -4379,7 +4390,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Gdal_Warp` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -4549,7 +4560,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `SAGA.ta_morphometry.0` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -4719,7 +4730,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `SymDifference` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -4889,7 +4900,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `SAGA.ta_morphometry.16` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -5059,7 +5070,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `SAGA.ta_morphometry.18` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -5229,7 +5240,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Touches` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -5399,7 +5410,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Union` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -5569,7 +5580,7 @@
       "abstract": "Process profile of the live OGC API - Processes process `Within` (ZOO-Project, Geonovum testbed), with a process-type entry linking to its Implementation Profile. Static processDescription only, no execute/results/provenance.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -5739,7 +5750,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `calculate-band` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -5923,7 +5934,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `download-band-sentinel2-product-safe` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -5976,6 +5987,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -6084,7 +6104,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `download-band-sentinel2-stac-item` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -6266,7 +6286,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `plot-image` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -6448,7 +6468,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `reproject-image` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -6627,7 +6647,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `select-products-sentinel2` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -6811,7 +6831,7 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `algae-usecase-workflow-copernicus` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -6863,6 +6883,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -6971,7 +7000,7 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `algae-usecase-workflow-copernicus-process` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -7027,6 +7056,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -7135,7 +7173,7 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `algae-usecase-workflow-earth-search` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -7186,6 +7224,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -7294,7 +7341,7 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `algae-usecase-workflow-earth-search-process` (W1 Algae Bloom), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -7351,6 +7398,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -7459,7 +7515,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `mangrove_cli` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -7522,6 +7578,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -7630,7 +7695,7 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `mangrove-workflow` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -7682,6 +7747,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -7790,7 +7864,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `parse_aoi` (W2 KindGrove), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -7841,6 +7915,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -7949,7 +8032,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `calculate_indices` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -8129,7 +8212,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `download_band` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -8309,7 +8392,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `estimate_biomass` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -8358,6 +8441,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -8466,7 +8558,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `export_stac` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -8517,6 +8609,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -8625,7 +8726,7 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `mangrove-workflow-steps` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -8688,6 +8789,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -8796,7 +8906,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `parse_aoi` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -8847,6 +8957,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -8955,7 +9074,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `reproject_band` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -9134,7 +9253,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `select_scene` (W2b KindGrove (step notebooks)), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -9313,7 +9432,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `crop` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -9493,7 +9612,7 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `detect_water_body` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -9548,6 +9667,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -9656,7 +9784,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `norm_diff` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -9835,7 +9963,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `otsu` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -10013,7 +10141,7 @@
       "abstract": "OGC API - Processes profile of the CWL CommandLineTool `stac` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -10064,6 +10192,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"
@@ -10172,7 +10309,7 @@
       "abstract": "OGC API - Processes profile of the CWL Workflow `water-bodies` (W3 Water Bodies), with its provenance view, process-type entry and openEO equivalence.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-22T00:00:00Z",
-      "dateOfLastChange": "2026-11-18",
+      "dateOfLastChange": "2026-11-19",
       "version": "0.1",
       "itemClass": "schema",
       "register": "process-profiles",
@@ -10224,6 +10361,15 @@
             "https://geolabs.github.io/bblocks-process-profiles/_sources/process-type/shapes.shacl"
           ],
           "rdfs:seeAlso": "bblocks://ospd.process-profiles.process-type",
+          "prof:hasRole": "role:validation",
+          "dct:format": "text/turtle",
+          "dct:conformsTo": "shacl:"
+        },
+        {
+          "prof:hasArtifact": [
+            "https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl"
+          ],
+          "rdfs:seeAlso": "bblocks://data-formats.vocabulary",
           "prof:hasRole": "role:validation",
           "dct:format": "text/turtle",
           "dct:conformsTo": "shacl:"

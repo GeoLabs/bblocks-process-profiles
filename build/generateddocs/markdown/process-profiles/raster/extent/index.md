@@ -357,13 +357,13 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                     dcterms:title "Input image filename." ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
             ns2:proj [ dcterms:description "Projection to be used to compute the envelope (default is WGS84)" ;
                     dcterms:title "Projection to be used to compute the envelope (default is WGS84)" ;
                     proc:minOccurs 0 ;
@@ -383,16 +383,16 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
         "value" ;
     proc:outputs [ ns3:out [ dcterms:description "Vector data file containing the envelope." ;
                     dcterms:title "Vector data file containing the envelope." ;
-                    proc:schema [ ns1:oneOf [ proc:type "object" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/zip" ],
-                                [ proc:type "string" ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
                                     ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/xml" ] ] ] ] .
+                                    ns1:contentMediaType "text/xml" ],
+                                [ proc:type "object" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/zip" ] ] ] ] .
 
 
 ```
@@ -452,6 +452,11 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Input image filename.",
       "description": "Input image filename.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -544,6 +549,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Vector data file containing the envelope.",
       "description": "Vector data file containing the envelope.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/surface",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/surface-kml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -640,6 +649,11 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Input image filename.",
       "description": "Input image filename.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -732,6 +746,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Vector data file containing the envelope.",
       "description": "Vector data file containing the envelope.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/surface",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/surface-kml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -778,9 +796,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns5: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -795,28 +814,31 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "Extracts an image envelope." ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns5:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.ImageEnvelope/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns2:elev [ dcterms:description "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory." ;
+    proc:inputs [ ns3:elev [ dcterms:description "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory." ;
                     dcterms:title "This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory." ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:elev.default [ dcterms:description "This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value." ;
+            ns3:elev.default [ dcterms:description "This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value." ;
                     dcterms:title "This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value." ;
                     proc:schema [ proc:default "0"^^rdf:JSON ;
                             proc:type "number" ;
                             ns1:format "float" ] ] ;
-            ns2:elev.geoid [ dcterms:description "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd)." ;
+            ns3:elev.geoid [ dcterms:description "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd)." ;
                     dcterms:title "Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd)." ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/octet-stream" ] ] ] ;
-            ns2:in [ dcterms:description "Input image filename." ;
+            ns3:in [ dcterms:description "Input image filename." ;
                     dcterms:title "Input image filename." ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-png> ;
                     proc:keywords "raster" ;
                     proc:metadata [ dcterms:title "Generic Profile: Raster extent -- input `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-extent/inputs/raster> ;
@@ -833,12 +855,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns2:proj [ dcterms:description "Projection to be used to compute the envelope (default is WGS84)" ;
+            ns3:proj [ dcterms:description "Projection to be used to compute the envelope (default is WGS84)" ;
                     dcterms:title "Projection to be used to compute the envelope (default is WGS84)" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:sr [ dcterms:description "Sampling rate for image edges (in pixel)." ;
+            ns3:sr [ dcterms:description "Sampling rate for image edges (in pixel)." ;
                     dcterms:title "Sampling rate for image edges (in pixel)." ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "0"^^rdf:JSON ;
@@ -847,21 +869,23 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Raster extent" ;
+    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Generic Profile: Raster extent" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-extent> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Implementation Profile: Raster extent" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-extent> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ ns4:out [ dcterms:description "Vector data file containing the envelope." ;
                     dcterms:title "Vector data file containing the envelope." ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/surface> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/surface-kml> ;
                     proc:keywords "geometry" ;
                     proc:metadata [ dcterms:title "Implementation Profile: Raster extent -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-extent/outputs/result> ;
@@ -940,6 +964,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent"
     }
   ],
   "prefLabel": "Extracts an image envelope.",
@@ -1028,6 +1062,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent"
     }
   ],
   "prefLabel": "Extracts an image envelope.",
@@ -1097,6 +1141,14 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:changeClassification rim:clarifyingChange ;
     rim:proposer pp:geolabs .
 
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent/actions/representation-2026-11-18> a rim:RegisterAction ;
+    dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
+    prov:startedAtTime "2026-11-18T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-extent, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Geometry." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
@@ -1128,6 +1180,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent/actions/addition>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent/actions/d5-2026-11-09>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent/actions/representation-2026-11-18>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/extent/actions/specialisation-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
@@ -1269,6 +1322,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster
@@ -1302,6 +1356,13 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-extent/inputs/raster
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
@@ -1314,6 +1375,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/surface
@@ -1347,6 +1409,12 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-extent/outputs/result
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/surface-kml
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 x-jsonld-extra-terms:
@@ -1381,6 +1449,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   dataType:
     x-jsonld-id: http://purl.org/dc/terms/type
+    x-jsonld-type: '@id'
+  representation:
+    x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
     x-jsonld-type: '@id'
   usedEntityType:
     x-jsonld-id: https://w3id.org/ogc/rim/activity-type/usedEntityType
@@ -1670,7 +1741,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.raster.extent
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-18'
+  dateOfLastChange: '2026-11-19'
 
 ```
 
@@ -1751,6 +1822,10 @@ Links to the schema:
     },
     "dataType": {
       "@id": "dct:type",
+      "@type": "@id"
+    },
+    "representation": {
+      "@id": "https://w3id.org/geolabs/ospd/generic-profiles/representation",
       "@type": "@id"
     },
     "usedEntityType": {

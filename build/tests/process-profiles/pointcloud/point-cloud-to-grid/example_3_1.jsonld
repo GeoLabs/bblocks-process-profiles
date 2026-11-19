@@ -49,6 +49,9 @@
       "title": "Points",
       "description": "Points",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las"
+      ],
       "keywords": [
         "point cloud"
       ],
@@ -138,6 +141,12 @@
       "title": "Z Value",
       "description": "Z Value",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -181,6 +190,13 @@
     "COUNT": {
       "title": "Number of Points in Cell",
       "description": "Number of Points in Cell",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -209,6 +225,13 @@
     "GRIDS": {
       "title": "Attributes",
       "description": "Attributes",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {

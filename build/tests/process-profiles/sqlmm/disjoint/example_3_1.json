@@ -50,6 +50,9 @@
       "title": "the first geometry",
       "description": "the first geometry.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -86,6 +89,9 @@
       "title": "the other geometry",
       "description": "the other geometry.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml"
+      ],
       "keywords": [
         "geometry"
       ],

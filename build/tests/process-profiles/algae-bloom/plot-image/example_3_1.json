@@ -73,6 +73,10 @@
       "title": "input_image",
       "description": "Image to map with the colors bins.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000"
+      ],
       "keywords": [
         "raster"
       ],
@@ -187,6 +191,10 @@
     "output_file": {
       "title": "output_file",
       "description": "",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff"
+      ],
       "schema": {
         "type": "string",
         "contentMediaType": "image/tiff; application=geotiff",
@@ -197,6 +205,9 @@
       "title": "output_plot",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/rendered-image",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/rendered-image-png"
+      ],
       "keywords": [
         "image"
       ],

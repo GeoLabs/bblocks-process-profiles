@@ -53,6 +53,9 @@
       "title": "Polygon to get the centroid",
       "description": "The centroid which is not necessarily within the geometry.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/surface",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -94,6 +97,9 @@
       "title": "The Centroid",
       "description": "JSON String / GML Entity of the centroid",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/point",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/point-gml"
+      ],
       "keywords": [
         "geometry"
       ],

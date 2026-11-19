@@ -1,7 +1,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <http://schema.org/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <http://schema.org/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/generic-profiles/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -17,9 +18,11 @@
         "resampling" ;
     dcterms:title "Performs image reprojection." ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns3:input_image [ dcterms:description "" ;
+    proc:inputs [ ns1:input_image [ dcterms:description "" ;
                     dcterms:title "input_image" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
+                    ns4:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
                     proc:metadata [ dcterms:title "Implementation Profile: Raster resampling -- input `raster`" ;
@@ -29,27 +32,27 @@
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-resampling/inputs/raster> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 1 ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/jp2" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ] ] ] ;
-            ns3:output_dimensions [ dcterms:description "Output dimensions for (width, height) of the output image." ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns1:output_dimensions [ dcterms:description "Output dimensions for (width, height) of the output image." ;
                     dcterms:title "output_dimensions" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "integer" ] ] ] ;
-            ns3:output_name [ dcterms:description "Name to apply for the output GeoTiff file." ;
+                            ns2:items [ proc:type "integer" ] ] ] ;
+            ns1:output_name [ dcterms:description "Name to apply for the output GeoTiff file." ;
                     dcterms:title "Output file name" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:output_resolution [ dcterms:description "Output resolution for (width, height) of the output image." ;
+            ns1:output_resolution [ dcterms:description "Output resolution for (width, height) of the output image." ;
                     dcterms:title "output_resolution" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/grid-resolution> ;
                     proc:keywords "grid resolution" ;
@@ -62,38 +65,39 @@
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "integer" ] ] ] ] ;
+                            ns2:items [ proc:type "integer" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value [ a ns2:Person ;
-                    ns2:email "francis.charette-migneault@crim.ca" ;
-                    ns2:identifier "http://orcid.org/0000-0003-4862-3349" ;
-                    ns2:name "Francis Charette-Migneault" ] ;
-            proc:role schema:author ],
-        [ rdf:value "1.0.0" ;
-            proc:role schema:softwareVersion ],
-        [ dcterms:title "Generic Profile: Raster resampling" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-resampling> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Implementation Profile: Raster resampling" ;
+    proc:metadata [ dcterms:title "Implementation Profile: Raster resampling" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-resampling> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ dcterms:title "Process Concept: Raster Coverage Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
-            proc:role schema:codeRepository ],
-        [ rdf:value "Performs a reprojection over image bands and returns the resulting GeoTiff." ;
-            proc:role schema:description ],
+        [ rdf:value "1.0.0" ;
+            proc:role schema:softwareVersion ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
             proc:role schema:license ],
+        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value [ a ns3:Person ;
+                    ns3:email "francis.charette-migneault@crim.ca" ;
+                    ns3:identifier "http://orcid.org/0000-0003-4862-3349" ;
+                    ns3:name "Francis Charette-Migneault" ] ;
+            proc:role schema:author ],
+        [ dcterms:title "Generic Profile: Raster resampling" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-resampling> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ rdf:value "Performs image reprojection." ;
-            proc:role schema:name ] ;
+            proc:role schema:name ],
+        [ rdf:value "Performs a reprojection over image bands and returns the resulting GeoTiff." ;
+            proc:role schema:description ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ pp:result [ dcterms:description "" ;
                     dcterms:title "result" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
+                    ns4:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff> ;
                     proc:keywords "raster" ;
                     proc:metadata [ dcterms:title "Generic Profile: Raster resampling -- output `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-resampling/outputs/raster> ;
@@ -102,6 +106,6 @@
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-resampling/outputs/raster> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentEncoding "binary" ;
-                            ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] .
+                            ns2:contentEncoding "binary" ;
+                            ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] .
 

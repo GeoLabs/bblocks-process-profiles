@@ -54,6 +54,9 @@
       "title": "the first geometry",
       "description": "the first geometry to compare against.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -93,6 +96,9 @@
       "title": "the other geometry",
       "description": "the other geometry to compare against.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -134,6 +140,9 @@
       "title": "The resulting geometry",
       "description": "The symmetric difference of two geometries",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml"
+      ],
       "keywords": [
         "geometry"
       ],

@@ -1,8 +1,8 @@
 @prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
-@prefix ns1: <https://w3id.org/ogc/api/processes/> .
-@prefix ns2: <http://www.iana.org/assignments/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/ogc/api/processes/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
@@ -20,8 +20,8 @@
     pp:candidateCctDependency "eoap.cct.bbox" ;
     pp:cwlClass "CommandLineTool" ;
     pp:cwlId "reproject_band" ;
-    ns1:executionUnit [ dct:format "application/cwl+yaml" ;
-            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
+    ns2:executionUnit [ dct:format "application/cwl+yaml" ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/executionUnit> ;
             oa:hasTarget <https://github.com/GeoLabs/KindGrove/releases/download/v0.0.2-rc3/mangrove-workflow-steps.cwl#reproject_band> ] .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/addition> a rim:RegisterAction ;
@@ -50,6 +50,14 @@
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11> a rim:RegisterAction ;
     dct:description "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#reproject_band). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_file and the output reprojected_file, in processDescription.json and processDescription.inherited.json. assumedFormatGaps removed: its two gaps, band_file and reprojected_file served as application/octet-stream, are closed by the format the CWL now declares, as their reason anticipated (removed on 2026-11-10 with the corrected CWL, pinned on 2026-11-11)." ;
     prov:startedAtTime "2026-11-11T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/representation-2026-11-18> a rim:RegisterAction ;
+    dct:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
+    prov:startedAtTime "2026-11-18T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
     rim:changeClassification rim:substantiveChange ;
@@ -95,6 +103,7 @@
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/identifier-2026-11-17>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/representation-2026-11-18>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09> ;
     rim:inRegister pp:register ;

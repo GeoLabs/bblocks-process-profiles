@@ -141,6 +141,9 @@
       "title": "product",
       "description": "",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff"
+      ],
       "keywords": [
         "raster"
       ],

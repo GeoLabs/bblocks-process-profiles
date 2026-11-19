@@ -1,5 +1,5 @@
 Validation report for ospd.process-profiles.kindgrove-steps.calculate-indices - Process profile: calculate_indices
-Generated 2026-11-18T18:26:27.484046+00:00
+Generated 2026-11-19T11:52:11.168510+00:00
 === Files ===
 Using examples/cwlprov.jsonld from examples
 "@graph" found, trying validation with contents unwrapped
@@ -14,269 +14,291 @@ Validation passed
 
 === SHACL ===
 Using SHACL closure graph sources (declared closures, ontologies and RDF data resources):
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/multi-polygon-geojson/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/point-cloud/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-duration/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-ipv4/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/multi-point-geojson/ontology.ttl
  - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-uri-reference/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/band-identifier/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-time/ontology.ttl
  - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-duration/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-geojson/ontology.ttl
- - https://defs.opengis.net/prez-backend/object?uri=http://www.opengis.net/ont/geosparql&_mediatype=text/turtle
  - https://ogcincubator.github.io/activity-type-register/build/annotated/register/activity-types/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/multi-curve-gml/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-password/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/point-gml/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/multi-point/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-iri-reference/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-ipv4/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/envi/ontology.ttl
  - https://geolabs.github.io/bblocks-data-formats/_sources/representation/multi-line-string-geojson/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/format-identifier/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/multi-point-gml/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/png/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-item-collection/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/surface-gml/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-single-band-geotiff/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/tin/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-email/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/elevation-model-geotiff/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/elevation-model/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/line-string/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri-reference/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/build/annotated/vocabulary/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/feature-collection/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/coordinate-reference-system/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-collection-gml/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-collection/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-pattern/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-ipv6/ontology.ttl
+ - /github/workspace/_sources/process-type/activity-type-parents.ttl
  - https://geolabs.github.io/bblocks-data-formats/_sources/format/geojson/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/format-identifier/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/raster-multi-band/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/date-string-date/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-single-band-geotiff/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-email/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/line-string-geojson/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/point-geojson/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-email/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/polyhedral-surface/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/multi-polygon/ontology.ttl
+ - /github/workspace/_sources/process-type/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/eo-product-stac-item/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/jpeg2000/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/polygon-gml/ontology.ttl
+ - https://ogcincubator.github.io/bblocks-cwl/build/annotated/cwl/v1_2_1/CWLOntology/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/expression/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/number/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-hostname/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-iri/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/boolean/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/tin/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/geometry-collection/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/line-string/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-item-collection/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-idn-hostname/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/triangle/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-single-band-jpeg/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-password/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/elevation-model-envi/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/time-interval/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/rendered-image-png/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/elevation-model-png/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-idn-hostname/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/gml/ontology.ttl
+ - https://ogcincubator.github.io/activity-type-register/build/annotated/register/geoprocessing-activity-types/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-collection-gml/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/data.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/rendered-image/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri-reference/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/line-string-gml/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/feature-collection-gml/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/feature/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/grid-resolution/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/polygon-geojson/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-single-band-aaigrid/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/eo-product/ontology.ttl
+ - https://ogcincubator.github.io/registered-item-model/build/annotated/rim/core-ontology/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/geometry/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/point-cloud-las/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/multi-surface/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-geotiff/ontology.ttl
  - https://geolabs.github.io/bblocks-data-formats/_sources/representation/eo-product-eo-geojson/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-ipv6/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/line/ontology.ttl
  - https://geolabs.github.io/bblocks-data-types/_sources/data-type/collection-identifier/ontology.ttl
  - https://geolabs.github.io/bblocks-data-types/_sources/data-type/curve/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/multi-polygon/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/feature-collection-geojson/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-ipv4/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/line-string-gml/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-ipv4/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/gml/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-idn-email/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-password/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/eo-product-stac-item/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/las/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-idn-email/ontology.ttl
- - https://ogcincubator.github.io/registered-item-model/build/annotated/rim/core-ontology/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-geotiff/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-uri/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-date/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/raster/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-json-pointer/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/raster-multi-band/ontology.ttl
- - https://geolabs.github.io/bblocks-generic-profiles/build/annotated/register/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-iri/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/multi-point-geojson/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-item/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/feature-geojson/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/colour-map/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/data.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-catalog/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/expression/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/eo-product/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/geometry-collection/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/multi-curve/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-collection-geojson/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-hostname/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/triangle/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-email/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/surface-geojson/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-relative-json-pointer/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-gml/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/polygon/ontology.ttl
- - /github/workspace/_sources/process-type/activity-type-parents.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/eo-geojson/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/rendered-image/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-hostname/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/polygon-geojson/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/curve-gml/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/rendered-image-png/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/geometry/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/stac-catalog/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/time-interval/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/stac-item-collection/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/boolean/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/build/annotated/vocabulary/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-iri/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/table/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/multi-surface/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/bounding-box/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/point-cloud/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/bounding-box-ogcapi-processes-bbox/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-time/ontology.ttl
- - https://www.w3.org/ns/prov-o
- - https://ogcincubator.github.io/activity-type-register/build/annotated/register/geoprocessing-activity-types/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/line/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uuid/ontology.ttl
- - https://ogcincubator.github.io/bblocks-cwl/build/annotated/cwl/v1_2_1/SchemaSaladOntology/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/binary-mask/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/feature-collection-gml/ontology.ttl
- - https://ogcincubator.github.io/bblocks-cwl/build/annotated/cwl/v1_2_1/CWLOntology/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-iri-reference/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/ogcapi-processes-bbox/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/feature/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/geotiff/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/point-geojson/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/point/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-uuid/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/stac-collection/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-idn-hostname/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-relative-json-pointer/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-duration/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/point-gml/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/surface/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/multi-point/ontology.ttl
- - /github/workspace/_sources/process-type/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/multi-surface-gml/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-iri-reference/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/raster-single-band/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/polygon-gml/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/multi-line-string/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/number/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri-template/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-json-pointer/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri/ontology.ttl
  - https://geolabs.github.io/bblocks-data-types/_sources/data-type/stac-item/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-date/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/grid-resolution/ontology.ttl
- - https://www.w3.org/ns/prov-o#
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/linear-ring/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/line-string-geojson/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/data.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/polyhedral-surface/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-date/ontology.ttl
  - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-date-time/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/radiometric-index/ontology.ttl
- - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-date-time/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-idn-hostname/ontology.ttl
- - https://geolabs.github.io/bblocks-data-formats/_sources/representation/point-cloud-las/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/elevation-model-geotiff/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-geojson/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-single-band-png/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/multi-curve/ontology.ttl
  - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-uri-template/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-pattern/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/surface-kml/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-png/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/raster/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/binary-mask/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-hostname/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/bounding-box/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-relative-json-pointer/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/feature-collection/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/multi-curve-gml/ontology.ttl
+ - https://defs.opengis.net/prez-backend/object?uri=http://www.opengis.net/ont/geosparql&_mediatype=text/turtle
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/eo-geojson/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/multi-line-string/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/stac-catalog/ontology.ttl
+ - https://www.w3.org/ns/prov-o#
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-ipv6/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/coordinate-reference-system/ontology.ttl
+ - https://www.w3.org/ns/prov-o
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/linear-ring/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/data.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/stac-collection/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/geotiff/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/build/annotated/vocabulary/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/surface-gml/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/bounding-box-ogcapi-processes-bbox/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/surface-geojson/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-ipv6/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-uuid/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-idn-email/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri-template/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/feature-collection-kml/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/raster-single-band/ontology.ttl
+ - https://geolabs.github.io/bblocks-generic-profiles/build/annotated/register/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/elevation-model-aaigrid/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-idn-email/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/stac-item-collection/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-password/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/curve-gml/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/multi-point-gml/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-gml/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-jpeg2000/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-iri-reference/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-iri/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-uri/ontology.ttl
  - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-time/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-catalog/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-relative-json-pointer/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/multi-surface-gml/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/polygon/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/las/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/point/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/feature-geojson/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/table/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/aaigrid/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/colour-map/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/feature-collection-geojson/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-item/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-collection-geojson/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/elevation-model/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-json-pointer/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uuid/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-single-band-envi/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/stac-collection/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/build/annotated/vocabulary/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/geometry-kml/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-json-pointer/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/surface/ontology.ttl
+ - https://ogcincubator.github.io/bblocks-cwl/build/annotated/cwl/v1_2_1/SchemaSaladOntology/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/kml/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/png/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-uri/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/jpeg/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/band-identifier/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/string-date/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/raster-jpeg/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/binary-mask-geotiff/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/radiometric-index/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/date/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/format/ogcapi-processes-bbox/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-formats/_sources/representation/multi-polygon-geojson/ontology.ttl
+ - https://geolabs.github.io/bblocks-data-types/_sources/data-type/string-date-time/ontology.ttl
 Validation result for https://geolabs.github.io/bblocks-generic-profiles/_sources/register/shapes.shacl: no results
 Focus nodes for https://geolabs.github.io/bblocks-generic-profiles/_sources/register/shapes.shacl:
- - Shape gp:GenericProfileItemClassShape: <https://w3id.org/geolabs/ospd/generic-profiles/item-class/generic-profile>
- - Shape gp:RepresentationReferenceShape: *none*
- - Shape gp:AdditionProposalShape: *none*
- - Shape gp:GenericProfileShape: *none*
- - Shape gp:DataTypeReferenceShape: *none*
- - Shape gp:ProcessConceptItemClassShape: <https://w3id.org/geolabs/ospd/generic-profiles/item-class/process-concept>
  - Shape gp:ImplementationProfileItemClassShape: <https://w3id.org/geolabs/ospd/generic-profiles/item-class/implementation-profile>
- - Shape gp:AdditionProposalShape/sh:property/sh:qualifiedValueShape: *none*
  - Shape gp:ProcessConceptShape: *none*
+ - Shape gp:GenericProfileShape: *none*
+ - Shape gp:AdditionProposalShape/sh:property/sh:qualifiedValueShape: *none*
+ - Shape gp:AdditionProposalShape: *none*
+ - Shape gp:GenericProfileItemClassShape: <https://w3id.org/geolabs/ospd/generic-profiles/item-class/generic-profile>
+ - Shape gp:ProcessConceptItemClassShape: <https://w3id.org/geolabs/ospd/generic-profiles/item-class/process-concept>
+ - Shape gp:RepresentationReferenceShape: *none*
+ - Shape gp:DataTypeReferenceShape: *none*
  - Shape gp:ImplementationProfileShape: *none*
 
 Validation result for https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl: no results
 Focus nodes for https://geolabs.github.io/bblocks-data-formats/_sources/vocabulary/shapes.shacl:
- - Shape df:AdditionProposalShape: *none*
- - Shape df:FormatShape: *none*
- - Shape df:MediaTypeInferenceShape: *none*
- - Shape df:AdditionProposalShape/sh:property/sh:qualifiedValueShape: *none*
- - Shape df:MediaTypeObservationShape: *none*
- - Shape df:RepresentationShape: *none*
  - Shape df:XmlSchemaElementShape: *none*
  - Shape df:PrimaryMediaTypeShape: *none*
+ - Shape df:MediaTypeObservationShape: *none*
+ - Shape df:FormatShape: *none*
+ - Shape df:RepresentationShape: *none*
+ - Shape df:MediaTypeInferenceShape: *none*
+ - Shape df:AdditionProposalShape/sh:property/sh:qualifiedValueShape: *none*
+ - Shape df:AdditionProposalShape: *none*
 
 Validation result for https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl: no results
 Focus nodes for https://geolabs.github.io/bblocks-data-types/_sources/vocabulary/shapes.shacl:
- - Shape dt:DataTypeVersionShape/sh:property/sh:qualifiedValueShape: *none*
- - Shape dt:DataTypeVersionShape: *none*
- - Shape dt:DataTypeItemShape: *none*
- - Shape dt:RegisterShape: <https://w3id.org/geolabs/ospd/data-types/register>
  - Shape dt:DataTypeShape: *none*
+ - Shape dt:DataTypeVersionShape: *none*
+ - Shape dt:RegisterShape: <https://w3id.org/geolabs/ospd/data-types/register>
+ - Shape dt:DataTypeVersionShape/sh:property/sh:qualifiedValueShape: *none*
+ - Shape dt:DataTypeItemShape: *none*
 
 Validation result for https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl: no results
 Focus nodes for https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl:
- - Shape rim:TextShape: *none*
- - Shape rim:CommitmentShape: *none*
- - Shape rim:RegisterSpecificationShape: *none*
- - Shape rim:RegisterShape: *none*
- - Shape rim:RegisterItemShape: *none*
- - Shape rim:ConceptShape: *none*
- - Shape rim:ConceptVersionShape: *none*
  - Shape rim:RegisterActionShape: *none*
+ - Shape rim:TextShape: *none*
+ - Shape rim:RegisterSpecificationShape: *none*
  - Shape rim:RegisterItemClassShape: *none*
+ - Shape rim:RegisterShape: *none*
+ - Shape rim:ConceptVersionShape: *none*
  - Shape rim:TextShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape rim:RegisterItemShape: *none*
+ - Shape rim:CommitmentShape: *none*
+ - Shape rim:ConceptShape: *none*
  - Shape rim:TextShape/sh:or/rdf:first: *none*
 
 Validation result for https://ogcincubator.github.io/cross-domain-model/_sources/prov/shapes.shacl: no results
 Focus nodes for https://ogcincubator.github.io/cross-domain-model/_sources/prov/shapes.shacl:
- - Shape <https://www.ogc.org/rules/prov/#prop-hadRole>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedDelegation>: *none*
- - Shape <https://www.ogc.org/rules/prov/#Invalidation-shape>: *none*
- - Shape <https://www.ogc.org/rules/prov/#Activity-shape>: id:c16504e6-ec23-43da-92c9-c00151a037f2,id:b05b7747-ddf9-4e6a-9b4a-2426b0e4b930,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135,id:effb40f4-0a75-4498-80d7-d04365cf463b,id:376997e3-8d83-426b-b84f-e985b2af4046,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5,id:af446720-3625-4794-9126-810a0620808f,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b,id:e96466cd-dd6c-469a-af95-6bbc439a3156,id:931b869b-928e-447a-bf72-bc6914cb5e33
- - Shape <https://www.ogc.org/rules/prov/#prop-hadPrimarySource>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-invalidated>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-hadActivity>: *none*
- - Shape <https://www.ogc.org/rules/prov/#InstantaneousEvent-shape>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedAssociation>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-activity>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-wasQuotedFrom>: *none*
- - Shape <https://www.ogc.org/rules/prov/#End-shape>: id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedEnd,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedEnd,id:931b869b-928e-447a-bf72-bc6914cb5e33/prov:qualifiedEnd,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedEnd,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedEnd,id:b05b7747-ddf9-4e6a-9b4a-2426b0e4b930/prov:qualifiedEnd,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedEnd,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedEnd,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedEnd,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedEnd,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedEnd,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedEnd
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedStart>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedInvalidation>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-atLocation>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-hadMember>: *none*
- - Shape <https://www.ogc.org/rules/prov/#Usage-shape>: id:931b869b-928e-447a-bf72-bc6914cb5e33/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:b05b7747-ddf9-4e6a-9b4a-2426b0e4b930/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedUsage,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedUsage,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedUsage,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedUsage,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedUsage,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedUsage
- - Shape <https://www.ogc.org/rules/prov/#prop-wasInfluencedBy>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedCommunication>: *none*
- - Shape <https://www.ogc.org/rules/prov/#Bundle-shape>: metadata:directory-03305ae1-bded-486a-bfd3-b2f244261014.ttl,metadata:directory-2363b376-af39-4421-ac82-298f9b5bf5d6.ttl
- - Shape <https://www.ogc.org/rules/prov/#prop-wasGeneratedBy>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-wasRevisionOf>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-hadPlan>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-influencer>: *none*
  - Shape <https://www.ogc.org/rules/prov/#prop-actedOnBehalfOf>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedGeneration>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedEnd>: *none*
- - Shape <https://www.ogc.org/rules/prov/#Collection-shape>: id:8ea13029-7217-48c6-83b2-5168cf85a135,id:728b8a7c-ecb1-4cd6-b49e-3f7537dd514b,id:81daad74-dad7-41e0-bc70-26432d1dfb21,id:4c4659c5-50da-43e0-8077-7def82bdd204,id:380f03a1-1d47-401e-b9d6-4e6b30363135,id:03305ae1-bded-486a-bfd3-b2f244261014,id:2363b376-af39-4421-ac82-298f9b5bf5d6
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedPrimarySource>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedQuotation>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-used>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-wasInvalidatedBy>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedAttribution>: *none*
- - Shape <https://www.ogc.org/rules/prov/#Entity-shape>: id:8982a81b-193e-4e8f-bacf-43df0bb2e832,id:50e7a067-7cf5-48cc-a7a9-995f535a42a5,id:e56a0493-0204-4306-b246-d6f0a0ed8e0b,id:df87d5ba-da6e-432b-b924-80ec05cd6e0b,id:a1526e7f-b483-4350-9c60-e56f786bfff3,id:54cd6275-9321-44c8-856b-5978bcb26eae,id:a29b44cd-ed7f-4617-8e76-6b4279377f1d,id:d81429c0-f7f3-4b1c-b7bb-0dd72a874aff,id:183be3aa-ca39-47b3-9cb9-9972ab5b4b04,id:924dc3e6-e45e-4ae0-940f-d538dce7a6e4,data:3f01f1f6a0a77a28c7ffde131fe58339eba52a01,id:c521c30a-5aa8-4fc8-9d25-b8d9de55c870,id:c5451c9d-b6ce-42de-b9a3-9512e9784e73,id:e279fef3-8bfb-464b-9df4-3497a11b9735,id:aa6dbd65-080e-408b-8c01-0acfe33cc871,id:5fc90b70-355b-4773-ab64-068be1b36cdc,id:95ff8885-0a15-43aa-82fa-7cd8b1e37f8d,id:d9517d0d-9e97-4d22-afa7-a402d0537cf6,data:2b8178722e8bb6fbc41909e7e32e88d4aa439eb8,id:e2de3352-f3cb-41aa-976e-7d0fa8018bcc,id:37378d08-0575-4061-9f35-0bd44e06d360,id:d8f4f618-3e0f-4024-a17f-b5c9d24b67b9,data:943b0707a0f1a109dd1de1d61e37a1654a191ae9,id:74367791-176c-4eaf-9ca3-e10883dc4521,id:6b4a4879-8c4b-4f74-9957-2902ed5cce8e,id:4a3cec45-e5c9-449f-b623-e71818c12362,id:a60dd30c-c4c6-4254-be37-68b96605a358,data:09b42388eb37be1a4b972127a78f691ec6eb3795,id:4640e02b-c74b-40e1-a818-75d60264864b,id:3874df5f-5219-46d7-b883-f927b2718f98,id:d124ea7e-589c-4dd3-9515-031b20191cf3,id:d092277a-8801-406a-94ec-078bb314ec37,data:78988010b890ce6f4d2136481f392787ec6d6106,id:8ea13029-7217-48c6-83b2-5168cf85a135,id:2f66b1e4-39fc-4551-8aa8-49831c3211bb,id:547c8cdb-eb07-4b2e-bd53-a0e43e839323,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band>,id:758a05e3-6c7f-41d7-af5a-b4798d4b882f,id:ab8af93b-6ae4-4bf6-86ac-989a33e53741,id:6dc7f217-6174-4e64-be16-a87833936301,data:9b8ad0ffede9b72258d46c48d2555b75623aaa2e,id:db33c88c-4dd2-4ea1-b06b-577175d50413,data:dd6dd1205c33f51e783742f16e856d1752beceda,id:728b8a7c-ecb1-4cd6-b49e-3f7537dd514b,id:eeb1bf4b-58a7-41c1-b269-d3320e3156e8,data:4c89b83017b6bf2fdefdc95f52a039255235ba37,id:e88dab08-862b-4933-9271-22712490f7bb,id:e2d4aa64-8b79-4922-beaa-658f42437197,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac>,id:740ff7b1-6fac-4641-92f3-b9a9b32a0eec,id:5d3a2cf8-ee6d-4729-9049-1b13ac82b9c8,id:d2cddbd6-1979-4e51-b267-7fec4bab3dc8,id:61f78ec9-45f1-4537-9ed6-4f4e8616efbf,id:0117a745-b852-44ba-a7a0-08e529a7067d,id:32255a12-525c-491e-bf2f-f579c17fdf39,data:e657235e3d4603e9bbdf1f26c7101ece981f1255,id:3a808b83-4512-4301-9193-fe5620d0ece5,id:3659eb06-f1ed-4ec3-8ccd-74774fdae9ac,data:661fc93f43cc808586d1ba6bf1b9e22a963ce449,id:d1fc5582-5435-437c-afc6-7bf715e11ac9,id:416a29f6-ecc2-420e-8f48-4d5bce2c3263,id:c3c368d8-6ec0-4064-bcfe-a0c6ebea821c,id:d7eaf21e-997d-440a-9c59-f5def6552d98,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene>,id:cb4e16e3-e34d-4252-820f-27055b12f9f0,data:938fb14bf0a2470ab2ae9b0420a64e5b81671271,id:da18af81-c62b-42a2-8596-4e773968588d,id:6811beb8-4d7f-45b8-9707-e34238fed895,id:57d70ea4-3ea9-4fa6-80e3-6504a20bafdc,id:d9c2f532-47b2-45e7-9825-ed5413dea033,id:2125c168-2391-4a9c-924c-8d5d7330ffd5,data:0ff4ea33ebd17218fd87cba84943c04e4e56137f,data:d1a501118882d0e474e5342dbf965ace5b931cca,id:f5beff83-d577-48b1-b086-b1a35ed1b44b,id:eff8560e-cd59-4a84-8dac-2f766310d52a,id:ff077bb5-6a4d-426d-be0c-e1baf185a250,id:b3b5ccdd-6d2b-4e1c-b9d3-f904fd999149,id:87d73316-63b5-4c3d-ba48-d2812d5dd71a,id:dcb23f91-1dbc-4929-9021-d23ee962fc04,id:9c4478e2-935b-41d5-857b-c2641d1c917d,id:827caa38-b109-46f9-be8f-4bc99371b11f,id:e10c43d5-f616-4774-8ff7-be84cdf977aa,id:03305ae1-bded-486a-bfd3-b2f244261014,data:443e27d9b969edf33b0080e08bc8bffe154f06f9,id:10db2d8a-f421-4312-aef9-6c5efbad211d,id:faffe676-addb-4b7c-ac15-34a991f69f69,id:4c4659c5-50da-43e0-8077-7def82bdd204,id:3ba979c6-c4b1-4d94-bd53-556aca41e518,id:c0bace95-d5f7-47c8-85c2-88006db5ab2d,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass>,id:3a6146e3-99f8-4cdc-aa09-aa71cf40578e,data:9c81f26b42f7f833fea1b35727ffbcc91dab6e3c,id:0fea0e08-9d5a-41e3-8889-fcd05025f7f7,id:2adedd6a-e764-47f5-82f0-d38efb1e074a,id:e70e9f12-3e5c-4948-9ca6-449d0d53c077,id:e858184a-032a-4649-a114-21e67c56c9b7,id:87573e08-1a69-4a83-a551-f2a1c560cc7c,data:4451dd50c71fb43e9f78bbe62b52f4d6349624a8,id:380f03a1-1d47-401e-b9d6-4e6b30363135,id:bc49aa46-3931-4344-8b1e-7788b5f50e0f,id:8f1f4d19-7ab7-48f7-a279-0cd0f11d5bb3,id:7f3077b0-d507-4f90-b1ce-76c822fefb1e,id:5ac41596-c778-4a85-89d7-230b7e014d7d,data:73c3313bdf7eed97c6d53d58dd7df2687f3ac1bf,id:105cc922-459c-4a99-a431-5d4b3b38aea9,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band>,id:7ad088e7-2b84-406e-a4ef-5e791c3c5457,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/parse_aoi>,id:aabf8f10-1849-4b0c-891f-dd7a04a822a7,id:ffc8283b-4edf-49e1-bcab-9bd74542ce23,data:ba936cb0e062bea4078e8b56371ca8fe054093dd,id:2363b376-af39-4421-ac82-298f9b5bf5d6,id:e8ec687a-b9d1-4afa-83c6-6c3bf9266d3e,id:c66a4eb4-76b6-4a3d-b5ee-aa35009027e1,id:6ee43ae1-f7f0-44e8-9521-f520ee73f8d5,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/calculate_indices>,id:3f96db66-4f0b-4af4-9034-8d14f35016b5,id:6f5fd862-1f4d-4a1b-9c03-5f531e769ee6,data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c,id:cbcc2c55-1928-47ce-88e9-9cc945faa37e,id:73d52f8a-86fe-46bd-a3e3-ed71eaa8b8d0,id:dd4db319-ab09-4589-93be-c0ab5a21b781,id:6818485a-eeb1-4ded-8202-995389ee3c9e,id:37dc1519-928c-46ff-b08a-8fa656dcede4,data:31cacee3ed40818e05aaa338979596497705bf56,id:72b6e1b9-31a6-41a5-9509-2fb54eb7a854,id:14e98d45-e476-4164-bcdd-e4822839bf51,id:5f1b745b-1648-40c5-8fbe-a8197ea712d1,id:c436c153-ead6-49cd-8341-ee3fc3d94747,wf:main,data:5052a0c49b2beb0515446c40d4eee08c7fcad904,id:1d5c6165-738d-4f3e-815b-21b08a3876bc,id:81daad74-dad7-41e0-bc70-26432d1dfb21,data:7f0e99772494c2b7c3755662f3725e91b7991785,id:dc91669b-4a2f-4bd1-92c9-382337d78dba,id:068eb4ce-9e22-4f53-8d00-6a22656436bb,id:e6cc9d7e-080c-437c-a66b-4f386982b118,id:c8ba466f-bf4e-4bf3-a2cb-e7013b6146cf,id:c11e8081-a4e0-43ef-ae32-f37e0aa2b9a7,id:5356eeb5-2499-42be-bc4e-e8528bde1ff8,data:b441775de2d148543034d26997c017d3a24544ed,id:f70266c8-9af3-4228-89f4-230a39e31c83,data:7238dd3cfee022d8d78263cad6a90a7ed0b1c31a
- - Shape <https://www.ogc.org/rules/prov/#Generation-shape>: id:ff077bb5-6a4d-426d-be0c-e1baf185a250/prov:qualifiedGeneration,id:87573e08-1a69-4a83-a551-f2a1c560cc7c/prov:qualifiedGeneration,id:4a3cec45-e5c9-449f-b623-e71818c12362/prov:qualifiedGeneration,id:da18af81-c62b-42a2-8596-4e773968588d/prov:qualifiedGeneration,id:a1526e7f-b483-4350-9c60-e56f786bfff3/prov:qualifiedGeneration,id:2363b376-af39-4421-ac82-298f9b5bf5d6/prov:qualifiedGeneration,id:6ee43ae1-f7f0-44e8-9521-f520ee73f8d5/prov:qualifiedGeneration,id:924dc3e6-e45e-4ae0-940f-d538dce7a6e4/prov:qualifiedGeneration,id:2363b376-af39-4421-ac82-298f9b5bf5d6/prov:qualifiedGeneration,id:a29b44cd-ed7f-4617-8e76-6b4279377f1d/prov:qualifiedGeneration,id:cbcc2c55-1928-47ce-88e9-9cc945faa37e/prov:qualifiedGeneration,id:bc49aa46-3931-4344-8b1e-7788b5f50e0f/prov:qualifiedGeneration,id:d9517d0d-9e97-4d22-afa7-a402d0537cf6/prov:qualifiedGeneration,id:c436c153-ead6-49cd-8341-ee3fc3d94747/prov:qualifiedGeneration,id:7f3077b0-d507-4f90-b1ce-76c822fefb1e/prov:qualifiedGeneration,id:37dc1519-928c-46ff-b08a-8fa656dcede4/prov:qualifiedGeneration,id:db33c88c-4dd2-4ea1-b06b-577175d50413/prov:qualifiedGeneration,id:3659eb06-f1ed-4ec3-8ccd-74774fdae9ac/prov:qualifiedGeneration,id:e88dab08-862b-4933-9271-22712490f7bb/prov:qualifiedGeneration,id:9c4478e2-935b-41d5-857b-c2641d1c917d/prov:qualifiedGeneration,id:cb4e16e3-e34d-4252-820f-27055b12f9f0/prov:qualifiedGeneration
- - Shape <https://www.ogc.org/rules/prov/#prop-wasInformedBy>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedInvalidation>: *none*
  - Shape <https://www.ogc.org/rules/prov/#prop-wasDerivedFrom>: *none*
- - Shape <https://www.ogc.org/rules/prov/#Start-shape>: id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedStart,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedStart,id:b05b7747-ddf9-4e6a-9b4a-2426b0e4b930/prov:qualifiedStart,id:1432f81c-9552-435f-a0ab-6b28e12ea1b3/prov:qualifiedStart,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedStart,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedStart,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedStart,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedStart,id:931b869b-928e-447a-bf72-bc6914cb5e33/prov:qualifiedStart,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedStart,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedStart,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedStart,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedStart
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedInfluence>: *none*
- - Shape <https://www.ogc.org/rules/prov/#Plan-shape>: <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band>,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/calculate_indices>,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass>,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac>,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band>,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/parse_aoi>,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene>,wf:main
- - Shape <https://www.ogc.org/rules/prov/#prop-wasStartedBy>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedUsage>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedAssociation>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-used>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-invalidated>: *none*
  - Shape <https://www.ogc.org/rules/prov/#prop-entity>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-hadUsage>: *none*
  - Shape <https://www.ogc.org/rules/prov/#EmptyCollection-shape>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-agent>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedDerivation>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-alternateOf>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-generated>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-wasAssociatedWith>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-wasEndedBy>: *none*
- - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedRevision>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-wasRevisionOf>: *none*
  - Shape <https://www.ogc.org/rules/prov/#prop-specializationOf>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-influencer>: *none*
  - Shape <https://www.ogc.org/rules/prov/#prop-wasAttributedTo>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-wasGeneratedBy>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#Collection-shape>: id:2363b376-af39-4421-ac82-298f9b5bf5d6,id:03305ae1-bded-486a-bfd3-b2f244261014,id:380f03a1-1d47-401e-b9d6-4e6b30363135,id:81daad74-dad7-41e0-bc70-26432d1dfb21,id:4c4659c5-50da-43e0-8077-7def82bdd204,id:728b8a7c-ecb1-4cd6-b49e-3f7537dd514b,id:8ea13029-7217-48c6-83b2-5168cf85a135
+ - Shape <https://www.ogc.org/rules/prov/#prop-hadPrimarySource>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-wasStartedBy>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedDelegation>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#End-shape>: id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedEnd,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedEnd,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedEnd,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedEnd,id:b05b7747-ddf9-4e6a-9b4a-2426b0e4b930/prov:qualifiedEnd,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedEnd,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedEnd,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedEnd,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedEnd,id:931b869b-928e-447a-bf72-bc6914cb5e33/prov:qualifiedEnd,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedEnd,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedEnd
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedCommunication>: *none*
  - Shape <https://www.ogc.org/rules/prov/#prop-hadGeneration>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedStart>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-wasInvalidatedBy>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-hadRole>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-wasEndedBy>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedInfluence>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-wasInfluencedBy>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-hadMember>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-activity>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedAttribution>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#Invalidation-shape>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#Start-shape>: id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedStart,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedStart,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedStart,id:1432f81c-9552-435f-a0ab-6b28e12ea1b3/prov:qualifiedStart,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedStart,id:931b869b-928e-447a-bf72-bc6914cb5e33/prov:qualifiedStart,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedStart,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedStart,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedStart,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedStart,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedStart,id:b05b7747-ddf9-4e6a-9b4a-2426b0e4b930/prov:qualifiedStart,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedStart
+ - Shape <https://www.ogc.org/rules/prov/#prop-alternateOf>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#Usage-shape>: id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedUsage,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedUsage,id:931b869b-928e-447a-bf72-bc6914cb5e33/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedUsage,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedUsage,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedUsage,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782/prov:qualifiedUsage,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:effb40f4-0a75-4498-80d7-d04365cf463b/prov:qualifiedUsage,id:e96466cd-dd6c-469a-af95-6bbc439a3156/prov:qualifiedUsage,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135/prov:qualifiedUsage,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedUsage,id:c16504e6-ec23-43da-92c9-c00151a037f2/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:af446720-3625-4794-9126-810a0620808f/prov:qualifiedUsage,id:376997e3-8d83-426b-b84f-e985b2af4046/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage,id:b05b7747-ddf9-4e6a-9b4a-2426b0e4b930/prov:qualifiedUsage,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5/prov:qualifiedUsage,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b/prov:qualifiedUsage
+ - Shape <https://www.ogc.org/rules/prov/#Activity-shape>: id:af446720-3625-4794-9126-810a0620808f,id:b05b7747-ddf9-4e6a-9b4a-2426b0e4b930,id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57,id:376997e3-8d83-426b-b84f-e985b2af4046,id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b,id:931b869b-928e-447a-bf72-bc6914cb5e33,id:e96466cd-dd6c-469a-af95-6bbc439a3156,id:f4cf1f0f-6d62-483b-ba92-38d6e1040135,id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5,id:c16504e6-ec23-43da-92c9-c00151a037f2,id:effb40f4-0a75-4498-80d7-d04365cf463b,id:ad22cfb2-89d1-476b-a33a-73bf3be4c782
+ - Shape <https://www.ogc.org/rules/prov/#prop-wasInformedBy>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-wasQuotedFrom>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-hadUsage>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-atLocation>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedUsage>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#Bundle-shape>: metadata:directory-2363b376-af39-4421-ac82-298f9b5bf5d6.ttl,metadata:directory-03305ae1-bded-486a-bfd3-b2f244261014.ttl
+ - Shape <https://www.ogc.org/rules/prov/#Plan-shape>: wf:main,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene>,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass>,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band>,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/calculate_indices>,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac>,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band>,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/parse_aoi>
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedGeneration>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedRevision>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#InstantaneousEvent-shape>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedDerivation>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#Generation-shape>: id:3659eb06-f1ed-4ec3-8ccd-74774fdae9ac/prov:qualifiedGeneration,id:87573e08-1a69-4a83-a551-f2a1c560cc7c/prov:qualifiedGeneration,id:a29b44cd-ed7f-4617-8e76-6b4279377f1d/prov:qualifiedGeneration,id:db33c88c-4dd2-4ea1-b06b-577175d50413/prov:qualifiedGeneration,id:c436c153-ead6-49cd-8341-ee3fc3d94747/prov:qualifiedGeneration,id:cb4e16e3-e34d-4252-820f-27055b12f9f0/prov:qualifiedGeneration,id:bc49aa46-3931-4344-8b1e-7788b5f50e0f/prov:qualifiedGeneration,id:d9517d0d-9e97-4d22-afa7-a402d0537cf6/prov:qualifiedGeneration,id:2363b376-af39-4421-ac82-298f9b5bf5d6/prov:qualifiedGeneration,id:da18af81-c62b-42a2-8596-4e773968588d/prov:qualifiedGeneration,id:7f3077b0-d507-4f90-b1ce-76c822fefb1e/prov:qualifiedGeneration,id:4a3cec45-e5c9-449f-b623-e71818c12362/prov:qualifiedGeneration,id:cbcc2c55-1928-47ce-88e9-9cc945faa37e/prov:qualifiedGeneration,id:e88dab08-862b-4933-9271-22712490f7bb/prov:qualifiedGeneration,id:6ee43ae1-f7f0-44e8-9521-f520ee73f8d5/prov:qualifiedGeneration,id:924dc3e6-e45e-4ae0-940f-d538dce7a6e4/prov:qualifiedGeneration,id:2363b376-af39-4421-ac82-298f9b5bf5d6/prov:qualifiedGeneration,id:9c4478e2-935b-41d5-857b-c2641d1c917d/prov:qualifiedGeneration,id:a1526e7f-b483-4350-9c60-e56f786bfff3/prov:qualifiedGeneration,id:37dc1519-928c-46ff-b08a-8fa656dcede4/prov:qualifiedGeneration,id:ff077bb5-6a4d-426d-be0c-e1baf185a250/prov:qualifiedGeneration
+ - Shape <https://www.ogc.org/rules/prov/#prop-agent>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#Entity-shape>: <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene>,id:57d70ea4-3ea9-4fa6-80e3-6504a20bafdc,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass>,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band>,id:aabf8f10-1849-4b0c-891f-dd7a04a822a7,id:c66a4eb4-76b6-4a3d-b5ee-aa35009027e1,id:7ad088e7-2b84-406e-a4ef-5e791c3c5457,id:5f1b745b-1648-40c5-8fbe-a8197ea712d1,id:2363b376-af39-4421-ac82-298f9b5bf5d6,id:6dc7f217-6174-4e64-be16-a87833936301,id:e70e9f12-3e5c-4948-9ca6-449d0d53c077,id:3ba979c6-c4b1-4d94-bd53-556aca41e518,id:03305ae1-bded-486a-bfd3-b2f244261014,id:5fc90b70-355b-4773-ab64-068be1b36cdc,id:37dc1519-928c-46ff-b08a-8fa656dcede4,id:32255a12-525c-491e-bf2f-f579c17fdf39,id:73d52f8a-86fe-46bd-a3e3-ed71eaa8b8d0,data:3f01f1f6a0a77a28c7ffde131fe58339eba52a01,id:54cd6275-9321-44c8-856b-5978bcb26eae,id:bc49aa46-3931-4344-8b1e-7788b5f50e0f,id:da18af81-c62b-42a2-8596-4e773968588d,data:443e27d9b969edf33b0080e08bc8bffe154f06f9,data:dd6dd1205c33f51e783742f16e856d1752beceda,id:3659eb06-f1ed-4ec3-8ccd-74774fdae9ac,id:d81429c0-f7f3-4b1c-b7bb-0dd72a874aff,id:6ee43ae1-f7f0-44e8-9521-f520ee73f8d5,data:31cacee3ed40818e05aaa338979596497705bf56,data:09b42388eb37be1a4b972127a78f691ec6eb3795,id:0fea0e08-9d5a-41e3-8889-fcd05025f7f7,data:d1a501118882d0e474e5342dbf965ace5b931cca,id:eeb1bf4b-58a7-41c1-b269-d3320e3156e8,id:ff077bb5-6a4d-426d-be0c-e1baf185a250,id:ab8af93b-6ae4-4bf6-86ac-989a33e53741,data:0ff4ea33ebd17218fd87cba84943c04e4e56137f,id:d7eaf21e-997d-440a-9c59-f5def6552d98,id:4a3cec45-e5c9-449f-b623-e71818c12362,id:d124ea7e-589c-4dd3-9515-031b20191cf3,wf:main,id:3a6146e3-99f8-4cdc-aa09-aa71cf40578e,id:e56a0493-0204-4306-b246-d6f0a0ed8e0b,id:61f78ec9-45f1-4537-9ed6-4f4e8616efbf,id:5d3a2cf8-ee6d-4729-9049-1b13ac82b9c8,id:183be3aa-ca39-47b3-9cb9-9972ab5b4b04,id:dc91669b-4a2f-4bd1-92c9-382337d78dba,id:2125c168-2391-4a9c-924c-8d5d7330ffd5,data:5052a0c49b2beb0515446c40d4eee08c7fcad904,data:9c81f26b42f7f833fea1b35727ffbcc91dab6e3c,id:3a808b83-4512-4301-9193-fe5620d0ece5,id:dd4db319-ab09-4589-93be-c0ab5a21b781,id:14e98d45-e476-4164-bcdd-e4822839bf51,id:3f96db66-4f0b-4af4-9034-8d14f35016b5,id:10db2d8a-f421-4312-aef9-6c5efbad211d,id:547c8cdb-eb07-4b2e-bd53-a0e43e839323,id:924dc3e6-e45e-4ae0-940f-d538dce7a6e4,id:cbcc2c55-1928-47ce-88e9-9cc945faa37e,id:dcb23f91-1dbc-4929-9021-d23ee962fc04,id:5ac41596-c778-4a85-89d7-230b7e014d7d,data:4c89b83017b6bf2fdefdc95f52a039255235ba37,id:d092277a-8801-406a-94ec-078bb314ec37,id:8ea13029-7217-48c6-83b2-5168cf85a135,id:1d5c6165-738d-4f3e-815b-21b08a3876bc,data:b441775de2d148543034d26997c017d3a24544ed,id:8f1f4d19-7ab7-48f7-a279-0cd0f11d5bb3,id:d9c2f532-47b2-45e7-9825-ed5413dea033,id:e10c43d5-f616-4774-8ff7-be84cdf977aa,id:6f5fd862-1f4d-4a1b-9c03-5f531e769ee6,id:8982a81b-193e-4e8f-bacf-43df0bb2e832,id:9c4478e2-935b-41d5-857b-c2641d1c917d,data:938fb14bf0a2470ab2ae9b0420a64e5b81671271,id:e2de3352-f3cb-41aa-976e-7d0fa8018bcc,id:c11e8081-a4e0-43ef-ae32-f37e0aa2b9a7,id:37378d08-0575-4061-9f35-0bd44e06d360,data:661fc93f43cc808586d1ba6bf1b9e22a963ce449,id:0117a745-b852-44ba-a7a0-08e529a7067d,id:cb4e16e3-e34d-4252-820f-27055b12f9f0,id:3874df5f-5219-46d7-b883-f927b2718f98,id:b3b5ccdd-6d2b-4e1c-b9d3-f904fd999149,data:943b0707a0f1a109dd1de1d61e37a1654a191ae9,id:f70266c8-9af3-4228-89f4-230a39e31c83,id:aa6dbd65-080e-408b-8c01-0acfe33cc871,id:d1fc5582-5435-437c-afc6-7bf715e11ac9,id:a1526e7f-b483-4350-9c60-e56f786bfff3,id:c0bace95-d5f7-47c8-85c2-88006db5ab2d,data:ba936cb0e062bea4078e8b56371ca8fe054093dd,id:eff8560e-cd59-4a84-8dac-2f766310d52a,id:740ff7b1-6fac-4641-92f3-b9a9b32a0eec,data:78988010b890ce6f4d2136481f392787ec6d6106,id:e2d4aa64-8b79-4922-beaa-658f42437197,data:2b8178722e8bb6fbc41909e7e32e88d4aa439eb8,id:faffe676-addb-4b7c-ac15-34a991f69f69,id:c521c30a-5aa8-4fc8-9d25-b8d9de55c870,data:73c3313bdf7eed97c6d53d58dd7df2687f3ac1bf,id:ffc8283b-4edf-49e1-bcab-9bd74542ce23,id:e279fef3-8bfb-464b-9df4-3497a11b9735,id:4c4659c5-50da-43e0-8077-7def82bdd204,id:728b8a7c-ecb1-4cd6-b49e-3f7537dd514b,id:87d73316-63b5-4c3d-ba48-d2812d5dd71a,data:7238dd3cfee022d8d78263cad6a90a7ed0b1c31a,id:068eb4ce-9e22-4f53-8d00-6a22656436bb,data:7f0e99772494c2b7c3755662f3725e91b7991785,id:e858184a-032a-4649-a114-21e67c56c9b7,id:e88dab08-862b-4933-9271-22712490f7bb,id:a29b44cd-ed7f-4617-8e76-6b4279377f1d,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/calculate_indices>,id:758a05e3-6c7f-41d7-af5a-b4798d4b882f,id:2f66b1e4-39fc-4551-8aa8-49831c3211bb,id:d2cddbd6-1979-4e51-b267-7fec4bab3dc8,id:a60dd30c-c4c6-4254-be37-68b96605a358,data:9b8ad0ffede9b72258d46c48d2555b75623aaa2e,id:827caa38-b109-46f9-be8f-4bc99371b11f,id:c8ba466f-bf4e-4bf3-a2cb-e7013b6146cf,id:c436c153-ead6-49cd-8341-ee3fc3d94747,id:81daad74-dad7-41e0-bc70-26432d1dfb21,id:416a29f6-ecc2-420e-8f48-4d5bce2c3263,id:6b4a4879-8c4b-4f74-9957-2902ed5cce8e,id:87573e08-1a69-4a83-a551-f2a1c560cc7c,id:6811beb8-4d7f-45b8-9707-e34238fed895,id:74367791-176c-4eaf-9ca3-e10883dc4521,id:4640e02b-c74b-40e1-a818-75d60264864b,id:2adedd6a-e764-47f5-82f0-d38efb1e074a,id:c5451c9d-b6ce-42de-b9a3-9512e9784e73,id:d9517d0d-9e97-4d22-afa7-a402d0537cf6,id:105cc922-459c-4a99-a431-5d4b3b38aea9,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band>,id:7f3077b0-d507-4f90-b1ce-76c822fefb1e,id:6818485a-eeb1-4ded-8202-995389ee3c9e,id:e6cc9d7e-080c-437c-a66b-4f386982b118,id:5356eeb5-2499-42be-bc4e-e8528bde1ff8,data:4451dd50c71fb43e9f78bbe62b52f4d6349624a8,data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c,id:50e7a067-7cf5-48cc-a7a9-995f535a42a5,id:f5beff83-d577-48b1-b086-b1a35ed1b44b,data:e657235e3d4603e9bbdf1f26c7101ece981f1255,id:c3c368d8-6ec0-4064-bcfe-a0c6ebea821c,id:95ff8885-0a15-43aa-82fa-7cd8b1e37f8d,id:d8f4f618-3e0f-4024-a17f-b5c9d24b67b9,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac>,id:df87d5ba-da6e-432b-b924-80ec05cd6e0b,id:e8ec687a-b9d1-4afa-83c6-6c3bf9266d3e,id:380f03a1-1d47-401e-b9d6-4e6b30363135,<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/parse_aoi>,id:72b6e1b9-31a6-41a5-9509-2fb54eb7a854,id:db33c88c-4dd2-4ea1-b06b-577175d50413
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedQuotation>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-hadActivity>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedEnd>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-generated>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedPrimarySource>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-wasAssociatedWith>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#prop-hadPlan>: *none*
 
 Validation result for _sources/process-type/shapes.shacl: no results
 Focus nodes for _sources/process-type/shapes.shacl:
- - Shape _:n8b62daf3e58f4cfd9b6d81936177c2b2b7: *none*
- - Shape pp:ProcessTypeShape: *none*
- - Shape pp:Tier4DataTypeReferenceShape: *none*
  - Shape pp:ProcessTypeShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n656863f6071140da93b0fba39b27534eb7: *none*
+ - Shape pp:Tier4DataTypeReferenceShape: *none*
+ - Shape pp:ProcessTypeShape: *none*
  - Shape pp:Tier4BoundRoleDataTypeShape: *none*
+ - Shape pp:Tier4RepresentationShape: *none*
 
 Validation result for https://ogcincubator.github.io/activity-type-register/_sources/geoprocessing-activity-types/shapes.shacl: no results
 Focus nodes for https://ogcincubator.github.io/activity-type-register/_sources/geoprocessing-activity-types/shapes.shacl:
- - Shape geoproc:GeoprocessingActivityTypeShape: *none*
- - Shape _:n7fd8d77919114ec8b2e36c5d7df67910b20: *none*
- - Shape geoproc:GeoprocessingActivityTypesShape/sh:property/sh:node: *none*
+ - Shape _:n9ae3a03af0ee4409a60929b7c7793e83b20: *none*
  - Shape geoproc:SpatialDataTypeShape: *none*
- - Shape geoproc:GeoprocessingActivityTypesShape: <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType>
- - Shape geoproc:GeoprocessingActivityTypeShape/sh:or/rdf:first: *none*
  - Shape geoproc:GeoprocessingActivityTypeShape/sh:or/rdf:rest/rdf:first: *none*
  - Shape geoproc:SpatialDataTypeShape/sh:property/sh:qualifiedValueShape: *none*
- - Shape _:n7fd8d77919114ec8b2e36c5d7df67910b21: *none*
+ - Shape geoproc:GeoprocessingActivityTypesShape: <https://w3id.org/ogc/rim/geoprocessing/GeoprocessingActivityType>
+ - Shape _:n9ae3a03af0ee4409a60929b7c7793e83b21: *none*
+ - Shape geoproc:GeoprocessingActivityTypeShape/sh:or/rdf:first: *none*
+ - Shape geoproc:GeoprocessingActivityTypeShape: *none*
+ - Shape geoproc:GeoprocessingActivityTypesShape/sh:property/sh:node: *none*
 
 Validation result for https://ogcincubator.github.io/activity-type-register/_sources/activity-types/shapes.shacl: no results
 Focus nodes for https://ogcincubator.github.io/activity-type-register/_sources/activity-types/shapes.shacl:

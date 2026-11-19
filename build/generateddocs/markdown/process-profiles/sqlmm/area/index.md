@@ -195,9 +195,9 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <http://www.iana.org/assignments/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -208,10 +208,10 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     dcterms:title "Compute geometry area." ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/GetArea/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns4:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+    proc:inputs [ ns3:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to compute are" ;
                     proc:metadata [ dcterms:title "Mon test" ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
@@ -229,7 +229,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:Area [ dcterms:description "The Computed Area Value" ;
+    proc:outputs [ ns2:Area [ dcterms:description "The Computed Area Value" ;
                     dcterms:title "Computed Area" ;
                     proc:metadata [ dcterms:title "Mon test  " ] ;
                     proc:schema [ proc:type "number" ;
@@ -297,6 +297,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Polygon to compute are",
       "description": "URI to a set of GML that describes the polygon.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/surface",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -423,6 +426,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Polygon to compute are",
       "description": "URI to a set of GML that describes the polygon.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/surface",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -494,10 +500,11 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <https://w3id.org/ogc/api/schema/> .
 @prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns5: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -515,54 +522,55 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
             ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/GetArea/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns1:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
+    proc:inputs [ ns2:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to compute are" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/surface> ;
+                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Geometry measure -- input `geometry`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-measure/inputs/geometry> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Area -- input `geometry`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Area -- input `geometry`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/area/inputs/geometry> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Geometry measure -- input `geometry`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-measure/inputs/geometry> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
                         [ dcterms:title "Mon test" ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "UTF-8" ;
-                                    ns2:contentMediaType "text/xml" ;
-                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                    proc:schema [ ns3:oneOf [ proc:type "string" ;
+                                    ns3:contentEncoding "UTF-8" ;
+                                    ns3:contentMediaType "text/xml" ;
+                                    ns3:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "text/xml" ;
-                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+                                    ns3:contentEncoding "base64" ;
+                                    ns3:contentMediaType "text/xml" ;
+                                    ns3:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Process Concept: Vector Geometry Processing" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+    proc:metadata [ dcterms:title "Generic Profile: Geometry measure" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-measure> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Demo" ],
         [ dcterms:title "Implementation Profile: Area" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/area> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ dcterms:title "Generic Profile: Geometry measure" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-measure> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+        [ dcterms:title "Process Concept: Vector Geometry Processing" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:Area [ dcterms:description "The Computed Area Value" ;
+    proc:outputs [ ns5:Area [ dcterms:description "The Computed Area Value" ;
                     dcterms:title "Computed Area" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/number> ;
                     proc:keywords "number" ;
-                    proc:metadata [ dcterms:title "Mon test  " ],
+                    proc:metadata [ dcterms:title "Implementation Profile: Area -- output `result`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/area/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
+                        [ dcterms:title "Mon test  " ],
                         [ dcterms:title "Generic Profile: Geometry measure -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/geometry-measure/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Area -- output `result`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/area/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
                     proc:schema [ proc:type "number" ;
-                            ns2:format "float" ] ] ] .
+                            ns3:format "float" ] ] ] .
 
 
 ```
@@ -623,6 +631,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/area to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area"
     }
   ],
@@ -710,6 +728,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/area to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area"
     }
   ],
@@ -779,6 +807,14 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:changeClassification rim:clarifyingChange ;
     rim:proposer pp:geolabs .
 
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area/actions/representation-2026-11-18> a rim:RegisterAction ;
+    dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
+    prov:startedAtTime "2026-11-18T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/area, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
@@ -809,6 +845,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area/actions/addition>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area/actions/d5-2026-11-09>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area/actions/representation-2026-11-18>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/area/actions/specialisation-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
@@ -941,6 +978,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/surface
@@ -974,6 +1012,11 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/area/inputs/geometry
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/inputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/input/
         outputs:
@@ -1053,6 +1096,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   dataType:
     x-jsonld-id: http://purl.org/dc/terms/type
+    x-jsonld-type: '@id'
+  representation:
+    x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
     x-jsonld-type: '@id'
   usedEntityType:
     x-jsonld-id: https://w3id.org/ogc/rim/activity-type/usedEntityType
@@ -1342,7 +1388,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.sqlmm.area
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-18'
+  dateOfLastChange: '2026-11-19'
 
 ```
 
@@ -1423,6 +1469,10 @@ Links to the schema:
     },
     "dataType": {
       "@id": "dct:type",
+      "@type": "@id"
+    },
+    "representation": {
+      "@id": "https://w3id.org/geolabs/ospd/generic-profiles/representation",
       "@type": "@id"
     },
     "usedEntityType": {

@@ -53,6 +53,9 @@
       "title": "Polygon to compute are",
       "description": "URI to a set of GML that describes the polygon.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/surface",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml"
+      ],
       "keywords": [
         "geometry"
       ],

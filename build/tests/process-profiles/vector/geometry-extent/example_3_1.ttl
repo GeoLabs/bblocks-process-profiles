@@ -1,8 +1,9 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/generic-profiles/> .
 @prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns5: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -33,50 +34,54 @@
             ns3:SHAPES [ dcterms:description "Shapes" ;
                     dcterms:title "Shapes" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-kml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Geometry extent -- input `geometry`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/geometry-extent/inputs/geometry> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Unary geometry operation -- input `geometry`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation -- input `geometry`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-geometry-operation/inputs/geometry> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "utf-8" ;
-                                    ns2:contentMediaType "text/xml" ],
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Geometry extent -- input `geometry`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/geometry-extent/inputs/geometry> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
                                 [ proc:type "object" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/vnd.google-earth.kml+xml" ] ] ] ] ;
+                                    ns1:contentEncoding "utf-8" ;
+                                    ns1:contentMediaType "text/xml" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
     proc:metadata [ dcterms:title "Process Concept: Vector Geometry Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Generic Profile: Unary geometry operation" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-geometry-operation> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Implementation Profile: Geometry extent" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/geometry-extent> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Generic Profile: Unary geometry operation" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-geometry-operation> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns1:EXTENTS [ dcterms:description "Extents" ;
+    proc:outputs [ ns5:EXTENTS [ dcterms:description "Extents" ;
                     dcterms:title "Extents" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/surface> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/surface-kml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Geometry extent -- output `result`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/geometry-extent/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
-                        [ dcterms:title "Generic Profile: Unary geometry operation -- output `result`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-geometry-operation/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "object" ],
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Geometry extent -- output `result`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/geometry-extent/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "utf-8" ;
+                                    ns1:contentMediaType "text/xml" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/vnd.google-earth.kml+xml" ],
-                                [ proc:type "string" ;
-                                    ns2:contentEncoding "utf-8" ;
-                                    ns2:contentMediaType "text/xml" ] ] ] ] .
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
+                                [ proc:type "object" ] ] ] ] .
 

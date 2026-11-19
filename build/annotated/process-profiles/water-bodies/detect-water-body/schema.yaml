@@ -150,6 +150,9 @@ x-jsonld-extra-terms:
   dataType:
     x-jsonld-id: http://purl.org/dc/terms/type
     x-jsonld-type: '@id'
+  representation:
+    x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+    x-jsonld-type: '@id'
   usedEntityType:
     x-jsonld-id: https://w3id.org/ogc/rim/activity-type/usedEntityType
     x-jsonld-type: '@id'
@@ -438,4 +441,4 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.water-bodies.detect-water-body
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-18'
+  dateOfLastChange: '2026-11-19'

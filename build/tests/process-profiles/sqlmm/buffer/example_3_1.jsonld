@@ -54,6 +54,9 @@
       "title": "Polygon to be buffered",
       "description": "URI to a set of GML that describes the polygon.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/geometry",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml"
+      ],
       "keywords": [
         "geometry"
       ],
@@ -119,6 +122,9 @@
       "title": "Buffered Polygon",
       "description": "GML stream describing the buffered polygon feature.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/surface",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml"
+      ],
       "keywords": [
         "geometry"
       ],

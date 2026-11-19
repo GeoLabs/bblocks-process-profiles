@@ -48,6 +48,11 @@
       "title": "Image list of operands to the mathematical expression.",
       "description": "Image list of operands to the mathematical expression.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -140,6 +145,11 @@
       "title": "Output image which is the result of the mathematical expressions on input image list operands.",
       "description": "Output image which is the result of the mathematical expressions on input image list operands.",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-jpeg",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "keywords": [
         "raster"
       ],

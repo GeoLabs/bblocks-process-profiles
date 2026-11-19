@@ -1,8 +1,9 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns5: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -19,19 +20,23 @@
     dcterms:title "Slope, Aspect, Curvature" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns5:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.ta_morphometry.0/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns4:ELEVATION [ dcterms:description "Elevation" ;
                     dcterms:title "Elevation" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-png> ;
                     proc:keywords "elevation" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Slope -- input `elevation`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope/inputs/elevation> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Terrain derivative -- input `elevation`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Terrain derivative -- input `elevation`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/inputs/elevation> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Slope -- input `elevation`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope/inputs/elevation> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
@@ -93,8 +98,13 @@
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:ASPECT [ dcterms:description "Aspect" ;
+    proc:outputs [ ns3:ASPECT [ dcterms:description "Aspect" ;
                     dcterms:title "Aspect" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
@@ -107,50 +117,108 @@
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns2:C_CROS [ dcterms:description "Zevenbergen & Thorne (1987) refer to this as plan curvature" ;
+            ns3:C_CROS [ dcterms:description "Zevenbergen & Thorne (1987) refer to this as plan curvature" ;
                     dcterms:title "Cross-Sectional Curvature" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
-            ns2:C_GENE [ dcterms:description "General Curvature" ;
-                    dcterms:title "General Curvature" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns2:C_LONG [ dcterms:description "Zevenbergen & Thorne (1987) refer to this as profile curvature" ;
-                    dcterms:title "Longitudinal Curvature" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ] ] ] ;
-            ns2:C_MAXI [ dcterms:description "Maximal Curvature" ;
+            ns3:C_GENE [ dcterms:description "General Curvature" ;
+                    dcterms:title "General Curvature" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+            ns3:C_LONG [ dcterms:description "Zevenbergen & Thorne (1987) refer to this as profile curvature" ;
+                    dcterms:title "Longitudinal Curvature" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
+            ns3:C_MAXI [ dcterms:description "Maximal Curvature" ;
                     dcterms:title "Maximal Curvature" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
+            ns3:C_MINI [ dcterms:description "Minimal Curvature" ;
+                    dcterms:title "Minimal Curvature" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
+            ns3:C_PLAN [ dcterms:description "Plan Curvature" ;
+                    dcterms:title "Plan Curvature" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
@@ -163,36 +231,32 @@
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
-            ns2:C_MINI [ dcterms:description "Minimal Curvature" ;
-                    dcterms:title "Minimal Curvature" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
-            ns2:C_PLAN [ dcterms:description "Plan Curvature" ;
-                    dcterms:title "Plan Curvature" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ;
-            ns2:C_PROF [ dcterms:description "Profile Curvature" ;
+            ns3:C_PROF [ dcterms:description "Profile Curvature" ;
                     dcterms:title "Profile Curvature" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
+            ns3:C_ROTO [ dcterms:description "Flow Line Curvature" ;
+                    dcterms:title "Flow Line Curvature" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ],
@@ -205,12 +269,33 @@
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ] ] ] ;
-            ns2:C_ROTO [ dcterms:description "Flow Line Curvature" ;
-                    dcterms:title "Flow Line Curvature" ;
+            ns3:C_TANG [ dcterms:description "Tangential Curvature" ;
+                    dcterms:title "Tangential Curvature" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
+            ns3:C_TOTA [ dcterms:description "Total Curvature" ;
+                    dcterms:title "Total Curvature" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
@@ -218,55 +303,34 @@
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
-            ns2:C_TANG [ dcterms:description "Tangential Curvature" ;
-                    dcterms:title "Tangential Curvature" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns2:C_TOTA [ dcterms:description "Total Curvature" ;
-                    dcterms:title "Total Curvature" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns2:SLOPE [ dcterms:description "Slope" ;
+            ns3:SLOPE [ dcterms:description "Slope" ;
                     dcterms:title "Slope" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Terrain derivative -- output `result`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Slope -- output `result`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Slope -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/slope/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Terrain derivative -- output `result`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/terrain-derivative/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ] .
+                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ] .
 

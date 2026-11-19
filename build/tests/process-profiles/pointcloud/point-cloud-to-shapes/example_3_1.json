@@ -48,6 +48,9 @@
       "title": "Points",
       "description": "Points",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las"
+      ],
       "keywords": [
         "point cloud"
       ],
@@ -79,6 +82,10 @@
       "title": "Shapes",
       "description": "Shapes",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/feature-collection",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/feature-collection-gml",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/feature-collection-kml"
+      ],
       "keywords": [
         "feature collection"
       ],

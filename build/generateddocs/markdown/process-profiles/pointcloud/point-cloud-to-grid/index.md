@@ -400,8 +400,8 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
 @prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns4: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
@@ -435,7 +435,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "number" ;
-                            ns1:format "float" ] ] ;
+                            ns2:format "float" ] ] ;
             ns3:OUTPUT [ dcterms:description "Output" ;
                     dcterms:title "Output" ;
                     proc:minOccurs 0 ;
@@ -446,57 +446,57 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                             proc:type "string" ] ] ;
             ns3:POINTS [ dcterms:description "Points" ;
                     dcterms:title "Points" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-lasf" ] ] ] ] ;
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-lasf" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:COUNT [ dcterms:description "Number of Points in Cell" ;
+    proc:outputs [ ns1:COUNT [ dcterms:description "Number of Points in Cell" ;
                     dcterms:title "Number of Points in Cell" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
-            ns2:GRID [ dcterms:description "Z Value" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
+            ns1:GRID [ dcterms:description "Z Value" ;
                     dcterms:title "Z Value" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ;
-            ns2:GRIDS [ dcterms:description "Attributes" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-envi" ] ] ] ;
+            ns1:GRIDS [ dcterms:description "Attributes" ;
                     dcterms:title "Attributes" ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ] .
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/png" ] ] ] ] .
 
 
 ```
@@ -556,6 +556,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Points",
       "description": "Points",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las"
+      ],
       "keywords": [
         "point cloud"
       ],
@@ -645,6 +648,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Z Value",
       "description": "Z Value",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -688,6 +697,13 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "COUNT": {
       "title": "Number of Points in Cell",
       "description": "Number of Points in Cell",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -716,6 +732,13 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "GRIDS": {
       "title": "Attributes",
       "description": "Attributes",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -799,6 +822,9 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Points",
       "description": "Points",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las"
+      ],
       "keywords": [
         "point cloud"
       ],
@@ -888,6 +914,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
       "title": "Z Value",
       "description": "Z Value",
       "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "keywords": [
         "raster"
       ],
@@ -931,6 +963,13 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "COUNT": {
       "title": "Number of Points in Cell",
       "description": "Number of Points in Cell",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -959,6 +998,13 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     "GRIDS": {
       "title": "Attributes",
       "description": "Attributes",
+      "dataType": "https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band",
+      "representation": [
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff",
+        "https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png"
+      ],
       "schema": {
         "oneOf": [
           {
@@ -992,9 +1038,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns5: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -1009,10 +1056,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "Point Cloud to Grid" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns5:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.4/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns2:AGGREGATION [ dcterms:description "Aggregation" ;
+    proc:inputs [ ns4:AGGREGATION [ dcterms:description "Aggregation" ;
                     dcterms:title "Aggregation" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"first value\""^^rdf:JSON ;
@@ -1023,22 +1070,22 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 "mean value" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:CELLSIZE [ dcterms:description "Cellsize" ;
+            ns4:CELLSIZE [ dcterms:description "Cellsize" ;
                     dcterms:title "Cellsize" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/number> ;
                     proc:keywords "cell size" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Point cloud rasterization -- input `cellSize`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-rasterization/inputs/cellSize> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Point cloud to grid -- input `cellSize`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Point cloud to grid -- input `cellSize`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid/inputs/cellSize> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Point cloud rasterization -- input `cellSize`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-rasterization/inputs/cellSize> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "number" ;
                             ns1:format "float" ] ] ;
-            ns2:OUTPUT [ dcterms:description "Output" ;
+            ns4:OUTPUT [ dcterms:description "Output" ;
                     dcterms:title "Output" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"only z\""^^rdf:JSON ;
@@ -1046,51 +1093,61 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 "only z" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:POINTS [ dcterms:description "Points" ;
+            ns4:POINTS [ dcterms:description "Points" ;
                     dcterms:title "Points" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las> ;
                     proc:keywords "point cloud" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Point cloud to grid -- input `points`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid/inputs/points> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Point cloud rasterization -- input `points`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Point cloud rasterization -- input `points`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-rasterization/inputs/points> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Point cloud to grid -- input `points`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid/inputs/points> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-lasf" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Point cloud rasterization" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-rasterization> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Process Concept: Point Cloud Processing" ;
+    proc:metadata [ dcterms:title "Process Concept: Point Cloud Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/point-cloud-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Generic Profile: Point cloud rasterization" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-rasterization> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Implementation Profile: Point cloud to grid" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:COUNT [ dcterms:description "Number of Points in Cell" ;
+    proc:outputs [ ns2:COUNT [ dcterms:description "Number of Points in Cell" ;
                     dcterms:title "Number of Points in Cell" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ;
-            ns3:GRID [ dcterms:description "Z Value" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
+            ns2:GRID [ dcterms:description "Z Value" ;
                     dcterms:title "Z Value" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
                     proc:keywords "raster" ;
                     proc:metadata [ dcterms:title "Generic Profile: Point cloud rasterization -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-rasterization/outputs/result> ;
@@ -1100,24 +1157,29 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns3:GRIDS [ dcterms:description "Attributes" ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
+            ns2:GRIDS [ dcterms:description "Attributes" ;
                     dcterms:title "Attributes" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
@@ -1184,6 +1246,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/pointcloud/point-cloud-to-grid to https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18); the inputs/outputs of the deployment's own output COUNT, output GRIDS get a dataType (profiles.yaml data_types). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid"
     }
   ],
@@ -1272,6 +1344,16 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/pointcloud/point-cloud-to-grid to https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
       "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid/actions/representation-2026-11-18",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18); the inputs/outputs of the deployment's own output COUNT, output GRIDS get a dataType (profiles.yaml data_types). Classified substantive: the form in which a part of the entry is stated changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid"
     }
   ],
@@ -1342,6 +1424,14 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:changeClassification rim:clarifyingChange ;
     rim:proposer pp:geolabs .
 
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid/actions/representation-2026-11-18> a rim:RegisterAction ;
+    dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18); the inputs/outputs of the deployment's own output COUNT, output GRIDS get a dataType (profiles.yaml data_types). Classified substantive: the form in which a part of the entry is stated changes." ;
+    prov:startedAtTime "2026-11-18T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer pp:geolabs .
+
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-grid, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
     prov:startedAtTime "2026-11-10T00:00:00+00:00"^^xsd:dateTime ;
@@ -1373,6 +1463,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid/actions/addition>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid/actions/d5-2026-11-09>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid/actions/identifier-2026-11-17>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid/actions/representation-2026-11-18>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-grid/actions/specialisation-2026-11-10> ;
     rim:inRegister pp:register ;
     rim:itemClass acttype:activityTypeItemClass ;
@@ -1515,6 +1606,7 @@ $defs:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud
@@ -1548,6 +1640,11 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid/inputs/points
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
             CELLSIZE:
               required:
               - dataType
@@ -1596,13 +1693,16 @@ $defs:
         outputs:
           type: object
           required:
+          - COUNT
           - GRID
+          - GRIDS
           properties:
             GRID:
               required:
               - dataType
               - keywords
               - metadata
+              - representation
               properties:
                 dataType:
                   const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
@@ -1636,6 +1736,48 @@ $defs:
                         href:
                           const: https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid/outputs/result
                   x-jsonld-id: https://w3id.org/ogc/api/processes/metadata
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            COUNT:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
+            GRIDS:
+              required:
+              - dataType
+              - representation
+              properties:
+                dataType:
+                  const: https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band
+                  x-jsonld-id: http://purl.org/dc/terms/type
+                  x-jsonld-type: '@id'
+                representation:
+                  const:
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff
+                  - https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png
+                  x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
+                  x-jsonld-type: '@id'
           x-jsonld-id: https://w3id.org/ogc/api/processes/outputs
           x-jsonld-vocab: https://w3id.org/geolabs/ospd/process-profiles/output/
 x-jsonld-extra-terms:
@@ -1670,6 +1812,9 @@ x-jsonld-extra-terms:
     x-jsonld-type: '@id'
   dataType:
     x-jsonld-id: http://purl.org/dc/terms/type
+    x-jsonld-type: '@id'
+  representation:
+    x-jsonld-id: https://w3id.org/geolabs/ospd/generic-profiles/representation
     x-jsonld-type: '@id'
   usedEntityType:
     x-jsonld-id: https://w3id.org/ogc/rim/activity-type/usedEntityType
@@ -1959,7 +2104,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.pointcloud.point-cloud-to-grid
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-18'
+  dateOfLastChange: '2026-11-19'
 
 ```
 
@@ -2040,6 +2185,10 @@ Links to the schema:
     },
     "dataType": {
       "@id": "dct:type",
+      "@type": "@id"
+    },
+    "representation": {
+      "@id": "https://w3id.org/geolabs/ospd/generic-profiles/representation",
       "@type": "@id"
     },
     "usedEntityType": {
