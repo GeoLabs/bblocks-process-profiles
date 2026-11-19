@@ -66,6 +66,15 @@ those activity types, and that the entity types are the parent's. A process type
 Implementation Profile keeps acttype:ActivityType. Narrower entity classes, `acttype:plan` and the
 `rdf:type` of runs wait for decision D8.
 
+Since 2026-11-19 the activity types of bblocks-generic-profiles are grouped by meaning into families:
+an operation is a sub-class of its family, itself a sub-class of `geoproc:GeoprocessingActivityType`.
+A process type still specialises the operation, never a family directly when it implements a profile;
+`activity-type-parents.ttl` states both levels, so the geoproc shape still reaches it. The schema's
+list of parents holds the published activity types only: `raster-band-math-multiband`, withdrawn and
+merged into `raster-band-math` that day, is no parent any more (`tests/retired-parent-fail.json`), and
+`raster.band-math-multiband` now specialises `raster-band-math` (`ACTIVITY_TYPE_MERGES` in
+`scripts/generate.py`, which keeps the parent its specialisation action recorded).
+
 ### The six phases and the Process Concepts: two axes
 
 `phase` (`pp:phase`, formerly `skos:broader`, which made the phases broader concepts of the type)
@@ -123,7 +132,11 @@ amendments recorded so far:
 - the plans of 2026-11-11 (substantive): the KindGrove steps pinned on `v0.0.2-rc3`, the W3 CWL on
   `72a76ae`, with the processDescriptions derived from them, which now declare their formats;
 - `not-attached-2026-11-11` (the seven CWL CommandLineTools attached to no profile, clarifying):
-  `notAttached` added.
+  `notAttached` added;
+- `representation-2026-11-18` (the entries whose inherited processDescription names representations,
+  substantive);
+- `activity-type-2026-11-19` (`raster.band-math-multiband`, substantive): `subClassOf` changes from
+  `raster-band-math-multiband` to `raster-band-math`, into which it is merged.
 
 `scripts/check_actions.py` compares each entry and its processDescription files with `ea01115` and
 reports every changed field that no action dated on or after the change names.

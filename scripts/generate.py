@@ -84,6 +84,14 @@ PROCESS_BASE = BASE + "process/"
 # 2026-11-17): each keeps its old IRI as owl:sameAs and records the move as a clarifying amendment.
 LEGACY_BASE = "https://geolabs.github.io/bblocks-process-profiles/def/"
 IDENTIFIER_MOVED = "2026-11-17"
+# Activity types of bblocks-generic-profiles merged into another (decision of 2026-11-19): the
+# Implementation Profile (key) that pointed to the withdrawn one now points to the other. The process
+# types that implement it change parent class on that date; their specialisation action keeps the
+# parent it recorded.
+ACTIVITY_TYPE_MERGES = {
+    "raster-band-math-multiband": {"from": "raster-band-math-multiband", "to": "raster-band-math",
+                                   "date": "2026-11-19"},
+}
 
 
 def process_base(workflow):
@@ -852,8 +860,21 @@ def amendments(proc, parent):
                     "checking its signature (docs/ATTACHMENTS.md)."))
     if parent:
         on = max("2026-11-10", str((proc.get("tier3") or {}).get("attached_on", "2026-11-10")))
+        merge = ACTIVITY_TYPE_MERGES.get(proc["implementsProfile"].rstrip("/").rsplit("/", 1)[-1])
+        recorded = parent["id"]
+        if merge:
+            if parent["id"] != GENERIC_PROFILES_BASE + "activity-type/" + merge["to"]:
+                sys.exit(f"{proc['key']}: ACTIVITY_TYPE_MERGES expects the parent {merge['to']}, not {parent['id']}")
+            recorded = GENERIC_PROFILES_BASE + "activity-type/" + merge["from"]
+            out.append((f"activity-type-{merge['date']}", merge["date"], "substantive",
+                        f"subClassOf changes from {recorded}, withdrawn from bblocks-generic-profiles on "
+                        f"{merge['date']}, to {parent['id']}, into which it is merged and to which the "
+                        f"Implementation Profile {proc['implementsProfile']} now points (decision of "
+                        f"{merge['date']}). The entity types are unchanged. Classified substantive: the parent "
+                        "class changes.",
+                        "http://www.w3.org/2000/01/rdf-schema#subClassOf"))
         out.append((f"specialisation-{on}", on, "substantive",
-                    f"subClassOf changes from {ACTIVITY_TYPE_CLASS} to {parent['id']}, the activity type of the "
+                    f"subClassOf changes from {ACTIVITY_TYPE_CLASS} to {recorded}, the activity type of the "
                     "operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): "
                     + ", ".join(v for k in ("usedEntityType", "generatedEntityType") for v in _lst(parent.get(k) or []))
                     + "."))
@@ -932,9 +953,20 @@ def parent_activity_type(proc, gp_root):
         return None
     ip_key = proc["implementsProfile"].rstrip("/").rsplit("/", 1)[-1]
     ip = json.loads((gp_root / "_sources" / "implementation-profile" / ip_key / "examples" / f"{ip_key}.json").read_text())
-    at_key = ip["activityType"].rstrip("/").rsplit("/", 1)[-1]
-    at = json.loads((gp_root / "_sources" / "activity-type" / at_key / "examples" / f"{at_key}.json").read_text())
-    if at["subClassOf"] != GEOPROC_CLASS or not (at.get("usedEntityType") or at.get("generatedEntityType")):
+    def load(iri):
+        key = iri.rstrip("/").rsplit("/", 1)[-1]
+        return json.loads((gp_root / "_sources" / "activity-type" / key / "examples" / f"{key}.json").read_text())
+    at = load(ip["activityType"])
+    if at.get("publicationStatus") != "published":
+        sys.exit(f"{proc['key']}: activity type {at['id']} is not published")
+    # Since 2026-11-19 an operation is a sub-class of its family, itself a sub-class of geoproc.
+    ancestor, seen = at, set()
+    while ancestor["subClassOf"] != GEOPROC_CLASS:
+        if not ancestor["subClassOf"].startswith(GENERIC_PROFILES_BASE + "activity-type/") or ancestor["id"] in seen:
+            break
+        seen.add(ancestor["id"])
+        ancestor = load(ancestor["subClassOf"])
+    if ancestor["subClassOf"] != GEOPROC_CLASS or not (at.get("usedEntityType") or at.get("generatedEntityType")):
         sys.exit(f"{proc['key']}: activity type {at['id']} is not a geoprocessing activity type with an entity type")
     return at
 
@@ -2161,7 +2193,10 @@ def sync_process_type_schema(pt, gp_root):
     schema = yaml.safe_load(path.read_text())
     props = schema["allOf"][1]["properties"]
     props["itemClass"]["const"] = ATR_ITEM_CLASS
-    props["subClassOf"]["enum"] = [ACTIVITY_TYPE_CLASS] + sorted(all_activity_types(gp_root))
+    # The published activity types only: a withdrawn one (raster-band-math-multiband, 2026-11-19) is
+    # no parent any more.
+    props["subClassOf"]["enum"] = [ACTIVITY_TYPE_CLASS] + sorted(
+        iri for iri, at in all_activity_types(gp_root).items() if at.get("publicationStatus") == "published")
     dump_yaml(path, schema)
 
 
@@ -2186,6 +2221,9 @@ def write_process_type_fixtures(pt):
 
     cases = {
         "arbitrary-parent-fail.json": lambda d: d.update(subClassOf="https://example.org/not-an-activity-type"),
+        # 2026-11-19: an activity type withdrawn from bblocks-generic-profiles is no parent any more
+        "retired-parent-fail.json": lambda d: d.update(
+            subClassOf=GENERIC_PROFILES_BASE + "activity-type/raster-band-math-multiband"),
         "specialised-without-entity-type-fail.json": lambda d: [d.pop(k) for k in ("usedEntityType", "generatedEntityType")],
         # C1 and C11 (2026-11-10): a reference to the data, and a decomposition of a literal role
         "by-reference-control.json": lambda d: d.update(byReference=[
@@ -2231,8 +2269,8 @@ def write_process_type_fixtures(pt):
 def write_parent_closure(pt, gp_root):
     """_sources/process-type/activity-type-parents.ttl, a data resource of the process-type block,
     so in the SHACL closure of every process profile: for each activity type of
-    bblocks-generic-profiles, its rdfs:subClassOf geoproc:GeoprocessingActivityType and its entity
-    types, as that register states them. With it, geoproc:GeoprocessingActivityTypesShape (Activity
+    bblocks-generic-profiles, its rdfs:subClassOf (geoproc:GeoprocessingActivityType for a family, its
+    family for an operation, since 2026-11-19) and its entity types, as that register states them. With it, geoproc:GeoprocessingActivityTypesShape (Activity
     Type Register) reaches a process type that specialises one of them, and pp:ProcessTypeShape
     compares the entity types. The activity types are not typed here: they are items of
     bblocks-generic-profiles, validated there, and the shapes that target acttype:ActivityType must
