@@ -2,6 +2,7 @@
   "run": {
     "id": "urn:example:run:algae-bloom:workflow-earth-search-process",
     "type": "WorkflowRun",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-earth-search-process",
     "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
@@ -27,6 +28,7 @@
   "engine": {
     "@id": "urn:example:engine:cwltool-3.1.20260108082145",
     "@type": "WorkflowEngine",
+    "provType": "Agent",
     "name": "cwltool",
     "version": "3.1.20260108082145"
   },
@@ -34,6 +36,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-process-0001/results/S2A_29SPC_20190701_0_L2A_chlorophyll_a.tiff",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process#outputs/chlorophyll_a",
@@ -46,6 +49,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-process-0001/results/S2A_29SPC_20190701_0_L2A_chlorophyll_a_color.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process#outputs/chlorophyll_a_color",
@@ -58,6 +62,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-process-0001/results/S2A_29SPC_20190701_0_L2A_chlorophyll_a_plot.png",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/png",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process#outputs/chlorophyll_a_plot",
@@ -70,6 +75,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-process-0001/results/S2A_29SPC_20190701_0_L2A_cyanobacteria.tiff",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process#outputs/cyanobacteria",
@@ -82,6 +88,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-process-0001/results/S2A_29SPC_20190701_0_L2A_cyanobacteria_color.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process#outputs/cyanobacteria_color",
@@ -94,6 +101,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-process-0001/results/S2A_29SPC_20190701_0_L2A_cyanobacteria_plot.png",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/png",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process#outputs/cyanobacteria_plot",
@@ -106,6 +114,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-process-0001/results/S2A_29SPC_20190701_0_L2A_turbidity.tiff",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process#outputs/turbidity",
@@ -118,6 +127,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-process-0001/results/S2A_29SPC_20190701_0_L2A_turbidity_color.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process#outputs/turbidity_color",
@@ -130,6 +140,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-earth-search-process-0001/results/S2A_29SPC_20190701_0_L2A_turbidity_plot.png",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/png",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search-process#outputs/turbidity_plot",

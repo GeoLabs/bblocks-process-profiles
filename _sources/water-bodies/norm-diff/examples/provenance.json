@@ -1,7 +1,7 @@
 [
   {
     "id": "urn:example:run:water-bodies:norm-diff",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff",
     "startedAtTime": "2026-09-23T20:14:14Z",
     "used": [
@@ -21,7 +21,7 @@
   },
   {
     "id": "urn:example:entity:norm-diff:in:rasters",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/norm_diff#inputs/rasters",
     "value": [
       {
@@ -36,7 +36,7 @@
   },
   {
     "id": "urn:example:entity:norm-diff:out:ndwi",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/norm_diff#outputs/ndwi",
     "wasGeneratedBy": "urn:example:run:water-bodies:norm-diff",
     "links": [
@@ -50,21 +50,25 @@
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/norm_diff/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/norm_diff/package"
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "id": "urn:example:run:kindgrove-steps:estimate-biomass",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/estimate-biomass",
     "startedAtTime": "2026-09-24T10:59:40Z",
     "used": [
@@ -24,7 +24,7 @@
   },
   {
     "id": "urn:example:entity:estimate-biomass:in:ndvi_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/estimate_biomass#inputs/ndvi_file",
     "links": [
       {
@@ -36,7 +36,7 @@
   },
   {
     "id": "urn:example:entity:estimate-biomass:in:ndwi_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/estimate_biomass#inputs/ndwi_file",
     "links": [
       {
@@ -48,7 +48,7 @@
   },
   {
     "id": "urn:example:entity:estimate-biomass:in:savi_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/estimate_biomass#inputs/savi_file",
     "links": [
       {
@@ -60,7 +60,7 @@
   },
   {
     "id": "urn:example:entity:estimate-biomass:in:stac_item",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/estimate_biomass#inputs/stac_item",
     "links": [
       {
@@ -72,7 +72,7 @@
   },
   {
     "id": "urn:example:entity:estimate-biomass:out:analysis_summary_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/estimate_biomass#outputs/analysis_summary_file",
     "wasGeneratedBy": "urn:example:run:kindgrove-steps:estimate-biomass",
     "wasDerivedFrom": [
@@ -92,7 +92,7 @@
   },
   {
     "id": "urn:example:entity:estimate-biomass:out:biomass_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/estimate_biomass#outputs/biomass_file",
     "wasGeneratedBy": "urn:example:run:kindgrove-steps:estimate-biomass",
     "wasDerivedFrom": [
@@ -112,7 +112,7 @@
   },
   {
     "id": "urn:example:entity:estimate-biomass:out:biomass_summary_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/estimate_biomass#outputs/biomass_summary_file",
     "wasGeneratedBy": "urn:example:run:kindgrove-steps:estimate-biomass",
     "wasDerivedFrom": [
@@ -132,7 +132,7 @@
   },
   {
     "id": "urn:example:entity:estimate-biomass:out:carbon_summary_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/estimate_biomass#outputs/carbon_summary_file",
     "wasGeneratedBy": "urn:example:run:kindgrove-steps:estimate-biomass",
     "wasDerivedFrom": [
@@ -152,7 +152,7 @@
   },
   {
     "id": "urn:example:entity:estimate-biomass:out:mangrove_mask_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/estimate_biomass#outputs/mangrove_mask_file",
     "wasGeneratedBy": "urn:example:run:kindgrove-steps:estimate-biomass",
     "wasDerivedFrom": [
@@ -172,21 +172,25 @@
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "urn:example:image:ghcr.io/geolabs/kindgrove/estimate-biomass:v0.0.2-rc2",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "container image ghcr.io/geolabs/kindgrove/estimate-biomass:v0.0.2-rc2"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/estimate_biomass/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/estimate_biomass/package"
   }
 ]

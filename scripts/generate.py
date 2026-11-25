@@ -206,6 +206,14 @@ PROFILE_CONTEXT = {
         "provName": "rdfs:label",
         "activityType": {"@id": "@type", "@type": "@id"},
         "entityType": {"@id": "@type", "@type": "@id"},
+        "agentType": {"@id": "@type", "@type": "@id"},
+        # bblock-prov-schema (PR #9, 2026-11-24) requires provType to be the bare Activity, Entity
+        # or Agent, with PROV subtypes in activityType / entityType / agentType; this context is
+        # the register's own, so it declares the terms the upstream contexts declare.
+        "Activity": "prov:Activity",
+        "Entity": "prov:Entity",
+        "Agent": "prov:Agent",
+        "SoftwareAgent": "prov:SoftwareAgent",
         "used": {"@id": "prov:used", "@type": "@id"},
         "wasAssociatedWith": {"@id": "prov:wasAssociatedWith", "@type": "@id"},
         "wasGeneratedBy": {"@id": "prov:wasGeneratedBy", "@type": "@id"},
@@ -758,7 +766,7 @@ def provenance_chain(proc, pd, exe, res, info, image, d):
     ents, used, file_inputs = [], [], []
     for name, v in exe["inputs"].items():
         eid = f"urn:example:entity:{key}:in:{name}"
-        e = {"id": eid, "provType": "prov:Entity", "entityType": f"{pd_url(pd)}#inputs/{name}"}
+        e = {"id": eid, "provType": "Entity", "entityType": f"{pd_url(pd)}#inputs/{name}"}
         if isinstance(v, dict) and "href" in v:
             e["links"] = [{"href": v["href"], "rel": "item", "type": v["type"]}]
             file_inputs.append(eid)
@@ -768,7 +776,7 @@ def provenance_chain(proc, pd, exe, res, info, image, d):
         used.append(eid)
     for name, v in res.items():
         eid = f"urn:example:entity:{key}:out:{name}"
-        e = {"id": eid, "provType": "prov:Entity", "entityType": f"{pd_url(pd)}#outputs/{name}",
+        e = {"id": eid, "provType": "Entity", "entityType": f"{pd_url(pd)}#outputs/{name}",
              "wasGeneratedBy": run_id}
         if file_inputs:
             e["wasDerivedFrom"] = file_inputs
@@ -781,7 +789,7 @@ def provenance_chain(proc, pd, exe, res, info, image, d):
         ents.append(e)
     activity = {
         "id": run_id,
-        "provType": "prov:Activity",
+        "provType": "Activity",
         "activityType": ptype_iri(proc),
         "startedAtTime": info["start"],
         "used": used,
@@ -790,16 +798,16 @@ def provenance_chain(proc, pd, exe, res, info, image, d):
     }
     if info["end"]:
         activity["endedAtTime"] = info["end"]
-    agents = [{"id": eng["id"], "provType": "prov:SoftwareAgent", "name": f"{eng['name']} {eng['version']}"}]
+    agents = [{"id": eng["id"], "provType": "Agent", "agentType": "prov:SoftwareAgent", "name": f"{eng['name']} {eng['version']}"}]
     if image:
-        agents.append({"id": f"urn:example:image:{image}", "provType": "prov:SoftwareAgent",
+        agents.append({"id": f"urn:example:image:{image}", "provType": "Agent", "agentType": "prov:SoftwareAgent",
                        "name": f"container image {image}"})
     # The plan the run followed, as this view names it (the Application Package), and as the
     # engine's own CWLProv graph names it (the run-local copy in the research object, an arcp: IRI
     # that changes with every run): the latter is a specialization of the former.
-    plans = [{"id": plan_url(pd), "provType": "prov:Plan"}]
+    plans = [{"id": plan_url(pd), "provType": "Entity", "entityType": "prov:Plan"}]
     if info["activity"].get("planIri"):
-        plans.append({"id": info["activity"]["planIri"], "provType": "prov:Plan",
+        plans.append({"id": info["activity"]["planIri"], "provType": "Entity", "entityType": "prov:Plan",
                       "specializationOf": plan_url(pd)})
     return [activity] + ents + agents + plans, run_id
 
@@ -809,6 +817,8 @@ def process_run(proc, pd, run_id, info, parent_run):
     doc = {
         "id": run_id,
         "type": "ProcessRun",
+        # required by prov#/$defs/Activity, which ProcessRun extends, since bblock-prov-schema #9
+        "provType": "Activity",
         "activityType": ptype_iri(proc),
         "describedByProcess": plan_url(pd),
         "usedInput": [{"id": f"urn:example:entity:{proc['key']}:in:{n}"} for n in proc["execute"]["inputs"]],
@@ -831,18 +841,20 @@ def execution_bundle(proc, pd, run_id, info, job_id, d):
         for f in _files_in(art):
             if not f["sha1"]:
                 return None
-            outputs.append({"id": f"{base}/{f['path']}", "type": "Artifact", "role": "output",
+            outputs.append({"id": f"{base}/{f['path']}", "type": "Artifact", "provType": "Entity", "role": "output",
                             "mediaType": media(MEDIA_BY_EXT.get(Path(f["path"]).suffix, "application/octet-stream"), d),
                             "describedByParameter": f"{pd_url(pd)}#outputs/{name}",
                             "wasOutputFrom": run_id, "checksum": {"algorithm": "SHA-1", "value": f["sha1"]}})
     if not outputs:
         return None
-    run = {"id": run_id, "type": "WorkflowRun", "activityType": ptype_iri(proc),
+    # provType: WorkflowRun extends ProcessRun, which extends prov#/$defs/Activity (bblock-prov-schema #9)
+    run = {"id": run_id, "type": "WorkflowRun", "provType": "Activity", "activityType": ptype_iri(proc),
            "describedByWorkflow": plan_url(pd), "wasEnactedBy": eng["id"], "status": "successful",
            "jobID": job_id, "startedAtTime": info["start"], "endedAtTime": info["end"]}
     if proc.get("steps"):
         run["hadSubProcessRun"] = [{"id": f"urn:example:run:{proc['workflow']}:{s}"} for s in proc["steps"]]
-    engine = {"@id": eng["id"], "@type": "WorkflowEngine", "name": eng["name"], "version": eng["version"]}
+    # provType: the engine is validated as prov#/$defs/Agent (bblock-prov-schema #9)
+    engine = {"@id": eng["id"], "@type": "WorkflowEngine", "provType": "Agent", "name": eng["name"], "version": eng["version"]}
     return {"run": run, "engine": engine, "outputs": outputs}
 
 

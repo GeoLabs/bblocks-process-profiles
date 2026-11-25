@@ -1,7 +1,7 @@
 [
   {
     "id": "urn:example:run:kindgrove:mangrove-workflow",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove-workflow",
     "startedAtTime": "2026-09-23T08:01:10Z",
     "used": [
@@ -22,7 +22,7 @@
   },
   {
     "id": "urn:example:entity:mangrove-workflow:in:aoi",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/mangrove-workflow#inputs/aoi",
     "value": {
       "bbox": [
@@ -36,19 +36,19 @@
   },
   {
     "id": "urn:example:entity:mangrove-workflow:in:cloud_cover_max",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/mangrove-workflow#inputs/cloud_cover_max",
     "value": 20
   },
   {
     "id": "urn:example:entity:mangrove-workflow:in:days_back",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/mangrove-workflow#inputs/days_back",
     "value": 90
   },
   {
     "id": "urn:example:entity:mangrove-workflow:out:stac",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/mangrove-workflow#outputs/stac",
     "wasGeneratedBy": "urn:example:run:kindgrove:mangrove-workflow",
     "links": [
@@ -62,16 +62,19 @@
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package"
   }
 ]
