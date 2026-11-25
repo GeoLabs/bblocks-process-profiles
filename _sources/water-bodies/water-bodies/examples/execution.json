@@ -2,6 +2,7 @@
   "run": {
     "id": "urn:example:run:water-bodies:water-bodies",
     "type": "WorkflowRun",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies",
     "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/water-bodies/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
@@ -21,6 +22,7 @@
   "engine": {
     "@id": "urn:example:engine:cwltool-3.1.20260108082145",
     "@type": "WorkflowEngine",
+    "provType": "Agent",
     "name": "cwltool",
     "version": "3.1.20260108082145"
   },
@@ -28,6 +30,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/S2A_10TFK_20220524_0_L2A.json",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "application/json",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -40,6 +43,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/otsu.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -52,6 +56,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/S2B_10TFK_20210713_0_L2A.json",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "application/json",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -64,6 +69,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/otsu.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -76,6 +82,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/catalog.json",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "application/json",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",

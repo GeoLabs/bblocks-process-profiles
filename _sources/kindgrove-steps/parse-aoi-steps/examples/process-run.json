@@ -1,6 +1,7 @@
 {
   "id": "urn:example:run:kindgrove-steps:parse-aoi-steps",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/parse-aoi-steps",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/parse_aoi/package",
   "usedInput": [

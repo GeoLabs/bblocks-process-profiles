@@ -25,9 +25,9 @@ pp:register a rim:Register ;
     rim:functionalIdentifier "https://geolabs.github.io/bblocks-process-profiles/"^^xsd:anyURI ;
     dct:title "OSPD Process Profiles"@en ;
     dct:description "Register of deployable OSPD process profiles and their process types."@en ;
-    rim:registerOwner pp:geolabs ;
-    rim:registerManager pp:geolabs ;
-    rim:controlBody pp:geolabs ;
+    rim:registerOwner <https://w3id.org/geolabs/ospd/org/geolabs> ;
+    rim:registerManager <https://w3id.org/geolabs/ospd/org/geolabs> ;
+    rim:controlBody <https://w3id.org/geolabs/ospd/org/geolabs> ;
     rim:hasSpecification pp:specification ;
     rim:runsOn pp:registerSystem .
 
@@ -63,9 +63,9 @@ pp:amendmentAction a rim:RegisterActionType , skos:Concept ;
     skos:prefLabel "amendment"@en ;
     skos:definition "An in-place change to a proposal, an item with no control-body decision recorded. Always classified, clarifying or substantive."@en .
 
-pp:geolabs a prov:Organization ;
-    rdfs:label "GeoLabs SARL" ;
-    rdfs:seeAlso <https://www.geolabs.fr/> .
+# GeoLabs SARL, owner, manager, control body and proposer, is
+# <https://w3id.org/geolabs/ospd/org/geolabs>, the one agent IRI of the four OSPD registers,
+# defined in the data-types register (_sources/vocabulary/data.ttl), not here.
 
 pp:registerSystem a rim:RegisterSystem ;
     rdfs:label "OGC Building Blocks register (bblocks-postprocess, GitHub Pages)" ;

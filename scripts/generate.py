@@ -33,7 +33,9 @@ SCRIPTS = ROOT / "scripts"
 BASE = "https://w3id.org/geolabs/ospd/process-profiles/"
 PTYPE_SCHEME = BASE + "process-type"
 PROCESS_TYPE_REGISTER = BASE + "register"
-GEOLABS_AGENT = BASE + "geolabs"
+# GeoLabs SARL: one agent IRI for the four OSPD registers, defined in the data-types register
+# (decision of 2026-11-19).
+GEOLABS_AGENT = "https://w3id.org/geolabs/ospd/org/geolabs"
 # Activity Type Register (ATR) terms. This is the only place that spells the ATR item class IRI:
 # upstream branch `model-tweaks` renames it to ActivityTypeItemClass. Entries take it from here
 # and sync_process_type_schema() writes it into _sources/process-type/schema.yaml.
@@ -84,6 +86,14 @@ PROCESS_BASE = BASE + "process/"
 # 2026-11-17): each keeps its old IRI as owl:sameAs and records the move as a clarifying amendment.
 LEGACY_BASE = "https://geolabs.github.io/bblocks-process-profiles/def/"
 IDENTIFIER_MOVED = "2026-11-17"
+# Activity types of bblocks-generic-profiles merged into another (decision of 2026-11-19): the
+# Implementation Profile (key) that pointed to the withdrawn one now points to the other. The process
+# types that implement it change parent class on that date; their specialisation action keeps the
+# parent it recorded.
+ACTIVITY_TYPE_MERGES = {
+    "raster-band-math-multiband": {"from": "raster-band-math-multiband", "to": "raster-band-math",
+                                   "date": "2026-11-19"},
+}
 
 
 def process_base(workflow):
@@ -196,6 +206,14 @@ PROFILE_CONTEXT = {
         "provName": "rdfs:label",
         "activityType": {"@id": "@type", "@type": "@id"},
         "entityType": {"@id": "@type", "@type": "@id"},
+        "agentType": {"@id": "@type", "@type": "@id"},
+        # bblock-prov-schema (PR #9, 2026-11-24) requires provType to be the bare Activity, Entity
+        # or Agent, with PROV subtypes in activityType / entityType / agentType; this context is
+        # the register's own, so it declares the terms the upstream contexts declare.
+        "Activity": "prov:Activity",
+        "Entity": "prov:Entity",
+        "Agent": "prov:Agent",
+        "SoftwareAgent": "prov:SoftwareAgent",
         "used": {"@id": "prov:used", "@type": "@id"},
         "wasAssociatedWith": {"@id": "prov:wasAssociatedWith", "@type": "@id"},
         "wasGeneratedBy": {"@id": "prov:wasGeneratedBy", "@type": "@id"},
@@ -748,7 +766,7 @@ def provenance_chain(proc, pd, exe, res, info, image, d):
     ents, used, file_inputs = [], [], []
     for name, v in exe["inputs"].items():
         eid = f"urn:example:entity:{key}:in:{name}"
-        e = {"id": eid, "provType": "prov:Entity", "entityType": f"{pd_url(pd)}#inputs/{name}"}
+        e = {"id": eid, "provType": "Entity", "entityType": f"{pd_url(pd)}#inputs/{name}"}
         if isinstance(v, dict) and "href" in v:
             e["links"] = [{"href": v["href"], "rel": "item", "type": v["type"]}]
             file_inputs.append(eid)
@@ -758,7 +776,7 @@ def provenance_chain(proc, pd, exe, res, info, image, d):
         used.append(eid)
     for name, v in res.items():
         eid = f"urn:example:entity:{key}:out:{name}"
-        e = {"id": eid, "provType": "prov:Entity", "entityType": f"{pd_url(pd)}#outputs/{name}",
+        e = {"id": eid, "provType": "Entity", "entityType": f"{pd_url(pd)}#outputs/{name}",
              "wasGeneratedBy": run_id}
         if file_inputs:
             e["wasDerivedFrom"] = file_inputs
@@ -771,7 +789,7 @@ def provenance_chain(proc, pd, exe, res, info, image, d):
         ents.append(e)
     activity = {
         "id": run_id,
-        "provType": "prov:Activity",
+        "provType": "Activity",
         "activityType": ptype_iri(proc),
         "startedAtTime": info["start"],
         "used": used,
@@ -780,16 +798,16 @@ def provenance_chain(proc, pd, exe, res, info, image, d):
     }
     if info["end"]:
         activity["endedAtTime"] = info["end"]
-    agents = [{"id": eng["id"], "provType": "prov:SoftwareAgent", "name": f"{eng['name']} {eng['version']}"}]
+    agents = [{"id": eng["id"], "provType": "Agent", "agentType": "prov:SoftwareAgent", "name": f"{eng['name']} {eng['version']}"}]
     if image:
-        agents.append({"id": f"urn:example:image:{image}", "provType": "prov:SoftwareAgent",
+        agents.append({"id": f"urn:example:image:{image}", "provType": "Agent", "agentType": "prov:SoftwareAgent",
                        "name": f"container image {image}"})
     # The plan the run followed, as this view names it (the Application Package), and as the
     # engine's own CWLProv graph names it (the run-local copy in the research object, an arcp: IRI
     # that changes with every run): the latter is a specialization of the former.
-    plans = [{"id": plan_url(pd), "provType": "prov:Plan"}]
+    plans = [{"id": plan_url(pd), "provType": "Entity", "entityType": "prov:Plan"}]
     if info["activity"].get("planIri"):
-        plans.append({"id": info["activity"]["planIri"], "provType": "prov:Plan",
+        plans.append({"id": info["activity"]["planIri"], "provType": "Entity", "entityType": "prov:Plan",
                       "specializationOf": plan_url(pd)})
     return [activity] + ents + agents + plans, run_id
 
@@ -799,6 +817,8 @@ def process_run(proc, pd, run_id, info, parent_run):
     doc = {
         "id": run_id,
         "type": "ProcessRun",
+        # required by prov#/$defs/Activity, which ProcessRun extends, since bblock-prov-schema #9
+        "provType": "Activity",
         "activityType": ptype_iri(proc),
         "describedByProcess": plan_url(pd),
         "usedInput": [{"id": f"urn:example:entity:{proc['key']}:in:{n}"} for n in proc["execute"]["inputs"]],
@@ -821,18 +841,20 @@ def execution_bundle(proc, pd, run_id, info, job_id, d):
         for f in _files_in(art):
             if not f["sha1"]:
                 return None
-            outputs.append({"id": f"{base}/{f['path']}", "type": "Artifact", "role": "output",
+            outputs.append({"id": f"{base}/{f['path']}", "type": "Artifact", "provType": "Entity", "role": "output",
                             "mediaType": media(MEDIA_BY_EXT.get(Path(f["path"]).suffix, "application/octet-stream"), d),
                             "describedByParameter": f"{pd_url(pd)}#outputs/{name}",
                             "wasOutputFrom": run_id, "checksum": {"algorithm": "SHA-1", "value": f["sha1"]}})
     if not outputs:
         return None
-    run = {"id": run_id, "type": "WorkflowRun", "activityType": ptype_iri(proc),
+    # provType: WorkflowRun extends ProcessRun, which extends prov#/$defs/Activity (bblock-prov-schema #9)
+    run = {"id": run_id, "type": "WorkflowRun", "provType": "Activity", "activityType": ptype_iri(proc),
            "describedByWorkflow": plan_url(pd), "wasEnactedBy": eng["id"], "status": "successful",
            "jobID": job_id, "startedAtTime": info["start"], "endedAtTime": info["end"]}
     if proc.get("steps"):
         run["hadSubProcessRun"] = [{"id": f"urn:example:run:{proc['workflow']}:{s}"} for s in proc["steps"]]
-    engine = {"@id": eng["id"], "@type": "WorkflowEngine", "name": eng["name"], "version": eng["version"]}
+    # provType: the engine is validated as prov#/$defs/Agent (bblock-prov-schema #9)
+    engine = {"@id": eng["id"], "@type": "WorkflowEngine", "provType": "Agent", "name": eng["name"], "version": eng["version"]}
     return {"run": run, "engine": engine, "outputs": outputs}
 
 
@@ -852,8 +874,21 @@ def amendments(proc, parent):
                     "checking its signature (docs/ATTACHMENTS.md)."))
     if parent:
         on = max("2026-11-10", str((proc.get("tier3") or {}).get("attached_on", "2026-11-10")))
+        merge = ACTIVITY_TYPE_MERGES.get(proc["implementsProfile"].rstrip("/").rsplit("/", 1)[-1])
+        recorded = parent["id"]
+        if merge:
+            if parent["id"] != GENERIC_PROFILES_BASE + "activity-type/" + merge["to"]:
+                sys.exit(f"{proc['key']}: ACTIVITY_TYPE_MERGES expects the parent {merge['to']}, not {parent['id']}")
+            recorded = GENERIC_PROFILES_BASE + "activity-type/" + merge["from"]
+            out.append((f"activity-type-{merge['date']}", merge["date"], "substantive",
+                        f"subClassOf changes from {recorded}, withdrawn from bblocks-generic-profiles on "
+                        f"{merge['date']}, to {parent['id']}, into which it is merged and to which the "
+                        f"Implementation Profile {proc['implementsProfile']} now points (decision of "
+                        f"{merge['date']}). The entity types are unchanged. Classified substantive: the parent "
+                        "class changes.",
+                        "http://www.w3.org/2000/01/rdf-schema#subClassOf"))
         out.append((f"specialisation-{on}", on, "substantive",
-                    f"subClassOf changes from {ACTIVITY_TYPE_CLASS} to {parent['id']}, the activity type of the "
+                    f"subClassOf changes from {ACTIVITY_TYPE_CLASS} to {recorded}, the activity type of the "
                     "operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): "
                     + ", ".join(v for k in ("usedEntityType", "generatedEntityType") for v in _lst(parent.get(k) or []))
                     + "."))
@@ -932,9 +967,20 @@ def parent_activity_type(proc, gp_root):
         return None
     ip_key = proc["implementsProfile"].rstrip("/").rsplit("/", 1)[-1]
     ip = json.loads((gp_root / "_sources" / "implementation-profile" / ip_key / "examples" / f"{ip_key}.json").read_text())
-    at_key = ip["activityType"].rstrip("/").rsplit("/", 1)[-1]
-    at = json.loads((gp_root / "_sources" / "activity-type" / at_key / "examples" / f"{at_key}.json").read_text())
-    if at["subClassOf"] != GEOPROC_CLASS or not (at.get("usedEntityType") or at.get("generatedEntityType")):
+    def load(iri):
+        key = iri.rstrip("/").rsplit("/", 1)[-1]
+        return json.loads((gp_root / "_sources" / "activity-type" / key / "examples" / f"{key}.json").read_text())
+    at = load(ip["activityType"])
+    if at.get("publicationStatus") != "published":
+        sys.exit(f"{proc['key']}: activity type {at['id']} is not published")
+    # Since 2026-11-19 an operation is a sub-class of its family, itself a sub-class of geoproc.
+    ancestor, seen = at, set()
+    while ancestor["subClassOf"] != GEOPROC_CLASS:
+        if not ancestor["subClassOf"].startswith(GENERIC_PROFILES_BASE + "activity-type/") or ancestor["id"] in seen:
+            break
+        seen.add(ancestor["id"])
+        ancestor = load(ancestor["subClassOf"])
+    if ancestor["subClassOf"] != GEOPROC_CLASS or not (at.get("usedEntityType") or at.get("generatedEntityType")):
         sys.exit(f"{proc['key']}: activity type {at['id']} is not a geoprocessing activity type with an entity type")
     return at
 
@@ -2161,7 +2207,10 @@ def sync_process_type_schema(pt, gp_root):
     schema = yaml.safe_load(path.read_text())
     props = schema["allOf"][1]["properties"]
     props["itemClass"]["const"] = ATR_ITEM_CLASS
-    props["subClassOf"]["enum"] = [ACTIVITY_TYPE_CLASS] + sorted(all_activity_types(gp_root))
+    # The published activity types only: a withdrawn one (raster-band-math-multiband, 2026-11-19) is
+    # no parent any more.
+    props["subClassOf"]["enum"] = [ACTIVITY_TYPE_CLASS] + sorted(
+        iri for iri, at in all_activity_types(gp_root).items() if at.get("publicationStatus") == "published")
     dump_yaml(path, schema)
 
 
@@ -2186,6 +2235,9 @@ def write_process_type_fixtures(pt):
 
     cases = {
         "arbitrary-parent-fail.json": lambda d: d.update(subClassOf="https://example.org/not-an-activity-type"),
+        # 2026-11-19: an activity type withdrawn from bblocks-generic-profiles is no parent any more
+        "retired-parent-fail.json": lambda d: d.update(
+            subClassOf=GENERIC_PROFILES_BASE + "activity-type/raster-band-math-multiband"),
         "specialised-without-entity-type-fail.json": lambda d: [d.pop(k) for k in ("usedEntityType", "generatedEntityType")],
         # C1 and C11 (2026-11-10): a reference to the data, and a decomposition of a literal role
         "by-reference-control.json": lambda d: d.update(byReference=[
@@ -2231,8 +2283,8 @@ def write_process_type_fixtures(pt):
 def write_parent_closure(pt, gp_root):
     """_sources/process-type/activity-type-parents.ttl, a data resource of the process-type block,
     so in the SHACL closure of every process profile: for each activity type of
-    bblocks-generic-profiles, its rdfs:subClassOf geoproc:GeoprocessingActivityType and its entity
-    types, as that register states them. With it, geoproc:GeoprocessingActivityTypesShape (Activity
+    bblocks-generic-profiles, its rdfs:subClassOf (geoproc:GeoprocessingActivityType for a family, its
+    family for an operation, since 2026-11-19) and its entity types, as that register states them. With it, geoproc:GeoprocessingActivityTypesShape (Activity
     Type Register) reaches a process type that specialises one of them, and pp:ProcessTypeShape
     compares the entity types. The activity types are not typed here: they are items of
     bblocks-generic-profiles, validated there, and the shapes that target acttype:ActivityType must

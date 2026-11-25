@@ -23,7 +23,7 @@ description: 'A candidate process-type register item which is also a class used 
   `/package` only for dynamically deployed processes) and so no `plan`; `deployment.processDescription`
   is then the only link to what is executed.'
 allOf:
-- $ref: bblocks://ogc.register.schemas.activity-types-schema
+- $ref: bblocks://ogc.register.profiles.schemas.activity-types-schema
 - type: object
   required:
   - id
@@ -483,35 +483,50 @@ allOf:
       - https://w3id.org/ogc/rim/activity-type/ActivityType
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/analytical-hillshading
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/area
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-algebra
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/buffer
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/catalogue-search
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/centroid
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/contains
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/convex-hull
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/coverage-subsetting
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/crosses
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/difference
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/disjoint
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/encoding-conversion
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/equals
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/extent-computation
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-construction
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-extent
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-measure
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-property-test
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/intersection
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/intersects
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/is-simple
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/otsu-thresholding
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-filtering
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-thinning
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-grid
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-shapes
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/portrayal
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/product-selection
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/radiometric-index
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math
-      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-classification
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-crop
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-extent
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-format-conversion
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-regridding
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-rendering
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-resampling
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/set-operation
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/slope
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/spatial-model-conversion
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/spatial-relation-test
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/symdifference
+      - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/terrain-derivative
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/terrain-ruggedness-index
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/topographic-position-index
       - https://w3id.org/geolabs/ospd/generic-profiles/activity-type/touches
@@ -543,7 +558,7 @@ allOf:
             actionType:
               const: addition
             proposer:
-              const: https://w3id.org/geolabs/ospd/process-profiles/geolabs
+              const: https://w3id.org/geolabs/ospd/org/geolabs
             startedAtTime:
               type: string
               format: date-time
@@ -570,7 +585,7 @@ allOf:
             description:
               type: string
             proposer:
-              const: https://w3id.org/geolabs/ospd/process-profiles/geolabs
+              const: https://w3id.org/geolabs/ospd/org/geolabs
             startedAtTime:
               type: string
               format: date-time
@@ -595,7 +610,7 @@ allOf:
           actionType:
             const: addition
           proposer:
-            const: https://w3id.org/geolabs/ospd/process-profiles/geolabs
+            const: https://w3id.org/geolabs/ospd/org/geolabs
           startedAtTime:
             type: string
             format: date-time
