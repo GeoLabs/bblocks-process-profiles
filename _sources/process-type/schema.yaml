@@ -23,7 +23,7 @@ description: 'A candidate process-type register item which is also a class used 
   `/package` only for dynamically deployed processes) and so no `plan`; `deployment.processDescription`
   is then the only link to what is executed.'
 allOf:
-- $ref: bblocks://ogc.register.schemas.activity-types-schema
+- $ref: bblocks://ogc.register.profiles.schemas.activity-types-schema
 - type: object
   required:
   - id

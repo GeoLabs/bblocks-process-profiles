@@ -9,8 +9,8 @@
   "itemClass": "schema",
   "register": "process-profiles",
   "dependsOn": [
-    "ogc.register.schemas.activity-types-schema",
-    "ogc.register.geoprocessing-activity-types",
+    "ogc.register.profiles.schemas.activity-types-schema",
+    "ogc.register.profiles.geoprocessing-activity-types",
     "data-types.vocabulary",
     "data-formats.vocabulary"
   ],
@@ -52,7 +52,7 @@
   "highlighted": true,
   "group": "OSPD",
   "isProfileOf": [
-    "ogc.register.schemas.activity-types-schema"
+    "ogc.register.profiles.schemas.activity-types-schema"
   ],
   "shaclShapes": [
     "shapes.shacl"

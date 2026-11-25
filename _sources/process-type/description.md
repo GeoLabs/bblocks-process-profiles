@@ -11,7 +11,7 @@ Each process-type entry is both:
 - an `acttype:ActivityType` and an `owl:Class` specialising `acttype:ActivityType`, so that its own
   IRI can be the RDF type of a provenance activity.
 
-The schema profiles `ogc.register.schemas.activity-types-schema` from the
+The schema profiles `ogc.register.profiles.schemas.activity-types-schema` from the
 [Activity Type Register](https://ogcincubator.github.io/activity-type-register/) and, through it, the
 [Registered Item Model](https://ogcincubator.github.io/registered-item-model/). Each entry has the RIM
 required core (object identifier, item class, validity and publication status) and records its
