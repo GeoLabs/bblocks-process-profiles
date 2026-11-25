@@ -48,9 +48,9 @@
     proc:outputs [ ns2:Result [ dcterms:description "A new geometry representing the intersection or NULL if there is no intersection or an error occurs." ;
                     dcterms:title "Intersection of geometries" ;
                     proc:metadata [ dcterms:title "Mon test  " ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                    proc:schema [ ns1:oneOf [ proc:type "object" ],
+                                [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
-                                [ proc:type "object" ] ] ] ] .
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] .
 

@@ -16,7 +16,7 @@
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/export-stac/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/export-stac"
     },
@@ -26,7 +26,7 @@
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/export-stac"
     },
@@ -36,7 +36,7 @@
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "clarifying",
       "description": "notAttached added (absent -> {reason}): the entry now states that this CommandLineTool implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md (profiles.yaml tier3.reason). Nothing else changes: the process was not attached before and is not attached now (decision Q1 of 2026-11-11).",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/export-stac"
     },
@@ -46,7 +46,7 @@
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#export_stac). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the inputs biomass_file and mangrove_mask_file, and application/octet-stream -> application/geo+json (with contentEncoding binary) for the input stac_item, in processDescription.json and processDescription.raw.json.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/export-stac"
     },
@@ -57,7 +57,7 @@
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/export-stac to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/export-stac, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/export-stac/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/export-stac"
     }

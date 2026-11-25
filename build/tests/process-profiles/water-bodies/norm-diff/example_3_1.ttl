@@ -1,6 +1,6 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
 @prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
@@ -18,7 +18,7 @@
     proc:inputs [ ns3:rasters [ dcterms:description "" ;
                     dcterms:title "rasters" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff> ;
+                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
                     proc:metadata [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters) -- input `rasters`" ;
@@ -29,22 +29,22 @@
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ] ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "1.4.1" ;
-            proc:role schema:softwareVersion ],
-        [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters)" ;
+    proc:metadata [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters)" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index-single-band> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ rdf:value "Process converted from CWL" ;
-            proc:role schema:description ],
         [ rdf:value "norm_diff" ;
             proc:role schema:name ],
+        [ rdf:value "Process converted from CWL" ;
+            proc:role schema:description ],
         [ dcterms:title "Generic Profile: Radiometric index" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/radiometric-index> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ rdf:value "1.4.1" ;
+            proc:role schema:softwareVersion ],
         [ dcterms:title "Process Concept: Raster Coverage Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
@@ -54,15 +54,15 @@
     proc:outputs [ ns4:ndwi [ dcterms:description "" ;
                     dcterms:title "ndwi" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff> ;
+                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters) -- output `raster`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index-single-band/outputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
-                        [ dcterms:title "Generic Profile: Radiometric index -- output `raster`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Radiometric index -- output `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/radiometric-index/outputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Radiometric index (single-band rasters) -- output `raster`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index-single-band/outputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentEncoding "binary" ;
-                            ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] .
+                            ns2:contentEncoding "binary" ;
+                            ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] .
 

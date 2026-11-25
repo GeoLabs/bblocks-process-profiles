@@ -1,7 +1,7 @@
 [
   {
     "id": "urn:example:run:kindgrove-steps:select-scene",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene",
     "startedAtTime": "2026-09-24T10:57:48Z",
     "used": [
@@ -26,43 +26,43 @@
   },
   {
     "id": "urn:example:entity:select-scene:in:west",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select_scene#inputs/west",
     "value": 95.15
   },
   {
     "id": "urn:example:entity:select-scene:in:south",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select_scene#inputs/south",
     "value": 15.9
   },
   {
     "id": "urn:example:entity:select-scene:in:east",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select_scene#inputs/east",
     "value": 95.35
   },
   {
     "id": "urn:example:entity:select-scene:in:north",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select_scene#inputs/north",
     "value": 16.1
   },
   {
     "id": "urn:example:entity:select-scene:in:cloud_cover_max",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select_scene#inputs/cloud_cover_max",
     "value": 20
   },
   {
     "id": "urn:example:entity:select-scene:in:days_back",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select_scene#inputs/days_back",
     "value": 90
   },
   {
     "id": "urn:example:entity:select-scene:out:stac_item",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select_scene#outputs/stac_item",
     "wasGeneratedBy": "urn:example:run:kindgrove-steps:select-scene",
     "links": [
@@ -76,21 +76,25 @@
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "urn:example:image:ghcr.io/geolabs/kindgrove/select-scene:v0.0.2-rc2",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "container image ghcr.io/geolabs/kindgrove/select-scene:v0.0.2-rc2"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/select_scene/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/select_scene/package"
   }
 ]

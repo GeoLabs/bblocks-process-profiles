@@ -312,11 +312,11 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:outputs [ ns2:Result [ dcterms:description "A new geometry representing the intersection or NULL if there is no intersection or an error occurs." ;
                     dcterms:title "Intersection of geometries" ;
                     proc:metadata [ dcterms:title "Mon test  " ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                    proc:schema [ ns1:oneOf [ proc:type "object" ],
+                                [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
-                                [ proc:type "object" ] ] ] ] .
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] .
 
 
 ```
@@ -694,10 +694,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/generic-profiles/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns5: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns5: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -713,33 +713,33 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "Compute intersection. " ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns5:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Intersection/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns4:InputEntity1 [ dcterms:description "the first geometry to compare against." ;
+    proc:inputs [ ns2:InputEntity1 [ dcterms:description "the first geometry to compare against." ;
                     dcterms:title "the first geometry" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
                     proc:keywords "geometry" ;
                     proc:metadata [ dcterms:title "Mon test  " ],
-                        [ dcterms:title "Generic Profile: Binary spatial set operation -- input `geometry1`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/inputs/geometry1> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
                         [ dcterms:title "Implementation Profile: Intersection -- input `geometry1`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/intersection/inputs/geometry1> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Binary spatial set operation -- input `geometry1`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/inputs/geometry1> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
-            ns4:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
+            ns2:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
                     dcterms:title "the other geometry" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
                     proc:keywords "geometry" ;
                     proc:metadata [ dcterms:title "Implementation Profile: Intersection -- input `geometry2`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/intersection/inputs/geometry2> ;
@@ -749,22 +749,22 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/inputs/geometry2> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Binary spatial set operation" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Implementation Profile: Intersection" ;
+    proc:metadata [ dcterms:title "Implementation Profile: Intersection" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/intersection> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Generic Profile: Binary spatial set operation" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Process Concept: Vector Geometry Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
@@ -772,23 +772,23 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:Result [ dcterms:description "A new geometry representing the intersection or NULL if there is no intersection or an error occurs." ;
+    proc:outputs [ ns5:Result [ dcterms:description "A new geometry representing the intersection or NULL if there is no intersection or an error occurs." ;
                     dcterms:title "Intersection of geometries" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Mon test  " ],
-                        [ dcterms:title "Generic Profile: Binary spatial set operation -- output `result`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Binary spatial set operation -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/outputs/result> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
+                        [ dcterms:title "Mon test  " ],
                         [ dcterms:title "Implementation Profile: Intersection -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/intersection/outputs/result> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "object" ],
-                                [ proc:type "string" ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] .
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "object" ] ] ] ] .
 
 
 ```
@@ -816,7 +816,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection"
     },
@@ -826,7 +826,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection"
     },
@@ -836,7 +836,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/intersection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection"
     },
@@ -847,7 +847,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersection to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection"
     },
@@ -857,7 +857,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection"
     }
@@ -914,7 +914,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection"
     },
@@ -924,7 +924,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection"
     },
@@ -934,7 +934,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/intersection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection"
     },
@@ -945,7 +945,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersection to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection"
     },
@@ -955,7 +955,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection"
     }
@@ -1008,7 +1008,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -1016,7 +1016,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/intersection to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -1025,7 +1025,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection/actions/representation-2026-11-18> a rim:RegisterAction ;
     dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
@@ -1033,7 +1033,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/intersection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry." ;
@@ -1041,7 +1041,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/intersection> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/sqlmm/Intersection> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Intersection> ;
     pp:version "2.0.0" .
@@ -1435,6 +1435,13 @@ x-jsonld-extra-terms:
   entityType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@id'
+  agentType:
+    x-jsonld-id: '@type'
+    x-jsonld-type: '@id'
+  Activity: http://www.w3.org/ns/prov#Activity
+  Entity: http://www.w3.org/ns/prov#Entity
+  Agent: http://www.w3.org/ns/prov#Agent
+  SoftwareAgent: http://www.w3.org/ns/prov#SoftwareAgent
   used:
     x-jsonld-id: http://www.w3.org/ns/prov#used
     x-jsonld-type: '@id'
@@ -1664,7 +1671,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.sqlmm.intersection
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-19'
+  dateOfLastChange: '2026-11-25'
 
 ```
 
@@ -1830,6 +1837,14 @@ Links to the schema:
       "@id": "@type",
       "@type": "@id"
     },
+    "agentType": {
+      "@id": "@type",
+      "@type": "@id"
+    },
+    "Activity": "prov:Activity",
+    "Entity": "prov:Entity",
+    "Agent": "prov:Agent",
+    "SoftwareAgent": "prov:SoftwareAgent",
     "used": {
       "@id": "prov:used",
       "@type": "@id"

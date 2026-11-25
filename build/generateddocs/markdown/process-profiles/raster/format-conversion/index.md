@@ -568,8 +568,8 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://www.iana.org/assignments/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
 @prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
@@ -585,10 +585,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "Convert raster data from one format to another. " ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns2:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
+    proc:inputs [ ns1:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
                     dcterms:title "Format of the output data" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/format-identifier> ;
                     proc:keywords "format" ;
@@ -602,13 +602,13 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     proc:schema [ proc:default "\"GTiff\""^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:GCP [ dcterms:description "Ground Point Control in the form : pixel,line,eating,northing(,elev)." ;
+            ns1:GCP [ dcterms:description "Ground Point Control in the form : pixel,line,eating,northing(,elev)." ;
                     dcterms:title "Ground Point Control" ;
                     proc:maxOccurs "unbounded" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:InputDSN [ dcterms:description "The input data source name to use as source for convertion." ;
+            ns1:InputDSN [ dcterms:description "The input data source name to use as source for convertion." ;
                     dcterms:title "The input data source name" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
                     proc:keywords "raster" ;
@@ -619,22 +619,22 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-format-conversion/inputs/raster> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns2:OutputDSN [ dcterms:description "The output data source name to use as source for convertion." ;
+            ns1:OutputDSN [ dcterms:description "The output data source name to use as source for convertion." ;
                     dcterms:title "The output data source name" ;
                     proc:schema [ proc:type "string" ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Implementation Profile: Raster format conversion" ;
+    proc:metadata [ dcterms:title "My Demo" ],
+        [ dcterms:title "Implementation Profile: Raster format conversion" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-format-conversion> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ dcterms:title "Generic Profile: Raster format conversion" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-format-conversion> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "My Demo" ],
         [ dcterms:title "Process Concept: Raster Coverage Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Generic Profile: Raster format conversion" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-format-conversion> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
@@ -642,12 +642,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:title "The resulting converted file" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster format conversion -- output `raster`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-format-conversion/outputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Raster format conversion -- output `raster`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster format conversion -- output `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-format-conversion/outputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Raster format conversion -- output `raster`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-format-conversion/outputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
                     proc:schema [ proc:type "string" ] ] ] .
 
 
@@ -676,7 +676,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion"
     },
@@ -686,7 +686,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion"
     },
@@ -696,7 +696,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "serverSideFiles added: the raster input and output are names of files stored on the server (ZOO-Kernel dataPath), with no media type, each naming the Implementation Profile role it implements.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion"
     },
@@ -706,7 +706,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-format-conversion, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion"
     },
@@ -717,7 +717,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion"
     }
@@ -791,7 +791,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion"
     },
@@ -801,7 +801,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion"
     },
@@ -811,7 +811,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "serverSideFiles added: the raster input and output are names of files stored on the server (ZOO-Kernel dataPath), with no media type, each naming the Implementation Profile role it implements.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion"
     },
@@ -821,7 +821,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-format-conversion, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion"
     },
@@ -832,7 +832,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion"
     }
@@ -902,7 +902,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -910,7 +910,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/format-conversion to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -919,7 +919,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion/actions/server-side-files-2026-11-09> a rim:RegisterAction ;
     dcterms:description "serverSideFiles added: the raster input and output are names of files stored on the server (ZOO-Kernel dataPath), with no media type, each naming the Implementation Profile role it implements." ;
@@ -927,7 +927,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-format-conversion, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
@@ -935,7 +935,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/raster/Gdal_Translate> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Translate> ;
     pp:version "1.0.0" .
@@ -956,14 +956,14 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "Gdal_Translate re-encodes a raster into another format (`Format`) without changing its content -- the same role save_result's `format` parameter plays when terminating an openEO process graph. Not exactMatch: save_result is a cube-terminal process (no further chaining downstream), while Gdal_Translate is an ordinary mid-pipeline step; `GCP` (ground control point) handling has no openEO equivalent either." ] ;
     pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/export-aggregation> ;
-    pp:serverSideFile [ pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-format-conversion/inputs/raster> ;
-            pp:liveName "InputDSN" ;
-            pp:location "A file name, relative to the directory set by `dataPath` in the `[main]` section of the ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process reads or writes it there. Its format is the representation of the Implementation Profile role it implements (GeoTIFF for raster)." ;
-            pp:side "inputs" ],
-        [ pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-format-conversion/outputs/raster> ;
+    pp:serverSideFile [ pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-format-conversion/outputs/raster> ;
             pp:liveName "Result" ;
             pp:location "A file name, relative to the directory set by `dataPath` in the `[main]` section of the ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process reads or writes it there. Its format is the representation of the Implementation Profile role it implements (GeoTIFF for raster)." ;
-            pp:side "outputs" ] ;
+            pp:side "outputs" ],
+        [ pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-format-conversion/inputs/raster> ;
+            pp:liveName "InputDSN" ;
+            pp:location "A file name, relative to the directory set by `dataPath` in the `[main]` section of the ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process reads or writes it there. Its format is the representation of the Implementation Profile role it implements (GeoTIFF for raster)." ;
+            pp:side "inputs" ] ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
     rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/format-conversion/actions/addition>,
@@ -1325,6 +1325,13 @@ x-jsonld-extra-terms:
   entityType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@id'
+  agentType:
+    x-jsonld-id: '@type'
+    x-jsonld-type: '@id'
+  Activity: http://www.w3.org/ns/prov#Activity
+  Entity: http://www.w3.org/ns/prov#Entity
+  Agent: http://www.w3.org/ns/prov#Agent
+  SoftwareAgent: http://www.w3.org/ns/prov#SoftwareAgent
   used:
     x-jsonld-id: http://www.w3.org/ns/prov#used
     x-jsonld-type: '@id'
@@ -1554,7 +1561,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.raster.format-conversion
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-19'
+  dateOfLastChange: '2026-11-25'
 
 ```
 
@@ -1720,6 +1727,14 @@ Links to the schema:
       "@id": "@type",
       "@type": "@id"
     },
+    "agentType": {
+      "@id": "@type",
+      "@type": "@id"
+    },
+    "Activity": "prov:Activity",
+    "Entity": "prov:Entity",
+    "Agent": "prov:Agent",
+    "SoftwareAgent": "prov:SoftwareAgent",
     "used": {
       "@id": "prov:used",
       "@type": "@id"

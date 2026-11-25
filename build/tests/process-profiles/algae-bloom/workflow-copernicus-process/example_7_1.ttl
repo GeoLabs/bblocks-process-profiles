@@ -7,7 +7,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main> a prov:Plan ;
+<arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process/package> .
 
 <urn:example:entity:workflow-copernicus-process:out:chlorophyll_a> a prov:Entity,
@@ -92,7 +93,8 @@
 <urn:example:entity:workflow-copernicus-process:in:s3_secret_key> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process#inputs/s3_secret_key> .
 
-<https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus-process/package> a prov:Entity,
+        prov:Plan .
 
 <urn:example:run:algae-bloom:workflow-copernicus-process> a prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus-process> ;
@@ -105,6 +107,7 @@
         <urn:example:entity:workflow-copernicus-process:in:s3_secret_key> ;
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145> .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 

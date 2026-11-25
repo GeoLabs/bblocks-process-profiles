@@ -191,8 +191,8 @@ OGC API - Processes processDescription derived from the CWL.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
 @prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -203,13 +203,13 @@ OGC API - Processes processDescription derived from the CWL.
 <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/otsu> dcterms:description "Process converted from CWL" ;
     dcterms:title "otsu" ;
     pp:version "1.4.1" ;
-    proc:inputs [ ns2:raster [ dcterms:description "" ;
+    proc:inputs [ ns1:raster [ dcterms:description "" ;
                     dcterms:title "raster" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentEncoding "binary" ;
-                            ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+                            ns2:contentEncoding "binary" ;
+                            ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
     proc:metadata [ rdf:value "1.4.1" ;
             proc:role schema:softwareVersion ],
@@ -223,8 +223,8 @@ OGC API - Processes processDescription derived from the CWL.
     proc:outputs [ ns3:binary_mask_item [ dcterms:description "" ;
                     dcterms:title "binary_mask_item" ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentEncoding "binary" ;
-                            ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] .
+                            ns2:contentEncoding "binary" ;
+                            ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] .
 
 
 ```
@@ -465,10 +465,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/generic-profiles/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <https://w3id.org/ogc/api/schema/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -481,55 +481,55 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         "thresholding" ;
     dcterms:title "otsu" ;
     pp:version "1.4.1" ;
-    proc:inputs [ ns3:raster [ dcterms:description "" ;
+    proc:inputs [ ns4:raster [ dcterms:description "" ;
                     dcterms:title "raster" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff> ;
+                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster thresholding -- input `raster`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-thresholding/inputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Otsu thresholding -- input `raster`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Otsu thresholding -- input `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/otsu-thresholding/inputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Raster thresholding -- input `raster`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-thresholding/inputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentEncoding "binary" ;
-                            ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+                            ns3:contentEncoding "binary" ;
+                            ns3:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Raster thresholding" ;
+    proc:metadata [ rdf:value "Process converted from CWL" ;
+            proc:role schema:description ],
+        [ dcterms:title "Generic Profile: Raster thresholding" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-thresholding> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ rdf:value "1.4.1" ;
+            proc:role schema:softwareVersion ],
         [ dcterms:title "Implementation Profile: Otsu thresholding" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/otsu-thresholding> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ rdf:value "otsu" ;
             proc:role schema:name ],
-        [ rdf:value "Process converted from CWL" ;
-            proc:role schema:description ],
-        [ rdf:value "1.4.1" ;
-            proc:role schema:softwareVersion ] ;
+        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns4:binary_mask_item [ dcterms:description "" ;
+    proc:outputs [ ns2:binary_mask_item [ dcterms:description "" ;
                     dcterms:title "binary_mask_item" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/binary-mask> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/binary-mask-geotiff> ;
+                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/binary-mask-geotiff> ;
                     proc:keywords "mask" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster thresholding -- output `mask`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-thresholding/outputs/mask> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Otsu thresholding -- output `mask`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Otsu thresholding -- output `mask`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/otsu-thresholding/outputs/mask> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Raster thresholding -- output `mask`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-thresholding/outputs/mask> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentEncoding "binary" ;
-                            ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] .
+                            ns3:contentEncoding "binary" ;
+                            ns3:contentMediaType "image/tiff; application=geotiff" ] ] ] .
 
 
 ```
@@ -674,7 +674,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 [
   {
     "id": "urn:example:run:water-bodies:otsu",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu",
     "startedAtTime": "2026-09-23T20:14:35Z",
     "used": [
@@ -694,7 +694,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:otsu:in:raster",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/otsu#inputs/raster",
     "links": [
       {
@@ -706,7 +706,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:otsu:out:binary_mask_item",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/otsu#outputs/binary_mask_item",
     "wasGeneratedBy": "urn:example:run:water-bodies:otsu",
     "wasDerivedFrom": [
@@ -723,21 +723,25 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/otsu/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/otsu/package"
   }
 ]
@@ -751,7 +755,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "@graph": [
     {
       "id": "urn:example:run:water-bodies:otsu",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu",
       "startedAtTime": "2026-09-23T20:14:35Z",
       "used": [
@@ -771,7 +775,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:otsu:in:raster",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/otsu#inputs/raster",
       "links": [
         {
@@ -783,7 +787,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:otsu:out:binary_mask_item",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/otsu#outputs/binary_mask_item",
       "wasGeneratedBy": "urn:example:run:water-bodies:otsu",
       "wasDerivedFrom": [
@@ -800,21 +804,25 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/otsu/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/otsu/package"
     }
   ]
@@ -831,7 +839,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu> a prov:Plan ;
+<arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/otsu/package> .
 
 <urn:example:entity:otsu:out:binary_mask_item> a prov:Entity,
@@ -843,7 +852,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     prov:wasDerivedFrom <urn:example:entity:otsu:in:raster> ;
     prov:wasGeneratedBy <urn:example:run:water-bodies:otsu> .
 
-<urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0> a prov:SoftwareAgent ;
+<urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0" .
 
 <urn:example:run:water-bodies:otsu> a prov:Activity,
@@ -856,7 +866,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0> .
 
-<https://ospd.example.org/ogc-api/processes/otsu/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/otsu/package> a prov:Entity,
+        prov:Plan .
 
 <urn:example:entity:otsu:in:raster> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/otsu#inputs/raster> ;
@@ -864,7 +875,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
             oa:hasTarget <https://ospd.example.org/ogc-api/jobs/upstream-step/results/norm_diff.tif> ] .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 
 
@@ -877,6 +889,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 {
   "id": "urn:example:run:water-bodies:otsu",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/otsu/package",
   "usedInput": [
@@ -897,6 +910,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/water-bodies/otsu/context.jsonld",
   "id": "urn:example:run:water-bodies:otsu",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/otsu/package",
   "usedInput": [
@@ -917,6 +931,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:water-bodies:otsu> a wfprov:ProcessRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/otsu/package> ;
     wfprov:usedInput <urn:example:entity:otsu:in:raster> ;
@@ -949,7 +964,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -959,7 +974,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -969,7 +984,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/otsu-thresholding (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -979,7 +994,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/otsu-thresholding, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -989,7 +1004,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription.inherited.json added with the attachment to the Implementation Profile otsu-thresholding: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -999,7 +1014,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/otsu.cwl). The 72a76ae CWL declares the format of its Files, so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input raster and the output binary_mask_item, in processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on 2026-11-10 for raster and binary_mask_item were removed the same day, when the corrected CWL served these formats; the entry has none.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -1010,7 +1025,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/otsu to https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -1020,7 +1035,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     }
@@ -1091,7 +1106,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -1101,7 +1116,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -1111,7 +1126,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/otsu-thresholding (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -1121,7 +1136,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/otsu-thresholding, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -1131,7 +1146,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription.inherited.json added with the attachment to the Implementation Profile otsu-thresholding: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -1141,7 +1156,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/otsu.cwl). The 72a76ae CWL declares the format of its Files, so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input raster and the output binary_mask_item, in processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on 2026-11-10 for raster and binary_mask_item were removed the same day, when the corrected CWL served these formats; the entry has none.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -1152,7 +1167,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/otsu to https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     },
@@ -1162,7 +1177,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu"
     }
@@ -1240,7 +1255,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -1248,7 +1263,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/otsu to https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -1257,7 +1272,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu/actions/inherited-description-2026-11-10> a rim:RegisterAction ;
     dcterms:description "processDescription.inherited.json added with the attachment to the Implementation Profile otsu-thresholding: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged." ;
@@ -1265,7 +1280,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu/actions/plan-2026-11-11> a rim:RegisterAction ;
     dcterms:description "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/otsu.cwl). The 72a76ae CWL declares the format of its Files, so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input raster and the output binary_mask_item, in processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on 2026-11-10 for raster and binary_mask_item were removed the same day, when the corrected CWL served these formats; the entry has none." ;
@@ -1273,7 +1288,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu/actions/representation-2026-11-18> a rim:RegisterAction ;
     dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
@@ -1281,7 +1296,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/otsu-thresholding, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
@@ -1289,7 +1304,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu/actions/tier3-2026-11-10> a rim:RegisterAction ;
     dcterms:description "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/otsu-thresholding (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
@@ -1297,7 +1312,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/otsu> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/otsu> ;
     pp:version "1.4.1" .
@@ -2212,13 +2227,13 @@ id:5fa19808-d14c-4c01-8bd1-05a7a8845019 a wf4ever:File,
         wfprov:Artifact,
         prov:Entity ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:6d7920a6-ee35-4701-88be-68838b9ba10b ;
-            prov:atTime "2026-09-23T22:14:43.705762"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu/binary_mask_item> ],
-        [ a prov:Generation ;
             prov:activity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ;
             prov:atTime "2026-09-23T22:14:43.709003"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/workflow%20node_water_bodies/detected_water_body> ] ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/workflow%20node_water_bodies/detected_water_body> ],
+        [ a prov:Generation ;
+            prov:activity id:6d7920a6-ee35-4701-88be-68838b9ba10b ;
+            prov:atTime "2026-09-23T22:14:43.705762"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu/binary_mask_item> ] ;
     provext:qualifiedSpecialization [ a provext:Specialization ;
             provext:generalEntity data:8cb131413518c30be6ba485ea61764491444cde5 ] ;
     cwlprov:basename "otsu.tif" ;
@@ -2331,10 +2346,10 @@ id:8d6db404-8e9b-4740-bc17-6a2fab7c0c32 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_crop" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop> ],
+            prov:agent id:8bbef2fa-3721-4f50-b27c-1d641100a89f ],
         [ a prov:Association ;
-            prov:agent id:8bbef2fa-3721-4f50-b27c-1d641100a89f ] ;
+            prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:11:25.695175"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
@@ -2342,6 +2357,10 @@ id:8d6db404-8e9b-4740-bc17-6a2fab7c0c32 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:09:38.001367"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:09:38.074291"^^xsd:dateTime ;
+            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/aoi> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:38.074835"^^xsd:dateTime ;
             prov:entity data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/band> ],
@@ -2349,10 +2368,6 @@ id:8d6db404-8e9b-4740-bc17-6a2fab7c0c32 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:09:38.075873"^^xsd:dateTime ;
             prov:entity data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/item> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:38.074291"^^xsd:dateTime ;
-            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop/aoi> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:38.075291"^^xsd:dateTime ;
             prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
@@ -2380,18 +2395,18 @@ id:eb53f504-eecb-4585-8e33-f7afdbbf816a a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:b3b5dbf6-efbd-48f2-ba85-a9937bb49c7e ],
+            provext:member id:42580139-e758-4dbe-8ca8-7a114f7abf7f ],
         [ a provext:Membership ;
-            provext:member id:42580139-e758-4dbe-8ca8-7a114f7abf7f ] .
+            provext:member id:b3b5dbf6-efbd-48f2-ba85-a9937bb49c7e ] .
 
 id:f47bdfb0-199b-4f9a-93c9-1bc6e9427cc5 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_crop_2" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:c2b78598-db7e-4ab3-89eb-621c7b5c9bd6 ],
-        [ a prov:Association ;
             prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2> ] ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2> ],
+        [ a prov:Association ;
+            prov:agent id:c2b78598-db7e-4ab3-89eb-621c7b5c9bd6 ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:14:14.382774"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
@@ -2399,10 +2414,6 @@ id:f47bdfb0-199b-4f9a-93c9-1bc6e9427cc5 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:11:25.771051"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:11:25.788461"^^xsd:dateTime ;
-            prov:entity data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/item> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:11:25.787927"^^xsd:dateTime ;
             prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/epsg> ],
@@ -2410,6 +2421,10 @@ id:f47bdfb0-199b-4f9a-93c9-1bc6e9427cc5 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T22:11:25.787372"^^xsd:dateTime ;
             prov:entity data:ba936cb0e062bea4078e8b56371ca8fe054093dd ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/band> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:11:25.788461"^^xsd:dateTime ;
+            prov:entity data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop_2/item> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:11:25.786582"^^xsd:dateTime ;
             prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
@@ -2419,10 +2434,10 @@ id:f960d24b-dcbf-4c16-88ce-ad7029487e59 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/node_normalized_difference" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
-            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference> ],
+            prov:agent id:87ca5fb7-8991-4f4e-b107-8b30f9be5eea ],
         [ a prov:Association ;
-            prov:agent id:87ca5fb7-8991-4f4e-b107-8b30f9be5eea ] ;
+            prov:agent id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ;
+            prov:hadPlan <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T22:14:35.757176"^^xsd:dateTime ;
             prov:hadActivity id:006f10ba-bce7-4602-bc25-46f0ca2c5724 ] ;
@@ -2475,17 +2490,17 @@ id:006f10ba-bce7-4602-bc25-46f0ca2c5724 a wfprov:WorkflowRun,
             prov:atTime "2026-09-23T22:09:36.483742"^^xsd:dateTime ;
             prov:hadActivity id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:37.998964"^^xsd:dateTime ;
-            prov:entity id:1f7549f8-4403-44f2-a435-f95a32edb9de ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/bands> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:37.999442"^^xsd:dateTime ;
             prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/epsg> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:37.997833"^^xsd:dateTime ;
             prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/aoi> ] ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/aoi> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T22:09:37.998964"^^xsd:dateTime ;
+            prov:entity id:1f7549f8-4403-44f2-a435-f95a32edb9de ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/bands> ] ;
     prov:startedAtTime "2026-09-23T22:09:36.483701"^^xsd:dateTime .
 
 
@@ -2886,6 +2901,13 @@ x-jsonld-extra-terms:
   entityType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@id'
+  agentType:
+    x-jsonld-id: '@type'
+    x-jsonld-type: '@id'
+  Activity: http://www.w3.org/ns/prov#Activity
+  Entity: http://www.w3.org/ns/prov#Entity
+  Agent: http://www.w3.org/ns/prov#Agent
+  SoftwareAgent: http://www.w3.org/ns/prov#SoftwareAgent
   used:
     x-jsonld-id: http://www.w3.org/ns/prov#used
     x-jsonld-type: '@id'
@@ -3115,7 +3137,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.water-bodies.otsu
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-19'
+  dateOfLastChange: '2026-11-25'
 
 ```
 
@@ -3281,6 +3303,14 @@ Links to the schema:
       "@id": "@type",
       "@type": "@id"
     },
+    "agentType": {
+      "@id": "@type",
+      "@type": "@id"
+    },
+    "Activity": "prov:Activity",
+    "Entity": "prov:Entity",
+    "Agent": "prov:Agent",
+    "SoftwareAgent": "prov:SoftwareAgent",
     "used": {
       "@id": "prov:used",
       "@type": "@id"

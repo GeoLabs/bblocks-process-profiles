@@ -3,7 +3,7 @@
   "@graph": [
     {
       "id": "urn:example:run:water-bodies:stac",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/stac",
       "startedAtTime": "2026-09-23T20:17:40Z",
       "used": [
@@ -24,7 +24,7 @@
     },
     {
       "id": "urn:example:entity:stac:in:item",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/stac#inputs/item",
       "value": [
         "https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2B_10TFK_20210713_0_L2A",
@@ -33,7 +33,7 @@
     },
     {
       "id": "urn:example:entity:stac:in:rasters",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/stac#inputs/rasters",
       "value": [
         {
@@ -48,7 +48,7 @@
     },
     {
       "id": "urn:example:entity:stac:out:stac_catalog",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/stac#outputs/stac_catalog",
       "wasGeneratedBy": "urn:example:run:water-bodies:stac",
       "links": [
@@ -62,21 +62,25 @@
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/stac:1.5.0",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/stac:1.5.0"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/stac/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/stac/package"
     }
   ]

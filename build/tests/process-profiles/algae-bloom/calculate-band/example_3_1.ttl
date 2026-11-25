@@ -1,7 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/generic-profiles/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/generic-profiles/> .
 @prefix ns4: <http://schema.org/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -19,10 +19,10 @@
         "raster" ;
     dcterms:title "Performs a calculation with bands." ;
     pp:version "1.1.0" ;
-    proc:inputs [ ns3:band_a [ dcterms:description "" ;
+    proc:inputs [ ns2:band_a [ dcterms:description "" ;
                     dcterms:title "band_a" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
@@ -42,102 +42,102 @@
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:band_b [ dcterms:description "" ;
+            ns2:band_b [ dcterms:description "" ;
                     dcterms:title "band_b" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ],
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:band_c [ dcterms:description "" ;
+                                    ns1:contentMediaType "image/jp2" ] ] ] ;
+            ns2:band_c [ dcterms:description "" ;
                     dcterms:title "band_c" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/jp2" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:band_d [ dcterms:description "" ;
+            ns2:band_d [ dcterms:description "" ;
                     dcterms:title "band_d" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ],
-                                [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/jp2" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:band_e [ dcterms:description "" ;
+            ns2:band_e [ dcterms:description "" ;
                     dcterms:title "band_e" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ],
-                                [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:band_f [ dcterms:description "" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/jp2" ] ] ] ;
+            ns2:band_f [ dcterms:description "" ;
                     dcterms:title "band_f" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
@@ -150,17 +150,17 @@
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/jp2" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:band_g [ dcterms:description "" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+            ns2:band_g [ dcterms:description "" ;
                     dcterms:title "band_g" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
@@ -176,14 +176,14 @@
                                     ns1:contentMediaType "image/tiff; application=geotiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "image/jp2" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ] ] ] ;
-            ns3:band_h [ dcterms:description "" ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+            ns2:band_h [ dcterms:description "" ;
                     dcterms:title "band_h" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
@@ -196,49 +196,49 @@
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:band_i [ dcterms:description "" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/jp2" ] ] ] ;
+            ns2:band_i [ dcterms:description "" ;
                     dcterms:title "band_i" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
-                                [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/jp2" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns3:band_j [ dcterms:description "" ;
+            ns2:band_j [ dcterms:description "" ;
                     dcterms:title "band_j" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
@@ -249,42 +249,42 @@
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns3:band_k [ dcterms:description "" ;
+            ns2:band_k [ dcterms:description "" ;
                     dcterms:title "band_k" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ],
-                                [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:band_l [ dcterms:description "" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/jp2" ] ] ] ;
+            ns2:band_l [ dcterms:description "" ;
                     dcterms:title "band_l" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
@@ -295,10 +295,10 @@
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/jp2" ] ] ] ;
-            ns3:band_m [ dcterms:description "" ;
+            ns2:band_m [ dcterms:description "" ;
                     dcterms:title "band_m" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
@@ -311,72 +311,72 @@
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns3:band_n [ dcterms:description "" ;
+                                    ns1:contentMediaType "image/jp2" ] ] ] ;
+            ns2:band_n [ dcterms:description "" ;
                     dcterms:title "band_n" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/jp2" ] ] ] ;
-            ns3:band_o [ dcterms:description "" ;
+            ns2:band_o [ dcterms:description "" ;
                     dcterms:title "band_o" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
+                                [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:band_p [ dcterms:description "" ;
+                                    ns1:contentMediaType "image/jp2" ] ] ] ;
+            ns2:band_p [ dcterms:description "" ;
                     dcterms:title "band_p" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
@@ -387,19 +387,19 @@
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:band_q [ dcterms:description "" ;
+            ns2:band_q [ dcterms:description "" ;
                     dcterms:title "band_q" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
@@ -410,33 +410,33 @@
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:band_r [ dcterms:description "" ;
+            ns2:band_r [ dcterms:description "" ;
                     dcterms:title "band_r" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ],
-                                [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:band_s [ dcterms:description "" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/jp2" ] ] ] ;
+            ns2:band_s [ dcterms:description "" ;
                     dcterms:title "band_s" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
@@ -449,40 +449,40 @@
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/jp2" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ] ] ] ;
-            ns3:band_t [ dcterms:description "" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns2:band_t [ dcterms:description "" ;
                     dcterms:title "band_t" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/jp2" ] ] ] ;
-            ns3:band_u [ dcterms:description "" ;
+            ns2:band_u [ dcterms:description "" ;
                     dcterms:title "band_u" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
@@ -498,23 +498,23 @@
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ],
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:band_v [ dcterms:description "" ;
+                                    ns1:contentMediaType "image/jp2" ] ] ] ;
+            ns2:band_v [ dcterms:description "" ;
                     dcterms:title "band_v" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
@@ -525,10 +525,10 @@
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns3:band_w [ dcterms:description "" ;
+            ns2:band_w [ dcterms:description "" ;
                     dcterms:title "band_w" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
@@ -541,17 +541,17 @@
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/jp2" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ] ] ] ;
-            ns3:band_x [ dcterms:description "" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns2:band_x [ dcterms:description "" ;
                     dcterms:title "band_x" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
@@ -561,6 +561,29 @@
                         [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                    proc:minOccurs 0 ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "binary" ;
+                                    ns1:contentMediaType "image/jp2" ] ] ] ;
+            ns2:band_y [ dcterms:description "" ;
+                    dcterms:title "band_y" ;
+                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
+                    proc:keywords "raster" ;
+                    proc:maxOccurs 1 ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
@@ -571,10 +594,10 @@
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff" ] ] ] ;
-            ns3:band_y [ dcterms:description "" ;
-                    dcterms:title "band_y" ;
+            ns2:band_z [ dcterms:description "" ;
+                    dcterms:title "band_z" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
                     proc:keywords "raster" ;
                     proc:maxOccurs 1 ;
@@ -584,29 +607,6 @@
                         [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
-                    proc:minOccurs 0 ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/jp2" ] ] ] ;
-            ns3:band_z [ dcterms:description "" ;
-                    dcterms:title "band_z" ;
-                    dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
-                        <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg2000> ;
-                    proc:keywords "raster" ;
-                    proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
@@ -617,63 +617,63 @@
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns3:calc [ dcterms:description "Calculation to perform with band references." ;
+            ns2:calc [ dcterms:description "Calculation to perform with band references." ;
                     dcterms:title "Calculation" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/expression> ;
                     proc:keywords "expression" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `expression`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/expression> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- input `expression`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `expression`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/expression> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math -- input `expression`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/expression> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:name [ dcterms:description "Name to apply for the output GeoTiff file." ;
+            ns2:name [ dcterms:description "Name to apply for the output GeoTiff file." ;
                     dcterms:title "Output file name" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "1.1.0" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
-            proc:role schema:codeRepository ],
-        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ rdf:value "Performs a calculation with bands." ;
+            proc:role schema:name ],
+        [ rdf:value [ a ns4:Person ;
+                    ns4:email "francis.charette-migneault@crim.ca" ;
+                    ns4:identifier "http://orcid.org/0000-0003-4862-3349" ;
+                    ns4:name "Francis Charette-Migneault" ] ;
+            proc:role schema:author ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
+        [ rdf:value "1.1.0" ;
+            proc:role schema:softwareVersion ],
         [ rdf:value "Performs a calculation over JPEG bands and returns the resulting GeoTiff." ;
             proc:role schema:description ],
         [ dcterms:title "Implementation Profile: Raster band math" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ rdf:value "Performs a calculation with bands." ;
-            proc:role schema:name ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
+        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
+            proc:role schema:codeRepository ],
         [ dcterms:title "Generic Profile: Raster band math" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ rdf:value [ a ns4:Person ;
-                    ns4:email "francis.charette-migneault@crim.ca" ;
-                    ns4:identifier "http://orcid.org/0000-0003-4862-3349" ;
-                    ns4:name "Francis Charette-Migneault" ] ;
-            proc:role schema:author ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ pp:result [ dcterms:description "" ;
                     dcterms:title "result" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- output `raster`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/outputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- output `raster`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- output `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/outputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Raster band math -- output `raster`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/outputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] .

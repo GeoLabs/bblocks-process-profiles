@@ -320,8 +320,8 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -332,25 +332,25 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
 <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/water-bodies> dcterms:description "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
     dcterms:title "Water bodies detection based on NDWI and otsu threshold" ;
     pp:version "1.4.1" ;
-    proc:inputs [ ns2:aoi [ dcterms:description "area of interest as a bounding box" ;
+    proc:inputs [ ns3:aoi [ dcterms:description "area of interest as a bounding box" ;
                     dcterms:title "area of interest" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns2:bands [ dcterms:description "bands used for the NDWI" ;
+            ns3:bands [ dcterms:description "bands used for the NDWI" ;
                     dcterms:title "bands used for the NDWI" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "[\"green\",\"nir\"]"^^rdf:JSON ;
                             proc:type "array" ;
                             ns1:items [ proc:type "string" ] ] ] ;
-            ns2:epsg [ dcterms:description "EPSG code" ;
+            ns3:epsg [ dcterms:description "EPSG code" ;
                     dcterms:title "EPSG code" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"EPSG:4326\""^^rdf:JSON ;
                             proc:type "string" ] ] ;
-            ns2:stac_items [ dcterms:description "list of Sentinel-2 COG STAC items" ;
+            ns3:stac_items [ dcterms:description "list of Sentinel-2 COG STAC items" ;
                     dcterms:title "Sentinel-2 STAC items" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
@@ -359,14 +359,14 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
     proc:jobControlOptions "async-execute" ;
     proc:metadata [ rdf:value "1.4.1" ;
             proc:role schema:softwareVersion ],
-        [ rdf:value "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
-            proc:role schema:description ],
         [ rdf:value "Water bodies detection based on NDWI and otsu threshold" ;
-            proc:role schema:name ] ;
+            proc:role schema:name ],
+        [ rdf:value "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
+            proc:role schema:description ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:stac [ dcterms:description "" ;
+    proc:outputs [ ns2:stac [ dcterms:description "" ;
                     dcterms:title "stac" ;
                     proc:schema [ proc:type "object" ;
                             ns1:format "stac-catalog" ;
@@ -657,9 +657,9 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -670,54 +670,54 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
 <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/water-bodies> dcterms:description "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
     dcterms:title "Water bodies detection based on NDWI and otsu threshold" ;
     pp:version "1.4.1" ;
-    proc:inputs [ ns3:aoi [ dcterms:description "area of interest as a bounding box" ;
+    proc:inputs [ ns2:aoi [ dcterms:description "area of interest as a bounding box" ;
                     dcterms:title "area of interest" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:bands [ dcterms:description "bands used for the NDWI" ;
+            ns2:bands [ dcterms:description "bands used for the NDWI" ;
                     dcterms:title "bands used for the NDWI" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "[\"green\",\"nir\"]"^^rdf:JSON ;
                             proc:type "array" ;
-                            ns2:items [ proc:type "string" ] ] ] ;
-            ns3:epsg [ dcterms:description "EPSG code" ;
+                            ns1:items [ proc:type "string" ] ] ] ;
+            ns2:epsg [ dcterms:description "EPSG code" ;
                     dcterms:title "EPSG code" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"EPSG:4326\""^^rdf:JSON ;
                             proc:type "string" ] ] ;
-            ns3:stac_items [ dcterms:description "list of Sentinel-2 COG STAC items" ;
+            ns2:stac_items [ dcterms:description "list of Sentinel-2 COG STAC items" ;
                     dcterms:title "Sentinel-2 STAC items" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "array" ;
-                            ns2:items [ proc:type "string" ] ] ] ] ;
+                            ns1:items [ proc:type "string" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
     proc:metadata [ rdf:value "Water bodies detection based on NDWI and otsu threshold" ;
             proc:role schema:name ],
-        [ rdf:value "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
-            proc:role schema:description ],
         [ rdf:value "1.4.1" ;
-            proc:role schema:softwareVersion ] ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value "Water bodies detection based on NDWI and otsu threshold applied to Sentinel-2 COG STAC items" ;
+            proc:role schema:description ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns1:stac [ dcterms:description "" ;
+    proc:outputs [ ns3:stac [ dcterms:description "" ;
                     dcterms:title "stac" ;
                     proc:schema [ proc:type "object" ;
-                            ns2:format "stac-collection" ;
-                            ns2:properties [ dcterms:description [ proc:type "string" ] ;
+                            ns1:format "stac-collection" ;
+                            ns1:properties [ dcterms:description [ proc:type "string" ] ;
                                     dcterms:title [ proc:type "string" ] ;
                                     rdfs:seeAlso [ dcterms:type "array" ] ;
                                     proc:type [ proc:enum "Collection" ;
                                             proc:type "string" ] ;
-                                    ns2:assets [ proc:type "object" ] ;
-                                    ns2:extent [ proc:type "object" ] ;
-                                    ns2:license [ proc:type "string" ] ;
-                                    ns2:stac_version [ proc:type "string" ] ] ;
-                            ns2:required "description",
+                                    ns1:assets [ proc:type "object" ] ;
+                                    ns1:extent [ proc:type "object" ] ;
+                                    ns1:license [ proc:type "string" ] ;
+                                    ns1:stac_version [ proc:type "string" ] ] ;
+                            ns1:required "description",
                                 "extent",
                                 "id",
                                 "license",
@@ -875,7 +875,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 [
   {
     "id": "urn:example:run:water-bodies:water-bodies",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies",
     "startedAtTime": "2026-09-23T20:09:35Z",
     "used": [
@@ -896,19 +896,19 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:water-bodies:in:aoi",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/water-bodies#inputs/aoi",
     "value": "-121.399,39.834,-120.74,40.472"
   },
   {
     "id": "urn:example:entity:water-bodies:in:epsg",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/water-bodies#inputs/epsg",
     "value": "EPSG:4326"
   },
   {
     "id": "urn:example:entity:water-bodies:in:stac_items",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/water-bodies#inputs/stac_items",
     "value": [
       "https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2B_10TFK_20210713_0_L2A",
@@ -917,7 +917,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:water-bodies:out:stac",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
     "wasGeneratedBy": "urn:example:run:water-bodies:water-bodies",
     "links": [
@@ -931,16 +931,19 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/water-bodies/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/water-bodies/package"
   }
 ]
@@ -954,7 +957,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "@graph": [
     {
       "id": "urn:example:run:water-bodies:water-bodies",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies",
       "startedAtTime": "2026-09-23T20:09:35Z",
       "used": [
@@ -975,19 +978,19 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:water-bodies:in:aoi",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/water-bodies#inputs/aoi",
       "value": "-121.399,39.834,-120.74,40.472"
     },
     {
       "id": "urn:example:entity:water-bodies:in:epsg",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/water-bodies#inputs/epsg",
       "value": "EPSG:4326"
     },
     {
       "id": "urn:example:entity:water-bodies:in:stac_items",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/water-bodies#inputs/stac_items",
       "value": [
         "https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2B_10TFK_20210713_0_L2A",
@@ -996,7 +999,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:water-bodies:out:stac",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
       "wasGeneratedBy": "urn:example:run:water-bodies:water-bodies",
       "links": [
@@ -1010,16 +1013,19 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/water-bodies/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/water-bodies/package"
     }
   ]
@@ -1037,7 +1043,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main> a prov:Plan ;
+<arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/water-bodies/package> .
 
 <urn:example:entity:water-bodies:out:stac> a prov:Entity,
@@ -1072,9 +1079,11 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
         <urn:example:entity:water-bodies:in:stac_items> ;
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145> .
 
-<https://ospd.example.org/ogc-api/processes/water-bodies/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/water-bodies/package> a prov:Entity,
+        prov:Plan .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 
 
@@ -1088,6 +1097,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "run": {
     "id": "urn:example:run:water-bodies:water-bodies",
     "type": "WorkflowRun",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies",
     "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/water-bodies/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
@@ -1107,6 +1117,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "engine": {
     "@id": "urn:example:engine:cwltool-3.1.20260108082145",
     "@type": "WorkflowEngine",
+    "provType": "Agent",
     "name": "cwltool",
     "version": "3.1.20260108082145"
   },
@@ -1114,6 +1125,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/S2A_10TFK_20220524_0_L2A.json",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "application/json",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -1126,6 +1138,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/otsu.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -1138,6 +1151,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/S2B_10TFK_20210713_0_L2A.json",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "application/json",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -1150,6 +1164,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/otsu.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -1162,6 +1177,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/catalog.json",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "application/json",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -1183,6 +1199,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "run": {
     "id": "urn:example:run:water-bodies:water-bodies",
     "type": "WorkflowRun",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies",
     "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/water-bodies/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
@@ -1202,6 +1219,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "engine": {
     "@id": "urn:example:engine:cwltool-3.1.20260108082145",
     "@type": "WorkflowEngine",
+    "provType": "Agent",
     "name": "cwltool",
     "version": "3.1.20260108082145"
   },
@@ -1209,6 +1227,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/S2A_10TFK_20220524_0_L2A.json",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "application/json",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -1221,6 +1240,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/otsu.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -1233,6 +1253,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/S2B_10TFK_20210713_0_L2A.json",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "application/json",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -1245,6 +1266,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/otsu.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -1257,6 +1279,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/catalog.json",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "application/json",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
@@ -1280,7 +1303,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/S2A_10TFK_20220524_0_L2A.json> prov:generated <urn:example:run:water-bodies:water-bodies> ;
+<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/S2A_10TFK_20220524_0_L2A.json> a prov:Entity ;
+    prov:generated <urn:example:run:water-bodies:water-bodies> ;
     ns1:checksum [ rdf:value "d6d2a88a822dadbc95c6d3381d6b0386e94a2148" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac" ;
@@ -1288,7 +1312,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/otsu.tif> prov:generated <urn:example:run:water-bodies:water-bodies> ;
+<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/otsu.tif> a prov:Entity ;
+    prov:generated <urn:example:run:water-bodies:water-bodies> ;
     ns1:checksum [ rdf:value "8a97a5260b1039d7f867c2f9ab8ee36a5cb5fbd4" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac" ;
@@ -1296,7 +1321,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/S2B_10TFK_20210713_0_L2A.json> prov:generated <urn:example:run:water-bodies:water-bodies> ;
+<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/S2B_10TFK_20210713_0_L2A.json> a prov:Entity ;
+    prov:generated <urn:example:run:water-bodies:water-bodies> ;
     ns1:checksum [ rdf:value "e74c29702b96c01957579e7d11b35d835356376b" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac" ;
@@ -1304,7 +1330,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/otsu.tif> prov:generated <urn:example:run:water-bodies:water-bodies> ;
+<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/otsu.tif> a prov:Entity ;
+    prov:generated <urn:example:run:water-bodies:water-bodies> ;
     ns1:checksum [ rdf:value "8cb131413518c30be6ba485ea61764491444cde5" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac" ;
@@ -1312,7 +1339,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/catalog.json> prov:generated <urn:example:run:water-bodies:water-bodies> ;
+<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/catalog.json> a prov:Entity ;
+    prov:generated <urn:example:run:water-bodies:water-bodies> ;
     ns1:checksum [ rdf:value "a234b13e2668a49acb831fdf87f3c1ead120dd41" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac" ;
@@ -1320,11 +1348,13 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/output> ;
     proc:type "Artifact" .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a wfprov:WorkflowEngine ;
+<urn:example:engine:cwltool-3.1.20260108082145> a wfprov:WorkflowEngine,
+        prov:Agent ;
     pp:name "cwltool" ;
     pp:version "3.1.20260108082145" .
 
 <urn:example:run:water-bodies:water-bodies> a wfprov:WorkflowRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies> ;
     wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/water-bodies/package> ;
     wfprov:hadSubProcessRun <urn:example:run:water-bodies:detect-water-body>,
@@ -1368,7 +1398,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies"
     },
@@ -1378,7 +1408,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies"
     },
@@ -1388,7 +1418,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/water-bodies.cwl). The processDescription is unchanged.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies"
     },
@@ -1399,7 +1429,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies to https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies"
     }
@@ -1491,7 +1521,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies"
     },
@@ -1501,7 +1531,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies"
     },
@@ -1511,7 +1541,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/water-bodies.cwl). The processDescription is unchanged.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies"
     },
@@ -1522,7 +1552,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies to https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies"
     }
@@ -1623,7 +1653,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -1631,7 +1661,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/water-bodies/water-bodies to https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -1640,7 +1670,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies/actions/plan-2026-11-11> a rim:RegisterAction ;
     dcterms:description "plan: executionUnit.href moves from GeoLabs/ogc-eo-application-package-hands-on f472585 to 72a76ae, pushed on 2026-11-11 (water-bodies/app-pkg-multiple/water-bodies.cwl). The processDescription is unchanged." ;
@@ -1648,7 +1678,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/water-bodies> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/water-bodies> ;
     pp:version "1.4.1" .
@@ -3396,17 +3426,17 @@ id:25ff238f-e08b-4dee-a1f9-485e90a02a52 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ],
+            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ],
         [ a provext:Membership ;
-            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ] .
+            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ] .
 
 id:3d637621-61a3-4c53-8aaf-70daadac3593 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:e06b906c-ef24-4174-830c-4a184274216f ],
+            provext:member id:5fa19808-d14c-4c01-8bd1-05a7a8845019 ],
         [ a provext:Membership ;
-            provext:member id:5fa19808-d14c-4c01-8bd1-05a7a8845019 ] .
+            provext:member id:e06b906c-ef24-4174-830c-4a184274216f ] .
 
 id:471cf7c7-1a60-4c28-b3d0-904c5aa74707 a wf4ever:File,
         wfprov:Artifact,
@@ -3419,9 +3449,9 @@ id:511850b1-b1bc-44cd-8316-bdd367fefd98 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ],
+            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ],
         [ a provext:Membership ;
-            provext:member data:5f0002427ab880579cf6a5a5c704bd399f3310f2 ] .
+            provext:member data:09dd884abf8f162fa6ed55f0e958ce9586b8bffd ] .
 
 id:5fa19808-d14c-4c01-8bd1-05a7a8845019 a wf4ever:File,
         wfprov:Artifact,
@@ -3457,19 +3487,19 @@ id:afa01c29-85ed-418e-b3a4-99ff6f4b06cf a ro:Folder,
         "id:7d9076f9-073d-4667-84e9-131fd7fda68c"^^xsd:QName,
         "id:a9451218-986b-4920-9d23-62638b8aea56"^^xsd:QName ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ;
-            prov:atTime "2026-09-23T22:17:45.465410"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/primary/stac> ],
-        [ a prov:Generation ;
             prov:activity id:fbfd9735-117b-4cdd-9707-61f171585925 ;
             prov:atTime "2026-09-23T22:17:45.432581"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/stac_catalog> ] ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_stac/stac_catalog> ],
+        [ a prov:Generation ;
+            prov:activity id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 ;
+            prov:atTime "2026-09-23T22:17:45.465410"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/primary/stac> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 ],
+            provext:member id:a782f6a0-89d7-46ac-9c76-c6569903f8e1 ],
         [ a provext:Membership ;
             provext:member id:1d5bc5ed-98ce-4f75-8ca8-c19f497b03c0 ],
         [ a provext:Membership ;
-            provext:member id:a782f6a0-89d7-46ac-9c76-c6569903f8e1 ],
+            provext:member id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 ],
         [ a provext:Membership ;
             provext:member id:0d06dfcd-e7b7-4fad-a2a5-66cddd416313 ] ;
     cwlprov:basename "docker_tmpwngcerl4" .
@@ -3478,9 +3508,9 @@ id:b6924a3c-a25c-4107-bdd7-2b5b2bff912e a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ],
+            provext:member data:ba936cb0e062bea4078e8b56371ca8fe054093dd ],
         [ a provext:Membership ;
-            provext:member data:ba936cb0e062bea4078e8b56371ca8fe054093dd ] .
+            provext:member data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ] .
 
 id:d8353ab3-7279-484e-a461-b04ae4b52890 a prov:Agent,
         prov:SoftwareAgent ;
@@ -3542,9 +3572,9 @@ id:1d5bc5ed-98ce-4f75-8ca8-c19f497b03c0 a ro:Folder,
     prov:hadDictionaryMember "id:1aa0c641-ea02-485d-a14b-c5a0aa40154b"^^xsd:QName,
         "id:bbd82449-f35c-4d0e-a771-32af085fe0db"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:0825c9ab-8336-4546-bdb6-27a7ec74c6b5 ],
+            provext:member id:8a52cbfa-2822-476c-baed-680f3a070398 ],
         [ a provext:Membership ;
-            provext:member id:8a52cbfa-2822-476c-baed-680f3a070398 ] ;
+            provext:member id:0825c9ab-8336-4546-bdb6-27a7ec74c6b5 ] ;
     cwlprov:basename "S2B_10TFK_20210713_0_L2A" .
 
 id:76afd8f9-b8f8-4b00-88b9-5bbf50509248 a ro:Folder,
@@ -3577,9 +3607,9 @@ id:df33a1dc-d46c-4154-9213-04cfb8cc55c4 a ro:Folder,
     prov:hadDictionaryMember "id:0c932b2b-21cb-4d36-8eda-c9d07f86bf53"^^xsd:QName,
         "id:4c5ac9a5-8f70-4cc6-bb2f-89864afd51b9"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:471cf7c7-1a60-4c28-b3d0-904c5aa74707 ],
+            provext:member id:ac975c99-5d6d-476f-b3ab-750fd0ac460d ],
         [ a provext:Membership ;
-            provext:member id:ac975c99-5d6d-476f-b3ab-750fd0ac460d ] ;
+            provext:member id:471cf7c7-1a60-4c28-b3d0-904c5aa74707 ] ;
     cwlprov:basename "S2A_10TFK_20220524_0_L2A" .
 
 id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 a wfprov:WorkflowRun,
@@ -3599,17 +3629,17 @@ id:43f96d95-9aa3-42a3-8046-388cdfaf7a80 a wfprov:WorkflowRun,
             prov:entity data:9d1fba832b03655b5b73ff964bc74d4543bf904a ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/epsg> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:37.995200"^^xsd:dateTime ;
-            prov:entity id:511850b1-b1bc-44cd-8316-bdd367fefd98 ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/stac_items> ],
+            prov:atTime "2026-09-23T22:09:37.991132"^^xsd:dateTime ;
+            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/aoi> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T22:09:37.992978"^^xsd:dateTime ;
             prov:entity id:b6924a3c-a25c-4107-bdd7-2b5b2bff912e ;
             prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/bands> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T22:09:37.991132"^^xsd:dateTime ;
-            prov:entity data:c968ad55dbad27ec9518fb34f62e7ac54bcbe7ad ;
-            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/aoi> ] ;
+            prov:atTime "2026-09-23T22:09:37.995200"^^xsd:dateTime ;
+            prov:entity id:511850b1-b1bc-44cd-8316-bdd367fefd98 ;
+            prov:hadRole <arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/stac_items> ] ;
     prov:startedAtTime "2026-09-23T22:09:35.483832"^^xsd:dateTime .
 
 id:39955f0d-0ccf-44b0-b0a9-70d1dd48559c a wfprov:WorkflowEngine,
@@ -3839,6 +3869,13 @@ x-jsonld-extra-terms:
   entityType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@id'
+  agentType:
+    x-jsonld-id: '@type'
+    x-jsonld-type: '@id'
+  Activity: http://www.w3.org/ns/prov#Activity
+  Entity: http://www.w3.org/ns/prov#Entity
+  Agent: http://www.w3.org/ns/prov#Agent
+  SoftwareAgent: http://www.w3.org/ns/prov#SoftwareAgent
   used:
     x-jsonld-id: http://www.w3.org/ns/prov#used
     x-jsonld-type: '@id'
@@ -4068,7 +4105,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.water-bodies.water-bodies
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-19'
+  dateOfLastChange: '2026-11-25'
 
 ```
 
@@ -4234,6 +4271,14 @@ Links to the schema:
       "@id": "@type",
       "@type": "@id"
     },
+    "agentType": {
+      "@id": "@type",
+      "@type": "@id"
+    },
+    "Activity": "prov:Activity",
+    "Entity": "prov:Entity",
+    "Agent": "prov:Agent",
+    "SoftwareAgent": "prov:SoftwareAgent",
     "used": {
       "@id": "prov:used",
       "@type": "@id"

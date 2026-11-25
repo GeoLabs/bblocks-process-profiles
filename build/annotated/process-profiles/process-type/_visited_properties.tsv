@@ -19,8 +19,8 @@ path	@id	schema
 /hasAction	https://w3id.org/ogc/rim/hasAction	/github/workspace/build/annotated/process-profiles/process-type/schema.yaml
 /usedEntityType	https://w3id.org/ogc/rim/activity-type/usedEntityType	/github/workspace/build/annotated/process-profiles/process-type/schema.yaml
 /generatedEntityType	https://w3id.org/ogc/rim/activity-type/generatedEntityType	/github/workspace/build/annotated/process-profiles/process-type/schema.yaml
-/associatedAgentType	https://w3id.org/ogc/rim/activity-type/associatedAgentType	https://ogcincubator.github.io/activity-type-register/build/annotated/register/schemas/activity-types-schema/schema.yaml
-/informedByActivityType	https://w3id.org/ogc/rim/activity-type/informedByActivityType	https://ogcincubator.github.io/activity-type-register/build/annotated/register/schemas/activity-types-schema/schema.yaml
+/associatedAgentType	https://w3id.org/ogc/rim/activity-type/associatedAgentType	https://ogcincubator.github.io/activity-type-register/build/annotated/register/profiles/schemas/activity-types-schema/schema.yaml
+/informedByActivityType	https://w3id.org/ogc/rim/activity-type/informedByActivityType	https://ogcincubator.github.io/activity-type-register/build/annotated/register/profiles/schemas/activity-types-schema/schema.yaml
 /prefLabel	http://www.w3.org/2004/02/skos/core#prefLabel	/github/workspace/build/annotated/process-profiles/process-type/schema.yaml
 /definition	http://www.w3.org/2004/02/skos/core#definition	/github/workspace/build/annotated/process-profiles/process-type/schema.yaml
 /inScheme	http://www.w3.org/2004/02/skos/core#inScheme	/github/workspace/build/annotated/process-profiles/process-type/schema.yaml

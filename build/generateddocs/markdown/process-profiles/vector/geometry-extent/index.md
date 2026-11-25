@@ -234,10 +234,10 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -249,10 +249,10 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     dcterms:title "Get Shapes Extents" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.shapes_tools.19/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns1:OUTPUT [ dcterms:description "Get Extent for ..." ;
+    proc:inputs [ ns2:OUTPUT [ dcterms:description "Get Extent for ..." ;
                     dcterms:title "Get Extent for ..." ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"each shape\""^^rdf:JSON ;
@@ -261,30 +261,30 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                 "each shape's part" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns1:SHAPES [ dcterms:description "Shapes" ;
+            ns2:SHAPES [ dcterms:description "Shapes" ;
                     dcterms:title "Shapes" ;
-                    proc:schema [ ns2:oneOf [ proc:type "object" ],
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "utf-8" ;
+                                    ns1:contentMediaType "text/xml" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/vnd.google-earth.kml+xml" ],
-                                [ proc:type "string" ;
-                                    ns2:contentEncoding "utf-8" ;
-                                    ns2:contentMediaType "text/xml" ] ] ] ] ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
+                                [ proc:type "object" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns4:EXTENTS [ dcterms:description "Extents" ;
+    proc:outputs [ ns3:EXTENTS [ dcterms:description "Extents" ;
                     dcterms:title "Extents" ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "utf-8" ;
-                                    ns2:contentMediaType "text/xml" ],
+                    proc:schema [ ns1:oneOf [ proc:type "object" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/vnd.google-earth.kml+xml" ],
-                                [ proc:type "object" ] ] ] ] .
+                                    ns1:contentEncoding "utf-8" ;
+                                    ns1:contentMediaType "text/xml" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ] ] ] ] .
 
 
 ```
@@ -602,8 +602,8 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/generic-profiles/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/generic-profiles/> .
 @prefix ns4: <http://www.iana.org/assignments/> .
 @prefix ns5: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
@@ -624,7 +624,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
             ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.shapes_tools.19/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns3:OUTPUT [ dcterms:description "Get Extent for ..." ;
+    proc:inputs [ ns2:OUTPUT [ dcterms:description "Get Extent for ..." ;
                     dcterms:title "Get Extent for ..." ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"each shape\""^^rdf:JSON ;
@@ -633,10 +633,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 "each shape's part" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns3:SHAPES [ dcterms:description "Shapes" ;
+            ns2:SHAPES [ dcterms:description "Shapes" ;
                     dcterms:title "Shapes" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-kml> ;
                     proc:keywords "geometry" ;
                     proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation -- input `geometry`" ;
@@ -646,31 +646,31 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/geometry-extent/inputs/geometry> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "utf-8" ;
+                                    ns1:contentMediaType "text/xml" ],
+                                [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
-                                [ proc:type "object" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/xml" ] ] ] ] ;
+                                [ proc:type "object" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
     proc:metadata [ dcterms:title "Process Concept: Vector Geometry Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/vector-geometry-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Implementation Profile: Geometry extent" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/geometry-extent> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ dcterms:title "Generic Profile: Unary geometry operation" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/unary-geometry-operation> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Implementation Profile: Geometry extent" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/geometry-extent> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ ns5:EXTENTS [ dcterms:description "Extents" ;
                     dcterms:title "Extents" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/surface> ;
-                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/surface-gml>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/surface-kml> ;
                     proc:keywords "geometry" ;
                     proc:metadata [ dcterms:title "Generic Profile: Unary geometry operation -- output `result`" ;
@@ -680,11 +680,11 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/geometry-extent/outputs/result> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/xml" ],
-                                [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "utf-8" ;
+                                    ns1:contentMediaType "text/xml" ],
                                 [ proc:type "object" ] ] ] ] .
 
 
@@ -713,7 +713,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent"
     },
@@ -723,7 +723,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent"
     },
@@ -733,7 +733,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-extent, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent"
     },
@@ -744,7 +744,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/vector/geometry-extent to https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent"
     },
@@ -754,7 +754,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent"
     }
@@ -811,7 +811,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent"
     },
@@ -821,7 +821,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent"
     },
@@ -831,7 +831,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-extent, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent"
     },
@@ -842,7 +842,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/vector/geometry-extent to https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent"
     },
@@ -852,7 +852,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent"
     }
@@ -905,7 +905,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -913,7 +913,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/vector/geometry-extent to https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -922,7 +922,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent/actions/representation-2026-11-18> a rim:RegisterAction ;
     dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
@@ -930,7 +930,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-extent, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry." ;
@@ -938,7 +938,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/vector/geometry-extent> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/vector/SAGA.shapes_tools.19> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.shapes_tools.19> ;
     pp:version "1.0.0" .
@@ -1288,6 +1288,13 @@ x-jsonld-extra-terms:
   entityType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@id'
+  agentType:
+    x-jsonld-id: '@type'
+    x-jsonld-type: '@id'
+  Activity: http://www.w3.org/ns/prov#Activity
+  Entity: http://www.w3.org/ns/prov#Entity
+  Agent: http://www.w3.org/ns/prov#Agent
+  SoftwareAgent: http://www.w3.org/ns/prov#SoftwareAgent
   used:
     x-jsonld-id: http://www.w3.org/ns/prov#used
     x-jsonld-type: '@id'
@@ -1517,7 +1524,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.vector.geometry-extent
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-19'
+  dateOfLastChange: '2026-11-25'
 
 ```
 
@@ -1683,6 +1690,14 @@ Links to the schema:
       "@id": "@type",
       "@type": "@id"
     },
+    "agentType": {
+      "@id": "@type",
+      "@type": "@id"
+    },
+    "Activity": "prov:Activity",
+    "Entity": "prov:Entity",
+    "Agent": "prov:Agent",
+    "SoftwareAgent": "prov:SoftwareAgent",
     "used": {
       "@id": "prov:used",
       "@type": "@id"

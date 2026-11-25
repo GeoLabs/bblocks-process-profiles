@@ -1,7 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -16,7 +16,7 @@
     dcterms:title "GDAL Warp Tool" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns1:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
@@ -29,12 +29,12 @@
                     dcterms:title "The input data source name" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster reprojection -- input `raster`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster reprojection -- input `raster`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection -- input `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/inputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster reprojection -- input `raster`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:schema [ proc:type "string" ] ] ;
             ns1:OutputDSN [ dcterms:description "The output data source name to use as source for convertion." ;
                     dcterms:title "The output data source name" ;
@@ -69,12 +69,12 @@
                     dcterms:title "The target Spatial reference Set" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/coordinate-reference-system> ;
                     proc:keywords "CRS" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster reprojection -- input `targetCRS`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/targetCRS> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster reprojection -- input `targetCRS`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection -- input `targetCRS`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/inputs/targetCRS> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster reprojection -- input `targetCRS`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/targetCRS> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
@@ -91,19 +91,19 @@
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ dcterms:title "Implementation Profile: Raster reprojection" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+        [ dcterms:title "Generic Profile: Raster reprojection" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:Result [ dcterms:description "The file name resulting of the convertion" ;
+    proc:outputs [ ns3:Result [ dcterms:description "The file name resulting of the convertion" ;
                     dcterms:title "The resulting converted file" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
                     proc:keywords "raster" ;

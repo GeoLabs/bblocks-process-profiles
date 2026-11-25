@@ -3,6 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:kindgrove-steps:estimate-biomass> a wfprov:ProcessRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/estimate-biomass> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/estimate_biomass/package> ;
     wfprov:usedInput <urn:example:entity:estimate-biomass:in:ndvi_file>,

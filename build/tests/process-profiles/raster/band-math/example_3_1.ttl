@@ -1,9 +1,9 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/geolabs/ospd/generic-profiles/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns3: <https://w3id.org/ogc/api/schema/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns5: <http://www.iana.org/assignments/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns5: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -18,24 +18,24 @@
     dcterms:title "Outputs a monoband image which is the result of a mathematical operation on several multi-band images." ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns5:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMath/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns4:exp [ dcterms:description "The muParser mathematical expression to apply on input images." ;
+    proc:inputs [ ns2:exp [ dcterms:description "The muParser mathematical expression to apply on input images." ;
                     dcterms:title "The muParser mathematical expression to apply on input images." ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/expression> ;
                     proc:keywords "expression" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `expression`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/expression> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Raster band math -- input `expression`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math -- input `expression`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/expression> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Raster band math -- input `expression`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/expression> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns4:il [ dcterms:description "Image list of operands to the mathematical expression." ;
+            ns2:il [ dcterms:description "Image list of operands to the mathematical expression." ;
                     dcterms:title "Image list of operands to the mathematical expression." ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns4:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-png> ;
                     proc:keywords "raster" ;
@@ -46,16 +46,16 @@
                         [ dcterms:title "Implementation Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math/inputs/rasters> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
-                    proc:schema [ ns3:oneOf [ proc:type "string" ;
-                                    ns3:contentEncoding "base64" ;
-                                    ns3:contentMediaType "image/jpeg" ],
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
-                                    ns3:contentEncoding "base64" ;
-                                    ns3:contentMediaType "image/tiff" ],
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
-                                    ns3:contentEncoding "base64" ;
-                                    ns3:contentMediaType "image/png" ] ] ] ;
-            ns4:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+            ns2:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
                     dcterms:title "Output image which is the result of the mathematical expressions on input image list operands." ;
                     proc:schema [ proc:default "\"float\""^^rdf:JSON ;
                             proc:enum "double",
@@ -65,7 +65,7 @@
                                 "uint16",
                                 "uint8" ;
                             proc:type "string" ] ] ;
-            ns4:ram [ dcterms:description "Available memory for processing (in MB)." ;
+            ns2:ram [ dcterms:description "Available memory for processing (in MB)." ;
                     dcterms:title "Available memory for processing (in MB)." ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "256"^^rdf:JSON ;
@@ -74,22 +74,22 @@
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Raster band math" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
+        [ dcterms:title "Generic Profile: Raster band math" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Implementation Profile: Raster band math" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
+    proc:outputs [ ns5:out [ dcterms:description "Output image which is the result of the mathematical expressions on input image list operands." ;
                     dcterms:title "Output image which is the result of the mathematical expressions on input image list operands." ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
-                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
+                    ns4:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-jpeg>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
                     proc:keywords "raster" ;
@@ -99,13 +99,13 @@
                         [ dcterms:title "Generic Profile: Raster band math -- output `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/outputs/raster> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
-                    proc:schema [ ns3:oneOf [ proc:type "string" ;
-                                    ns3:contentEncoding "base64" ;
-                                    ns3:contentMediaType "image/tiff" ],
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
-                                    ns3:contentEncoding "base64" ;
-                                    ns3:contentMediaType "image/png" ],
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
-                                    ns3:contentEncoding "base64" ;
-                                    ns3:contentMediaType "image/jpeg" ] ] ] ] .
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ] .
 

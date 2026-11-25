@@ -7,7 +7,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference> a prov:Plan ;
+<arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_normalized_difference> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/norm_diff/package> .
 
 <urn:example:entity:norm-diff:out:ndwi> a prov:Entity,
@@ -23,7 +24,8 @@
     rdf:value [ pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_green.tif" ],
         [ pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/crop_nir.tif" ] .
 
-<urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0> a prov:SoftwareAgent ;
+<urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0" .
 
 <urn:example:run:water-bodies:norm-diff> a prov:Activity,
@@ -36,8 +38,10 @@
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:1.5.0> .
 
-<https://ospd.example.org/ogc-api/processes/norm_diff/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/norm_diff/package> a prov:Entity,
+        prov:Plan .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 

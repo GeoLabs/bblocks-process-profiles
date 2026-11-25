@@ -6,7 +6,8 @@
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://ospd.example.org/ogc-api/jobs/water-bodies-detect-water-body-0001/results/otsu.tif> prov:generated <urn:example:run:water-bodies:detect-water-body> ;
+<https://ospd.example.org/ogc-api/jobs/water-bodies-detect-water-body-0001/results/otsu.tif> a prov:Entity ;
+    prov:generated <urn:example:run:water-bodies:detect-water-body> ;
     ns1:checksum [ rdf:value "8cb131413518c30be6ba485ea61764491444cde5" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/detect_water_body#outputs/detected_water_body" ;
@@ -14,11 +15,13 @@
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/output> ;
     proc:type "Artifact" .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a wfprov:WorkflowEngine ;
+<urn:example:engine:cwltool-3.1.20260108082145> a wfprov:WorkflowEngine,
+        prov:Agent ;
     pp:name "cwltool" ;
     pp:version "3.1.20260108082145" .
 
 <urn:example:run:water-bodies:detect-water-body> a wfprov:WorkflowRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/detect-water-body> ;
     wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/detect_water_body/package> ;
     wfprov:hadSubProcessRun <urn:example:run:water-bodies:crop>,

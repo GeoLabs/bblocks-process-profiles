@@ -1,7 +1,7 @@
 [
   {
     "id": "urn:example:run:kindgrove-steps:export-stac",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/export-stac",
     "startedAtTime": "2026-09-24T10:59:47Z",
     "used": [
@@ -30,7 +30,7 @@
   },
   {
     "id": "urn:example:entity:export-stac:in:mangrove_mask_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/export_stac#inputs/mangrove_mask_file",
     "links": [
       {
@@ -42,7 +42,7 @@
   },
   {
     "id": "urn:example:entity:export-stac:in:biomass_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/export_stac#inputs/biomass_file",
     "links": [
       {
@@ -54,7 +54,7 @@
   },
   {
     "id": "urn:example:entity:export-stac:in:biomass_summary_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/export_stac#inputs/biomass_summary_file",
     "links": [
       {
@@ -66,7 +66,7 @@
   },
   {
     "id": "urn:example:entity:export-stac:in:carbon_summary_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/export_stac#inputs/carbon_summary_file",
     "links": [
       {
@@ -78,7 +78,7 @@
   },
   {
     "id": "urn:example:entity:export-stac:in:analysis_summary_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/export_stac#inputs/analysis_summary_file",
     "links": [
       {
@@ -90,7 +90,7 @@
   },
   {
     "id": "urn:example:entity:export-stac:in:stac_item",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/export_stac#inputs/stac_item",
     "links": [
       {
@@ -102,31 +102,31 @@
   },
   {
     "id": "urn:example:entity:export-stac:in:west",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/export_stac#inputs/west",
     "value": 95.15
   },
   {
     "id": "urn:example:entity:export-stac:in:south",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/export_stac#inputs/south",
     "value": 15.9
   },
   {
     "id": "urn:example:entity:export-stac:in:east",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/export_stac#inputs/east",
     "value": 95.35
   },
   {
     "id": "urn:example:entity:export-stac:in:north",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/export_stac#inputs/north",
     "value": 16.1
   },
   {
     "id": "urn:example:entity:export-stac:out:stac_catalog",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/export_stac#outputs/stac_catalog",
     "wasGeneratedBy": "urn:example:run:kindgrove-steps:export-stac",
     "wasDerivedFrom": [
@@ -148,21 +148,25 @@
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "urn:example:image:ghcr.io/geolabs/kindgrove/export-stac:v0.0.2-rc2",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "container image ghcr.io/geolabs/kindgrove/export-stac:v0.0.2-rc2"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/export_stac/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/export_stac/package"
   }
 ]

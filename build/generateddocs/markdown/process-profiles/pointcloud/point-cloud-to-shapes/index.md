@@ -187,9 +187,9 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
 @prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -200,10 +200,10 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     dcterms:title "Point Cloud to Shapes" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.5/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns2:POINTS [ dcterms:description "Points" ;
+    proc:inputs [ ns4:POINTS [ dcterms:description "Points" ;
                     dcterms:title "Points" ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
@@ -216,10 +216,10 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
         "value" ;
     proc:outputs [ ns3:SHAPES [ dcterms:description "Shapes" ;
                     dcterms:title "Shapes" ;
-                    proc:schema [ ns1:oneOf [ proc:type "object" ],
-                                [ proc:type "string" ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
+                                [ proc:type "object" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
                                     ns1:contentMediaType "text/xml" ] ] ] ] .
@@ -489,10 +489,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/geolabs/ospd/generic-profiles/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns3: <https://w3id.org/ogc/api/schema/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns5: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
@@ -507,13 +507,13 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "Point Cloud to Shapes" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.5/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns3:POINTS [ dcterms:description "Points" ;
+    proc:inputs [ ns4:POINTS [ dcterms:description "Points" ;
                     dcterms:title "Points" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud> ;
-                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las> ;
                     proc:keywords "point cloud" ;
                     proc:metadata [ dcterms:title "Generic Profile: Point cloud to features -- input `points`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features/inputs/points> ;
@@ -521,43 +521,43 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                         [ dcterms:title "Implementation Profile: Point cloud to shapes -- input `points`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes/inputs/points> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/x-ogc-lasf" ] ] ] ] ;
+                    proc:schema [ ns3:oneOf [ proc:type "string" ;
+                                    ns3:contentEncoding "base64" ;
+                                    ns3:contentMediaType "application/x-ogc-lasf" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Implementation Profile: Point cloud to shapes" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+    proc:metadata [ dcterms:title "Generic Profile: Point cloud to features" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Process Concept: Point Cloud Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/point-cloud-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Generic Profile: Point cloud to features" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+        [ dcterms:title "Implementation Profile: Point cloud to shapes" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ ns5:SHAPES [ dcterms:description "Shapes" ;
                     dcterms:title "Shapes" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/feature-collection> ;
-                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/feature-collection-gml>,
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/feature-collection-gml>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/feature-collection-kml> ;
                     proc:keywords "feature collection" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Point cloud to features -- output `result`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Point cloud to shapes -- output `result`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Point cloud to shapes -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "utf-8" ;
-                                    ns2:contentMediaType "text/xml" ],
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Point cloud to features -- output `result`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
+                    proc:schema [ ns3:oneOf [ proc:type "string" ;
+                                    ns3:contentEncoding "utf-8" ;
+                                    ns3:contentMediaType "text/xml" ],
+                                [ proc:type "object" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/vnd.google-earth.kml+xml" ],
-                                [ proc:type "object" ] ] ] ] .
+                                    ns3:contentEncoding "base64" ;
+                                    ns3:contentMediaType "application/vnd.google-earth.kml+xml" ] ] ] ] .
 
 
 ```
@@ -585,7 +585,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes"
     },
@@ -595,7 +595,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes"
     },
@@ -605,7 +605,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-shapes, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#FeatureCollection.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes"
     },
@@ -616,7 +616,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/pointcloud/point-cloud-to-shapes to https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes"
     },
@@ -626,7 +626,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes"
     }
@@ -683,7 +683,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes"
     },
@@ -693,7 +693,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes"
     },
@@ -703,7 +703,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-shapes, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#FeatureCollection.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes"
     },
@@ -714,7 +714,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/pointcloud/point-cloud-to-shapes to https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes"
     },
@@ -724,7 +724,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes"
     }
@@ -777,7 +777,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -785,7 +785,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/pointcloud/point-cloud-to-shapes to https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -794,7 +794,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes/actions/representation-2026-11-18> a rim:RegisterAction ;
     dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
@@ -802,7 +802,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-shapes, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#FeatureCollection." ;
@@ -810,7 +810,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/pointcloud/point-cloud-to-shapes> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/pointcloud/SAGA.pointcloud_tools.5> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.5> ;
     pp:version "1.0.0" .
@@ -1155,6 +1155,13 @@ x-jsonld-extra-terms:
   entityType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@id'
+  agentType:
+    x-jsonld-id: '@type'
+    x-jsonld-type: '@id'
+  Activity: http://www.w3.org/ns/prov#Activity
+  Entity: http://www.w3.org/ns/prov#Entity
+  Agent: http://www.w3.org/ns/prov#Agent
+  SoftwareAgent: http://www.w3.org/ns/prov#SoftwareAgent
   used:
     x-jsonld-id: http://www.w3.org/ns/prov#used
     x-jsonld-type: '@id'
@@ -1384,7 +1391,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.pointcloud.point-cloud-to-shapes
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-19'
+  dateOfLastChange: '2026-11-25'
 
 ```
 
@@ -1550,6 +1557,14 @@ Links to the schema:
       "@id": "@type",
       "@type": "@id"
     },
+    "agentType": {
+      "@id": "@type",
+      "@type": "@id"
+    },
+    "Activity": "prov:Activity",
+    "Entity": "prov:Entity",
+    "Agent": "prov:Agent",
+    "SoftwareAgent": "prov:SoftwareAgent",
     "used": {
       "@id": "prov:used",
       "@type": "@id"

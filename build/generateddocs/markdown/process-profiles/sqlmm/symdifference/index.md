@@ -263,8 +263,8 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns3: <http://www.iana.org/assignments/> .
 @prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
@@ -280,28 +280,28 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
             ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SymDifference/execution> ] ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns1:InputEntity1 [ dcterms:description "the first geometry to compare against." ;
+    proc:inputs [ ns2:InputEntity1 [ dcterms:description "the first geometry to compare against." ;
                     dcterms:title "the first geometry" ;
                     proc:metadata [ dcterms:title "Mon test  " ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "UTF-8" ;
-                                    ns2:contentMediaType "text/xml" ;
-                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "text/xml" ;
-                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
-            ns1:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
+            ns2:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
                     dcterms:title "the other geometry" ;
                     proc:metadata [ dcterms:title "Mon test  " ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "UTF-8" ;
-                                    ns2:contentMediaType "text/xml" ;
-                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "text/xml" ;
-                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
@@ -312,11 +312,11 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     proc:outputs [ ns4:Result [ dcterms:description "The symmetric difference of two geometries" ;
                     dcterms:title "The resulting geometry" ;
                     proc:metadata [ dcterms:title "Mon test  " ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "UTF-8" ;
-                                    ns2:contentMediaType "text/xml" ;
-                                    ns2:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
-                                [ proc:type "object" ] ] ] ] .
+                    proc:schema [ ns1:oneOf [ proc:type "object" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentMediaType "text/xml" ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] .
 
 
 ```
@@ -721,19 +721,19 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
                     ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Binary spatial set operation -- input `geometry1`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/inputs/geometry1> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Symmetric difference -- input `geometry1`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Symmetric difference -- input `geometry1`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference/inputs/geometry1> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Mon test  " ] ;
+                        [ dcterms:title "Mon test  " ],
+                        [ dcterms:title "Generic Profile: Binary spatial set operation -- input `geometry1`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/inputs/geometry1> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
             ns2:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
@@ -741,13 +741,13 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
                     ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Symmetric difference -- input `geometry2`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference/inputs/geometry2> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                    proc:metadata [ dcterms:title "Mon test  " ],
                         [ dcterms:title "Generic Profile: Binary spatial set operation -- input `geometry2`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/inputs/geometry2> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Mon test  " ] ;
+                        [ dcterms:title "Implementation Profile: Symmetric difference -- input `geometry2`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference/inputs/geometry2> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
@@ -777,13 +777,13 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
                     ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Binary spatial set operation -- output `result`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
+                    proc:metadata [ dcterms:title "Mon test  " ],
                         [ dcterms:title "Implementation Profile: Symmetric difference -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference/outputs/result> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
-                        [ dcterms:title "Mon test  " ] ;
+                        [ dcterms:title "Generic Profile: Binary spatial set operation -- output `result`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
@@ -816,7 +816,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference"
     },
@@ -826,7 +826,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference"
     },
@@ -836,7 +836,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/symdifference, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference"
     },
@@ -847,7 +847,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/symdifference to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference"
     },
@@ -857,7 +857,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference"
     }
@@ -914,7 +914,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference"
     },
@@ -924,7 +924,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference"
     },
@@ -934,7 +934,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/symdifference, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference"
     },
@@ -945,7 +945,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/symdifference to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference"
     },
@@ -955,7 +955,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference"
     }
@@ -1008,7 +1008,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -1016,7 +1016,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/sqlmm/symdifference to https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -1025,7 +1025,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference/actions/representation-2026-11-18> a rim:RegisterAction ;
     dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
@@ -1033,7 +1033,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/symdifference, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Geometry." ;
@@ -1041,7 +1041,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/sqlmm/symdifference> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/sqlmm/SymDifference> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SymDifference> ;
     pp:version "2.0.0" .
@@ -1435,6 +1435,13 @@ x-jsonld-extra-terms:
   entityType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@id'
+  agentType:
+    x-jsonld-id: '@type'
+    x-jsonld-type: '@id'
+  Activity: http://www.w3.org/ns/prov#Activity
+  Entity: http://www.w3.org/ns/prov#Entity
+  Agent: http://www.w3.org/ns/prov#Agent
+  SoftwareAgent: http://www.w3.org/ns/prov#SoftwareAgent
   used:
     x-jsonld-id: http://www.w3.org/ns/prov#used
     x-jsonld-type: '@id'
@@ -1664,7 +1671,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.sqlmm.symdifference
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-19'
+  dateOfLastChange: '2026-11-25'
 
 ```
 
@@ -1830,6 +1837,14 @@ Links to the schema:
       "@id": "@type",
       "@type": "@id"
     },
+    "agentType": {
+      "@id": "@type",
+      "@type": "@id"
+    },
+    "Activity": "prov:Activity",
+    "Entity": "prov:Entity",
+    "Agent": "prov:Agent",
+    "SoftwareAgent": "prov:SoftwareAgent",
     "used": {
       "@id": "prov:used",
       "@type": "@id"

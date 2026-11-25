@@ -2,6 +2,7 @@
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/kindgrove-steps/export-stac/context.jsonld",
   "id": "urn:example:run:kindgrove-steps:export-stac",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/export-stac",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/export_stac/package",
   "usedInput": [

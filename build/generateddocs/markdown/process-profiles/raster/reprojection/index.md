@@ -335,8 +335,8 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://www.iana.org/assignments/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
 @prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
@@ -349,58 +349,58 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     dcterms:title "GDAL Warp Tool" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns2:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
+    proc:inputs [ ns1:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
                     dcterms:title "Format of the output data" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"GTiff\""^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:InputDSN [ dcterms:description "The input data source name to use as source for convertion." ;
+            ns1:InputDSN [ dcterms:description "The input data source name to use as source for convertion." ;
                     dcterms:title "The input data source name" ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns2:OutputDSN [ dcterms:description "The output data source name to use as source for convertion." ;
+            ns1:OutputDSN [ dcterms:description "The output data source name to use as source for convertion." ;
                     dcterms:title "The output data source name" ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns2:geoloc [ dcterms:description "Force use of Geolocation Arrays" ;
+            ns1:geoloc [ dcterms:description "Force use of Geolocation Arrays" ;
                     dcterms:title "Geolocation" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "boolean" ] ] ;
-            ns2:order [ dcterms:description "The default is to select a polynomial order based on the number of GCPs." ;
+            ns1:order [ dcterms:description "The default is to select a polynomial order based on the number of GCPs." ;
                     dcterms:title "The order of polynomial used for warping (1 to 3)" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"1\""^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:r [ dcterms:description "Available methods are: near (nearest neighbour resampling - default, fastest algorithm, worst interpolation quality), bilinear, cubic, cubicspline, lanczos (Lanczos windowed sinc resampling)" ;
+            ns1:r [ dcterms:description "Available methods are: near (nearest neighbour resampling - default, fastest algorithm, worst interpolation quality), bilinear, cubic, cubicspline, lanczos (Lanczos windowed sinc resampling)" ;
                     dcterms:title "Resampling method to use" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "boolean" ] ] ;
-            ns2:rpc [ dcterms:description "Force use of RPCs" ;
+            ns1:rpc [ dcterms:description "Force use of RPCs" ;
                     dcterms:title "RPCs" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "boolean" ] ] ;
-            ns2:s_srs [ dcterms:description "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text." ;
+            ns1:s_srs [ dcterms:description "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text." ;
                     dcterms:title "The source Spatial reference Set" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:t_srs [ dcterms:description "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text." ;
+            ns1:t_srs [ dcterms:description "The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text." ;
                     dcterms:title "The target Spatial reference Set" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:te [ dcterms:description "set georeferenced extents of output file to be created (in target SRS)." ;
+            ns1:te [ dcterms:description "set georeferenced extents of output file to be created (in target SRS)." ;
                     dcterms:title "xmin,ymin,xmax,ymax" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns2:tps [ dcterms:description "Force use of thin plate spline transformer based on available GCPs" ;
+            ns1:tps [ dcterms:description "Force use of thin plate spline transformer based on available GCPs" ;
                     dcterms:title "Thin Plate Spline" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
@@ -839,8 +839,8 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -855,7 +855,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "GDAL Warp Tool" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns1:Format [ dcterms:description "Select the output format by usig short name of the format (use gda-config --formats for list of available formats on your platform)." ;
@@ -868,12 +868,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:title "The input data source name" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster reprojection -- input `raster`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster reprojection -- input `raster`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection -- input `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/inputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster reprojection -- input `raster`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:schema [ proc:type "string" ] ] ;
             ns1:OutputDSN [ dcterms:description "The output data source name to use as source for convertion." ;
                     dcterms:title "The output data source name" ;
@@ -908,12 +908,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     dcterms:title "The target Spatial reference Set" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/coordinate-reference-system> ;
                     proc:keywords "CRS" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster reprojection -- input `targetCRS`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/targetCRS> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster reprojection -- input `targetCRS`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection -- input `targetCRS`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection/inputs/targetCRS> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster reprojection -- input `targetCRS`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/targetCRS> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ] ] ;
@@ -930,19 +930,19 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Generic Profile: Raster reprojection" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ dcterms:title "Implementation Profile: Raster reprojection" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+        [ dcterms:title "Generic Profile: Raster reprojection" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:Result [ dcterms:description "The file name resulting of the convertion" ;
+    proc:outputs [ ns3:Result [ dcterms:description "The file name resulting of the convertion" ;
                     dcterms:title "The resulting converted file" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
                     proc:keywords "raster" ;
@@ -980,7 +980,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection"
     },
@@ -990,7 +990,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection"
     },
@@ -1000,7 +1000,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "serverSideFiles added: the raster input and output are names of files stored on the server (ZOO-Kernel dataPath), with no media type, each naming the Implementation Profile role it implements.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection"
     },
@@ -1010,7 +1010,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection"
     },
@@ -1021,7 +1021,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/reprojection to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection"
     }
@@ -1095,7 +1095,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection"
     },
@@ -1105,7 +1105,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection"
     },
@@ -1115,7 +1115,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "serverSideFiles added: the raster input and output are names of files stored on the server (ZOO-Kernel dataPath), with no media type, each naming the Implementation Profile role it implements.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection"
     },
@@ -1125,7 +1125,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection"
     },
@@ -1136,7 +1136,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/reprojection to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection"
     }
@@ -1206,7 +1206,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -1214,7 +1214,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/reprojection to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -1223,7 +1223,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/server-side-files-2026-11-09> a rim:RegisterAction ;
     dcterms:description "serverSideFiles added: the raster input and output are names of files stored on the server (ZOO-Kernel dataPath), with no media type, each naming the Implementation Profile role it implements." ;
@@ -1231,7 +1231,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
@@ -1239,7 +1239,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/raster/Gdal_Warp> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp> ;
     pp:version "1.0.0" .
@@ -1260,14 +1260,14 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "Gdal_Warp exposes both `s_srs`/`t_srs` (CRS reprojection) and `r`/`te` (resampling method, target extent): a closer match to resample_spatial than W1's own `reproject-image` use of the same underlying tool (which only changes pixel size, `-t_srs` unused) -- here both the `projection` and `resolution`/`method` parameters of resample_spatial are exercised. Not exactMatch: GCP-based warping (`tps`, `rpc`, `geoloc`) and `order` (polynomial order) have no openEO equivalent." ] ;
     pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing> ;
-    pp:serverSideFile [ pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/raster> ;
-            pp:liveName "InputDSN" ;
-            pp:location "A file name, relative to the directory set by `dataPath` in the `[main]` section of the ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process reads or writes it there. Its format is the representation of the Implementation Profile role it implements (GeoTIFF for raster)." ;
-            pp:side "inputs" ],
-        [ pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/outputs/raster> ;
+    pp:serverSideFile [ pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/outputs/raster> ;
             pp:liveName "Result" ;
             pp:location "A file name, relative to the directory set by `dataPath` in the `[main]` section of the ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process reads or writes it there. Its format is the representation of the Implementation Profile role it implements (GeoTIFF for raster)." ;
-            pp:side "outputs" ] ;
+            pp:side "outputs" ],
+        [ pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/raster> ;
+            pp:liveName "InputDSN" ;
+            pp:location "A file name, relative to the directory set by `dataPath` in the `[main]` section of the ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process reads or writes it there. Its format is the representation of the Implementation Profile role it implements (GeoTIFF for raster)." ;
+            pp:side "inputs" ] ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
     rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/addition>,
@@ -1643,6 +1643,13 @@ x-jsonld-extra-terms:
   entityType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@id'
+  agentType:
+    x-jsonld-id: '@type'
+    x-jsonld-type: '@id'
+  Activity: http://www.w3.org/ns/prov#Activity
+  Entity: http://www.w3.org/ns/prov#Entity
+  Agent: http://www.w3.org/ns/prov#Agent
+  SoftwareAgent: http://www.w3.org/ns/prov#SoftwareAgent
   used:
     x-jsonld-id: http://www.w3.org/ns/prov#used
     x-jsonld-type: '@id'
@@ -1872,7 +1879,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.raster.reprojection
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-19'
+  dateOfLastChange: '2026-11-25'
 
 ```
 
@@ -2038,6 +2045,14 @@ Links to the schema:
       "@id": "@type",
       "@type": "@id"
     },
+    "agentType": {
+      "@id": "@type",
+      "@type": "@id"
+    },
+    "Activity": "prov:Activity",
+    "Entity": "prov:Entity",
+    "Agent": "prov:Agent",
+    "SoftwareAgent": "prov:SoftwareAgent",
     "used": {
       "@id": "prov:used",
       "@type": "@id"

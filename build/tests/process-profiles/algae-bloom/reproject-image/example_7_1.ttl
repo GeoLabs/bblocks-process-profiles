@@ -7,7 +7,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/reproject_b03_60m_2> a prov:Plan ;
+<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/reproject_b03_60m_2> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/reproject-image/package> .
 
 <urn:example:entity:reproject-image:out:result> a prov:Entity,
@@ -27,7 +28,8 @@
         <https://ospd.example.org/ogc-api/processes/reproject-image#inputs/output_resolution> ;
     rdf:value 60 .
 
-<urn:example:image:ogc-ospd/algae-usecase/reproject-image> a prov:SoftwareAgent ;
+<urn:example:image:ogc-ospd/algae-usecase/reproject-image> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image ogc-ospd/algae-usecase/reproject-image" .
 
 <urn:example:run:algae-bloom:reproject-image> a prov:Activity,
@@ -42,7 +44,8 @@
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ogc-ospd/algae-usecase/reproject-image> .
 
-<https://ospd.example.org/ogc-api/processes/reproject-image/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/reproject-image/package> a prov:Entity,
+        prov:Plan .
 
 <urn:example:entity:reproject-image:in:input_image> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/reproject-image#inputs/input_image> ;
@@ -50,6 +53,7 @@
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
             oa:hasTarget <https://ospd.example.org/ogc-api/jobs/upstream-step/results/B03.tif> ] .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 

@@ -27,19 +27,19 @@
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
                     ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Binary spatial set operation -- input `geometry1`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/inputs/geometry1> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Symmetric difference -- input `geometry1`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Symmetric difference -- input `geometry1`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference/inputs/geometry1> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Mon test  " ] ;
+                        [ dcterms:title "Mon test  " ],
+                        [ dcterms:title "Generic Profile: Binary spatial set operation -- input `geometry1`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/inputs/geometry1> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "UTF-8" ;
+                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
                                     ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ;
             ns2:InputEntity2 [ dcterms:description "the other geometry to compare against." ;
@@ -47,13 +47,13 @@
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
                     ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Symmetric difference -- input `geometry2`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference/inputs/geometry2> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                    proc:metadata [ dcterms:title "Mon test  " ],
                         [ dcterms:title "Generic Profile: Binary spatial set operation -- input `geometry2`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/inputs/geometry2> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Mon test  " ] ;
+                        [ dcterms:title "Implementation Profile: Symmetric difference -- input `geometry2`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference/inputs/geometry2> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "text/xml" ;
@@ -83,13 +83,13 @@
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
                     ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-gml> ;
                     proc:keywords "geometry" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Binary spatial set operation -- output `result`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
+                    proc:metadata [ dcterms:title "Mon test  " ],
                         [ dcterms:title "Implementation Profile: Symmetric difference -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/symdifference/outputs/result> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
-                        [ dcterms:title "Mon test  " ] ;
+                        [ dcterms:title "Generic Profile: Binary spatial set operation -- output `result`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/binary-spatial-operation/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;

@@ -6,7 +6,8 @@
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/S2A_10TFK_20220524_0_L2A.json> prov:generated <urn:example:run:water-bodies:water-bodies> ;
+<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/S2A_10TFK_20220524_0_L2A.json> a prov:Entity ;
+    prov:generated <urn:example:run:water-bodies:water-bodies> ;
     ns1:checksum [ rdf:value "d6d2a88a822dadbc95c6d3381d6b0386e94a2148" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac" ;
@@ -14,7 +15,8 @@
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/otsu.tif> prov:generated <urn:example:run:water-bodies:water-bodies> ;
+<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2A_10TFK_20220524_0_L2A/otsu.tif> a prov:Entity ;
+    prov:generated <urn:example:run:water-bodies:water-bodies> ;
     ns1:checksum [ rdf:value "8a97a5260b1039d7f867c2f9ab8ee36a5cb5fbd4" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac" ;
@@ -22,7 +24,8 @@
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/S2B_10TFK_20210713_0_L2A.json> prov:generated <urn:example:run:water-bodies:water-bodies> ;
+<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/S2B_10TFK_20210713_0_L2A.json> a prov:Entity ;
+    prov:generated <urn:example:run:water-bodies:water-bodies> ;
     ns1:checksum [ rdf:value "e74c29702b96c01957579e7d11b35d835356376b" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac" ;
@@ -30,7 +33,8 @@
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/otsu.tif> prov:generated <urn:example:run:water-bodies:water-bodies> ;
+<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/S2B_10TFK_20210713_0_L2A/otsu.tif> a prov:Entity ;
+    prov:generated <urn:example:run:water-bodies:water-bodies> ;
     ns1:checksum [ rdf:value "8cb131413518c30be6ba485ea61764491444cde5" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac" ;
@@ -38,7 +42,8 @@
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/catalog.json> prov:generated <urn:example:run:water-bodies:water-bodies> ;
+<https://ospd.example.org/ogc-api/jobs/water-bodies-water-bodies-0001/results/catalog.json> a prov:Entity ;
+    prov:generated <urn:example:run:water-bodies:water-bodies> ;
     ns1:checksum [ rdf:value "a234b13e2668a49acb831fdf87f3c1ead120dd41" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac" ;
@@ -46,11 +51,13 @@
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/water-bodies/output> ;
     proc:type "Artifact" .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a wfprov:WorkflowEngine ;
+<urn:example:engine:cwltool-3.1.20260108082145> a wfprov:WorkflowEngine,
+        prov:Agent ;
     pp:name "cwltool" ;
     pp:version "3.1.20260108082145" .
 
 <urn:example:run:water-bodies:water-bodies> a wfprov:WorkflowRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies> ;
     wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/water-bodies/package> ;
     wfprov:hadSubProcessRun <urn:example:run:water-bodies:detect-water-body>,

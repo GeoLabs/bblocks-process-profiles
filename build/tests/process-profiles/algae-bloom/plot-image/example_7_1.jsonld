@@ -3,7 +3,7 @@
   "@graph": [
     {
       "id": "urn:example:run:algae-bloom:plot-image",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/plot-image",
       "startedAtTime": "2026-09-23T06:40:29Z",
       "used": [
@@ -27,7 +27,7 @@
     },
     {
       "id": "urn:example:entity:plot-image:in:input_image",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/plot-image#inputs/input_image",
       "links": [
         {
@@ -39,31 +39,31 @@
     },
     {
       "id": "urn:example:entity:plot-image:in:color_scale",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/plot-image#inputs/color_scale",
       "value": "[[0,[73,111,242]],[4,[130,211,95]],[8,[254,253,5]],[12,[253,0,4]],[16,[142,32,38]],[20,[217,124,245]]]"
     },
     {
       "id": "urn:example:entity:plot-image:in:output_name",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/plot-image#inputs/output_name",
       "value": "S2A_29SPC_20190701_0_L2A_turbidity_color"
     },
     {
       "id": "urn:example:entity:plot-image:in:plot_name",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/plot-image#inputs/plot_name",
       "value": "S2A_29SPC_20190701_0_L2A_turbidity_plot"
     },
     {
       "id": "urn:example:entity:plot-image:in:plot_title",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/plot-image#inputs/plot_title",
       "value": "Turbidity"
     },
     {
       "id": "urn:example:entity:plot-image:out:output_file",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/plot-image#outputs/output_file",
       "wasGeneratedBy": "urn:example:run:algae-bloom:plot-image",
       "wasDerivedFrom": [
@@ -80,7 +80,7 @@
     },
     {
       "id": "urn:example:entity:plot-image:out:output_plot",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/plot-image#outputs/output_plot",
       "wasGeneratedBy": "urn:example:run:algae-bloom:plot-image",
       "wasDerivedFrom": [
@@ -97,21 +97,25 @@
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "urn:example:image:ogc-ospd/algae-usecase/plot-image:1.0.0",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "container image ogc-ospd/algae-usecase/plot-image:1.0.0"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/plot-image/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/plot_turbidity_2",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/plot-image/package"
     }
   ]

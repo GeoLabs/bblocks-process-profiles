@@ -368,9 +368,9 @@ OGC API - Processes processDescription derived from the CWL.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://schema.org/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns1: <https://w3id.org/ogc/api/schema/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns3: <http://schema.org/> .
 @prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -389,53 +389,53 @@ OGC API - Processes processDescription derived from the CWL.
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "object" ;
-                            ns2:properties [ ns2:bbox [ proc:type "array" ;
-                                            ns2:items [ proc:type "number" ] ;
-                                            ns2:oneOf [ dcterms:description "3D bbox" ;
-                                                    ns2:maxItems 6 ;
-                                                    ns2:minItems 6 ],
+                            ns1:properties [ ns1:bbox [ proc:type "array" ;
+                                            ns1:items [ proc:type "number" ] ;
+                                            ns1:oneOf [ dcterms:description "3D bbox" ;
+                                                    ns1:maxItems 6 ;
+                                                    ns1:minItems 6 ],
                                                 [ dcterms:description "2D bbox" ;
-                                                    ns2:maxItems 4 ;
-                                                    ns2:minItems 4 ] ] ;
-                                    ns2:crs [ proc:default "\"CRS84\""^^rdf:JSON ;
+                                                    ns1:maxItems 4 ;
+                                                    ns1:minItems 4 ] ] ;
+                                    ns1:crs [ proc:default "\"CRS84\""^^rdf:JSON ;
                                             proc:enum "CRS84",
                                                 "CRS84h" ;
                                             proc:type "string" ] ] ;
-                            ns2:required "bbox" ] ] ] ;
+                            ns1:required "bbox" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value [ a ns1:Person ;
-                    ns1:identifier "https://orcid.org/0000-0002-9617-8641" ;
-                    ns1:name "Gérald Fenoy" ] ;
+    proc:metadata [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value [ a ns3:Person ;
+                    ns3:identifier "https://orcid.org/0000-0002-9617-8641" ;
+                    ns3:name "Gérald Fenoy" ] ;
             proc:role schema:contributor ],
-        [ rdf:value "parse_aoi" ;
-            proc:role schema:name ],
-        [ rdf:value [ a ns1:Person ;
-                    ns1:name "Cameron Sajedi" ] ;
-            proc:role schema:author ],
         [ rdf:value "https://github.com/starling-foundries/KindGrove?tab=MIT-1-ov-file#readme" ;
             proc:role schema:license ],
-        [ rdf:value "Process converted from CWL" ;
-            proc:role schema:description ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
         [ rdf:value "0.0.1" ;
-            proc:role schema:softwareVersion ] ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value "parse_aoi" ;
+            proc:role schema:name ],
+        [ rdf:value [ a ns3:Person ;
+                    ns3:name "Cameron Sajedi" ] ;
+            proc:role schema:author ],
+        [ rdf:value "Process converted from CWL" ;
+            proc:role schema:description ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:east [ dcterms:description "" ;
+    proc:outputs [ ns2:east [ dcterms:description "" ;
                     dcterms:title "east" ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns3:north [ dcterms:description "" ;
+            ns2:north [ dcterms:description "" ;
                     dcterms:title "north" ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns3:output_dir [ dcterms:description "" ;
+            ns2:output_dir [ dcterms:description "" ;
                     dcterms:title "output_dir" ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:south [ dcterms:description "" ;
+            ns2:south [ dcterms:description "" ;
                     dcterms:title "south" ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns3:west [ dcterms:description "" ;
+            ns2:west [ dcterms:description "" ;
                     dcterms:title "west" ;
                     proc:schema [ proc:type "number" ] ] ] .
 
@@ -603,7 +603,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 [
   {
     "id": "urn:example:run:kindgrove:parse-aoi",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi",
     "startedAtTime": "2026-09-23T08:01:11Z",
     "used": [
@@ -623,7 +623,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:parse-aoi:in:aoi",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#inputs/aoi",
     "value": {
       "bbox": [
@@ -637,7 +637,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:parse-aoi:out:east",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/east",
     "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
     "value": 95.35,
@@ -645,7 +645,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:parse-aoi:out:north",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/north",
     "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
     "value": 16.1,
@@ -653,7 +653,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:parse-aoi:out:output_dir",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/output_dir",
     "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
     "value": "outputs",
@@ -661,7 +661,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:parse-aoi:out:south",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/south",
     "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
     "value": 15.9,
@@ -669,7 +669,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:parse-aoi:out:west",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/west",
     "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
     "value": 95.15,
@@ -677,21 +677,25 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "urn:example:image:alpine:3.22.2",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "container image alpine:3.22.2"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/parse_aoi/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/parse_aoi",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/parse_aoi/package"
   }
 ]
@@ -705,7 +709,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "@graph": [
     {
       "id": "urn:example:run:kindgrove:parse-aoi",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi",
       "startedAtTime": "2026-09-23T08:01:11Z",
       "used": [
@@ -725,7 +729,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:parse-aoi:in:aoi",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#inputs/aoi",
       "value": {
         "bbox": [
@@ -739,7 +743,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:parse-aoi:out:east",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/east",
       "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
       "value": 95.35,
@@ -747,7 +751,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:parse-aoi:out:north",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/north",
       "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
       "value": 16.1,
@@ -755,7 +759,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:parse-aoi:out:output_dir",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/output_dir",
       "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
       "value": "outputs",
@@ -763,7 +767,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:parse-aoi:out:south",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/south",
       "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
       "value": 15.9,
@@ -771,7 +775,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:parse-aoi:out:west",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/west",
       "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
       "value": 95.15,
@@ -779,21 +783,25 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "urn:example:image:alpine:3.22.2",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "container image alpine:3.22.2"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/parse_aoi/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/parse_aoi",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/parse_aoi/package"
     }
   ]
@@ -807,7 +815,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/parse_aoi> a prov:Plan ;
+<arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/parse_aoi> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/parse_aoi/package> .
 
 <urn:example:entity:parse-aoi:out:east> a prov:Entity,
@@ -848,10 +857,12 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
                 9.535e+01 ;
             pp:crs "CRS84" ] .
 
-<urn:example:image:alpine:3.22.2> a prov:SoftwareAgent ;
+<urn:example:image:alpine:3.22.2> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image alpine:3.22.2" .
 
-<https://ospd.example.org/ogc-api/processes/parse_aoi/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/parse_aoi/package> a prov:Entity,
+        prov:Plan .
 
 <urn:example:run:kindgrove:parse-aoi> a prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi> ;
@@ -863,7 +874,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:alpine:3.22.2> .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 
 
@@ -876,6 +888,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 {
   "id": "urn:example:run:kindgrove:parse-aoi",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/parse_aoi/package",
   "usedInput": [
@@ -896,6 +909,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/kindgrove/parse-aoi/context.jsonld",
   "id": "urn:example:run:kindgrove:parse-aoi",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/parse_aoi/package",
   "usedInput": [
@@ -916,6 +930,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:kindgrove:parse-aoi> a wfprov:ProcessRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/parse_aoi/package> ;
     wfprov:usedInput <urn:example:entity:parse-aoi:in:aoi> ;
@@ -948,7 +963,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi"
     },
@@ -958,7 +973,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi"
     },
@@ -968,7 +983,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "clarifying",
       "description": "notAttached added (absent -> {reason}): the entry now states that this CommandLineTool implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md (profiles.yaml tier3.reason). Nothing else changes: the process was not attached before and is not attached now (decision Q1 of 2026-11-11).",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi"
     },
@@ -979,7 +994,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/parse-aoi to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi"
     }
@@ -1055,7 +1070,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi"
     },
@@ -1065,7 +1080,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi"
     },
@@ -1075,7 +1090,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "clarifying",
       "description": "notAttached added (absent -> {reason}): the entry now states that this CommandLineTool implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md (profiles.yaml tier3.reason). Nothing else changes: the process was not attached before and is not attached now (decision Q1 of 2026-11-11).",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi"
     },
@@ -1086,7 +1101,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/parse-aoi to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi"
     }
@@ -1169,7 +1184,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -1177,7 +1192,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove/parse-aoi to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -1186,7 +1201,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi/actions/not-attached-2026-11-11> a rim:RegisterAction ;
     dcterms:description "notAttached added (absent -> {reason}): the entry now states that this CommandLineTool implements no Implementation Profile, with the reason already given in docs/ATTACHMENTS.md (profiles.yaml tier3.reason). Nothing else changes: the process was not attached before and is not attached now (decision Q1 of 2026-11-11)." ;
@@ -1194,7 +1209,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove/parse_aoi> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/parse_aoi> ;
     pp:version "0.0.1" .
@@ -2842,10 +2857,10 @@ id:32497dfb-a6ea-4996-a29e-3700668da867 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/step_1" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:3ad94428-01ae-451b-a3f4-af56b73e6981 ;
-            prov:hadPlan <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1> ],
+            prov:agent id:a6977d92-2fbb-47e7-a784-4bfcb0da723b ],
         [ a prov:Association ;
-            prov:agent id:a6977d92-2fbb-47e7-a784-4bfcb0da723b ] ;
+            prov:agent id:3ad94428-01ae-451b-a3f4-af56b73e6981 ;
+            prov:hadPlan <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T10:03:16.994695"^^xsd:dateTime ;
             prov:hadActivity id:ec5cc9e1-3e83-4551-a759-4745c5b5040b ] ;
@@ -2853,33 +2868,33 @@ id:32497dfb-a6ea-4996-a29e-3700668da867 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T10:01:12.463948"^^xsd:dateTime ;
             prov:hadActivity id:ec5cc9e1-3e83-4551-a759-4745c5b5040b ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:12.503903"^^xsd:dateTime ;
-            prov:entity id:d061c0fb-cd9b-4026-acea-7aa18b482246 ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/west> ],
+            prov:atTime "2026-09-23T10:01:12.503436"^^xsd:dateTime ;
+            prov:entity id:43bb865a-d8cd-4787-8345-a30f5433a956 ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/east> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:12.503410"^^xsd:dateTime ;
-            prov:entity id:cf0be29b-e4d9-4fd3-bd1b-2ed80a4095a9 ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/days_back> ],
+            prov:atTime "2026-09-23T10:01:12.503452"^^xsd:dateTime ;
+            prov:entity id:930cbb58-e736-4bd6-97e8-f8d6fdb3ecca ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/north> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T10:01:12.503371"^^xsd:dateTime ;
             prov:entity id:980cdadc-8748-4ee0-8e50-02285fada4ac ;
             prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/cloud_cover_max> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:12.503886"^^xsd:dateTime ;
-            prov:entity id:a98d2a32-f817-4ba9-9a35-66d4b22bc9de ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/south> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:12.503436"^^xsd:dateTime ;
-            prov:entity id:43bb865a-d8cd-4787-8345-a30f5433a956 ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/east> ],
+            prov:atTime "2026-09-23T10:01:12.503410"^^xsd:dateTime ;
+            prov:entity id:cf0be29b-e4d9-4fd3-bd1b-2ed80a4095a9 ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/days_back> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T10:01:12.503865"^^xsd:dateTime ;
             prov:entity data:e71003c6b7dd4093ce139ac0c51a6ba38d54a439 ;
             prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/output_dir> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:12.503452"^^xsd:dateTime ;
-            prov:entity id:930cbb58-e736-4bd6-97e8-f8d6fdb3ecca ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/north> ] .
+            prov:atTime "2026-09-23T10:01:12.503886"^^xsd:dateTime ;
+            prov:entity id:a98d2a32-f817-4ba9-9a35-66d4b22bc9de ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/south> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T10:01:12.503903"^^xsd:dateTime ;
+            prov:entity id:d061c0fb-cd9b-4026-acea-7aa18b482246 ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/west> ] .
 
 id:371c06f9-5e4f-482d-a56d-17457d592305 a prov:Entity ;
     prov:value 1.59e+01 .
@@ -2910,17 +2925,17 @@ id:570b17a1-1129-4b02-b2bc-a4675847cf5d a ro:Folder,
     prov:hadDictionaryMember "id:a9056b20-82a6-42a0-a8f8-13f831d67eb4"^^xsd:QName,
         "id:f6d74394-3b64-40fe-a8c1-7c63d02a3a5e"^^xsd:QName ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:32497dfb-a6ea-4996-a29e-3700668da867 ;
-            prov:atTime "2026-09-23T10:03:16.994705"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/result> ],
-        [ a prov:Generation ;
             prov:activity id:ec5cc9e1-3e83-4551-a759-4745c5b5040b ;
             prov:atTime "2026-09-23T10:03:17.024364"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/primary/stac> ] ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/primary/stac> ],
+        [ a prov:Generation ;
+            prov:activity id:32497dfb-a6ea-4996-a29e-3700668da867 ;
+            prov:atTime "2026-09-23T10:03:16.994705"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/step_1/result> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:204e8020-f340-4534-bcb6-378a06cfce69 ],
+            provext:member id:3efd1082-30b0-4081-aac3-595258d0235a ],
         [ a provext:Membership ;
-            provext:member id:3efd1082-30b0-4081-aac3-595258d0235a ] ;
+            provext:member id:204e8020-f340-4534-bcb6-378a06cfce69 ] ;
     cwlprov:basename "outputs" .
 
 id:5aa7a676-73f7-4cd5-bcc3-8c24e71dd6e0 a prov:Entity ;
@@ -2930,11 +2945,11 @@ id:639b3f31-e75a-4bcb-891c-0a3a8d2301e3 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
+            provext:member id:0b639232-1377-4260-9361-ccfad1f07653 ],
+        [ a provext:Membership ;
             provext:member id:84fd2907-ae91-49e6-b896-5337cf88d4e4 ],
         [ a provext:Membership ;
             provext:member id:c5bac52b-0236-4d46-9e95-2715e4ebb57f ],
-        [ a provext:Membership ;
-            provext:member id:0b639232-1377-4260-9361-ccfad1f07653 ],
         [ a provext:Membership ;
             provext:member id:8cae0f0e-8136-47a3-91de-2df4cb915caa ] .
 
@@ -2999,9 +3014,9 @@ id:ef051260-da6b-471f-b7ec-77a3f03338f9 a wfprov:Artifact,
         [ a provext:Membership ;
             provext:member id:3d6a2dea-df15-41de-943f-5c75ffc145fd ],
         [ a provext:Membership ;
-            provext:member id:05148d8f-b41a-430e-ab3c-e47863420580 ],
+            provext:member id:371c06f9-5e4f-482d-a56d-17457d592305 ],
         [ a provext:Membership ;
-            provext:member id:371c06f9-5e4f-482d-a56d-17457d592305 ] .
+            provext:member id:05148d8f-b41a-430e-ab3c-e47863420580 ] .
 
 data:09b42388eb37be1a4b972127a78f691ec6eb3795 a wfprov:Artifact,
         prov:Entity ;
@@ -3020,11 +3035,11 @@ id:3efd1082-30b0-4081-aac3-595258d0235a a ro:Folder,
     provext:qualifiedMembership [ a provext:Membership ;
             provext:member id:30f546f9-0831-4994-946d-88f0365ffd8a ],
         [ a provext:Membership ;
+            provext:member id:311c03b4-81b7-421a-8cd4-b744019dc39b ],
+        [ a provext:Membership ;
             provext:member id:1a78bcc2-8056-4262-8f95-eff699d2deeb ],
         [ a provext:Membership ;
-            provext:member id:1ec302cf-1d77-48c8-9550-86945f3a70ef ],
-        [ a provext:Membership ;
-            provext:member id:311c03b4-81b7-421a-8cd4-b744019dc39b ] ;
+            provext:member id:1ec302cf-1d77-48c8-9550-86945f3a70ef ] ;
     cwlprov:basename "mangrove-analysis-20260923-080315" .
 
 id:3ad94428-01ae-451b-a3f4-af56b73e6981 a wfprov:WorkflowEngine,
@@ -3039,10 +3054,10 @@ id:a475ab91-5a11-4da1-8e90-fc280da2c643 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/parse_aoi" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:3ad94428-01ae-451b-a3f4-af56b73e6981 ;
-            prov:hadPlan <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/parse_aoi> ],
+            prov:agent id:aef78493-9502-4ecb-9d44-f04f881f4650 ],
         [ a prov:Association ;
-            prov:agent id:aef78493-9502-4ecb-9d44-f04f881f4650 ] ;
+            prov:agent id:3ad94428-01ae-451b-a3f4-af56b73e6981 ;
+            prov:hadPlan <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/parse_aoi> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T10:01:12.461683"^^xsd:dateTime ;
             prov:hadActivity id:ec5cc9e1-3e83-4551-a759-4745c5b5040b ] ;
@@ -3067,17 +3082,17 @@ id:ec5cc9e1-3e83-4551-a759-4745c5b5040b a wfprov:WorkflowRun,
             prov:atTime "2026-09-23T10:01:10.962463"^^xsd:dateTime ;
             prov:hadActivity id:3ad94428-01ae-451b-a3f4-af56b73e6981 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:11.351454"^^xsd:dateTime ;
-            prov:entity id:ab971800-6389-44da-a7db-d85c11161552 ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/days_back> ],
+            prov:atTime "2026-09-23T10:01:11.351399"^^xsd:dateTime ;
+            prov:entity id:74500aa8-7eb8-4831-a5d7-b57b0d559a7f ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/aoi> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T10:01:11.351432"^^xsd:dateTime ;
             prov:entity id:d41afe53-37b5-4d07-a4d3-8f135d5ee9bd ;
             prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/cloud_cover_max> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T10:01:11.351399"^^xsd:dateTime ;
-            prov:entity id:74500aa8-7eb8-4831-a5d7-b57b0d559a7f ;
-            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/aoi> ] ;
+            prov:atTime "2026-09-23T10:01:11.351454"^^xsd:dateTime ;
+            prov:entity id:ab971800-6389-44da-a7db-d85c11161552 ;
+            prov:hadRole <arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/days_back> ] ;
     prov:startedAtTime "2026-09-23T10:01:10.962438"^^xsd:dateTime .
 
 
@@ -3305,6 +3320,13 @@ x-jsonld-extra-terms:
   entityType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@id'
+  agentType:
+    x-jsonld-id: '@type'
+    x-jsonld-type: '@id'
+  Activity: http://www.w3.org/ns/prov#Activity
+  Entity: http://www.w3.org/ns/prov#Entity
+  Agent: http://www.w3.org/ns/prov#Agent
+  SoftwareAgent: http://www.w3.org/ns/prov#SoftwareAgent
   used:
     x-jsonld-id: http://www.w3.org/ns/prov#used
     x-jsonld-type: '@id'
@@ -3534,7 +3556,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.kindgrove.parse-aoi
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-19'
+  dateOfLastChange: '2026-11-25'
 
 ```
 
@@ -3700,6 +3722,14 @@ Links to the schema:
       "@id": "@type",
       "@type": "@id"
     },
+    "agentType": {
+      "@id": "@type",
+      "@type": "@id"
+    },
+    "Activity": "prov:Activity",
+    "Entity": "prov:Entity",
+    "Agent": "prov:Agent",
+    "SoftwareAgent": "prov:SoftwareAgent",
     "used": {
       "@id": "prov:used",
       "@type": "@id"

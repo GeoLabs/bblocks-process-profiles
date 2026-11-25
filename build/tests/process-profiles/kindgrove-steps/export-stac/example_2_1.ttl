@@ -77,23 +77,23 @@
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
+    proc:metadata [ rdf:value [ a ns4:Person ;
+                    ns4:name "Cameron Sajedi" ] ;
+            proc:role schema:author ],
         [ rdf:value "Plot the biomass map and export the results as a STAC Catalog" ;
             proc:role schema:description ],
-        [ rdf:value "0.1.0" ;
-            proc:role schema:softwareVersion ],
         [ rdf:value [ a ns4:Person ;
                     ns4:affiliation "GeoLabs" ;
                     ns4:name "Gérald Fenoy" ] ;
             proc:role schema:contributor ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
             proc:role schema:license ],
-        [ rdf:value [ a ns4:Person ;
-                    ns4:name "Cameron Sajedi" ] ;
-            proc:role schema:author ],
         [ rdf:value "export_stac" ;
-            proc:role schema:name ] ;
+            proc:role schema:name ],
+        [ rdf:value "0.1.0" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;

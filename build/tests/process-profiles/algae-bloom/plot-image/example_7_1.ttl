@@ -7,7 +7,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/plot_turbidity_2> a prov:Plan ;
+<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/plot_turbidity_2> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/plot-image/package> .
 
 <urn:example:entity:plot-image:out:output_file> a prov:Entity,
@@ -44,10 +45,12 @@
         <https://ospd.example.org/ogc-api/processes/plot-image#inputs/plot_title> ;
     rdf:value "Turbidity" .
 
-<urn:example:image:ogc-ospd/algae-usecase/plot-image:1.0.0> a prov:SoftwareAgent ;
+<urn:example:image:ogc-ospd/algae-usecase/plot-image:1.0.0> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image ogc-ospd/algae-usecase/plot-image:1.0.0" .
 
-<https://ospd.example.org/ogc-api/processes/plot-image/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/plot-image/package> a prov:Entity,
+        prov:Plan .
 
 <urn:example:run:algae-bloom:plot-image> a prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/plot-image> ;
@@ -69,6 +72,7 @@
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
             oa:hasTarget <https://ospd.example.org/ogc-api/jobs/upstream-step/results/S2A_29SPC_20190701_0_L2A_turbidity.tiff> ] .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 

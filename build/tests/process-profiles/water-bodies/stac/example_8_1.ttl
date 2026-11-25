@@ -3,6 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:water-bodies:stac> a wfprov:ProcessRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/stac> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/stac/package> ;
     wfprov:usedInput <urn:example:entity:stac:in:item>,

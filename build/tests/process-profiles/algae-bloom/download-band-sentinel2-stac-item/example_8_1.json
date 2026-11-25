@@ -1,6 +1,7 @@
 {
   "id": "urn:example:run:algae-bloom:download-band-sentinel2-stac-item",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item/package",
   "usedInput": [

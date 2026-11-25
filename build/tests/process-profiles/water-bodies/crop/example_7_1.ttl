@@ -7,7 +7,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop> a prov:Plan ;
+<arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_crop> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/crop/package> .
 
 <urn:example:entity:crop:out:cropped> a prov:Entity,
@@ -34,7 +35,8 @@
         <https://ospd.example.org/ogc-api/processes/crop#inputs/item> ;
     rdf:value "https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2B_10TFK_20210713_0_L2A" .
 
-<urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/crop:1.5.0> a prov:SoftwareAgent ;
+<urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/crop:1.5.0> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/crop:1.5.0" .
 
 <urn:example:run:water-bodies:crop> a prov:Activity,
@@ -50,8 +52,10 @@
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/crop:1.5.0> .
 
-<https://ospd.example.org/ogc-api/processes/crop/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/crop/package> a prov:Entity,
+        prov:Plan .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 

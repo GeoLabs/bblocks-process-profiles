@@ -7,7 +7,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene> a prov:Plan ;
+<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/select_scene/package> .
 
 <urn:example:entity:select-scene:out:stac_item> a prov:Entity,
@@ -42,7 +43,8 @@
         <https://ospd.example.org/ogc-api/processes/select_scene#inputs/west> ;
     rdf:value 9.515e+01 .
 
-<urn:example:image:ghcr.io/geolabs/kindgrove/select-scene:v0.0.2-rc2> a prov:SoftwareAgent ;
+<urn:example:image:ghcr.io/geolabs/kindgrove/select-scene:v0.0.2-rc2> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image ghcr.io/geolabs/kindgrove/select-scene:v0.0.2-rc2" .
 
 <urn:example:run:kindgrove-steps:select-scene> a prov:Activity,
@@ -60,8 +62,10 @@
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ghcr.io/geolabs/kindgrove/select-scene:v0.0.2-rc2> .
 
-<https://ospd.example.org/ogc-api/processes/select_scene/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/select_scene/package> a prov:Entity,
+        prov:Plan .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 

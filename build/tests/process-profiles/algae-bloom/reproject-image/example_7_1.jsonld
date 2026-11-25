@@ -3,7 +3,7 @@
   "@graph": [
     {
       "id": "urn:example:run:algae-bloom:reproject-image",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/reproject-image",
       "startedAtTime": "2026-09-23T06:39:37Z",
       "used": [
@@ -25,7 +25,7 @@
     },
     {
       "id": "urn:example:entity:reproject-image:in:input_image",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/reproject-image#inputs/input_image",
       "links": [
         {
@@ -37,7 +37,7 @@
     },
     {
       "id": "urn:example:entity:reproject-image:in:output_resolution",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/reproject-image#inputs/output_resolution",
       "value": [
         60,
@@ -46,13 +46,13 @@
     },
     {
       "id": "urn:example:entity:reproject-image:in:output_name",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/reproject-image#inputs/output_name",
       "value": "B03_60m"
     },
     {
       "id": "urn:example:entity:reproject-image:out:result",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/reproject-image#outputs/result",
       "wasGeneratedBy": "urn:example:run:algae-bloom:reproject-image",
       "wasDerivedFrom": [
@@ -69,21 +69,25 @@
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "urn:example:image:ogc-ospd/algae-usecase/reproject-image",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "container image ogc-ospd/algae-usecase/reproject-image"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/reproject-image/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/reproject_b03_60m_2",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/reproject-image/package"
     }
   ]

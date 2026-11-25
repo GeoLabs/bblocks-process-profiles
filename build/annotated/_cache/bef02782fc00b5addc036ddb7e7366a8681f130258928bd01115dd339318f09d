@@ -3,12 +3,13 @@
   "name": "Registered Item Model",
   "abstract": "A base RDF and SHACL model for register items, register item classes and register\ngovernance metadata, aligned with ISO 19135:2026 (*Geographic information \u2014 Registration\nand register governance*). Sub-registers profile this model rather than inventing their own.\n",
   "description": "A register is a catalogue with systematic governance: a content information model\n(what an item looks like) plus management metadata (who governs it, what state it is\nin, how it changes). ISO 19135:2026 defines one such register model \u2014 separating a\n**concept plane** (meaning: concepts and concept versions) from a **content plane**\n(representation: register item classes and register items) and adding a governance\nlayer of roles, statuses, actions and commitments.\n\nThis repository publishes that model as a single base [OGC Building\nBlock](https://ogcincubator.github.io/bblocks-docs/), independent of any one register's\nown content schema. Any register \u2014 a CSV catalogue, the OGC Definitions Server, a\nGitHub-managed vocabulary, or a Building Blocks register itself \u2014 maps its own\nschema's identifiers, statuses and roles onto this base model via a JSON-LD context,\nso that management metadata from otherwise unrelated registers becomes one queryable\ngraph. A sub-register's rules are expressed as a profile of this base block (null,\nadditive, or constrained), always validating against it.\n\nRegister vs. registry: the **register** is the governed information (items,\nidentifiers, statuses, roles, processes); the **register system** \u2014 often loosely\ncalled the \"registry\" \u2014 is merely the information system it happens to run on. This\nmodel describes the former, independent of the latter.\n",
-  "modified": "2026-10-31T04:32:53.906666",
+  "sparqlEndpoint": "https://defs-hosted.opengis.net/fuseki-ospd/query",
+  "modified": "2026-11-25T10:15:20.195289",
   "tooling": {
     "bblocks-postprocess": {
-      "commitId": "\"862052921203373f8136e6f464e0dfdd693e79f5",
-      "shortCommitId": "\"862052",
-      "date": "2026-10-26T21:53:11+00:00\""
+      "commitId": "\"009466f93d27bf23cb4832f43883f4f524ab5d30",
+      "shortCommitId": "\"009466",
+      "date": "2026-11-24T22:38:04+00:00\""
     }
   },
   "gitRepository": "https://github.com/ogcincubator/registered-item-model",
@@ -56,7 +57,15 @@
         "metadata"
       ],
       "dateTimeAddition": "2026-09-17T00:00:00Z",
-      "dateOfLastChange": "2026-10-31",
+      "dateOfLastChange": "2026-11-25",
+      "resources": [
+        {
+          "role": "data",
+          "ref": "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/catalog.ttl",
+          "format": "text/turtle",
+          "title": "Registered Item Model catalog"
+        }
+      ],
       "ontology": "https://ogcincubator.github.io/registered-item-model/build/annotated/rim/core-ontology/ontology.ttl",
       "sourceFiles": "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/",
       "validationPassed": true,
@@ -82,7 +91,7 @@
       "abstract": "Modular RDF implementation profile based on ISO/FDIS 19135:2026.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-25T00:00:00Z",
-      "dateOfLastChange": "2026-10-31",
+      "dateOfLastChange": "2026-11-25",
       "itemClass": "schema",
       "version": "0.2",
       "dependsOn": [
@@ -127,7 +136,7 @@
       "abstract": "A REGISTER description model with JSON/LD/RDF implementation as defined by ISO/FDIS 19135:2026. Modular Building Block to support interoperable profiles of register",
       "status": "under-development",
       "dateTimeAddition": "2026-09-25T00:00:00Z",
-      "dateOfLastChange": "2026-10-31",
+      "dateOfLastChange": "2026-11-25",
       "itemClass": "schema",
       "version": "0.2",
       "dependsOn": [
@@ -172,7 +181,7 @@
       "abstract": "A REGISTER ITEM CLASS model with JSON/LD/RDF implementation as defined by ISO/FDIS 19135:2026. (describes the type of object in a register) Modular Building Block to support interoperable profiles of register",
       "status": "under-development",
       "dateTimeAddition": "2026-09-25T00:00:00Z",
-      "dateOfLastChange": "2026-10-31",
+      "dateOfLastChange": "2026-11-25",
       "itemClass": "schema",
       "version": "0.2",
       "dependsOn": [
@@ -216,7 +225,7 @@
       "abstract": "Modular RDF implementation profile based on ISO/FDIS 19135:2026.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-25T00:00:00Z",
-      "dateOfLastChange": "2026-10-31",
+      "dateOfLastChange": "2026-11-25",
       "itemClass": "schema",
       "version": "0.2",
       "dependsOn": [
@@ -261,7 +270,7 @@
       "abstract": "A REGISTER ITEM model with JSON/LD/RDF implementation as defined by ISO/FDIS 19135:2026. This provides a canonical schema for a register entry, that can be extended according the REGISTER ITEM CLASS defined for the register.",
       "status": "under-development",
       "dateTimeAddition": "2026-09-25T00:00:00Z",
-      "dateOfLastChange": "2026-10-31",
+      "dateOfLastChange": "2026-11-25",
       "itemClass": "schema",
       "version": "0.2",
       "dependsOn": [
@@ -308,7 +317,7 @@
       "abstract": "A REGISTER interaction activity model with JSON/LD/RDF implementation as defined by ISO/FDIS 19135:2026. Modular Building Block to support interoperable profiles of register",
       "status": "under-development",
       "dateTimeAddition": "2026-09-25T00:00:00Z",
-      "dateOfLastChange": "2026-10-31",
+      "dateOfLastChange": "2026-11-25",
       "itemClass": "schema",
       "version": "0.2",
       "dependsOn": [

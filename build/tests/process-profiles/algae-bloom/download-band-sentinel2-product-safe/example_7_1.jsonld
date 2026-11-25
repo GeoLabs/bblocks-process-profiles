@@ -3,7 +3,7 @@
   "@graph": [
     {
       "id": "urn:example:run:algae-bloom:download-band-sentinel2-product-safe",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-product-safe",
       "startedAtTime": "2026-09-23T07:31:29Z",
       "used": [
@@ -27,35 +27,35 @@
     },
     {
       "id": "urn:example:entity:download-band-sentinel2-product-safe:in:product_url",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe#inputs/product_url",
       "value": "s3:///eodata/Sentinel-2/MSI/L2A/2019/07/01/S2A_MSIL2A_20190701T110621_N0212_R137_T29SPC_20190701T120906.SAFE"
     },
     {
       "id": "urn:example:entity:download-band-sentinel2-product-safe:in:band",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe#inputs/band",
       "value": "B03"
     },
     {
       "id": "urn:example:entity:download-band-sentinel2-product-safe:in:resolution",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe#inputs/resolution",
       "value": "60m"
     },
     {
       "id": "urn:example:entity:download-band-sentinel2-product-safe:in:s3_access_key",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe#inputs/s3_access_key"
     },
     {
       "id": "urn:example:entity:download-band-sentinel2-product-safe:in:s3_secret_key",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe#inputs/s3_secret_key"
     },
     {
       "id": "urn:example:entity:download-band-sentinel2-product-safe:out:product",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe#outputs/product",
       "wasGeneratedBy": "urn:example:run:algae-bloom:download-band-sentinel2-product-safe",
       "links": [
@@ -69,21 +69,25 @@
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "urn:example:image:ogc-ospd/algae-usecase/download-band-sentinel2-product-safe:1.1.0",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "container image ogc-ospd/algae-usecase/download-band-sentinel2-product-safe:1.1.0"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_60m",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe/package"
     }
   ]

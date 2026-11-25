@@ -1,8 +1,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/geolabs/ospd/generic-profiles/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns1: <http://www.iana.org/assignments/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns3: <https://w3id.org/ogc/api/schema/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns5: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
@@ -17,13 +17,13 @@
     dcterms:title "Point Cloud to Shapes" ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.5/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns3:POINTS [ dcterms:description "Points" ;
+    proc:inputs [ ns4:POINTS [ dcterms:description "Points" ;
                     dcterms:title "Points" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud> ;
-                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las> ;
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las> ;
                     proc:keywords "point cloud" ;
                     proc:metadata [ dcterms:title "Generic Profile: Point cloud to features -- input `points`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features/inputs/points> ;
@@ -31,41 +31,41 @@
                         [ dcterms:title "Implementation Profile: Point cloud to shapes -- input `points`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes/inputs/points> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/x-ogc-lasf" ] ] ] ] ;
+                    proc:schema [ ns3:oneOf [ proc:type "string" ;
+                                    ns3:contentEncoding "base64" ;
+                                    ns3:contentMediaType "application/x-ogc-lasf" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Implementation Profile: Point cloud to shapes" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+    proc:metadata [ dcterms:title "Generic Profile: Point cloud to features" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
         [ dcterms:title "Process Concept: Point Cloud Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/point-cloud-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Generic Profile: Point cloud to features" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+        [ dcterms:title "Implementation Profile: Point cloud to shapes" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
     proc:outputs [ ns5:SHAPES [ dcterms:description "Shapes" ;
                     dcterms:title "Shapes" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/feature-collection> ;
-                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/feature-collection-gml>,
+                    ns2:representation <https://w3id.org/geolabs/ospd/data-formats/representation/feature-collection-gml>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/feature-collection-kml> ;
                     proc:keywords "feature collection" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Point cloud to features -- output `result`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Point cloud to shapes -- output `result`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Point cloud to shapes -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-shapes/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
-                    proc:schema [ ns2:oneOf [ proc:type "string" ;
-                                    ns2:contentEncoding "utf-8" ;
-                                    ns2:contentMediaType "text/xml" ],
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Point cloud to features -- output `result`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-to-features/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
+                    proc:schema [ ns3:oneOf [ proc:type "string" ;
+                                    ns3:contentEncoding "utf-8" ;
+                                    ns3:contentMediaType "text/xml" ],
+                                [ proc:type "object" ],
                                 [ proc:type "string" ;
-                                    ns2:contentEncoding "base64" ;
-                                    ns2:contentMediaType "application/vnd.google-earth.kml+xml" ],
-                                [ proc:type "object" ] ] ] ] .
+                                    ns3:contentEncoding "base64" ;
+                                    ns3:contentMediaType "application/vnd.google-earth.kml+xml" ] ] ] ] .
 

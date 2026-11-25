@@ -2,6 +2,7 @@
   "run": {
     "id": "urn:example:run:kindgrove-steps:mangrove-workflow-steps",
     "type": "WorkflowRun",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps",
     "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
@@ -36,6 +37,7 @@
   "engine": {
     "@id": "urn:example:engine:cwltool-3.1.20260108082145",
     "@type": "WorkflowEngine",
+    "provType": "Agent",
     "name": "cwltool",
     "version": "3.1.20260108082145"
   },
@@ -43,6 +45,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/kindgrove-steps-mangrove-workflow-steps-0001/results/catalog.json",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "application/json",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps#outputs/stac",
@@ -55,6 +58,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/kindgrove-steps-mangrove-workflow-steps-0001/results/mangrove-analysis-20260924-105955/biomass.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps#outputs/stac",
@@ -67,6 +71,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/kindgrove-steps-mangrove-workflow-steps-0001/results/mangrove-analysis-20260924-105955/biomass_quicklook.png",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/png",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps#outputs/stac",
@@ -79,6 +84,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/kindgrove-steps-mangrove-workflow-steps-0001/results/mangrove-analysis-20260924-105955/biomass_summary.csv",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "text/csv",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps#outputs/stac",
@@ -91,6 +97,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/kindgrove-steps-mangrove-workflow-steps-0001/results/mangrove-analysis-20260924-105955/carbon_summary.csv",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "text/csv",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps#outputs/stac",
@@ -103,6 +110,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/kindgrove-steps-mangrove-workflow-steps-0001/results/mangrove-analysis-20260924-105955/mangrove-analysis-20260924-105955.json",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "application/json",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps#outputs/stac",
@@ -115,6 +123,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/kindgrove-steps-mangrove-workflow-steps-0001/results/mangrove-analysis-20260924-105955/mangrove_mask.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps#outputs/stac",

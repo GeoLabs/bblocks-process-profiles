@@ -3,7 +3,7 @@
   "@graph": [
     {
       "id": "urn:example:run:kindgrove-steps:mangrove-workflow-steps",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/mangrove-workflow-steps",
       "startedAtTime": "2026-09-24T10:57:44Z",
       "used": [
@@ -24,7 +24,7 @@
     },
     {
       "id": "urn:example:entity:mangrove-workflow-steps:in:aoi",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps#inputs/aoi",
       "value": {
         "bbox": [
@@ -38,19 +38,19 @@
     },
     {
       "id": "urn:example:entity:mangrove-workflow-steps:in:cloud_cover_max",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps#inputs/cloud_cover_max",
       "value": 20
     },
     {
       "id": "urn:example:entity:mangrove-workflow-steps:in:days_back",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps#inputs/days_back",
       "value": 90
     },
     {
       "id": "urn:example:entity:mangrove-workflow-steps:out:stac",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps#outputs/stac",
       "wasGeneratedBy": "urn:example:run:kindgrove-steps:mangrove-workflow-steps",
       "links": [
@@ -64,16 +64,19 @@
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/mangrove-workflow-steps/package"
     }
   ]

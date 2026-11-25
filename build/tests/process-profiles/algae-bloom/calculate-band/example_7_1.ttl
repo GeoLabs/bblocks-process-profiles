@@ -7,7 +7,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/calculate_turbidity_2> a prov:Plan ;
+<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/calculate_turbidity_2> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/calculate-band/package> .
 
 <urn:example:entity:calculate-band:out:result> a prov:Entity,
@@ -28,7 +29,8 @@
         <https://ospd.example.org/ogc-api/processes/calculate-band#inputs/name> ;
     rdf:value "S2A_29SPC_20190701_0_L2A_turbidity" .
 
-<urn:example:image:ogc-ospd/algae-usecase/calculate-band:1.1.0> a prov:SoftwareAgent ;
+<urn:example:image:ogc-ospd/algae-usecase/calculate-band:1.1.0> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image ogc-ospd/algae-usecase/calculate-band:1.1.0" .
 
 <urn:example:run:algae-bloom:calculate-band> a prov:Activity,
@@ -44,7 +46,8 @@
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ogc-ospd/algae-usecase/calculate-band:1.1.0> .
 
-<https://ospd.example.org/ogc-api/processes/calculate-band/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/calculate-band/package> a prov:Entity,
+        prov:Plan .
 
 <urn:example:entity:calculate-band:in:band_a> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/calculate-band#inputs/band_a> ;
@@ -58,6 +61,7 @@
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
             oa:hasTarget <https://ospd.example.org/ogc-api/jobs/upstream-step/results/B03_60m.tiff> ] .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 

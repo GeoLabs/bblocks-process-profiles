@@ -7,7 +7,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/calculate_indices> a prov:Plan ;
+<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/calculate_indices> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/calculate_indices/package> .
 
 <urn:example:entity:calculate-indices:out:ndvi_file> a prov:Entity,
@@ -39,14 +40,16 @@
     rdf:value [ a pp:geotiff ;
             pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/red_4326.tif" ],
         [ a pp:geotiff ;
-            pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/nir_4326.tif" ],
+            pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/green_4326.tif" ],
         [ a pp:geotiff ;
-            pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/green_4326.tif" ] .
+            pp:href "https://ospd.example.org/ogc-api/jobs/upstream-step/results/nir_4326.tif" ] .
 
-<urn:example:image:ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc2> a prov:SoftwareAgent ;
+<urn:example:image:ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc2> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc2" .
 
-<https://ospd.example.org/ogc-api/processes/calculate_indices/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/calculate_indices/package> a prov:Entity,
+        prov:Plan .
 
 <urn:example:run:kindgrove-steps:calculate-indices> a prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/calculate-indices> ;
@@ -58,6 +61,7 @@
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ghcr.io/geolabs/kindgrove/calculate-indices:v0.0.2-rc2> .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 

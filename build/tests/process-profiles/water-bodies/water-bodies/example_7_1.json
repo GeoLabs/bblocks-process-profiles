@@ -1,7 +1,7 @@
 [
   {
     "id": "urn:example:run:water-bodies:water-bodies",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/water-bodies",
     "startedAtTime": "2026-09-23T20:09:35Z",
     "used": [
@@ -22,19 +22,19 @@
   },
   {
     "id": "urn:example:entity:water-bodies:in:aoi",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/water-bodies#inputs/aoi",
     "value": "-121.399,39.834,-120.74,40.472"
   },
   {
     "id": "urn:example:entity:water-bodies:in:epsg",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/water-bodies#inputs/epsg",
     "value": "EPSG:4326"
   },
   {
     "id": "urn:example:entity:water-bodies:in:stac_items",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/water-bodies#inputs/stac_items",
     "value": [
       "https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2B_10TFK_20210713_0_L2A",
@@ -43,7 +43,7 @@
   },
   {
     "id": "urn:example:entity:water-bodies:out:stac",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/water-bodies#outputs/stac",
     "wasGeneratedBy": "urn:example:run:water-bodies:water-bodies",
     "links": [
@@ -57,16 +57,19 @@
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/water-bodies/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/water-bodies/package"
   }
 ]

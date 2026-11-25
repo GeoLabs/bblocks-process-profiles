@@ -3,7 +3,7 @@
   "@graph": [
     {
       "id": "urn:example:run:algae-bloom:workflow-earth-search",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-earth-search",
       "startedAtTime": "2026-09-23T06:26:24Z",
       "used": [
@@ -26,7 +26,7 @@
     },
     {
       "id": "urn:example:entity:workflow-earth-search:in:aoi",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#inputs/aoi",
       "links": [
         {
@@ -38,13 +38,13 @@
     },
     {
       "id": "urn:example:entity:workflow-earth-search:in:collection",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#inputs/collection",
       "value": "sentinel-2-l2a"
     },
     {
       "id": "urn:example:entity:workflow-earth-search:in:toi",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#inputs/toi",
       "value": [
         "2019-06-25",
@@ -53,19 +53,19 @@
     },
     {
       "id": "urn:example:entity:workflow-earth-search:in:delta",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#inputs/delta",
       "value": 4
     },
     {
       "id": "urn:example:entity:workflow-earth-search:in:cloud_cover",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#inputs/cloud_cover",
       "value": 0.1
     },
     {
       "id": "urn:example:entity:workflow-earth-search:out:chlorophyll_a",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/chlorophyll_a",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-earth-search",
       "wasDerivedFrom": [
@@ -87,7 +87,7 @@
     },
     {
       "id": "urn:example:entity:workflow-earth-search:out:chlorophyll_a_color",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/chlorophyll_a_color",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-earth-search",
       "wasDerivedFrom": [
@@ -109,7 +109,7 @@
     },
     {
       "id": "urn:example:entity:workflow-earth-search:out:chlorophyll_a_plot",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/chlorophyll_a_plot",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-earth-search",
       "wasDerivedFrom": [
@@ -131,7 +131,7 @@
     },
     {
       "id": "urn:example:entity:workflow-earth-search:out:cyanobacteria",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/cyanobacteria",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-earth-search",
       "wasDerivedFrom": [
@@ -153,7 +153,7 @@
     },
     {
       "id": "urn:example:entity:workflow-earth-search:out:cyanobacteria_color",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/cyanobacteria_color",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-earth-search",
       "wasDerivedFrom": [
@@ -175,7 +175,7 @@
     },
     {
       "id": "urn:example:entity:workflow-earth-search:out:cyanobacteria_plot",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/cyanobacteria_plot",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-earth-search",
       "wasDerivedFrom": [
@@ -197,7 +197,7 @@
     },
     {
       "id": "urn:example:entity:workflow-earth-search:out:turbidity",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/turbidity",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-earth-search",
       "wasDerivedFrom": [
@@ -219,7 +219,7 @@
     },
     {
       "id": "urn:example:entity:workflow-earth-search:out:turbidity_color",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/turbidity_color",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-earth-search",
       "wasDerivedFrom": [
@@ -241,7 +241,7 @@
     },
     {
       "id": "urn:example:entity:workflow-earth-search:out:turbidity_plot",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search#outputs/turbidity_plot",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-earth-search",
       "wasDerivedFrom": [
@@ -263,16 +263,19 @@
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-earth-search/package"
     }
   ]

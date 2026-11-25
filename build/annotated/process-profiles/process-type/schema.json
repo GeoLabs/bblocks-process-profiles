@@ -4,7 +4,7 @@
   "description": "A candidate process-type register item which is also a class used as the PROV rdf:type of executions. It profiles the Registered Item Model activity-type schema; each entry is both an acttype:ActivityType register item and an owl:Class specialising acttype:ActivityType, or, when it implements an Implementation Profile, the activity type of its operation in bblocks-generic-profiles, with the same GeoSPARQL entity types.\n\nDecision D5: one entry per deployed process, in five parts. Its meaning is `prefLabel`, `definition` and `subClassOf`. Its classification (`classification`: the six-phase position), its deployment (`deployment`: profile block, processDescription, run class), its plan (`plan`) and its correspondences (`correspondences`: openEO) are kept apart from that meaning. `implementsProfile` links it to its Implementation Profile (tier 3), with the declarations that qualify the binding (`serverSideFiles`, `roleDecompositions`, `assumedFormatGaps`, `byReference`, `unboundRoles`, `fixedRoleValues`); a CWL CommandLineTool attached to no Implementation Profile states why in `notAttached`.\n\nWhat an activity of this type executes -- its plan, a `prov:Plan` -- is the OGC Application Package served by OGC API - Processes - Part 2 (Deploy, Replace, Undeploy) at `/processes/{processID}/package`, whose execution unit is the pinned CWL. A run of this type records the same IRI as its `qualifiedAssociation.hadPlan`. A process implemented natively by its server (`mutable: false`) has no Application Package (Part 2 serves `/package` only for dynamically deployed processes) and so no `plan`; `deployment.processDescription` is then the only link to what is executed.",
   "allOf": [
     {
-      "$ref": "https://ogcincubator.github.io/activity-type-register/build/annotated/register/schemas/activity-types-schema/schema.json"
+      "$ref": "https://ogcincubator.github.io/activity-type-register/build/annotated/register/profiles/schemas/activity-types-schema/schema.json"
     },
     {
       "type": "object",
@@ -691,35 +691,50 @@
             "https://w3id.org/ogc/rim/activity-type/ActivityType",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/analytical-hillshading",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/area",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-algebra",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/band-retrieval",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/buffer",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/catalogue-search",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/centroid",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/contains",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/convex-hull",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/coverage-subsetting",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/crosses",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/difference",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/disjoint",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/encoding-conversion",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/equals",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/extent-computation",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-construction",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-extent",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-measure",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/geometry-property-test",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/intersection",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/intersects",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/is-simple",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/otsu-thresholding",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-filtering",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-thinning",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-grid",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/point-cloud-to-shapes",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/portrayal",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/product-selection",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/radiometric-index",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math",
-            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-classification",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-crop",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-extent",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-format-conversion",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-regridding",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-rendering",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-resampling",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/set-operation",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/slope",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/spatial-model-conversion",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/spatial-relation-test",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/symdifference",
+            "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/terrain-derivative",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/terrain-ruggedness-index",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/topographic-position-index",
             "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/touches",
@@ -761,7 +776,7 @@
                     "x-jsonld-type": "@vocab"
                   },
                   "proposer": {
-                    "const": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+                    "const": "https://w3id.org/geolabs/ospd/org/geolabs",
                     "x-jsonld-id": "https://w3id.org/ogc/rim/proposer",
                     "x-jsonld-type": "@id"
                   },
@@ -810,7 +825,7 @@
                     "x-jsonld-id": "http://purl.org/dc/terms/description"
                   },
                   "proposer": {
-                    "const": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+                    "const": "https://w3id.org/geolabs/ospd/org/geolabs",
                     "x-jsonld-id": "https://w3id.org/ogc/rim/proposer",
                     "x-jsonld-type": "@id"
                   },
@@ -856,7 +871,7 @@
                 "x-jsonld-type": "@vocab"
               },
               "proposer": {
-                "const": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+                "const": "https://w3id.org/geolabs/ospd/org/geolabs",
                 "x-jsonld-id": "https://w3id.org/ogc/rim/proposer",
                 "x-jsonld-type": "@id"
               },
@@ -1023,6 +1038,6 @@
     "itemIdentifier": "ospd.process-profiles.process-type",
     "register": "https://geolabs.github.io/bblocks-process-profiles/build/register.json",
     "version": "0.1",
-    "dateOfLastChange": "2026-11-19"
+    "dateOfLastChange": "2026-11-25"
   }
 }

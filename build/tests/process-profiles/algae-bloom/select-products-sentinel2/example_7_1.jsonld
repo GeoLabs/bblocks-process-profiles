@@ -3,7 +3,7 @@
   "@graph": [
     {
       "id": "urn:example:run:algae-bloom:select-products-sentinel2",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2",
       "startedAtTime": "2026-09-23T06:26:24Z",
       "used": [
@@ -29,7 +29,7 @@
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:aoi",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/aoi",
       "links": [
         {
@@ -41,25 +41,25 @@
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:catalog",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/catalog",
       "value": "earth-search"
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:collection",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/collection",
       "value": "sentinel-2-l2a"
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:product_level",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/product_level",
       "value": "L2A"
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:toi",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/toi",
       "value": [
         "2019-06-25",
@@ -68,19 +68,19 @@
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:delta",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/delta",
       "value": 4
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:cloud_cover",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/cloud_cover",
       "value": 0.1
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:out:urls",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#outputs/urls",
       "wasGeneratedBy": "urn:example:run:algae-bloom:select-products-sentinel2",
       "wasDerivedFrom": [
@@ -94,21 +94,25 @@
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "urn:example:image:ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "container image ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package"
     }
   ]

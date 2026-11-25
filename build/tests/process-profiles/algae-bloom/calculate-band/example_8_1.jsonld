@@ -2,6 +2,7 @@
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/algae-bloom/calculate-band/context.jsonld",
   "id": "urn:example:run:algae-bloom:calculate-band",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/calculate-band",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/calculate-band/package",
   "usedInput": [

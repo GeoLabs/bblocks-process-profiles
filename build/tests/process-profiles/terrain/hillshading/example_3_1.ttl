@@ -1,8 +1,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix ns5: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
@@ -28,12 +28,12 @@
                     dcterms:title "Azimuth" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/number> ;
                     proc:keywords "azimuth" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading -- input `azimuth`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/azimuth> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Analytical hillshading -- input `azimuth`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Analytical hillshading -- input `azimuth`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/azimuth> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Analytical hillshading -- input `azimuth`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/azimuth> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "315"^^rdf:JSON ;
                             proc:nullable true ;
@@ -44,7 +44,7 @@
             ns2:DATE_MIN [ dcterms:description "Day" ;
                     dcterms:title "Day (min value)" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/date> ;
-                    ns4:representation <https://w3id.org/geolabs/ospd/data-formats/representation/date-string-date> ;
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/date-string-date> ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:nullable true ;
                             proc:type "string" ;
@@ -53,12 +53,12 @@
                     dcterms:title "Height" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/number> ;
                     proc:keywords "altitude" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Analytical hillshading -- input `altitude`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/altitude> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Analytical hillshading -- input `altitude`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading -- input `altitude`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/inputs/altitude> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Analytical hillshading -- input `altitude`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/inputs/altitude> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "45"^^rdf:JSON ;
                             proc:nullable true ;
@@ -69,7 +69,7 @@
             ns2:ELEVATION [ dcterms:description "Elevation" ;
                     dcterms:title "Elevation" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/elevation-model> ;
-                    ns4:representation <https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-aaigrid>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-aaigrid>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-envi>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/elevation-model-png> ;
@@ -82,16 +82,16 @@
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
             ns2:EXAGGERATION [ dcterms:description "The terrain exaggeration factor allows one to increase the shading contrasts in flat areas." ;
                     dcterms:title "Exaggeration" ;
                     proc:minOccurs 0 ;
@@ -160,42 +160,42 @@
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Implementation Profile: Analytical hillshading" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ dcterms:title "Generic Profile: Analytical hillshading" ;
+    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Implementation Profile: Analytical hillshading" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ dcterms:title "Process Concept: Terrain Analysis" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/terrain-analysis> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
+    proc:outputs [ ns4:SHADE [ dcterms:description "The angle between the surface and the incoming light beams, measured in radians." ;
                     dcterms:title "Analytical Hillshading" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
-                    ns4:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Analytical hillshading -- output `result`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
-                        [ dcterms:title "Generic Profile: Analytical hillshading -- output `result`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Analytical hillshading -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/analytical-hillshading/outputs/result> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
+                        [ dcterms:title "Implementation Profile: Analytical hillshading -- output `result`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/analytical-hillshading/outputs/result> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "application/x-ogc-envi" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ] .
+                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ] .
 

@@ -1,7 +1,7 @@
 [
   {
     "id": "urn:example:run:algae-bloom:download-band-sentinel2-stac-item",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-stac-item",
     "startedAtTime": "2026-09-23T06:36:40Z",
     "used": [
@@ -22,19 +22,19 @@
   },
   {
     "id": "urn:example:entity:download-band-sentinel2-stac-item:in:product_url",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item#inputs/product_url",
     "value": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_29SPC_20190701_0_L2A"
   },
   {
     "id": "urn:example:entity:download-band-sentinel2-stac-item:in:band",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item#inputs/band",
     "value": "B03"
   },
   {
     "id": "urn:example:entity:download-band-sentinel2-stac-item:out:product",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item#outputs/product",
     "wasGeneratedBy": "urn:example:run:algae-bloom:download-band-sentinel2-stac-item",
     "links": [
@@ -48,21 +48,25 @@
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "urn:example:image:ogc-ospd/algae-usecase/download-band-sentinel2-stac-item:1.1.0",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "container image ogc-ospd/algae-usecase/download-band-sentinel2-stac-item:1.1.0"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/download_b03_10m_2",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/download-band-sentinel2-stac-item/package"
   }
 ]

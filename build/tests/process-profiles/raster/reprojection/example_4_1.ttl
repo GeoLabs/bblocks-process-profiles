@@ -14,7 +14,7 @@
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -22,7 +22,7 @@
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/reprojection to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -31,7 +31,7 @@
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/server-side-files-2026-11-09> a rim:RegisterAction ;
     dcterms:description "serverSideFiles added: the raster input and output are names of files stored on the server (ZOO-Kernel dataPath), with no media type, each naming the Implementation Profile role it implements." ;
@@ -39,7 +39,7 @@
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
@@ -47,7 +47,7 @@
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/raster/Gdal_Warp> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/Gdal_Warp> ;
     pp:version "1.0.0" .
@@ -68,14 +68,14 @@
     pp:openeoEquivalence [ pp:equivalenceLevel "closeMatch" ;
             pp:rationale "Gdal_Warp exposes both `s_srs`/`t_srs` (CRS reprojection) and `r`/`te` (resampling method, target extent): a closer match to resample_spatial than W1's own `reproject-image` use of the same underlying tool (which only changes pixel size, `-t_srs` unused) -- here both the `projection` and `resolution`/`method` parameters of resample_spatial are exercised. Not exactMatch: GCP-based warping (`tps`, `rpc`, `geoloc`) and `order` (polynomial order) have no openEO equivalent." ] ;
     pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/pre-processing> ;
-    pp:serverSideFile [ pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/raster> ;
-            pp:liveName "InputDSN" ;
-            pp:location "A file name, relative to the directory set by `dataPath` in the `[main]` section of the ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process reads or writes it there. Its format is the representation of the Implementation Profile role it implements (GeoTIFF for raster)." ;
-            pp:side "inputs" ],
-        [ pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/outputs/raster> ;
+    pp:serverSideFile [ pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/outputs/raster> ;
             pp:liveName "Result" ;
             pp:location "A file name, relative to the directory set by `dataPath` in the `[main]` section of the ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process reads or writes it there. Its format is the representation of the Implementation Profile role it implements (GeoTIFF for raster)." ;
-            pp:side "outputs" ] ;
+            pp:side "outputs" ],
+        [ pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection/inputs/raster> ;
+            pp:liveName "InputDSN" ;
+            pp:location "A file name, relative to the directory set by `dataPath` in the `[main]` section of the ZOO-Kernel main.cfg of the server: the file is stored on the server, and the process reads or writes it there. Its format is the representation of the Implementation Profile role it implements (GeoTIFF for raster)." ;
+            pp:side "inputs" ] ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
     rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/reprojection/actions/addition>,

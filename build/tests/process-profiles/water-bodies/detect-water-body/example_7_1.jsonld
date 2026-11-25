@@ -3,6 +3,7 @@
   "run": {
     "id": "urn:example:run:water-bodies:detect-water-body",
     "type": "WorkflowRun",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/detect-water-body",
     "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/detect_water_body/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
@@ -25,6 +26,7 @@
   "engine": {
     "@id": "urn:example:engine:cwltool-3.1.20260108082145",
     "@type": "WorkflowEngine",
+    "provType": "Agent",
     "name": "cwltool",
     "version": "3.1.20260108082145"
   },
@@ -32,6 +34,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/water-bodies-detect-water-body-0001/results/otsu.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/detect_water_body#outputs/detected_water_body",

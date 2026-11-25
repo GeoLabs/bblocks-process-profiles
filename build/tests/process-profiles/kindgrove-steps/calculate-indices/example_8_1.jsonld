@@ -2,6 +2,7 @@
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/kindgrove-steps/calculate-indices/context.jsonld",
   "id": "urn:example:run:kindgrove-steps:calculate-indices",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/calculate-indices",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/calculate_indices/package",
   "usedInput": [

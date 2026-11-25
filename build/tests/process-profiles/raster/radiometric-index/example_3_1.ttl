@@ -2,8 +2,8 @@
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns3: <https://w3id.org/geolabs/ospd/generic-profiles/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns5: <http://www.iana.org/assignments/> .
+@prefix ns4: <http://www.iana.org/assignments/> .
+@prefix ns5: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -18,7 +18,7 @@
     dcterms:title "Compute radiometric indices." ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns5:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns4:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.RadiometricIndices/execution> ] ;
     pp:version "1.0.0" ;
     proc:inputs [ ns2:channels [ dcterms:description "Blue channel index" ;
@@ -48,21 +48,21 @@
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-png> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Radiometric index -- input `rasters`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/radiometric-index/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Radiometric index -- input `rasters`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Radiometric index -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index/inputs/rasters> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Radiometric index -- input `rasters`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/radiometric-index/inputs/rasters> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
             ns2:out [ dcterms:description "Radiometric indices output image" ;
                     dcterms:title "Radiometric indices output image" ;
                     proc:schema [ proc:default "\"float\""^^rdf:JSON ;
@@ -82,38 +82,38 @@
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Implementation Profile: Radiometric index" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ dcterms:title "Generic Profile: Radiometric index" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/radiometric-index> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
+        [ dcterms:title "Implementation Profile: Radiometric index" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns4:out [ dcterms:description "Radiometric indices output image" ;
+    proc:outputs [ ns5:out [ dcterms:description "Radiometric indices output image" ;
                     dcterms:title "Radiometric indices output image" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
                     ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-png> ;
                     proc:keywords "raster" ;
-                    proc:metadata [ dcterms:title "Generic Profile: Radiometric index -- output `raster`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/radiometric-index/outputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ],
-                        [ dcterms:title "Implementation Profile: Radiometric index -- output `raster`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Radiometric index -- output `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/radiometric-index/outputs/raster> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ],
+                        [ dcterms:title "Generic Profile: Radiometric index -- output `raster`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/radiometric-index/outputs/raster> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-output> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ] .
+                                    ns1:contentMediaType "image/tiff" ] ] ] ] .
 

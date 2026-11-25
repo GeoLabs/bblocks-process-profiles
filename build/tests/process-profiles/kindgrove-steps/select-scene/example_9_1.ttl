@@ -27,7 +27,7 @@
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -35,7 +35,7 @@
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/select-scene to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -44,7 +44,7 @@
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene/actions/inherited-description-2026-11-10> a rim:RegisterAction ;
     dcterms:description "processDescription.inherited.json added with the attachment to the Implementation Profile product-selection: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged." ;
@@ -52,7 +52,7 @@
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene/actions/plan-2026-11-11> a rim:RegisterAction ;
     dcterms:description "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#select_scene). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> application/geo+json (with contentEncoding binary) for the output stac_item, in processDescription.json and processDescription.inherited.json. The assumedFormatGaps recorded at the attachment on 2026-11-10 for stac_item were removed the same day, when the corrected CWL served these formats; the entry has none." ;
@@ -60,7 +60,7 @@
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene/actions/representation-2026-11-18> a rim:RegisterAction ;
     dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
@@ -68,7 +68,7 @@
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene/actions/role-decompositions-2026-11-10> a rim:RegisterAction ;
     dcterms:description "roleDecompositions added: the role areaOfInterest of product-selection is taken as the four inputs west, south, east and north, and the literal role timeInterval as days_back, not reproducible since it depends on the time of execution (decision C11 of 2026-11-10)." ;
@@ -76,7 +76,7 @@
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/product-selection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Feature." ;
@@ -84,7 +84,7 @@
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene/actions/tier3-2026-11-10> a rim:RegisterAction ;
     dcterms:description "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
@@ -92,7 +92,7 @@
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/select_scene> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/select_scene> ;
     pp:version "0.1.0" .
@@ -114,14 +114,14 @@
             pp:rationale "Same filter semantics as load_collection's `spatial_extent` (west/south/east/north) and a `properties` cloud-cover filter; `days_back` is a relative time window resolved against the execution date, not an explicit `temporal_extent` -- the same non-reproducibility already documented for `kindgrove.mangrove-workflow` (Q-W2-DAYSBACK)." ] ;
     pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/selection-filtering> ;
     pp:plan <https://ospd.example.org/ogc-api/processes/select_scene/package> ;
-    pp:roleDecomposition [ skos:note "The area of interest is taken as the four bounds of a bounding box, in EPSG:4326 (implicit: passed as the `bbox` of pystac_client, read), not as a GeoJSON geometry: the representation geometry-geojson of the role is not served." ;
-            pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection/inputs/areaOfInterest> ;
-            pp:part ( "west" "south" "east" "north" ) ;
-            pp:side "inputs" ],
-        [ skos:note "The time interval is the `days_back` days before the time of execution: the same input gives another interval on another day, so a run cannot be repeated from its inputs alone." ;
+    pp:roleDecomposition [ skos:note "The time interval is the `days_back` days before the time of execution: the same input gives another interval on another day, so a run cannot be repeated from its inputs alone." ;
             pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection/inputs/timeInterval> ;
             pp:part ( "days_back" ) ;
             pp:reproducible false ;
+            pp:side "inputs" ],
+        [ skos:note "The area of interest is taken as the four bounds of a bounding box, in EPSG:4326 (implicit: passed as the `bbox` of pystac_client, read), not as a GeoJSON geometry: the representation geometry-geojson of the role is not served." ;
+            pp:implements <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection/inputs/areaOfInterest> ;
+            pp:part ( "west" "south" "east" "north" ) ;
             pp:side "inputs" ] ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Geometry ;

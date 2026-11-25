@@ -366,8 +366,8 @@ OGC API - Processes processDescription derived from the CWL.
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
 @prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns4: <http://schema.org/> .
+@prefix ns3: <http://schema.org/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -420,27 +420,27 @@ OGC API - Processes processDescription derived from the CWL.
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value [ a ns4:Person ;
-                    ns4:name "Cameron Sajedi" ] ;
-            proc:role schema:author ],
-        [ rdf:value "reproject_band" ;
+    proc:metadata [ rdf:value "reproject_band" ;
             proc:role schema:name ],
-        [ rdf:value "Reproject a raster onto a regular grid covering a bounding box" ;
-            proc:role schema:description ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
-        [ rdf:value [ a ns4:Person ;
-                    ns4:affiliation "GeoLabs" ;
-                    ns4:name "Gérald Fenoy" ] ;
-            proc:role schema:contributor ],
         [ rdf:value "0.1.0" ;
             proc:role schema:softwareVersion ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ] ;
+            proc:role schema:license ],
+        [ rdf:value [ a ns3:Person ;
+                    ns3:affiliation "GeoLabs" ;
+                    ns3:name "Gérald Fenoy" ] ;
+            proc:role schema:contributor ],
+        [ rdf:value [ a ns3:Person ;
+                    ns3:name "Cameron Sajedi" ] ;
+            proc:role schema:author ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value "Reproject a raster onto a regular grid covering a bounding box" ;
+            proc:role schema:description ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns3:reprojected_file [ dcterms:description "" ;
+    proc:outputs [ ns4:reprojected_file [ dcterms:description "" ;
                     dcterms:title "reprojected_file" ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
@@ -883,10 +883,10 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://schema.org/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix ns3: <https://w3id.org/ogc/api/schema/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns4: <http://schema.org/> .
 @prefix ns5: <https://w3id.org/geolabs/ospd/generic-profiles/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -902,7 +902,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
         "reprojection" ;
     dcterms:title "reproject_band" ;
     pp:version "0.1.0" ;
-    proc:inputs [ ns4:band_file [ dcterms:description "" ;
+    proc:inputs [ ns1:band_file [ dcterms:description "" ;
                     dcterms:title "band_file" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
                     ns5:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff> ;
@@ -918,12 +918,12 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     proc:schema [ proc:type "string" ;
                             ns3:contentEncoding "binary" ;
                             ns3:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns4:east [ dcterms:description "" ;
+            ns1:east [ dcterms:description "" ;
                     dcterms:title "east" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns4:epsg [ dcterms:description "" ;
+            ns1:epsg [ dcterms:description "" ;
                     dcterms:title "epsg" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/coordinate-reference-system> ;
                     proc:keywords "CRS" ;
@@ -937,54 +937,54 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "4326"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns4:north [ dcterms:description "" ;
+            ns1:north [ dcterms:description "" ;
                     dcterms:title "north" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns4:resolution [ dcterms:description "" ;
+            ns1:resolution [ dcterms:description "" ;
                     dcterms:title "resolution" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "0.0001"^^rdf:JSON ;
                             proc:type "number" ] ] ;
-            ns4:south [ dcterms:description "" ;
+            ns1:south [ dcterms:description "" ;
                     dcterms:title "south" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns4:west [ dcterms:description "" ;
+            ns1:west [ dcterms:description "" ;
                     dcterms:title "west" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+    proc:metadata [ rdf:value "0.1.0" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value "reproject_band" ;
+            proc:role schema:name ],
+        [ rdf:value [ a ns4:Person ;
+                    ns4:affiliation "GeoLabs" ;
+                    ns4:name "Gérald Fenoy" ] ;
+            proc:role schema:contributor ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
+        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ dcterms:title "Generic Profile: Raster reprojection" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ rdf:value "Reproject a raster onto a regular grid covering a bounding box" ;
+            proc:role schema:description ],
         [ dcterms:title "Implementation Profile: Raster reprojection" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
-        [ rdf:value "0.1.0" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value "Reproject a raster onto a regular grid covering a bounding box" ;
-            proc:role schema:description ],
-        [ rdf:value [ a ns1:Person ;
-                    ns1:name "Cameron Sajedi" ] ;
-            proc:role schema:author ],
-        [ rdf:value [ a ns1:Person ;
-                    ns1:affiliation "GeoLabs" ;
-                    ns1:name "Gérald Fenoy" ] ;
-            proc:role schema:contributor ],
-        [ rdf:value "reproject_band" ;
-            proc:role schema:name ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ] ;
+        [ rdf:value [ a ns4:Person ;
+                    ns4:name "Cameron Sajedi" ] ;
+            proc:role schema:author ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
@@ -1165,7 +1165,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 [
   {
     "id": "urn:example:run:kindgrove-steps:reproject-band",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
     "startedAtTime": "2026-09-24T10:59:12Z",
     "used": [
@@ -1191,7 +1191,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:reproject-band:in:band_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/band_file",
     "links": [
       {
@@ -1203,43 +1203,43 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:reproject-band:in:west",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/west",
     "value": 95.15
   },
   {
     "id": "urn:example:entity:reproject-band:in:south",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/south",
     "value": 15.9
   },
   {
     "id": "urn:example:entity:reproject-band:in:east",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/east",
     "value": 95.35
   },
   {
     "id": "urn:example:entity:reproject-band:in:north",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/north",
     "value": 16.1
   },
   {
     "id": "urn:example:entity:reproject-band:in:epsg",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/epsg",
     "value": 4326
   },
   {
     "id": "urn:example:entity:reproject-band:in:resolution",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/resolution",
     "value": 0.0001
   },
   {
     "id": "urn:example:entity:reproject-band:out:reprojected_file",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#outputs/reprojected_file",
     "wasGeneratedBy": "urn:example:run:kindgrove-steps:reproject-band",
     "wasDerivedFrom": [
@@ -1256,21 +1256,25 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "urn:example:image:ghcr.io/geolabs/kindgrove/reproject-band:v0.0.2-rc2",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "container image ghcr.io/geolabs/kindgrove/reproject-band:v0.0.2-rc2"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/reproject_band/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/reproject_band/package"
   }
 ]
@@ -1284,7 +1288,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "@graph": [
     {
       "id": "urn:example:run:kindgrove-steps:reproject-band",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
       "startedAtTime": "2026-09-24T10:59:12Z",
       "used": [
@@ -1310,7 +1314,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:reproject-band:in:band_file",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/band_file",
       "links": [
         {
@@ -1322,43 +1326,43 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:reproject-band:in:west",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/west",
       "value": 95.15
     },
     {
       "id": "urn:example:entity:reproject-band:in:south",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/south",
       "value": 15.9
     },
     {
       "id": "urn:example:entity:reproject-band:in:east",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/east",
       "value": 95.35
     },
     {
       "id": "urn:example:entity:reproject-band:in:north",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/north",
       "value": 16.1
     },
     {
       "id": "urn:example:entity:reproject-band:in:epsg",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/epsg",
       "value": 4326
     },
     {
       "id": "urn:example:entity:reproject-band:in:resolution",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#inputs/resolution",
       "value": 0.0001
     },
     {
       "id": "urn:example:entity:reproject-band:out:reprojected_file",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/reproject_band#outputs/reprojected_file",
       "wasGeneratedBy": "urn:example:run:kindgrove-steps:reproject-band",
       "wasDerivedFrom": [
@@ -1375,21 +1379,25 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "urn:example:image:ghcr.io/geolabs/kindgrove/reproject-band:v0.0.2-rc2",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "container image ghcr.io/geolabs/kindgrove/reproject-band:v0.0.2-rc2"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/reproject_band/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/reproject_band/package"
     }
   ]
@@ -1407,7 +1415,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band> a prov:Plan ;
+<arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/reproject_band/package> .
 
 <urn:example:entity:reproject-band:out:reprojected_file> a prov:Entity,
@@ -1443,7 +1452,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
         <https://ospd.example.org/ogc-api/processes/reproject_band#inputs/west> ;
     rdf:value 9.515e+01 .
 
-<urn:example:image:ghcr.io/geolabs/kindgrove/reproject-band:v0.0.2-rc2> a prov:SoftwareAgent ;
+<urn:example:image:ghcr.io/geolabs/kindgrove/reproject-band:v0.0.2-rc2> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image ghcr.io/geolabs/kindgrove/reproject-band:v0.0.2-rc2" .
 
 <urn:example:run:kindgrove-steps:reproject-band> a prov:Activity,
@@ -1462,7 +1472,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ghcr.io/geolabs/kindgrove/reproject-band:v0.0.2-rc2> .
 
-<https://ospd.example.org/ogc-api/processes/reproject_band/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/reproject_band/package> a prov:Entity,
+        prov:Plan .
 
 <urn:example:entity:reproject-band:in:band_file> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/reproject_band#inputs/band_file> ;
@@ -1470,7 +1481,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
             oa:hasTarget <https://ospd.example.org/ogc-api/jobs/upstream-step/results/red.tif> ] .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 
 
@@ -1483,6 +1495,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 {
   "id": "urn:example:run:kindgrove-steps:reproject-band",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/reproject_band/package",
   "usedInput": [
@@ -1521,6 +1534,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/kindgrove-steps/reproject-band/context.jsonld",
   "id": "urn:example:run:kindgrove-steps:reproject-band",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/reproject_band/package",
   "usedInput": [
@@ -1559,6 +1573,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:kindgrove-steps:reproject-band> a wfprov:ProcessRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/reproject_band/package> ;
     wfprov:usedInput <urn:example:entity:reproject-band:in:band_file>,
@@ -1597,7 +1612,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
@@ -1607,7 +1622,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
@@ -1617,7 +1632,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
@@ -1627,7 +1642,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
@@ -1637,7 +1652,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#reproject_band). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_file and the output reprojected_file, in processDescription.json and processDescription.inherited.json. assumedFormatGaps removed: its two gaps, band_file and reprojected_file served as application/octet-stream, are closed by the format the CWL now declares, as their reason anticipated (removed on 2026-11-10 with the corrected CWL, pinned on 2026-11-11).",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
@@ -1648,7 +1663,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
@@ -1658,7 +1673,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     }
@@ -1734,7 +1749,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
@@ -1744,7 +1759,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
@@ -1754,7 +1769,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
@@ -1764,7 +1779,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
@@ -1774,7 +1789,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#reproject_band). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_file and the output reprojected_file, in processDescription.json and processDescription.inherited.json. assumedFormatGaps removed: its two gaps, band_file and reprojected_file served as application/octet-stream, are closed by the format the CWL now declares, as their reason anticipated (removed on 2026-11-10 with the corrected CWL, pinned on 2026-11-11).",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-11T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
@@ -1785,7 +1800,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     },
@@ -1795,7 +1810,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band"
     }
@@ -1879,7 +1894,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -1887,7 +1902,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/kindgrove-steps/reproject-band to https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -1896,7 +1911,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/plan-2026-11-11> a rim:RegisterAction ;
     dcterms:description "plan: executionUnit.href moves from the v0.0.2-rc2 release of GeoLabs/KindGrove to the v0.0.2-rc3 release (mangrove-workflow-steps.cwl#reproject_band). The rc3 CWL declares the format of its Files (the ipython2cwl format annotation), so the processDescription derived from it changes: contentMediaType application/octet-stream -> image/tiff; application=geotiff (with contentEncoding binary) for the input band_file and the output reprojected_file, in processDescription.json and processDescription.inherited.json. assumedFormatGaps removed: its two gaps, band_file and reprojected_file served as application/octet-stream, are closed by the format the CWL now declares, as their reason anticipated (removed on 2026-11-10 with the corrected CWL, pinned on 2026-11-11)." ;
@@ -1904,7 +1919,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/representation-2026-11-18> a rim:RegisterAction ;
     dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
@@ -1912,7 +1927,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-reprojection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
@@ -1920,7 +1935,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band/actions/tier3-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
@@ -1928,7 +1943,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/kindgrove-steps/reproject_band> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/reproject_band> ;
     pp:version "0.1.0" .
@@ -6295,13 +6310,13 @@ id:2363b376-af39-4421-ac82-298f9b5bf5d6 a ro:Folder,
     prov:hadDictionaryMember "id:758a05e3-6c7f-41d7-af5a-b4798d4b882f"^^xsd:QName,
         "id:dcb23f91-1dbc-4929-9021-d23ee962fc04"^^xsd:QName ;
     prov:qualifiedGeneration [ a prov:Generation ;
-            prov:activity id:c16504e6-ec23-43da-92c9-c00151a037f2 ;
-            prov:atTime "2026-09-24T12:59:58.100038"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/stac_catalog> ],
-        [ a prov:Generation ;
             prov:activity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ;
             prov:atTime "2026-09-24T12:59:58.171647"^^xsd:dateTime ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/primary/stac> ] ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/primary/stac> ],
+        [ a prov:Generation ;
+            prov:activity id:c16504e6-ec23-43da-92c9-c00151a037f2 ;
+            prov:atTime "2026-09-24T12:59:58.100038"^^xsd:dateTime ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/stac_catalog> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
             provext:member id:f70266c8-9af3-4228-89f4-230a39e31c83 ],
         [ a provext:Membership ;
@@ -6334,9 +6349,9 @@ id:380f03a1-1d47-401e-b9d6-4e6b30363135 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:cbcc2c55-1928-47ce-88e9-9cc945faa37e ],
-        [ a provext:Membership ;
             provext:member id:6ee43ae1-f7f0-44e8-9521-f520ee73f8d5 ],
+        [ a provext:Membership ;
+            provext:member id:cbcc2c55-1928-47ce-88e9-9cc945faa37e ],
         [ a provext:Membership ;
             provext:member id:a29b44cd-ed7f-4617-8e76-6b4279377f1d ] .
 
@@ -6378,11 +6393,11 @@ id:4c4659c5-50da-43e0-8077-7def82bdd204 a wfprov:Artifact,
     provext:qualifiedMembership [ a provext:Membership ;
             provext:member id:c0bace95-d5f7-47c8-85c2-88006db5ab2d ],
         [ a provext:Membership ;
-            provext:member id:dd4db319-ab09-4589-93be-c0ab5a21b781 ],
+            provext:member id:a60dd30c-c4c6-4254-be37-68b96605a358 ],
         [ a provext:Membership ;
             provext:member id:2f66b1e4-39fc-4551-8aa8-49831c3211bb ],
         [ a provext:Membership ;
-            provext:member id:a60dd30c-c4c6-4254-be37-68b96605a358 ] .
+            provext:member id:dd4db319-ab09-4589-93be-c0ab5a21b781 ] .
 
 id:4d33da78-bc2b-4f11-927c-55071695661b a prov:Agent,
         prov:SoftwareAgent ;
@@ -6437,9 +6452,17 @@ id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57 a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:58:01.354035"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:58:01.588695"^^xsd:dateTime ;
+            prov:entity id:8f1f4d19-7ab7-48f7-a279-0cd0f11d5bb3 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/west> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:58:01.588345"^^xsd:dateTime ;
             prov:entity data:78988010b890ce6f4d2136481f392787ec6d6106 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/band> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:58:01.588559"^^xsd:dateTime ;
+            prov:entity id:183be3aa-ca39-47b3-9cb9-9972ab5b4b04 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/north> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:58:01.588654"^^xsd:dateTime ;
             prov:entity id:db33c88c-4dd2-4ea1-b06b-577175d50413 ;
@@ -6448,14 +6471,6 @@ id:6ed05a19-69ad-401e-9b2a-5d24ea6d9f57 a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:58:01.588501"^^xsd:dateTime ;
             prov:entity id:d1fc5582-5435-437c-afc6-7bf715e11ac9 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/east> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:58:01.588559"^^xsd:dateTime ;
-            prov:entity id:183be3aa-ca39-47b3-9cb9-9972ab5b4b04 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/north> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:58:01.588695"^^xsd:dateTime ;
-            prov:entity id:8f1f4d19-7ab7-48f7-a279-0cd0f11d5bb3 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band/west> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:58:01.588601"^^xsd:dateTime ;
             prov:entity id:d81429c0-f7f3-4b1c-b7bb-0dd72a874aff ;
@@ -6485,9 +6500,9 @@ id:728b8a7c-ecb1-4cd6-b49e-3f7537dd514b a wfprov:Artifact,
         [ a provext:Membership ;
             provext:member id:105cc922-459c-4a99-a431-5d4b3b38aea9 ],
         [ a provext:Membership ;
-            provext:member id:3a6146e3-99f8-4cdc-aa09-aa71cf40578e ],
+            provext:member id:ab8af93b-6ae4-4bf6-86ac-989a33e53741 ],
         [ a provext:Membership ;
-            provext:member id:ab8af93b-6ae4-4bf6-86ac-989a33e53741 ] .
+            provext:member id:3a6146e3-99f8-4cdc-aa09-aa71cf40578e ] .
 
 id:72b6e1b9-31a6-41a5-9509-2fb54eb7a854 a prov:Entity ;
     prov:value 1.61e+01 .
@@ -6542,9 +6557,9 @@ id:81daad74-dad7-41e0-bc70-26432d1dfb21 a wfprov:Artifact,
     prov:hadDictionaryMember "id:5356eeb5-2499-42be-bc4e-e8528bde1ff8"^^xsd:QName,
         "id:d8f4f618-3e0f-4024-a17f-b5c9d24b67b9"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:4c4659c5-50da-43e0-8077-7def82bdd204 ],
+            provext:member data:09b42388eb37be1a4b972127a78f691ec6eb3795 ],
         [ a provext:Membership ;
-            provext:member data:09b42388eb37be1a4b972127a78f691ec6eb3795 ] .
+            provext:member id:4c4659c5-50da-43e0-8077-7def82bdd204 ] .
 
 id:82a589e5-da3e-471d-959a-5f0ada295abf a prov:Agent .
 
@@ -6610,10 +6625,10 @@ id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/download_band_2" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ;
-            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2> ],
+            prov:agent id:112f1253-d984-432e-8b9c-f6b600dc0867 ],
         [ a prov:Association ;
-            prov:agent id:112f1253-d984-432e-8b9c-f6b600dc0867 ] ;
+            prov:agent id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ;
+            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-24T12:58:36.167066"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
@@ -6621,14 +6636,6 @@ id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5 a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:58:16.254478"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:58:16.268706"^^xsd:dateTime ;
-            prov:entity id:e10c43d5-f616-4774-8ff7-be84cdf977aa ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/south> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:58:16.268376"^^xsd:dateTime ;
-            prov:entity data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/band> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:58:16.268610"^^xsd:dateTime ;
             prov:entity id:547c8cdb-eb07-4b2e-bd53-a0e43e839323 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/east> ],
@@ -6637,13 +6644,21 @@ id:9c060ac7-786e-4f1d-874a-ac1dc995d3a5 a wfprov:ProcessRun,
             prov:entity id:d7eaf21e-997d-440a-9c59-f5def6552d98 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/north> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:58:16.268791"^^xsd:dateTime ;
+            prov:entity id:db33c88c-4dd2-4ea1-b06b-577175d50413 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/stac_item> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:58:16.268376"^^xsd:dateTime ;
+            prov:entity data:bc74f4f071a5a33f00ab88a6d6385b5e6638b86c ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/band> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:58:16.268833"^^xsd:dateTime ;
             prov:entity id:50e7a067-7cf5-48cc-a7a9-995f535a42a5 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/west> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:58:16.268791"^^xsd:dateTime ;
-            prov:entity id:db33c88c-4dd2-4ea1-b06b-577175d50413 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/stac_item> ] .
+            prov:atTime "2026-09-24T12:58:16.268706"^^xsd:dateTime ;
+            prov:entity id:e10c43d5-f616-4774-8ff7-be84cdf977aa ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_2/south> ] .
 
 id:9c4478e2-935b-41d5-857b-c2641d1c917d a wf4ever:File,
         wfprov:Artifact,
@@ -6715,6 +6730,14 @@ id:ad22cfb2-89d1-476b-a33a-73bf3be4c782 a wfprov:ProcessRun,
             prov:entity id:3874df5f-5219-46d7-b883-f927b2718f98 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_3/north> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:58:36.200263"^^xsd:dateTime ;
+            prov:entity id:7ad088e7-2b84-406e-a4ef-5e791c3c5457 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_3/east> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:58:36.200371"^^xsd:dateTime ;
+            prov:entity id:c11e8081-a4e0-43ef-ae32-f37e0aa2b9a7 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_3/south> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:58:36.200068"^^xsd:dateTime ;
             prov:entity data:ba936cb0e062bea4078e8b56371ca8fe054093dd ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_3/band> ],
@@ -6722,14 +6745,6 @@ id:ad22cfb2-89d1-476b-a33a-73bf3be4c782 a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:58:36.200427"^^xsd:dateTime ;
             prov:entity id:db33c88c-4dd2-4ea1-b06b-577175d50413 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_3/stac_item> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:58:36.200371"^^xsd:dateTime ;
-            prov:entity id:c11e8081-a4e0-43ef-ae32-f37e0aa2b9a7 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_3/south> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:58:36.200263"^^xsd:dateTime ;
-            prov:entity id:7ad088e7-2b84-406e-a4ef-5e791c3c5457 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/download_band_3/east> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:58:36.200466"^^xsd:dateTime ;
             prov:entity id:e858184a-032a-4649-a114-21e67c56c9b7 ;
@@ -6739,10 +6754,10 @@ id:af446720-3625-4794-9126-810a0620808f a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/reproject_band_3" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ;
-            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3> ],
+            prov:agent id:936a4bd7-abcd-4bf2-9423-94ae772bd057 ],
         [ a prov:Association ;
-            prov:agent id:936a4bd7-abcd-4bf2-9423-94ae772bd057 ] ;
+            prov:agent id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ;
+            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-24T12:59:32.420671"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
@@ -6750,33 +6765,33 @@ id:af446720-3625-4794-9126-810a0620808f a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:59:25.490304"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:25.509607"^^xsd:dateTime ;
-            prov:entity id:ffc8283b-4edf-49e1-bcab-9bd74542ce23 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/epsg> ],
+            prov:atTime "2026-09-24T12:59:25.509369"^^xsd:dateTime ;
+            prov:entity id:a1526e7f-b483-4350-9c60-e56f786bfff3 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/band_file> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:25.509555"^^xsd:dateTime ;
             prov:entity id:e6cc9d7e-080c-437c-a66b-4f386982b118 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/east> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:25.509728"^^xsd:dateTime ;
-            prov:entity id:d2cddbd6-1979-4e51-b267-7fec4bab3dc8 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/south> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:25.509771"^^xsd:dateTime ;
-            prov:entity id:5f1b745b-1648-40c5-8fbe-a8197ea712d1 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/west> ],
+            prov:atTime "2026-09-24T12:59:25.509646"^^xsd:dateTime ;
+            prov:entity id:72b6e1b9-31a6-41a5-9509-2fb54eb7a854 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/north> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:25.509686"^^xsd:dateTime ;
             prov:entity id:e2de3352-f3cb-41aa-976e-7d0fa8018bcc ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/resolution> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:25.509369"^^xsd:dateTime ;
-            prov:entity id:a1526e7f-b483-4350-9c60-e56f786bfff3 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/band_file> ],
+            prov:atTime "2026-09-24T12:59:25.509771"^^xsd:dateTime ;
+            prov:entity id:5f1b745b-1648-40c5-8fbe-a8197ea712d1 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/west> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:25.509646"^^xsd:dateTime ;
-            prov:entity id:72b6e1b9-31a6-41a5-9509-2fb54eb7a854 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/north> ] .
+            prov:atTime "2026-09-24T12:59:25.509607"^^xsd:dateTime ;
+            prov:entity id:ffc8283b-4edf-49e1-bcab-9bd74542ce23 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/epsg> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:25.509728"^^xsd:dateTime ;
+            prov:entity id:d2cddbd6-1979-4e51-b267-7fec4bab3dc8 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_3/south> ] .
 
 id:b3b5ccdd-6d2b-4e1c-b9d3-f904fd999149 a wf4ever:File,
         wfprov:Artifact,
@@ -6819,6 +6834,18 @@ id:c16504e6-ec23-43da-92c9-c00151a037f2 a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:59:47.598635"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:47.691973"^^xsd:dateTime ;
+            prov:entity id:924dc3e6-e45e-4ae0-940f-d538dce7a6e4 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/analysis_summary_file> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:47.692457"^^xsd:dateTime ;
+            prov:entity id:db33c88c-4dd2-4ea1-b06b-577175d50413 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/stac_item> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:47.692122"^^xsd:dateTime ;
+            prov:entity id:3659eb06-f1ed-4ec3-8ccd-74774fdae9ac ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/biomass_summary_file> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:47.692292"^^xsd:dateTime ;
             prov:entity id:dc91669b-4a2f-4bd1-92c9-382337d78dba ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/east> ],
@@ -6827,37 +6854,25 @@ id:c16504e6-ec23-43da-92c9-c00151a037f2 a wfprov:ProcessRun,
             prov:entity id:9c4478e2-935b-41d5-857b-c2641d1c917d ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/carbon_summary_file> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:47.692412"^^xsd:dateTime ;
-            prov:entity id:c5451c9d-b6ce-42de-b9a3-9512e9784e73 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/south> ],
+            prov:atTime "2026-09-24T12:59:47.692318"^^xsd:dateTime ;
+            prov:entity id:d9517d0d-9e97-4d22-afa7-a402d0537cf6 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/mangrove_mask_file> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:47.692088"^^xsd:dateTime ;
+            prov:entity id:bc49aa46-3931-4344-8b1e-7788b5f50e0f ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/biomass_file> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:47.692360"^^xsd:dateTime ;
             prov:entity id:6818485a-eeb1-4ded-8202-995389ee3c9e ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/north> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:47.692122"^^xsd:dateTime ;
-            prov:entity id:3659eb06-f1ed-4ec3-8ccd-74774fdae9ac ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/biomass_summary_file> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:47.692457"^^xsd:dateTime ;
-            prov:entity id:db33c88c-4dd2-4ea1-b06b-577175d50413 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/stac_item> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:47.692318"^^xsd:dateTime ;
-            prov:entity id:d9517d0d-9e97-4d22-afa7-a402d0537cf6 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/mangrove_mask_file> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:47.692513"^^xsd:dateTime ;
             prov:entity id:37378d08-0575-4061-9f35-0bd44e06d360 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/west> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:47.691973"^^xsd:dateTime ;
-            prov:entity id:924dc3e6-e45e-4ae0-940f-d538dce7a6e4 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/analysis_summary_file> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:47.692088"^^xsd:dateTime ;
-            prov:entity id:bc49aa46-3931-4344-8b1e-7788b5f50e0f ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/biomass_file> ] .
+            prov:atTime "2026-09-24T12:59:47.692412"^^xsd:dateTime ;
+            prov:entity id:c5451c9d-b6ce-42de-b9a3-9512e9784e73 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/export_stac/south> ] .
 
 id:c3c368d8-6ec0-4064-bcfe-a0c6ebea821c a prov:Entity ;
     prov:value "20"^^xsd:int .
@@ -7006,25 +7021,21 @@ id:effb40f4-0a75-4498-80d7-d04365cf463b a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:57:48.481355"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:48.579345"^^xsd:dateTime ;
-            prov:entity id:d092277a-8801-406a-94ec-078bb314ec37 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/south> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:48.579301"^^xsd:dateTime ;
-            prov:entity id:e279fef3-8bfb-464b-9df4-3497a11b9735 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/north> ],
+            prov:atTime "2026-09-24T12:57:48.579935"^^xsd:dateTime ;
+            prov:entity id:d124ea7e-589c-4dd3-9515-031b20191cf3 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/west> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:48.579889"^^xsd:dateTime ;
             prov:entity data:5052a0c49b2beb0515446c40d4eee08c7fcad904 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/stac_api> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:48.577808"^^xsd:dateTime ;
-            prov:entity id:5d3a2cf8-ee6d-4729-9049-1b13ac82b9c8 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/cloud_cover_max> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:48.578733"^^xsd:dateTime ;
             prov:entity data:4c89b83017b6bf2fdefdc95f52a039255235ba37 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/collection> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:48.579301"^^xsd:dateTime ;
+            prov:entity id:e279fef3-8bfb-464b-9df4-3497a11b9735 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/north> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:48.578840"^^xsd:dateTime ;
             prov:entity id:df87d5ba-da6e-432b-b924-80ec05cd6e0b ;
@@ -7034,9 +7045,13 @@ id:effb40f4-0a75-4498-80d7-d04365cf463b a wfprov:ProcessRun,
             prov:entity id:e2d4aa64-8b79-4922-beaa-658f42437197 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/days_back> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:48.579935"^^xsd:dateTime ;
-            prov:entity id:d124ea7e-589c-4dd3-9515-031b20191cf3 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/west> ] .
+            prov:atTime "2026-09-24T12:57:48.579345"^^xsd:dateTime ;
+            prov:entity id:d092277a-8801-406a-94ec-078bb314ec37 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/south> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:48.577808"^^xsd:dateTime ;
+            prov:entity id:5d3a2cf8-ee6d-4729-9049-1b13ac82b9c8 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/select_scene/cloud_cover_max> ] .
 
 id:f3cf79d9-5592-4f15-a94b-728004a97650 a prov:Agent,
         prov:SoftwareAgent ;
@@ -7062,6 +7077,10 @@ id:f4cf1f0f-6d62-483b-ba92-38d6e1040135 a wfprov:ProcessRun,
             prov:entity id:6811beb8-4d7f-45b8-9707-e34238fed895 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/resolution> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:18.369114"^^xsd:dateTime ;
+            prov:entity id:61f78ec9-45f1-4537-9ed6-4f4e8616efbf ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/south> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:18.369015"^^xsd:dateTime ;
             prov:entity id:87d73316-63b5-4c3d-ba48-d2812d5dd71a ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/epsg> ],
@@ -7070,9 +7089,9 @@ id:f4cf1f0f-6d62-483b-ba92-38d6e1040135 a wfprov:ProcessRun,
             prov:entity id:c521c30a-5aa8-4fc8-9d25-b8d9de55c870 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/north> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:18.369114"^^xsd:dateTime ;
-            prov:entity id:61f78ec9-45f1-4537-9ed6-4f4e8616efbf ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/south> ],
+            prov:atTime "2026-09-24T12:59:18.369145"^^xsd:dateTime ;
+            prov:entity id:6b4a4879-8c4b-4f74-9957-2902ed5cce8e ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/west> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:18.368961"^^xsd:dateTime ;
             prov:entity id:faffe676-addb-4b7c-ac15-34a991f69f69 ;
@@ -7080,11 +7099,7 @@ id:f4cf1f0f-6d62-483b-ba92-38d6e1040135 a wfprov:ProcessRun,
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:18.368809"^^xsd:dateTime ;
             prov:entity id:cb4e16e3-e34d-4252-820f-27055b12f9f0 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/band_file> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:18.369145"^^xsd:dateTime ;
-            prov:entity id:6b4a4879-8c4b-4f74-9957-2902ed5cce8e ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/west> ] .
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band_2/band_file> ] .
 
 id:f5beff83-d577-48b1-b086-b1a35ed1b44b a prov:Entity ;
     prov:value 2e-01 .
@@ -7113,9 +7128,9 @@ id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b a wfprov:ProcessRun,
             prov:entity id:e70e9f12-3e5c-4948-9ca6-449d0d53c077 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/east> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:12.290735"^^xsd:dateTime ;
-            prov:entity id:e8ec687a-b9d1-4afa-83c6-6c3bf9266d3e ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/north> ],
+            prov:atTime "2026-09-24T12:59:12.290800"^^xsd:dateTime ;
+            prov:entity id:e56a0493-0204-4306-b246-d6f0a0ed8e0b ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/south> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:12.290487"^^xsd:dateTime ;
             prov:entity id:7f3077b0-d507-4f90-b1ce-76c822fefb1e ;
@@ -7125,17 +7140,17 @@ id:f6decba1-ec9c-4822-a5f2-feb5a1bd925b a wfprov:ProcessRun,
             prov:entity id:eff8560e-cd59-4a84-8dac-2f766310d52a ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/resolution> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:12.290700"^^xsd:dateTime ;
-            prov:entity id:aa6dbd65-080e-408b-8c01-0acfe33cc871 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/epsg> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:12.290800"^^xsd:dateTime ;
-            prov:entity id:e56a0493-0204-4306-b246-d6f0a0ed8e0b ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/south> ],
+            prov:atTime "2026-09-24T12:59:12.290735"^^xsd:dateTime ;
+            prov:entity id:e8ec687a-b9d1-4afa-83c6-6c3bf9266d3e ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/north> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:12.290832"^^xsd:dateTime ;
             prov:entity id:74367791-176c-4eaf-9ca3-e10883dc4521 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/west> ] .
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/west> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:12.290700"^^xsd:dateTime ;
+            prov:entity id:aa6dbd65-080e-408b-8c01-0acfe33cc871 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/reproject_band/epsg> ] .
 
 id:f70266c8-9af3-4228-89f4-230a39e31c83 a wf4ever:File,
         wfprov:Artifact,
@@ -7187,17 +7202,17 @@ id:03305ae1-bded-486a-bfd3-b2f244261014 a ro:Folder,
         "id:827caa38-b109-46f9-be8f-4bc99371b11f"^^xsd:QName,
         "id:eeb1bf4b-58a7-41c1-b269-d3320e3156e8"^^xsd:QName ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:8982a81b-193e-4e8f-bacf-43df0bb2e832 ],
+            provext:member id:73d52f8a-86fe-46bd-a3e3-ed71eaa8b8d0 ],
         [ a provext:Membership ;
             provext:member id:740ff7b1-6fac-4641-92f3-b9a9b32a0eec ],
         [ a provext:Membership ;
-            provext:member id:b3b5ccdd-6d2b-4e1c-b9d3-f904fd999149 ],
-        [ a provext:Membership ;
-            provext:member id:2125c168-2391-4a9c-924c-8d5d7330ffd5 ],
-        [ a provext:Membership ;
             provext:member id:3a808b83-4512-4301-9193-fe5620d0ece5 ],
         [ a provext:Membership ;
-            provext:member id:73d52f8a-86fe-46bd-a3e3-ed71eaa8b8d0 ] ;
+            provext:member id:b3b5ccdd-6d2b-4e1c-b9d3-f904fd999149 ],
+        [ a provext:Membership ;
+            provext:member id:8982a81b-193e-4e8f-bacf-43df0bb2e832 ],
+        [ a provext:Membership ;
+            provext:member id:2125c168-2391-4a9c-924c-8d5d7330ffd5 ] ;
     cwlprov:basename "mangrove-analysis-20260924-105955" .
 
 id:b05b7747-ddf9-4e6a-9b4a-2426b0e4b930 a wfprov:ProcessRun,
@@ -7242,10 +7257,10 @@ id:376997e3-8d83-426b-b84f-e985b2af4046 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/estimate_biomass" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ;
-            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass> ],
+            prov:agent id:e932c1b9-7fde-4dbd-a1af-1b17de8a38de ],
         [ a prov:Association ;
-            prov:agent id:e932c1b9-7fde-4dbd-a1af-1b17de8a38de ] ;
+            prov:agent id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ;
+            prov:hadPlan <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-24T12:59:47.581645"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
@@ -7253,6 +7268,22 @@ id:376997e3-8d83-426b-b84f-e985b2af4046 a wfprov:ProcessRun,
             prov:atTime "2026-09-24T12:59:40.439020"^^xsd:dateTime ;
             prov:hadActivity id:e96466cd-dd6c-469a-af95-6bbc439a3156 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:40.534185"^^xsd:dateTime ;
+            prov:entity id:14e98d45-e476-4164-bcdd-e4822839bf51 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/carbon_fraction> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:40.534404"^^xsd:dateTime ;
+            prov:entity id:f5beff83-d577-48b1-b086-b1a35ed1b44b ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/savi_min> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:40.534147"^^xsd:dateTime ;
+            prov:entity id:d9c2f532-47b2-45e7-9825-ed5413dea033 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/biomass_slope> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:59:40.534255"^^xsd:dateTime ;
+            prov:entity id:3ba979c6-c4b1-4d94-bd53-556aca41e518 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndvi_max> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:40.534343"^^xsd:dateTime ;
             prov:entity id:10db2d8a-f421-4312-aef9-6c5efbad211d ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndwi_min> ],
@@ -7261,41 +7292,25 @@ id:376997e3-8d83-426b-b84f-e985b2af4046 a wfprov:ProcessRun,
             prov:entity id:54cd6275-9321-44c8-856b-5978bcb26eae ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/biomass_intercept> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534404"^^xsd:dateTime ;
-            prov:entity id:f5beff83-d577-48b1-b086-b1a35ed1b44b ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/savi_min> ],
+            prov:atTime "2026-09-24T12:59:40.534219"^^xsd:dateTime ;
+            prov:entity id:da18af81-c62b-42a2-8596-4e773968588d ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndvi_file> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:40.534371"^^xsd:dateTime ;
             prov:entity id:87573e08-1a69-4a83-a551-f2a1c560cc7c ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/savi_file> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534219"^^xsd:dateTime ;
-            prov:entity id:da18af81-c62b-42a2-8596-4e773968588d ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndvi_file> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534255"^^xsd:dateTime ;
-            prov:entity id:3ba979c6-c4b1-4d94-bd53-556aca41e518 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndvi_max> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534311"^^xsd:dateTime ;
-            prov:entity id:4a3cec45-e5c9-449f-b623-e71818c12362 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndwi_file> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534185"^^xsd:dateTime ;
-            prov:entity id:14e98d45-e476-4164-bcdd-e4822839bf51 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/carbon_fraction> ],
+            prov:atTime "2026-09-24T12:59:40.534286"^^xsd:dateTime ;
+            prov:entity id:32255a12-525c-491e-bf2f-f579c17fdf39 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndvi_min> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:59:40.534428"^^xsd:dateTime ;
             prov:entity id:db33c88c-4dd2-4ea1-b06b-577175d50413 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/stac_item> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534286"^^xsd:dateTime ;
-            prov:entity id:32255a12-525c-491e-bf2f-f579c17fdf39 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndvi_min> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:59:40.534147"^^xsd:dateTime ;
-            prov:entity id:d9c2f532-47b2-45e7-9825-ed5413dea033 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/biomass_slope> ] .
+            prov:atTime "2026-09-24T12:59:40.534311"^^xsd:dateTime ;
+            prov:entity id:4a3cec45-e5c9-449f-b623-e71818c12362 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/estimate_biomass/ndwi_file> ] .
 
 id:db33c88c-4dd2-4ea1-b06b-577175d50413 a wf4ever:File,
         wfprov:Artifact,
@@ -7331,41 +7346,49 @@ id:e96466cd-dd6c-469a-af95-6bbc439a3156 a wfprov:WorkflowRun,
             prov:atTime "2026-09-24T12:57:44.628464"^^xsd:dateTime ;
             prov:hadActivity id:1432f81c-9552-435f-a0ab-6b28e12ea1b3 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.246066"^^xsd:dateTime ;
-            prov:entity id:c8ba466f-bf4e-4bf3-a2cb-e7013b6146cf ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/epsg> ],
+            prov:atTime "2026-09-24T12:57:45.245944"^^xsd:dateTime ;
+            prov:entity data:4c89b83017b6bf2fdefdc95f52a039255235ba37 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/collection> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:45.246023"^^xsd:dateTime ;
             prov:entity id:95ff8885-0a15-43aa-82fa-7cd8b1e37f8d ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/days_back> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.244914"^^xsd:dateTime ;
-            prov:entity id:aabf8f10-1849-4b0c-891f-dd7a04a822a7 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/biomass_slope> ],
+            prov:atTime "2026-09-24T12:57:45.244950"^^xsd:dateTime ;
+            prov:entity id:1d5c6165-738d-4f3e-815b-21b08a3876bc ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/carbon_fraction> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:45.247187"^^xsd:dateTime ;
+            prov:entity data:5052a0c49b2beb0515446c40d4eee08c7fcad904 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/stac_api> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:45.246104"^^xsd:dateTime ;
+            prov:entity id:6dc7f217-6174-4e64-be16-a87833936301 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/ndvi_max> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:45.244804"^^xsd:dateTime ;
+            prov:entity id:8ea13029-7217-48c6-83b2-5168cf85a135 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/aoi> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-24T12:57:45.246218"^^xsd:dateTime ;
+            prov:entity id:6f5fd862-1f4d-4a1b-9c03-5f531e769ee6 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/resolution> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:45.244872"^^xsd:dateTime ;
             prov:entity id:3f96db66-4f0b-4af4-9034-8d14f35016b5 ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/biomass_intercept> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.245944"^^xsd:dateTime ;
-            prov:entity data:4c89b83017b6bf2fdefdc95f52a039255235ba37 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/collection> ],
+            prov:atTime "2026-09-24T12:57:45.244914"^^xsd:dateTime ;
+            prov:entity id:aabf8f10-1849-4b0c-891f-dd7a04a822a7 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/biomass_slope> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.244950"^^xsd:dateTime ;
-            prov:entity id:1d5c6165-738d-4f3e-815b-21b08a3876bc ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/carbon_fraction> ],
+            prov:atTime "2026-09-24T12:57:45.246066"^^xsd:dateTime ;
+            prov:entity id:c8ba466f-bf4e-4bf3-a2cb-e7013b6146cf ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/epsg> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:45.246177"^^xsd:dateTime ;
             prov:entity id:5fc90b70-355b-4773-ab64-068be1b36cdc ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/ndwi_min> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.246141"^^xsd:dateTime ;
-            prov:entity id:c66a4eb4-76b6-4a3d-b5ee-aa35009027e1 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/ndvi_min> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.247187"^^xsd:dateTime ;
-            prov:entity data:5052a0c49b2beb0515446c40d4eee08c7fcad904 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/stac_api> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-24T12:57:45.244986"^^xsd:dateTime ;
             prov:entity id:c3c368d8-6ec0-4064-bcfe-a0c6ebea821c ;
@@ -7375,17 +7398,9 @@ id:e96466cd-dd6c-469a-af95-6bbc439a3156 a wfprov:WorkflowRun,
             prov:entity id:068eb4ce-9e22-4f53-8d00-6a22656436bb ;
             prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/savi_min> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.246218"^^xsd:dateTime ;
-            prov:entity id:6f5fd862-1f4d-4a1b-9c03-5f531e769ee6 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/resolution> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.244804"^^xsd:dateTime ;
-            prov:entity id:8ea13029-7217-48c6-83b2-5168cf85a135 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/aoi> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-24T12:57:45.246104"^^xsd:dateTime ;
-            prov:entity id:6dc7f217-6174-4e64-be16-a87833936301 ;
-            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/ndvi_max> ] ;
+            prov:atTime "2026-09-24T12:57:45.246141"^^xsd:dateTime ;
+            prov:entity id:c66a4eb4-76b6-4a3d-b5ee-aa35009027e1 ;
+            prov:hadRole <arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/ndvi_min> ] ;
     prov:startedAtTime "2026-09-24T12:57:44.628413"^^xsd:dateTime .
 
 
@@ -7864,6 +7879,13 @@ x-jsonld-extra-terms:
   entityType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@id'
+  agentType:
+    x-jsonld-id: '@type'
+    x-jsonld-type: '@id'
+  Activity: http://www.w3.org/ns/prov#Activity
+  Entity: http://www.w3.org/ns/prov#Entity
+  Agent: http://www.w3.org/ns/prov#Agent
+  SoftwareAgent: http://www.w3.org/ns/prov#SoftwareAgent
   used:
     x-jsonld-id: http://www.w3.org/ns/prov#used
     x-jsonld-type: '@id'
@@ -8093,7 +8115,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.kindgrove-steps.reproject-band
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-19'
+  dateOfLastChange: '2026-11-25'
 
 ```
 
@@ -8259,6 +8281,14 @@ Links to the schema:
       "@id": "@type",
       "@type": "@id"
     },
+    "agentType": {
+      "@id": "@type",
+      "@type": "@id"
+    },
+    "Activity": "prov:Activity",
+    "Entity": "prov:Entity",
+    "Agent": "prov:Agent",
+    "SoftwareAgent": "prov:SoftwareAgent",
     "used": {
       "@id": "prov:used",
       "@type": "@id"

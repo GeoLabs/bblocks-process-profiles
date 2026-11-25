@@ -17,7 +17,7 @@
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     },
@@ -27,7 +27,7 @@
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     },
@@ -37,7 +37,7 @@
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     },
@@ -48,7 +48,7 @@
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/band-math-multiband to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     },
@@ -58,14 +58,25 @@
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/activity-type-2026-11-19",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "affectedProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "description": "subClassOf changes from https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband, withdrawn from bblocks-generic-profiles on 2026-11-19, to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math, into which it is merged and to which the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math-multiband now points (decision of 2026-11-19). The entity types are unchanged. Classified substantive: the parent class changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
+      "startedAtTime": "2026-11-19T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     }
   ],
   "prefLabel": "This application performs mathematical operations on several multiband images.",
   "definition": "This application performs a mathematical operation on several multi-band images and outputs the result into an image (multi- or mono-band, as opposed to the BandMath OTB-application). The mathematical formula is done by the muParserX library.The list of features and the syntax of muParserX is available at [1].As opposed to muParser (and thus the BandMath OTB-application [2]), muParserX supports vector expressions which allows outputting multi-band images.Hereafter is a brief reference of the muParserX syntaxFundamentals------------The formula can be written using:* numerical values ( 2.3, -5, 3.1e4, ...)* variables containing pixel values (please, note the indexing of inputs from 1 to N). Examples for the first input image: * ``im1`` a pixel from 1st input, made of n components (n bands) * ``im1b2`` the 2nd component of a pixel from 1st input (band index is 1-based) * ``im1b2N3x4`` a 3x4 pixels Neighbourhood of a pixel the 2nd component of a pixel from the 1st input * ``im1PhyX`` horizontal (X-axis) spacing of the 1st input. * ``im1PhyY`` vertical (Y-axis) spacing of the 1st input input. * ``im1b2Mean`` mean of the 2nd component of the 1st input (global statistics) * ``im1b2Mini`` minimum of the 2nd component of the 1st input (global statistics) * ``im1b2Maxi`` maximum of the 2nd component of the 1st input (global statistics) * ``im1b2Sum`` sum of the 2nd component of the 1st input (global statistics) * ``im1b2Var`` variance of the 2nd component of the 1st input (global statistics) * ``idxX`` and ``idxY`` are the indices of the current pixel (generic variables)* binary operators: * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division * ``^`` raise x to the power of y * ``",
-  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",

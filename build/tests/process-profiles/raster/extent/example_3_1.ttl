@@ -52,13 +52,13 @@
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+                                    ns1:contentMediaType "image/tiff" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ] ] ] ;
             ns3:proj [ dcterms:description "Projection to be used to compute the envelope (default is WGS84)" ;
                     dcterms:title "Projection to be used to compute the envelope (default is WGS84)" ;
                     proc:minOccurs 0 ;
@@ -100,11 +100,11 @@
                     proc:schema [ ns1:oneOf [ proc:type "object" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/xml" ],
+                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "application/zip" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "application/vnd.google-earth.kml+xml" ] ] ] ] .
+                                    ns1:contentMediaType "text/xml" ] ] ] ] .
 

@@ -62,12 +62,12 @@ pp:process-type a skos:ConceptScheme,
 pp:register a rim:Register ;
     dct:description "Register of deployable OSPD process profiles and their process types."@en ;
     dct:title "OSPD Process Profiles"@en ;
-    rim:controlBody pp:geolabs ;
+    rim:controlBody <https://w3id.org/geolabs/ospd/org/geolabs> ;
     rim:functionalIdentifier "https://geolabs.github.io/bblocks-process-profiles/"^^xsd:anyURI ;
     rim:hasSpecification pp:specification ;
     rim:objectIdentifier "https://w3id.org/geolabs/ospd/process-profiles/register"^^xsd:anyURI ;
-    rim:registerManager pp:geolabs ;
-    rim:registerOwner pp:geolabs ;
+    rim:registerManager <https://w3id.org/geolabs/ospd/org/geolabs> ;
+    rim:registerOwner <https://w3id.org/geolabs/ospd/org/geolabs> ;
     rim:runsOn pp:registerSystem .
 
 pp:roleDecomposition a owl:ObjectProperty ;
@@ -122,10 +122,6 @@ pp:specification a rim:RegisterSpecification ;
         "What is substantive here (validated 2026-11-10, extended 2026-11-11). Substantive: the parent class (subClassOf) or an entity type changed; the Implementation Profile implemented (implementsProfile) added, removed or changed; a binding declaration (serverSideFiles, roleDecompositions, assumedFormatGaps, byReference, unboundRoles, fixedRoleValues) added, removed or changed; the processDescription or the plan that is deployed changed; the six-phase classification changed, or the form in which a part of the entry is stated. Clarifying: the label, a reworded definition with the same meaning, the openEO correspondences and their rationale, notes and descriptions; the statement that a process is not attached (notAttached) added, removed or changed."@en ;
     dct:title "OSPD Process Profiles register specification"@en ;
     rim:definesSubstantiveChange "A change is substantive when a register user may have to change their data, profiles or processes because of it, or when it changes what an item means. Any other change to an existing item is clarifying." .
-
-pp:geolabs a prov:Organization ;
-    rdfs:label "GeoLabs SARL" ;
-    rdfs:seeAlso <https://www.geolabs.fr/> .
 
 pp: a owl:Ontology ;
     dct:creator "GeoLabs SARL" ;

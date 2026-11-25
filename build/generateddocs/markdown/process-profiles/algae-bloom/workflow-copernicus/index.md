@@ -558,8 +558,8 @@ OGC API - Processes processDescription derived from the CWL (manually corrected,
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix ns4: <http://schema.org/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -579,35 +579,35 @@ to evaluate algae bloom for water quality assessment.
     dcterms:title """Algae bloom for water quality assessment on Sentinel-2 imagery offered by Copernicus platform.
 """ ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns3:aoi [ dcterms:description "" ;
+    proc:inputs [ ns2:aoi [ dcterms:description "" ;
                     dcterms:title "aoi" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
                             ns1:contentEncoding "binary" ;
                             ns1:contentMediaType "application/geo+json" ] ] ;
-            ns3:cloud_cover [ dcterms:description "" ;
+            ns2:cloud_cover [ dcterms:description "" ;
                     dcterms:title "cloud_cover" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns3:collection [ dcterms:description "" ;
+            ns2:collection [ dcterms:description "" ;
                     dcterms:title "collection" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:date [ dcterms:description "" ;
+            ns2:date [ dcterms:description "" ;
                     dcterms:title "date" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:delta [ dcterms:description "" ;
+            ns2:delta [ dcterms:description "" ;
                     dcterms:title "delta" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "4"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns3:s3_access_key [ dcterms:description """Access key to Copernicus data provider.
+            ns2:s3_access_key [ dcterms:description """Access key to Copernicus data provider.
 See https://documentation.dataspace.copernicus.eu/Registration.html 
 and https://documentation.dataspace.copernicus.eu/APIs/S3.html#generate-secrets for details.
 """ ;
@@ -616,7 +616,7 @@ and https://documentation.dataspace.copernicus.eu/APIs/S3.html#generate-secrets 
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
                             ns1:writeOnly true ] ] ;
-            ns3:s3_secret_key [ dcterms:description """Access key to Copernicus data provider.
+            ns2:s3_secret_key [ dcterms:description """Access key to Copernicus data provider.
 See https://documentation.dataspace.copernicus.eu/Registration.html 
 and https://documentation.dataspace.copernicus.eu/APIs/S3.html#generate-secrets for details.
 """ ;
@@ -628,11 +628,6 @@ and https://documentation.dataspace.copernicus.eu/APIs/S3.html#generate-secrets 
     proc:jobControlOptions "async-execute" ;
     proc:metadata [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
             proc:role schema:codeRepository ],
-        [ rdf:value """Algae bloom for water quality assessment on Sentinel-2 imagery offered by Copernicus platform.
-""" ;
-            proc:role schema:name ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
         [ rdf:value """Finds Sentinel-2 products on Copernicus using filtering parameters
 and performs band calculation on retrieved Sentinel-2 products
 to evaluate algae bloom for water quality assessment.
@@ -643,60 +638,65 @@ to evaluate algae bloom for water quality assessment.
                     ns4:identifier "http://orcid.org/0000-0003-4862-3349" ;
                     ns4:name "Francis Charette-Migneault" ] ;
             proc:role schema:author ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
+        [ rdf:value """Algae bloom for water quality assessment on Sentinel-2 imagery offered by Copernicus platform.
+""" ;
+            proc:role schema:name ],
         [ rdf:value "2.0.0" ;
             proc:role schema:softwareVersion ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:chlorophyll_a [ dcterms:description "" ;
+    proc:outputs [ ns3:chlorophyll_a [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:chlorophyll_a_color [ dcterms:description "" ;
+            ns3:chlorophyll_a_color [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a_color" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:chlorophyll_a_plot [ dcterms:description "" ;
+            ns3:chlorophyll_a_plot [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a_plot" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/png" ] ] ] ;
-            ns2:cyanobacteria [ dcterms:description "" ;
+            ns3:cyanobacteria [ dcterms:description "" ;
                     dcterms:title "cyanobacteria" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:cyanobacteria_color [ dcterms:description "" ;
+            ns3:cyanobacteria_color [ dcterms:description "" ;
                     dcterms:title "cyanobacteria_color" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:cyanobacteria_plot [ dcterms:description "" ;
+            ns3:cyanobacteria_plot [ dcterms:description "" ;
                     dcterms:title "cyanobacteria_plot" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/png" ] ] ] ;
-            ns2:turbidity [ dcterms:description "" ;
+            ns3:turbidity [ dcterms:description "" ;
                     dcterms:title "turbidity" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:turbidity_color [ dcterms:description "" ;
+            ns3:turbidity_color [ dcterms:description "" ;
                     dcterms:title "turbidity_color" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
                                     ns1:contentEncoding "binary" ;
                                     ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:turbidity_plot [ dcterms:description "" ;
+            ns3:turbidity_plot [ dcterms:description "" ;
                     dcterms:title "turbidity_plot" ;
                     proc:schema [ proc:type "array" ;
                             ns1:items [ proc:type "string" ;
@@ -1184,9 +1184,9 @@ Unmodified output of the `eoap.cct.cwl-to-ogcprocess` jq transform.
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix ns4: <http://schema.org/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -1206,35 +1206,35 @@ to evaluate algae bloom for water quality assessment.
     dcterms:title """Algae bloom for water quality assessment on Sentinel-2 imagery offered by Copernicus platform.
 """ ;
     pp:version "2.0.0" ;
-    proc:inputs [ ns3:aoi [ dcterms:description "" ;
+    proc:inputs [ ns1:aoi [ dcterms:description "" ;
                     dcterms:title "aoi" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
-                            ns1:contentEncoding "binary" ;
-                            ns1:contentMediaType "application/geo+json" ] ] ;
-            ns3:cloud_cover [ dcterms:description "" ;
+                            ns2:contentEncoding "binary" ;
+                            ns2:contentMediaType "application/geo+json" ] ] ;
+            ns1:cloud_cover [ dcterms:description "" ;
                     dcterms:title "cloud_cover" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns3:collection [ dcterms:description "" ;
+            ns1:collection [ dcterms:description "" ;
                     dcterms:title "collection" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:date [ dcterms:description "" ;
+            ns1:date [ dcterms:description "" ;
                     dcterms:title "date" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:delta [ dcterms:description "" ;
+            ns1:delta [ dcterms:description "" ;
                     dcterms:title "delta" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "4"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns3:s3_access_key [ dcterms:description """Access key to Copernicus data provider.
+            ns1:s3_access_key [ dcterms:description """Access key to Copernicus data provider.
 See https://documentation.dataspace.copernicus.eu/Registration.html 
 and https://documentation.dataspace.copernicus.eu/APIs/S3.html#generate-secrets for details.
 """ ;
@@ -1242,7 +1242,7 @@ and https://documentation.dataspace.copernicus.eu/APIs/S3.html#generate-secrets 
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:s3_secret_key [ dcterms:description """Access key to Copernicus data provider.
+            ns1:s3_secret_key [ dcterms:description """Access key to Copernicus data provider.
 See https://documentation.dataspace.copernicus.eu/Registration.html 
 and https://documentation.dataspace.copernicus.eu/APIs/S3.html#generate-secrets for details.
 """ ;
@@ -1251,82 +1251,82 @@ and https://documentation.dataspace.copernicus.eu/APIs/S3.html#generate-secrets 
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
+    proc:metadata [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
+        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
             proc:role schema:codeRepository ],
+        [ rdf:value """Finds Sentinel-2 products on Copernicus using filtering parameters
+and performs band calculation on retrieved Sentinel-2 products
+to evaluate algae bloom for water quality assessment.
+""" ;
+            proc:role schema:description ],
         [ rdf:value [ a ns4:Person ;
                     ns4:email "francis.charette-migneault@crim.ca" ;
                     ns4:identifier "http://orcid.org/0000-0003-4862-3349" ;
                     ns4:name "Francis Charette-Migneault" ] ;
             proc:role schema:author ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
         [ rdf:value """Algae bloom for water quality assessment on Sentinel-2 imagery offered by Copernicus platform.
 """ ;
             proc:role schema:name ],
         [ rdf:value "2.0.0" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value """Finds Sentinel-2 products on Copernicus using filtering parameters
-and performs band calculation on retrieved Sentinel-2 products
-to evaluate algae bloom for water quality assessment.
-""" ;
-            proc:role schema:description ] ;
+            proc:role schema:softwareVersion ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:chlorophyll_a [ dcterms:description "" ;
+    proc:outputs [ ns3:chlorophyll_a [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:chlorophyll_a_color [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns3:chlorophyll_a_color [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a_color" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:chlorophyll_a_plot [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns3:chlorophyll_a_plot [ dcterms:description "" ;
                     dcterms:title "chlorophyll_a_plot" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ;
-            ns2:cyanobacteria [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/png" ] ] ] ;
+            ns3:cyanobacteria [ dcterms:description "" ;
                     dcterms:title "cyanobacteria" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:cyanobacteria_color [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns3:cyanobacteria_color [ dcterms:description "" ;
                     dcterms:title "cyanobacteria_color" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:cyanobacteria_plot [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns3:cyanobacteria_plot [ dcterms:description "" ;
                     dcterms:title "cyanobacteria_plot" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ;
-            ns2:turbidity [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/png" ] ] ] ;
+            ns3:turbidity [ dcterms:description "" ;
                     dcterms:title "turbidity" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:turbidity_color [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns3:turbidity_color [ dcterms:description "" ;
                     dcterms:title "turbidity_color" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
-            ns2:turbidity_plot [ dcterms:description "" ;
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/tiff; application=geotiff" ] ] ] ;
+            ns3:turbidity_plot [ dcterms:description "" ;
                     dcterms:title "turbidity_plot" ;
                     proc:schema [ proc:type "array" ;
-                            ns1:items [ proc:type "string" ;
-                                    ns1:contentEncoding "binary" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ] .
+                            ns2:items [ proc:type "string" ;
+                                    ns2:contentEncoding "binary" ;
+                                    ns2:contentMediaType "image/png" ] ] ] ] .
 
 
 ```
@@ -1601,7 +1601,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 [
   {
     "id": "urn:example:run:algae-bloom:workflow-copernicus",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus",
     "startedAtTime": "2026-09-23T07:31:01Z",
     "used": [
@@ -1626,7 +1626,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:workflow-copernicus:in:aoi",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/aoi",
     "links": [
       {
@@ -1638,41 +1638,41 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:workflow-copernicus:in:collection",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/collection",
     "value": "SENTINEL-2"
   },
   {
     "id": "urn:example:entity:workflow-copernicus:in:date",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/date",
     "value": "2019-06-29"
   },
   {
     "id": "urn:example:entity:workflow-copernicus:in:delta",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/delta",
     "value": 4
   },
   {
     "id": "urn:example:entity:workflow-copernicus:in:cloud_cover",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/cloud_cover",
     "value": 0.1
   },
   {
     "id": "urn:example:entity:workflow-copernicus:in:s3_access_key",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/s3_access_key"
   },
   {
     "id": "urn:example:entity:workflow-copernicus:in:s3_secret_key",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/s3_secret_key"
   },
   {
     "id": "urn:example:entity:workflow-copernicus:out:chlorophyll_a",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a",
     "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
     "wasDerivedFrom": [
@@ -1689,7 +1689,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:workflow-copernicus:out:chlorophyll_a_color",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a_color",
     "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
     "wasDerivedFrom": [
@@ -1706,7 +1706,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:workflow-copernicus:out:chlorophyll_a_plot",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a_plot",
     "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
     "wasDerivedFrom": [
@@ -1723,7 +1723,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:workflow-copernicus:out:cyanobacteria",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria",
     "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
     "wasDerivedFrom": [
@@ -1740,7 +1740,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:workflow-copernicus:out:cyanobacteria_color",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria_color",
     "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
     "wasDerivedFrom": [
@@ -1757,7 +1757,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:workflow-copernicus:out:cyanobacteria_plot",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria_plot",
     "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
     "wasDerivedFrom": [
@@ -1774,7 +1774,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:workflow-copernicus:out:turbidity",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity",
     "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
     "wasDerivedFrom": [
@@ -1791,7 +1791,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:workflow-copernicus:out:turbidity_color",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity_color",
     "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
     "wasDerivedFrom": [
@@ -1808,7 +1808,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:workflow-copernicus:out:turbidity_plot",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity_plot",
     "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
     "wasDerivedFrom": [
@@ -1825,16 +1825,19 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package"
   }
 ]
@@ -1848,7 +1851,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "@graph": [
     {
       "id": "urn:example:run:algae-bloom:workflow-copernicus",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus",
       "startedAtTime": "2026-09-23T07:31:01Z",
       "used": [
@@ -1873,7 +1876,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:workflow-copernicus:in:aoi",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/aoi",
       "links": [
         {
@@ -1885,41 +1888,41 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:workflow-copernicus:in:collection",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/collection",
       "value": "SENTINEL-2"
     },
     {
       "id": "urn:example:entity:workflow-copernicus:in:date",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/date",
       "value": "2019-06-29"
     },
     {
       "id": "urn:example:entity:workflow-copernicus:in:delta",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/delta",
       "value": 4
     },
     {
       "id": "urn:example:entity:workflow-copernicus:in:cloud_cover",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/cloud_cover",
       "value": 0.1
     },
     {
       "id": "urn:example:entity:workflow-copernicus:in:s3_access_key",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/s3_access_key"
     },
     {
       "id": "urn:example:entity:workflow-copernicus:in:s3_secret_key",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/s3_secret_key"
     },
     {
       "id": "urn:example:entity:workflow-copernicus:out:chlorophyll_a",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
       "wasDerivedFrom": [
@@ -1936,7 +1939,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:workflow-copernicus:out:chlorophyll_a_color",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a_color",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
       "wasDerivedFrom": [
@@ -1953,7 +1956,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:workflow-copernicus:out:chlorophyll_a_plot",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a_plot",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
       "wasDerivedFrom": [
@@ -1970,7 +1973,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:workflow-copernicus:out:cyanobacteria",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
       "wasDerivedFrom": [
@@ -1987,7 +1990,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:workflow-copernicus:out:cyanobacteria_color",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria_color",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
       "wasDerivedFrom": [
@@ -2004,7 +2007,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:workflow-copernicus:out:cyanobacteria_plot",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria_plot",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
       "wasDerivedFrom": [
@@ -2021,7 +2024,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:workflow-copernicus:out:turbidity",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
       "wasDerivedFrom": [
@@ -2038,7 +2041,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:workflow-copernicus:out:turbidity_color",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity_color",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
       "wasDerivedFrom": [
@@ -2055,7 +2058,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:workflow-copernicus:out:turbidity_plot",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity_plot",
       "wasGeneratedBy": "urn:example:run:algae-bloom:workflow-copernicus",
       "wasDerivedFrom": [
@@ -2072,16 +2075,19 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package"
     }
   ]
@@ -2099,7 +2105,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main> a prov:Plan ;
+<arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> .
 
 <urn:example:entity:workflow-copernicus:out:chlorophyll_a> a prov:Entity,
@@ -2205,7 +2212,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 <urn:example:entity:workflow-copernicus:in:s3_secret_key> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#inputs/s3_secret_key> .
 
-<https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> a prov:Entity,
+        prov:Plan .
 
 <urn:example:run:algae-bloom:workflow-copernicus> a prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus> ;
@@ -2228,7 +2236,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
             oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/example/algae-usecase-region.geojson> ] .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 
 
@@ -2242,6 +2251,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "run": {
     "id": "urn:example:run:algae-bloom:workflow-copernicus",
     "type": "WorkflowRun",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus",
     "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
@@ -2261,6 +2271,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "engine": {
     "@id": "urn:example:engine:cwltool-3.1.20260108082145",
     "@type": "WorkflowEngine",
+    "provType": "Agent",
     "name": "cwltool",
     "version": "3.1.20260108082145"
   },
@@ -2268,6 +2279,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a.tiff",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a",
@@ -2280,6 +2292,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a_color.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a_color",
@@ -2292,6 +2305,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a_plot.png",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/png",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a_plot",
@@ -2304,6 +2318,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria.tiff",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria",
@@ -2316,6 +2331,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_color.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria_color",
@@ -2328,6 +2344,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_plot.png",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/png",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria_plot",
@@ -2340,6 +2357,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity.tiff",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity",
@@ -2352,6 +2370,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity_color.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity_color",
@@ -2364,6 +2383,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity_plot.png",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/png",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity_plot",
@@ -2385,6 +2405,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "run": {
     "id": "urn:example:run:algae-bloom:workflow-copernicus",
     "type": "WorkflowRun",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus",
     "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
@@ -2404,6 +2425,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "engine": {
     "@id": "urn:example:engine:cwltool-3.1.20260108082145",
     "@type": "WorkflowEngine",
+    "provType": "Agent",
     "name": "cwltool",
     "version": "3.1.20260108082145"
   },
@@ -2411,6 +2433,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a.tiff",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a",
@@ -2423,6 +2446,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a_color.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a_color",
@@ -2435,6 +2459,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a_plot.png",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/png",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a_plot",
@@ -2447,6 +2472,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria.tiff",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria",
@@ -2459,6 +2485,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_color.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria_color",
@@ -2471,6 +2498,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_plot.png",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/png",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria_plot",
@@ -2483,6 +2511,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity.tiff",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity",
@@ -2495,6 +2524,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity_color.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity_color",
@@ -2507,6 +2537,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     {
       "id": "https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity_plot.png",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/png",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity_plot",
@@ -2530,7 +2561,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a.tiff> prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
+<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a.tiff> a prov:Entity ;
+    prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
     ns1:checksum [ rdf:value "3b00d9df28c7548e79088d660b1d416953bdb464" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a" ;
@@ -2538,7 +2570,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a_color.tif> prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
+<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a_color.tif> a prov:Entity ;
+    prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
     ns1:checksum [ rdf:value "e6006027bca29c0e9abb13482a5deea81527097b" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a_color" ;
@@ -2546,7 +2579,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a_plot.png> prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
+<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_chlorophyll_a_plot.png> a prov:Entity ;
+    prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
     ns1:checksum [ rdf:value "9cf89d0572c2a7632f7e096b040d37f8a99b4307" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/chlorophyll_a_plot" ;
@@ -2554,7 +2588,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria.tiff> prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
+<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria.tiff> a prov:Entity ;
+    prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
     ns1:checksum [ rdf:value "b90b2dee65d0b638143e2788b825e245dbe9c4bb" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria" ;
@@ -2562,7 +2597,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_color.tif> prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
+<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_color.tif> a prov:Entity ;
+    prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
     ns1:checksum [ rdf:value "b42b9a24d33c0b4d0dd3f9942c1c30b83eef37c1" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria_color" ;
@@ -2570,7 +2606,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_plot.png> prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
+<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_cyanobacteria_plot.png> a prov:Entity ;
+    prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
     ns1:checksum [ rdf:value "1b832fde3fc0d94955508d006d745a0a9e9b9596" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/cyanobacteria_plot" ;
@@ -2578,7 +2615,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity.tiff> prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
+<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity.tiff> a prov:Entity ;
+    prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
     ns1:checksum [ rdf:value "1e0302087d93ff81d5ec6b3a7a63ad7d0daec758" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity" ;
@@ -2586,7 +2624,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity_color.tif> prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
+<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity_color.tif> a prov:Entity ;
+    prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
     ns1:checksum [ rdf:value "823dc9c0e24073601b98c7ac80d545355715c6f5" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity_color" ;
@@ -2594,7 +2633,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
-<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity_plot.png> prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
+<https://ospd.example.org/ogc-api/jobs/algae-bloom-workflow-copernicus-0001/results/S2A_MSIL2A_20190701T110621_N0500_R137_T29SPC_20230604T023542_turbidity_plot.png> a prov:Entity ;
+    prov:generated <urn:example:run:algae-bloom:workflow-copernicus> ;
     ns1:checksum [ rdf:value "92c53811eb6d7bad871be5ebee515b4f95e0336a" ;
             ns1:algorithm "SHA-1" ] ;
     ns1:describedByParameter "https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus#outputs/turbidity_plot" ;
@@ -2602,11 +2642,13 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     proc:role <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/output> ;
     proc:type "Artifact" .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a wfprov:WorkflowEngine ;
+<urn:example:engine:cwltool-3.1.20260108082145> a wfprov:WorkflowEngine,
+        prov:Agent ;
     pp:name "cwltool" ;
     pp:version "3.1.20260108082145" .
 
 <urn:example:run:algae-bloom:workflow-copernicus> a wfprov:WorkflowRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus> ;
     wfprov:describedByWorkflow <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus/package> ;
     wfprov:hadSubProcessRun <urn:example:run:algae-bloom:select-products-sentinel2>,
@@ -2654,7 +2696,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus"
     },
@@ -2664,7 +2706,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus"
     },
@@ -2675,7 +2717,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus"
     }
@@ -2769,7 +2811,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus"
     },
@@ -2779,7 +2821,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus"
     },
@@ -2790,7 +2832,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus"
     }
@@ -2893,7 +2935,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -2901,7 +2943,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/workflow-copernicus to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -2910,7 +2952,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/workflow-copernicus> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/algae-usecase-workflow-copernicus> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/algae-usecase-workflow-copernicus> ;
     pp:version "2.0.0" .
@@ -4310,22 +4352,6 @@ id:3b68ba23-95c2-48fc-92bb-753f98188bf2 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T09:31:02.350383"^^xsd:dateTime ;
             prov:hadActivity id:44c595c3-0138-459e-bff2-432829fe1bf3 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.391980"^^xsd:dateTime ;
-            prov:entity data:8bfeb7b030ae1994f504c6c9ec46111b90434378 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/catalog> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.392236"^^xsd:dateTime ;
-            prov:entity data:d184cbedd77b80cede3f63388a471a8634278cf3 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/collection> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.392720"^^xsd:dateTime ;
-            prov:entity cwlprov:None ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/toi> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.391633"^^xsd:dateTime ;
-            prov:entity id:653d2ec7-333d-431e-81c5-d30c4c02282a ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/aoi> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:02.392462"^^xsd:dateTime ;
             prov:entity id:fc839955-c480-42b7-a657-730494fc154e ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/delta> ],
@@ -4334,13 +4360,29 @@ id:3b68ba23-95c2-48fc-92bb-753f98188bf2 a wfprov:ProcessRun,
             prov:entity data:632ab110c744c188c9ae98cb2c6b74767894037a ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/product_level> ],
         [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:02.391980"^^xsd:dateTime ;
+            prov:entity data:8bfeb7b030ae1994f504c6c9ec46111b90434378 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/catalog> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:02.392720"^^xsd:dateTime ;
+            prov:entity cwlprov:None ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/toi> ],
+        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:02.392016"^^xsd:dateTime ;
             prov:entity id:c5d12ec5-693c-4ae4-9157-ffaf8e84a5a2 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/cloud_cover> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:02.392439"^^xsd:dateTime ;
             prov:entity data:aae1ba7d07b94e0929479a0ed4c1ec64718ac191 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/date> ] .
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/date> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:02.392236"^^xsd:dateTime ;
+            prov:entity data:d184cbedd77b80cede3f63388a471a8634278cf3 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/collection> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:02.391633"^^xsd:dateTime ;
+            prov:entity id:653d2ec7-333d-431e-81c5-d30c4c02282a ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/select_products/aoi> ] .
 
 id:5001cc2f-8b7b-4b93-9043-8ce09886304f a prov:Agent .
 
@@ -4456,25 +4498,13 @@ id:44c595c3-0138-459e-bff2-432829fe1bf3 a wfprov:WorkflowRun,
             prov:atTime "2026-09-23T09:31:01.086687"^^xsd:dateTime ;
             prov:hadActivity id:63709288-2770-4d4f-97fa-3e8ff70d0b32 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.346121"^^xsd:dateTime ;
-            prov:entity id:cea98bc9-4a78-442d-a99a-eb4850b01d63 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/aoi> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.348450"^^xsd:dateTime ;
-            prov:entity data:f6cab44ac3c9f733bfece9ad8d3ad1452cbf9570 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/s3_secret_key> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.347746"^^xsd:dateTime ;
-            prov:entity id:97f268f3-383e-43a2-ad2b-3212b43b5676 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/delta> ],
-        [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:02.347208"^^xsd:dateTime ;
             prov:entity data:d184cbedd77b80cede3f63388a471a8634278cf3 ;
             prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/collection> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T09:31:02.348133"^^xsd:dateTime ;
-            prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/s3_access_key> ],
+            prov:atTime "2026-09-23T09:31:02.346121"^^xsd:dateTime ;
+            prov:entity id:cea98bc9-4a78-442d-a99a-eb4850b01d63 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/aoi> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:02.347708"^^xsd:dateTime ;
             prov:entity data:aae1ba7d07b94e0929479a0ed4c1ec64718ac191 ;
@@ -4482,7 +4512,19 @@ id:44c595c3-0138-459e-bff2-432829fe1bf3 a wfprov:WorkflowRun,
         [ a prov:Usage ;
             prov:atTime "2026-09-23T09:31:02.346187"^^xsd:dateTime ;
             prov:entity id:c719b109-a5e5-414b-8e1a-2fa5262c9394 ;
-            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/cloud_cover> ] ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/cloud_cover> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:02.348450"^^xsd:dateTime ;
+            prov:entity data:f6cab44ac3c9f733bfece9ad8d3ad1452cbf9570 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/s3_secret_key> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:02.348133"^^xsd:dateTime ;
+            prov:entity data:b75fa50f91a9dd377927a83994bff64245718790 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/s3_access_key> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T09:31:02.347746"^^xsd:dateTime ;
+            prov:entity id:97f268f3-383e-43a2-ad2b-3212b43b5676 ;
+            prov:hadRole <arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/delta> ] ;
     prov:startedAtTime "2026-09-23T09:31:01.086664"^^xsd:dateTime .
 
 
@@ -4748,6 +4790,13 @@ x-jsonld-extra-terms:
   entityType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@id'
+  agentType:
+    x-jsonld-id: '@type'
+    x-jsonld-type: '@id'
+  Activity: http://www.w3.org/ns/prov#Activity
+  Entity: http://www.w3.org/ns/prov#Entity
+  Agent: http://www.w3.org/ns/prov#Agent
+  SoftwareAgent: http://www.w3.org/ns/prov#SoftwareAgent
   used:
     x-jsonld-id: http://www.w3.org/ns/prov#used
     x-jsonld-type: '@id'
@@ -4977,7 +5026,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.algae-bloom.workflow-copernicus
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-19'
+  dateOfLastChange: '2026-11-25'
 
 ```
 
@@ -5143,6 +5192,14 @@ Links to the schema:
       "@id": "@type",
       "@type": "@id"
     },
+    "agentType": {
+      "@id": "@type",
+      "@type": "@id"
+    },
+    "Activity": "prov:Activity",
+    "Entity": "prov:Entity",
+    "Agent": "prov:Agent",
+    "SoftwareAgent": "prov:SoftwareAgent",
     "used": {
       "@id": "prov:used",
       "@type": "@id"

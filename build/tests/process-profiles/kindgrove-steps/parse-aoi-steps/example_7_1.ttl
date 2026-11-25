@@ -3,6 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:kindgrove-steps:parse-aoi-steps> a wfprov:ProcessRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/parse-aoi-steps> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/parse_aoi/package> ;
     wfprov:usedInput <urn:example:entity:parse-aoi-steps:in:aoi> ;

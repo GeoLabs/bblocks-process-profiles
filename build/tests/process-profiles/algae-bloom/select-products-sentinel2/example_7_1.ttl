@@ -7,7 +7,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products> a prov:Plan ;
+<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package> .
 
 <urn:example:entity:select-products-sentinel2:out:urls> a prov:Entity,
@@ -43,7 +44,8 @@
     rdf:value "2019-06-25",
         "2019-07-03" .
 
-<urn:example:image:ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0> a prov:SoftwareAgent ;
+<urn:example:image:ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0" .
 
 <urn:example:run:algae-bloom:select-products-sentinel2> a prov:Activity,
@@ -62,7 +64,8 @@
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0> .
 
-<https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package> a prov:Entity,
+        prov:Plan .
 
 <urn:example:entity:select-products-sentinel2:in:aoi> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/aoi> ;
@@ -70,6 +73,7 @@
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
             oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/example/algae-usecase-region.geojson> ] .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 

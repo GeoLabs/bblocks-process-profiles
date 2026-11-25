@@ -419,9 +419,9 @@ OGC API - Processes processDescription derived from the CWL.
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns2: <http://schema.org/> .
 @prefix ns3: <https://w3id.org/ogc/api/schema/> .
-@prefix ns4: <http://schema.org/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -486,27 +486,27 @@ Returned matches will be either S3 or direct HTTPS references depending on the c
                     proc:schema [ proc:type "array" ;
                             ns3:items [ proc:type "string" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
-            proc:role schema:codeRepository ],
+    proc:metadata [ rdf:value [ a ns2:Person ;
+                    ns2:email "francis.charette-migneault@crim.ca" ;
+                    ns2:identifier "http://orcid.org/0000-0003-4862-3349" ;
+                    ns2:name "Francis Charette-Migneault" ] ;
+            proc:role schema:author ],
         [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
             proc:role schema:license ],
+        [ rdf:value "1.1.0" ;
+            proc:role schema:softwareVersion ],
         [ rdf:value """Searches a catalog for Sentinel-2 products using filtering parameters and returns all matched locations.
 Returned matches will be either S3 or direct HTTPS references depending on the catalog.
 """ ;
             proc:role schema:description ],
-        [ rdf:value "1.1.0" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value [ a ns4:Person ;
-                    ns4:email "francis.charette-migneault@crim.ca" ;
-                    ns4:identifier "http://orcid.org/0000-0003-4862-3349" ;
-                    ns4:name "Francis Charette-Migneault" ] ;
-            proc:role schema:author ],
+        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
+            proc:role schema:codeRepository ],
         [ rdf:value "Searches the specified catalog for Sentinel-2 products matching filtering criteria." ;
             proc:role schema:name ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:urls [ dcterms:description "" ;
+    proc:outputs [ ns4:urls [ dcterms:description "" ;
                     dcterms:title "urls" ;
                     proc:schema [ proc:type "array" ;
                             ns3:items [ proc:type "string" ] ] ] ] .
@@ -1004,11 +1004,11 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns2: <https://w3id.org/ogc/api/schema/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns4: <http://schema.org/> .
-@prefix ns5: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns2: <http://schema.org/> .
+@prefix ns3: <https://w3id.org/ogc/api/schema/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns5: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -1027,35 +1027,35 @@ Returned matches will be either S3 or direct HTTPS references depending on the c
         "selection" ;
     dcterms:title "Searches the specified catalog for Sentinel-2 products matching filtering criteria." ;
     pp:version "1.1.0" ;
-    proc:inputs [ ns3:aoi [ dcterms:description "Polygon defining the area of interest." ;
+    proc:inputs [ ns1:aoi [ dcterms:description "Polygon defining the area of interest." ;
                     dcterms:title "Area of interest" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/geometry> ;
-                    ns5:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-geojson> ;
+                    ns4:representation <https://w3id.org/geolabs/ospd/data-formats/representation/geometry-geojson> ;
                     proc:keywords "area of interest" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Product selection -- input `areaOfInterest`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection/inputs/areaOfInterest> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Product selection -- input `areaOfInterest`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Product selection -- input `areaOfInterest`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/product-selection/inputs/areaOfInterest> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Product selection -- input `areaOfInterest`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection/inputs/areaOfInterest> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ;
-                            ns2:contentEncoding "binary" ;
-                            ns2:contentMediaType "application/geo+json" ] ] ;
-            ns3:catalog [ dcterms:description "" ;
+                            ns3:contentEncoding "binary" ;
+                            ns3:contentMediaType "application/geo+json" ] ] ;
+            ns1:catalog [ dcterms:description "" ;
                     dcterms:title "catalog" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:enum "copernicus",
                                 "earth-search" ;
                             proc:type "string" ] ] ;
-            ns3:cloud_cover [ dcterms:description "" ;
+            ns1:cloud_cover [ dcterms:description "" ;
                     dcterms:title "cloud_cover" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns3:collection [ dcterms:description "" ;
+            ns1:collection [ dcterms:description "" ;
                     dcterms:title "collection" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/collection-identifier> ;
                     proc:keywords "collection" ;
@@ -1068,69 +1068,69 @@ Returned matches will be either S3 or direct HTTPS references depending on the c
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:date [ dcterms:description "Date around which ±delta-days will be applied for search. If omitted, 'toi' input must be provided instead." ;
+            ns1:date [ dcterms:description "Date around which ±delta-days will be applied for search. If omitted, 'toi' input must be provided instead." ;
                     dcterms:title "Central date" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:delta [ dcterms:description "" ;
+            ns1:delta [ dcterms:description "" ;
                     dcterms:title "delta" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "4"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns3:product_level [ dcterms:description "" ;
+            ns1:product_level [ dcterms:description "" ;
                     dcterms:title "product_level" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:enum "L1C",
                                 "L2A" ;
                             proc:type "string" ] ] ;
-            ns3:toi [ dcterms:description "Start and end date-time strings. Must be provided if 'date' input is omitted." ;
+            ns1:toi [ dcterms:description "Start and end date-time strings. Must be provided if 'date' input is omitted." ;
                     dcterms:title "Time of interest" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/time-interval> ;
                     proc:keywords "time interval" ;
                     proc:maxOccurs 1 ;
-                    proc:metadata [ dcterms:title "Generic Profile: Product selection -- input `timeInterval`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/product-selection/inputs/timeInterval> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
-                        [ dcterms:title "Implementation Profile: Product selection -- input `timeInterval`" ;
+                    proc:metadata [ dcterms:title "Implementation Profile: Product selection -- input `timeInterval`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection/inputs/timeInterval> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
+                        [ dcterms:title "Generic Profile: Product selection -- input `timeInterval`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/product-selection/inputs/timeInterval> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:type "array" ;
-                            ns2:items [ proc:type "string" ] ] ] ] ;
+                            ns3:items [ proc:type "string" ] ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ rdf:value [ a ns4:Person ;
-                    ns4:email "francis.charette-migneault@crim.ca" ;
-                    ns4:identifier "http://orcid.org/0000-0003-4862-3349" ;
-                    ns4:name "Francis Charette-Migneault" ] ;
-            proc:role schema:author ],
-        [ rdf:value "Searches the specified catalog for Sentinel-2 products matching filtering criteria." ;
-            proc:role schema:name ],
-        [ rdf:value """Searches a catalog for Sentinel-2 products using filtering parameters and returns all matched locations.
-Returned matches will be either S3 or direct HTTPS references depending on the catalog.
-""" ;
-            proc:role schema:description ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ],
-        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
-            proc:role schema:codeRepository ],
-        [ dcterms:title "Process Concept: Data Discovery and Access" ;
+    proc:metadata [ dcterms:title "Process Concept: Data Discovery and Access" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/data-discovery-and-access> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ dcterms:title "Generic Profile: Product selection" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/product-selection> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
+        [ rdf:value """Searches a catalog for Sentinel-2 products using filtering parameters and returns all matched locations.
+Returned matches will be either S3 or direct HTTPS references depending on the catalog.
+""" ;
+            proc:role schema:description ],
         [ rdf:value "1.1.0" ;
             proc:role schema:softwareVersion ],
         [ dcterms:title "Implementation Profile: Product selection" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ rdf:value [ a ns2:Person ;
+                    ns2:email "francis.charette-migneault@crim.ca" ;
+                    ns2:identifier "http://orcid.org/0000-0003-4862-3349" ;
+                    ns2:name "Francis Charette-Migneault" ] ;
+            proc:role schema:author ],
+        [ rdf:value "https://gitlab.ogc.org/ogc/ogc-ospd" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value "Searches the specified catalog for Sentinel-2 products matching filtering criteria." ;
+            proc:role schema:name ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns1:urls [ dcterms:description "" ;
+    proc:outputs [ ns5:urls [ dcterms:description "" ;
                     dcterms:title "urls" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/eo-product> ;
                     proc:keywords "product" ;
@@ -1141,7 +1141,7 @@ Returned matches will be either S3 or direct HTTPS references depending on the c
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection/outputs/products> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
                     proc:schema [ proc:type "array" ;
-                            ns2:items [ proc:type "string" ] ] ] ] .
+                            ns3:items [ proc:type "string" ] ] ] ] .
 
 
 ```
@@ -1313,7 +1313,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 [
   {
     "id": "urn:example:run:algae-bloom:select-products-sentinel2",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2",
     "startedAtTime": "2026-09-23T06:26:24Z",
     "used": [
@@ -1339,7 +1339,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:select-products-sentinel2:in:aoi",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/aoi",
     "links": [
       {
@@ -1351,25 +1351,25 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:select-products-sentinel2:in:catalog",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/catalog",
     "value": "earth-search"
   },
   {
     "id": "urn:example:entity:select-products-sentinel2:in:collection",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/collection",
     "value": "sentinel-2-l2a"
   },
   {
     "id": "urn:example:entity:select-products-sentinel2:in:product_level",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/product_level",
     "value": "L2A"
   },
   {
     "id": "urn:example:entity:select-products-sentinel2:in:toi",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/toi",
     "value": [
       "2019-06-25",
@@ -1378,19 +1378,19 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:entity:select-products-sentinel2:in:delta",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/delta",
     "value": 4
   },
   {
     "id": "urn:example:entity:select-products-sentinel2:in:cloud_cover",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/cloud_cover",
     "value": 0.1
   },
   {
     "id": "urn:example:entity:select-products-sentinel2:out:urls",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#outputs/urls",
     "wasGeneratedBy": "urn:example:run:algae-bloom:select-products-sentinel2",
     "wasDerivedFrom": [
@@ -1404,21 +1404,25 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "urn:example:image:ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "container image ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package"
   }
 ]
@@ -1432,7 +1436,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "@graph": [
     {
       "id": "urn:example:run:algae-bloom:select-products-sentinel2",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2",
       "startedAtTime": "2026-09-23T06:26:24Z",
       "used": [
@@ -1458,7 +1462,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:aoi",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/aoi",
       "links": [
         {
@@ -1470,25 +1474,25 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:catalog",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/catalog",
       "value": "earth-search"
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:collection",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/collection",
       "value": "sentinel-2-l2a"
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:product_level",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/product_level",
       "value": "L2A"
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:toi",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/toi",
       "value": [
         "2019-06-25",
@@ -1497,19 +1501,19 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:delta",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/delta",
       "value": 4
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:in:cloud_cover",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/cloud_cover",
       "value": 0.1
     },
     {
       "id": "urn:example:entity:select-products-sentinel2:out:urls",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2#outputs/urls",
       "wasGeneratedBy": "urn:example:run:algae-bloom:select-products-sentinel2",
       "wasDerivedFrom": [
@@ -1523,21 +1527,25 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "urn:example:image:ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "container image ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package"
     }
   ]
@@ -1555,7 +1563,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products> a prov:Plan ;
+<arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package> .
 
 <urn:example:entity:select-products-sentinel2:out:urls> a prov:Entity,
@@ -1591,7 +1600,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rdf:value "2019-06-25",
         "2019-07-03" .
 
-<urn:example:image:ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0> a prov:SoftwareAgent ;
+<urn:example:image:ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0" .
 
 <urn:example:run:algae-bloom:select-products-sentinel2> a prov:Activity,
@@ -1610,7 +1620,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ogc-ospd/algae-usecase/select-products-sentinel2:1.1.0> .
 
-<https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package> a prov:Entity,
+        prov:Plan .
 
 <urn:example:entity:select-products-sentinel2:in:aoi> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/select-products-sentinel2#inputs/aoi> ;
@@ -1618,7 +1629,8 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
             oa:hasTarget <https://github.com/crim-ca/ogc-ospd-phase1/raw/5edd4ec4cbd21e5fceb7c3f4b6c5d0ce809a57ea/ogc_app_pkg/example/algae-usecase-region.geojson> ] .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 
 
@@ -1631,6 +1643,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 {
   "id": "urn:example:run:algae-bloom:select-products-sentinel2",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package",
   "usedInput": [
@@ -1669,6 +1682,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/algae-bloom/select-products-sentinel2/context.jsonld",
   "id": "urn:example:run:algae-bloom:select-products-sentinel2",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package",
   "usedInput": [
@@ -1707,6 +1721,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:algae-bloom:select-products-sentinel2> a wfprov:ProcessRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/select-products-sentinel2/package> ;
     wfprov:usedInput <urn:example:entity:select-products-sentinel2:in:aoi>,
@@ -1745,7 +1760,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1755,7 +1770,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1765,7 +1780,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1775,7 +1790,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/product-selection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1785,7 +1800,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription.inherited.json added with the attachment to the Implementation Profile product-selection: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1795,7 +1810,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "byReference added: the output urls implements the role products of product-selection as URLs of the STAC Items, not the Items themselves (decision C1 of 2026-11-10).",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1806,7 +1821,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2 to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1816,7 +1831,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     }
@@ -1907,7 +1922,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1917,7 +1932,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1927,7 +1942,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md).",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1937,7 +1952,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/product-selection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1947,7 +1962,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription.inherited.json added with the attachment to the Implementation Profile product-selection: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1957,7 +1972,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "byReference added: the output urls implements the role products of product-selection as URLs of the STAC Items, not the Items themselves (decision C1 of 2026-11-10).",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1968,7 +1983,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2 to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     },
@@ -1978,7 +1993,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2"
     }
@@ -2078,7 +2093,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/by-reference-2026-11-10> a rim:RegisterAction ;
     dcterms:description "byReference added: the output urls implements the role products of product-selection as URLs of the STAC Items, not the Items themselves (decision C1 of 2026-11-10)." ;
@@ -2086,7 +2101,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -2094,7 +2109,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/algae-bloom/select-products-sentinel2 to https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -2103,7 +2118,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/inherited-description-2026-11-10> a rim:RegisterAction ;
     dcterms:description "processDescription.inherited.json added with the attachment to the Implementation Profile product-selection: the deployed processDescription with each bound input and output linked to the role it implements (metadata, role implementation-input or implementation-output) and carrying that role's dataType; the profile schema inherits it. The deployed processDescription is unchanged." ;
@@ -2111,7 +2126,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/representation-2026-11-18> a rim:RegisterAction ;
     dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
@@ -2119,7 +2134,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/product-selection, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Geometry, http://www.opengis.net/ont/geosparql#Feature." ;
@@ -2127,7 +2142,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2/actions/tier3-2026-11-10> a rim:RegisterAction ;
     dcterms:description "Attached to the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/product-selection (implementsProfile), after checking its signature (docs/ATTACHMENTS.md)." ;
@@ -2135,7 +2150,7 @@ W3C PROV chain validated against `ogc.bbr.provenance.provenance`.
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/select-products-sentinel2> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/algae-bloom/select-products-sentinel2> rdfs:seeAlso <https://ospd.example.org/ogc-api/processes/select-products-sentinel2> ;
     pp:version "1.1.0" .
@@ -3776,9 +3791,9 @@ id:0ee12773-4ecf-4b82-9e77-dacfea757a43 a wfprov:Artifact,
             prov:atTime "2026-09-23T08:40:34.610317"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/primary/turbidity_color> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:cc8be8e0-4b98-47f7-8c0c-a757d7a5eff4 ],
+            provext:member id:248923b2-906c-4d76-867f-da6f12462902 ],
         [ a provext:Membership ;
-            provext:member id:248923b2-906c-4d76-867f-da6f12462902 ] .
+            provext:member id:cc8be8e0-4b98-47f7-8c0c-a757d7a5eff4 ] .
 
 id:0f27aaca-13e9-4be4-b2d9-ea39fef6101f a wfprov:Artifact,
         prov:Collection,
@@ -3788,9 +3803,9 @@ id:0f27aaca-13e9-4be4-b2d9-ea39fef6101f a wfprov:Artifact,
             prov:atTime "2026-09-23T08:40:34.610317"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/primary/cyanobacteria> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:f4eb96c4-9178-469a-94da-e74a9ec97592 ],
+            provext:member id:4b2d89fd-9ef0-45c2-a15e-f2e4c32bc7be ],
         [ a provext:Membership ;
-            provext:member id:4b2d89fd-9ef0-45c2-a15e-f2e4c32bc7be ] .
+            provext:member id:f4eb96c4-9178-469a-94da-e74a9ec97592 ] .
 
 id:43171557-8d98-4580-a7eb-6347713b13d8 a wfprov:Artifact,
         prov:Collection,
@@ -3800,9 +3815,9 @@ id:43171557-8d98-4580-a7eb-6347713b13d8 a wfprov:Artifact,
             prov:atTime "2026-09-23T08:26:25.900602"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/urls> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:c80240b036ceef4fdcfb684013f5e78f2fd144e7 ],
+            provext:member data:084a442888f71ba66d9e75fde8221f58dfaa6acf ],
         [ a provext:Membership ;
-            provext:member data:084a442888f71ba66d9e75fde8221f58dfaa6acf ] .
+            provext:member data:c80240b036ceef4fdcfb684013f5e78f2fd144e7 ] .
 
 id:5855d17a-509f-4d45-91ef-c239bcb938de a wfprov:Artifact,
         prov:Collection,
@@ -3812,9 +3827,9 @@ id:5855d17a-509f-4d45-91ef-c239bcb938de a wfprov:Artifact,
             prov:atTime "2026-09-23T08:40:34.610317"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/primary/cyanobacteria_color> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:f82e4423-a8ac-41d1-9919-25b94a343f05 ],
+            provext:member id:1cfc6922-9537-41b3-a579-31eaab50998e ],
         [ a provext:Membership ;
-            provext:member id:1cfc6922-9537-41b3-a579-31eaab50998e ] .
+            provext:member id:f82e4423-a8ac-41d1-9919-25b94a343f05 ] .
 
 id:78c77861-3ab8-4a56-a0cc-62899eb92912 a wfprov:Artifact,
         prov:Collection,
@@ -3850,10 +3865,10 @@ id:7a4b06ca-ec17-4eac-bbf7-96ba8af7bd86 a wfprov:ProcessRun,
             prov:agent id:2eaf041b-2988-4cd3-bd1b-2c3f2028e2c8 ;
             prov:hadPlan <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/algae-usecase-workflow-earth-search/process> ] ;
     prov:qualifiedStart [ a prov:Start ;
-            prov:atTime "2026-09-23T08:26:25.902635"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T08:35:40.367661"^^xsd:dateTime ;
             prov:hadActivity id:39aa9d6c-b92f-486d-9c56-5289ebc57918 ],
         [ a prov:Start ;
-            prov:atTime "2026-09-23T08:35:40.367661"^^xsd:dateTime ;
+            prov:atTime "2026-09-23T08:26:25.902635"^^xsd:dateTime ;
             prov:hadActivity id:39aa9d6c-b92f-486d-9c56-5289ebc57918 ] .
 
 id:8fb08dce-0549-434c-b6bc-251e3b2227d2 a wfprov:Artifact,
@@ -3876,9 +3891,9 @@ id:d5e1a699-e4ec-4961-9136-0c23387faf90 a wfprov:Artifact,
             prov:atTime "2026-09-23T08:40:34.610317"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/primary/turbidity> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:d0b679db-ef77-442f-a4c0-f093f5da8990 ],
+            provext:member id:4e6424db-66b9-4389-81ca-0a3040fbfd07 ],
         [ a provext:Membership ;
-            provext:member id:4e6424db-66b9-4389-81ca-0a3040fbfd07 ] .
+            provext:member id:d0b679db-ef77-442f-a4c0-f093f5da8990 ] .
 
 id:ed4239e2-9d57-4b3c-9644-295b0a843de3 a wfprov:Artifact,
         prov:Collection,
@@ -3888,9 +3903,9 @@ id:ed4239e2-9d57-4b3c-9644-295b0a843de3 a wfprov:Artifact,
             prov:atTime "2026-09-23T08:40:34.610317"^^xsd:dateTime ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/primary/chlorophyll_a_plot> ] ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member id:3a29ce4a-c70b-4cb5-ac90-5cc003d32df1 ],
+            provext:member id:372c5307-8059-4cb2-afdb-5417b1e9d278 ],
         [ a provext:Membership ;
-            provext:member id:372c5307-8059-4cb2-afdb-5417b1e9d278 ] .
+            provext:member id:3a29ce4a-c70b-4cb5-ac90-5cc003d32df1 ] .
 
 wf:main a wfdesc:Workflow,
         prov:Entity,
@@ -4072,10 +4087,10 @@ id:6eeb1082-3e85-4b8c-87e4-db08b8a54f27 a wfprov:ProcessRun,
         prov:Activity ;
     rdfs:label "Run of workflow/packed.cwl#main/select_products" ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent id:2eaf041b-2988-4cd3-bd1b-2c3f2028e2c8 ;
-            prov:hadPlan <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products> ],
+            prov:agent id:74ee65c3-45e0-49ab-9086-fd0704308112 ],
         [ a prov:Association ;
-            prov:agent id:74ee65c3-45e0-49ab-9086-fd0704308112 ] ;
+            prov:agent id:2eaf041b-2988-4cd3-bd1b-2c3f2028e2c8 ;
+            prov:hadPlan <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products> ] ;
     prov:qualifiedEnd [ a prov:End ;
             prov:atTime "2026-09-23T08:26:25.900591"^^xsd:dateTime ;
             prov:hadActivity id:39aa9d6c-b92f-486d-9c56-5289ebc57918 ] ;
@@ -4083,17 +4098,17 @@ id:6eeb1082-3e85-4b8c-87e4-db08b8a54f27 a wfprov:ProcessRun,
             prov:atTime "2026-09-23T08:26:24.581116"^^xsd:dateTime ;
             prov:hadActivity id:39aa9d6c-b92f-486d-9c56-5289ebc57918 ] ;
     prov:qualifiedUsage [ a prov:Usage ;
-            prov:atTime "2026-09-23T08:26:24.619408"^^xsd:dateTime ;
-            prov:entity data:4c89b83017b6bf2fdefdc95f52a039255235ba37 ;
-            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/collection> ],
+            prov:atTime "2026-09-23T08:26:24.620133"^^xsd:dateTime ;
+            prov:entity id:71200b7e-dd7c-4784-a342-7f5a60ceba87 ;
+            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/toi> ],
+        [ a prov:Usage ;
+            prov:atTime "2026-09-23T08:26:24.618823"^^xsd:dateTime ;
+            prov:entity id:bb36ba47-4fd9-4c7e-b7f8-fd944a8f3539 ;
+            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/aoi> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T08:26:24.619154"^^xsd:dateTime ;
             prov:entity data:b361b353c05b9c7e9b56b5de806f65ce2c8da7b5 ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/catalog> ],
-        [ a prov:Usage ;
-            prov:atTime "2026-09-23T08:26:24.620133"^^xsd:dateTime ;
-            prov:entity id:71200b7e-dd7c-4784-a342-7f5a60ceba87 ;
-            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/toi> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T08:26:24.619184"^^xsd:dateTime ;
             prov:entity id:cf1cca44-d0e6-48b5-ba47-0e7ab8eb2752 ;
@@ -4103,25 +4118,25 @@ id:6eeb1082-3e85-4b8c-87e4-db08b8a54f27 a wfprov:ProcessRun,
             prov:entity cwlprov:None ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/date> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T08:26:24.618823"^^xsd:dateTime ;
-            prov:entity id:bb36ba47-4fd9-4c7e-b7f8-fd944a8f3539 ;
-            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/aoi> ],
+            prov:atTime "2026-09-23T08:26:24.619451"^^xsd:dateTime ;
+            prov:entity id:4be4827d-8cb6-4720-99c0-164401d97f27 ;
+            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/delta> ],
         [ a prov:Usage ;
             prov:atTime "2026-09-23T08:26:24.619722"^^xsd:dateTime ;
             prov:entity data:632ab110c744c188c9ae98cb2c6b74767894037a ;
             prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/product_level> ],
         [ a prov:Usage ;
-            prov:atTime "2026-09-23T08:26:24.619451"^^xsd:dateTime ;
-            prov:entity id:4be4827d-8cb6-4720-99c0-164401d97f27 ;
-            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/delta> ] .
+            prov:atTime "2026-09-23T08:26:24.619408"^^xsd:dateTime ;
+            prov:entity data:4c89b83017b6bf2fdefdc95f52a039255235ba37 ;
+            prov:hadRole <arcp://uuid,39aa9d6c-b92f-486d-9c56-5289ebc57918/workflow/packed.cwl#main/select_products/collection> ] .
 
 id:71200b7e-dd7c-4784-a342-7f5a60ceba87 a wfprov:Artifact,
         prov:Collection,
         prov:Entity ;
     provext:qualifiedMembership [ a provext:Membership ;
-            provext:member data:e6b6a83d9218e6cb73c53b7fb501615a47a84aaa ],
+            provext:member data:2a63ee24a0e8e4b59a1f6e59f003d4201c3ecba3 ],
         [ a provext:Membership ;
-            provext:member data:2a63ee24a0e8e4b59a1f6e59f003d4201c3ecba3 ] .
+            provext:member data:e6b6a83d9218e6cb73c53b7fb501615a47a84aaa ] .
 
 id:74ee65c3-45e0-49ab-9086-fd0704308112 a prov:Agent,
         prov:SoftwareAgent ;
@@ -4795,6 +4810,13 @@ x-jsonld-extra-terms:
   entityType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@id'
+  agentType:
+    x-jsonld-id: '@type'
+    x-jsonld-type: '@id'
+  Activity: http://www.w3.org/ns/prov#Activity
+  Entity: http://www.w3.org/ns/prov#Entity
+  Agent: http://www.w3.org/ns/prov#Agent
+  SoftwareAgent: http://www.w3.org/ns/prov#SoftwareAgent
   used:
     x-jsonld-id: http://www.w3.org/ns/prov#used
     x-jsonld-type: '@id'
@@ -5024,7 +5046,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.algae-bloom.select-products-sentinel2
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-19'
+  dateOfLastChange: '2026-11-25'
 
 ```
 
@@ -5190,6 +5212,14 @@ Links to the schema:
       "@id": "@type",
       "@type": "@id"
     },
+    "agentType": {
+      "@id": "@type",
+      "@type": "@id"
+    },
+    "Activity": "prov:Activity",
+    "Entity": "prov:Entity",
+    "Agent": "prov:Agent",
+    "SoftwareAgent": "prov:SoftwareAgent",
     "used": {
       "@id": "prov:used",
       "@type": "@id"

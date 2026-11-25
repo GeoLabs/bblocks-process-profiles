@@ -2,6 +2,7 @@
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/kindgrove-steps/reproject-band/context.jsonld",
   "id": "urn:example:run:kindgrove-steps:reproject-band",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/reproject-band",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/reproject_band/package",
   "usedInput": [

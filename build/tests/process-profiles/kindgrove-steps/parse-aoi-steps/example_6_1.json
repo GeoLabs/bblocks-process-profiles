@@ -1,7 +1,7 @@
 [
   {
     "id": "urn:example:run:kindgrove-steps:parse-aoi-steps",
-    "provType": "prov:Activity",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/parse-aoi-steps",
     "startedAtTime": "2026-09-24T10:57:45Z",
     "used": [
@@ -21,7 +21,7 @@
   },
   {
     "id": "urn:example:entity:parse-aoi-steps:in:aoi",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#inputs/aoi",
     "value": {
       "bbox": [
@@ -35,7 +35,7 @@
   },
   {
     "id": "urn:example:entity:parse-aoi-steps:out:east",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/east",
     "wasGeneratedBy": "urn:example:run:kindgrove-steps:parse-aoi-steps",
     "value": 95.35,
@@ -43,7 +43,7 @@
   },
   {
     "id": "urn:example:entity:parse-aoi-steps:out:north",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/north",
     "wasGeneratedBy": "urn:example:run:kindgrove-steps:parse-aoi-steps",
     "value": 16.1,
@@ -51,7 +51,7 @@
   },
   {
     "id": "urn:example:entity:parse-aoi-steps:out:south",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/south",
     "wasGeneratedBy": "urn:example:run:kindgrove-steps:parse-aoi-steps",
     "value": 15.9,
@@ -59,7 +59,7 @@
   },
   {
     "id": "urn:example:entity:parse-aoi-steps:out:west",
-    "provType": "prov:Entity",
+    "provType": "Entity",
     "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/west",
     "wasGeneratedBy": "urn:example:run:kindgrove-steps:parse-aoi-steps",
     "value": 95.15,
@@ -67,21 +67,25 @@
   },
   {
     "id": "urn:example:engine:cwltool-3.1.20260108082145",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "cwltool 3.1.20260108082145"
   },
   {
     "id": "urn:example:image:alpine:3.22.2",
-    "provType": "prov:SoftwareAgent",
+    "provType": "Agent",
+    "agentType": "prov:SoftwareAgent",
     "name": "container image alpine:3.22.2"
   },
   {
     "id": "https://ospd.example.org/ogc-api/processes/parse_aoi/package",
-    "provType": "prov:Plan"
+    "provType": "Entity",
+    "entityType": "prov:Plan"
   },
   {
     "id": "arcp://uuid,e96466cd-dd6c-469a-af95-6bbc439a3156/workflow/packed.cwl#main/parse_aoi",
-    "provType": "prov:Plan",
+    "provType": "Entity",
+    "entityType": "prov:Plan",
     "specializationOf": "https://ospd.example.org/ogc-api/processes/parse_aoi/package"
   }
 ]

@@ -7,7 +7,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main> a prov:Plan ;
+<arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/mangrove-workflow/package> .
 
 <urn:example:entity:mangrove-workflow:out:stac> a prov:Entity,
@@ -45,8 +46,10 @@
         <urn:example:entity:mangrove-workflow:in:days_back> ;
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145> .
 
-<https://ospd.example.org/ogc-api/processes/mangrove-workflow/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/mangrove-workflow/package> a prov:Entity,
+        prov:Plan .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 

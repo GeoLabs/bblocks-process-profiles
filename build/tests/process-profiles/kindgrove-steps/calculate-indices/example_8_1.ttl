@@ -3,6 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:kindgrove-steps:calculate-indices> a wfprov:ProcessRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/calculate-indices> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/calculate_indices/package> ;
     wfprov:usedInput <urn:example:entity:calculate-indices:in:band_files> ;

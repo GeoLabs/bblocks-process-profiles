@@ -3,6 +3,7 @@
   "run": {
     "id": "urn:example:run:kindgrove:mangrove-workflow",
     "type": "WorkflowRun",
+    "provType": "Activity",
     "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove-workflow",
     "describedByWorkflow": "https://ospd.example.org/ogc-api/processes/mangrove-workflow/package",
     "wasEnactedBy": "urn:example:engine:cwltool-3.1.20260108082145",
@@ -22,6 +23,7 @@
   "engine": {
     "@id": "urn:example:engine:cwltool-3.1.20260108082145",
     "@type": "WorkflowEngine",
+    "provType": "Agent",
     "name": "cwltool",
     "version": "3.1.20260108082145"
   },
@@ -29,6 +31,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/kindgrove-mangrove-workflow-0001/results/catalog.json",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "application/json",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/mangrove-workflow#outputs/stac",
@@ -41,6 +44,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/kindgrove-mangrove-workflow-0001/results/mangrove-analysis-20260923-080315/biomass_summary.csv",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "text/csv",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/mangrove-workflow#outputs/stac",
@@ -53,6 +57,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/kindgrove-mangrove-workflow-0001/results/mangrove-analysis-20260923-080315/carbon_summary.csv",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "text/csv",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/mangrove-workflow#outputs/stac",
@@ -65,6 +70,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/kindgrove-mangrove-workflow-0001/results/mangrove-analysis-20260923-080315/mangrove-analysis-20260923-080315.json",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "application/json",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/mangrove-workflow#outputs/stac",
@@ -77,6 +83,7 @@
     {
       "id": "https://ospd.example.org/ogc-api/jobs/kindgrove-mangrove-workflow-0001/results/mangrove-analysis-20260923-080315/mangrove_mask.tif",
       "type": "Artifact",
+      "provType": "Entity",
       "role": "output",
       "mediaType": "image/tiff; application=geotiff",
       "describedByParameter": "https://ospd.example.org/ogc-api/processes/mangrove-workflow#outputs/stac",

@@ -2,6 +2,7 @@
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/kindgrove-steps/estimate-biomass/context.jsonld",
   "id": "urn:example:run:kindgrove-steps:estimate-biomass",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/estimate-biomass",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/estimate_biomass/package",
   "usedInput": [

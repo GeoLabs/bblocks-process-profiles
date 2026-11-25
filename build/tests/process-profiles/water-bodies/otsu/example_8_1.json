@@ -1,6 +1,7 @@
 {
   "id": "urn:example:run:water-bodies:otsu",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/otsu",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/otsu/package",
   "usedInput": [

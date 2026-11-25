@@ -3,6 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:kindgrove:mangrove> a wfprov:ProcessRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/mangrove> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/mangrove_cli/package> ;
     wfprov:usedInput <urn:example:entity:mangrove:in:cloud_cover_max>,

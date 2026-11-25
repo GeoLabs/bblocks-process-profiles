@@ -3,7 +3,8 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/parse_aoi> a prov:Plan ;
+<arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/parse_aoi> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/parse_aoi/package> .
 
 <urn:example:entity:parse-aoi:out:east> a prov:Entity,
@@ -44,10 +45,12 @@
                 9.535e+01 ;
             pp:crs "CRS84" ] .
 
-<urn:example:image:alpine:3.22.2> a prov:SoftwareAgent ;
+<urn:example:image:alpine:3.22.2> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image alpine:3.22.2" .
 
-<https://ospd.example.org/ogc-api/processes/parse_aoi/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/parse_aoi/package> a prov:Entity,
+        prov:Plan .
 
 <urn:example:run:kindgrove:parse-aoi> a prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi> ;
@@ -59,6 +62,7 @@
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:alpine:3.22.2> .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 

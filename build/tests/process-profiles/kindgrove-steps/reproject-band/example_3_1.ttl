@@ -1,8 +1,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://schema.org/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix ns3: <https://w3id.org/ogc/api/schema/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns4: <http://schema.org/> .
 @prefix ns5: <https://w3id.org/geolabs/ospd/generic-profiles/> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -18,7 +18,7 @@
         "reprojection" ;
     dcterms:title "reproject_band" ;
     pp:version "0.1.0" ;
-    proc:inputs [ ns4:band_file [ dcterms:description "" ;
+    proc:inputs [ ns1:band_file [ dcterms:description "" ;
                     dcterms:title "band_file" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
                     ns5:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff> ;
@@ -34,12 +34,12 @@
                     proc:schema [ proc:type "string" ;
                             ns3:contentEncoding "binary" ;
                             ns3:contentMediaType "image/tiff; application=geotiff" ] ] ;
-            ns4:east [ dcterms:description "" ;
+            ns1:east [ dcterms:description "" ;
                     dcterms:title "east" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns4:epsg [ dcterms:description "" ;
+            ns1:epsg [ dcterms:description "" ;
                     dcterms:title "epsg" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/coordinate-reference-system> ;
                     proc:keywords "CRS" ;
@@ -53,54 +53,54 @@
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "4326"^^rdf:JSON ;
                             proc:type "integer" ] ] ;
-            ns4:north [ dcterms:description "" ;
+            ns1:north [ dcterms:description "" ;
                     dcterms:title "north" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns4:resolution [ dcterms:description "" ;
+            ns1:resolution [ dcterms:description "" ;
                     dcterms:title "resolution" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "0.0001"^^rdf:JSON ;
                             proc:type "number" ] ] ;
-            ns4:south [ dcterms:description "" ;
+            ns1:south [ dcterms:description "" ;
                     dcterms:title "south" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ;
-            ns4:west [ dcterms:description "" ;
+            ns1:west [ dcterms:description "" ;
                     dcterms:title "west" ;
                     proc:maxOccurs 1 ;
                     proc:minOccurs 1 ;
                     proc:schema [ proc:type "number" ] ] ] ;
     proc:jobControlOptions "async-execute" ;
-    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+    proc:metadata [ rdf:value "0.1.0" ;
+            proc:role schema:softwareVersion ],
+        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
+            proc:role schema:codeRepository ],
+        [ rdf:value "reproject_band" ;
+            proc:role schema:name ],
+        [ rdf:value [ a ns4:Person ;
+                    ns4:affiliation "GeoLabs" ;
+                    ns4:name "Gérald Fenoy" ] ;
+            proc:role schema:contributor ],
+        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
+            proc:role schema:license ],
+        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ dcterms:title "Generic Profile: Raster reprojection" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-reprojection> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ rdf:value "Reproject a raster onto a regular grid covering a bounding box" ;
+            proc:role schema:description ],
         [ dcterms:title "Implementation Profile: Raster reprojection" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-reprojection> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
-        [ rdf:value "https://github.com/starling-foundries/KindGrove" ;
-            proc:role schema:codeRepository ],
-        [ rdf:value "0.1.0" ;
-            proc:role schema:softwareVersion ],
-        [ rdf:value "Reproject a raster onto a regular grid covering a bounding box" ;
-            proc:role schema:description ],
-        [ rdf:value [ a ns1:Person ;
-                    ns1:name "Cameron Sajedi" ] ;
-            proc:role schema:author ],
-        [ rdf:value [ a ns1:Person ;
-                    ns1:affiliation "GeoLabs" ;
-                    ns1:name "Gérald Fenoy" ] ;
-            proc:role schema:contributor ],
-        [ rdf:value "reproject_band" ;
-            proc:role schema:name ],
-        [ rdf:value "https://spdx.org/licenses/CC-BY-NC-SA-4.0" ;
-            proc:role schema:license ] ;
+        [ rdf:value [ a ns4:Person ;
+                    ns4:name "Cameron Sajedi" ] ;
+            proc:role schema:author ] ;
     proc:mutable true ;
     proc:outputTransmission "reference",
         "value" ;

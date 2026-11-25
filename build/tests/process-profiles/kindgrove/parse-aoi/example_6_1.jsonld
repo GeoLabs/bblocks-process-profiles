@@ -3,7 +3,7 @@
   "@graph": [
     {
       "id": "urn:example:run:kindgrove:parse-aoi",
-      "provType": "prov:Activity",
+      "provType": "Activity",
       "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi",
       "startedAtTime": "2026-09-23T08:01:11Z",
       "used": [
@@ -23,7 +23,7 @@
     },
     {
       "id": "urn:example:entity:parse-aoi:in:aoi",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#inputs/aoi",
       "value": {
         "bbox": [
@@ -37,7 +37,7 @@
     },
     {
       "id": "urn:example:entity:parse-aoi:out:east",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/east",
       "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
       "value": 95.35,
@@ -45,7 +45,7 @@
     },
     {
       "id": "urn:example:entity:parse-aoi:out:north",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/north",
       "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
       "value": 16.1,
@@ -53,7 +53,7 @@
     },
     {
       "id": "urn:example:entity:parse-aoi:out:output_dir",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/output_dir",
       "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
       "value": "outputs",
@@ -61,7 +61,7 @@
     },
     {
       "id": "urn:example:entity:parse-aoi:out:south",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/south",
       "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
       "value": 15.9,
@@ -69,7 +69,7 @@
     },
     {
       "id": "urn:example:entity:parse-aoi:out:west",
-      "provType": "prov:Entity",
+      "provType": "Entity",
       "entityType": "https://ospd.example.org/ogc-api/processes/parse_aoi#outputs/west",
       "wasGeneratedBy": "urn:example:run:kindgrove:parse-aoi",
       "value": 95.15,
@@ -77,21 +77,25 @@
     },
     {
       "id": "urn:example:engine:cwltool-3.1.20260108082145",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "cwltool 3.1.20260108082145"
     },
     {
       "id": "urn:example:image:alpine:3.22.2",
-      "provType": "prov:SoftwareAgent",
+      "provType": "Agent",
+      "agentType": "prov:SoftwareAgent",
       "name": "container image alpine:3.22.2"
     },
     {
       "id": "https://ospd.example.org/ogc-api/processes/parse_aoi/package",
-      "provType": "prov:Plan"
+      "provType": "Entity",
+      "entityType": "prov:Plan"
     },
     {
       "id": "arcp://uuid,ec5cc9e1-3e83-4551-a759-4745c5b5040b/workflow/packed.cwl#main/parse_aoi",
-      "provType": "prov:Plan",
+      "provType": "Entity",
+      "entityType": "prov:Plan",
       "specializationOf": "https://ospd.example.org/ogc-api/processes/parse_aoi/package"
     }
   ]

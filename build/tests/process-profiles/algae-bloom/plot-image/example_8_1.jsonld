@@ -2,6 +2,7 @@
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/algae-bloom/plot-image/context.jsonld",
   "id": "urn:example:run:algae-bloom:plot-image",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/plot-image",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/plot-image/package",
   "usedInput": [

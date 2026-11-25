@@ -3,6 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:algae-bloom:download-band-sentinel2-product-safe> a wfprov:ProcessRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/algae-bloom/download-band-sentinel2-product-safe> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe/package> ;
     wfprov:usedInput <urn:example:entity:download-band-sentinel2-product-safe:in:band>,

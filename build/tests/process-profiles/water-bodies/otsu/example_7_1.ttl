@@ -6,7 +6,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu> a prov:Plan ;
+<arcp://uuid,43f96d95-9aa3-42a3-8046-388cdfaf7a80/workflow/packed.cwl#main/node_otsu> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/otsu/package> .
 
 <urn:example:entity:otsu:out:binary_mask_item> a prov:Entity,
@@ -18,7 +19,8 @@
     prov:wasDerivedFrom <urn:example:entity:otsu:in:raster> ;
     prov:wasGeneratedBy <urn:example:run:water-bodies:otsu> .
 
-<urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0> a prov:SoftwareAgent ;
+<urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0" .
 
 <urn:example:run:water-bodies:otsu> a prov:Activity,
@@ -31,7 +33,8 @@
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:1.5.0> .
 
-<https://ospd.example.org/ogc-api/processes/otsu/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/otsu/package> a prov:Entity,
+        prov:Plan .
 
 <urn:example:entity:otsu:in:raster> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/otsu#inputs/raster> ;
@@ -39,6 +42,7 @@
             ns1:relation <http://www.iana.org/assignments/relation/item> ;
             oa:hasTarget <https://ospd.example.org/ogc-api/jobs/upstream-step/results/norm_diff.tif> ] .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 

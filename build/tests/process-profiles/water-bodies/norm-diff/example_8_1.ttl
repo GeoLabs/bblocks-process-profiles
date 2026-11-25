@@ -3,6 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:water-bodies:norm-diff> a wfprov:ProcessRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/norm-diff> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/norm_diff/package> ;
     wfprov:usedInput <urn:example:entity:norm-diff:in:rasters> ;

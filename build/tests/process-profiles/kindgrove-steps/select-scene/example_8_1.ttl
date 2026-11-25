@@ -3,6 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:example:run:kindgrove-steps:select-scene> a wfprov:ProcessRun,
+        prov:Activity,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene> ;
     wfprov:describedByProcess <https://ospd.example.org/ogc-api/processes/select_scene/package> ;
     wfprov:usedInput <urn:example:entity:select-scene:in:cloud_cover_max>,

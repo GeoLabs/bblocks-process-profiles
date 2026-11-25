@@ -2,6 +2,7 @@
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/kindgrove/parse-aoi/context.jsonld",
   "id": "urn:example:run:kindgrove:parse-aoi",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove/parse-aoi",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/parse_aoi/package",
   "usedInput": [

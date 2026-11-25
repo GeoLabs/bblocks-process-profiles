@@ -1,8 +1,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/generic-profiles/> .
-@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix ns5: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
@@ -21,7 +21,7 @@
             ns5:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/SAGA.pointcloud_tools.4/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns4:AGGREGATION [ dcterms:description "Aggregation" ;
+    proc:inputs [ ns3:AGGREGATION [ dcterms:description "Aggregation" ;
                     dcterms:title "Aggregation" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"first value\""^^rdf:JSON ;
@@ -32,7 +32,7 @@
                                 "mean value" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns4:CELLSIZE [ dcterms:description "Cellsize" ;
+            ns3:CELLSIZE [ dcterms:description "Cellsize" ;
                     dcterms:title "Cellsize" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/number> ;
                     proc:keywords "cell size" ;
@@ -46,8 +46,8 @@
                     proc:schema [ proc:default "1"^^rdf:JSON ;
                             proc:nullable true ;
                             proc:type "number" ;
-                            ns1:format "float" ] ] ;
-            ns4:OUTPUT [ dcterms:description "Output" ;
+                            ns2:format "float" ] ] ;
+            ns3:OUTPUT [ dcterms:description "Output" ;
                     dcterms:title "Output" ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "\"only z\""^^rdf:JSON ;
@@ -55,10 +55,10 @@
                                 "only z" ;
                             proc:nullable true ;
                             proc:type "string" ] ] ;
-            ns4:POINTS [ dcterms:description "Points" ;
+            ns3:POINTS [ dcterms:description "Points" ;
                     dcterms:title "Points" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/point-cloud> ;
-                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las> ;
+                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/point-cloud-las> ;
                     proc:keywords "point cloud" ;
                     proc:metadata [ dcterms:title "Generic Profile: Point cloud rasterization -- input `points`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-rasterization/inputs/points> ;
@@ -66,47 +66,47 @@
                         [ dcterms:title "Implementation Profile: Point cloud to grid -- input `points`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid/inputs/points> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-lasf" ] ] ] ] ;
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-lasf" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Process Concept: Point Cloud Processing" ;
+    proc:metadata [ dcterms:title "Implementation Profile: Point cloud to grid" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
+        [ dcterms:title "Process Concept: Point Cloud Processing" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/point-cloud-processing> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
         [ dcterms:title "Generic Profile: Point cloud rasterization" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/point-cloud-rasterization> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
-        [ dcterms:title "Implementation Profile: Point cloud to grid" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:COUNT [ dcterms:description "Number of Points in Cell" ;
+    proc:outputs [ ns4:COUNT [ dcterms:description "Number of Points in Cell" ;
                     dcterms:title "Number of Points in Cell" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
-                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
-            ns2:GRID [ dcterms:description "Z Value" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-envi" ] ] ] ;
+            ns4:GRID [ dcterms:description "Z Value" ;
                     dcterms:title "Z Value" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
-                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
@@ -117,35 +117,35 @@
                         [ dcterms:title "Implementation Profile: Point cloud to grid -- output `result`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/point-cloud-to-grid/outputs/result> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ] ] ] ;
-            ns2:GRIDS [ dcterms:description "Attributes" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-envi" ] ] ] ;
+            ns4:GRIDS [ dcterms:description "Attributes" ;
                     dcterms:title "Attributes" ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster-single-band> ;
-                    ns3:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
+                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-aaigrid>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-envi>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-single-band-png> ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-aaigrid" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-aaigrid" ],
                                 [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "application/x-ogc-envi" ] ] ] ] .
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "application/x-ogc-envi" ] ] ] ] .
 

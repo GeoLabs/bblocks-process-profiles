@@ -372,8 +372,8 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://w3id.org/ogc/api/schema/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns3: <http://www.iana.org/assignments/> .
+@prefix ns2: <http://www.iana.org/assignments/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
 @prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
@@ -386,15 +386,27 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
     dcterms:title "This application performs mathematical operations on several multiband images." ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns3:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns2:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMathX/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns2:exp [ dcterms:description "Mathematical expression to apply." ;
+    proc:inputs [ ns3:exp [ dcterms:description "Mathematical expression to apply." ;
                     dcterms:title "Mathematical expression to apply." ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns2:il [ dcterms:description "Image list to perform computation on." ;
+            ns3:il [ dcterms:description "Image list to perform computation on." ;
                     dcterms:title "Image list to perform computation on." ;
                     proc:maxOccurs 1024 ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/png" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/jpeg" ],
+                                [ proc:type "string" ;
+                                    ns1:contentEncoding "base64" ;
+                                    ns1:contentMediaType "image/tiff" ] ] ] ;
+            ns3:incontext [ dcterms:description "A txt file containing user's constants and expressions." ;
+                    dcterms:title "A txt file containing user's constants and expressions." ;
+                    proc:minOccurs 0 ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/png" ],
@@ -404,19 +416,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/jpeg" ] ] ] ;
-            ns2:incontext [ dcterms:description "A txt file containing user's constants and expressions." ;
-                    dcterms:title "A txt file containing user's constants and expressions." ;
-                    proc:minOccurs 0 ;
-                    proc:schema [ ns1:oneOf [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/tiff" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ],
-                                [ proc:type "string" ;
-                                    ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ] ] ] ;
-            ns2:out [ dcterms:description "Output image." ;
+            ns3:out [ dcterms:description "Output image." ;
                     dcterms:title "Output image." ;
                     proc:schema [ proc:default "\"float\""^^rdf:JSON ;
                             proc:enum "double",
@@ -426,7 +426,7 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                                 "uint16",
                                 "uint8" ;
                             proc:type "string" ] ] ;
-            ns2:ram [ dcterms:description "Available memory for processing (in MB)." ;
+            ns3:ram [ dcterms:description "Available memory for processing (in MB)." ;
                     dcterms:title "Available memory for processing (in MB)." ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "256"^^rdf:JSON ;
@@ -442,10 +442,10 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                     dcterms:title "Output image." ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/jpeg" ],
+                                    ns1:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
-                                    ns1:contentMediaType "image/png" ],
+                                    ns1:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "base64" ;
                                     ns1:contentMediaType "image/tiff" ] ] ] ;
@@ -453,10 +453,10 @@ Live OGC API - Processes processDescription, normalised (ZOO-Project-internal fi
                     dcterms:title "A txt file where to save user's constants and expressions." ;
                     proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/plain" ],
+                                    ns1:contentMediaType "text/xml" ],
                                 [ proc:type "string" ;
                                     ns1:contentEncoding "utf-8" ;
-                                    ns1:contentMediaType "text/xml" ] ] ] ] .
+                                    ns1:contentMediaType "text/plain" ] ] ] ] .
 
 
 ```
@@ -941,11 +941,11 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
 #### ttl
 ```ttl
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ns1: <http://www.iana.org/assignments/> .
-@prefix ns2: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
-@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
-@prefix ns4: <https://w3id.org/ogc/api/schema/> .
-@prefix ns5: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns1: <https://w3id.org/geolabs/ospd/generic-profiles/> .
+@prefix ns2: <https://w3id.org/ogc/api/schema/> .
+@prefix ns3: <https://w3id.org/geolabs/ospd/process-profiles/output/> .
+@prefix ns4: <https://w3id.org/geolabs/ospd/process-profiles/input/> .
+@prefix ns5: <http://www.iana.org/assignments/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix pp: <https://w3id.org/geolabs/ospd/process-profiles/> .
 @prefix proc: <https://w3id.org/ogc/api/processes/> .
@@ -961,24 +961,24 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     dcterms:title "This application performs mathematical operations on several multiband images." ;
     rdfs:seeAlso [ rdfs:label "Execute End Point" ;
             dcterms:type "application/json" ;
-            ns1:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
+            ns5:relation <http://www.opengis.net/def/rel/ogc/1.0/execute> ;
             oa:hasTarget <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMathX/execution> ] ;
     pp:version "1.0.0" ;
-    proc:inputs [ ns3:exp [ dcterms:description "Mathematical expression to apply." ;
+    proc:inputs [ ns4:exp [ dcterms:description "Mathematical expression to apply." ;
                     dcterms:title "Mathematical expression to apply." ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/expression> ;
                     proc:keywords "expression" ;
-                    proc:metadata [ dcterms:title "Implementation Profile: Raster band math (multi-band output) -- input `expression`" ;
-                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math-multiband/inputs/expression> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ],
-                        [ dcterms:title "Generic Profile: Raster band math -- input `expression`" ;
+                    proc:metadata [ dcterms:title "Generic Profile: Raster band math -- input `expression`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/expression> ;
-                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ],
+                        [ dcterms:title "Implementation Profile: Raster band math (multi-band output) -- input `expression`" ;
+                            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math-multiband/inputs/expression> ;
+                            proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-input> ] ;
                     proc:schema [ proc:type "string" ] ] ;
-            ns3:il [ dcterms:description "Image list to perform computation on." ;
+            ns4:il [ dcterms:description "Image list to perform computation on." ;
                     dcterms:title "Image list to perform computation on." ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns5:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-png> ;
                     proc:keywords "raster" ;
@@ -989,28 +989,28 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                         [ dcterms:title "Generic Profile: Raster band math -- input `rasters`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math/inputs/rasters> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/generic-input> ] ;
-                    proc:schema [ ns4:oneOf [ proc:type "string" ;
-                                    ns4:contentEncoding "base64" ;
-                                    ns4:contentMediaType "image/png" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns4:contentEncoding "base64" ;
-                                    ns4:contentMediaType "image/tiff" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
-                                    ns4:contentEncoding "base64" ;
-                                    ns4:contentMediaType "image/jpeg" ] ] ] ;
-            ns3:incontext [ dcterms:description "A txt file containing user's constants and expressions." ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/png" ] ] ] ;
+            ns4:incontext [ dcterms:description "A txt file containing user's constants and expressions." ;
                     dcterms:title "A txt file containing user's constants and expressions." ;
                     proc:minOccurs 0 ;
-                    proc:schema [ ns4:oneOf [ proc:type "string" ;
-                                    ns4:contentEncoding "base64" ;
-                                    ns4:contentMediaType "image/tiff" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
-                                    ns4:contentEncoding "base64" ;
-                                    ns4:contentMediaType "image/png" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/tiff" ],
                                 [ proc:type "string" ;
-                                    ns4:contentEncoding "base64" ;
-                                    ns4:contentMediaType "image/jpeg" ] ] ] ;
-            ns3:out [ dcterms:description "Output image." ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/png" ] ] ] ;
+            ns4:out [ dcterms:description "Output image." ;
                     dcterms:title "Output image." ;
                     proc:schema [ proc:default "\"float\""^^rdf:JSON ;
                             proc:enum "double",
@@ -1020,7 +1020,7 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                                 "uint16",
                                 "uint8" ;
                             proc:type "string" ] ] ;
-            ns3:ram [ dcterms:description "Available memory for processing (in MB)." ;
+            ns4:ram [ dcterms:description "Available memory for processing (in MB)." ;
                     dcterms:title "Available memory for processing (in MB)." ;
                     proc:minOccurs 0 ;
                     proc:schema [ proc:default "256"^^rdf:JSON ;
@@ -1029,22 +1029,22 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
-    proc:metadata [ dcterms:title "Process Concept: Raster Coverage Processing" ;
-            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ],
-        [ dcterms:title "Implementation Profile: Raster band math (multi-band output)" ;
+    proc:metadata [ dcterms:title "Implementation Profile: Raster band math (multi-band output)" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math-multiband> ;
             proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/implementation> ],
         [ dcterms:title "Generic Profile: Raster band math" ;
             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/generic-profile/raster-band-math> ;
-            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ] ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/generic> ],
+        [ dcterms:title "Process Concept: Raster Coverage Processing" ;
+            proc:href <https://w3id.org/geolabs/ospd/generic-profiles/concept/raster-coverage-processing> ;
+            proc:role <http://www.opengis.net/spec/wps/2.0/def/process-profile/concept> ] ;
     proc:mutable false ;
     proc:outputTransmission "reference",
         "value" ;
-    proc:outputs [ ns2:out [ dcterms:description "Output image." ;
+    proc:outputs [ ns3:out [ dcterms:description "Output image." ;
                     dcterms:title "Output image." ;
                     dcterms:type <https://w3id.org/geolabs/ospd/data-types/data-type/raster> ;
-                    ns5:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
+                    ns1:representation <https://w3id.org/geolabs/ospd/data-formats/representation/raster-geotiff>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-jpeg>,
                         <https://w3id.org/geolabs/ospd/data-formats/representation/raster-png> ;
                     proc:keywords "raster" ;
@@ -1054,23 +1054,23 @@ The same processDescription as OGC 14-065r1 Table 21 wants it at the Implementat
                         [ dcterms:title "Implementation Profile: Raster band math (multi-band output) -- output `raster`" ;
                             proc:href <https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math-multiband/outputs/raster> ;
                             proc:role <https://w3id.org/geolabs/ospd/generic-profiles/role/implementation-output> ] ;
-                    proc:schema [ ns4:oneOf [ proc:type "string" ;
-                                    ns4:contentEncoding "base64" ;
-                                    ns4:contentMediaType "image/tiff" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/png" ],
                                 [ proc:type "string" ;
-                                    ns4:contentEncoding "base64" ;
-                                    ns4:contentMediaType "image/jpeg" ],
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/jpeg" ],
                                 [ proc:type "string" ;
-                                    ns4:contentEncoding "base64" ;
-                                    ns4:contentMediaType "image/png" ] ] ] ;
-            ns2:outcontext [ dcterms:description "A txt file where to save user's constants and expressions." ;
+                                    ns2:contentEncoding "base64" ;
+                                    ns2:contentMediaType "image/tiff" ] ] ] ;
+            ns3:outcontext [ dcterms:description "A txt file where to save user's constants and expressions." ;
                     dcterms:title "A txt file where to save user's constants and expressions." ;
-                    proc:schema [ ns4:oneOf [ proc:type "string" ;
-                                    ns4:contentEncoding "utf-8" ;
-                                    ns4:contentMediaType "text/plain" ],
+                    proc:schema [ ns2:oneOf [ proc:type "string" ;
+                                    ns2:contentEncoding "utf-8" ;
+                                    ns2:contentMediaType "text/xml" ],
                                 [ proc:type "string" ;
-                                    ns4:contentEncoding "utf-8" ;
-                                    ns4:contentMediaType "text/xml" ] ] ] ] .
+                                    ns2:contentEncoding "utf-8" ;
+                                    ns2:contentMediaType "text/plain" ] ] ] ] .
 
 
 ```
@@ -1098,7 +1098,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     },
@@ -1108,7 +1108,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     },
@@ -1118,7 +1118,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     },
@@ -1129,7 +1129,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/band-math-multiband to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     },
@@ -1139,14 +1139,25 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/activity-type-2026-11-19",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "affectedProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "description": "subClassOf changes from https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband, withdrawn from bblocks-generic-profiles on 2026-11-19, to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math, into which it is merged and to which the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math-multiband now points (decision of 2026-11-19). The entity types are unchanged. Classified substantive: the parent class changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
+      "startedAtTime": "2026-11-19T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     }
   ],
   "prefLabel": "This application performs mathematical operations on several multiband images.",
   "definition": "This application performs a mathematical operation on several multi-band images and outputs the result into an image (multi- or mono-band, as opposed to the BandMath OTB-application). The mathematical formula is done by the muParserX library.The list of features and the syntax of muParserX is available at [1].As opposed to muParser (and thus the BandMath OTB-application [2]), muParserX supports vector expressions which allows outputting multi-band images.Hereafter is a brief reference of the muParserX syntaxFundamentals------------The formula can be written using:* numerical values ( 2.3, -5, 3.1e4, ...)* variables containing pixel values (please, note the indexing of inputs from 1 to N). Examples for the first input image: * ``im1`` a pixel from 1st input, made of n components (n bands) * ``im1b2`` the 2nd component of a pixel from 1st input (band index is 1-based) * ``im1b2N3x4`` a 3x4 pixels Neighbourhood of a pixel the 2nd component of a pixel from the 1st input * ``im1PhyX`` horizontal (X-axis) spacing of the 1st input. * ``im1PhyY`` vertical (Y-axis) spacing of the 1st input input. * ``im1b2Mean`` mean of the 2nd component of the 1st input (global statistics) * ``im1b2Mini`` minimum of the 2nd component of the 1st input (global statistics) * ``im1b2Maxi`` maximum of the 2nd component of the 1st input (global statistics) * ``im1b2Sum`` sum of the 2nd component of the 1st input (global statistics) * ``im1b2Var`` variance of the 2nd component of the 1st input (global statistics) * ``idxX`` and ``idxY`` are the indices of the current pixel (generic variables)* binary operators: * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division * ``^`` raise x to the power of y * ``",
-  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
@@ -1196,7 +1207,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/addition",
       "type": "RegisterAction",
       "actionType": "addition",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-09-22T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     },
@@ -1206,7 +1217,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-09T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     },
@@ -1216,7 +1227,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-10T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     },
@@ -1227,7 +1238,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "changeClassification": "clarifying",
       "affectedProperty": "https://w3id.org/ogc/rim/objectIdentifier",
       "description": "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/band-math-multiband to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-17T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     },
@@ -1237,14 +1248,25 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
       "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
       "changeClassification": "substantive",
       "description": "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes.",
-      "proposer": "https://w3id.org/geolabs/ospd/process-profiles/geolabs",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
       "startedAtTime": "2026-11-18T00:00:00Z",
+      "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
+    },
+    {
+      "id": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/activity-type-2026-11-19",
+      "type": "RegisterAction",
+      "actionType": "https://w3id.org/geolabs/ospd/process-profiles/amendmentAction",
+      "changeClassification": "substantive",
+      "affectedProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "description": "subClassOf changes from https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband, withdrawn from bblocks-generic-profiles on 2026-11-19, to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math, into which it is merged and to which the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math-multiband now points (decision of 2026-11-19). The entity types are unchanged. Classified substantive: the parent class changes.",
+      "proposer": "https://w3id.org/geolabs/ospd/org/geolabs",
+      "startedAtTime": "2026-11-19T00:00:00Z",
       "appliesTo": "https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband"
     }
   ],
   "prefLabel": "This application performs mathematical operations on several multiband images.",
   "definition": "This application performs a mathematical operation on several multi-band images and outputs the result into an image (multi- or mono-band, as opposed to the BandMath OTB-application). The mathematical formula is done by the muParserX library.The list of features and the syntax of muParserX is available at [1].As opposed to muParser (and thus the BandMath OTB-application [2]), muParserX supports vector expressions which allows outputting multi-band images.Hereafter is a brief reference of the muParserX syntaxFundamentals------------The formula can be written using:* numerical values ( 2.3, -5, 3.1e4, ...)* variables containing pixel values (please, note the indexing of inputs from 1 to N). Examples for the first input image: * ``im1`` a pixel from 1st input, made of n components (n bands) * ``im1b2`` the 2nd component of a pixel from 1st input (band index is 1-based) * ``im1b2N3x4`` a 3x4 pixels Neighbourhood of a pixel the 2nd component of a pixel from the 1st input * ``im1PhyX`` horizontal (X-axis) spacing of the 1st input. * ``im1PhyY`` vertical (Y-axis) spacing of the 1st input input. * ``im1b2Mean`` mean of the 2nd component of the 1st input (global statistics) * ``im1b2Mini`` minimum of the 2nd component of the 1st input (global statistics) * ``im1b2Maxi`` maximum of the 2nd component of the 1st input (global statistics) * ``im1b2Sum`` sum of the 2nd component of the 1st input (global statistics) * ``im1b2Var`` variance of the 2nd component of the 1st input (global statistics) * ``idxX`` and ``idxY`` are the indices of the current pixel (generic variables)* binary operators: * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division * ``^`` raise x to the power of y * ``",
-  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband",
+  "subClassOf": "https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math",
   "usedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "generatedEntityType": "http://www.opengis.net/ont/geosparql#Feature",
   "inScheme": "https://w3id.org/geolabs/ospd/process-profiles/process-type",
@@ -1286,11 +1308,20 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
 @prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/activity-type-2026-11-19> a rim:RegisterAction ;
+    dcterms:description "subClassOf changes from https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband, withdrawn from bblocks-generic-profiles on 2026-11-19, to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math, into which it is merged and to which the Implementation Profile https://w3id.org/geolabs/ospd/generic-profiles/implementation-profile/raster-band-math-multiband now points (decision of 2026-11-19). The entity types are unchanged. Classified substantive: the parent class changes." ;
+    prov:startedAtTime "2026-11-19T00:00:00+00:00"^^xsd:dateTime ;
+    rim:actionType pp:amendmentAction ;
+    rim:affectedProperty rdfs:subClassOf ;
+    rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband> ;
+    rim:changeClassification rim:substantiveChange ;
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
+
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/addition> a rim:RegisterAction ;
     prov:startedAtTime "2026-09-22T00:00:00+00:00"^^xsd:dateTime ;
     rim:actionType rim:additionAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband> ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/d5-2026-11-09> a rim:RegisterAction ;
     dcterms:description "Decision D5: the meaning of the type (prefLabel, definition, subClassOf) is kept apart from the rest. The six-phase position moves from skos:broader to pp:phase (classification); profile, processDescription and provenanceClass move to a node of their own (pp:deployment); the openEO correspondences are grouped apart. The plan was already a node of its own." ;
@@ -1298,7 +1329,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/identifier-2026-11-17> a rim:RegisterAction ;
     dcterms:description "The object identifier of this item moves from https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/band-math-multiband to https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband, which resolves through w3id.org (decision of 2026-11-17); the register actions of the item move with it, under https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/. The old IRI is kept as owl:sameAs. The content of the item is unchanged. Classified clarifying: the item is the same, only its identifier changes." ;
@@ -1307,7 +1338,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:affectedProperty rim:objectIdentifier ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband> ;
     rim:changeClassification rim:clarifyingChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/representation-2026-11-18> a rim:RegisterAction ;
     dcterms:description "processDescription: in processDescription.inherited.json, each input and output that has a data type now names its representations (representation), the df:Representation items of bblocks-data-formats that realize that data type in a format the deployment declares (decision of 2026-11-18). Classified substantive: the form in which a part of the entry is stated changes." ;
@@ -1315,7 +1346,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/specialisation-2026-11-10> a rim:RegisterAction ;
     dcterms:description "subClassOf changes from https://w3id.org/ogc/rim/activity-type/ActivityType to https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband, the activity type of the operation in bblocks-generic-profiles (decision of 2026-11-10), with the same entity type(s): http://www.opengis.net/ont/geosparql#Feature, http://www.opengis.net/ont/geosparql#Feature." ;
@@ -1323,7 +1354,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     rim:actionType pp:amendmentAction ;
     rim:appliesTo <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband> ;
     rim:changeClassification rim:substantiveChange ;
-    rim:proposer pp:geolabs .
+    rim:proposer <https://w3id.org/geolabs/ospd/org/geolabs> .
 
 <https://w3id.org/geolabs/ospd/process-profiles/process/raster/OTB.BandMathX> rdfs:seeAlso <https://host1.tb.geonovum.geolabs.fr/ogc-api/processes/OTB.BandMathX> ;
     pp:version "1.0.0" .
@@ -1331,7 +1362,7 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
 <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband> a owl:Class,
         pp:ProcessType,
         acttype:ActivityType ;
-    rdfs:subClassOf <https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math-multiband> ;
+    rdfs:subClassOf <https://w3id.org/geolabs/ospd/generic-profiles/activity-type/raster-band-math> ;
     owl:sameAs <https://geolabs.github.io/bblocks-process-profiles/def/process-type/raster/band-math-multiband> ;
     skos:definition "This application performs a mathematical operation on several multi-band images and outputs the result into an image (multi- or mono-band, as opposed to the BandMath OTB-application). The mathematical formula is done by the muParserX library.The list of features and the syntax of muParserX is available at [1].As opposed to muParser (and thus the BandMath OTB-application [2]), muParserX supports vector expressions which allows outputting multi-band images.Hereafter is a brief reference of the muParserX syntaxFundamentals------------The formula can be written using:* numerical values ( 2.3, -5, 3.1e4, ...)* variables containing pixel values (please, note the indexing of inputs from 1 to N). Examples for the first input image: * ``im1`` a pixel from 1st input, made of n components (n bands) * ``im1b2`` the 2nd component of a pixel from 1st input (band index is 1-based) * ``im1b2N3x4`` a 3x4 pixels Neighbourhood of a pixel the 2nd component of a pixel from the 1st input * ``im1PhyX`` horizontal (X-axis) spacing of the 1st input. * ``im1PhyY`` vertical (Y-axis) spacing of the 1st input input. * ``im1b2Mean`` mean of the 2nd component of the 1st input (global statistics) * ``im1b2Mini`` minimum of the 2nd component of the 1st input (global statistics) * ``im1b2Maxi`` maximum of the 2nd component of the 1st input (global statistics) * ``im1b2Sum`` sum of the 2nd component of the 1st input (global statistics) * ``im1b2Var`` variance of the 2nd component of the 1st input (global statistics) * ``idxX`` and ``idxY`` are the indices of the current pixel (generic variables)* binary operators: * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division * ``^`` raise x to the power of y * ``" ;
     skos:inScheme pp:process-type ;
@@ -1345,7 +1376,8 @@ Registered ActivityType OWL class `https://w3id.org/geolabs/ospd/process-profile
     pp:phase <https://w3id.org/geolabs/ospd/process-profiles/phase/scientific-computation> ;
     acttype:generatedEntityType geo:Feature ;
     acttype:usedEntityType geo:Feature ;
-    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/addition>,
+    rim:hasAction <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/activity-type-2026-11-19>,
+        <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/addition>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/d5-2026-11-09>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/identifier-2026-11-17>,
         <https://w3id.org/geolabs/ospd/process-profiles/process-type/raster/band-math-multiband/actions/representation-2026-11-18>,
@@ -1721,6 +1753,13 @@ x-jsonld-extra-terms:
   entityType:
     x-jsonld-id: '@type'
     x-jsonld-type: '@id'
+  agentType:
+    x-jsonld-id: '@type'
+    x-jsonld-type: '@id'
+  Activity: http://www.w3.org/ns/prov#Activity
+  Entity: http://www.w3.org/ns/prov#Entity
+  Agent: http://www.w3.org/ns/prov#Agent
+  SoftwareAgent: http://www.w3.org/ns/prov#SoftwareAgent
   used:
     x-jsonld-id: http://www.w3.org/ns/prov#used
     x-jsonld-type: '@id'
@@ -1950,7 +1989,7 @@ x-bblocks-metadata:
   itemIdentifier: ospd.process-profiles.raster.band-math-multiband
   register: https://geolabs.github.io/bblocks-process-profiles/build/register.json
   version: '0.1'
-  dateOfLastChange: '2026-11-19'
+  dateOfLastChange: '2026-11-25'
 
 ```
 
@@ -2116,6 +2155,14 @@ Links to the schema:
       "@id": "@type",
       "@type": "@id"
     },
+    "agentType": {
+      "@id": "@type",
+      "@type": "@id"
+    },
+    "Activity": "prov:Activity",
+    "Entity": "prov:Entity",
+    "Agent": "prov:Agent",
+    "SoftwareAgent": "prov:SoftwareAgent",
     "used": {
       "@id": "prov:used",
       "@type": "@id"

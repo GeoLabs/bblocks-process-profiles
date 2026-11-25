@@ -2,6 +2,7 @@
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/kindgrove-steps/select-scene/context.jsonld",
   "id": "urn:example:run:kindgrove-steps:select-scene",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/kindgrove-steps/select-scene",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/select_scene/package",
   "usedInput": [

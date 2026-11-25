@@ -27,11 +27,11 @@
             ns2:InputPolygon [ dcterms:description "URI to a set of GML that describes the polygon." ;
                     dcterms:title "Polygon to be buffered" ;
                     proc:metadata [ dcterms:title "Mon test  " ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "object" ],
-                                [ proc:type "string" ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] ;
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "object" ] ] ] ] ;
     proc:jobControlOptions "async-execute",
         "dismiss",
         "sync-execute" ;
@@ -42,9 +42,9 @@
     proc:outputs [ ns4:Result [ dcterms:description "GML stream describing the buffered polygon feature." ;
                     dcterms:title "Buffered Polygon" ;
                     proc:metadata [ dcterms:title "Mon test  " ] ;
-                    proc:schema [ ns1:oneOf [ proc:type "object" ],
-                                [ proc:type "string" ;
+                    proc:schema [ ns1:oneOf [ proc:type "string" ;
                                     ns1:contentEncoding "UTF-8" ;
                                     ns1:contentMediaType "text/xml" ;
-                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ] ] ] ] .
+                                    ns1:contentSchema "http://fooa/gml/3.1.0/polygon.xsd" ],
+                                [ proc:type "object" ] ] ] ] .
 

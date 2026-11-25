@@ -7,7 +7,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_60m> a prov:Plan ;
+<arcp://uuid,44c595c3-0138-459e-bff2-432829fe1bf3/workflow/packed.cwl#main/download_b03_60m> a prov:Entity,
+        prov:Plan ;
     prov:specializationOf <https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe/package> .
 
 <urn:example:entity:download-band-sentinel2-product-safe:out:product> a prov:Entity,
@@ -36,7 +37,8 @@
 <urn:example:entity:download-band-sentinel2-product-safe:in:s3_secret_key> a prov:Entity,
         <https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe#inputs/s3_secret_key> .
 
-<urn:example:image:ogc-ospd/algae-usecase/download-band-sentinel2-product-safe:1.1.0> a prov:SoftwareAgent ;
+<urn:example:image:ogc-ospd/algae-usecase/download-band-sentinel2-product-safe:1.1.0> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "container image ogc-ospd/algae-usecase/download-band-sentinel2-product-safe:1.1.0" .
 
 <urn:example:run:algae-bloom:download-band-sentinel2-product-safe> a prov:Activity,
@@ -53,8 +55,10 @@
     prov:wasAssociatedWith <urn:example:engine:cwltool-3.1.20260108082145>,
         <urn:example:image:ogc-ospd/algae-usecase/download-band-sentinel2-product-safe:1.1.0> .
 
-<https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe/package> a prov:Plan .
+<https://ospd.example.org/ogc-api/processes/download-band-sentinel2-product-safe/package> a prov:Entity,
+        prov:Plan .
 
-<urn:example:engine:cwltool-3.1.20260108082145> a prov:SoftwareAgent ;
+<urn:example:engine:cwltool-3.1.20260108082145> a prov:Agent,
+        prov:SoftwareAgent ;
     pp:name "cwltool 3.1.20260108082145" .
 

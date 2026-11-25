@@ -2,6 +2,7 @@
   "@context": "https://geolabs.github.io/bblocks-process-profiles/build/annotated/process-profiles/water-bodies/stac/context.jsonld",
   "id": "urn:example:run:water-bodies:stac",
   "type": "ProcessRun",
+  "provType": "Activity",
   "activityType": "https://w3id.org/geolabs/ospd/process-profiles/process-type/water-bodies/stac",
   "describedByProcess": "https://ospd.example.org/ogc-api/processes/stac/package",
   "usedInput": [
